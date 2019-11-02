@@ -1,111 +1,162 @@
-<h1>WebAssembly Instructions (opcodes)</h1>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>WebAssembly Opcodes</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<link href="hover.css" rel="stylesheet">
+	<style>
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+/* could probably done better with gradients */
+.reserved, .crosshatch { 
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; 
+} 
+.reserved span {
+	background-color: #eee;
+}
+
+.proposal, .diagonal-stripe-1 { background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; } 
+/* .proposal-with-text { background-color: #eee; } */
+
+table {
+	border-collapse:collapse; 
+	table-layout:fixed; 
+	width:100%;
+	font-size: 9px;
+}
+table td {
+	border:solid 1px #aaa; 
+	word-wrap:break-word; 
+	vertical-align: top;
+}
+</style>
+<script>
+	
+
+function toHex(d) {
+    return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
+}
+
+
+function ApplyFormatting() {
+    var table = document.getElementById('opcodes');
+    //for (var r = 0, n = table.rows.length; r < n; r++) {
+		//for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
+			//var cell = table.rows[r].cells[c];
+
+	tds = table.getElementsByTagName("td");
+	for (var n=0; n<tds.length;n++) {
+		var cell = tds[n];
+		var opcode = cell.innerHTML;
+		var reserved = false;
+		var proposal = "";
+		if (opcode == "" || opcode[0] == "&" ) { //TODO: better selection of &npsb; / "\xa0"
+			cell.classList.add("reserved");
+			reserved = true;
+		} else if (opcode[0] == "*") {
+			cell.classList.add("reserved");
+			reserved = true;
+			opcode = opcode.substring(1);
+			proposal = opcode;
+			cell.innerHTML = "<span>" + BoldMainOpBit(opcode) + "</span>";
+		} else {
+			cell.innerHTML = BoldMainOpBit(opcode);
+		}
+		
+		cell.classList.add("tooltip");
+		//var normal = (cell.getAttribute("reserved")==null || cell.getAttribute("reserved")=="");
+
+		var opcodeText = opcode;
+		var proposedText = "";
+		if (reserved) { 
+			//opcodeText = "Reserved"; 
+			opcodeText = "<em>Reserved</em>";
+			if (proposal) {
+				proposedText = "<p>Proposed: " + proposal + "</p>";
+			}
+		}
+		cell.innerHTML += "<div class='bottom'><h3>" + opcodeText + "</h3><b>0x" + toHex(n) + "</b>" + proposedText + "</div>";
+		
+	}
+    
+}
+
+function BoldMainOpBit(opcodeName) {
+	// todo: replace with some neater regex maybe
+	// todo: insert zws's in separate method (and include in copy-sign + pop-cnt)
+	var zws = "&#8203;"; // zero-width space 
+	if (opcodeName.includes(".")) {
+		// bold after the dot
+		split = opcodeName.split(".");
+		if (split[1].includes("_") && split[1] != "is_null") {
+			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
+			secondSplit = split[1].split("_", 2);
+			return split[0] + "." + zws + "<b>" + secondSplit[0] + "</b>" + zws + "_" + secondSplit[1];
+		} else {
+			return split[0] + "." + zws + "<b>" + split[1] + "</b>";
+		}
+	} else {
+		return "<b>" + opcodeName + "</b>";
+	}
+	//return opcodeName;
+}
+
+onload = ApplyFormatting;
+
+</script>
+</head>
+<body>
+<h1>WebAssembly Opcodes</h1>
+<!--- by pengo wray --->
 &nbsp;
-<table>
+<table id="opcodes">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>_0</th>
+<th>_1</th>
+<th>_2</th>
+<th>_3</th>
+<th>_4</th>
+<th>_5</th>
+<th>_6</th>
+<th>_7</th>
+<th>_8</th>
+<th>_9</th>
+<th>_A</th>
+<th>_B</th>
+<th>_C</th>
+<th>_D</th>
+<th>_E</th>
+<th>_F</th>
+</tr>
+</thead>
 <tbody>
 <tr>
+<th scope="row">0_</th>
+<td>unreachable</td>
+<td>nop</td>
+<td>block</td>
+<td>loop</td>
+<td>if</td>
+<td>else</td>
+<td></td>
 <td>&nbsp;</td>
-<td>
-_0
-</td>
-<td>
-_1
-</td>
-<td>
-_2
-</td>
-<td>
-_3_
-</td>
-<td>
-_4
-</td>
-<td>
-_5
-</td>
-<td>
-_6
-</td>
-<td>
-_7
-</td>
-<td>
-_8
-</td>
-<td>
-_9
-</td>
-<td>
-_A
-</td>
-<td>
-_B
-</td>
-<td>
-_C
-</td>
-<td>
-_D
-</td>
-<td>
-_E
-</td>
-<td>
-_F
-</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>end</td>
+<td>br</td>
+<td>br_if</td>
+<td>br_table</td>
+<td>return</td>
 </tr>
 <tr>
-<td>
-0_
-</td>
-<td>
-unreachable
-</td>
-<td>
-nop
-</td>
-<td>
-block
-</td>
-<td>
-loop
-</td>
-<td>
-if
-</td>
-<td>
-else
-</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>
-end
-</td>
-<td>
-br
-</td>
-<td>
-br_if
-</td>
-<td>
-br_table
-</td>
-<td>
-return
-</td>
-</tr>
-<tr>
-<td>
-1_
-</td>
-<td>
-call
-</td>
-<td>
-call_indirect
-</td>
+<th scope="row">1_</th>
+<td>call</td>
+<td>call_indirect</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -114,545 +165,205 @@ call_indirect
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>
-drop
-</td>
-<td>
-select
-</td>
-<td>* select t*</td>
+<td>drop</td>
+<td>select</td>
+<td>*select t*</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>
-2_
-</td>
-<td>
-local.get
-</td>
-<td>
-local.set
-</td>
-<td>
-local.tee
-</td>
-<td>
-global.get
-</td>
-<td>
-global.set
-</td>
-<td>* table.get</td>
-<td>* table.set</td>
+<th scope="row">2_</th>
+<td>local.get</td>
+<td>local.set</td>
+<td>local.tee</td>
+<td>global.get</td>
+<td>global.set</td>
+<td>*table.get</td>
+<td>*table.set</td>
 <td>&nbsp;</td>
-<td>
-i32.load
-</td>
-<td>
-i64.load
-</td>
-<td>
-f32.load
-</td>
-<td>
-f64.load
-</td>
-<td>
-i32.load8_s
-</td>
-<td>
-i32.load8_u
-</td>
-<td>
-i32.load16_s
-</td>
-<td>
-i32.load16_u
-</td>
+<td>i32.load</td>
+<td>i64.load</td>
+<td>f32.load</td>
+<td>f64.load</td>
+<td>i32.load8_s</td>
+<td>i32.load8_u</td>
+<td>i32.load16_s</td>
+<td>i32.load16_u</td>
 </tr>
 <tr>
-<td>
-3_
-</td>
-<td>
-i64.load8_s
-</td>
-<td>
-i64.load8_u
-</td>
-<td>
-i64.load16_s
-</td>
-<td>
-i64.load16_u
-</td>
-<td>
-i64.load32_s
-</td>
-<td>
-i64.load32_u
-</td>
-<td>
-i32.store
-</td>
-<td>
-i64.store
-</td>
-<td>
-f32.store
-</td>
-<td>
-f64.store
-</td>
-<td>
-i32.store8
-</td>
-<td>
-i32.store16
-</td>
-<td>
-i64.store8
-</td>
-<td>
-i64.store16
-</td>
-<td>
-i64.store32
-</td>
-<td>
-memory.size
-</td>
+<th scope="row">3_</th>
+<td>i64.load8_s</td>
+<td>i64.load8_u</td>
+<td>i64.load16_s</td>
+<td>i64.load16_u</td>
+<td>i64.load32_s</td>
+<td>i64.load32_u</td>
+<td>i32.store</td>
+<td>i64.store</td>
+<td>f32.store</td>
+<td>f64.store</td>
+<td>i32.store8</td>
+<td>i32.store16</td>
+<td>i64.store8</td>
+<td>i64.store16</td>
+<td>i64.store32</td>
+<td>memory.size</td>
 </tr>
 <tr>
-<td>
-4_
-</td>
-<td>
-memory.grow
-</td>
-<td>
-i32.const
-</td>
-<td>
-i64.const
-</td>
-<td>
-f32.const
-</td>
-<td>
-f64.const
-</td>
-<td>
-i32.eqz
-</td>
-<td>
-i32.eq
-</td>
-<td>
-i64.ne
-</td>
-<td>
-i64.lt_s
-</td>
-<td>
-i64.lt_u
-</td>
-<td>
-i64.gt_s
-</td>
-<td>
-i64.gt_u
-</td>
-<td>
-i64.le_s
-</td>
-<td>
-i64.le_u
-</td>
-<td>
-i64.ge_s
-</td>
-<td>
-i64.ge_u
-</td>
+<th scope="row">4_</th>
+<td>memory.grow</td>
+<td>i32.const</td>
+<td>i64.const</td>
+<td>f32.const</td>
+<td>f64.const</td>
+<td>i32.eqz</td>
+<td>i32.eq</td>
+<td>i64.ne</td>
+<td>i64.lt_s</td>
+<td>i64.lt_u</td>
+<td>i64.gt_s</td>
+<td>i64.gt_u</td>
+<td>i64.le_s</td>
+<td>i64.le_u</td>
+<td>i64.ge_s</td>
+<td>i64.ge_u</td>
 </tr>
 <tr>
-<td>
-5_
-</td>
-<td>
-i64.eqz
-</td>
-<td>
-i64.eq
-</td>
-<td>
-i64.ne
-</td>
-<td>
-i64.lt_s
-</td>
-<td>
-i64.lt_u
-</td>
-<td>
-i64.gt_s
-</td>
-<td>
-i64.gt_u
-</td>
-<td>
-i64.le_s
-</td>
-<td>
-i64.le_u
-</td>
-<td>
-i64.ge_s
-</td>
-<td>
-i64.ge_u
-</td>
-<td>
-f32.eq
-</td>
-<td>
-f32.ne
-</td>
-<td>
-f32.lt
-</td>
-<td>
-f32.gt
-</td>
-<td>
-f32.le
-</td>
+<th scope="row">5_</th>
+<td>i64.eqz</td>
+<td>i64.eq</td>
+<td>i64.ne</td>
+<td>i64.lt_s</td>
+<td>i64.lt_u</td>
+<td>i64.gt_s</td>
+<td>i64.gt_u</td>
+<td>i64.le_s</td>
+<td>i64.le_u</td>
+<td>i64.ge_s</td>
+<td>i64.ge_u</td>
+<td>f32.eq</td>
+<td>f32.ne</td>
+<td>f32.lt</td>
+<td>f32.gt</td>
+<td>f32.le</td>
 </tr>
 <tr>
-<td>
-6_
-</td>
-<td>
-f32.ge
-</td>
-<td>
-f64.eq
-</td>
-<td>
-f64.ne
-</td>
-<td>
-f64.lt
-</td>
-<td>
-f64.gt
-</td>
-<td>
-f64.le
-</td>
-<td>
-f64.ge
-</td>
-<td>
-i32.clz
-</td>
-<td>
-i32.ctz
-</td>
-<td>
-i32.popcnt
-</td>
-<td>
-i32.add
-</td>
-<td>
-i32.sub
-</td>
-<td>
-i32.mul
-</td>
-<td>
-i32.div_s
-</td>
-<td>
-i32.div_u
-</td>
-<td>
-i32.rem_s
-</td>
+<th scope="row">6_</th>
+<td>f32.ge</td>
+<td>f64.eq</td>
+<td>f64.ne</td>
+<td>f64.lt</td>
+<td>f64.gt</td>
+<td>f64.le</td>
+<td>f64.ge</td>
+<td>i32.clz</td>
+<td>i32.ctz</td>
+<td>i32.popcnt</td>
+<td>i32.add</td>
+<td>i32.sub</td>
+<td>i32.mul</td>
+<td>i32.div_s</td>
+<td>i32.div_u</td>
+<td>i32.rem_s</td>
 </tr>
 <tr>
-<td>
-7_
-</td>
-<td>
-i32.rem_u
-</td>
-<td>
-i32.and
-</td>
-<td>
-i32.or
-</td>
-<td>
-i32.xor
-</td>
-<td>
-i32.shl
-</td>
-<td>
-i32.shr_s
-</td>
-<td>
-i32.shr_u
-</td>
-<td>
-i32.rotl
-</td>
-<td>
-i32.rotr
-</td>
-<td>
-i64.clz
-</td>
-<td>
-i64.ctz
-</td>
-<td>
-i64.popcnt
-</td>
-<td>
-i64.add
-</td>
-<td>
-i64.sub
-</td>
-<td>
-i64.mul
-</td>
-<td>
-i64.div_s
-</td>
+<th scope="row">7_</th>
+<td>i32.rem_u</td>
+<td>i32.and</td>
+<td>i32.or</td>
+<td>i32.xor</td>
+<td>i32.shl</td>
+<td>i32.shr_s</td>
+<td>i32.shr_u</td>
+<td>i32.rotl</td>
+<td>i32.rotr</td>
+<td>i64.clz</td>
+<td>i64.ctz</td>
+<td>i64.popcnt</td>
+<td>i64.add</td>
+<td>i64.sub</td>
+<td>i64.mul</td>
+<td>i64.div_s</td>
 </tr>
 <tr>
-<td>
-8_
-</td>
-<td>
-i64.div_u
-</td>
-<td>
-i64.rem_s
-</td>
-<td>
-i64.rem_u
-</td>
-<td>
-i64.and
-</td>
-<td>
-i64.or
-</td>
-<td>
-i64.xor
-</td>
-<td>
-i64.shl
-</td>
-<td>
-i64.shr_s
-</td>
-<td>
-i64.shr_u
-</td>
-<td>
-i64.rotl
-</td>
-<td>
-i64.rotr
-</td>
-<td>
-f32.abs
-</td>
-<td>
-f32.neg
-</td>
-<td>
-f32.ceil
-</td>
-<td>
-f32.floor
-</td>
-<td>
-f32.trunc
-</td>
+<th scope="row">8_</th>
+<td>i64.div_u</td>
+<td>i64.rem_s</td>
+<td>i64.rem_u</td>
+<td>i64.and</td>
+<td>i64.or</td>
+<td>i64.xor</td>
+<td>i64.shl</td>
+<td>i64.shr_s</td>
+<td>i64.shr_u</td>
+<td>i64.rotl</td>
+<td>i64.rotr</td>
+<td>f32.abs</td>
+<td>f32.neg</td>
+<td>f32.ceil</td>
+<td>f32.floor</td>
+<td>f32.trunc</td>
 </tr>
 <tr>
-<td>
-9_
-</td>
-<td>
-f32.nearest
-</td>
-<td>
-f32.sqrt
-</td>
-<td>
-f32.add
-</td>
-<td>
-f32.sub
-</td>
-<td>
-f32.mul
-</td>
-<td>
-f32.div
-</td>
-<td>
-f32.min
-</td>
-<td>
-f32.max
-</td>
-<td>
-f32.copysign
-</td>
-<td>
-f64.abs
-</td>
-<td>
-f64.neg
-</td>
-<td>
-f64.ceil
-</td>
-<td>
-f64.floor
-</td>
-<td>
-f64.trunc
-</td>
-<td>
-f64.nearest
-</td>
-<td>
-f64.sqrt
-</td>
+<th scope="row">9_</th>
+<td>f32.nearest</td>
+<td>f32.sqrt</td>
+<td>f32.add</td>
+<td>f32.sub</td>
+<td>f32.mul</td>
+<td>f32.div</td>
+<td>f32.min</td>
+<td>f32.max</td>
+<td>f32.copysign</td>
+<td>f64.abs</td>
+<td>f64.neg</td>
+<td>f64.ceil</td>
+<td>f64.floor</td>
+<td>f64.trunc</td>
+<td>f64.nearest</td>
+<td>f64.sqrt</td>
 </tr>
 <tr>
-<td>
-A_
-</td>
-<td>
-f64.add
-</td>
-<td>
-f64.sub
-</td>
-<td>
-f64.mul
-</td>
-<td>
-f64.div
-</td>
-<td>
-f64.min
-</td>
-<td>
-f64.max
-</td>
-<td>
-f64.copysign
-</td>
-<td>
-i32.wrap_i64
-</td>
-<td>
-i32.trunc_f32_s
-</td>
-<td>
-i32.trunc_f32_u
-</td>
-<td>
-i32.trunc_f64_s
-</td>
-<td>
-i32.trunc_f64_u
-</td>
-<td>
-i64.extend_i32_s
-</td>
-<td>
-i64.extend_i32_u
-</td>
-<td>
-i64.trunc_f32_s
-</td>
-<td>
-i64.trunc_f32_u
-</td>
+<th scope="row">A_</th>
+<td>f64.add</td>
+<td>f64.sub</td>
+<td>f64.mul</td>
+<td>f64.div</td>
+<td>f64.min</td>
+<td>f64.max</td>
+<td>f64.copysign</td>
+<td>i32.wrap_i64</td>
+<td>i32.trunc_f32_s</td>
+<td>i32.trunc_f32_u</td>
+<td>i32.trunc_f64_s</td>
+<td>i32.trunc_f64_u</td>
+<td>i64.extend_i32_s</td>
+<td>i64.extend_i32_u</td>
+<td>i64.trunc_f32_s</td>
+<td>i64.trunc_f32_u</td>
 </tr>
 <tr>
-<td>
-B_
-</td>
-<td>
-i64.trunc_f64_s
-</td>
-<td>
-i64.trunc_f64_u
-</td>
-<td>
-f32.convert_i32_s
-</td>
-<td>
-f32.convert_i32_u
-</td>
-<td>
-f32.convert_i64_s
-</td>
-<td>
-f32.convert_i64_u
-</td>
-<td>
-f32.demote_f64
-</td>
-<td>
-f64.convert_i32_s
-</td>
-<td>
-f64.convert_i32_u
-</td>
-<td>
-f64.convert_i64_s
-</td>
-<td>
-f64.convert_i64_u
-</td>
-<td>
-f64.promote_f32
-</td>
-<td>
-i32.reinterpret_f32
-</td>
-<td>
-i64.reinterpret_f64
-</td>
-<td>
-f32.reinterpret_i32
-</td>
-<td>
-f64.reinterpret_i64
-</td>
+<th scope="row">B_</th>
+<td>i64.trunc_f64_s</td>
+<td>i64.trunc_f64_u</td>
+<td>f32.convert_i32_s</td>
+<td>f32.convert_i32_u</td>
+<td>f32.convert_i64_s</td>
+<td>f32.convert_i64_u</td>
+<td>f32.demote_f64</td>
+<td>f64.convert_i32_s</td>
+<td>f64.convert_i32_u</td>
+<td>f64.convert_i64_s</td>
+<td>f64.convert_i64_u</td>
+<td>f64.promote_f32</td>
+<td>i32.reinterpret_f32</td>
+<td>i64.reinterpret_f64</td>
+<td>f32.reinterpret_i32</td>
+<td>f64.reinterpret_i64</td>
 </tr>
 <tr>
-<td>
-C_
-</td>
+<th scope="row">C_</th>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -671,12 +382,10 @@ C_
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>
-D_
-</td>
-<td>* ref.null</td>
-<td>* ref.is_null</td>
-<td>* ref.func</td>
+<th scope="row">D_</th>
+<td>*ref.null</td>
+<td>*ref.is_null</td>
+<td>*ref.func</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -692,9 +401,7 @@ D_
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>
-E_
-</td>
+<th scope="row">E_</th>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -713,9 +420,7 @@ E_
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>
-F_
-</td>
+<th scope="row">F_</th>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -728,7 +433,7 @@ F_
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>* **</td>
+<td>***</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -793,4 +498,5 @@ return_call_indirect is 0x13
 </pre>
 </p>
 <p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>
-<!--- by pengo wray --->
+</body>
+</html>
