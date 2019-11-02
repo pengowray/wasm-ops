@@ -728,7 +728,7 @@ F_
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>* table._</td>
+<td>* **</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -737,5 +737,60 @@ F_
 </table>
 &nbsp;
 <p>* = part of proposed <a href="https://github.com/WebAssembly/reference-types"><em>Reference Types</em> spec</a> (22-Aug-2019)</p>
+<p>
+** = Table/memory functions <a href="https://github.com/webassembly/bulk-memory-operations">Bulk Memory proposal</a> & of Reference Types proposal
+<pre>
+0xfc 0x08 == memory.init
+0xfc 0x09 == data.drop
+0xfc 0x0a == memory.copy
+0xfc 0x0b == memory.fill
+0xfc 0x0c == table.init
+0xfc 0x0d == elem.drop
+0xfc 0x0e == table.copy
+0xfc 0x0f == table.grow *
+0xfc 0x10 == table.size *
+0xfc 0x11 == table.fill *
+</pre>
+<p>
+<a href="https://github.com/WebAssembly/exception-handling/blob/master/proposals/Exceptions.md">Exception handling proposal</a>
+<pre>
+0x06 == try 	
+0x07 == catch 	
+0x08 == throw
+0x09 == rethrow
+0x0a == br_on_exn
+-0x18 == exnref
+</pre>
+</p>
+<p>
+<a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping Float-to-int Conversions proposal</a>
+<pre>
+i32.trunc_sat_f32_s	0xfc 0x00
+i32.trunc_sat_f32_u	0xfc 0x01
+i32.trunc_sat_f64_s	0xfc 0x02
+i32.trunc_sat_f64_u	0xfc 0x03
+i64.trunc_sat_f32_s	0xfc 0x04
+i64.trunc_sat_f32_u	0xfc 0x05
+i64.trunc_sat_f64_s	0xfc 0x06
+i64.trunc_sat_f64_u	0xfc 0x07
+</pre>
+</p>
+<p>
+<a href="https://github.com/WebAssembly/sign-extension-ops">Sign-extension operators proposal</a>
+<pre>
+0xC0 => i32.extend8_s
+0xC1 => i32.extend16_s
+0xC2 => i64.extend8_s
+0xC3 => i64.extend16_s
+0xC4 => i64.extend32_s
+</pre>
+</p>
+<p>
+<a href="https://github.com/WebAssembly/tail-call">Tail Call proposal</a>
+<pre>
+return_call is 0x12
+return_call_indirect is 0x13
+</pre>
+</p>
 <p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>
 <!--- by pengo wray --->
