@@ -1,4 +1,4 @@
-<h1>WebAssembly Core Instructions</h1>
+<h1>WebAssembly Instructions (opcodes)</h1>
 &nbsp;
 <table>
 <tbody>
@@ -120,7 +120,7 @@ drop
 <td>
 select
 </td>
-<td>&nbsp;</td>
+<td>* select t*</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -139,13 +139,13 @@ local.set
 local.tee
 </td>
 <td>
-global.set
+global.get
 </td>
 <td>
 global.set
 </td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>* table.get</td>
+<td>* table.set</td>
 <td>&nbsp;</td>
 <td>
 i32.load
@@ -674,9 +674,9 @@ C_
 <td>
 D_
 </td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>* ref.null</td>
+<td>* ref.is_null</td>
+<td>* ref.func</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -728,7 +728,7 @@ F_
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>* table._</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -736,5 +736,6 @@ F_
 </tbody>
 </table>
 &nbsp;
+<p>* = part of proposed <a href="https://github.com/WebAssembly/reference-types"><em>Reference Types</em> spec</a> (22-Aug-2019)</p>
 <p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>
 <!--- by pengo wray --->
