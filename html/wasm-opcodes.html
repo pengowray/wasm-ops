@@ -4,6 +4,9 @@
 	<title>WebAssembly Opcodes</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link href="hover.css" rel="stylesheet">
+	<link href="katex.css" rel="stylesheet">
+	<link href="pygments.css" rel="stylesheet">
+	<link href="webassembly_spec.css" rel="stylesheet">
 	<style>
 
 body {
@@ -19,6 +22,9 @@ body {
 
 .proposal, .diagonal-stripe-1 { background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; } 
 /* .proposal-with-text { background-color: #eee; } */
+.hex {
+	text-align: right;
+}
 
 table {
 	border-collapse:collapse; 
@@ -52,7 +58,7 @@ function ApplyFormatting() {
 		var opcode = cell.innerHTML;
 		var reserved = false;
 		var proposal = "";
-		if (opcode == "" || opcode[0] == "&" ) { //TODO: better selection of &npsb; / "\xa0"
+		if (opcode == "" || opcode[0] == "&" ) { //TODO: better selection of &npsb; aka \xa0
 			cell.classList.add("reserved");
 			reserved = true;
 		} else if (opcode[0] == "*") {
@@ -70,6 +76,14 @@ function ApplyFormatting() {
 
 		var opcodeText = opcode;
 		var proposedText = "";
+		var hex = "0x" + toHex(n); // e.g. 0x8F
+
+		var help = document.getElementById(hex);
+		var helpText = "";
+		if (help != null) {
+			helpText = help.innerHTML;
+		}
+
 		if (reserved) { 
 			//opcodeText = "Reserved"; 
 			opcodeText = "<em>Reserved</em>";
@@ -77,7 +91,8 @@ function ApplyFormatting() {
 				proposedText = "<p>Proposed: " + proposal + "</p>";
 			}
 		}
-		cell.innerHTML += "<div class='bottom'><h3>" + opcodeText + "</h3><b>0x" + toHex(n) + "</b>" + proposedText + "</div>";
+		
+		cell.innerHTML += "<div class='bottom'><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
 		
 	}
     
@@ -108,6 +123,7 @@ onload = ApplyFormatting;
 </script>
 </head>
 <body>
+
 <h1>WebAssembly Opcodes</h1>
 <!--- by pengo wray --->
 &nbsp;
@@ -440,6 +456,23 @@ onload = ApplyFormatting;
 </tr>
 </tbody>
 </table>
+
+<div style="display: none">
+<div id="0x69">
+	Type:
+	<span class="mopen">[</span><a href="#syntax-valtype"><span class="mord"><span class="mord mathsf">i</span><span class="mord mathsf">3</span><span class="mord mathsf">2</span></span></a><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><a href="#syntax-functype"><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></a><span class="mopen">[</span><a href="#syntax-valtype"><span class="mord"><span class="mord mathsf">i</span><span class="mord mathsf">3</span><span class="mord mathsf">2</span></span></a><span class="mclose">]</span>
+	<!-- Numeric Instructions,  t.unop -->
+	<div class="section" id="op-ipopcnt">
+	<span id="id18②"></span>
+	<h5 class="no-toc heading settled" data-level="4.3.2.20" id="-hrefop-ipopcntmathrmipopcnt_n-i"><span class="secno">4.3.2.20. </span><span class="content"><span class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><a href="#op-ipopcnt"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">p</span><span class="mord mathrm">o</span><span class="mord mathrm">p</span><span class="mord mathrm">c</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathrm">i</span><span class="mclose">)</span></span></span></span></span></span></span></span><a class="self-link" href="#-hrefop-ipopcntmathrmipopcnt_n-i"></a></h5>
+	<ul class="simple">
+	<li>Return the count of non-zero bits in <span class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">i</span></span></span></span></span></span></span>.
+	</li></ul>
+	<div class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.209108em;vertical-align:-0.354554em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><a href="#op-ipopcnt"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">p</span><span class="mord mathrm">o</span><span class="mord mathrm">p</span><span class="mord mathrm">c</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">=</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mrel"><span class="mord text"><span class="mord">if</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><a href="#aux-ibits"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">b</span><span class="mord mathrm">i</span><span class="mord mathrm">t</span><span class="mord mathrm">s</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></span></div>
+	</div>
+</div>
+</div>
+
 &nbsp;
 <p>* = part of proposed <a href="https://github.com/WebAssembly/reference-types"><em>Reference Types</em> spec</a> (22-Aug-2019)</p>
 <p>
