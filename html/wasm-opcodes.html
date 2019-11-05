@@ -259,11 +259,11 @@ onload = ApplyFormatting;
 <td>loop</td>
 <td>if</td>
 <td>else</td>
-<td></td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>*try</td>
+<td>*catch</td>
+<td>*throw</td>
+<td>*rethrow</td>
+<td>*br_on_exn</td>
 <td>end</td>
 <td>br</td>
 <td>br_if</td>
@@ -274,8 +274,8 @@ onload = ApplyFormatting;
 <th scope="row">1_</th>
 <td>call</td>
 <td>call_indirect</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>*return_call</td>
+<td>*return_call_indirect</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -284,7 +284,7 @@ onload = ApplyFormatting;
 <td>&nbsp;</td>
 <td>drop</td>
 <td>select</td>
-<td>*select t*</td>
+<td>*select t</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -481,11 +481,11 @@ onload = ApplyFormatting;
 </tr>
 <tr>
 <th scope="row">C_</th>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>*i32.extend8_s</td>
+<td>*i32.extend16_s</td>
+<td>*i64.extend8_s</td>
+<td>*i64.extend16_s</td>
+<td>*i64.extend32_s</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -551,13 +551,79 @@ onload = ApplyFormatting;
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>***</td>
-<td>&nbsp;</td>
+<td>*SIMD</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
-
+<p>
+<br/>
+<b>** 0xFC proposals</b>
+</p>
+<table id="opcodes_FC">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>_0</th>
+<th>_1</th>
+<th>_2</th>
+<th>_3</th>
+<th>_4</th>
+<th>_5</th>
+<th>_6</th>
+<th>_7</th>
+<th>_8</th>
+<th>_9</th>
+<th>_A</th>
+<th>_B</th>
+<th>_C</th>
+<th>_D</th>
+<th>_E</th>
+<th>_F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">FC 0_</th>
+<td class="reserved"><span>i32.trunc_sat_f32_s</span></td>
+<td class="reserved"><span>i32.trunc_sat_f32_u</span></td>
+<td class="reserved"><span>i32.trunc_sat_f64_s</span></td>
+<td class="reserved"><span>i32.trunc_sat_f64_u</span></td>
+<td class="reserved"><span>i64.trunc_sat_f32_s</span></td>
+<td class="reserved"><span>i64.trunc_sat_f32_u</span></td>
+<td class="reserved"><span>i64.trunc_sat_f64_s</span></td>
+<td class="reserved"><span>i64.trunc_sat_f64_u</span></td>
+<td class="reserved"><span>memory.init</td>
+<td class="reserved"><span>data.drop</span></td>
+<td class="reserved"><span>memory.copy</span></td>
+<td class="reserved"><span>memory.fill</span></td>
+<td class="reserved"><span>table.init</span></td>
+<td class="reserved"><span>elem.drop</span></td>
+<td class="reserved"><span>table.copy</span></td>
+<td class="reserved"><span>table.grow</span></td>
+</tr>
+<tr>
+<th scope="row">FC 1_</th>
+<td class="reserved"><span>table.size</span></td>
+<td class="reserved"><span>table.fill</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+</tbody></table>
+		
 <div style="display: none">
 <div id="0x69">
 	Type:
@@ -575,21 +641,7 @@ onload = ApplyFormatting;
 </div>
 
 &nbsp;
-<p>* = part of proposed <a href="https://github.com/WebAssembly/reference-types"><em>Reference Types</em> spec</a> (22-Aug-2019)</p>
-<p>
-** = Table/memory functions <a href="https://github.com/webassembly/bulk-memory-operations">Bulk Memory proposal</a> & of Reference Types proposal
-<pre>
-0xfc 0x08 == memory.init
-0xfc 0x09 == data.drop
-0xfc 0x0a == memory.copy
-0xfc 0x0b == memory.fill
-0xfc 0x0c == table.init
-0xfc 0x0d == elem.drop
-0xfc 0x0e == table.copy
-0xfc 0x0f == table.grow *
-0xfc 0x10 == table.size *
-0xfc 0x11 == table.fill *
-</pre>
+<!--
 <p>
 <a href="https://github.com/WebAssembly/exception-handling/blob/master/proposals/Exceptions.md">Exception handling proposal</a>
 <pre>
@@ -602,35 +654,59 @@ onload = ApplyFormatting;
 </pre>
 </p>
 <p>
-<a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping Float-to-int Conversions proposal</a>
+<a href="https://github.com/WebAssembly/tail-call">Tail Call proposal</a>
 <pre>
-i32.trunc_sat_f32_s	0xfc 0x00
-i32.trunc_sat_f32_u	0xfc 0x01
-i32.trunc_sat_f64_s	0xfc 0x02
-i32.trunc_sat_f64_u	0xfc 0x03
-i64.trunc_sat_f32_s	0xfc 0x04
-i64.trunc_sat_f32_u	0xfc 0x05
-i64.trunc_sat_f64_s	0xfc 0x06
-i64.trunc_sat_f64_u	0xfc 0x07
+0x12 == return_call 
+0x13 == return_call_indirect
 </pre>
 </p>
+-->
+<!--
+<p>
+<a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping Float-to-int Conversions proposal</a>
+<pre>
+0xfc 0x00 == i32.trunc_sat_f32_s
+0xfc 0x01 == i32.trunc_sat_f32_u
+0xfc 0x02 == i32.trunc_sat_f64_s
+0xfc 0x03 == i32.trunc_sat_f64_u
+0xfc 0x04 == i64.trunc_sat_f32_s
+0xfc 0x05 == i64.trunc_sat_f32_u
+0xfc 0x06 == i64.trunc_sat_f64_s
+0xfc 0x07 == i64.trunc_sat_f64_u
+</pre>
+</p>
+<p>
+<a href="https://github.com/WebAssembly/reference-types">Reference Types proposal</a> [only 0xfc.. opcodes listed below] (22-Aug-2019)
+<pre>
+0xfc 0x08 == memory.init 
+0xfc 0x09 == data.drop 
+0xfc 0x0a == memory.copy 
+0xfc 0x0b == memory.fill 
+0xfc 0x0c == table.init 
+0xfc 0x0d == elem.drop 
+0xfc 0x0e == table.copy 
+</pre>
+</p>
+<p><a href="https://github.com/webassembly/bulk-memory-operations">Bulk Memory proposal</a>
+<pre>
+0xfc 0x0f == table.grow 
+0xfc 0x10 == table.size 
+0xfc 0x11 == table.fill 		
+</pre>
+</p>
+-->
+<!--
 <p>
 <a href="https://github.com/WebAssembly/sign-extension-ops">Sign-extension operators proposal</a>
 <pre>
-0xC0 => i32.extend8_s
-0xC1 => i32.extend16_s
-0xC2 => i64.extend8_s
-0xC3 => i64.extend16_s
-0xC4 => i64.extend32_s
+0xC0 == i32.extend8_s
+0xC1 == i32.extend16_s
+0xC2 == i64.extend8_s
+0xC3 == i64.extend16_s
+0xC4 == i64.extend32_s
 </pre>
 </p>
-<p>
-<a href="https://github.com/WebAssembly/tail-call">Tail Call proposal</a>
-<pre>
-return_call is 0x12
-return_call_indirect is 0x13
-</pre>
-</p>
-<p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>
+-->
+<!--<p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>-->
 </body>
 </html>
