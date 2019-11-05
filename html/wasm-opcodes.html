@@ -8,7 +8,9 @@
 	<link href="katex.css" rel="stylesheet">
 	<link href="pygments.css" rel="stylesheet">
 	<link href="webassembly_spec.css" rel="stylesheet">
+
 	-->
+	<script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
 	<style>
 
 body {
@@ -50,10 +52,15 @@ td:not(.reserved), th {
 	background:white;
 	background-clip: padding-box; 
 }
+.gr_pre_i32_test {
+	color:indianred;
+	background-color:indianred;
+	color:lightpink
+}
 
 </style>
 <script>
-	
+
 
 function toHex(d) {
     return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
@@ -83,8 +90,34 @@ function ApplyFormatting() {
 			cell.innerHTML = "<span>" + BoldMainOpBit(opcode) + "</span>";
 		} else {
 			cell.innerHTML = BoldMainOpBit(opcode);
+
+			// classes for "groups" (excludes proposals for now)
+			var chopped = ChopUp(opcode);
+			if (typeof chopped.pre !== "undefined") {
+				cell.classList.add('gr_pre_' + chopped.pre.slice(0, -1)); 
+			}
+			if (typeof chopped.mainop !== "undefined") {
+				//console.log(chopped.mainop);
+				var op = "gr_op_" + chopped.mainop;
+				if (chopped.mainop == "demote") op = "gr_op_promote";
+				cell.classList.add(op); 
+				hoverByClass(op, "lightblue"); // TODO: XXXXX 
+			}
+			if (typeof chopped.opbits !== "undefined") {
+				cell.classList.add("gr_opbits_" + chopped.opbits); 
+			}
+			if (typeof chopped.post !== "undefined") {
+				cell.classList.add("gr_post" + chopped.post); 
+			}
+			if (typeof chopped.sign !== "undefined") {
+				cell.classList.add("gr_sign" + chopped.sign); 
+			}
+			//if (typeof chopped.pre !== "undefined" && typeof chopped.sign !== "undefined" ) {
+				//note: doesn't make senes, as sign may belong to the pre (i64.gt_u) or post (f64.convert_i64_u)
+				//cell.classList.add('gr_type_' + chopped.pre.slice(0, -1) + chopped.sign); 
+			//}
 		}
-		
+		ChopUp(opcode);
 		cell.classList.add("tooltip");
 		//var normal = (cell.getAttribute("reserved")==null || cell.getAttribute("reserved")=="");
 
@@ -105,24 +138,78 @@ function ApplyFormatting() {
 				proposedText = "<p>Proposed: " + proposal + "</p>";
 			}
 		}
-		
+
+
 		cell.innerHTML += "<div class='bottom'><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
-		
 	}
-    
+	OnceLoaded();
+}
+
+var classes = ["gr_pre_i32", "gr_op_popcnt", "gr_pre_i64", "gr_op_ge", "gr_sign_s", "gr_type_i64_s"]; //list of your classes
+
+function hoverByClass(classname,colorover,colorout=""){ // colorout="transparent"
+	var elms=document.getElementsByClassName(classname);
+	for(var i=0;i<elms.length;i++){
+		elms[i].onmouseover = function(){
+			for(var k=0;k<elms.length;k++){
+				elms[k].style.backgroundColor=colorover;
+				elms[k].style.transition = ".2s"
+				//elms[k].style.color=colorover;
+			}
+		};
+		elms[i].onmouseout = function(){
+			for(var k=0;k<elms.length;k++){
+				elms[k].style.backgroundColor=colorout;
+				elms[k].style.transition = ".4s"
+				//elms[k].style.color=colorout;
+			}
+		};
+	}
+}
+function OnceLoaded() {
+	/*
+	hoverByClass("gr_pre_i32","lightpink");
+	hoverByClass("gr_pre_i64","lightpink");
+	hoverByClass("gr_pre_f32","lightpink");
+	hoverByClass("gr_pre_f64","lightpink");
+
+	//hoverByClass("gr_op_ge","lightblue");
+	*/
+}
+
+// pre: (i32|i64|f32|f64|table|memory|data|elem)
+// mainop: select, trunc, eqz, load
+// mainopbits: 8 (load8)
+// post: f32 (f64.​promote​_f32)
+// sign: [su] (i32.​div​_s, i64.trunc_sat_f32_s)
+//var opcodeRegex = /(?<pre>[a-z0-9]+(?:\.))?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
+//var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
+//var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
+const opcodeRegex = XRegExp(
+	`(?<pre>  [a-z0-9]+\\.)?  # before the dot: 'f64.'' 'table.'' 'memory.''
+	 (?<mainop>(([a-z]+|_(?!([su]$|[if][36])))+))
+	 (?<opbits>[0-9]+)?
+	 (?<post>(?:_)(i32|i64|f32|f64))?
+	 (?<sign>(?:_)[su])?`, 'x');
+
+function ChopUp(opcodeName) {
+	//var matches = opcodeRegex.exec(opcodeName);
+	var matches = XRegExp.exec(opcodeName, opcodeRegex);
+	//console.log(matches);
+	return matches;
 }
 
 function BoldMainOpBit(opcodeName) {
 	// todo: replace with some neater regex maybe
 	// todo: insert zws's in separate method (and include in copy-sign + pop-cnt)
-	var zws = "&#8203;"; // zero-width space 
+	var zws = "<wbr>"; // "&#8203;"; // zero-width space. "<zws>"" doesn't appear in clipboard (yay)
 	if (opcodeName.includes(".")) {
 		// bold after the dot
 		split = opcodeName.split(".");
 		if (split[1].includes("_") && split[1] != "is_null") {
 			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
-			secondSplit = split[1].split("_", 2);
-			return split[0] + "." + zws + "<b>" + secondSplit[0] + "</b>" + zws + "_" + secondSplit[1];
+			secondSplit = split[1].split("_");
+			return split[0] + "." + zws + "<b>" + secondSplit[0] + "</b>" + zws + "_" + secondSplit.slice(1).join("_");
 		} else {
 			return split[0] + "." + zws + "<b>" + split[1] + "</b>";
 		}
