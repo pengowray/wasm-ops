@@ -4,9 +4,11 @@
 	<title>WebAssembly Opcodes</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link href="hover.css" rel="stylesheet">
+	<!--
 	<link href="katex.css" rel="stylesheet">
 	<link href="pygments.css" rel="stylesheet">
 	<link href="webassembly_spec.css" rel="stylesheet">
+	-->
 	<style>
 
 body {
@@ -14,7 +16,7 @@ body {
 }
 /* could probably done better with gradients */
 .reserved, .crosshatch { 
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; 
+	/* background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="); background-repeat: repeat;  */
 } 
 .reserved span {
 	background-color: #eee;
@@ -31,12 +33,20 @@ table {
 	table-layout:fixed; 
 	width:100%;
 	font-size: 9px;
+
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; 
 }
-table td {
+td, th {
 	border:solid 1px #aaa; 
 	word-wrap:break-word; 
 	vertical-align: top;
 }
+td:not(.reserved), th {
+	background-image: unset;
+	background:white;
+	background-clip: padding-box; 
+}
+
 </style>
 <script>
 	
