@@ -61,6 +61,20 @@ td:not(.reserved), th {
 </style>
 <script>
 
+shorthand = {
+	'clz':'iunop', 'ctz':'iunop', 'popcnt':'iunop',
+	'abs':'funop', 'neg':'funop', 'sqrt':'funop', 'ceil':'funop', 'floor':'funop', 'trunc':'funop', 'nearest':'funop',
+	'add':'binop', 'sub':'binop', 'mul':'binop', 'div':'binop', 'rem':'binop', 
+	'and':'binop', 'or':'binop', 'xor':'binop', 'shl':'binop', 'shr':'binop', 'rotl':'binop', 'rotr':'binop', // ibinop
+	'copysign':'binop', 'min':'binop', 'max':'binop', // fbinop: copysign | add | sub | mul | div | min | max | 
+	'eq':'relop', 'ne':'relop', 'lt':'relop', 'gt':'relop', 'le':'relop', 'ge':'relop', // all exist for irelop & frelop
+	'eqz':'testop',
+	'wrap':'cvtop', 'extend':'cvtop', 'trunc':'cvtop', 'convert':'cvtop', 'demote':'cvtop', 'promote':'cvtop', 'reinterpret':'cvtop',
+	'drop':'parametric', 'select':'parametric', 
+	'get':'variable', 'set':'variable', 'tee':'variable', 
+	'load':'memory', 'store':'memory', 'size':'memory', 'grow':'memory',
+	'nop':'control', 'unreachable':'control', 'block':'control', 'loop':'control', 'if':'control', 'br':'control', 'br_if':'control', 'br_table':'control', 'return':'control', 'call':'control', 'call_indirect':'control', 'end':'control', 'else':'control',
+}
 
 function toHex(d) {
     return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
@@ -93,25 +107,40 @@ function ApplyFormatting() {
 
 			// classes for "groups" (excludes proposals for now)
 			var chopped = ChopUp(opcode);
+			var pre = undefined;
 			if (typeof chopped.pre !== "undefined") {
-				cell.classList.add('gr_pre_' + chopped.pre.slice(0, -1)); 
+				pre = 'group_pre_' + chopped.pre.slice(0, -1);
+				cell.classList.add(pre); 
 			}
 			if (typeof chopped.mainop !== "undefined") {
 				//console.log(chopped.mainop);
-				var op = "gr_op_" + chopped.mainop;
-				if (chopped.mainop == "demote") op = "gr_op_promote";
-				cell.classList.add(op); 
-				hoverByClass(op, "lightblue"); // TODO: XXXXX 
+				var op = "group_op_" + chopped.mainop;
+				var colors = [];
+				//hoverByClass(op, "lightblue"); // old
+
+				if (chopped.mainop == "demote") op = "group_op_promote";
+				cell.classList.add(op);
+				
+				var shortgroup = undefined;
+				if (chopped.mainop in shorthand) {
+					shortgroup = "group_sh_" + shorthand[chopped.mainop];
+					cell.classList.add(shortgroup); 
+					colors.push({'classname':shortgroup, 'color':'#EEE0FF'});
+				}
+				colors.push({'classname':op, 'color':'lightblue'})
+				addHover(cell, colors );
+				
 			}
 			if (typeof chopped.opbits !== "undefined") {
-				cell.classList.add("gr_opbits_" + chopped.opbits); 
+				cell.classList.add("group_opbits_" + chopped.opbits); 
 			}
 			if (typeof chopped.post !== "undefined") {
-				cell.classList.add("gr_post" + chopped.post); 
+				cell.classList.add("group_post" + chopped.post); 
 			}
 			if (typeof chopped.sign !== "undefined") {
-				cell.classList.add("gr_sign" + chopped.sign); 
+				cell.classList.add("group_sign" + chopped.sign); 
 			}
+			
 			//if (typeof chopped.pre !== "undefined" && typeof chopped.sign !== "undefined" ) {
 				//note: doesn't make senes, as sign may belong to the pre (i64.gt_u) or post (f64.convert_i64_u)
 				//cell.classList.add('gr_type_' + chopped.pre.slice(0, -1) + chopped.sign); 
@@ -139,28 +168,52 @@ function ApplyFormatting() {
 			}
 		}
 
-
 		cell.innerHTML += "<div class='bottom'><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
 	}
 	OnceLoaded();
 }
 
-var classes = ["gr_pre_i32", "gr_op_popcnt", "gr_pre_i64", "gr_op_ge", "gr_sign_s", "gr_type_i64_s"]; //list of your classes
+//var classes = ["gr_pre_i32", "gr_op_popcnt", "gr_pre_i64", "gr_op_ge", "gr_sign_s", "gr_type_i64_s"]; //list of your classes
+
+function addHover(cell, classesToColor) { // [{'classname':'class','color':'#color'},...]
+	cell.onmouseover = function() {
+		console.debug("mouse over");
+		for (var i=0;i<classesToColor.length;i++) {
+			var item = classesToColor[i];
+			var elms=document.getElementsByClassName(item.classname);
+			for(var k=0;k<elms.length;k++) {
+				elms[k].style.transition = ".4s"
+				elms[k].style.backgroundColor=item.color;
+				console.debug(item.color);
+			}
+		}
+	};
+	cell.onmouseout = function(){
+		for (var i=0;i<classesToColor.length;i++) {
+			var item = classesToColor[i];
+			var elms=document.getElementsByClassName(item.classname);
+			for(var k=0;k<elms.length;k++) {
+				elms[k].style.transition = ".4s"
+				elms[k].style.backgroundColor= "";
+			}
+		}
+	};	
+}
 
 function hoverByClass(classname,colorover,colorout=""){ // colorout="transparent"
 	var elms=document.getElementsByClassName(classname);
 	for(var i=0;i<elms.length;i++){
 		elms[i].onmouseover = function(){
 			for(var k=0;k<elms.length;k++){
+				elms[k].style.transition = ".4s"
 				elms[k].style.backgroundColor=colorover;
-				elms[k].style.transition = ".2s"
 				//elms[k].style.color=colorover;
 			}
 		};
 		elms[i].onmouseout = function(){
 			for(var k=0;k<elms.length;k++){
-				elms[k].style.backgroundColor=colorout;
 				elms[k].style.transition = ".4s"
+				elms[k].style.backgroundColor=colorout;
 				//elms[k].style.color=colorout;
 			}
 		};
@@ -202,7 +255,7 @@ function ChopUp(opcodeName) {
 function BoldMainOpBit(opcodeName) {
 	// todo: replace with some neater regex maybe
 	// todo: insert zws's in separate method (and include in copy-sign + pop-cnt)
-	var zws = "<wbr>"; // "&#8203;"; // zero-width space. "<zws>"" doesn't appear in clipboard (yay)
+	var zws = "<wbr>"; // "&#8203;"; // zero-width space. "<zws>" doesn't appear in clipboard (yay)
 	if (opcodeName.includes(".")) {
 		// bold after the dot
 		split = opcodeName.split(".");
