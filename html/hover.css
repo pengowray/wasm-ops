@@ -1,25 +1,28 @@
 /* via http://www.menucool.com/tooltip/css-tooltip */
 .tooltip {
     position:relative;
+    /*
     border-bottom:1px dotted #666;
     text-align:left;
+    */
 }
 
 .tooltip .bottom {
+    text-align:left;
     min-width:200px; 
-    top:40px;
+    top:62px;
     left:50%;
-    transform:translate(-50%, 0);
+    transform:translate(-70%, 0);
     padding:10px 20px;
     color:#444444;
     background-color:#EEEEEE;
     font-weight:normal;
-    font-size:13px;
+    font-size:12px;
     border-radius:8px;
     position:absolute;
     z-index:99999999;
     box-sizing:border-box;
-    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+    box-shadow:0 1px 8px rgba(0,0,0,0.3);
     display:none;
 }
 

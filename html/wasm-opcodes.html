@@ -3,15 +3,21 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>WebAssembly Opcodes</title>
+	<!-- https://atomiks.github.io/tippyjs/ -->
+	<!--
+	<script src="https://unpkg.com/popper.js@1"></script>
+	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
+	-->
+	<script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
+
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link href="hover.css" rel="stylesheet">
 	<!--
 	<link href="katex.css" rel="stylesheet">
 	<link href="pygments.css" rel="stylesheet">
 	<link href="webassembly_spec.css" rel="stylesheet">
-
 	-->
-	<script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
+	
 	<style>
 
 body {
@@ -36,12 +42,12 @@ table {
 td, th {
 	word-wrap:break-word; 
 	vertical-align: top;
+	text-align: center; 
 }
 td {
 	border:solid 1px #ccc;
 	color: #666;
 	padding: 4px;
-	-moz-background-clip: padding-box;
 	background-clip: padding-box;
 }
 td.reserved {
@@ -63,6 +69,17 @@ td:not(.reserved), th {
 	background-clip: border-box;
 	*/
 }
+.op {
+	font-size: larger;
+	font-weight: bold;
+	text-align: center;
+}
+/* line break which doesn't get copied into clipboard */
+.op::before { content: "\A"; white-space: pre; }
+.post::before { content: "\A"; white-space: pre; }
+
+
+
 </style>
 <script>
 shorthand = {
@@ -242,12 +259,12 @@ function BoldMainOpBit(opcodeName) {
 		if (split[1].includes("_") && split[1] != "is_null") {
 			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
 			secondSplit = split[1].split("_");
-			return split[0] + "." + zws + "<b>" + secondSplit[0] + "</b>" + zws + "_" + secondSplit.slice(1).join("_");
+			return split[0] + "." + "<span class='op'>" + secondSplit[0] + "</span><span class='post'>_" + secondSplit.slice(1).join("_") + "</span>";
 		} else {
-			return split[0] + "." + zws + "<b>" + split[1] + "</b>";
+			return split[0] + "." + "<span class='op'>" + split[1] + "</span>";
 		}
 	} else {
-		return "<b>" + opcodeName + "</b>";
+		return "<span class='op'>" + opcodeName + "</span>";
 	}
 	//return opcodeName;
 }
