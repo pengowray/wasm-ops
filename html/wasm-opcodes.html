@@ -4,15 +4,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>WebAssembly Opcodes</title>
 	<!-- https://atomiks.github.io/tippyjs/ -->
-	<!--
 	<script src="https://unpkg.com/popper.js@1"></script>
 	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
-	-->
 	<script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-	<link href="hover.css" rel="stylesheet">
 	<!--
+	<link href="hover.css" rel="stylesheet">
 	<link href="katex.css" rel="stylesheet">
 	<link href="pygments.css" rel="stylesheet">
 	<link href="webassembly_spec.css" rel="stylesheet">
@@ -36,7 +34,7 @@ body {
 table {
 	border-collapse:collapse; 
 	table-layout:fixed; 
-	width:100%;
+	width:300mm;
 	font-size: 9pt;
 }
 td, th {
@@ -111,6 +109,11 @@ function ApplyFormatting() {
 	tds = table.getElementsByTagName("td");
 	for (var n=0; n<tds.length;n++) {
 		var cell = tds[n];
+
+		var hex = "0x" + toHex(n); // e.g. 0x8F
+		var op_hex = 'op_' + hex
+		cell.classList.add(op_hex);
+
 		var opcode = cell.innerHTML;
 		var reserved = false;
 		var proposal = "";
@@ -146,10 +149,11 @@ function ApplyFormatting() {
 				if (chopped.mainop in shorthand) {
 					shortgroup = "group_sh_" + shorthand[chopped.mainop];
 					cell.classList.add(shortgroup); 
-					colors.push({'classname':shortgroup, 'color':'#EEE0FF'}); // was: #e8dcc1
+					colors.push({'classname':shortgroup, 'background-color':'#EEE0FF'}); // was: #e8dcc1
 				}
-				colors.push({'classname':op, 'color':'lightblue'}) // #faf4c8
-				addHover(cell, colors );
+				colors.push({'classname':op, 'backgroundColor':'lightblue'}) // #faf4c8
+				colors.push({'classname':op_hex, 'color':'black'})
+				addHover(cell, colors);
 				// light red: #FFF5F5 red text: 
 				// orange bg: #FDFAF5
 				// green bg: #FCFFF5
@@ -164,19 +168,10 @@ function ApplyFormatting() {
 			if (typeof chopped.sign !== "undefined") {
 				cell.classList.add("group_sign" + chopped.sign); 
 			}
-			
-			//if (typeof chopped.pre !== "undefined" && typeof chopped.sign !== "undefined" ) {
-				//note: doesn't make senes, as sign may belong to the pre (i64.gt_u) or post (f64.convert_i64_u)
-				//cell.classList.add('gr_type_' + chopped.pre.slice(0, -1) + chopped.sign); 
-			//}
 		}
-		ChopUp(opcode);
-		cell.classList.add("tooltip");
-		//var normal = (cell.getAttribute("reserved")==null || cell.getAttribute("reserved")=="");
 
 		var opcodeText = opcode;
 		var proposedText = "";
-		var hex = "0x" + toHex(n); // e.g. 0x8F
 
 		var help = document.getElementById(hex);
 		var helpText = "";
@@ -191,8 +186,15 @@ function ApplyFormatting() {
 				proposedText = "<p>Proposed: " + proposal + "</p>";
 			}
 		}
-
-		cell.innerHTML += "<div class='bottom'><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
+		//cell.classList.add("tooltip");
+		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
+		//cell.innerHTML += tooltiptext;
+		tippy(cell, {
+			content: tooltiptext, 
+			delay: [300, 0], 
+			theme: 'light-border',
+			//interactive: true,
+			placement: 'bottom',});
 	}
 	OnceLoaded();
 }
@@ -207,8 +209,8 @@ function addHover(cell, classesToColor) { // [{'classname':'class','color':'#col
 			var elms=document.getElementsByClassName(item.classname);
 			for(var k=0;k<elms.length;k++) {
 				elms[k].style.transition = ".4s"
-				elms[k].style.backgroundColor=item.color;
-				console.debug(item.color);
+				elms[k].style.backgroundColor=item.backgroundColor;
+				elms[k].style.color=item.color || "";
 			}
 		}
 	};
@@ -219,6 +221,7 @@ function addHover(cell, classesToColor) { // [{'classname':'class','color':'#col
 			for(var k=0;k<elms.length;k++) {
 				elms[k].style.transition = ".4s"
 				elms[k].style.backgroundColor= "";
+				elms[k].style.color="";
 			}
 		}
 	};	
@@ -677,7 +680,7 @@ onload = ApplyFormatting;
 <div style="display: none">
 <div id="0x00"><p>The unreachable instruction causes an unconditional trap.</p></div>
 <div id="0x01"><p>The nop instruction does nothing.</p></div>
-<div id="0x02"><p>The block, loop and if instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, end or else pseudo-instructions. As the grammar prescribes, they must be well-nested.</p></div>
+<div id="0x02"><p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. As the grammar prescribes, they must be well-nested.</p></div>
 
 <div id="0x1A"><p>The drop instruction simply throws away a single operand.</p></div>
 <div id="0x1B"><p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p></div>
