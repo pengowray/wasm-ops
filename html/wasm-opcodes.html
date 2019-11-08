@@ -149,11 +149,11 @@ function ApplyFormatting() {
 				if (chopped.mainop in shorthand) {
 					shortgroup = "group_sh_" + shorthand[chopped.mainop];
 					cell.classList.add(shortgroup); 
-					colors.push({'classname':shortgroup, 'background-color':'#EEE0FF'}); // was: #e8dcc1
+					colors.push({'classname':shortgroup, 'backgroundColor':'#EEE0FF'}); // was: #e8dcc1
 				}
 				colors.push({'classname':op, 'backgroundColor':'lightblue'}) // #faf4c8
-				colors.push({'classname':op_hex, 'color':'black'})
-				addHover(cell, colors);
+				colors.push({'classname':op_hex, 'color':'black', 'backgroundColor':'#24dff0'})
+				addHoverColor(cell, colors);
 				// light red: #FFF5F5 red text: 
 				// orange bg: #FDFAF5
 				// green bg: #FCFFF5
@@ -201,7 +201,7 @@ function ApplyFormatting() {
 
 //var classes = ["gr_pre_i32", "gr_op_popcnt", "gr_pre_i64", "gr_op_ge", "gr_sign_s", "gr_type_i64_s"]; //list of your classes
 
-function addHover(cell, classesToColor) { // [{'classname':'class','color':'#color'},...]
+function addHoverColor(cell, classesToColor) { // [{'classname':'class','color':'#color'},...]
 	cell.onmouseover = function() {
 		console.debug("mouse over");
 		for (var i=0;i<classesToColor.length;i++) {
