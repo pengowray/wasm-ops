@@ -666,6 +666,7 @@ onload = ApplyFormatting;
 
 <div id="0x28"><p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate memarg that contains an address offset and the expected alignment (expressed as the exponent of a power of 2).</p></div>
 <div id="0x29"><p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p></div>
+<div id="0x30"><p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p></div>
 <div id="0x2C"><p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p></div>
 
 <div id="0x3F"><p>The <b>memory.size</b> instruction returns the current size of a memory.
@@ -687,9 +688,12 @@ onload = ApplyFormatting;
 <div id="0x70"><p>remainder</p></div>
 <div id="0x81"><p>remainder</p></div>
 <div id="0x82"><p>remainder</p></div>
+<div id="0x71"><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x72"><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x73"><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
 <div id="0x74"><p>Shift left: Return the result of shifting i1 left by k bits, modulo 2N</p></div>
-<div id="0x75"><p>Shift right: Return the result of shifting i1 right by k bits, extended with 0 bits</p></div>
-<div id="0x76"><p>Shift right: Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
+<div id="0x75"><p>Shift right (signed): Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
+<div id="0x76"><p>Shift right (unsigned): Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
 <div id="0x77"><p>Return the result of rotating i1 left by k bits.</p></div>
 <div id="0x78"><p>Return the result of rotating i1 right by k bits.</p></div>
 <div id="0x98"><p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p></div>
