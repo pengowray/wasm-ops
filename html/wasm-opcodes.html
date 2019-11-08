@@ -17,15 +17,10 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
-/* could probably done better with gradients. duplicated in: .reserved */
+/* could probably done better with gradients. duplicated in: td.reserved */
 .crosshatch { 
 	 background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; 
 } 
-
-.reserved span {
-	background-color: #eee;
-}
-
 .proposal, .diagonal-stripe-1 { background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; } 
 /* .proposal-with-text { background-color: #eee; } */
 .hex {
@@ -36,32 +31,40 @@ table {
 	border-collapse:collapse; 
 	table-layout:fixed; 
 	width:100%;
-	font-size: 9px;
-
-	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg==");
-	background-repeat: repeat; 
+	font-size: 9pt;
 }
 td, th {
 	word-wrap:break-word; 
 	vertical-align: top;
 }
 td {
-	border:solid 1px #aaa; 
+	border:solid 1px #ccc;
+	color: #666;
+	padding: 4px;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
 }
+td.reserved {
+	background-color: #eee;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg==");
+	background-repeat: repeat; 
+	background-clip: padding-box;
+	padding: 4px;
+}
+.reserved span {
+	color:darkgray;
+	background-color: #eee;
+}
+
 td:not(.reserved), th {
+	/*
 	background-image: unset;
 	background:white;
-	background-clip: padding-box; 
+	background-clip: border-box;
+	*/
 }
-.gr_pre_i32_test {
-	color:indianred;
-	background-color:indianred;
-	color:lightpink
-}
-
 </style>
 <script>
-
 shorthand = {
 	'clz':'iunop', 'ctz':'iunop', 'popcnt':'iunop',
 	'abs':'funop', 'neg':'funop', 'sqrt':'funop', 'ceil':'funop', 'floor':'funop', 'trunc':'funop', 'nearest':'funop',
@@ -126,10 +129,13 @@ function ApplyFormatting() {
 				if (chopped.mainop in shorthand) {
 					shortgroup = "group_sh_" + shorthand[chopped.mainop];
 					cell.classList.add(shortgroup); 
-					colors.push({'classname':shortgroup, 'color':'#EEE0FF'});
+					colors.push({'classname':shortgroup, 'color':'#EEE0FF'}); // was: #e8dcc1
 				}
-				colors.push({'classname':op, 'color':'lightblue'})
+				colors.push({'classname':op, 'color':'lightblue'}) // #faf4c8
 				addHover(cell, colors );
+				// light red: #FFF5F5 red text: 
+				// orange bg: #FDFAF5
+				// green bg: #FCFFF5
 				
 			}
 			if (typeof chopped.opbits !== "undefined") {
