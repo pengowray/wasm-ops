@@ -76,6 +76,19 @@ td:not(.reserved), th {
 .op::before { content: "\A"; white-space: pre; }
 .post::before { content: "\A"; white-space: pre; }
 
+.highlight-selection {
+	color: black;
+	background-color:lightblue;
+}
+.highlight-shorthand {
+	background-color:#EEE0FF;
+}
+.highlight-opcode {
+	background-color:#24dff0;
+}
+.highlight-pre {
+	background-color: rgba(219, 223, 16, 0.616);
+}
 
 
 </style>
@@ -132,9 +145,11 @@ function ApplyFormatting() {
 			// classes for "groups" (excludes proposals for now)
 			var chopped = ChopUp(opcode);
 			var pre = undefined;
+			var pre_group = undefined;
 			if (typeof chopped.pre !== "undefined") {
-				pre = 'group_pre_' + chopped.pre.slice(0, -1);
-				cell.classList.add(pre); 
+				pre = chopped.pre.slice(0, -1);
+				pre_group = 'group_pre_' + pre;
+				cell.classList.add(pre_group);
 			}
 			if (typeof chopped.mainop !== "undefined") {
 				//console.log(chopped.mainop);
@@ -149,14 +164,20 @@ function ApplyFormatting() {
 				if (chopped.mainop in shorthand) {
 					shortgroup = "group_sh_" + shorthand[chopped.mainop];
 					cell.classList.add(shortgroup); 
-					colors.push({'classname':shortgroup, 'backgroundColor':'#EEE0FF'}); // was: #e8dcc1
+					//colors.push({'classname':shortgroup, 'backgroundColor':'#EEE0FF'}); // was: #e8dcc1
+					colors.push({'classname':shortgroup, 'highlight':'highlight-shorthand'});
 				}
-				colors.push({'classname':op, 'backgroundColor':'lightblue'}) // #faf4c8
-				colors.push({'classname':op_hex, 'color':'black', 'backgroundColor':'#24dff0'})
+				//colors.push({'classname':op, 'backgroundColor':'lightblue'}) // #faf4c8
+				colors.push({'classname':op, 'highlight':'highlight-opcode'})
+				//colors.push({'classname':op_hex, 'color':'black', 'backgroundColor':'#24dff0'})
+				colors.push({'classname':op_hex, 'highlight':'highlight-selection'})
 				addHoverColor(cell, colors);
-				// light red: #FFF5F5 red text: 
-				// orange bg: #FDFAF5
-				// green bg: #FCFFF5
+
+				if (typeof pre !== 'undefined') {
+					var preElm = cell.getElementsByClassName('pre')[0]; //todo: check for null
+					var preclass = 'pre_' + pre; // = 'group_pre_' + pre (to style the whole cell)
+					addHoverColor(preElm, [{'classname':preclass, 'highlight':'highlight-pre'}]); // style text, e.g. "i32"
+				}
 				
 			}
 			if (typeof chopped.opbits !== "undefined") {
@@ -180,37 +201,29 @@ function ApplyFormatting() {
 		}
 
 		if (reserved) { 
-			//opcodeText = "Reserved"; 
 			opcodeText = "<em>Reserved</em>";
 			if (proposal) {
 				proposedText = "<p>Proposed: " + proposal + "</p>";
 			}
 		}
-		//cell.classList.add("tooltip");
 		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
-		//cell.innerHTML += tooltiptext;
 		tippy(cell, {
 			content: tooltiptext, 
 			delay: [300, 0], 
-			theme: 'light-border',
-			//interactive: true,
+			theme: 'light-border', //TODO
+			//interactive: true, // TODO?
 			placement: 'bottom',});
 	}
 	OnceLoaded();
 }
 
-//var classes = ["gr_pre_i32", "gr_op_popcnt", "gr_pre_i64", "gr_op_ge", "gr_sign_s", "gr_type_i64_s"]; //list of your classes
-
-function addHoverColor(cell, classesToColor) { // [{'classname':'class','color':'#color'},...]
+function addHoverColor(cell, classesToColor) { // classesToColor = [{'classname':'class','highlight':'highlight-class'},...]
 	cell.onmouseover = function() {
-		console.debug("mouse over");
 		for (var i=0;i<classesToColor.length;i++) {
 			var item = classesToColor[i];
 			var elms=document.getElementsByClassName(item.classname);
 			for(var k=0;k<elms.length;k++) {
-				elms[k].style.transition = ".4s"
-				elms[k].style.backgroundColor=item.backgroundColor;
-				elms[k].style.color=item.color || "";
+				elms[k].classList.add(item.highlight);
 			}
 		}
 	};
@@ -219,9 +232,7 @@ function addHoverColor(cell, classesToColor) { // [{'classname':'class','color':
 			var item = classesToColor[i];
 			var elms=document.getElementsByClassName(item.classname);
 			for(var k=0;k<elms.length;k++) {
-				elms[k].style.transition = ".4s"
-				elms[k].style.backgroundColor= "";
-				elms[k].style.color="";
+				elms[k].classList.remove(item.highlight);
 			}
 		}
 	};	
@@ -239,16 +250,15 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
-	`(?<pre>  [a-z0-9]+\\.)?  # before the dot: 'f64.'' 'table.'' 'memory.''
-	 (?<mainop>(([a-z]+|_(?!([su]$|[if][36])))+))
-	 (?<opbits>[0-9]+)?
-	 (?<post>(?:_)(i32|i64|f32|f64))?
-	 (?<sign>(?:_)[su])?`, 'x');
+	`(?<pre>    [a-z0-9]+\\.)?  # before the dot: 'f64.'' 'table.'' 'memory.''
+	 (?<mainop> (([a-z]+|_(?!([su]$|[if][36])))+))
+	 (?<opbits> [0-9]+)?
+	 (?<post>   (?:_)(i32|i64|f32|f64))?
+	 (?<sign>   (?:_)[su])?`
+		, 'x');
 
 function ChopUp(opcodeName) {
-	//var matches = opcodeRegex.exec(opcodeName);
 	var matches = XRegExp.exec(opcodeName, opcodeRegex);
-	//console.log(matches);
 	return matches;
 }
 
@@ -262,9 +272,9 @@ function BoldMainOpBit(opcodeName) {
 		if (split[1].includes("_") && split[1] != "is_null") {
 			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
 			secondSplit = split[1].split("_");
-			return split[0] + "." + "<span class='op'>" + secondSplit[0] + "</span><span class='post'>_" + secondSplit.slice(1).join("_") + "</span>";
+			return "<span class='pre pre_" + split[0] + "''>" + split[0] + "</span>.<span class='op'>" + secondSplit[0] + "</span><span class='post'>_" + secondSplit.slice(1).join("_") + "</span>";
 		} else {
-			return split[0] + "." + "<span class='op'>" + split[1] + "</span>";
+			return "<span class='pre pre_" + split[0] + "'>" + split[0] + "</span>.<span class='op'>" + split[1] + "</span>";
 		}
 	} else {
 		return "<span class='op'>" + opcodeName + "</span>";
