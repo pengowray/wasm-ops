@@ -399,15 +399,15 @@ onload = ApplyFormatting;
 <td>f64.const</td>
 <td>i32.eqz</td>
 <td>i32.eq</td>
-<td>i64.ne</td>
-<td>i64.lt_s</td>
-<td>i64.lt_u</td>
-<td>i64.gt_s</td>
-<td>i64.gt_u</td>
-<td>i64.le_s</td>
-<td>i64.le_u</td>
-<td>i64.ge_s</td>
-<td>i64.ge_u</td>
+<td>i32.ne</td>
+<td>i32.lt_s</td>
+<td>i32.lt_u</td>
+<td>i32.gt_s</td>
+<td>i32.gt_u</td>
+<td>i32.le_s</td>
+<td>i32.le_u</td>
+<td>i32.ge_s</td>
+<td>i32.ge_u</td>
 </tr>
 <tr>
 <th scope="row">5_</th>
@@ -690,7 +690,20 @@ onload = ApplyFormatting;
 <div style="display: none">
 <div id="0x00"><p>The unreachable instruction causes an unconditional trap.</p></div>
 <div id="0x01"><p>The nop instruction does nothing.</p></div>
-<div id="0x02"><p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. As the grammar prescribes, they must be well-nested.</p></div>
+<div id="0x02">
+	<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>
+	<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. As the grammar prescribes, they must be well-nested.</p>
+</div>
+<div id="0x03"><p>a block with a label at the beginning which may be used to form loops</p></div>
+<div id="0x04"><p>the beginning of an if construct with an implicit <i>then</i> block</p></div>
+<div id="0x05"><p>marks the else block of an <i>if</i>.</p></div>
+<div id="0x0B"><p>an instruction that marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function</p></div>
+<div id="0x0C"><p>branch to a given label in an enclosing construct.</p><p>br performs an unconditional branch</p></div>
+<div id="0x0D"><p>conditionally branch to a given label in an enclosing construct.</p><p>br_if performs a conditional branch</p></div>
+<div id="0x0E"><p>a jump table which jumps to a label in an enclosing construct.</p><p>br_table performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p></div>
+<div id="0x0F"><p>return zero or more values from this function.</p><p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p></div>
+<div id="0x10"><p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p></div>
+<div id="0x11"><p>The call_indirect instruction calls a function indirectly through an operand indexing into a table. </p></div>
 
 <div id="0x1A"><p>The drop instruction simply throws away a single operand.</p></div>
 <div id="0x1B"><p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p></div>
@@ -700,38 +713,99 @@ onload = ApplyFormatting;
 <div id="0x23"><p>This instructions gets the values of variables.</p></div>
 <div id="0x24"><p>This instructions sets the values of variables </p></div>
 
-<div id="0x28"><p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate memarg that contains an address offset and the expected alignment (expressed as the exponent of a power of 2).</p></div>
-<div id="0x29"><p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p></div>
-<div id="0x30"><p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p></div>
-<div id="0x2C"><p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p></div>
+<div id="0x28">
+	<p>load 4 bytes as i32.</p>
+	<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment (expressed as the exponent of a power of 2).</p>
+</div>
+<div id="0x29">
+	<p>load 8 bytes as i64.</p>
+	<p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p>
+</div>
+<div id="0x2A">
+	<p>load 4 bytes as f32.</p>
+	<p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p>
+</div>
+<div id="0x2B">
+	<p>load 8 bytes as f64.</p>
+</div>
+<div id="0x2C">
+	<p>load 1 byte and sign-extend i8 to i32.</p>
+	<p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p>
+</div>
+<div id="0x2D"><p>load 1 byte and zero-extend i8 to i32</p></div>
+<div id="0x2E"><p>load 2 bytes and sign-extend i16 to i32</p></div>
+<div id="0x2F"><p>load 2 bytes and zero-extend i16 to i32</p></div>
+<div id="0x30"><p>load 1 byte and sign-extend i8 to i64</p></div>
+<div id="0x31"><p>load 1 byte and zero-extend i8 to i64</p></div>
+<div id="0x32"><p>load 2 bytes and sign-extend i16 to i64</p></div>
+<div id="0x33"><p>load 2 bytes and zero-extend i16 to i64</p></div>
+<div id="0x34"><p>load 4 bytes and sign-extend i16 to i64</p></div>
+<div id="0x35"><p>load 4 bytes and zero-extend i16 to i64</p></div>
 
-<div id="0x3F"><p>The <b>memory.size</b> instruction returns the current size of a memory.
-	Operates in units of page size. </p></div>
-<div id="0x40"><p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.
-	Operates in units of page size.</p></div>
-<div id="0x0C"><p>br performs an unconditional branch</p></div>
-<div id="0x0D"><p>br_if performs a conditional branch</p></div>
-<div id="0x0E"><p>br_table performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p></div>
-<div id="0x0F"><p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p></div>
-<div id="0x10"><p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p></div>
-<div id="0x11"><p>The call_indirect instruction calls a function indirectly through an operand indexing into a table. </p></div>
-<div id="0x41"><p>Push the value t.const c to the stack.</p></div>
-<div id="0x45"><p>Return 1 if 𝑖 is zero, 0 otherwise.</p></div>
-<div id="0x67"><p>Return the count of leading zero bits in i; all bits are considered leading zeros if i is 0.</p></div>
-<div id="0x68"><p>Return the count of trailing zero bits in i; all bits are considered trailing zeros if i is 0.</p></div>
-<div id="0x69"><p>Return the count of non-zero bits in i.</p></div>
-<div id="0x6F"><p>remainder</p></div>
-<div id="0x70"><p>remainder</p></div>
-<div id="0x81"><p>remainder</p></div>
-<div id="0x82"><p>remainder</p></div>
-<div id="0x71"><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x72"><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x73"><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x74"><p>Shift left: Return the result of shifting i1 left by k bits, modulo 2N</p></div>
-<div id="0x75"><p>Shift right (signed): Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
-<div id="0x76"><p>Shift right (unsigned): Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
-<div id="0x77"><p>Return the result of rotating i1 left by k bits.</p></div>
-<div id="0x78"><p>Return the result of rotating i1 right by k bits.</p></div>
+<div id="0x3F">
+	<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>
+	<p>Operates in units of page size.</p>
+</div>
+<div id="0x40">
+	<p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.</p>
+	<p>Operates in units of page size.</p>
+</div>
+
+<div id="0x41"><p>Push a value to the stack.</p></div>
+<div id="0x42"><p>Push a value to the stack.</p></div>
+<div id="0x43"><p>Push a value to the stack.</p></div>
+<div id="0x44"><p>Push a value to the stack.</p></div>
+
+<div id="0x45"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p></div>
+<div id="0x50"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p></div>
+<div id="0x46"><p>sign-agnostic compare equal</p></div>
+<div id="0x51"><p>sign-agnostic compare equal</p></div>
+<div id="0x47"><p>sign-agnostic compare unequal</p></div>
+<div id="0x52"><p>sign-agnostic compare unequal</p></div>
+<div id="0x48"><p>signed less than</p></div>
+<div id="0x53"><p>signed less than</p></div>
+<div id="0x49"><p>unsigned less than</p></div>
+<div id="0x54"><p>unsigned less than</p></div>
+<div id="0x4A"><p>signed greater than</p></div>
+<div id="0x55"><p>signed greater than</p></div>
+<div id="0x4B"><p>unsigned greater than</p></div>
+<div id="0x56"><p>unsigned greater than</p></div>
+<div id="0x4C"><p>signed less than or equal</p></div>
+<div id="0x57"><p>signed less than or equal</p></div>
+<div id="0x4D"><p>unsigned less than or equal</p></div>
+<div id="0x58"><p>unsigned less than or equal</p></div>
+<div id="0x4E"><p>signed greater than or equal</p></div>
+<div id="0x59"><p>signed greater than or equal</p></div>
+<div id="0x4F"><p>unsigned greater than or equal</p></div>
+<div id="0x5A"><p>unsigned greater than or equal</p></div>
+
+
+
+<div id="0x6A"><p>sign-agnostic addition</p></div>
+<div id="0x7C"><p>sign-agnostic addition</p></div>
+<div id="0x6B"><p>sign-agnostic subtraction</p></div>
+<div id="0x7D"><p>sign-agnostic subtraction</p></div>
+<div id="0x6C"><p>sign-agnostic multiplication (lower 32-bits)</p></div>
+<div id="0x7E"><p>sign-agnostic multiplication (lower 32-bits)</p></div>
+<div id="0x6D"><p>signed division (result is truncated toward zero)</p></div>
+<div id="0x6E"><p>unsigned division (result is floored)</p></div>
+
+
+<div id="0x67"><p>sign-agnostic count leading zero bits</p><p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p></div>
+<div id="0x68"><p>sign-agnostic count trailing zero bits</p><p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p></div>
+<div id="0x69"><p>sign-agnostic count number of one bits</p><p>Return the count of non-zero bits in i.</p></div>
+<div id="0x6F"><p>signed remainder (result has the sign of the dividend)</p></div>
+<div id="0x70"><p>unsigned remainder</p></div>
+<div id="0x81"><p>signed remainder (result has the sign of the dividend)</p></div>
+<div id="0x82"><p>unsigned remainder</p></div>
+<div id="0x71"><p>sign-agnostic bitwise <i>and</i>.</p><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x72"><p>sign-agnostic bitwise <i>inclusive or</i>.</p><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x73"><p>sign-agnostic bitwise <i>exclusive or</i>.</p><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x74"><p>sign-agnostic shift left</p><p>Return the result of shifting i1 left by k bits, modulo 2N</p></div>
+<div id="0x75"><p>sign-replicating (arithmetic) shift right</p><p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
+<div id="0x76"><p>zero-replicating (logical) shift right</p><p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
+<div id="0x77"><p>sign-agnostic rotate left</p><p>Return the result of rotating i1 left by k bits.</p></div>
+<div id="0x78"><p>sign-agnostic rotate right</p><p>Return the result of rotating i1 right by k bits.</p></div>
 <div id="0x98"><p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p></div>
 <div id="0x9F"><p>square root</p></div>
 <div id="0xA7"><p>Return i modulo 2N.</p></div>
