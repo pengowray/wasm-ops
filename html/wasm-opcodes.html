@@ -83,11 +83,19 @@ td:not(.reserved), th {
 .highlight-shorthand {
 	background-color:#EEE0FF;
 }
+.highlight-opcode:not(.highlight-shorthand){
+	/* special colour for 'trunc' opcodes, when found outside of the selected "shorthand". */
+	background-color:#cff1fc;
+}
 .highlight-opcode {
 	background-color:#24dff0;
 }
 .highlight-pre {
 	background-color: rgba(219, 223, 16, 0.616);
+}
+p.bigsign {
+	font-size: 22pt;
+	text-align: center;
 }
 
 
@@ -95,7 +103,7 @@ td:not(.reserved), th {
 <script>
 shorthand = {
 	'clz':'iunop', 'ctz':'iunop', 'popcnt':'iunop',
-	'abs':'funop', 'neg':'funop', 'sqrt':'funop', 'ceil':'funop', 'floor':'funop', 'trunc':'funop', 'nearest':'funop',
+	'abs':'funop', 'neg':'funop', 'sqrt':'funop', 'ceil':'funop', 'floor':'funop', 'nearest':'funop', /* 'trunc':'funop', (see exceptions) */ 
 	'add':'binop', 'sub':'binop', 'mul':'binop', 'div':'binop', 'rem':'binop', 
 	'and':'binop', 'or':'binop', 'xor':'binop', 'shl':'binop', 'shr':'binop', 'rotl':'binop', 'rotr':'binop', // ibinop
 	'copysign':'binop', 'min':'binop', 'max':'binop', // fbinop: copysign | add | sub | mul | div | min | max | 
@@ -106,6 +114,19 @@ shorthand = {
 	'get':'variable', 'set':'variable', 'tee':'variable', 
 	'load':'memory', 'store':'memory', 'size':'memory', 'grow':'memory',
 	'nop':'control', 'unreachable':'control', 'block':'control', 'loop':'control', 'if':'control', 'br':'control', 'br_if':'control', 'br_table':'control', 'return':'control', 'call':'control', 'call_indirect':'control', 'end':'control', 'else':'control',
+}
+// more trunc functions in 'cvtop' so make exceptions
+shorthand_exceptions = { 
+	'0x8F': 'funop', '0x9D':'funop'
+}
+function get_shorthand_group(op, hex) {
+	if (hex in shorthand_exceptions) {
+		return "group_sh_" + shorthand_exceptions[hex]
+	}
+	if (op in shorthand) {
+		return "group_sh_" + shorthand[op];
+	}
+	return undefined;
 }
 
 function toHex(d) {
@@ -160,13 +181,14 @@ function ApplyFormatting() {
 				if (chopped.mainop == "demote") op = "group_op_promote";
 				cell.classList.add(op);
 				
-				var shortgroup = undefined;
-				if (chopped.mainop in shorthand) {
-					shortgroup = "group_sh_" + shorthand[chopped.mainop];
-					cell.classList.add(shortgroup); 
+				var shortgroup = get_shorthand_group(chopped.mainop, hex);
+				if (typeof shortgroup !== "undefined") {
+					cell.classList.add(shortgroup);
 					//colors.push({'classname':shortgroup, 'backgroundColor':'#EEE0FF'}); // was: #e8dcc1
 					colors.push({'classname':shortgroup, 'highlight':'highlight-shorthand'});
 				}
+				
+
 				//colors.push({'classname':op, 'backgroundColor':'lightblue'}) // #faf4c8
 				colors.push({'classname':op, 'highlight':'highlight-opcode'})
 				//colors.push({'classname':op_hex, 'color':'black', 'backgroundColor':'#24dff0'})
@@ -209,7 +231,7 @@ function ApplyFormatting() {
 		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
 		tippy(cell, {
 			content: tooltiptext, 
-			delay: [300, 0], 
+			delay: [100, 0], 
 			theme: 'light-border', //TODO
 			//interactive: true, // TODO?
 			placement: 'bottom',});
@@ -687,7 +709,10 @@ onload = ApplyFormatting;
 </tr>
 </tbody></table>
 		
-<div style="display: none">
+<div style="display: none"> 
+
+<!-- Help to be shown in popups. In hex code order, except when two or more items have the same (or very similar) text, where they are grouped together. -->
+
 <div id="0x00"><p>The unreachable instruction causes an unconditional trap.</p></div>
 <div id="0x01"><p>The nop instruction does nothing.</p></div>
 <div id="0x02">
@@ -707,11 +732,11 @@ onload = ApplyFormatting;
 
 <div id="0x1A"><p>The drop instruction simply throws away a single operand.</p></div>
 <div id="0x1B"><p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p></div>
-<div id="0x20"><p>This instructions gets the values of variables.</p></div>
-<div id="0x21"><p>This instructions sets the values of variables.</p></div>
+<div id="0x20"><p>This instruction gets the value of a variable.</p></div>
+<div id="0x21"><p>This instruction sets the value of a variable.</p></div>
 <div id="0x22"><p>The local.tee instruction is like local.set but also returns its argument.</p></div>
-<div id="0x23"><p>This instructions gets the values of variables.</p></div>
-<div id="0x24"><p>This instructions sets the values of variables </p></div>
+<div id="0x23"><p>This instruction gets the value of a variable.</p></div>
+<div id="0x24"><p>This instruction sets the value of a variable </p></div>
 
 <div id="0x28">
 	<p>load 4 bytes as i32.</p>
@@ -741,7 +766,15 @@ onload = ApplyFormatting;
 <div id="0x33"><p>load 2 bytes and zero-extend i16 to i64</p></div>
 <div id="0x34"><p>load 4 bytes and sign-extend i16 to i64</p></div>
 <div id="0x35"><p>load 4 bytes and zero-extend i16 to i64</p></div>
-
+<div id="0x36"><p>store 4 bytes (no conversion)</p></div>
+<div id="0x37"><p>store 8 bytes (no conversion)</p></div>
+<div id="0x38"><p>store 4 bytes (no conversion)</p></div>
+<div id="0x39"><p>store 8 bytes (no conversion)</p></div>
+<div id="0x3A"><p>wrap i32 to i8 and store 1 byte</p></div>
+<div id="0x3B"><p>wrap i32 to i16 and store 2 bytes</p></div>
+<div id="0x3C"><p>wrap i64 to i8 and store 1 byte</p></div>
+<div id="0x3D"><p>wrap i64 to i16 and store 2 bytes</p></div>
+<div id="0x3E"><p>wrap i64 to i32 and store 4 bytes</p></div>
 <div id="0x3F">
 	<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>
 	<p>Operates in units of page size.</p>
@@ -758,61 +791,144 @@ onload = ApplyFormatting;
 
 <div id="0x45"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p></div>
 <div id="0x50"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p></div>
-<div id="0x46"><p>sign-agnostic compare equal</p></div>
-<div id="0x51"><p>sign-agnostic compare equal</p></div>
-<div id="0x47"><p>sign-agnostic compare unequal</p></div>
-<div id="0x52"><p>sign-agnostic compare unequal</p></div>
-<div id="0x48"><p>signed less than</p></div>
-<div id="0x53"><p>signed less than</p></div>
-<div id="0x49"><p>unsigned less than</p></div>
-<div id="0x54"><p>unsigned less than</p></div>
-<div id="0x4A"><p>signed greater than</p></div>
-<div id="0x55"><p>signed greater than</p></div>
-<div id="0x4B"><p>unsigned greater than</p></div>
-<div id="0x56"><p>unsigned greater than</p></div>
-<div id="0x4C"><p>signed less than or equal</p></div>
-<div id="0x57"><p>signed less than or equal</p></div>
-<div id="0x4D"><p>unsigned less than or equal</p></div>
-<div id="0x58"><p>unsigned less than or equal</p></div>
-<div id="0x4E"><p>signed greater than or equal</p></div>
-<div id="0x59"><p>signed greater than or equal</p></div>
-<div id="0x4F"><p>unsigned greater than or equal</p></div>
-<div id="0x5A"><p>unsigned greater than or equal</p></div>
+<div id="0x46"><p class="bigsign">==</p><p>sign-agnostic compare equal</p></div>
+<div id="0x51"><p class="bigsign">==</p><p>sign-agnostic compare equal</p></div>
+<div id="0x47"><p class="bigsign">≠</p><p>sign-agnostic compare unequal</p></div>
+<div id="0x52"><p class="bigsign">≠</p><p>sign-agnostic compare unequal</p></div>
+<div id="0x48"><p class="bigsign">&lt;</p><p>signed less than</p></div>
+<div id="0x53"><p class="bigsign">&lt;</p><p>signed less than</p></div>
+<div id="0x49"><p class="bigsign">&lt;</p><p>unsigned less than</p></div>
+<div id="0x54"><p class="bigsign">&lt;</p><p>unsigned less than</p></div>
+<div id="0x4A"><p class="bigsign">&gt;</p><p>signed greater than</p></div>
+<div id="0x55"><p class="bigsign">&gt;</p><p>signed greater than</p></div>
+<div id="0x4B"><p class="bigsign">&gt;</p><p>unsigned greater than</p></div>
+<div id="0x56"><p class="bigsign">&gt;</p><p>unsigned greater than</p></div>
+<div id="0x4C"><p class="bigsign">≤</p><p>signed less than or equal</p></div>
+<div id="0x57"><p class="bigsign">≤</p><p>signed less than or equal</p></div>
+<div id="0x4D"><p class="bigsign">≤</p><p>unsigned less than or equal</p></div>
+<div id="0x58"><p class="bigsign">≤</p><p>unsigned less than or equal</p></div>
+<div id="0x4E"><p class="bigsign">≥</p><p>signed greater than or equal</p></div>
+<div id="0x59"><p class="bigsign">≥</p><p>signed greater than or equal</p></div>
+<div id="0x4F"><p class="bigsign">≥</p><p>unsigned greater than or equal</p></div>
+<div id="0x5A"><p class="bigsign">≥</p><p>unsigned greater than or equal</p></div>
 
+<div id="0x5B"><p class="bigsign">==</p><p>compare equal</p></div>
+<div id="0x61"><p class="bigsign">==</p><p>compare equal</p></div>
+<div id="0x5C"><p class="bigsign">≠</p><p>compare unordered or unequal</p></div>
+<div id="0x62"><p class="bigsign">≠</p><p>compare unordered or unequal</p></div>
+<div id="0x5D"><p class="bigsign">&lt;</p><p>less than</p></div>
+<div id="0x63"><p class="bigsign">&lt;</p><p> less than</p></div>
+<div id="0x5E"><p class="bigsign">&gt;</p><p> greater than</p></div>
+<div id="0x64"><p class="bigsign">&gt;</p><p> greater than</p></div>
+<div id="0x5F"><p class="bigsign">≤</p><p>less than or equal</p></div>
+<div id="0x65"><p class="bigsign">≤</p><p>less than or equal</p></div>
+<div id="0x60"><p class="bigsign">≥</p><p>greater than or equal</p></div>
+<div id="0x66"><p class="bigsign">≥</p><p>greater than or equal</p></div>
 
+<div id="0x67"><p>sign-agnostic count leading zero bits</p><p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p></div>
+<div id="0x79"><p>sign-agnostic count leading zero bits</p><p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p></div>
+<div id="0x68"><p>sign-agnostic count trailing zero bits</p><p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p></div>
+<div id="0x7A"><p>sign-agnostic count trailing zero bits</p><p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p></div>
+<div id="0x69"><p>sign-agnostic count number of one bits</p><p>Return the count of non-zero bits in i.</p></div>
+<div id="0x7B"><p>sign-agnostic count number of one bits</p><p>Return the count of non-zero bits in i.</p></div>
 
 <div id="0x6A"><p>sign-agnostic addition</p></div>
 <div id="0x7C"><p>sign-agnostic addition</p></div>
 <div id="0x6B"><p>sign-agnostic subtraction</p></div>
 <div id="0x7D"><p>sign-agnostic subtraction</p></div>
-<div id="0x6C"><p>sign-agnostic multiplication (lower 32-bits)</p></div>
-<div id="0x7E"><p>sign-agnostic multiplication (lower 32-bits)</p></div>
+<div id="0x6C"><p>sign-agnostic multiplication, modulo 2<sup>32</sup></p></div>
+<div id="0x7E"><p>sign-agnostic multiplication, modulo 2<sup>64</sup></p></div>
 <div id="0x6D"><p>signed division (result is truncated toward zero)</p></div>
+<div id="0x7F"><p>signed division (result is truncated toward zero)</p></div>
 <div id="0x6E"><p>unsigned division (result is floored)</p></div>
+<div id="0x80"><p>unsigned division (result is floored)</p></div>
 
-
-<div id="0x67"><p>sign-agnostic count leading zero bits</p><p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p></div>
-<div id="0x68"><p>sign-agnostic count trailing zero bits</p><p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p></div>
-<div id="0x69"><p>sign-agnostic count number of one bits</p><p>Return the count of non-zero bits in i.</p></div>
 <div id="0x6F"><p>signed remainder (result has the sign of the dividend)</p></div>
-<div id="0x70"><p>unsigned remainder</p></div>
 <div id="0x81"><p>signed remainder (result has the sign of the dividend)</p></div>
+<div id="0x70"><p>unsigned remainder</p></div>
 <div id="0x82"><p>unsigned remainder</p></div>
 <div id="0x71"><p>sign-agnostic bitwise <i>and</i>.</p><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x83"><p>sign-agnostic bitwise <i>and</i>.</p><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
 <div id="0x72"><p>sign-agnostic bitwise <i>inclusive or</i>.</p><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x84"><p>sign-agnostic bitwise <i>inclusive or</i>.</p><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
 <div id="0x73"><p>sign-agnostic bitwise <i>exclusive or</i>.</p><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x74"><p>sign-agnostic shift left</p><p>Return the result of shifting i1 left by k bits, modulo 2N</p></div>
+<div id="0x85"><p>sign-agnostic bitwise <i>exclusive or</i>.</p><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
+<div id="0x74"><p>sign-agnostic shift left</p><p>Return the result of shifting i1 left by k bits, modulo 2<sup>32</sup></p></div>
+<div id="0x86"><p>sign-agnostic shift left</p><p>Return the result of shifting i1 left by k bits, modulo 2<sup>64</sup></p></div>
 <div id="0x75"><p>sign-replicating (arithmetic) shift right</p><p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
+<div id="0x87"><p>sign-replicating (arithmetic) shift right</p><p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
 <div id="0x76"><p>zero-replicating (logical) shift right</p><p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
+<div id="0x88"><p>zero-replicating (logical) shift right</p><p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
 <div id="0x77"><p>sign-agnostic rotate left</p><p>Return the result of rotating i1 left by k bits.</p></div>
+<div id="0x89"><p>sign-agnostic rotate left</p><p>Return the result of rotating i1 left by k bits.</p></div>
 <div id="0x78"><p>sign-agnostic rotate right</p><p>Return the result of rotating i1 right by k bits.</p></div>
+<div id="0x8A"><p>sign-agnostic rotate right</p><p>Return the result of rotating i1 right by k bits.</p></div>
+
+<div id="0x8B"><p>absolute value</p></div>
+<div id="0x99"><p>absolute value</p></div>
+<div id="0x8C"><p>negation</p></div>
+<div id="0x9A"><p>negation</p></div>
+<div id="0x8D"><p>ceiling operator</p></div>
+<div id="0x9B"><p>ceiling operator</p></div>
+<div id="0x8E"><p>floor operator</p></div>
+<div id="0x9C"><p>floor operator</p></div>
+<div id="0x8F"><p>round to nearest integer towards zero</p></div>
+<div id="0x9D"><p>round to nearest integer towards zero</p></div>
+<div id="0x90"><p>round to nearest integer, ties to even</p></div>
+<div id="0x9E"><p>round to nearest integer, ties to even</p></div>
+<div id="0x91"><p class="bigsign">√</p><p>square root</p></div>
+<div id="0x9F"><p class="bigsign">√</p><p>square root</p></div>
+
+<div id="0x92"><p class="bigsign">+</p><p>addition</p></div>
+<div id="0xA0"><p class="bigsign">+</p><p>addition</p></div>
+<div id="0x93"><p class="bigsign">-</p><p>subtraction</p></div>
+<div id="0xA1"><p class="bigsign">-</p><p>subtraction</p></div>
+<div id="0x94"><p class="bigsign">×</p><p>multiplication</p></div>
+<div id="0xA2"><p class="bigsign">×</p><p>multiplication</p></div>
+<div id="0x95"><p class="bigsign">÷</p><p>division</p><p>partial function: division by 0 is undefined</p></div>
+<div id="0xA3"><p class="bigsign">÷</p><p>division</p><p>partial function: division by 0 is undefined</p></div>
+<div id="0x96"><p>minimum (binary operator); if either operand is NaN, returns NaN</p></div>
+<div id="0xA4"><p>minimum (binary operator); if either operand is NaN, returns NaN</p></div>
+<div id="0x97"><p>maximum (binary operator); if either operand is NaN, returns NaN</p></div>
+<div id="0xA5"><p>maximum (binary operator); if either operand is NaN, returns NaN</p></div>
+
 <div id="0x98"><p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p></div>
-<div id="0x9F"><p>square root</p></div>
-<div id="0xA7"><p>Return i modulo 2N.</p></div>
-<div id="0x91"><p>square root</p></div>
-<div id="0x7x"><p></p></div>
-<div id="0x7x"><p></p></div>
-<div id="0x69">
+<div id="0xA6"><p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p></div>
+
+<div id="0xA7"><p>wrap a 64-bit integer to a 32-bit integer.</p><p>Return i modulo 2<sup>32</sup>.</p></div>
+<div id="0xA8"><p>truncate a 32-bit float to a signed 32-bit integer</p></div>
+<div id="0xA9"><p>truncate a 32-bit float to an unsigned 32-bit integer</p></div>
+<div id="0xAA"><p>truncate a 64-bit float to a signed 32-bit integer</p></div>
+<div id="0xAB"><p>truncate a 64-bit float to an unsigned 32-bit integer</p></div>
+
+<div id="0xAC"><p>extend a signed 32-bit integer to a 64-bit integer.</p></div>
+<div id="0xAD"><p>extend an unsigned 32-bit integer to a 64-bit integer.</p></div>
+
+<div id="0xAE"><p>truncate a 32-bit float to a signed 64-bit integer.</p></div>
+<div id="0xAF"><p>truncate a 32-bit float to an unsigned 64-bit integer.</p></div>
+<div id="0xB0"><p>truncate a 64-bit float to a signed 64-bit integer.</p></div>
+<div id="0xB1"><p>truncate a 64-bit float to an unsigned 64-bit integer.</p></div>
+
+<div id="0xB2"><p>convert a signed 32-bit integer to a 32-bit float.</p></div>
+<div id="0xB3"><p>convert an unsigned 32-bit integer to a 32-bit float.</p></div>
+<div id="0xB4"><p>convert a signed 64-bit integer to a 32-bit float.</p></div>
+<div id="0xB5"><p>convert an unsigned 64-bit integer to a 32-bit float.</p></div>
+
+<div id="0xB6"><p>demote a 64-bit float to a 32-bit float</p></div>
+
+<div id="0xB7"><p>convert a signed 32-bit integer to a 64-bit float.</p></div>
+<div id="0xB8"><p>convert an unsigned 32-bit integer to a 64-bit float.</p></div>
+<div id="0xB9"><p>convert a signed 64-bit integer to a 64-bit float.</p></div>
+<div id="0xBA"><p>convert an unsigned 64-bit integer to a 64-bit float.</p></div>
+
+<div id="0xBB"><p>promote a 32-bit float to a 64-bit float</p></div>
+
+<div id="0xBC"><p>reinterpret the bits of a 32-bit float as a 32-bit integer</p></div>
+<div id="0xBD"><p>reinterpret the bits of a 64-bit float as a 64-bit integer</p></div>
+<div id="0xBE"><p>reinterpret the bits of a 32-bit integer as a 32-bit float</p></div>
+<div id="0xBF"><p>reinterpret the bits of a 64-bit integer as a 64-bit float</p></div>
+
+<div id="0x69_old_unused">
 	<p></p>
 	Type:
 	<span class="mopen">[</span><a href="#syntax-valtype"><span class="mord"><span class="mord mathsf">i</span><span class="mord mathsf">3</span><span class="mord mathsf">2</span></span></a><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><a href="#syntax-functype"><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></a><span class="mopen">[</span><a href="#syntax-valtype"><span class="mord"><span class="mord mathsf">i</span><span class="mord mathsf">3</span><span class="mord mathsf">2</span></span></a><span class="mclose">]</span>
@@ -825,7 +941,6 @@ onload = ApplyFormatting;
 	</li></ul>
 	<div class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.209108em;vertical-align:-0.354554em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><a href="#op-ipopcnt"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">p</span><span class="mord mathrm">o</span><span class="mord mathrm">p</span><span class="mord mathrm">c</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">=</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mrel"><span class="mord text"><span class="mord">if</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><a href="#aux-ibits"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">b</span><span class="mord mathrm">i</span><span class="mord mathrm">t</span><span class="mord mathrm">s</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></span></div>
 	</div>
-
 </div>
 </div>
 
