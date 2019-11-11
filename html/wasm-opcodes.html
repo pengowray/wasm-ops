@@ -78,8 +78,11 @@ td:not(.reserved), th {
 .post::before { content: "\A"; white-space: pre; }
 
 .op-type {
-	font-size:xx-large;
+	font-size:x-large;
 	padding-left: .8em;
+}
+.immediate-args {
+	color: lightgrey;
 }
 
 .supsub {
@@ -115,7 +118,7 @@ td:not(.reserved), th {
 	background-color: rgba(219, 223, 16, 0.616);
 }
 p.bigsign {
-	font-size: 22pt;
+	font-size: 15.5pt;
 	text-align: center;
 }
 
@@ -135,6 +138,7 @@ shorthand = {
 	'get':'variable', 'set':'variable', 'tee':'variable', 
 	'load':'memory', 'store':'memory', 'size':'memory', 'grow':'memory',
 	'nop':'control', 'unreachable':'control', 'block':'control', 'loop':'control', 'if':'control', 'br':'control', 'br_if':'control', 'br_table':'control', 'return':'control', 'call':'control', 'call_indirect':'control', 'end':'control', 'else':'control',
+	'const':'const'
 }
 // more trunc functions in 'cvtop' so make exceptions
 shorthand_exceptions = { 
@@ -239,22 +243,32 @@ function ApplyFormatting() {
 
 		var help = document.getElementById(hex);
 		var helpText = "";
+		var immediateArg = "";
 		if (help != null) {
+			// remove <span class="immediate-args">x</span> so it can be placed beside the op code.
+			var immediateArgElm = help.getElementsByClassName("immediate-args");
+			if (typeof immediateArgElm[0] !== "undefined") {
+				var iaElm = immediateArgElm[0];
+				immediateArg = " " + iaElm.outerHTML;
+				iaElm.parentNode.removeChild(iaElm);
+			}
+
 			helpText = help.innerHTML;
 		}
+
 
 		if (reserved) { 
 			opcodeText = "<em>Reserved</em>";
 			if (proposal) {
-				proposedText = "<p>Proposed: " + proposal + "</p>";
+				proposedText = "<p>Proposed: " + proposal + immediateArg + "</p>";
 			}
 		}
-		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + "</h3>" + proposedText + helpText + "</div>";
+		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + immediateArg + "</h3>" + proposedText + helpText + "</div>";
 		tippy(cell, {
 			content: tooltiptext, 
 			delay: [100, 0], 
 			theme: 'light-border', //TODO
-			//interactive: true, // TODO?
+			//interactive: true, // TODO (causes unstable table display)
 			placement: 'bottom',});
 	}
 	OnceLoaded();
@@ -293,11 +307,11 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
-	`(?<pre>    [a-z0-9]+\\.)?  # before the dot: 'f64.'' 'table.'' 'memory.''
-	 (?<mainop> (([a-z]+|_(?!([su]$|[if][36])))+))
-	 (?<opbits> [0-9]+)?
-	 (?<post>   (?:_)(i32|i64|f32|f64))?
-	 (?<sign>   (?:_)[su])?`
+	`(?<pre>    [a-z0-9]+\\.)?                       # before the dot: 'f64.' 'table.' 'memory.' (optional)
+	 (?<mainop> (([a-z]+|_(?!([su]$|[if][36])))+))   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, ...
+	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
+	 (?<post>   (?:_)(i32|i64|f32|f64))?             # optional
+	 (?<sign>   (?:_)[su])?	                         # optional`
 		, 'x');
 
 function ChopUp(opcodeName) {
@@ -306,7 +320,7 @@ function ChopUp(opcodeName) {
 }
 
 function BoldMainOpBit(opcodeName) {
-	// todo: replace with some neater regex maybe
+	// todo: replace with some neater regex maybe, eg ChopUp()
 	// todo: insert zws's in separate method (and include in copy-sign + pop-cnt)
 	var zws = "<wbr>"; // "&#8203;"; // zero-width space. "<zws>" doesn't appear in clipboard (yay)
 	if (opcodeName.includes(".")) {
@@ -744,30 +758,36 @@ onload = ApplyFormatting;
 	<p><h3>Type:</h3><span class="op-type">[] → []</span></p>
 </div>
 <div id="0x02">
+	<span class=immediate-args>[t<sup>?</sup>]</span>
 	<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>
 	<p><h3>Type:</h3><span class="op-type">[] → [t<sup>∗</sup>]</span></p>
 	<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. As the grammar prescribes, they must be well-nested.</p>
 </div>
 <div id="0x03">
+	<span class=immediate-args>[t<sup>?</sup>]</span>
 	<p>a block with a label at the beginning which may be used to form loops</p>
 	<p><h3>Type:</h3><span class="op-type">[] → [t<sup>∗</sup>]</span></p>
 </div>
 <div id="0x04">
+	<span class=immediate-args>[t<sup>?</sup>]</span>
 	<p>the beginning of an if construct with an implicit <i>then</i> block</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [t<sup>∗</sup>]</span></p>
 </div>
 <div id="0x05"><p>marks the else block of an <i>if</i>.</p></div>
 <div id="0x0B"><p>an instruction that marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function</p></div>
 <div id="0x0C">
+	<span class=immediate-args><i>l</i></span>
 	<p>branch to a given label in an enclosing construct.</p><p>br performs an unconditional branch</p>
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x0D">
+	<span class=immediate-args><i>l</i></span>
 	<p>br_if performs a conditional branch</p>
 	<p>conditionally branch to a given label in an enclosing construct.</p>
 	<p><h3>Type:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
 </div>
 <div id="0x0E">
+	<span class=immediate-args><i>l* l</i></span>
 	<p>a jump table which jumps to a label in an enclosing construct.</p>
 	<p>br_table performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p>
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup> i32] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
@@ -778,10 +798,12 @@ onload = ApplyFormatting;
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x10">
+	<span class=immediate-args><i>x</i></span>
 	<p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p>
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x11">
+	<span class=immediate-args><i>x</i></span>
 	<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>
 	<p><h3>Type:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
 </div>
@@ -794,85 +816,273 @@ onload = ApplyFormatting;
 	<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>
 	<p><h3>Type:</h3><span class="op-type">[t t i32] → [t]</span></p>
 </div>
-<div id="0x20"><p>This instruction gets the value of a variable.</p></div>
-<div id="0x21"><p>This instruction sets the value of a variable.</p></div>
-<div id="0x22"><p>The local.tee instruction is like local.set but also returns its argument.</p></div>
-<div id="0x23"><p>This instruction gets the value of a variable.</p></div>
-<div id="0x24"><p>This instruction sets the value of a variable </p></div>
+<div id="0x20">
+	<span class=immediate-args><i>x</i></span>
+	<p>This instruction gets the value of a variable.</p>
+	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>x</i>:localidx (u32)</span></p>
+	<p><h3>Type:</h3><span class="op-type">[] → [t]</span></p>
+	<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>
+</div>
+<div id="0x21">
+	<span class=immediate-args><i>x</i></span>
+	<p>This instruction sets the value of a variable.</p>
+	<p><h3>Type:</h3><span class="op-type">[t] → []</span></p>
+	<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>
+</div>
+<div id="0x22">
+	<span class=immediate-args><i>x</i></span>
+	<p>The local.tee instruction is like local.set but also returns its argument.</p>
+	<p><h3>Type:</h3><span class="op-type">[t] → [t]</span></p>
+	<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>
+</div>
+<div id="0x23">
+	<span class=immediate-args><i>x</i></span>
+	<p>This instruction gets the value of a variable.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [t]</span></p>
+</div>
+<div id="0x24">
+	<span class=immediate-args><i>x</i></span>
+	<p>This instruction sets the value of a variable </p>
+	<p><h3>Type:</h3><span class="op-type">[t] → []</span></p>
+</div>
 
 <div id="0x28">
+	<span class=immediate-args><i>m</i></span>
 	<p>load 4 bytes as i32.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>m</i> : memarg ::= {offset <i>u32</i>, align <i>u32</i>}</span></p>
 	<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment (expressed as the exponent of a power of 2).</p>
 </div>
 <div id="0x29">
+	<span class=immediate-args><i>m</i></span>
 	<p>load 8 bytes as i64.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 	<p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p>
 </div>
 <div id="0x2A">
+	<span class=immediate-args><i>m</i></span>
 	<p>load 4 bytes as f32.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f64]</span></p>
 	<p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p>
 </div>
 <div id="0x2B">
+	<span class=immediate-args><i>m</i></span>
 	<p>load 8 bytes as f64.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f64]</span></p>
 </div>
 <div id="0x2C">
+	<span class=immediate-args><i>m</i></span>
 	<p>load 1 byte and sign-extend i8 to i32.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 	<p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p>
 </div>
-<div id="0x2D"><p>load 1 byte and zero-extend i8 to i32</p></div>
-<div id="0x2E"><p>load 2 bytes and sign-extend i16 to i32</p></div>
-<div id="0x2F"><p>load 2 bytes and zero-extend i16 to i32</p></div>
-<div id="0x30"><p>load 1 byte and sign-extend i8 to i64</p></div>
-<div id="0x31"><p>load 1 byte and zero-extend i8 to i64</p></div>
-<div id="0x32"><p>load 2 bytes and sign-extend i16 to i64</p></div>
-<div id="0x33"><p>load 2 bytes and zero-extend i16 to i64</p></div>
-<div id="0x34"><p>load 4 bytes and sign-extend i16 to i64</p></div>
-<div id="0x35"><p>load 4 bytes and zero-extend i16 to i64</p></div>
-<div id="0x36"><p>store 4 bytes (no conversion)</p></div>
-<div id="0x37"><p>store 8 bytes (no conversion)</p></div>
-<div id="0x38"><p>store 4 bytes (no conversion)</p></div>
-<div id="0x39"><p>store 8 bytes (no conversion)</p></div>
-<div id="0x3A"><p>wrap i32 to i8 and store 1 byte</p></div>
-<div id="0x3B"><p>wrap i32 to i16 and store 2 bytes</p></div>
-<div id="0x3C"><p>wrap i64 to i8 and store 1 byte</p></div>
-<div id="0x3D"><p>wrap i64 to i16 and store 2 bytes</p></div>
-<div id="0x3E"><p>wrap i64 to i32 and store 4 bytes</p></div>
+<div id="0x2D">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 1 byte and zero-extend i8 to i32</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+</div>
+<div id="0x2E">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 2 bytes and sign-extend i16 to i32</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+</div>
+<div id="0x2F">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 2 bytes and zero-extend i16 to i32</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+</div>
+<div id="0x30">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 1 byte and sign-extend i8 to i64</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0x31">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 1 byte and zero-extend i8 to i64</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0x32">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 2 bytes and sign-extend i16 to i64</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0x33">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 2 bytes and zero-extend i16 to i64</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0x34">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 4 bytes and sign-extend i16 to i64</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0x35">
+	<span class=immediate-args><i>m</i></span>
+	<p>load 4 bytes and zero-extend i16 to i64</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0x36">
+	<span class=immediate-args><i>m</i></span>
+	<p>store 4 bytes (no conversion)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → []</span></p>
+</div>
+<div id="0x37">
+	<span class=immediate-args><i>m</i></span>
+	<p>store 8 bytes (no conversion)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
+</div>
+<div id="0x38">
+	<span class=immediate-args><i>m</i></span>
+	<p>store 4 bytes (no conversion)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 f32] → []</span></p>
+</div>
+<div id="0x39">
+	<span class=immediate-args><i>m</i></span>
+	<p>store 8 bytes (no conversion)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 f64] → []</span></p>
+</div>
+<div id="0x3A">
+	<span class=immediate-args><i>m</i></span>
+	<p>wrap i32 to i8 and store 1 byte</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → []</span></p>
+</div>
+<div id="0x3B">
+	<span class=immediate-args><i>m</i></span>
+	<p>wrap i32 to i16 and store 2 bytes</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → []</span></p>
+</div>
+<div id="0x3C">
+	<span class=immediate-args><i>m</i></span>
+	<p>wrap i64 to i8 and store 1 byte</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
+</div>
+<div id="0x3D">
+	<span class=immediate-args><i>m</i></span>
+	<p>wrap i64 to i16 and store 2 bytes</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
+</div>
+<div id="0x3E">
+	<span class=immediate-args><i>m</i></span>
+	<p>wrap i64 to i32 and store 4 bytes</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
+</div>
 <div id="0x3F">
 	<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>
 	<p>Operates in units of page size.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [i32]</span></p>
 </div>
 <div id="0x40">
 	<p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.</p>
 	<p>Operates in units of page size.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 </div>
 
-<div id="0x41"><p>Push a value to the stack.</p></div>
-<div id="0x42"><p>Push a value to the stack.</p></div>
-<div id="0x43"><p>Push a value to the stack.</p></div>
-<div id="0x44"><p>Push a value to the stack.</p></div>
+<div id="0x41">
+	<span class=immediate-args><i>i32</i></span>
+	<p>Push a 32-bit integer value to the stack.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [i32]</span></p>
+</div>
+<div id="0x42">
+	<span class=immediate-args><i>i64</i></span>
+	<p>Push a 64-bit integer value to the stack.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [i64]</span></p>
+</div>
+<div id="0x43">
+	<span class=immediate-args><i>f32</i></span>
+	<p>Push a 32-bit float value to the stack.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [f32]</span></p>
+</div>
+<div id="0x44">
+	<p>Push a 64-bit float value to the stack.</p>
+	<span class=immediate-args><i>f64</i></span>
+	<p><h3>Type:</h3><span class="op-type">[] → [f64]</span></p>
+</div>
 
-<div id="0x45"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p></div>
-<div id="0x50"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p></div>
-<div id="0x46"><p class="bigsign">==</p><p>sign-agnostic compare equal</p></div>
-<div id="0x51"><p class="bigsign">==</p><p>sign-agnostic compare equal</p></div>
-<div id="0x47"><p class="bigsign">≠</p><p>sign-agnostic compare unequal</p></div>
-<div id="0x52"><p class="bigsign">≠</p><p>sign-agnostic compare unequal</p></div>
-<div id="0x48"><p class="bigsign">&lt;</p><p>signed less than</p></div>
-<div id="0x53"><p class="bigsign">&lt;</p><p>signed less than</p></div>
-<div id="0x49"><p class="bigsign">&lt;</p><p>unsigned less than</p></div>
-<div id="0x54"><p class="bigsign">&lt;</p><p>unsigned less than</p></div>
-<div id="0x4A"><p class="bigsign">&gt;</p><p>signed greater than</p></div>
-<div id="0x55"><p class="bigsign">&gt;</p><p>signed greater than</p></div>
-<div id="0x4B"><p class="bigsign">&gt;</p><p>unsigned greater than</p></div>
-<div id="0x56"><p class="bigsign">&gt;</p><p>unsigned greater than</p></div>
-<div id="0x4C"><p class="bigsign">≤</p><p>signed less than or equal</p></div>
-<div id="0x57"><p class="bigsign">≤</p><p>signed less than or equal</p></div>
-<div id="0x4D"><p class="bigsign">≤</p><p>unsigned less than or equal</p></div>
-<div id="0x58"><p class="bigsign">≤</p><p>unsigned less than or equal</p></div>
-<div id="0x4E"><p class="bigsign">≥</p><p>signed greater than or equal</p></div>
-<div id="0x59"><p class="bigsign">≥</p><p>signed greater than or equal</p></div>
-<div id="0x4F"><p class="bigsign">≥</p><p>unsigned greater than or equal</p></div>
-<div id="0x5A"><p class="bigsign">≥</p><p>unsigned greater than or equal</p></div>
+<div id="0x45"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p><p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p></div>
+<div id="0x50"><p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p><p><h3>Type:</h3><span class="op-type">[i64] → [i32]</span></p></div>
+<div id="0x46">
+	<p class="bigsign">==</p>
+	<p>sign-agnostic compare equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x51">
+	<p class="bigsign">==</p>
+	<p>sign-agnostic compare equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
+</div>
+<div id="0x47">
+	<p class="bigsign">≠</p>
+	<p>sign-agnostic compare unequal</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x52">
+	<p class="bigsign">≠</p>
+	<p>sign-agnostic compare unequal</p>
+</div>
+<div id="0x48">
+	<p class="bigsign">&lt;</p>
+	<p>signed less than</p>
+</div>
+<div id="0x53">
+	<p class="bigsign">&lt;</p>
+	<p>signed less than</p>
+</div>
+<div id="0x49">
+	<p class="bigsign">&lt;</p>
+	<p>unsigned less than</p>
+</div>
+<div id="0x54">
+	<p class="bigsign">&lt;</p>
+	<p>unsigned less than</p>
+</div>
+<div id="0x4A">
+	<p class="bigsign">&gt;</p>
+	<p>signed greater than</p>
+</div>
+<div id="0x55">
+	<p class="bigsign">&gt;</p>
+	<p>signed greater than</p>
+</div>
+<div id="0x4B">
+	<p class="bigsign">&gt;</p>
+	<p>unsigned greater than</p>
+</div>
+<div id="0x56">
+	<p class="bigsign">&gt;</p>
+	<p>unsigned greater than</p>
+</div>
+<div id="0x4C">
+	<p class="bigsign">≤</p>
+	<p>signed less than or equal</p>
+</div>
+<div id="0x57">
+	<p class="bigsign">≤</p>
+	<p>signed less than or equal</p>
+</div>
+<div id="0x4D">
+	<p class="bigsign">≤</p>
+	<p>unsigned less than or equal</p>
+</div>
+<div id="0x58">
+	<p class="bigsign">≤</p>
+	<p>unsigned less than or equal</p>
+</div>
+<div id="0x4E">
+	<p class="bigsign">≥</p>
+	<p>signed greater than or equal</p>
+</div>
+<div id="0x59">
+	<p class="bigsign">≥</p>
+	<p>signed greater than or equal</p>
+</div>
+<div id="0x4F">
+	<p class="bigsign">≥</p>
+	<p>unsigned greater than or equal</p>
+</div>
+<div id="0x5A">
+	<p class="bigsign">≥</p>
+	<p>unsigned greater than or equal</p>
+</div>
 
 <div id="0x5B"><p class="bigsign">==</p><p>compare equal</p></div>
 <div id="0x61"><p class="bigsign">==</p><p>compare equal</p></div>
