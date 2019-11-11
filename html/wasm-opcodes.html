@@ -28,7 +28,8 @@ body {
 .proposal, .diagonal-stripe-1 { background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; } 
 /* .proposal-with-text { background-color: #eee; } */
 .hex {
-	text-align: right;
+	text-align: left;
+	color: khaki;
 }
 
 table {
@@ -75,6 +76,26 @@ td:not(.reserved), th {
 /* line break which doesn't get copied into clipboard */
 .op::before { content: "\A"; white-space: pre; }
 .post::before { content: "\A"; white-space: pre; }
+
+.op-type {
+	font-size:xx-large;
+	padding-left: .8em;
+}
+
+.supsub {
+	/* via https://stackoverflow.com/a/24908149 */
+    display: inline-block;
+}
+.supsub sup,
+.supsub sub {
+    position: relative;
+    display: block;
+    font-size: .5em;
+    line-height: 1.2;
+}
+.supsub sub {
+    top: .3em;
+}
 
 .highlight-selection {
 	color: black;
@@ -711,27 +732,68 @@ onload = ApplyFormatting;
 		
 <div style="display: none"> 
 
-<!-- Help to be shown in popups. In hex code order, except when two or more items have the same (or very similar) text, where they are grouped together. -->
+<!-- Help to be shown in popups. --> 
+<!-- Ordered by hex code, except when two or more items have the same (or very similar) text, where they are grouped together. -->
 
-<div id="0x00"><p>The unreachable instruction causes an unconditional trap.</p></div>
-<div id="0x01"><p>The nop instruction does nothing.</p></div>
+<div id="0x00">
+	<p>The unreachable instruction causes an unconditional trap.</p>
+	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
+</div>
+<div id="0x01">
+	<p>The nop instruction does nothing.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → []</span></p>
+</div>
 <div id="0x02">
 	<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [t<sup>∗</sup>]</span></p>
 	<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. As the grammar prescribes, they must be well-nested.</p>
 </div>
-<div id="0x03"><p>a block with a label at the beginning which may be used to form loops</p></div>
-<div id="0x04"><p>the beginning of an if construct with an implicit <i>then</i> block</p></div>
+<div id="0x03">
+	<p>a block with a label at the beginning which may be used to form loops</p>
+	<p><h3>Type:</h3><span class="op-type">[] → [t<sup>∗</sup>]</span></p>
+</div>
+<div id="0x04">
+	<p>the beginning of an if construct with an implicit <i>then</i> block</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [t<sup>∗</sup>]</span></p>
+</div>
 <div id="0x05"><p>marks the else block of an <i>if</i>.</p></div>
 <div id="0x0B"><p>an instruction that marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function</p></div>
-<div id="0x0C"><p>branch to a given label in an enclosing construct.</p><p>br performs an unconditional branch</p></div>
-<div id="0x0D"><p>conditionally branch to a given label in an enclosing construct.</p><p>br_if performs a conditional branch</p></div>
-<div id="0x0E"><p>a jump table which jumps to a label in an enclosing construct.</p><p>br_table performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p></div>
-<div id="0x0F"><p>return zero or more values from this function.</p><p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p></div>
-<div id="0x10"><p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p></div>
-<div id="0x11"><p>The call_indirect instruction calls a function indirectly through an operand indexing into a table. </p></div>
+<div id="0x0C">
+	<p>branch to a given label in an enclosing construct.</p><p>br performs an unconditional branch</p>
+	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
+</div>
+<div id="0x0D">
+	<p>br_if performs a conditional branch</p>
+	<p>conditionally branch to a given label in an enclosing construct.</p>
+	<p><h3>Type:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
+</div>
+<div id="0x0E">
+	<p>a jump table which jumps to a label in an enclosing construct.</p>
+	<p>br_table performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p>
+	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup> i32] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
+</div>
+<div id="0x0F">
+	<p>return zero or more values from this function.</p>
+	<p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p>
+	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
+</div>
+<div id="0x10">
+	<p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p>
+	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
+</div>
+<div id="0x11">
+	<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>
+	<p><h3>Type:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
+</div>
 
-<div id="0x1A"><p>The drop instruction simply throws away a single operand.</p></div>
-<div id="0x1B"><p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p></div>
+<div id="0x1A">
+	<p>The drop instruction simply throws away a single operand.</p>
+	<p><h3>Type:</h3><span class="op-type">[t] → []</span></p>
+</div>
+<div id="0x1B">
+	<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>
+	<p><h3>Type:</h3><span class="op-type">[t t i32] → []</span></p>
+</div>
 <div id="0x20"><p>This instruction gets the value of a variable.</p></div>
 <div id="0x21"><p>This instruction sets the value of a variable.</p></div>
 <div id="0x22"><p>The local.tee instruction is like local.set but also returns its argument.</p></div>
