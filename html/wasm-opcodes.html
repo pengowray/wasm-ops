@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>WebAssembly Opcodes</title>
+	<title>WebAssembly Opcode Table</title>
+	<!-- <p>WebAssembly is an open, industry-wide effort to bring a safe, efficient assembly language to the web. WebAssembly technology is developed collaboratively by major browser vendors including Mozilla, Google, Microsoft, and Apple. WebAssembly modules can be downloaded and executed by the majority of browsers in use today.</p> -->
 	<!-- https://atomiks.github.io/tippyjs/ -->
 	<script src="https://unpkg.com/popper.js@1"></script>
 	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
@@ -83,6 +84,20 @@ td:not(.reserved), th {
 }
 .immediate-args {
 	color: lightgrey;
+	font-family: Georgia, serif;
+	font-style: italic;
+}
+
+.mathsy {
+	font-family: Georgia, serif;
+}
+.mathsy-i {
+	font-family: Georgia, serif;
+	font-style: italic;
+}
+.op-imm-args {
+	font-family: Georgia, serif;
+	font-size: 15px;
 }
 
 .supsub {
@@ -345,8 +360,7 @@ onload = ApplyFormatting;
 </head>
 <body>
 
-<h1>WebAssembly Opcodes</h1>
-<!--- by pengo wray --->
+<h1>Pengo Wray's WebAssembly Opcodes</h1>
 &nbsp;
 <table id="opcodes">
 <thead>
@@ -776,20 +790,21 @@ onload = ApplyFormatting;
 <div id="0x05"><p>marks the else block of an <i>if</i>.</p></div>
 <div id="0x0B"><p>an instruction that marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function</p></div>
 <div id="0x0C">
-	<span class=immediate-args><i>l</i></span>
+	<span class="immediate-args">l</span>
 	<p>branch to a given label in an enclosing construct.</p><p>br performs an unconditional branch</p>
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x0D">
-	<span class=immediate-args><i>l</i></span>
+	<span class="immediate-args">l</span>
 	<p>br_if performs a conditional branch</p>
 	<p>conditionally branch to a given label in an enclosing construct.</p>
 	<p><h3>Type:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
 </div>
 <div id="0x0E">
-	<span class=immediate-args><i>l* l</i></span>
+	<span class="immediate-args">l* l</span>
 	<p>a jump table which jumps to a label in an enclosing construct.</p>
 	<p>br_table performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p>
+	<p><h3>Immediate arguments:</h3><span class="op-imm-args"><i>l*</i> ::= vec( labelidx <i>u32</i> ) <br> <i>l</i> ::= labelidx <i>u32</i></span></p>
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup> i32] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x0F">
@@ -798,12 +813,12 @@ onload = ApplyFormatting;
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x10">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p>
 	<p><h3>Type:</h3><span class="op-type">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 </div>
 <div id="0x11">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>
 	<p><h3>Type:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
 </div>
@@ -817,152 +832,152 @@ onload = ApplyFormatting;
 	<p><h3>Type:</h3><span class="op-type">[t t i32] → [t]</span></p>
 </div>
 <div id="0x20">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>This instruction gets the value of a variable.</p>
-	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>x</i>:localidx (u32)</span></p>
+	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>x</i> : localidx (u32)</span></p>
 	<p><h3>Type:</h3><span class="op-type">[] → [t]</span></p>
 	<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>
 </div>
 <div id="0x21">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>This instruction sets the value of a variable.</p>
 	<p><h3>Type:</h3><span class="op-type">[t] → []</span></p>
 	<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>
 </div>
 <div id="0x22">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>The local.tee instruction is like local.set but also returns its argument.</p>
 	<p><h3>Type:</h3><span class="op-type">[t] → [t]</span></p>
 	<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>
 </div>
 <div id="0x23">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>This instruction gets the value of a variable.</p>
 	<p><h3>Type:</h3><span class="op-type">[] → [t]</span></p>
 </div>
 <div id="0x24">
-	<span class=immediate-args><i>x</i></span>
+	<span class="immediate-args">x</span>
 	<p>This instruction sets the value of a variable </p>
 	<p><h3>Type:</h3><span class="op-type">[t] → []</span></p>
 </div>
 
 <div id="0x28">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 4 bytes as i32.</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
-	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>m</i> : memarg ::= {offset <i>u32</i>, align <i>u32</i>}</span></p>
+	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>m</i> : memarg ::= { offset <i>u32</i>, align <i>u32</i> }</span></p>
 	<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment (expressed as the exponent of a power of 2).</p>
 </div>
 <div id="0x29">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 8 bytes as i64.</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 	<p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p>
 </div>
 <div id="0x2A">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 4 bytes as f32.</p>
-	<p><h3>Type:</h3><span class="op-type">[i32] → [f64]</span></p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f32]</span></p>
 	<p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p>
 </div>
 <div id="0x2B">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 8 bytes as f64.</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [f64]</span></p>
 </div>
 <div id="0x2C">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 1 byte and sign-extend i8 to i32.</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 	<p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p>
 </div>
 <div id="0x2D">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 1 byte and zero-extend i8 to i32</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 </div>
 <div id="0x2E">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 2 bytes and sign-extend i16 to i32</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 </div>
 <div id="0x2F">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 2 bytes and zero-extend i16 to i32</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 </div>
 <div id="0x30">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 1 byte and sign-extend i8 to i64</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 </div>
 <div id="0x31">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 1 byte and zero-extend i8 to i64</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 </div>
 <div id="0x32">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 2 bytes and sign-extend i16 to i64</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 </div>
 <div id="0x33">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 2 bytes and zero-extend i16 to i64</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 </div>
 <div id="0x34">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 4 bytes and sign-extend i16 to i64</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 </div>
 <div id="0x35">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>load 4 bytes and zero-extend i16 to i64</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
 </div>
 <div id="0x36">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>store 4 bytes (no conversion)</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i32] → []</span></p>
 </div>
 <div id="0x37">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>store 8 bytes (no conversion)</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
 </div>
 <div id="0x38">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>store 4 bytes (no conversion)</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 f32] → []</span></p>
 </div>
 <div id="0x39">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>store 8 bytes (no conversion)</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 f64] → []</span></p>
 </div>
 <div id="0x3A">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>wrap i32 to i8 and store 1 byte</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i32] → []</span></p>
 </div>
 <div id="0x3B">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>wrap i32 to i16 and store 2 bytes</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i32] → []</span></p>
 </div>
 <div id="0x3C">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>wrap i64 to i8 and store 1 byte</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
 </div>
 <div id="0x3D">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>wrap i64 to i16 and store 2 bytes</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
 </div>
 <div id="0x3E">
-	<span class=immediate-args><i>m</i></span>
+	<span class="immediate-args">m</span>
 	<p>wrap i64 to i32 and store 4 bytes</p>
 	<p><h3>Type:</h3><span class="op-type">[i32 i64] → []</span></p>
 </div>
@@ -978,23 +993,23 @@ onload = ApplyFormatting;
 </div>
 
 <div id="0x41">
-	<span class=immediate-args><i>i32</i></span>
+	<span class="immediate-args">i32</span>
 	<p>Push a 32-bit integer value to the stack.</p>
 	<p><h3>Type:</h3><span class="op-type">[] → [i32]</span></p>
 </div>
 <div id="0x42">
-	<span class=immediate-args><i>i64</i></span>
+	<span class="immediate-args">i64</span>
 	<p>Push a 64-bit integer value to the stack.</p>
 	<p><h3>Type:</h3><span class="op-type">[] → [i64]</span></p>
 </div>
 <div id="0x43">
-	<span class=immediate-args><i>f32</i></span>
+	<span class="immediate-args">f32</span>
 	<p>Push a 32-bit float value to the stack.</p>
 	<p><h3>Type:</h3><span class="op-type">[] → [f32]</span></p>
 </div>
 <div id="0x44">
 	<p>Push a 64-bit float value to the stack.</p>
-	<span class=immediate-args><i>f64</i></span>
+	<span class="immediate-args">f64</span>
 	<p><h3>Type:</h3><span class="op-type">[] → [f64]</span></p>
 </div>
 
@@ -1018,187 +1033,542 @@ onload = ApplyFormatting;
 <div id="0x52">
 	<p class="bigsign">≠</p>
 	<p>sign-agnostic compare unequal</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x48">
 	<p class="bigsign">&lt;</p>
 	<p>signed less than</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x53">
 	<p class="bigsign">&lt;</p>
 	<p>signed less than</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x49">
 	<p class="bigsign">&lt;</p>
 	<p>unsigned less than</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x54">
 	<p class="bigsign">&lt;</p>
 	<p>unsigned less than</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x4A">
 	<p class="bigsign">&gt;</p>
 	<p>signed greater than</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x55">
 	<p class="bigsign">&gt;</p>
 	<p>signed greater than</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x4B">
 	<p class="bigsign">&gt;</p>
 	<p>unsigned greater than</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x56">
 	<p class="bigsign">&gt;</p>
 	<p>unsigned greater than</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x4C">
 	<p class="bigsign">≤</p>
 	<p>signed less than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x57">
 	<p class="bigsign">≤</p>
 	<p>signed less than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x4D">
 	<p class="bigsign">≤</p>
 	<p>unsigned less than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x58">
 	<p class="bigsign">≤</p>
 	<p>unsigned less than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x4E">
 	<p class="bigsign">≥</p>
 	<p>signed greater than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x59">
 	<p class="bigsign">≥</p>
 	<p>signed greater than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 <div id="0x4F">
 	<p class="bigsign">≥</p>
 	<p>unsigned greater than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
 </div>
 <div id="0x5A">
 	<p class="bigsign">≥</p>
 	<p>unsigned greater than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i32]</span></p>
 </div>
 
-<div id="0x5B"><p class="bigsign">==</p><p>compare equal</p></div>
-<div id="0x61"><p class="bigsign">==</p><p>compare equal</p></div>
-<div id="0x5C"><p class="bigsign">≠</p><p>compare unordered or unequal</p></div>
-<div id="0x62"><p class="bigsign">≠</p><p>compare unordered or unequal</p></div>
-<div id="0x5D"><p class="bigsign">&lt;</p><p>less than</p></div>
-<div id="0x63"><p class="bigsign">&lt;</p><p> less than</p></div>
-<div id="0x5E"><p class="bigsign">&gt;</p><p> greater than</p></div>
-<div id="0x64"><p class="bigsign">&gt;</p><p> greater than</p></div>
-<div id="0x5F"><p class="bigsign">≤</p><p>less than or equal</p></div>
-<div id="0x65"><p class="bigsign">≤</p><p>less than or equal</p></div>
-<div id="0x60"><p class="bigsign">≥</p><p>greater than or equal</p></div>
-<div id="0x66"><p class="bigsign">≥</p><p>greater than or equal</p></div>
+<div id="0x5B">
+	<p class="bigsign">==</p>
+	<p>compare equal</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [i32]</span></p>
+</div>
+<div id="0x61">
+	<p class="bigsign">==</p>
+	<p>compare equal</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [i32]</span></p>
+</div>
+<div id="0x5C">
+	<p class="bigsign">≠</p>
+	<p>compare unordered or unequal</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [i32]</span></p>
+</div>
+<div id="0x62">
+	<p class="bigsign">≠</p>
+	<p>compare unordered or unequal</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [i32]</span></p>
+</div>
+<div id="0x5D">
+	<p class="bigsign">&lt;</p>
+	<p>less than</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [i32]</span></p>
+</div>
+<div id="0x63">
+	<p class="bigsign">&lt;</p>
+	<p>less than</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [i32]</span></p>
+</div>
+<div id="0x5E">
+	<p class="bigsign">&gt;</p>
+	<p>greater than</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [i32]</span></p>
+</div>
+<div id="0x64">
+	<p class="bigsign">&gt;</p>
+	<p> greater than</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [i32]</span></p>
+</div>
+<div id="0x5F">
+	<p class="bigsign">≤</p>
+	<p>less than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [i32]</span></p>
+</div>
+<div id="0x65">
+	<p class="bigsign">≤</p>
+	<p>less than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [i32]</span></p>
+</div>
+<div id="0x60">
+	<p class="bigsign">≥</p>
+	<p>greater than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [i32]</span></p>
+</div>
+<div id="0x66">
+	<p class="bigsign">≥</p>
+	<p>greater than or equal</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [i32]</span></p>
+</div>
 
-<div id="0x67"><p>sign-agnostic count leading zero bits</p><p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p></div>
-<div id="0x79"><p>sign-agnostic count leading zero bits</p><p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p></div>
-<div id="0x68"><p>sign-agnostic count trailing zero bits</p><p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p></div>
-<div id="0x7A"><p>sign-agnostic count trailing zero bits</p><p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p></div>
-<div id="0x69"><p>sign-agnostic count number of one bits</p><p>Return the count of non-zero bits in i.</p></div>
-<div id="0x7B"><p>sign-agnostic count number of one bits</p><p>Return the count of non-zero bits in i.</p></div>
+<div id="0x67">
+	<p>sign-agnostic count leading zero bits</p>
+	<p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+</div>
+<div id="0x79">
+	<p>sign-agnostic count leading zero bits</p>
+	<p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [i64]</span></p>
+</div>
+<div id="0x68">
+	<p>sign-agnostic count trailing zero bits</p>
+	<p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+</div>
+<div id="0x7A">
+	<p>sign-agnostic count trailing zero bits</p>
+	<p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [i64]</span></p>
+</div>
+<div id="0x69">
+	<p>sign-agnostic count number of one bits</p>
+	<p>Return the count of non-zero bits in i.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
+</div>
+<div id="0x7B">
+	<p>sign-agnostic count number of one bits</p>
+	<p>Return the count of non-zero bits in i.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [i64]</span></p>
+</div>
 
-<div id="0x6A"><p>sign-agnostic addition</p></div>
-<div id="0x7C"><p>sign-agnostic addition</p></div>
-<div id="0x6B"><p>sign-agnostic subtraction</p></div>
-<div id="0x7D"><p>sign-agnostic subtraction</p></div>
-<div id="0x6C"><p>sign-agnostic multiplication, modulo 2<sup>32</sup></p></div>
-<div id="0x7E"><p>sign-agnostic multiplication, modulo 2<sup>64</sup></p></div>
-<div id="0x6D"><p>signed division (result is truncated toward zero)</p></div>
-<div id="0x7F"><p>signed division (result is truncated toward zero)</p></div>
-<div id="0x6E"><p>unsigned division (result is floored)</p></div>
-<div id="0x80"><p>unsigned division (result is floored)</p></div>
+<div id="0x6A">
+	<p>sign-agnostic addition</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x7C">
+	<p>sign-agnostic addition</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x6B">
+	<p>sign-agnostic subtraction</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x7D">
+	<p>sign-agnostic subtraction</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x6C">
+	<p>sign-agnostic multiplication, modulo 2<sup>32</sup></p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x7E">
+	<p>sign-agnostic multiplication, modulo 2<sup>64</sup></p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x6D">
+	<p>signed division (result is truncated toward zero)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x7F">
+	<p>signed division (result is truncated toward zero)</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x6E">
+	<p>unsigned division (result is floored)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x80">
+	<p>unsigned division (result is floored)</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x6F">
+	<p>signed remainder (result has the sign of the dividend)</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x81">
+	<p>signed remainder (result has the sign of the dividend)</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x70">
+	<p>unsigned remainder</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x82">
+	<p>unsigned remainder</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x71">
+	<p>sign-agnostic bitwise <i>and</i>.</p>
+	<p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x83">
+	<p>sign-agnostic bitwise <i>and</i>.</p>
+	<p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x72">
+	<p>sign-agnostic bitwise <i>inclusive or</i>.</p>
+	<p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x84">
+	<p>sign-agnostic bitwise <i>inclusive or</i>.</p>
+	<p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x73">
+	<p>sign-agnostic bitwise <i>exclusive or</i>.</p>
+	<p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x85">
+	<p>sign-agnostic bitwise <i>exclusive or</i>.</p>
+	<p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x74">
+	<p>sign-agnostic shift left</p>
+	<p>Return the result of shifting i1 left by k bits, modulo 2<sup>32</sup></p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x86">
+	<p>sign-agnostic shift left</p>
+	<p>Return the result of shifting i1 left by k bits, modulo 2<sup>64</sup></p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x75">
+	<p>sign-replicating (arithmetic) shift right</p>
+	<p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x87">
+	<p>sign-replicating (arithmetic) shift right</p>
+	<p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x76">
+	<p>zero-replicating (logical) shift right</p>
+	<p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x88">
+	<p>zero-replicating (logical) shift right</p>
+	<p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x77">
+	<p>sign-agnostic rotate left</p>
+	<p>Return the result of rotating i1 left by k bits.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x89">
+	<p>sign-agnostic rotate left</p>
+	<p>Return the result of rotating i1 left by k bits.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
+<div id="0x78">
+	<p>sign-agnostic rotate right</p>
+	<p>Return the result of rotating i1 right by k bits.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32 i32] → [i32]</span></p>
+</div>
+<div id="0x8A">
+	<p>sign-agnostic rotate right</p>
+	<p>Return the result of rotating i1 right by k bits.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64 i64] → [i64]</span></p>
+</div>
 
-<div id="0x6F"><p>signed remainder (result has the sign of the dividend)</p></div>
-<div id="0x81"><p>signed remainder (result has the sign of the dividend)</p></div>
-<div id="0x70"><p>unsigned remainder</p></div>
-<div id="0x82"><p>unsigned remainder</p></div>
-<div id="0x71"><p>sign-agnostic bitwise <i>and</i>.</p><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x83"><p>sign-agnostic bitwise <i>and</i>.</p><p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x72"><p>sign-agnostic bitwise <i>inclusive or</i>.</p><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x84"><p>sign-agnostic bitwise <i>inclusive or</i>.</p><p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x73"><p>sign-agnostic bitwise <i>exclusive or</i>.</p><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x85"><p>sign-agnostic bitwise <i>exclusive or</i>.</p><p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p></div>
-<div id="0x74"><p>sign-agnostic shift left</p><p>Return the result of shifting i1 left by k bits, modulo 2<sup>32</sup></p></div>
-<div id="0x86"><p>sign-agnostic shift left</p><p>Return the result of shifting i1 left by k bits, modulo 2<sup>64</sup></p></div>
-<div id="0x75"><p>sign-replicating (arithmetic) shift right</p><p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
-<div id="0x87"><p>sign-replicating (arithmetic) shift right</p><p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p></div>
-<div id="0x76"><p>zero-replicating (logical) shift right</p><p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
-<div id="0x88"><p>zero-replicating (logical) shift right</p><p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p></div>
-<div id="0x77"><p>sign-agnostic rotate left</p><p>Return the result of rotating i1 left by k bits.</p></div>
-<div id="0x89"><p>sign-agnostic rotate left</p><p>Return the result of rotating i1 left by k bits.</p></div>
-<div id="0x78"><p>sign-agnostic rotate right</p><p>Return the result of rotating i1 right by k bits.</p></div>
-<div id="0x8A"><p>sign-agnostic rotate right</p><p>Return the result of rotating i1 right by k bits.</p></div>
+<div id="0x8B">
+	<p>absolute value</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x99">
+	<p>absolute value</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
+<div id="0x8C">
+	<p>negation</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x9A">
+	<p>negation</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
+<div id="0x8D">
+	<p>ceiling operator</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x9B">
+	<p>ceiling operator</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
+<div id="0x8E">
+	<p>floor operator</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x9C">
+	<p>floor operator</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
+<div id="0x8F">
+	<p>round to nearest integer towards zero</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x9D">
+	<p>round to nearest integer towards zero</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
+<div id="0x90">
+	<p>round to nearest integer, ties to even</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x9E">
+	<p>round to nearest integer, ties to even</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
+<div id="0x91">
+	<p>square root</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f32]</span></p>
+</div>
+<div id="0x9F">
+	<p>square root</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f64]</span></p>
+</div>
 
-<div id="0x8B"><p>absolute value</p></div>
-<div id="0x99"><p>absolute value</p></div>
-<div id="0x8C"><p>negation</p></div>
-<div id="0x9A"><p>negation</p></div>
-<div id="0x8D"><p>ceiling operator</p></div>
-<div id="0x9B"><p>ceiling operator</p></div>
-<div id="0x8E"><p>floor operator</p></div>
-<div id="0x9C"><p>floor operator</p></div>
-<div id="0x8F"><p>round to nearest integer towards zero</p></div>
-<div id="0x9D"><p>round to nearest integer towards zero</p></div>
-<div id="0x90"><p>round to nearest integer, ties to even</p></div>
-<div id="0x9E"><p>round to nearest integer, ties to even</p></div>
-<div id="0x91"><p class="bigsign">√</p><p>square root</p></div>
-<div id="0x9F"><p class="bigsign">√</p><p>square root</p></div>
+<div id="0x92">
+	<p>addition</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA0">
+	<p>addition</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
+<div id="0x93">
+	<p>subtraction</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA1">
+	<p>subtraction</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
+<div id="0x94">
+	<p>multiplication</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA2">
+	<p>multiplication</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
+<div id="0x95">
+	<p>division</p>
+	<p>partial function: division by 0 is undefined</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA3">
+	<p>division</p>
+	<p>partial function: division by 0 is undefined</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
+<div id="0x96">
+	<p>minimum (binary operator); if either operand is NaN, returns NaN</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA4">
+	<p>minimum (binary operator); if either operand is NaN, returns NaN</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
+<div id="0x97">
+	<p>maximum (binary operator); if either operand is NaN, returns NaN</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA5">
+	<p>maximum (binary operator); if either operand is NaN, returns NaN</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
+<div id="0x98">
+	<p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p>
+	<p><h3>Type:</h3><span class="op-type">[f32 f32] → [f32]</span></p>
+</div>
+<div id="0xA6">
+	<p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p>
+	<p><h3>Type:</h3><span class="op-type">[f64 f64] → [f64]</span></p>
+</div>
 
-<div id="0x92"><p class="bigsign">+</p><p>addition</p></div>
-<div id="0xA0"><p class="bigsign">+</p><p>addition</p></div>
-<div id="0x93"><p class="bigsign">-</p><p>subtraction</p></div>
-<div id="0xA1"><p class="bigsign">-</p><p>subtraction</p></div>
-<div id="0x94"><p class="bigsign">×</p><p>multiplication</p></div>
-<div id="0xA2"><p class="bigsign">×</p><p>multiplication</p></div>
-<div id="0x95"><p class="bigsign">÷</p><p>division</p><p>partial function: division by 0 is undefined</p></div>
-<div id="0xA3"><p class="bigsign">÷</p><p>division</p><p>partial function: division by 0 is undefined</p></div>
-<div id="0x96"><p>minimum (binary operator); if either operand is NaN, returns NaN</p></div>
-<div id="0xA4"><p>minimum (binary operator); if either operand is NaN, returns NaN</p></div>
-<div id="0x97"><p>maximum (binary operator); if either operand is NaN, returns NaN</p></div>
-<div id="0xA5"><p>maximum (binary operator); if either operand is NaN, returns NaN</p></div>
+<div id="0xA7">
+	<p>wrap a 64-bit integer to a 32-bit integer.</p>
+	<p>Return i modulo 2<sup>32</sup>.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [i32]</span></p>
+</div>
+<div id="0xA8">
+	<p>truncate a 32-bit float to a signed 32-bit integer</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [i32]</span></p>
+</div>
+<div id="0xA9">
+	<p>truncate a 32-bit float to an unsigned 32-bit integer</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [i32]</span></p>
+</div>
+<div id="0xAA">
+	<p>truncate a 64-bit float to a signed 32-bit integer</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [i32]</span></p>
+</div>
+<div id="0xAB">
+	<p>truncate a 64-bit float to an unsigned 32-bit integer</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [i32]</span></p>
+</div>
 
-<div id="0x98"><p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p></div>
-<div id="0xA6"><p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p></div>
+<div id="0xAC">
+	<p>extend a signed 32-bit integer to a 64-bit integer.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
+<div id="0xAD">
+	<p>extend an unsigned 32-bit integer to a 64-bit integer.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [i64]</span></p>
+</div>
 
-<div id="0xA7"><p>wrap a 64-bit integer to a 32-bit integer.</p><p>Return i modulo 2<sup>32</sup>.</p></div>
-<div id="0xA8"><p>truncate a 32-bit float to a signed 32-bit integer</p></div>
-<div id="0xA9"><p>truncate a 32-bit float to an unsigned 32-bit integer</p></div>
-<div id="0xAA"><p>truncate a 64-bit float to a signed 32-bit integer</p></div>
-<div id="0xAB"><p>truncate a 64-bit float to an unsigned 32-bit integer</p></div>
+<div id="0xAE">
+	<p>truncate a 32-bit float to a signed 64-bit integer.</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [i64]</span></p>
+</div>
+<div id="0xAF">
+	<p>truncate a 32-bit float to an unsigned 64-bit integer.</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [i64]</span></p>
+</div>
+<div id="0xB0">
+	<p>truncate a 64-bit float to a signed 64-bit integer.</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [i64]</span></p>
+</div>
+<div id="0xB1">
+	<p>truncate a 64-bit float to an unsigned 64-bit integer.</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [i64]</span></p>
+</div>
 
-<div id="0xAC"><p>extend a signed 32-bit integer to a 64-bit integer.</p></div>
-<div id="0xAD"><p>extend an unsigned 32-bit integer to a 64-bit integer.</p></div>
+<div id="0xB2">
+	<p>convert a signed 32-bit integer to a 32-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f32]</span></p>
+</div>
+<div id="0xB3">
+	<p>convert an unsigned 32-bit integer to a 32-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f32]</span></p>
+</div>
+<div id="0xB4">
+	<p>convert a signed 64-bit integer to a 32-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [f32]</span></p>
+</div>
+<div id="0xB5">
+	<p>convert an unsigned 64-bit integer to a 32-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [f32]</span></p>
+</div>
 
-<div id="0xAE"><p>truncate a 32-bit float to a signed 64-bit integer.</p></div>
-<div id="0xAF"><p>truncate a 32-bit float to an unsigned 64-bit integer.</p></div>
-<div id="0xB0"><p>truncate a 64-bit float to a signed 64-bit integer.</p></div>
-<div id="0xB1"><p>truncate a 64-bit float to an unsigned 64-bit integer.</p></div>
+<div id="0xB6">
+	<p>demote a 64-bit float to a 32-bit float</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [f32]</span></p>
+</div>
 
-<div id="0xB2"><p>convert a signed 32-bit integer to a 32-bit float.</p></div>
-<div id="0xB3"><p>convert an unsigned 32-bit integer to a 32-bit float.</p></div>
-<div id="0xB4"><p>convert a signed 64-bit integer to a 32-bit float.</p></div>
-<div id="0xB5"><p>convert an unsigned 64-bit integer to a 32-bit float.</p></div>
+<div id="0xB7">
+	<p>convert a signed 32-bit integer to a 64-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f64]</span></p>
+</div>
+<div id="0xB8">
+	<p>convert an unsigned 32-bit integer to a 64-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f64]</span></p>
+</div>
+<div id="0xB9">
+	<p>convert a signed 64-bit integer to a 64-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [f64]</span></p>
+</div>
+<div id="0xBA">
+	<p>convert an unsigned 64-bit integer to a 64-bit float.</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [f64]</span></p>
+</div>
 
-<div id="0xB6"><p>demote a 64-bit float to a 32-bit float</p></div>
+<div id="0xBB">
+	<p>promote a 32-bit float to a 64-bit float</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [f64]</span></p>
+</div>
 
-<div id="0xB7"><p>convert a signed 32-bit integer to a 64-bit float.</p></div>
-<div id="0xB8"><p>convert an unsigned 32-bit integer to a 64-bit float.</p></div>
-<div id="0xB9"><p>convert a signed 64-bit integer to a 64-bit float.</p></div>
-<div id="0xBA"><p>convert an unsigned 64-bit integer to a 64-bit float.</p></div>
-
-<div id="0xBB"><p>promote a 32-bit float to a 64-bit float</p></div>
-
-<div id="0xBC"><p>reinterpret the bits of a 32-bit float as a 32-bit integer</p></div>
-<div id="0xBD"><p>reinterpret the bits of a 64-bit float as a 64-bit integer</p></div>
-<div id="0xBE"><p>reinterpret the bits of a 32-bit integer as a 32-bit float</p></div>
-<div id="0xBF"><p>reinterpret the bits of a 64-bit integer as a 64-bit float</p></div>
+<div id="0xBC">
+	<p>reinterpret the bits of a 32-bit float as a 32-bit integer</p>
+	<p><h3>Type:</h3><span class="op-type">[f32] → [i32]</span></p>
+</div>
+<div id="0xBD">
+	<p>reinterpret the bits of a 64-bit float as a 64-bit integer</p>
+	<p><h3>Type:</h3><span class="op-type">[f64] → [i64]</span></p>
+</div>
+<div id="0xBE">
+	<p>reinterpret the bits of a 32-bit integer as a 32-bit float</p>
+	<p><h3>Type:</h3><span class="op-type">[i32] → [f32]</span></p>
+</div>
+<div id="0xBF">
+	<p>reinterpret the bits of a 64-bit integer as a 64-bit float</p>
+	<p><h3>Type:</h3><span class="op-type">[i64] → [f64]</span></p>
+</div>
 
 <div id="0x69_old_unused">
 	<p></p>
@@ -1284,9 +1654,9 @@ onload = ApplyFormatting;
 </p>
 -->
 <!--<p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>-->
-<p>
+<span>
 	<br>
-	<a href="https://github.com/pengowray/wasm-ops">View on GitHub</a>
-</p>
+	<p><a href="https://github.com/pengowray/wasm-ops">View on GitHub</a></p>
+</span>
 </body>
 </html>
