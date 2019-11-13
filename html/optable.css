@@ -1,0 +1,117 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+/* could probably done better with gradients. duplicated in: td.reserved */
+.crosshatch { 
+	 background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; 
+} 
+.proposal, .diagonal-stripe-1 { background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzEnLz4KPC9zdmc+Cg=="); background-repeat: repeat; } 
+/* .proposal-with-text { background-color: #eee; } */
+.hex {
+	text-align: left;
+	color: khaki;
+}
+
+table {
+	border-collapse:collapse; 
+	table-layout:fixed; 
+	width:300mm;
+	font-size: 9pt;
+}
+td, th {
+	word-wrap:break-word; 
+	vertical-align: top;
+	text-align: center; 
+}
+td {
+	border:solid 1px #ccc;
+	color: #666;
+	padding: 4px;
+	background-clip: padding-box;
+}
+td.reserved {
+	background-color: #eee;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg==");
+	background-repeat: repeat; 
+	background-clip: padding-box;
+	padding: 4px;
+}
+.reserved span {
+	color:darkgray;
+	background-color: #eee;
+}
+
+td:not(.reserved), th {
+	/*
+	background-image: unset;
+	background:white;
+	background-clip: border-box;
+	*/
+}
+.op {
+	font-size: larger;
+	font-weight: bold;
+	text-align: center;
+}
+/* line break which doesn't get copied into clipboard */
+.op::before { content: "\A"; white-space: pre; }
+.post::before { content: "\A"; white-space: pre; }
+
+.op-type {
+	font-size:x-large;
+	padding-left: .8em;
+}
+.immediate-args {
+	color: lightgrey;
+	font-family: Georgia, serif;
+	font-style: italic;
+}
+
+.mathsy {
+	font-family: Georgia, serif;
+}
+.mathsy-i {
+	font-family: Georgia, serif;
+	font-style: italic;
+}
+.op-imm-args {
+	font-family: Georgia, serif;
+	font-size: 15px;
+}
+
+.supsub {
+	/* via https://stackoverflow.com/a/24908149 */
+    display: inline-block;
+}
+.supsub sup,
+.supsub sub {
+    position: relative;
+    display: block;
+    font-size: .5em;
+    line-height: 1.2;
+}
+.supsub sub {
+    top: .3em;
+}
+
+.highlight-selection {
+	color: black;
+	background-color:lightblue;
+}
+.highlight-shorthand {
+	background-color:#EEE0FF;
+}
+.highlight-opcode:not(.highlight-shorthand){
+	/* special colour for 'trunc' opcodes, when found outside of the selected "shorthand". */
+	background-color:#cff1fc;
+}
+.highlight-opcode {
+	background-color:#24dff0;
+}
+.highlight-pre {
+	background-color: rgba(219, 223, 16, 0.616);
+}
+p.bigsign {
+	font-size: 15.5pt;
+	text-align: center;
+}
