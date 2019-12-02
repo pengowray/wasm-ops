@@ -7,12 +7,13 @@
 	<!-- https://atomiks.github.io/tippyjs/ -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://unpkg.com/popper.js@1"></script>
-	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.js"></script>
+	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.min.js"></script>
+
 	<script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
 
-	<script src="html/optable.js"></script>
 	<link href="html/optable.css" rel="stylesheet"/>
+	<script src="html/optable.js"></script>
 </head>
 <body>
 
@@ -522,7 +523,10 @@
 	<p>load 4 bytes as i32.</p>
 	<p><h3>Type:</h3><span class="op-type">[i32] → [i32]</span></p>
 	<p><h3>Immediate argument:</h3><span class="op-imm-args"><i>m</i> : memarg ::= { offset <i>u32</i>, align <i>u32</i> }</span></p>
-	<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment (expressed as the exponent of a power of 2).</p>
+	<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment.<!-- (expressed as the exponent of a power of 2). --></p>
+	<p>The first immediate value (memarg.align) is an alignment hint about the effective-address. It is a power-of 2 encoded as log2(memarg.align). In practice, its value may be: 0 (8-bit), 1 (16-bit), 2 (32-bit), or (64-bit; used only with wasm64). <!-- https://rsms.me/wasm-intro#addressing-memory --></p>
+	<p><code>effective-address = address-operand + offset-immediate</code></p>
+	<p>If memarg.align is incorrect it is considered "misaligned". Misaligned access still has the same behavior as aligned access, only possibly much slower.</p>
 </div>
 <div id="0x29">
 	<span class="immediate-args">m</span>
@@ -1311,6 +1315,14 @@
 -->
 <!--<p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>-->
 <span>
+	<p>
+		<h2>Further reading</h2>
+		<ul>
+			<li><a href="https://webassembly.github.io/spec/">WebAssembly Specifications</a></li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly">WebAssembly</a> (MDN web docs; developer.mozilla.org)</li>
+			<li><a href="https://rsms.me/wasm-intro">Introduction to WebAssembly</a> (Rasmus Andersson; rsms.me)</li>
+		</ul>
+	</p>
 	<br>
 	<p><a href="https://github.com/pengowray/wasm-ops">View on GitHub</a></p>
 </span>
