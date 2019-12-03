@@ -57,10 +57,20 @@ td:not(.reserved), th {
 .op::before { content: "\A"; white-space: pre; }
 .post::before { content: "\A"; white-space: pre; }
 
-.op-type {
-	font-size:x-large;
+.op-imm-args {
+	font-family: Georgia, serif;
+	font-size: 15px;
 	padding-left: .8em;
 }
+
+.op-type {
+	padding-left: .8em;
+}
+
+.op-type.large {
+	font-size:large;
+}
+
 .immediate-args {
 	color: lightgrey;
 	font-family: Georgia, serif;
@@ -73,10 +83,6 @@ td:not(.reserved), th {
 .mathsy-i {
 	font-family: Georgia, serif;
 	font-style: italic;
-}
-.op-imm-args {
-	font-family: Georgia, serif;
-	font-size: 15px;
 }
 
 .supsub {
