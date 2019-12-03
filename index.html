@@ -465,19 +465,24 @@
 	<p><h3>Followed by:</h3>
 		<ol>
 			<li>i8 <i>rt</i> : blocktype — 0x40 = [], 0x7F = [i32], 0x7E = [i64], 0x7D = [f32], 0x7C = [f64]</li>
-			<li>(<i>in</i> : instr)* — instructions</li> 
+			<li><i>in<sub>1</sub></i> : instr<span class="supsub"><sup>∗</sup><sub>1</sub></span> — instructions<sub>1</sub></li> 
 			<li>0x0B — end</li>
 		</ol> 
 		or
 		<ol>
 			<li>i8 <i>rt</i> : blocktype</li>
-			<li>(<i>in<sub>1</sub></i> : instr)* — instructions</li> 
+			<li><i>in<sub>1</sub></i> : instr<span class="supsub"><sup>∗</sup><sub>1</sub></span> — instructions<sub>1</sub></li> 
 			<li>0x05 — else</li>
-			<li>(<i>in<sub>2</sub></i> : instr)* — instructions</li> 
+			<li><i>in<sub>2</sub></i> : instr<span class="supsub"><sup>∗</sup><sub>2</sub></span> — instructions<sub>2</sub></li> 
 			<li>0x0B — end</li>
 		</ol> 
 	</p>
-	<p><h3>Stack:</h3><span class="op-type">[i32] → [t<sup>∗</sup>]</span></p>
+	<p>
+		<h3>Stack:</h3>
+		<span class="op-type">[i32] → [t<sup>∗</sup>]</span><br/>
+		<span class="op-type">i32 <i>c</i> → [t<sup>∗</sup>]</span><br/>
+		<span class="op-type">if <i>c</i> is non-zero, enter block instructions<sub>1</sub>, else enter block instructions<sub>2</sub></span>
+	</p>
 </div>
 <div id="0x05"><p>Marks the else block of an <i>if</i>.</p></div>
 <div id="0x0B"><p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p></div>
@@ -491,7 +496,7 @@
 	<p>Label 0 refers to the innermost structured control instruction enclosing the referring branch instruction, while increasing indices refer to those farther out.</p>
 	<p>
 		<h3>Stack:</h3><span class="op-type large">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span>
-		<!--  <br/>
+		<!--  <br/> TODO
 		<span class="op-type">labels, <i>val</i> : result → val</span>
 		<span class="op-type">vec( label { instr∗ } ), vec( val ) : arguments </span> -->
 	</p>
