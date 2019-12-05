@@ -439,7 +439,7 @@
 	<p><h3>Followed by:</h3>
 		<ol>
 			<li>i8 <i>rt</i> : blocktype — 0x40 = [], 0x7F = [i32], 0x7E = [i64], 0x7D = [f32], 0x7C = [f64]</li>
-			<li>(<i>in</i> : instr)* — instructions</li> 
+			<li>instructions</li> 
 			<li>0x0B — end</li>
 		</ol> 
 	</p>
@@ -453,7 +453,7 @@
 	<p><h3>Followed by:</h3>
 		<ol>
 			<li>i8 <i>rt</i> : blocktype — 0x40 = [], 0x7F = [i32], 0x7E = [i64], 0x7D = [f32], 0x7C = [f64]</li>
-			<li>(<i>in</i> : instr)* — instructions</li> 
+			<li>instructions</li> 
 			<li>0x0B — end</li>
 		</ol> 
 	</p>
@@ -733,12 +733,12 @@
 </div>
 <div id="0x3F">
 	<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>
-	<p>Operates in units of page size.</p>
+	<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>
 	<p><h3>Stack:</h3><span class="op-type">[] → [i32]</span></p>
 </div>
 <div id="0x40">
 	<p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.</p>
-	<p>Operates in units of page size.</p>
+	<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>
 	<p><h3>Stack:</h3><span class="op-type">[i32] → [i32]</span></p>
 </div>
 
