@@ -422,12 +422,12 @@
 
 <div id="0x00">
 	<p>The unreachable instruction causes an unconditional trap.</p>
+	<p>A trap immediately aborts execution. Traps cannot be handled by WebAssembly code, but are reported to the outside environment, where they typically can be caught.</p>
 	<p><h3>Followed by:</h3>
 		<span class="op-imm-args"></span>Note: Any instructions following must be valid. <!-- well-typed? -->
 	</p>
 	<p><h3>Stack:</h3><span class="op-type large">[t<span class="supsub"><sup>∗</sup><sub>1</sub></span>] → [t<span class="supsub"><sup>∗</sup><sub>2</sub></span>]</span></p>
 	<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>
-	<p>A trap immediately aborts execution. Traps cannot be handled by WebAssembly code, but are reported to the outside environment, where they typically can be caught.</p>
 </div>
 <div id="0x01">
 	<p>The nop instruction does nothing.</p>
