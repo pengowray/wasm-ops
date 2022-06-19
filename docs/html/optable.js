@@ -31,9 +31,13 @@ function toHex(d) {
     return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
 }
 
+function ApplyFormattingAll() {
+	ApplyFormatting(document.getElementById('opcodes', true));
+	ApplyFormatting(document.getElementById('opcodes_FC', false));
+	ApplyFormatting(document.getElementById('opcodes_FD', false));
+}
 
-function ApplyFormatting() {
-    var table = document.getElementById('opcodes');
+function ApplyFormatting(table, addHelp) {
     //for (var r = 0, n = table.rows.length; r < n; r++) {
 		//for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
 			//var cell = table.rows[r].cells[c];
@@ -117,7 +121,7 @@ function ApplyFormatting() {
 		var help = document.getElementById(hex);
 		var helpText = "";
 		var immediateArg = "";
-		if (help != null) {
+		if (addHelp && help != null) {
 			// remove <span class="immediate-args">x</span> so it can be placed beside the op code.
 			var immediateArgElm = help.getElementsByClassName("immediate-args");
 			if (typeof immediateArgElm[0] !== "undefined") {
@@ -212,4 +216,4 @@ function BoldMainOpBit(opcodeName) {
 	//return opcodeName;
 }
 
-onload = ApplyFormatting;
+onload = ApplyFormattingAll;
