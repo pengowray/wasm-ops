@@ -32,14 +32,14 @@ function toHex(d) {
 }
 
 function ApplyFormattingAll() {
-	ApplyFormatting(document.getElementById('opcodes'), true);
- 	ApplyFormatting(document.getElementById('opcodes_FB'), false);
-	ApplyFormatting(document.getElementById('opcodes_FC'), false);
-	ApplyFormatting(document.getElementById('opcodes_FD'), false);
-	ApplyFormatting(document.getElementById('opcodes_FE'), false);
+	ApplyFormatting(document.getElementById('opcodes'), '');
+ 	ApplyFormatting(document.getElementById('opcodes_FB'), 'FB');
+	ApplyFormatting(document.getElementById('opcodes_FC'), 'FC');
+	ApplyFormatting(document.getElementById('opcodes_FD'), 'FD');
+	ApplyFormatting(document.getElementById('opcodes_FE'), 'FE');
 }
 
-function ApplyFormatting(table, addHelp) {
+function ApplyFormatting(table, prefix) {
     //for (var r = 0, n = table.rows.length; r < n; r++) {
 		//for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
 			//var cell = table.rows[r].cells[c];
@@ -48,8 +48,8 @@ function ApplyFormatting(table, addHelp) {
 	for (var n=0; n<tds.length;n++) {
 		var cell = tds[n];
 
-		var hex = "0x" + toHex(n); // e.g. 0x8F
-		var op_hex = 'op_' + hex
+		var hex = "0x" + prefix + toHex(n); // e.g. '0x8F' or '0xFD23'
+		var op_hex = 'op_' + prefix + hex
 		cell.classList.add(op_hex);
 
 		var opcode = cell.innerHTML;
@@ -123,7 +123,7 @@ function ApplyFormatting(table, addHelp) {
 		var help = document.getElementById(hex);
 		var helpText = "";
 		var immediateArg = "";
-		if (addHelp && help != null) {
+		if (help != null) {
 			// remove <span class="immediate-args">x</span> so it can be placed beside the op code.
 			var immediateArgElm = help.getElementsByClassName("immediate-args");
 			if (typeof immediateArgElm[0] !== "undefined") {
