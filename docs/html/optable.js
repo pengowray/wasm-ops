@@ -35,6 +35,7 @@ function ApplyFormattingAll() {
 	ApplyFormatting(document.getElementById('opcodes'), true);
 	ApplyFormatting(document.getElementById('opcodes_FC'), false);
 	ApplyFormatting(document.getElementById('opcodes_FD'), false);
+	ApplyFormatting(document.getElementById('opcodes_FE'), false);
 }
 
 function ApplyFormatting(table, addHelp) {
@@ -203,6 +204,10 @@ function BoldMainOpBit(opcodeName) {
 	if (opcodeName.includes(".")) {
 		// bold after the dot
 		split = opcodeName.split(".");
+		if (split[1] == "atomic") {
+			split[0] += ".atomic";
+			split[1] = split[2];
+		}
 		if (split[1].includes("_") && split[1] != "is_null") {
 			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
 			secondSplit = split[1].split("_");
