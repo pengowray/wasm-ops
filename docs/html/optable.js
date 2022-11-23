@@ -33,6 +33,7 @@ function toHex(d) {
 
 function ApplyFormattingAll() {
 	ApplyFormatting(document.getElementById('opcodes'), true);
+ 	ApplyFormatting(document.getElementById('opcodes_FB'), false);
 	ApplyFormatting(document.getElementById('opcodes_FC'), false);
 	ApplyFormatting(document.getElementById('opcodes_FD'), false);
 	ApplyFormatting(document.getElementById('opcodes_FE'), false);

@@ -296,7 +296,7 @@
 <td>*ref.func</td>
 <td>*ref.as_non_null</td>
 <td>*br_on_null</td>
-<td>&nbsp;</td>
+<td>*ref.eq</td>
 <td>*br_on_non_null</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -340,7 +340,7 @@
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>*GC</td>
 <td>***</td>
 <td>*SIMD</td>
 <td>*Threads</td>
@@ -349,6 +349,184 @@
 </tbody>
 </table>
 <p>
+<br/>
+<b>** GC proposals</b>
+<table id="opcodes_FB">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>_0</th>
+<th>_1</th>
+<th>_2</th>
+<th>_3</th>
+<th>_4</th>
+<th>_5</th>
+<th>_6</th>
+<th>_7</th>
+<th>_8</th>
+<th>_9</th>
+<th>_A</th>
+<th>_B</th>
+<th>_C</th>
+<th>_D</th>
+<th>_E</th>
+<th>_F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">FB 0_</th>
+<td class="reserved">&nbsp;</td>
+<td class="reserved"><span>struct.new_canon</span></td>
+<td class="reserved"><span>struct.new_canon_default</span></td>
+<td class="reserved"><span>struct.get</span></td>
+<td class="reserved"><span>struct.get_s</span></td>
+<td class="reserved"><span>struct.get_u</span></td>
+<td class="reserved"><span>struct.set</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 1_</th>
+<td class="reserved">&nbsp;</td>
+<td class="reserved"><span>array.new_canon</span></td>
+<td class="reserved"><span>array.new_canon_default</span></td>
+<td class="reserved"><span>array.get</span></td>
+<td class="reserved"><span>array.get_s</span></td>
+<td class="reserved"><span>array.get_u</span></td>
+<td class="reserved"><span>array.set</span></td>
+<td class="reserved"><span>array.len</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved"><span>array.new_canon_fixed</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved"><span>array.new_canon_data</span></td>
+<td class="reserved"><span>array.new_canon_elem</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 2_</th>
+<td class="reserved"><span>i31.new</span></td>
+<td class="reserved"><span>i31.get_s</span></td>
+<td class="reserved"><span>i31.get_u</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 3_</th>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 4_</th>
+<td class="reserved"><span>ref.test</span></td>
+<td class="reserved"><span>ref.cast</span></td>
+<td class="reserved"><span>br_on_cast</span></td>
+<td class="reserved"><span>br_on_cast_fail</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved"><span>ref.test</span></td>
+<td class="reserved"><span>ref.cast</span></td>
+<td class="reserved"><span>br_on_cast</span></td>
+<td class="reserved"><span>br_on_cast_fail</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 5_</th>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 6_</th>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 7_</th>
+<td class="reserved"><span>extern.internalize</span></td>
+<td class="reserved"><span>extern.externalize</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+</tbody></table>
 <br/>
 <b>** 0xFC proposals</b>
 </p>
