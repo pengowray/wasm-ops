@@ -67,8 +67,8 @@
 <td>call_indirect</td>
 <td>*return_call</td>
 <td>*return_call_indirect</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>*call_ref</td>
+<td>*return_call_ref</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>*delegate</td>
@@ -294,10 +294,10 @@
 <td>*ref.null</td>
 <td>*ref.is_null</td>
 <td>*ref.func</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
+<td>*ref.as_non_null</td>
+<td>*br_on_null</td>
 <td>*ref.eq</td>
-<td></td>
+<td>*br_on_non_null</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
@@ -343,7 +343,7 @@
 <td>*GC</td>
 <td>***</td>
 <td>*SIMD</td>
-<td>&nbsp;</td>
+<td>*Threads</td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -921,6 +921,128 @@
 <td><span>i32x4.trunc_sat_f64x2_u_zero</span></td>
 <td><span>f64x2.convert_low_i32x4_s</span></td>
 <td><span>f64x2.convert_low_i32x4_u</span></td>
+</tr>
+</tbody></table>
+<br/>
+<b>** Thread proposals</b>
+</p>
+<table id="opcodes_FE">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>_0</th>
+<th>_1</th>
+<th>_2</th>
+<th>_3</th>
+<th>_4</th>
+<th>_5</th>
+<th>_6</th>
+<th>_7</th>
+<th>_8</th>
+<th>_9</th>
+<th>_A</th>
+<th>_B</th>
+<th>_C</th>
+<th>_D</th>
+<th>_E</th>
+<th>_F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">FE 0_</th>
+<td class="reserved"><span>memory.atomic.notify</span></td>
+<td class="reserved"><span>memory.atomic.wait32</span></td>
+<td class="reserved"><span>memory.atomic.wait64</span></td>
+<td class="reserved"><span>atomic.fence</span></td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+<td class="reserved">&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FE 1_</th>
+<td class="reserved"><span>i32.atomic.load</span></td>
+<td class="reserved"><span>i64.atomic.load</span></td>
+<td class="reserved"><span>i32.atomic.load8_u</span></td>
+<td class="reserved"><span>i32.atomic.load16_u</span></td>
+<td class="reserved"><span>i64.atomic.load8_u</span></td>
+<td class="reserved"><span>i64.atomic.load16_u</span></td>
+<td class="reserved"><span>i64.atomic.load32_u</span></td>
+<td class="reserved"><span>i32.atomic.store</span></td>
+<td class="reserved"><span>i64.atomic.store</span></td>
+<td class="reserved"><span>i32.atomic.store8</span></td>
+<td class="reserved"><span>i32.atomic.store16</span></td>
+<td class="reserved"><span>i64.atomic.store8</span></td>
+<td class="reserved"><span>i64.atomic.store16</span></td>
+<td class="reserved"><span>i64.atomic.store32</span></td>
+<td class="reserved"><span>i32.atomic.rmw.add</span></td>
+<td class="reserved"><span>i64.atomic.rmw.add</span></td>
+</tr>
+<tr>
+<th scope="row">FE 2_</th>
+<td class="reserved"><span>i32.atomic.rmw8.add_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.add_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw8.add_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw16.add_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw32.add_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw.sub</span></td>
+<td class="reserved"><span>i64.atomic.rmw.sub</span></td>
+<td class="reserved"><span>i32.atomic.rmw8.sub_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.sub_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw8.sub_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw16.sub_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw32.sub_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw.and</span></td>
+<td class="reserved"><span>i64.atomic.rmw.and</span></td>
+<td class="reserved"><span>i32.atomic.rmw8.and_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.and_u</span></td>
+</tr>
+<tr>
+<th scope="row">FE 3_</th>
+<td class="reserved"><span>i64.atomic.rmw8.and_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw16.and_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw32.and_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw.or</span></td>
+<td class="reserved"><span>i64.atomic.rmw.or</span></td>
+<td class="reserved"><span>i32.atomic.rmw8.or_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.or_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw8.or_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw16.or_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw32.or_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw.xor</span></td>
+<td class="reserved"><span>i64.atomic.rmw.xor</span></td>
+<td class="reserved"><span>i32.atomic.rmw8.xor_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.xor_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw8.xor_u</span></td>
+<td class="reserved"><span>64.atomic.rmw16.xor_u</span></td>
+</tr>
+<tr>
+<th scope="row">FE 4_</th>
+<td class="reserved"><span>i64.atomic.rmw32.xor_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw.xchg</span></td>
+<td class="reserved"><span>i64.atomic.rmw.xchg</span></td>
+<td class="reserved"><span>i32.atomic.rmw8.xchg_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.xchg_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw8.xchg_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw16.xchg_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw32.xchg_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw.cmpxchg</span></td>
+<td class="reserved"><span>i64.atomic.rmw.cmpxchg</span></td>
+<td class="reserved"><span>i32.atomic.rmw8.cmpxchg_u</span></td>
+<td class="reserved"><span>i32.atomic.rmw16.cmpxchg_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw8.cmpxchg_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw16.cmpxchg_u</span></td>
+<td class="reserved"><span>i64.atomic.rmw32.cmpxchg_u</span></td>
+<td class="reserved">&nbsp;</td>
 </tr>
 </tbody></table>
 
