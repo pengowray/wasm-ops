@@ -31,6 +31,14 @@ function toHex(d) {
     return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
 }
 
+function isNull(v) {
+	return (v === undefined) || v === null; // || v.trim() === "";
+}
+
+function isNullOrEmpty(v) {
+	return (v === undefined) || v === null || v.trim() === "";
+}
+
 function ApplyFormattingAll() {
 	ApplyFormatting(document.getElementById('opcodes'), '');
  	ApplyFormatting(document.getElementById('opcodes_FB'), 'FB');
@@ -49,13 +57,14 @@ function ApplyFormatting(table, prefix) {
 		var cell = tds[n];
 
 		var hex = "0x" + prefix + toHex(n); // e.g. '0x8F' or '0xFD23'
-		var op_hex = 'op_' + prefix + hex
+		var op_hex = 'op_' + hex
 		cell.classList.add(op_hex);
 
-		var opcode = cell.innerHTML;
+		//var opcode = cell.innerHTML;
+		var opcode = cell.innerText;
 		var reserved = false;
 		var proposal = "";
-		if (opcode == "" || opcode[0] == "&" ) { //TODO: better selection of &npsb; aka \xa0
+		if (isNullOrEmpty(opcode) || opcode[0] == "&" ) { //TODO: better selection of &npsb; aka \xa0
 			cell.classList.add("reserved");
 			reserved = true;
 		} else if (opcode[0] == "*") {
@@ -71,13 +80,12 @@ function ApplyFormatting(table, prefix) {
 			var chopped = ChopUp(opcode);
 			var pre = undefined;
 			var pre_group = undefined;
-			if (typeof chopped.pre !== "undefined") {
+			if (chopped !== null && !isNull(chopped.pre)) {
 				pre = chopped.pre.slice(0, -1);
 				pre_group = 'group_pre_' + pre;
 				cell.classList.add(pre_group);
 			}
-			if (typeof chopped.mainop !== "undefined") {
-				//console.log(chopped.mainop);
+			if (chopped !== null && !isNull(chopped.mainop)) {
 				var op = "group_op_" + chopped.mainop;
 				var colors = [];
 				//hoverByClass(op, "lightblue"); // old
@@ -86,12 +94,11 @@ function ApplyFormatting(table, prefix) {
 				cell.classList.add(op);
 				
 				var shortgroup = get_shorthand_group(chopped.mainop, hex);
-				if (typeof shortgroup !== "undefined") {
+				if (shortgroup !== null && !isNullOrEmpty(shortgroup)) {
 					cell.classList.add(shortgroup);
 					//colors.push({'classname':shortgroup, 'backgroundColor':'#EEE0FF'}); // was: #e8dcc1
 					colors.push({'classname':shortgroup, 'highlight':'highlight-shorthand'});
 				}
-				
 
 				//colors.push({'classname':op, 'backgroundColor':'lightblue'}) // #faf4c8
 				colors.push({'classname':op, 'highlight':'highlight-opcode'})
@@ -99,20 +106,20 @@ function ApplyFormatting(table, prefix) {
 				colors.push({'classname':op_hex, 'highlight':'highlight-selection'})
 				addHoverColor(cell, colors);
 
-				if (typeof pre !== 'undefined') {
+				if (chopped !== null && !isNull(pre)) {
 					var preElm = cell.getElementsByClassName('pre')[0]; //todo: check for null
 					var preclass = 'pre_' + pre; // = 'group_pre_' + pre (to style the whole cell)
 					addHoverColor(preElm, [{'classname':preclass, 'highlight':'highlight-pre'}]); // style text, e.g. "i32"
 				}
 				
 			}
-			if (typeof chopped.opbits !== "undefined") {
+			if (chopped !== null && !isNull(chopped.opbits)) {
 				cell.classList.add("group_opbits_" + chopped.opbits); 
 			}
-			if (typeof chopped.post !== "undefined") {
+			if (chopped !== null && !isNull(chopped.post)) {
 				cell.classList.add("group_post" + chopped.post); 
 			}
-			if (typeof chopped.sign !== "undefined") {
+			if (chopped !== null && !isNull(chopped.sign)) {
 				cell.classList.add("group_sign" + chopped.sign); 
 			}
 		}
@@ -126,7 +133,7 @@ function ApplyFormatting(table, prefix) {
 		if (help != null) {
 			// remove <span class="immediate-args">x</span> so it can be placed beside the op code.
 			var immediateArgElm = help.getElementsByClassName("immediate-args");
-			if (typeof immediateArgElm[0] !== "undefined") {
+			if (immediateArgElm !== null && immediateArgElm.length >= 1 && !isNull(immediateArgElm[0])) {
 				var iaElm = immediateArgElm[0];
 				immediateArg = " " + iaElm.outerHTML;
 				iaElm.parentNode.removeChild(iaElm);
@@ -189,7 +196,7 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
-	`(?<pre>    [a-z0-9]+\\.)?                       # before the dot: 'f64.' 'table.' 'memory.' (optional)
+	`(?<pre>    [a-z0-9]+\\.(atomic\.)?)?            # before the dot: 'f64.' 'table.' 'memory.' 'i32.atomic.' (optional)
 	 (?<mainop> (([a-z]+|_(?!([su]$|[if][36])))+))   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, ...
 	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
 	 (?<post>   (?:_)(i32|i64|f32|f64))?             # optional
@@ -198,7 +205,13 @@ const opcodeRegex = XRegExp(
 
 function ChopUp(opcodeName) {
 	var matches = XRegExp.exec(opcodeName, opcodeRegex);
-	return matches;
+	// example: Array(10) [ "i32.load16_u", "i32.", "load", "load", "load", undefined, "16", undefined, undefined, "_u" ]
+	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
+	//console.log(matches);
+	if (matches !== null && matches.groups !== undefined)
+		return matches.groups;
+	
+	return null;
 }
 
 function BoldMainOpBit(opcodeName) {
@@ -219,6 +232,7 @@ function BoldMainOpBit(opcodeName) {
 		} else {
 			return "<span class='pre pre_" + split[0] + "'>" + split[0] + "</span>.<span class='op'>" + split[1] + "</span>";
 		}
+		
 	} else {
 		return "<span class='op'>" + opcodeName + "</span>";
 	}
