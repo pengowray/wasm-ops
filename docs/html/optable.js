@@ -1,8 +1,10 @@
+/*
 shorthand = {
 	'clz':'iunop', 'ctz':'iunop', 'popcnt':'iunop',
-	'abs':'funop', 'neg':'funop', 'sqrt':'funop', 'ceil':'funop', 'floor':'funop', 'nearest':'funop', /* 'trunc':'funop', (see exceptions) */ 
+	'abs':'funop', 'neg':'funop', 'sqrt':'funop', 'ceil':'funop', 'floor':'funop', 'nearest':'funop', // 'trunc':'funop', (see exceptions) 
 	'add':'binop', 'sub':'binop', 'mul':'binop', 'div':'binop', 'rem':'binop', 
 	'and':'binop', 'or':'binop', 'xor':'binop', 'shl':'binop', 'shr':'binop', 'rotl':'binop', 'rotr':'binop', // ibinop
+	
 	'copysign':'binop', 'min':'binop', 'max':'binop', // fbinop: copysign | add | sub | mul | div | min | max | 
 	'eq':'relop', 'ne':'relop', 'lt':'relop', 'gt':'relop', 'le':'relop', 'ge':'relop', // all exist for irelop & frelop
 	'eqz':'testop',
@@ -14,9 +16,15 @@ shorthand = {
 	'const':'const'
 }
 // more trunc functions in 'cvtop' so make exceptions
-shorthand_exceptions = { 
+/shorthand_exceptions = { 
 	'0x8F': 'funop', '0x9D':'funop'
 }
+*/
+
+// disable "shorthand" (highlight groups) until can be reworked with new op codes
+shorthand = {}
+shorthand_exceptions = {}
+
 function get_shorthand_group(op, hex) {
 	if (hex in shorthand_exceptions) {
 		return "group_sh_" + shorthand_exceptions[hex]
@@ -90,7 +98,8 @@ function ApplyFormatting(table, prefix) {
 				var colors = [];
 				//hoverByClass(op, "lightblue"); // old
 
-				if (chopped.mainop == "demote") op = "group_op_promote";
+				// treat demote and promote as the "same" so they're highlighted together (as there's so few of these op codes)
+				if (chopped.mainop == "demote") op = "group_op_promote"; 
 				cell.classList.add(op);
 				
 				var shortgroup = get_shorthand_group(chopped.mainop, hex);
@@ -197,9 +206,9 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
 	`(?<pre>    [a-z0-9]+\\.(atomic\.)?)?            # before the dot: 'f64.' 'table.' 'memory.' 'i32.atomic.' (optional)
-	 (?<mainop> (([a-z]+|_(?!([su]$|[if][36])))+))   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, ...
+	 (?<mainop> [a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr (todo)...
 	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
-	 (?<post>   (?:_)(i32|i64|f32|f64))?             # optional
+	 (?<post>   (?:_)((low|high|sat)_[ixf0-9]+|i32|i64|f32|f64|pairwise|lane))?             # optional
 	 (?<sign>   (?:_)[su])?	                         # optional`
 		, 'x');
 
@@ -207,7 +216,7 @@ function ChopUp(opcodeName) {
 	var matches = XRegExp.exec(opcodeName, opcodeRegex);
 	// example: Array(10) [ "i32.load16_u", "i32.", "load", "load", "load", undefined, "16", undefined, undefined, "_u" ]
 	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
-	//console.log(matches);
+	console.log(matches);
 	if (matches !== null && matches.groups !== undefined)
 		return matches.groups;
 	
