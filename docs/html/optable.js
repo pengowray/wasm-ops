@@ -136,13 +136,16 @@ function ApplyFormatting(table, prefix) {
 		}
 
 
-		if (reserved) { 
-			opcodeText = "<em>Reserved</em>";
+		// a little text if there's no helptext yet
+		if (reserved && helpText == "") {
 			if (proposal) {
-				proposedText = "<p>Proposed: " + proposal + immediateArg + "</p>";
+				helpText = "<p><i>Proposal</i></p>";
+			} else  {
+				opcodeText = "<em>Reserved</em>";
 			}
 		}
-		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + immediateArg + "</h3>" + proposedText + helpText + "</div>";
+		
+		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + immediateArg + "</h3>" + helpText + "</div>";
 		tippy(cell, {
 			content: tooltiptext, 
 			delay: [100, 0], 

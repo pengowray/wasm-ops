@@ -563,19 +563,19 @@
 <td class="reserved"><span>i64.trunc_sat_f32_u</span></td>
 <td class="reserved"><span>i64.trunc_sat_f64_s</span></td>
 <td class="reserved"><span>i64.trunc_sat_f64_u</span></td>
-<td class="reserved"><span>memory.init</span></td>
-<td class="reserved"><span>data.drop</span></td>
-<td class="reserved"><span>memory.copy</span></td>
-<td class="reserved"><span>memory.fill</span></td>
-<td class="reserved"><span>table.init</span></td>
-<td class="reserved"><span>elem.drop</span></td>
-<td class="reserved"><span>table.copy</span></td>
-<td class="reserved"><span>table.grow</span></td>
+<td><span>memory.init</span></td>
+<td><span>data.drop</span></td>
+<td><span>memory.copy</span></td>
+<td><span>memory.fill</span></td>
+<td><span>table.init</span></td>
+<td><span>elem.drop</span></td>
+<td><span>table.copy</span></td>
+<td><span>table.grow</span></td>
 </tr>
 <tr>
 <th scope="row">FC 1_</th>
-<td class="reserved"><span>table.size</span></td>
-<td class="reserved"><span>table.fill</span></td>
+<td><span>table.size</span></td>
+<td><span>table.fill</span></td>
 <td class="reserved">&nbsp;</td>
 <td class="reserved">&nbsp;</td>
 <td class="reserved">&nbsp;</td>
@@ -1116,6 +1116,22 @@
 	</p>
 </div>
 <div id="0x05"><p>Marks the else block of an <i>if</i>.</p></div>
+<div id="0x06">
+<p>begins a block which can handle thrown exceptions</p>
+<p><em>Exception Handling Proposal</em></p>
+</div>
+<div id="0x07">
+<p>begins the catch block of the try block</p>
+<p><em>Exception Handling Proposal</em></p>
+</div>
+<div id="0x08">
+<p>Creates an exception defined by the tag and then throws it</p>
+<p><em>Exception Handling Proposal</em></p>
+</div>
+<div id="0x09">
+<p>Pops the exnref on top of the stack and throws it</p>
+<p><em>Exception Handling Proposal</em></p>
+</div>
 <div id="0x0B"><p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p></div>
 <div id="0x0C">
 	<span class="immediate-args">l</span>
@@ -1184,7 +1200,14 @@
 	<p><h3>Stack:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
 	<p>In future versions of WebAssembly, the zero byte may be used to index additional tables.</p>
 </div>
-
+<div id="0x14"> <!-- call_ref  -->
+	<p>call a function through a ref $t</p>
+	<p><em>Typed Function References Proposal</em></p>
+</div>
+<div id="0x15"> <!-- return_call_ref -->
+	<!-- todo -->
+	<p><em>Typed Function References Proposal</em></p>
+</div>
 <div id="0x1A">
 	<p>The drop instruction simply throws away a single operand.</p>
 	<p><h3>Stack:</h3><span class="op-type">[t] → []</span> (value-polymorphic) <!-- https://webassembly.github.io/spec/core/valid/instructions.html#polymorphism --></p>
@@ -1192,6 +1215,14 @@
 <div id="0x1B">
 	<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>
 	<p><h3>Stack:</h3><span class="op-type">[t t i32] → [t]</span> (value-polymorphic) <!-- https://webassembly.github.io/spec/core/valid/instructions.html#polymorphism --></p>
+</div>
+<div id="0x18">
+	<p>begins the delegate block of the try block</p>
+	<p><em>Exception Handling Proposal</em></p>
+</div>
+<div id="0x19">
+	<p>begins the catch_all block of the try block</p>
+	<p><em>Exception Handling Proposal</em></p>
 </div>
 <div id="0x20">
 	<span class="immediate-args">x</span>
@@ -1229,6 +1260,14 @@
 	<p><h3>Stack:</h3><span class="op-type">[t] → []</span></p>
 </div>
 
+<div id="0x25">
+	<p>Access tables</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
+<div id="0x26">
+	<p>Access tables</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
 <div id="0x28">
 	<span class="immediate-args">m</span>
 	<p>load 4 bytes as i32.</p>
@@ -1954,30 +1993,60 @@
 	<p>reinterpret the bits of a 64-bit integer as a 64-bit float</p>
 	<p><h3>Stack:</h3><span class="op-type">[i64] → [f64]</span></p>
 </div>
-<div id="0xD6">
+<div id="0xD3">  <!-- ref.as_non_null -->
+	<p>converts a nullable reference to a non-nullable one or traps if null</p>
+	<p><em>Typed Function References Proposal</em></p>
+</div>
+<div id="0xD4"> <!-- br_on_null -->
+	<p>converts a nullable reference to a non-nullable one or branches if null</p>
+	<p><em>Typed Function References Proposal</em></p>
+</div>
+<div id="0xD6"> <!-- br_on_non_null -->
 	<p>checks for null and branches if present</p>
+	<p><em>Typed Function References Proposal, GC Proposal</em></p>
 </div>
 <div id="0xFC08">
 	<p>copy from a passive data segment to linear memory</p>
+	<p><em>Bulk Memory Operations</em></p>
 </div>
 <div id="0xFC09">
 	<p>prevent further use of passive data segment</p>
+	<p><em>Bulk Memory Operations</em></p>
+</div>
+<div id="0xFC0F">
+	<p>manipulate the size of a table</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
+<div id="0xFC10">
+	<p>manipulate the size of a table</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
+<div id="0xFC11">
+	<p>fills a range in a table with a value</p>
+	<p><em>Reference Types Proposal</em></p>
 </div>
 <div id="0xFC0A">
 	<p>copy from one region of linear memory to another region</p>
+	<p><em>Bulk Memory Operations</em></p>
 </div>
 <div id="0xFC0B">
 	<p>fill a region of linear memory with a given byte value</p>
+	<p><em>Bulk Memory Operations</em></p>
 </div>
 <div id="0xFC0C">
 	<p>copy from a passive element segment to a table</p>
+	<p><em>Bulk Memory Operations</em></p>
 </div>
 <div id="0xFC0D">
 	<p>prevent further use of a passive element segment</p>
+	<p><em>Bulk Memory Operations</em></p>
 </div>
 <div id="0xFC0E">
 	<p>copy from one region of a table to another region</p>
-</div>
+	<p><em>Bulk Memory Operations</em></p>
+</div
+
+<-- 0xFD SIMD instructions, ordered like https://doc.rust-lang.org/stable/core/arch/wasm/index.html for now -->
 <div id="0xFDE0">
 	<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>
 </div>
@@ -2161,6 +2230,7 @@
 		<ul>
 			<li><a href="https://webassembly.github.io/spec/">WebAssembly Specifications</a></li>
 			<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly">WebAssembly</a> — MDN (developer.mozilla.org)</li>
+			<ul><li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Reference">Instruction reference</a></li></ul>
 			<li><a href="https://rsms.me/wasm-intro">Introduction to WebAssembly</a> — Rasmus Andersson (rsms.me)</li>
 		</ul>
 	</p>
@@ -2168,7 +2238,11 @@
 		<h3>Proposals</h3>
 		<ul>
 			<li><a href="https://github.com/WebAssembly/proposals">WebAssembly proposals</a> (github)</li>
+			<li><a href="https://github.com/WebAssembly/bulk-memory-operations">Bulk Memory Operations and Conditional Segment Initialization</a></li>
+			<li><a href="https://github.com/WebAssembly/reference-types">Reference Types Proposal</a></li>
+			<li><a href="https://github.com/WebAssembly/exception-handling">Exception Handling Proposal</a></li>
 			<li><a href="https://doc.rust-lang.org/stable/core/arch/wasm/index.html">Rust Module core::arch::wasm</a> — SIMD documentation</li>
+			
 		</ul>
 	</p>
 	
