@@ -47,12 +47,28 @@ function isNullOrEmpty(v) {
 	return (v === undefined) || v === null || (typeof v == "string" && v.trim() === "");
 }
 
+function ifStr(v) {
+	if (v === undefined || v === null || (typeof v !== "string") || (typeof v === "undefined"))
+		return "";
+		
+	return v;
+}
+
+function trimdot(v) {
+	// remove starting and ending spaces, dots and underscores
+	v = v.replace(/[\._ ]+$/, "")
+	v = v.replace(/^[\._ ]+/, "")
+	return v;
+}
+
 function ApplyFormattingAll() {
 	ApplyFormatting(document.getElementById('opcodes'), '');
  	ApplyFormatting(document.getElementById('opcodes_FB'), 'FB');
 	ApplyFormatting(document.getElementById('opcodes_FC'), 'FC');
 	ApplyFormatting(document.getElementById('opcodes_FD'), 'FD');
 	ApplyFormatting(document.getElementById('opcodes_FE'), 'FE');
+	ApplyFormatting(document.getElementById('opcodes_FD1'), 'FD1');
+	
 }
 
 function ApplyFormatting(table, prefix) {
@@ -224,8 +240,9 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
 	`(?<pre>    [a-z0-9]+\\.(atomic\.)?(rmw[0-9]*\.)?)            # before the dot: 'f64.' 'table.' 'memory.'  'i32.atomic.rmw16' (optional)
-	 (?<mainop> (q15)?[a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr (todo)...
-	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
+	 (?<relaxed> relaxed\.)? # (optional)
+	 (?<mainop> (q15|all_|any_|is_)?[a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr, all_true, any_true, is_null, ...
+	 (?<opbits> [0-9][0-9x]*)?                             # e.g. '8' (from load8), '16x4' (from load16x4) optional
 	 (?<post>   (?:_)((low_|high_|sat_)?[ixf0-9]+|sat|i32|i64|f32|f64|pairwise|lane))?             # optional
 	 (?<sign>   (?:_)[su])?	                         # optional
 	 (?<rest>   ([0-9a-zA-Z\._]*))?`
@@ -233,54 +250,58 @@ const opcodeRegex = XRegExp(
 
 function ChopUp(opcodeName) {
 	var matches = XRegExp.exec(opcodeName, opcodeRegex);
-	// example: Array(10) [ "i32.load16_u", "i32.", "load", "load", "load", undefined, "16", undefined, undefined, "_u" ]
 	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
 	
 	if (matches !== null && matches.groups !== undefined) {
 		matches.groups.full = opcodeName; // mainly for debug
-		console.log(matches.groups);
+		//console.log(matches.groups);
 		return matches.groups;
 	} else {
-		console.log("no match: " + opcodeName);
+		//console.log("no match: " + opcodeName);
 		return { mainop: opcodeName, full: opcodeName };
 	}
-	
-	return null;
 }
 
 function BoldMainOpBit(opcodeName, cutUp) {
-	// todo: replace with some neater regex maybe, eg ChopUp()
-	// todo: insert zws's in separate method (and include in copy-sign + pop-cnt)
 	var zws = "<wbr>"; // "&#8203;"; // zero-width space. "<zws>" doesn't appear in clipboard (yay)
-	if (cutUp && opcodeName.includes(".")) {
-		// bold after the dot
-		split = opcodeName.split(".");
-		var pre = split[0];
-		var preText = split[0];
-		var opName = split[1];
-		if (split[1] == "atomic") {
-			if (split[2][0] == 'r') { // if (split[2].startsWith('rwm'))
-				pre = split[0] + ".atomic." + split[2]; // eg 'i32.atomic.rmw16'
-				preText = split[0] + ".atomic." + zws + split[2];  // include invisible break point
-				opName = split[3];
-			} else {
-				pre = split[0] + ".atomic"  // eg 'i32.atomic' from 'i32.atomic.store'
-				preText = split[0] + "." + zws + "atomic" ;
-				opName = split[2];
-			}
-		}
-		if (opName.includes("_") && opName != "is_null") {
-			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
-			secondSplit = opName.split("_");
-			return "<span class='pre pre_" + pre + "''>" + preText + "</span>.<span class='op'>" + secondSplit[0] + "</span><span class='post'>_" + secondSplit.slice(1).join("_") + "</span>";
-		} else {
-			return "<span class='pre pre_" + pre + "'>" + preText + "</span>.<span class='op'>" + opName + "</span>";
-		}
-		
-	} else {
+	if (!cutUp) {
 		return "<span class='op'>" + opcodeName + "</span>";
 	}
-	//return opcodeName;
+	
+	var cutup = ChopUp(opcodeName);
+	var ret = "";
+	if (!isNullOrEmpty(cutup.pre)) {
+		var preText = cutup.pre;
+		preText = preText.replace("atomic.rmw", "atomic.<wbr>rmw");
+		preText = preText.replace("memory.atomic", "memory.<wbr>atomic");
+		
+		ret += "<span class='pre pre_" + trimdot(cutup.pre) + "'>" + preText + "</span>";
+	}
+	if (!isNullOrEmpty(cutup.relaxed)) {
+		ret += "<span><wbr>" + cutup.relaxed + "</span>";
+	}
+	if (!isNullOrEmpty(cutup.mainop) || !isNullOrEmpty(cutup.opbits)) {
+		var opText = ifStr(cutup.mainop) + ifStr(cutup.opbits);
+		opText = opText.replace("return_call", "return_<wbr>call");
+		opText = opText.replace("call_indirect", "call_<wbr>indirect");
+		opText = opText.replace("laneselect", "lane<wbr>select");
+		opText = opText.replace("br_on_", "br_on_<wbr>");
+		opText = opText.replace("unreachable", "unreach<wbr>able");
+		opText = opText.replace("externalize", "external<wbr>ize");
+		opText = opText.replace("internalize", "internal<wbr>ize");
+		
+		ret += "<span class='op'>" + opText + "</span>";
+	}
+	if (!isNullOrEmpty(cutup.post) || !isNullOrEmpty(cutup.sign) || !isNullOrEmpty(cutup.rest)) {
+		var postText = ifStr(cutup.post) + ifStr(cutup.sign) + ifStr(cutup.rest);
+		//postText = postText[0] + postText.substring(1).replace("_", "_<wbr>"); // skip first letter
+		postText = postText[0] + postText.substring(1).replace("_", "<wbr>_");
+		ret += "<span class='post'>" + postText + "</span>";
+	}
+
+	return ret;
+
 }
+
 
 onload = ApplyFormattingAll;
