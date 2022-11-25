@@ -2107,7 +2107,8 @@
 	<p><em>Bulk Memory Operations</em></p>
 </div
 
-<-- 0xFD SIMD instructions, ordered like https://doc.rust-lang.org/stable/core/arch/wasm/index.html for now -->
+<-- 0xFD SIMD instructions, ordered like https://doc.rust-lang.org/stable/core/arch/wasm/index.html -->
+
 <div id="0xFDE0">
 	<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>
 </div>
@@ -2201,6 +2202,231 @@
 <div id="0xFD69"> <!-- f32x4_trunc -->
 	<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>
 </div>
+
+<!-- Ordered as at https://github.com/WebAssembly/threads/blob/main/proposals/threads/Overview.md#read-modify-write -->
+
+<div id="0xFE12"> <!-- i32.atomic.load8_u --><p>atomically load 1 byte and zero-extend i8 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE13"><!-- i32.atomic.load16_u --><p>atomically load 2 bytes and zero-extend i16 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE10"><!-- i32.atomic.load --><p>atomically load 4 bytes as i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE14"><!-- i64.atomic.load8_u --><p>atomically load 1 byte and zero-extend i8 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE15"><!-- i64.atomic.load16_u --><p>atomically load 2 bytes and zero-extend i16 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE16"><!-- i64.atomic.load32_u --><p>atomically load 4 bytes and zero-extend i32 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE11"><!-- i64.atomic.load --><p>atomically load 8 bytes as i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE19"><!-- i32.atomic.store8 --><p>wrap i32 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE1A"><!-- i32.atomic.store16 --><p>wrap i32 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE17"><!-- i32.atomic.store --><p>(no conversion) atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE1B"><!-- i64.atomic.store8 --><p>wrap i64 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE1C"><!-- i64.atomic.store16 --><p>wrap i64 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE1D"><!-- i64.atomic.store32 --><p>wrap i64 to i32 and atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+<div id="0xFE18"><!-- i64.atomic.store --><p>(no conversion) atomically store 8 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p></div>
+
+<div id="0xFE20"> <!-- i32.atomic.rmw8.add_u -->
+	<p>8-bit sign-agnostic addition</p>
+	<p>Read: 1 byte, Write: 1 byte</p>
+	<p>Returns: zero-extended i8 to i32</p>	
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE21"> <!-- i32.atomic.rmw16.add_u -->
+	<p>16-bit sign-agnostic addition</p>
+	<p>Read: 2 bytes, Write: 2 bytes</p>
+	<p>Returns: zero-extended i16 to i32</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE1E"> <!-- i32.atomic.rmw.add -->
+	<p>32-bit sign-agnostic addition</p>
+	<p>Read: 4 bytes, Write: 4 bytes</p>
+	<p>Returns: as i32</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE22"> <!-- i64.atomic.rmw8.add_u -->
+	<p>8-bit sign-agnostic addition</p>
+	<p>Returns: zero-extended i8 to i64</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE23"> <!-- i64.atomic.rmw16.add_u -->
+	<p>64-bit sign-agnostic addition</p>
+	<p>Read: 4 bytes, Write: 4 bytes</p>
+	<p>Returns: zero-extended i16 to i64</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE24"> <!-- i64.atomic.rmw32.add_u --> 
+	<p>32-bit sign-agnostic addition</p>
+	<p>Returns: zero-extended i32 to i64</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE1F"> <!-- i64.atomic.rmw.add --> 
+	<p>64-bit sign-agnostic addition</p>
+	<p>Read: 8 bytes, Write: 8 bytes</p>
+	<p>Returns: as i64</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE27"> <!-- i32.atomic.rmw8.sub_u -->
+	<p>8-bit sign-agnostic subtraction</p>
+	<p>Read: 1 byte, Write: 1 byte</p>
+	<p>Returns: zero-extended i8 to i32</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE28"> <!-- i32.atomic.rmw16.sub_u -->
+	<p>16-bit sign-agnostic subtraction</p>
+	<p>Read: 2 bytes, Write: 2 bytes</p>
+	<p>Returns: zero-extended i16 to i32</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE25"> <!-- i32.atomic.rmw.sub -->
+	<p>32-bit sign-agnostic subtraction</p>
+	<p>Read: 4 bytes, Write: 4 bytes</p>
+	<p>Returns: as i32</p>
+	<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+	<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE29"><!-- i64.atomic.rmw8.sub_u --><p>8-bit sign-agnostic subtraction</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE2A"><!-- i64.atomic.rmw16.sub_u --><p>16-bit sign-agnostic subtraction</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE2B"><!-- i64.atomic.rmw32.sub_u --><p>32-bit sign-agnostic subtraction</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE26"><!-- i64.atomic.rmw.sub --><p>64-bit sign-agnostic subtraction</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE2E"><!-- i32.atomic.rmw8.and_u --><p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE2F"><!-- i32.atomic.rmw16.and_u --><p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE2C"><!-- i32.atomic.rmw.and --><p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE30"><!-- i64.atomic.rmw8.and_u --><p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE31"><!-- i64.atomic.rmw16.and_u --><p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE32"><!-- i64.atomic.rmw32.and_u --><p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE2D"><!-- i64.atomic.rmw.and --><p>64-bit sign-agnostic bitwise and</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE35"><!-- i32.atomic.rmw8.or_u --><p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE36"><!-- i32.atomic.rmw16.or_u --><p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE33"><!-- i32.atomic.rmw.or --><p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE37"><!-- i64.atomic.rmw8.or_u --><p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE38"><!-- i64.atomic.rmw16.or_u --><p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE39"><!-- i64.atomic.rmw32.or_u --><p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE34"><!-- i64.atomic.rmw.or --><p>64-bit sign-agnostic bitwise inclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE3C"><!-- i32.atomic.rmw8.xor_u --><p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE3D"><!-- i32.atomic.rmw16.xor_u --><p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE3A"><!-- i32.atomic.rmw.xor --><p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE3E"><!-- i64.atomic.rmw8.xor_u --><p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE3F"><!-- i64.atomic.rmw16.xor_u --><p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE40"><!-- i64.atomic.rmw32.xor_u --><p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE3B"><!-- i64.atomic.rmw.xor --><p>64-bit sign-agnostic bitwise exclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE43"><!-- i32.atomic.rmw8.xchg_u --><p>nop</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE44"><!-- i32.atomic.rmw16.xchg_u --><p>nop</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE41"><!-- i32.atomic.rmw.xchg --><p>nop</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE45"><!-- i64.atomic.rmw8.xchg_u --><p>nop</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE46"><!-- i64.atomic.rmw16.xchg_u --><p>nop</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE47"><!-- i64.atomic.rmw32.xchg_u --><p>nop</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+<div id="0xFE42"><!-- i64.atomic.rmw.xchg --><p>nop</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>
+<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>
+<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
+</div>
+
+<div id="0xFE4A"><!-- i32.atomic.rmw8.cmpxchg_u --><p>Load as loaded:1 byte</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i32</p></div>
+<div id="0xFE4B"><!-- i32.atomic.rmw16.cmpxchg_u --><p>Load as loaded:2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i8 to i32</p></div>
+<div id="0xFE48"><!-- i32.atomic.rmw.cmpxchg --><p>Load as loaded:4 bytes</p><p>Compare expected with loaded: 32-bit compare equal</p><p>Conditionally Store replacement: store 4 bytes</p><p>Return loaded: as i32</p></div>
+<div id="0xFE4C"><!-- i64.atomic.rmw8.cmpxchg_u --><p>Load as loaded:1 byte</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i64</p></div>
+<div id="0xFE4D"><!-- i64.atomic.rmw16.cmpxchg_u --><p>Load as loaded:2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i16 to i64</p></div>
+<div id="0xFE4E"><!-- i64.atomic.rmw32.cmpxchg_u --><p>Load as loaded:4 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes</p><p>Return loaded: zero-extended from i32 to i64</p></div>
+<div id="0xFE49"><!-- i64.atomic.rmw.cmpxchg --><p>Load as loaded:8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p></div>
+
+<!-- todo: remaining threading instructions -->
+
 <div id="0x69_old_unused">
 	<p></p>
 	Stack:
