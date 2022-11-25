@@ -2202,6 +2202,101 @@
 <div id="0xFD69"> <!-- f32x4_trunc -->
 	<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>
 </div>
+<div id="0xFDEC"> <!-- f64x2_abs -->
+	<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFDF0"> <!-- f64x2_add -->
+	<p>Lane-wise add of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFD74"> <!-- f64x2_ceil -->
+	<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>
+</div>
+<div id="0xFDFE"> <!-- f64x2.convert_low_i32x4 -->
+	<p>Lane-wise conversion from integer to floating point.</p>
+</div>
+<div id="0xFD"> <!-- f64x2.convert_low_i32x4 [_s]-->
+	<p>Lane-wise conversion from signed integer to floating point.</p>
+</div>
+<div id="0xFDFF"> <!-- f64x2_convert_low_u32x4 [_u]-->
+	<p>Lane-wise conversion from unsigned integer to floating point.</p>
+</div>
+<div id="0xFDF3"> <!-- f64x2.div -->
+	<p>Lane-wise divide of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFD47"> <!-- f64x2.eq -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>
+	<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>
+</div>
+<div id="0xFD21"> <!-- f64x2.extract_lane -->
+	<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>
+	<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>
+</div>
+<div id="0xFD75"> <!-- f64x2.floor -->
+	<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>
+</div>
+<div id="0xFD4C"> <!-- f64x2.ge -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD4A"> <!-- f64x2.gt -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD4B"> <!-- f64x2.le -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD49"> <!-- f64x2.lt -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFDF5"> <!-- f64x2.max -->
+	<p>Calculates the lane-wise maximum of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFDF4"> <!-- f64x2.min -->
+	<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as two 64-bit floating point numbers.
+</p>
+</div>
+<div id="0xFDF2"> <!-- f64x2.mul -->
+	<p>Lane-wise multiply of two 128-bit vectors interpreted as two 64-bit floating point numbers.
+</p>
+</div>
+<div id="0xFD48"> <!-- f64x2.ne -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>
+	<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>
+</div>
+<div id="0xFD94"> <!-- f64x2.nearest -->
+	<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>
+</div>
+<div id="0xFDED"> <!-- f64x2.neg -->
+	<p>Negates each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFDF7"> <!-- f64x2.pmax -->
+	<p>Lane-wise maximum value</p> <!-- todo -->
+</div>
+<div id="0xFDF6"> <!-- f64x2.pmin -->
+	<p>Lane-wise minimum value</p>
+</div>
+<div id="0xFD5F"> <!-- f64x2.promote_low_f32x4 -->
+	<p>Conversion of the two lower single-precision floating point lanes to the two double-precision lanes of the result.</p>
+</div>
+<div id="0xFD22"> <!-- f64x2.replace_lane -->
+	<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>
+	<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>
+</div>
+<div id="0xFD14"> <!-- f64x2.splat -->
+	<p>Creates a vector with identical lanes.</p>
+	<p>Constructs a vector with x replicated to all 2 lanes.</p>
+</div>
+<div id="0xFDEF"> <!-- f64x2.sqrt -->
+	<p>Calculates the square root of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFDF1"> <!-- f64x2.sub -->
+	<p>Lane-wise subtract of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>
+</div>
+<div id="0xFD7A"> <!-- f64x2.trunc -->
+	<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>
+</div>
 
 <!-- Ordered as at https://github.com/WebAssembly/threads/blob/main/proposals/threads/Overview.md#read-modify-write -->
 
@@ -2516,9 +2611,9 @@
 		<h2>Further reading</h2>
 		<ul>
 			<li><a href="https://webassembly.github.io/spec/">WebAssembly Specifications</a></li>
-			<ul><li><a href="https://webassembly.github.io/spec/core/binary/instructions.html">Instructions</a> — opcodes</li></ul>
+			<ul><li><a href="https://webassembly.github.io/spec/core/binary/instructions.html">Instructions</a> (opcodes)</li></ul>
 			<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly">WebAssembly</a> — MDN (developer.mozilla.org)</li>
-			<ul><li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Reference">Instruction reference</a> —  opcodes</li></ul>
+			<ul><li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Reference">Instruction reference</a> (opcodes)</li></ul>
 			<li><a href="https://rsms.me/wasm-intro">Introduction to WebAssembly</a> — Rasmus Andersson (rsms.me)</li>
 		</ul>
 	</p>
