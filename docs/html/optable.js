@@ -220,20 +220,23 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
-	`(?<pre>    [a-z0-9]+\\.(atomic\.)?)?            # before the dot: 'f64.' 'table.' 'memory.' 'i32.atomic.' (optional)
+	`(?<pre>    [a-z0-9]+\\.(atomic\.)?(rmw[0-9]*\.)?)            # before the dot: 'f64.' 'table.' 'memory.'  'i32.atomic.rmw16' (optional)
 	 (?<mainop> [a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr (todo)...
 	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
 	 (?<post>   (?:_)((low|high|sat)_[ixf0-9]+|i32|i64|f32|f64|pairwise|lane))?             # optional
-	 (?<sign>   (?:_)[su])?	                         # optional`
+	 (?<sign>   (?:_)[su])?	                         # optional
+	 (?<rest>   ([0-9a-zA-Z\._]))?`
 		, 'x');
 
 function ChopUp(opcodeName) {
 	var matches = XRegExp.exec(opcodeName, opcodeRegex);
 	// example: Array(10) [ "i32.load16_u", "i32.", "load", "load", "load", undefined, "16", undefined, undefined, "_u" ]
 	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
-	//console.log(matches);
-	if (matches !== null && matches.groups !== undefined)
+	
+	if (matches !== null && matches.groups !== undefined) {
+		console.log(matches.groups);
 		return matches.groups;
+	}
 	
 	return null;
 }
@@ -246,8 +249,13 @@ function BoldMainOpBit(opcodeName) {
 		// bold after the dot
 		split = opcodeName.split(".");
 		if (split[1] == "atomic") {
-			split[0] += ".atomic";
-			split[1] = split[2];
+			if (split[2][0] == 'r') { // if (split[2].startsWith('rwm'))
+				split[0] += ".atomic." + split[2]; // eg 'i32.atomic.rmw16'
+				split[1] = split[3];
+			} else {
+				split[0] += ".atomic"  // eg 'i32.atomic' from 'i32.atomic.store'
+				split[1] = split[2];
+			}
 		}
 		if (split[1].includes("_") && split[1] != "is_null") {
 			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
