@@ -89,13 +89,14 @@ function ApplyFormatting(table, prefix) {
 			cell.classList.add("reserved");
 			reserved = true;
 			opcode = opcode.substring(1);
+			helpOpcodeTitle = opcode;
 			proposal = opcode;
-			cell.innerHTML = "<span>" + BoldMainOpBit(opcode) + "</span>";
+			cell.innerHTML = "<span>" + BoldMainOpBit(opcode, true) + "</span>";
 		} else {
 			if (opcodeFromAttrib) {
-				cell.innerHTML = BoldMainOpBit(cell.innerHTML);
+				cell.innerHTML = BoldMainOpBit(cell.innerHTML, false);
 			} else {
-				cell.innerHTML = BoldMainOpBit(opcode);
+				cell.innerHTML = BoldMainOpBit(opcode, true);
 			}
 
 			// classes for "groups" (excludes proposals for now)
@@ -129,10 +130,12 @@ function ApplyFormatting(table, prefix) {
 				colors.push({'classname':op_hex, 'highlight':'highlight-selection'})
 				addHoverColor(cell, colors);
 
-				if (chopped !== null && !isNull(pre)) {
-					var preElm = cell.getElementsByClassName('pre')[0]; //todo: check for null
-					var preclass = 'pre_' + pre; // = 'group_pre_' + pre (to style the whole cell)
-					addHoverColor(preElm, [{'classname':preclass, 'highlight':'highlight-pre'}]); // style text, e.g. "i32"
+				if (chopped !== null && !isNullOrEmpty(pre)) {
+					var preElm = cell.getElementsByClassName('pre')[0]; 
+					if (!isNull(preElm)) {
+						var preclass = 'pre_' + pre; // = 'group_pre_' + pre (to style the whole cell)
+						addHoverColor(preElm, [{'classname':preclass, 'highlight':'highlight-pre'}]); // style text, e.g. "i32"
+					}
 				}
 				
 			}
@@ -221,9 +224,9 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
 	`(?<pre>    [a-z0-9]+\\.(atomic\.)?(rmw[0-9]*\.)?)            # before the dot: 'f64.' 'table.' 'memory.'  'i32.atomic.rmw16' (optional)
-	 (?<mainop> [a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr (todo)...
+	 (?<mainop> (q15)?[a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr (todo)...
 	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
-	 (?<post>   (?:_)((low_|high_|sat_)?[ixf0-9]+|i32|i64|f32|f64|pairwise|lane))?             # optional
+	 (?<post>   (?:_)((low_|high_|sat_)?[ixf0-9]+|sat|i32|i64|f32|f64|pairwise|lane))?             # optional
 	 (?<sign>   (?:_)[su])?	                         # optional
 	 (?<rest>   ([0-9a-zA-Z\._]*))?`
 		, 'x');
@@ -234,19 +237,22 @@ function ChopUp(opcodeName) {
 	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
 	
 	if (matches !== null && matches.groups !== undefined) {
-		matches.groups.full = opcodeName; // for debug
-		//console.log(matches.groups);
+		matches.groups.full = opcodeName; // mainly for debug
+		console.log(matches.groups);
 		return matches.groups;
+	} else {
+		console.log("no match: " + opcodeName);
+		return { mainop: opcodeName, full: opcodeName };
 	}
 	
 	return null;
 }
 
-function BoldMainOpBit(opcodeName) {
+function BoldMainOpBit(opcodeName, cutUp) {
 	// todo: replace with some neater regex maybe, eg ChopUp()
 	// todo: insert zws's in separate method (and include in copy-sign + pop-cnt)
 	var zws = "<wbr>"; // "&#8203;"; // zero-width space. "<zws>" doesn't appear in clipboard (yay)
-	if (opcodeName.includes(".")) {
+	if (cutUp && opcodeName.includes(".")) {
 		// bold after the dot
 		split = opcodeName.split(".");
 		var pre = split[0];
