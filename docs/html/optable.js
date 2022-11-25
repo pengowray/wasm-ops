@@ -249,21 +249,26 @@ function BoldMainOpBit(opcodeName) {
 	if (opcodeName.includes(".")) {
 		// bold after the dot
 		split = opcodeName.split(".");
+		var pre = split[0];
+		var preText = split[0];
+		var opName = split[1];
 		if (split[1] == "atomic") {
 			if (split[2][0] == 'r') { // if (split[2].startsWith('rwm'))
-				split[0] += ".atomic." + split[2]; // eg 'i32.atomic.rmw16'
-				split[1] = split[3];
+				pre = split[0] + ".atomic." + split[2]; // eg 'i32.atomic.rmw16'
+				preText = split[0] + ".atomic." + zws + split[2];  // include invisible break point
+				opName = split[3];
 			} else {
-				split[0] += ".atomic"  // eg 'i32.atomic' from 'i32.atomic.store'
-				split[1] = split[2];
+				pre = split[0] + ".atomic"  // eg 'i32.atomic' from 'i32.atomic.store'
+				preText = split[0] + "." + zws + "atomic" ;
+				opName = split[2];
 			}
 		}
-		if (split[1].includes("_") && split[1] != "is_null") {
+		if (opName.includes("_") && opName != "is_null") {
 			// don't bold after the first underscore (for all opcodes containing a dot, except for "is_null")
-			secondSplit = split[1].split("_");
-			return "<span class='pre pre_" + split[0] + "''>" + split[0] + "</span>.<span class='op'>" + secondSplit[0] + "</span><span class='post'>_" + secondSplit.slice(1).join("_") + "</span>";
+			secondSplit = opName.split("_");
+			return "<span class='pre pre_" + pre + "''>" + preText + "</span>.<span class='op'>" + secondSplit[0] + "</span><span class='post'>_" + secondSplit.slice(1).join("_") + "</span>";
 		} else {
-			return "<span class='pre pre_" + split[0] + "'>" + split[0] + "</span>.<span class='op'>" + split[1] + "</span>";
+			return "<span class='pre pre_" + pre + "'>" + preText + "</span>.<span class='op'>" + opName + "</span>";
 		}
 		
 	} else {
