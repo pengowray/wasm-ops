@@ -223,9 +223,9 @@ const opcodeRegex = XRegExp(
 	`(?<pre>    [a-z0-9]+\\.(atomic\.)?(rmw[0-9]*\.)?)            # before the dot: 'f64.' 'table.' 'memory.'  'i32.atomic.rmw16' (optional)
 	 (?<mainop> [a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr (todo)...
 	 (?<opbits> [0-9]+)?                             # e.g. '8' (from load8) optional
-	 (?<post>   (?:_)((low|high|sat)_[ixf0-9]+|i32|i64|f32|f64|pairwise|lane))?             # optional
+	 (?<post>   (?:_)((low_|high_|sat_)?[ixf0-9]+|i32|i64|f32|f64|pairwise|lane))?             # optional
 	 (?<sign>   (?:_)[su])?	                         # optional
-	 (?<rest>   ([0-9a-zA-Z\._]))?`
+	 (?<rest>   ([0-9a-zA-Z\._]*))?`
 		, 'x');
 
 function ChopUp(opcodeName) {
@@ -234,7 +234,8 @@ function ChopUp(opcodeName) {
 	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
 	
 	if (matches !== null && matches.groups !== undefined) {
-		console.log(matches.groups);
+		matches.groups.full = opcodeName; // for debug
+		//console.log(matches.groups);
 		return matches.groups;
 	}
 	
