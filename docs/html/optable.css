@@ -12,6 +12,22 @@ body {
 	color: khaki;
 }
 
+a:link {
+      text-decoration: none;
+}
+
+a:visited {
+      text-decoration: none;
+}
+
+a:hover {
+      text-decoration: none;
+}
+
+a:active {
+      text-decoration: none;
+}
+
 table {
 	border-collapse:collapse; 
 	table-layout:fixed; 
@@ -48,6 +64,7 @@ td:not(.reserved), th {
 	background-clip: border-box;
 	*/
 }
+
 .op {
 	font-size: larger;
 	font-weight: bold;

@@ -40,11 +40,11 @@ function toHex(d) {
 }
 
 function isNull(v) {
-	return (v === undefined) || v === null; // || v.trim() === "";
+	return (v === undefined) || v === null; 
 }
 
 function isNullOrEmpty(v) {
-	return (v === undefined) || v === null || v.trim() === "";
+	return (v === undefined) || v === null || (typeof v == "string" && v.trim() === "");
 }
 
 function ApplyFormattingAll() {
@@ -68,8 +68,14 @@ function ApplyFormatting(table, prefix) {
 		var op_hex = 'op_' + hex
 		cell.classList.add(op_hex);
 
-		//var opcode = cell.innerHTML;
-		var opcode = cell.innerText;
+		// take opcode from "opcode" attribute if available, but usually it's from the cell text
+		var opcode = cell.getAttribute("opcode");
+		var opcodeFromAttrib = true;
+		if (isNullOrEmpty(opcode)) {
+			opcode = cell.innerText;
+			opcodeFromAttrib = false;
+		}
+		
 		var reserved = false;
 		var proposal = "";
 		if (isNullOrEmpty(opcode) || opcode[0] == "&" ) { //TODO: better selection of &npsb; aka \xa0
@@ -82,7 +88,11 @@ function ApplyFormatting(table, prefix) {
 			proposal = opcode;
 			cell.innerHTML = "<span>" + BoldMainOpBit(opcode) + "</span>";
 		} else {
-			cell.innerHTML = BoldMainOpBit(opcode);
+			if (opcodeFromAttrib) {
+				cell.innerHTML = BoldMainOpBit(cell.innerHTML);
+			} else {
+				cell.innerHTML = BoldMainOpBit(opcode);
+			}
 
 			// classes for "groups" (excludes proposals for now)
 			var chopped = ChopUp(opcode);
@@ -216,7 +226,7 @@ function ChopUp(opcodeName) {
 	var matches = XRegExp.exec(opcodeName, opcodeRegex);
 	// example: Array(10) [ "i32.load16_u", "i32.", "load", "load", "load", undefined, "16", undefined, undefined, "_u" ]
 	// example: groups: Object { pre: "i32.", mainop: "load", opbits: "16", post: undefined,  pre: "i32.", sign: "_u" }
-	console.log(matches);
+	//console.log(matches);
 	if (matches !== null && matches.groups !== undefined)
 		return matches.groups;
 	

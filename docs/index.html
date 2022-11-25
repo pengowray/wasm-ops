@@ -340,17 +340,18 @@
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td>*GC</td>
-<td>***</td>
-<td>*SIMD</td>
-<td>*Threads</td>
+<td opcode="twobytefb.GC"><a href="#gc">⭕<br/>GC</a></td>
+<td opcode="twobytefc.FC"><a href="#fc">⭐<br/>FC</a></td>
+<td opcode="twobytefd.SIMD"><a href="#simd">🌀<br/>SIMD</a></td>
+<td opcode="twobytefe.Threads"><a href="#threads">🧵<br/>Threads</a></td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
 <p>
 <br/>
-<b>** GC proposals</b>
+<h2 name="gc" id="gc">⭕ GC Proposal</h2>
+<p>Proposal to add garbage collection (GC) support to WebAssembly</p>
 <table id="opcodes_FB">
 <thead>
 <tr>
@@ -528,8 +529,9 @@
 </tr>
 </tbody></table>
 <br/>
-<b>** 0xFC proposals</b>
+<h2 name="fc" id="fc">⭐ FC extensions</h2>
 </p>
+<p>2-byte instructions beginning with 0xFC.</p>
 <table id="opcodes_FC">
 <thead>
 <tr>
@@ -593,8 +595,9 @@
 </tr>
 </tbody></table>
 <br/>
-<b>** SIMD opcodes</b>
+<h2 name="simd" id="simd">🌀 SIMD opcodes</h2>
 </p>
+<p>SIMD (single instruction, multiple data) instructions begin with 0xFD.</p>
 <table id="opcodes_FD">
 <thead>
 <tr>
@@ -924,8 +927,9 @@
 </tr>
 </tbody></table>
 <br/>
-<b>** Thread proposals</b>
+<h2 name="threads" id="threads">🧵 Threads</h2>
 </p>
+<p>2-byte instructions beginning with 0xFE.</p>
 <table id="opcodes_FE">
 <thead>
 <tr>
@@ -2004,6 +2008,32 @@
 	<p>checks for null and branches if present</p>
 	<p><em>Typed Function References Proposal, GC Proposal</em></p>
 </div>
+<div id="0xFB">
+	<p>2-byte instructions beginning with 0xFB.</p>
+	<p>Proposal to add garbage collection (GC) support.</p>
+	<p>See table below</p>
+</div>
+<div id="0xFC">
+	<p>2-byte instructions beginning with 0xFC.</p>
+	<p>Includes opcodes from the following extensions:
+	<ul>
+	<li>Non-trapping float-to-int conversion</li>
+	<li>Bulk Memory Operations</li>
+	<li>Reference Types Proposal</li>
+	</ul>
+	</p>
+	<p>See table below</p>
+</div>
+<div id="0xFD">
+	<p>2-byte instructions beginning with 0xFD.</p>
+	<p>SIMD opcodes.</p>
+	<p>See table below</p>
+</div>
+<div id="0xFE">
+	<p>2-byte instructions beginning with 0xFE.</p>
+	<p>Threads Proposal for WebAssembly.</p>
+	<p>See table below</p>
+</div>
 <div id="0xFC00">
 	<p>saturating form of i32.trunc_f32_s</p>
 	<p><em>Non-trapping float-to-int Conversion Proposal</em></p>
@@ -2269,7 +2299,7 @@
 	<p>
 		<h3>Extensions and Proposals</h3>
 		<ul>
-			<li><a href="https://webassembly.org/roadmap/">WebAssembly Roadmap</a> — implemented features in browsers and engines</li>
+			<li><a href="https://webassembly.org/roadmap/">WebAssembly Roadmap</a> — implemented features in popular browsers and engines</li>
 			<li><a href="https://github.com/WebAssembly/proposals">WebAssembly proposals</a> (github)</li>
 			<ul>
 				<li><a href="https://github.com/WebAssembly/bulk-memory-operations">Bulk Memory Operations and Conditional Segment Initialization</a></li>
