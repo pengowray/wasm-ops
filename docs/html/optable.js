@@ -75,6 +75,10 @@ function ApplyFormatting(table, prefix) {
 			opcode = cell.innerText;
 			opcodeFromAttrib = false;
 		}
+		var helpOpcodeTitle = cell.getAttribute("displayOpcode");
+		if (isNull(helpOpcodeTitle)) {
+			helpOpcodeTitle = opcode;
+		}
 		
 		var reserved = false;
 		var proposal = "";
@@ -143,7 +147,8 @@ function ApplyFormatting(table, prefix) {
 			}
 		}
 
-		var opcodeText = opcode;
+		//var opcodeText = opcode;
+		var opcodeText = helpOpcodeTitle
 		var proposedText = "";
 
 		var help = document.getElementById(hex);
