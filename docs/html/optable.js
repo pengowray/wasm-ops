@@ -295,7 +295,7 @@ function BoldMainOpBit(opcodeName, cutUp) {
 	if (!isNullOrEmpty(cutup.post) || !isNullOrEmpty(cutup.sign) || !isNullOrEmpty(cutup.rest)) {
 		var postText = ifStr(cutup.post) + ifStr(cutup.sign) + ifStr(cutup.rest);
 		//postText = postText[0] + postText.substring(1).replace("_", "_<wbr>"); // skip first letter
-		postText = postText[0] + postText.substring(1).replace("_", "<wbr>_");
+		postText = postText[0] + postText.substring(1).replaceAll("_", "<wbr>_");
 		ret += "<span class='post'>" + postText + "</span>";
 	}
 
