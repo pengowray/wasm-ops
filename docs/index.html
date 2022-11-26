@@ -2265,7 +2265,7 @@
 <div id="0xFD6A">
 	<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>
 </div>
-<div id="0xFDE1"> <!-- f32x4_neg -->
+<div id="0xFDE1"> <!-- f32x4.neg -->
 	<p>Negates each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>
 </div>
 <div id="0xFDEB">
@@ -2274,31 +2274,31 @@
 <div id="0xFDEA">
 	<p>Lane-wise minimum value, defined as b &lt; a ? b : a</p>
 </div>
-<div id="0xFD20"> <!-- f32x4_replace_lane -->
+<div id="0xFD20"> <!-- f32x4.replace_lane -->
 	<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>
 	<p>Replaces the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>
 	<!-- todo: definition of variables: https://doc.rust-lang.org/stable/core/arch/wasm/fn.f32x4_replace_lane.html -->
 </div>
-<div id="0xFD13"> <!-- f32x4_splat -->
+<div id="0xFD13"> <!-- f32x4.splat -->
 	<p>Creates a vector with identical lanes.</p>
 	<p>Constructs a vector with x replicated to all 4 lanes.</p>
 </div>
-<div id="0xFDE3"> <!-- f32x4_sqrt -->
+<div id="0xFDE3"> <!-- f32x4.sqrt -->
 	<p>Calculates the square root of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>
 </div>
-<div id="0xFDE5"> <!-- f32x4_sub -->
+<div id="0xFDE5"> <!-- f32x4.sub -->
 	<p>Lane-wise subtraction of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>
 </div>
-<div id="0xFD69"> <!-- f32x4_trunc -->
+<div id="0xFD69"> <!-- f32x4.trunc -->
 	<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>
 </div>
-<div id="0xFDEC"> <!-- f64x2_abs -->
+<div id="0xFDEC"> <!-- f64x2.abs -->
 	<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>
 </div>
-<div id="0xFDF0"> <!-- f64x2_add -->
+<div id="0xFDF0"> <!-- f64x2.add -->
 	<p>Lane-wise add of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>
 </div>
-<div id="0xFD74"> <!-- f64x2_ceil -->
+<div id="0xFD74"> <!-- f64x2.ceil -->
 	<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>
 </div>
 <div id="0xFDFE"> <!-- f64x2.convert_low_i32x4 -->
@@ -2307,7 +2307,7 @@
 <div id="0xFD"> <!-- f64x2.convert_low_i32x4 [_s]-->
 	<p>Lane-wise conversion from signed integer to floating point.</p>
 </div>
-<div id="0xFDFF"> <!-- f64x2_convert_low_u32x4 [_u]-->
+<div id="0xFDFF"> <!-- f64x2.convert_low_u32x4 [_u]-->
 	<p>Lane-wise conversion from unsigned integer to floating point.</p>
 </div>
 <div id="0xFDF3"> <!-- f64x2.div -->
@@ -2388,6 +2388,132 @@
 	<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>
 </div>
 
+<div id="0xFD60"><!-- i8x16.abs -->
+	<p>Lane-wise wrapping absolute value.</p>
+</div>
+<div id="0xFD6E"><!-- i8x16.add -->
+	<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>
+</div>
+<div id="0xFD6F"><!-- i8x16_add_sat [s] -->
+	<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MAX.</p>
+</div>
+<div id="0xFD63"><!-- i8x16.all_true -->
+	<p>Returns true if all lanes are non-zero, false otherwise.</p>
+</div>
+<div id="0xFD64"><!-- i8x16_bitmask -->
+	<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>
+</div>
+<div id="0xFD23"><!-- i8x16.eq -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>
+	<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>
+</div>
+<div id="0xFD15"><!-- i8x16.extract_lane [_s]-->
+	<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
+	<p>Extracts the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>
+</div>
+<div id="0xFD16"><!-- i8x16.extract_lane [_u] -->
+	<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
+</div>
+<div id="0xFD2B"><!-- i8x16.ge [_s] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD2C"><!-- i8x16.ge [_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD27"><!-- i8x16_gt [_s] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD28"><!-- i8x16_gt [_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+<div id="0xFD29"><!-- i8x16.le [_s] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD2A"><!-- i8x16.le [_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+<div id="0xFD25"><!-- i8x16_lt [_s] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
+	<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>
+</div>
+<div id="0xFD26"><!-- i8x16_lt [_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+
+<div id="0xFD78"><!-- i8x16_max [_s] -->
+	<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>
+</div>
+<div id="0xFD79"><!-- i8x16_max [_u] -->
+	<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>
+</div>
+<div id="0xFD76"><!-- i8x16_min [_s] -->
+	<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>
+</div>
+<div id="0xFD77"><!-- i8x16_min [_u] -->
+	<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>
+</div>
+<div id="0xFD65"><!-- i8x16.narrow_i16x8 [_s] -->
+	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
+	<p>Signed saturation to 0x7f or 0x80 is used and the input lanes are always interpreted as signed integers.</p>
+</div>
+<div id="0xFD66"><!-- i8x16.narrow_i16x8 [_u] -->
+	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
+</div>
+<div id="0xFD24"><!-- i8x16.ne -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>
+	<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>
+</div>
+<div id="0xFD61"><!-- i8x16_neg -->
+	<p>Negates a 128-bit vectors interpreted as sixteen 8-bit signed integers</p>
+</div>
+<div id="0xFD62"><!-- i8x16.popcnt -->
+	<p>Count the number of bits set to one within each lane.</p>
+</div>
+<div id="0xFD17"><!-- i8x16.replace_lane -->
+	<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
+	<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>
+</div>
+<div id="0xFD6B"><!-- i8x16.shl -->
+	<p>Shifts each lane to the left by the specified number of bits.</p>
+	<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>
+</div>
+<div id="0xFD6C"><!-- i8x16.shr [_s] -->
+	<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>
+	<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>
+</div>
+<div id="0xFD6D"><!-- i8x16.shr [_u] -->
+	<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>
+</div>
+<div id="0xFD0D"><!-- i8x16.shuffle -->
+	<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>
+</div>
+<div id="0xFD0F"><!-- i8x16.splat -->
+	<p>Creates a vector with identical lanes.</p>
+	<p>Constructs a vector with x replicated to all 16 lanes.</p>
+</div>
+<div id="0xFD71"><!-- i8x16.sub -->
+	<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>
+</div>
+<div id="0xFD72"><!-- i8x16_sub_sat [_s] -->
+	<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MIN.</p>
+</div>
+
+<!-- todo: <div id="0xFD73">--><!-- i8x16_sub_sat [_u]-->
+
+<div id="0xFD0E"><!-- i8x16.swizzle -->
+	<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>
+	<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>
+</div>
+
+<!-- todo: many -->
+
+<div id="0xFD82">
+	<p>Lane-wise saturating rounding multiplication in Q15 format.</p>
+</div>
 <-- 0xFD Relaxed SIMD instructions, prototype locations -->
 <div id="0xFDA2"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
 <div id="0xFDA5"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
@@ -2621,13 +2747,13 @@
 <p>The RMW operators have two operands, an address and a value used in the modify operation.</p>
 </div>
 
-<div id="0xFE4A"><!-- i32.atomic.rmw8.cmpxchg_u --><p>Load as loaded:1 byte</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i32</p></div>
-<div id="0xFE4B"><!-- i32.atomic.rmw16.cmpxchg_u --><p>Load as loaded:2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i8 to i32</p></div>
-<div id="0xFE48"><!-- i32.atomic.rmw.cmpxchg --><p>Load as loaded:4 bytes</p><p>Compare expected with loaded: 32-bit compare equal</p><p>Conditionally Store replacement: store 4 bytes</p><p>Return loaded: as i32</p></div>
-<div id="0xFE4C"><!-- i64.atomic.rmw8.cmpxchg_u --><p>Load as loaded:1 byte</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i64</p></div>
-<div id="0xFE4D"><!-- i64.atomic.rmw16.cmpxchg_u --><p>Load as loaded:2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i16 to i64</p></div>
+<div id="0xFE4A"><!-- i32.atomic.rmw8.cmpxchg_u --><p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i32</p></div>
+<div id="0xFE4B"><!-- i32.atomic.rmw16.cmpxchg_u --><p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i8 to i32</p></div>
+<div id="0xFE48"><!-- i32.atomic.rmw.cmpxchg --><p>Load as loaded: 4 bytes</p><p>Compare expected with loaded: 32-bit compare equal</p><p>Conditionally Store replacement: store 4 bytes</p><p>Return loaded: as i32</p></div>
+<div id="0xFE4C"><!-- i64.atomic.rmw8.cmpxchg_u --><p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i64</p></div>
+<div id="0xFE4D"><!-- i64.atomic.rmw16.cmpxchg_u --><p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i16 to i64</p></div>
 <div id="0xFE4E"><!-- i64.atomic.rmw32.cmpxchg_u --><p>Load as loaded:4 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes</p><p>Return loaded: zero-extended from i32 to i64</p></div>
-<div id="0xFE49"><!-- i64.atomic.rmw.cmpxchg --><p>Load as loaded:8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p></div>
+<div id="0xFE49"><!-- i64.atomic.rmw.cmpxchg --><p>Load as loaded: 8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p></div>
 
 <!-- todo: remaining threading instructions -->
 
