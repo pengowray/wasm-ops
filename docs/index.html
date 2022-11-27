@@ -1013,7 +1013,6 @@
 </tr>
 </tbody></table>
 <br/>
-</p>
 
 <p>
 <h2 name="threads" id="threads">🧵 Threads</h2>
@@ -2197,7 +2196,7 @@
 	<p><em>Bulk Memory Operations</em></p>
 </div
 
-<-- 0xFD SIMD instructions, ordered like https://doc.rust-lang.org/stable/core/arch/wasm/index.html -->
+<!-- 0xFD SIMD instructions, ordered like https://doc.rust-lang.org/stable/core/arch/wasm/index.html -->
 
 <div id="0xFDE0">
 	<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>
@@ -2301,13 +2300,10 @@
 <div id="0xFD74"> <!-- f64x2.ceil -->
 	<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>
 </div>
-<div id="0xFDFE"> <!-- f64x2.convert_low_i32x4 -->
-	<p>Lane-wise conversion from integer to floating point.</p>
-</div>
-<div id="0xFD"> <!-- f64x2.convert_low_i32x4 [_s]-->
+<div id="0xFDFE"> <!-- f64x2.convert_low_i32x4 [_s]-->
 	<p>Lane-wise conversion from signed integer to floating point.</p>
 </div>
-<div id="0xFDFF"> <!-- f64x2.convert_low_u32x4 [_u]-->
+<div id="0xFDFF"> <!-- f64x2.convert_low_u32x4 [f64x2.convert_low_i32x4_u]-->
 	<p>Lane-wise conversion from unsigned integer to floating point.</p>
 </div>
 <div id="0xFDF3"> <!-- f64x2.div -->
@@ -2391,19 +2387,19 @@
 <div id="0xFD60"><!-- i8x16.abs -->
 	<p>Lane-wise wrapping absolute value.</p>
 </div>
-<div id="0xFD6E"><!-- i8x16.add -->
+<div id="0xFD6E"><!-- i8x16.add + u8x16.add -->
 	<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>
 </div>
 <div id="0xFD6F"><!-- i8x16_add_sat [s] -->
 	<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MAX.</p>
 </div>
-<div id="0xFD63"><!-- i8x16.all_true -->
+<div id="0xFD63"><!-- i8x16.all_true + u8x16.all_true -->
 	<p>Returns true if all lanes are non-zero, false otherwise.</p>
 </div>
-<div id="0xFD64"><!-- i8x16_bitmask -->
+<div id="0xFD64"><!-- i8x16.bitmask + u8x16.bitmask -->
 	<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>
 </div>
-<div id="0xFD23"><!-- i8x16.eq -->
+<div id="0xFD23"><!-- i8x16.eq + u8x16.eq -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>
 	<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>
 </div>
@@ -2411,73 +2407,47 @@
 	<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
 	<p>Extracts the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>
 </div>
-<div id="0xFD16"><!-- i8x16.extract_lane [_u] -->
-	<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
-</div>
 <div id="0xFD2B"><!-- i8x16.ge [_s] -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
 	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
 </div>
-<div id="0xFD2C"><!-- i8x16.ge [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
-	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
-</div>
-<div id="0xFD27"><!-- i8x16_gt [_s] -->
+<div id="0xFD27"><!-- i8x16.gt [_s] -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
 	<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>
-</div>
-<div id="0xFD28"><!-- i8x16_gt [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
 </div>
 <div id="0xFD29"><!-- i8x16.le [_s] -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
 	<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>
 </div>
-<div id="0xFD2A"><!-- i8x16.le [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
-</div>
 <div id="0xFD25"><!-- i8x16_lt [_s] -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
 	<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>
 </div>
-<div id="0xFD26"><!-- i8x16_lt [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
-</div>
-
 <div id="0xFD78"><!-- i8x16_max [_s] -->
 	<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>
 </div>
-<div id="0xFD79"><!-- i8x16_max [_u] -->
-	<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>
-</div>
 <div id="0xFD76"><!-- i8x16_min [_s] -->
-	<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>
-</div>
-<div id="0xFD77"><!-- i8x16_min [_u] -->
 	<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>
 </div>
 <div id="0xFD65"><!-- i8x16.narrow_i16x8 [_s] -->
 	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
 	<p>Signed saturation to 0x7f or 0x80 is used and the input lanes are always interpreted as signed integers.</p>
 </div>
-<div id="0xFD66"><!-- i8x16.narrow_i16x8 [_u] -->
-	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
-</div>
-<div id="0xFD24"><!-- i8x16.ne -->
+<div id="0xFD24"><!-- i8x16.ne + u8x16.ne-->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>
 	<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>
 </div>
 <div id="0xFD61"><!-- i8x16_neg -->
 	<p>Negates a 128-bit vectors interpreted as sixteen 8-bit signed integers</p>
 </div>
-<div id="0xFD62"><!-- i8x16.popcnt -->
+<div id="0xFD62"><!-- i8x16.popcnt + u8x16.popcnt -->
 	<p>Count the number of bits set to one within each lane.</p>
 </div>
-<div id="0xFD17"><!-- i8x16.replace_lane -->
+<div id="0xFD17"><!-- i8x16.replace_lane + u8x16.replace_lane -->
 	<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
 	<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>
 </div>
-<div id="0xFD6B"><!-- i8x16.shl -->
+<div id="0xFD6B"><!-- i8x16.shl + u8x16.shl -->
 	<p>Shifts each lane to the left by the specified number of bits.</p>
 	<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>
 </div>
@@ -2485,137 +2455,89 @@
 	<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>
 	<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>
 </div>
-<div id="0xFD6D"><!-- i8x16.shr [_u] -->
-	<p>Shifts each lane to the right by the specified number of bits, zero extending.</p>
-</div>
-<div id="0xFD0D"><!-- i8x16.shuffle -->
+<div id="0xFD0D"><!-- i8x16.shuffle + u8x16.shuffle -->
 	<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>
 </div>
-<div id="0xFD0F"><!-- i8x16.splat -->
+<div id="0xFD0F"><!-- i8x16.splat + u8x16.splat -->
 	<p>Creates a vector with identical lanes.</p>
 	<p>Constructs a vector with x replicated to all 16 lanes.</p>
 </div>
-<div id="0xFD71"><!-- i8x16.sub -->
+<div id="0xFD71"><!-- i8x16.sub + u8x16.sub -->
 	<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>
 </div>
 <div id="0xFD72"><!-- i8x16_sub_sat [_s] -->
 	<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MIN.</p>
 </div>
-<!-- todo: <div id="0xFD73">--><!-- i8x16_sub_sat [_u]-->
-<div id="0xFD0E"><!-- i8x16.swizzle -->
+<div id="0xFD0E"><!-- i8x16.swizzle + u8x16.swizzle -->
 	<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>
 	<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>
 </div>
+
 <div id="0xFD80"><!-- i16x8.abs -->
 	<p>Lane-wise wrapping absolute value.</p>
 </div>
-<div id="0xFD8E"><!-- i16x8.add -->
+<div id="0xFD8E"><!-- i16x8.add + u16x8.add -->
 	<p>Adds two 128-bit vectors as if they were two packed eight 16-bit integers.</p>
 </div>
 <div id="0xFD8F"><!-- i16x8.add_sat [_s] -->
 	<p>Adds two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MAX.</p>
 </div>
-<div id="0xFD90"><!-- i16x8.add_sat [_u] -->
-	<p>Adds two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to i16::MAX.</p>
-</div>
-<div id="0xFD"><!-- i16x8.all_true -->
+<div id="0xFD83"><!-- i16x8.all_true + u16x8.all_true -->
 	<p>Returns true if all lanes are non-zero, false otherwise.</p>
 </div>
-<div id="0xFD83"><!-- i16x8.bitmask -->
+<div id="0xFD84"><!-- i16x8.bitmask + u16x8.bitmask -->
 	<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>
 </div>
-<div id="0xFD"><!-- i16x8.eq -->
+<div id="0xFD2D"><!-- i16x8.eq + u16x8.eq -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>
 </div>
-<div id="0xFD2D"><!-- i16x8.extadd_pairwise_i8x16 -->
-	<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>
-</div>
-<div id="0xFD7C"><!-- i16x8.extadd_pairwise_u8x16 [i16x8.extadd_pairwise_i8x16] [_s] -->
-	<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>
-</div>
-<div id="0xFD7D"><!-- i16x8.extadd_pairwise_u8x16 [i16x8.extadd_pairwise_i8x16] [_u] -->
+<div id="0xFD7C"><!-- i16x8.extadd_pairwise_i8x16 [_s] -->
 	<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>
 </div>
 <div id="0xFD88"><!-- i16x8.extend_high_i8x16 [_s] -->
 	<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>
 </div>
-<div id="0xFD8A"><!-- i16x8.extend_high_u8x16 [i16x8.extend_high_i8x16_u]-->
-	<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>
-</div>
 <div id="0xFD87"><!-- i16x8.extend_low_i8x16 [i16x8.extend_low_i8x16_s] -->
 	<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>
 </div>
-<div id="0xFD89"><!-- i16x8.extend_low_u8x16 [i16x8.extend_low_i8x16_u] -->
-	<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>
-</div>
 <div id="0xFD9D"><!-- i16x8.extmul_high_i8x16 [i16x8.extmul_high_i8x16_s] -->
-	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
-</div>
-<div id="0xFD9F"><!-- i16x8.extmul_high_u8x16 [i16x8.extmul_high_i8x16_u] -->
 	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
 </div>
 <div id="0xFD9C"><!-- i16x8.extmul_low_i8x16 [i16x8.extmul_low_i8x16_s] -->
 	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
 </div>
-<div id="0xFD9E"><!-- i16x8.extmul_low_u8x16 [i16x8.extmul_low_i8x16_u] -->
-	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
-</div>
 <div id="0xFD18"><!-- i16x8.extract_lane [_s] -->
-	<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>
-</div>
-<div id="0xFD19"><!-- i16x8.extract_lane [_u] -->
 	<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>
 </div>
 <div id="0xFD35"><!-- i16x8.ge [_s] [8 sixteen-bit integers] -->
 	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>
 </div>
-<div id="0xFD36"><!-- i16x8.ge [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit unsigned integers.</p>
-</div>
 <div id="0xFD31"><!-- i16x8.gt -->
 	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>
 </div>
-<div id="0xFD32"><!-- i16x8.gt [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit unsigned integers.</p>
-</div>
 <div id="0xFD33"><!-- i16x8.le -->
 	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>
-</div>
-<div id="0xFD34"><!-- i16x8.le [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit unsigned integers.</p>
 </div>
 
 <!-- todo: i16x8.load_extend_i8x8 -->
 <!-- todo: i16x8.load_extend_u8x8 -->
 
 <div id="0xFD2F"><!-- i16x8.lt [_s] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit signed integers.</p>
-</div>
-<div id="0xFD30"><!-- i16x8.lt [_u] -->
-	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>
+	<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>
 </div>
 <div id="0xFD98"><!-- i16x8.max -->
 	<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>
 </div>
-<div id="0xFD99"><!-- i16x8.max -->
-	<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>
-</div>
 <div id="0xFD96"><!-- i16x8.min -->
 	<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>
 </div>
-<div id="0xFD97"><!-- i16x8.min -->
-	<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>
-</div>
-<div id="0xFD95"><!-- i16x8.mul -->
-	<p>Multiplies two 128-bit vectors as if they were two packed eight 16-bit signed integers.</p>
+<div id="0xFD95"><!-- i16x8.mul + u16x8.mul [had "signed integers" for both] -->
+	<p>Multiplies two 128-bit vectors as if they were two packed eight 16-bit integers.</p>
 </div>
 <div id="0xFD85"><!-- i16x8.narrow_i32x4 -->
 	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
 </div>
-<div id="0xFD86"><!-- i16x8.narrow_i32x4 [_u] -->
-	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
-</div>
-<div id="0xFD2E"><!-- i16x8.ne -->
+<div id="0xFD2E"><!-- i16x8.ne + u16x8.ne -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>
 </div>
 <div id="0xFD81"><!-- i16x8.neg -->
@@ -2624,35 +2546,426 @@
 <div id="0xFD82">
 	<p>Lane-wise saturating rounding multiplication in Q15 format.</p>
 </div>
-<div id="0xFD1A"><!-- i16x8.replace_lane -->
+<div id="0xFD1A"><!-- i16x8.replace_lane + u16x8.replace_lane -->
 	<p>Replaces a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>
 </div>
-<div id="0xFD8B"><!-- i16x8.shl -->
+<div id="0xFD8B"><!-- i16x8.shl + u16x8.shl -->
 	<p>Shifts each lane to the left by the specified number of bits.</p>
 </div>
 <div id="0xFD8C"><!-- i16x8.shr -->
 	<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>
 </div>
-<div id="0xFD8D"><!-- i16x8.shr [_u] [zero extending] -->
-	<p>Shifts each lane to the right by the specified number of bits, zero extending.</p>
-</div>
 <div id="0xXXXX_i16x8.shuffle"><!-- i16x8.shuffle [not an opcode]; https://doc.rust-lang.org/stable/core/arch/wasm/fn.u16x8_shuffle.html -->
 	<p>Same as i8x16_shuffle, except operates as if the inputs were eight 16-bit integers, only taking 8 indices to shuffle.</p>
 	<p>Indices in the range [0, 7] select from a while [8, 15] select from b. Note that this will generate the i8x16.shuffle instruction, since there is no native i16x8.shuffle instruction (there is no need for one since i8x16.shuffle suffices).</p>
 </div>
-<div id="0xFD10"><!-- i16x8.splat -->
+<div id="0xFD10"><!-- i16x8.splat + u16x8.splat -->
 	<p>Creates a vector with identical lanes.</p>
 </div>
-<div id="0xFD91"><!-- i16x8.sub -->
+<div id="0xFD91"><!-- i16x8.sub + u16x8.sub -->
 	<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit integers.</p>
 </div>
 <div id="0xFD92"><!-- i16x8.sub_sat -->
 	<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MIN.</p>
 </div>
 
-<!-- todo: many -->
+<div id="0xFDA0"><!-- i32x4.abs -->
+	<p>Lane-wise wrapping absolute value.</p>
+</div>
+<div id="0xFDAE"><!-- i32x4.add + u32x4.add -->
+	<p>Adds two 128-bit vectors as if they were two packed four 32-bit integers.</p>
+</div>
+<div id="0xFDA3"><!-- i32x4.all_true + u32x4.all_true -->
+	<p>Returns true if all lanes are non-zero, false otherwise.</p>
+</div>
+<div id="0xFDA4"><!-- i32x4.bitmask + u32x4.bitmask -->
+	<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>
+</div>
+<div id="0xFDBA"><!-- i32x4.dot_i16x8 [_s] -->
+	<p>Lane-wise multiply signed 16-bit integers in the two input vectors and add adjacent pairs of the full 32-bit results.</p>
+</div>
+<div id="0xFD37"><!-- i32x4.eq + u32x4.eq -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>
+</div>
+<div id="0xFD7E"><!-- i32x4.extadd_pairwise_i16x8 [_s] -->
+	<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>
+</div>
+<div id="0xFDA8"><!-- i32x4.extend_high_i16x8 -->
+	<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>
+</div>
+<div id="0xFDA7"><!-- i32x4.extend_low_i16x8 -->
+	<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>
+</div>
+<div id="0xFDBD"><!-- i32x4.extmul_high_i16x8 -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFDBC"><!-- i32x4.extmul_low_i16x8 -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFD1B"><!-- i32x4.extract_lane + u32x4.extract_lane -->
+	<p>Extracts a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>
+</div>
+<div id="0xFD3F"><!-- i32x4.ge [_s] [four 32-bit -- 4 thirty-two-bit]-->
+	<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>
+</div>
+<div id="0xFD3B"><!-- i32x4.gt -->
+	<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>
+</div>
+<div id="0xFD3D"><!-- i32x4.le -->
+	<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>
+</div>
+<!-- i32x4.load_extend_i16x4 <p>Load four 16-bit integers and sign extend each one to a 32-bit lane</p> -->
+<!-- i32x4.load_extend_u16x4 <p>Load four 16-bit integers and zero extend each one to a 32-bit lane</p> -->
+	
+<div id="0xFD39"><!-- i32x4.lt -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit signed integers.</p>
+</div>
+<div id="0xFDB8"><!-- i32x4.max [_s] -->
+	<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>
+</div>
+<div id="0xFDB6"><!-- i32x4.min [_s] -->
+	<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>
+</div>
+<div id="0xFDB5"><!-- i32x4.mul + u32x4.mul [signed or unsigned?] -->
+	<p>Multiplies two 128-bit vectors as if they were two packed four 32-bit signed integers.</p>
+</div>
+<div id="0xFD38"><!-- i32x4.ne + u32x4.ne -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>
+</div>
+<div id="0xFDA1"><!-- i32x4.neg -->
+	<p>Negates a 128-bit vectors interpreted as four 32-bit signed integers</p>
+</div>
+<div id="0xFD1C"><!-- i32x4.replace_lane + u32x4.replace_lane -->
+	<p>Replaces a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>
+</div>
+<div id="0xFDAB"><!-- i32x4.shl + u32x4.shl -->
+	<p>Shifts each lane to the left by the specified number of bits.</p>
+</div>
+<div id="0xFDAC"><!-- i32x4.shr [_s] -->
+	<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>
+</div>
+<!-- i32x4.shuffle <p>Same as i8x16_shuffle, except operates as if the inputs were four 32-bit integers, only taking 4 indices to shuffle.</p> [not an op code] -->
+	
+</div>
+<div id="0xFD11"><!-- i32x4.splat + u32x4.splat -->
+	<p>Creates a vector with identical lanes.</p>
+</div>
+<div id="0xFDB1"><!-- i32x4.sub + u32x4.sub -->
+	<p>Subtracts two 128-bit vectors as if they were two packed four 32-bit integers.</p>
+</div>
+<div id="0xFDF8"><!-- i32x4.trunc_sat_f32x4 [_s] -->
+	<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit signed integers.</p>
+</div>
+<div id="0xFDFC"><!-- i32x4.trunc_sat_f64x2_zero [i32x4.trunc_sat_f64x2_s_zero] -->
+	<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>
+</div>
+<div id="0xFDC0"><!-- i64x2.abs -->
+	<p>Lane-wise wrapping absolute value.</p>
+</div>
+<div id="0xFDCE"><!-- i64x2.add + u64x2.add -->
+	<p>Adds two 128-bit vectors as if they were two packed two 64-bit integers.</p>
+</div>
+<div id="0xFDC3"><!-- i64x2.all_true + u64x2.all_true-->
+	<p>Returns true if all lanes are non-zero, false otherwise.</p>
+</div>
+<div id="0xFDC4"><!-- i64x2.bitmask + u64x2.bitmask -->
+	<p>Extracts the high bit for each lane in 'a' and produce a scalar mask with all bits concatenated.</p>
+</div>
+<div id="0xFDD6"><!-- i64x2.eq + u64x2.eq -->
+	<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>
+</div>
+<div id="0xFDC8"><!-- i64x2.extend_high_i32x4 [_s] -->
+	<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>
+</div>
+<div id="0xFDC7"><!-- i64x2.extend_low_i32x4 [_s] -->
+	<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>
+</div>
+<div id="0xFDDD"><!-- i64x2.extmul_high_i32x4 [_s] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFDDC"><!-- i64x2.extmul_low_i32x4 [_s] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFD1D"><!-- i64x2.extract_lane + u64x2.extract_lane -->
+	<p>Extracts a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>
+</div>
+<div id="0xFDDB"><!-- i64x2.ge [_s] [2 sixty-four-bit] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>
+</div>
+<div id="0xFDD9"><!-- i64x2.gt -->
+	<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>
+</div>
+<div id="0xFDDA"><!-- i64x2.le -->
+	<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>
+</div>
+<!-- i64x2.load_extend_i32x2 <p>Load two 32-bit integers and sign extend each one to a 64-bit lane</p> -->
+<!-- i64x2.load_extend_u32x2 <p>Load two 32-bit integers and zero extend each one to a 64-bit lane</p> -->
 
-<-- 0xFD Relaxed SIMD instructions, prototype locations -->
+<div id="0xFDD8"><!-- i64x2.lt [_s] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>
+</div>
+<div id="0xFDD5"><!-- i64x2.mul + u64x2.mul -->
+	<p>Multiplies two 128-bit vectors as if they were two packed two 64-bit integers.</p>
+</div>
+<div id="0xFDD7"><!-- i64x2.ne + u64x2.ne -->
+	<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>
+</div>
+<div id="0xFDC1"><!-- i64x2.neg -->
+	<p>Negates a 128-bit vectors interpreted as two 64-bit signed integers</p>
+</div>
+<div id="0xFD1E"><!-- i64x2.replace_lane + u64x2.replace_lane -->
+	<p>Replaces a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>
+</div>
+<div id="0xFDCB"><!-- i64x2.shl + u64x2.shl -->
+	<p>Shifts each lane to the left by the specified number of bits.</p>
+</div>
+<div id="0xFDCC"><!-- i64x2.shr [_s] -->
+	<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>
+</div>
+
+<!-- i64x2.shuffle <p>Same as i8x16_shuffle, except operates as if the inputs were two 64-bit integers, only taking 2 indices to shuffle.</p> -->
+	
+</div>
+<div id="0xFD12"><!-- i64x2.splat + u64x2.splat -->
+	<p>Creates a vector with identical lanes.</p>
+</div>
+<div id="0xFDD1"><!-- i64x2.sub + u64x2.sub -->
+	<p>Subtracts two 128-bit vectors as if they were two packed two 64-bit integers.</p>
+</div>
+<div id="0xFD70"><!-- u8x16.add_sat [i8x16.add_sat_u] -->
+	<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to u8::MAX.</p>
+</div>
+<div id="0xFD7B"><!-- u8x16.avgr [i8x16.avgr_u] -->
+	<p>Lane-wise rounding average.</p>
+</div>
+<div id="0xFD16"><!-- u8x16.extract_lane [i8x16.extract_lane_u] -->
+	<p>Extracts a lane from a 128-bit vector interpreted as 16 packed u8 numbers.</p>
+</div>
+<div id="0xFD2C"><!-- u8x16.ge [i8x16.ge_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+<div id="0xFD28"><!-- u8x16.gt [i8x16.gt_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+<div id="0xFD2A"><!-- u8x16.le [i8x16.le_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+<div id="0xFD26"><!-- u8x16.lt [i8x16.lt_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>
+</div>
+<div id="0xFD79"><!-- u8x16.max [i8x16.max_u] -->
+	<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>
+</div>
+<div id="0xFD77"><!-- u8x16.min [i8x16.min_u] -->
+	<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>
+</div>
+<div id="0xFD66"><!-- u8x16.narrow_i16x8 [i8x16.narrow_i16x8_u] -->
+	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
+</div>
+<div id="0xFD6D"><!-- u8x16.shr [i8x16.shr_u] -->
+	<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>
+</div>
+<div id="0xFD73"><!-- u8x16.sub_sat [i8x16.sub_sat_u]  -->
+	<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to 0.</p>
+</div>
+<div id="0xFD90"><!-- u16x8.add_sat [i16x8.add_sat_u] -->
+	<p>Adds two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to u16::MAX.</p>
+</div>
+<div id="0xFD9B"><!-- u16x8.avgr [i16x8.avgr_u] -->
+	<p>Lane-wise rounding average.</p>
+</div>
+<div id="0xFD7D"><!-- u16x8.extadd_pairwise_u8x16 [i16x8.extadd_pairwise_i8x16_u] -->
+	<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>
+</div>
+<div id="0xFD8A"><!-- u16x8.extend_high_u8x16 [i16x8.extend_high_i8x16_u] -->
+	<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>
+</div>
+<div id="0xFD89"><!-- u16x8.extend_low_u8x16 [i16x8.extend_low_i8x16_u] -->
+	<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>
+</div>
+<div id="0xFD9F"><!-- u16x8.extmul_high_u8x16 [i16x8.extmul_high_i8x16_u] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFD9E"><!-- u16x8.extmul_low_u8x16 [i16x8.extmul_low_i8x16_u] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFD19"><!-- u16x8.extract_lane [i16x8.extract_lane_u] -->
+	<p>Extracts a lane from a 128-bit vector interpreted as 8 packed u16 numbers.</p>
+</div>
+<div id="0xFD36"><!-- u16x8.ge [i16x8.ge_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>
+</div>
+<div id="0xFD32"><!-- u16x8.gt [i16x8.gt_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>
+</div>
+<div id="0xFD34"><!-- u16x8.le -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>
+</div>
+<!-- u16x8.load_extend_u8x8 <p>Load eight 8-bit integers and zero extend each one to a 16-bit lane</p> -->
+	
+<div id="0xFD30"><!-- u16x8.lt [i16x8.lt_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>
+</div>
+<div id="0xFD99"><!-- u16x8.max [i16x8.max_u] -->
+	<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>
+</div>
+<div id="0xFD97"><!-- u16x8.min [i16x8.min_u] -->
+	<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>
+</div>
+<div id="0xFD86"><!-- u16x8.narrow_i32x4 [i16x8.narrow_i32x4_u] -->
+	<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>
+</div>
+<div id="0xFD8D"><!-- u16x8.shr [i16x8.shr_u] -->
+	<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>
+</div>
+<!-- u16x8.shuffle <p>Same as i8x16_shuffle, except operates as if the inputs were eight 16-bit integers, only taking 8 indices to shuffle.</p>-->
+<div id="0xFD93"><!-- u16x8.sub_sat [i16x8.sub_sat_u] -->
+	<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to 0.</p>
+</div>
+
+<div id="0xFD7F"><!-- u32x4.extadd_pairwise_u16x8 [i32x4.extadd_pairwise_i16x8_u]-->
+	<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>
+</div>
+<div id="0xFDAA"><!-- u32x4.extend_high_u16x8 [i32x4.extend_high_i16x8_u] -->
+	<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>
+</div>
+<div id="0xFDA9"><!-- u32x4.extend_low_u16x8 [i32x4.extend_low_i16x8_u] -->
+	<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>
+</div>
+<div id="0xFDBF"><!-- u32x4.extmul_high_u16x8 [i32x4.extmul_high_i16x8_u] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFDBE"><!-- u32x4.extmul_low_u16x8 [i32x4.extmul_low_i16x8_u] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFD40"><!-- u32x4.ge [i32x4.ge_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>
+</div>
+<div id="0xFD3C"><!-- u32x4.gt [i32x4.gt_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>
+</div>
+<div id="0xFD3E"><!-- u32x4.le [i32x4.le_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>
+</div>
+
+<!-- u32x4.load_extend_u16x4 <p>Load four 16-bit integers and zero extend each one to a 32-bit lane</p> -->
+
+<div id="0xFD3A"><!-- u32x4.lt [i32x4.lt_u] -->
+	<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>
+</div>
+<div id="0xFDB9"><!-- u32x4.max [i32x4.max_u] -->
+	<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>
+</div>
+<div id="0xFDB7"><!-- u32x4.min [i32x4.min_u] -->
+	<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>
+</div>
+<div id="0xFDAD"><!-- u32x4.shr [i32x4.shr_u] -->
+	<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>
+</div>
+
+<!-- u32x4.shuffle <p>Same as i8x16_shuffle, except operates as if the inputs were four 32-bit integers, only taking 4 indices to shuffle.</p> -->
+	
+<div id="0xFDF9"><!-- u32x4.trunc_sat_f32x4 [i32x4.trunc_sat_f32x4_u] -->
+	<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit unsigned integers.</p>
+</div>
+<div id="0xFDFD"><!-- u32x4.trunc_sat_f64x2_zero [i32x4.trunc_sat_f64x2_u_zero] -->
+	<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>
+</div>
+
+<div id="0xFDCA"><!-- u64x2.extend_high_u32x4 [i64x2.extend_high_i32x4_u] -->
+	<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>
+</div>
+<div id="0xFDC9"><!-- u64x2.extend_low_u32x4 [i64x2.extend_low_i32x4_u] -->
+	<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>
+</div>
+<div id="0xFDDF"><!-- u64x2.extmul_high_u32x4 [i64x2.extmul_high_i32x4_u] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+<div id="0xFDDE"><!-- u64x2.extmul_low_u32x4 [i64x2.extmul_low_i32x4_u] -->
+	<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>
+</div>
+
+<!-- u64x2.load_extend_u32x2 <p>Load two 32-bit integers and zero extend each one to a 64-bit lane</p> -->
+
+<div id="0xFDCD"><!-- u64x2.shr [i64x2.shr_u] -->
+	<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>
+</div>
+
+<!-- u64x2.shuffle <p>Same as i8x16_shuffle, except operates as if the inputs were two 64-bit integers, only taking 2 indices to shuffle. -->
+	
+</div>
+
+<div id="0xFD4E"><!-- v128.and -->
+	<p>Performs a bitwise and of the two input 128-bit vectors, returning the resulting vector.</p>
+</div>
+<div id="0xFD4F"><!-- v128.andnot -->
+	<p>Bitwise AND of bits of a and the logical inverse of bits of b.</p>
+</div>
+<div id="0xFD53"><!-- v128.any_true -->
+	<p>Returns true if any bit in a is set, or false otherwise.</p>
+</div>
+<div id="0xFD52"><!-- v128.bitselect -->
+	<p>Use the bitmask in c to select bits from v1 when 1 and v2 when 0.</p>
+</div>
+<div id="0xFD00"><!-- v128.load -->
+	<p>Loads a v128 vector from the given heap address.</p>
+</div>
+<div id="0xFD54"><!-- v128.load8_lane -->
+	<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>
+</div>
+<div id="0xFD07"><!-- v128.load8_splat -->
+	<p>Load a single element and splat to all lanes of a v128 vector.</p>
+</div>
+<div id="0xFD55"><!-- v128.load16_lane -->
+	<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>
+</div>
+<div id="0xFD08"><!-- v128.load16_splat -->
+	<p>Load a single element and splat to all lanes of a v128 vector.</p>
+</div>
+<div id="0xFD56"><!-- v128.load32_lane -->
+	<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>
+</div>
+<div id="0xFD09"><!-- v128.load32_splat -->
+	<p>Load a single element and splat to all lanes of a v128 vector.</p>
+</div>
+<div id="0xFD5C"><!-- v128.load32_zero -->
+	<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>
+</div>
+<div id="0xFD57"><!-- v128.load64_lane -->
+	<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>
+</div>
+<div id="0xFD0A"><!-- v128.load64_splat -->
+	<p>Load a single element and splat to all lanes of a v128 vector.</p>
+</div>
+<div id="0xFD5D"><!-- v128.load64_zero -->
+	<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>
+</div>
+<div id="0xFD4D"><!-- v128.not -->
+	<p>Flips each bit of the 128-bit input vector.</p>
+</div>
+<div id="0xFD50"><!-- v128.or -->
+	<p>Performs a bitwise or of the two input 128-bit vectors, returning the resulting vector.</p>
+</div>
+<div id="0xFD0B"><!-- v128.store -->
+	<p>Stores a v128 vector to the given heap address.</p>
+</div>
+<div id="0xFD58"><!-- v128.store8_lane -->
+	<p>Stores the 8-bit value from lane L of v into m</p>
+</div>
+<div id="0xFD59"><!-- v128.store16_lane -->
+	<p>Stores the 16-bit value from lane L of v into m</p>
+</div>
+<div id="0xFD5A"><!-- v128.store32_lane -->
+	<p>Stores the 32-bit value from lane L of v into m</p>
+</div>
+<div id="0xFD5B"><!-- v128.store64_lane -->
+	<p>Stores the 64-bit value from lane L of v into m</p>
+</div>
+<div id="0xFD51"><!-- v128.xor -->
+	<p>Performs a bitwise xor of the two input 128-bit vectors, returning the resulting vector.</p>
+</div>
+
+<!-- 0xFD Relaxed SIMD instructions, prototype locations -->
 <div id="0xFDA2"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
 <div id="0xFDA5"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
 <div id="0xFDA6"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
@@ -2908,7 +3221,6 @@
 	</li></ul>
 	<div class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.209108em;vertical-align:-0.354554em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><a href="#op-ipopcnt"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">p</span><span class="mord mathrm">o</span><span class="mord mathrm">p</span><span class="mord mathrm">c</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">=</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mrel"><span class="mord text"><span class="mord">if</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><a href="#aux-ibits"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">b</span><span class="mord mathrm">i</span><span class="mord mathrm">t</span><span class="mord mathrm">s</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></span></div>
 	</div>
-</div>
 </div>
 
 &nbsp;
