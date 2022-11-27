@@ -62,16 +62,17 @@ function trimdot(v) {
 }
 
 function ApplyFormattingAll() {
-	ApplyFormatting(document.getElementById('opcodes'), '');
- 	ApplyFormatting(document.getElementById('opcodes_FB'), 'FB');
-	ApplyFormatting(document.getElementById('opcodes_FC'), 'FC');
-	ApplyFormatting(document.getElementById('opcodes_FD'), 'FD');
-	ApplyFormatting(document.getElementById('opcodes_FE'), 'FE');
-	ApplyFormatting(document.getElementById('opcodes_FD1'), 'FD1');
+	ApplyFormatting(document.getElementById('opcodes'), '', 0);
+ 	ApplyFormatting(document.getElementById('opcodes_FB'), 'FB', 0);
+	ApplyFormatting(document.getElementById('opcodes_FB_strings'), 'FB', 0x80);
+	ApplyFormatting(document.getElementById('opcodes_FC'), 'FC', 0);
+	ApplyFormatting(document.getElementById('opcodes_FD'), 'FD', 0);
+	ApplyFormatting(document.getElementById('opcodes_FE'), 'FE', 0);
+	ApplyFormatting(document.getElementById('opcodes_FD1'), 'FD1', 0);
 	
 }
 
-function ApplyFormatting(table, prefix) {
+function ApplyFormatting(table, prefix, start) {
     //for (var r = 0, n = table.rows.length; r < n; r++) {
 		//for (var c = 0, m = table.rows[r].cells.length; c < m; c++) {
 			//var cell = table.rows[r].cells[c];
@@ -80,7 +81,7 @@ function ApplyFormatting(table, prefix) {
 	for (var n=0; n<tds.length;n++) {
 		var cell = tds[n];
 
-		var hex = "0x" + prefix + toHex(n); // e.g. '0x8F' or '0xFD23'
+		var hex = "0x" + prefix + toHex(n + start); // e.g. '0x8F' or '0xFD23'
 		var op_hex = 'op_' + hex
 		cell.classList.add(op_hex);
 

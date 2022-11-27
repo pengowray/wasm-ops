@@ -340,7 +340,7 @@
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 <td>&nbsp;</td>
-<td opcode="twobytefb.gc" displayOpcode="⭕ Garbage Collection opcodes"><a href="#gc">⭕<br/>GC</a></td>
+<td opcode="twobytefb.gc" displayOpcode="⭕ Garbage Collection<br>➰ Reference-Typed Strings"><a href="#gc">⭕ GC</a><br/><a href="#strings">➰ Str</a></td>
 <td opcode="twobytefc.fc" displayOpcode="⭐ 0xFCxx opcodes"><a href="#fc">⭐<br/>FC</a></td>
 <td opcode="twobytefd.simd" displayOpcode="🌀 SIMD opcodes"><a href="#simd">🌀<br/>SIMD</a></td>
 <td opcode="twobytefe.threads" displayOpcode="🧵 Threading opcodes"><a href="#threads">🧵<br/>Threads</a></td>
@@ -350,9 +350,8 @@
 </table>
 <p>
 <br/>
-<h2 name="gc" id="gc">⭕ GC Proposal</h2>
-<p>Proposal to add garbage collection (GC) support. 0xFB 00-7F</p>
-<p>Reference-Typed Strings Proposal. 0xFB 80-BF</p>
+<h2 id="gc">⭕ GC Proposal</h2>
+<p>Proposal to add garbage collection (GC) support.</p>
 <table id="opcodes_FB">
 <thead>
 <tr>
@@ -528,6 +527,32 @@
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
+</tbody></table>
+
+<h2 id="strings">➰ Reference-Typed Strings Proposal</h2>
+<table id="opcodes_FB_strings">
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>_0</th>
+<th>_1</th>
+<th>_2</th>
+<th>_3</th>
+<th>_4</th>
+<th>_5</th>
+<th>_6</th>
+<th>_7</th>
+<th>_8</th>
+<th>_9</th>
+<th>_A</th>
+<th>_B</th>
+<th>_C</th>
+<th>_D</th>
+<th>_E</th>
+<th>_F</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <th scope="row">FB 8_</th>
 <td>string.new_utf8</td>
@@ -1008,7 +1033,8 @@
 <br/>
 </p>
 
-<p>Relaxed SIMD proposal (0xFD 1xx)</p>
+<h2>Relaxed SIMD proposal</h2>
+<p>0xFD 0x1__</p>
 <p>
 <table id="opcodes_FD1">
 <thead>
@@ -2226,7 +2252,10 @@
 </div>
 <div id="0xFB">
 	<p>Multibyte instructions beginning with the prefix 0xFB.</p>
-	<p>Proposal to add garbage collection (GC) support.</p>
+	<ul>
+	<li>Proposal to add garbage collection (GC) support.</li>
+	<li>Proposal to add reference-typed strings.</li>
+	</ul>
 	<p>See table below for full opcodes.</p>
 </div>
 <div id="0xFC">
