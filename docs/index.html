@@ -351,7 +351,8 @@
 <p>
 <br/>
 <h2 name="gc" id="gc">⭕ GC Proposal</h2>
-<p>Proposal to add garbage collection (GC) support to WebAssembly</p>
+<p>Proposal to add garbage collection (GC) support. 0xFB 00-7F</p>
+<p>Reference-Typed Strings Proposal. 0xFB 80-BF</p>
 <table id="opcodes_FB">
 <thead>
 <tr>
@@ -527,6 +528,83 @@
 <td>&nbsp;</td>
 <td>&nbsp;</td>
 </tr>
+<tr>
+<th scope="row">FB 8_</th>
+<td>string.new_utf8</td>
+<td>string.new_wtf16</td>
+<td>string.const</td>
+<td>string.measure_utf8</td>
+<td>string.measure_wtf8</td>
+<td>string.measure_wtf16</td>
+<td>string.encode_utf8</td>
+<td>string.encode_wtf16</td>
+<td>string.concat</td>
+<td>string.eq</td>
+<td>string.is_usv_sequence</td>
+<td>string.new_lossy_utf8</td>
+<td>string.new_wtf8</td>
+<td>string.encode_lossy_utf8</td>
+<td>string.encode_wtf8 </td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<th scope="row">FB 9_</th>
+<td>string.as_wtf8</td>
+<td>stringview_wtf8.advance</td>
+<td>stringview_wtf8.encode_utf8</td>
+<td>stringview_wtf8.slice</td>
+<td>stringview_wtf8.encode_lossy_utf8 </td>
+<td>stringview_wtf8.encode_wtf8</td>
+<td></td>
+<td></td>
+<td>string.as_wtf16</td>
+<td>stringview_wtf16.length</td>
+<td>stringview_wtf16.get_codeunit</td>
+<td>stringview_wtf16.encode</td>
+<td>stringview_wtf16.slice</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">FB A_</th>
+<td>string.as_iter</td>
+<td>stringview_iter.next</td>
+<td>stringview_iter.advance</td>
+<td>stringview_iter.rewind</td>
+<td>stringview_iter.slice</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<th scope="row">FB B_</th>
+<td>string.new_utf8_array</td>
+<td>string.new_wtf16_array</td>
+<td>string.encode_utf8_array</td>
+<td>string.encode_wtf16_array</td>
+<td>string.new_lossy_utf8_array</td>
+<td>string.new_wtf8_array</td>
+<td>string.encode_lossy_utf8_array</td>
+<td>string.encode_wtf8_array</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
 </tbody></table>
 <br/>
 <h2 name="fc" id="fc">⭐ FC extensions</h2>
@@ -3358,6 +3436,11 @@
 				<li><a href="https://github.com/WebAssembly/reference-types">Reference Types Proposal</a></li>
 				<li><a href="https://github.com/WebAssembly/exception-handling">Exception Handling Proposal</a></li>
 				<li><a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping float-to-int Conversion Proposal</a></li>
+				<li><a href="https://github.com/WebAssembly/stringref">Reference-Typed Strings Proposal</a></li>
+				<li><a href="https://github.com/WebAssembly/stack-switching">Stack Switching Proposal / Typed continuations</a> — proposes several new instructions: cont.new, cont.bind, resume, resume_throw</li>
+				<li><a href="https://github.com/WebAssembly/call-tags">Call Tags Proposal</a> — proposes new instructions: call_with_tag, call_tag.new, call_tag.canon</li>
+				<li><a href="https://github.com/WebAssembly/memory-control">Memory control proposal</a> — proposes new instructions: memory.map, memory.unmap, memory.protect, memory.discard</li>
+				<li><a href="https://github.com/WebAssembly/constant-time">Constant-Time Extension Proposal</a> – proposes new instructions for secret types: iNN.declassify, sNN.classify, sNN.load, sNN.store, ...</li>
 			</ul>
 			<li><a href="https://doc.rust-lang.org/stable/core/arch/wasm/index.html">Rust Module core::arch::wasm</a> — SIMD documentation</li>
 		</ul>

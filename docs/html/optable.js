@@ -239,7 +239,7 @@ function OnceLoaded() {
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>[a-z_]+)(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 //var opcodeRegex = /(?<pre>[a-z0-9]+\.)?(?<mainop>(([a-z]+|_(?!([[iu][0-9])))+))(?<post>(?:_)(i32|i64|f32|f64))?(?<sign>(?:_)[su])?/;
 const opcodeRegex = XRegExp(
-	`(?<pre>    [a-z0-9]+\\.(atomic\.)?(rmw[0-9]*\.)?)            # before the dot: 'f64.' 'table.' 'memory.'  'i32.atomic.rmw16' (optional)
+	`(?<pre>    (stringview_)?[a-z0-9]+\\.(atomic\.)?(rmw[0-9]*\.)?)  # before the dot: 'f64.' 'table.' 'memory.'  'i32.atomic.rmw16' 'stringview_iter'  (optional)
 	 (?<relaxed> relaxed\.)? # (optional)
 	 (?<mainop> (q15|all_|any_|is_)?[a-z]+)   # e.g: nop, br_table, wrap [not wrap_i64], load [not load8], convert, q15mulr, all_true, any_true, is_null, ...
 	 (?<opbits> [0-9][0-9x]*)?                             # e.g. '8' (from load8), '16x4' (from load16x4) optional
@@ -274,6 +274,7 @@ function BoldMainOpBit(opcodeName, cutUp) {
 		var preText = cutup.pre;
 		preText = preText.replace("atomic.rmw", "atomic.<wbr>rmw");
 		preText = preText.replace("memory.atomic", "memory.<wbr>atomic");
+		preText = preText.replace("stringview_iter", "stringview_<wbr>iter");
 		
 		ret += "<span class='pre pre_" + trimdot(cutup.pre) + "'>" + preText + "</span>";
 	}
