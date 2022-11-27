@@ -1292,6 +1292,14 @@
 	<p><h3>Stack:</h3><span class="op-type">[t<sup>?</sup> i32] → [t<sup>?</sup>]</span></p>
 	<p>In future versions of WebAssembly, the zero byte may be used to index additional tables.</p>
 </div>
+<div id="0x12"> <!-- return_call  -->
+	<p>the tail-call version of call</p>
+	<p><em>Tail calls proposal</em></p>
+</div>
+<div id="0x13"> <!-- return_call_indirect  -->
+	<p>the tail-call version of call</p>
+	<p><em>Tail calls proposal</em></p>
+</div>
 <div id="0x14"> <!-- call_ref  -->
 	<p>call a function through a ref $t</p>
 	<p><em>Typed Function References Proposal</em></p>
@@ -1299,6 +1307,15 @@
 <div id="0x15"> <!-- return_call_ref -->
 	<!-- todo -->
 	<p><em>Typed Function References Proposal</em></p>
+</div>
+
+<div id="0x18">
+	<p>begins the delegate block of the try block</p>
+	<p><em>Exception Handling Proposal</em></p>
+</div>
+<div id="0x19">
+	<p>begins the catch_all block of the try block</p>
+	<p><em>Exception Handling Proposal</em></p>
 </div>
 <div id="0x1A">
 	<p>The drop instruction simply throws away a single operand.</p>
@@ -1308,13 +1325,9 @@
 	<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>
 	<p><h3>Stack:</h3><span class="op-type">[t t i32] → [t]</span> (value-polymorphic) <!-- https://webassembly.github.io/spec/core/valid/instructions.html#polymorphism --></p>
 </div>
-<div id="0x18">
-	<p>begins the delegate block of the try block</p>
-	<p><em>Exception Handling Proposal</em></p>
-</div>
-<div id="0x19">
-	<p>begins the catch_all block of the try block</p>
-	<p><em>Exception Handling Proposal</em></p>
+<div id="0x1C"><!-- select t -->
+	<p>Only annotated 'select' can be used with reference types.</p>
+	<p><em>Reference Types Proposal</em></p>
 </div>
 <div id="0x20">
 	<span class="immediate-args">x</span>
@@ -2104,6 +2117,18 @@
 	<p>extend a signed 32-bit integer to a 64-bit integer</p>
 	<p><em>Sign-extension operators extension</em></p>
 </div>
+<div id="0xD0">  <!-- ref.null -->
+	<p>evaluates to the null reference constant</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
+<div id="0xD1">  <!-- ref.is_null -->
+	<p>checks for null</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
+<div id="0xD2">  <!-- ref.func -->
+	<p>creates a reference to a given function</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
 <div id="0xD3">  <!-- ref.as_non_null -->
 	<p>converts a nullable reference to a non-nullable one or traps if null</p>
 	<p><em>Typed Function References Proposal</em></p>
@@ -2112,6 +2137,11 @@
 	<p>converts a nullable reference to a non-nullable one or branches if null</p>
 	<p><em>Typed Function References Proposal</em></p>
 </div>
+<div id="0xD5">  <!-- ref.eq  -->
+	<p>[eqref eqref] -&gt; [i32]</p>
+	<p><em>Reference Types Proposal</em></p>
+</div>
+
 <div id="0xD6"> <!-- br_on_non_null -->
 	<p>checks for null and branches if present</p>
 	<p><em>Typed Function References Proposal, GC Proposal</em></p>
