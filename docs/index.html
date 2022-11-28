@@ -18,7 +18,7 @@
 <body>
 
 <h1>WebAssembly Opcodes</h1>
-<!-- by Pengo Wray -->
+<p><b>by Pengo Wray</b></p>
 <table id="opcodes">
 <thead>
 <tr>
@@ -530,6 +530,7 @@
 </tbody></table>
 
 <h2 id="strings">➰ Reference-Typed Strings Proposal</h2>
+<p>This is a phase 1 proposal and may change in future. [As of 2022]</p>
 <table id="opcodes_FB_strings">
 <thead>
 <tr>
@@ -2280,6 +2281,114 @@
 	<p>Threads Proposal for WebAssembly.</p>
 	<p>See table below for full opcodes.</p>
 </div>
+
+<!-- GC proposal -->
+<div id="0xFB01">
+	<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB02">
+	<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB03">
+	<p>reads field 'i' from a structure</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB06">
+	<p>writes field 'i' of a structure</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB11">
+	<p>allocates an array with canonical RTT (runtime type)</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB12">
+	<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB13">
+	<p>reads an element from an array</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB16">
+	<p>writes an element to an array</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB17">
+	<p>inquires the length of an array</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB19">
+	<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB1B">
+	<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB1C">
+	<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB20">
+	<p>creates an i31ref from a 32 bit value, truncating high bit</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB21"> <!-- i31.get_s -->
+	<p>extracts the value, sign-extending</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB22"> <!-- i31.get_u -->
+	<p>extracts the value, zero-extending</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB40"> 
+	<p>checks whether a reference has a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB40"> 
+	<p>checks whether a reference has a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB41"> 
+	<p>tries to convert to a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB42">
+	<p>branches if a reference has a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB43">
+	<p>branches if a reference does not have a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB48"> 
+	<p>checks whether a reference has a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB49"> 
+	<p>tries to convert to a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB4A">
+	<p>branches if a reference has a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB4B">
+	<p>branches if a reference does not have a given heap type</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB70">
+	<p>converts an external value into the internal representation</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+<div id="0xFB71">
+	<p>converts an internal value into the external representation</p>
+	<p><em>Garbage Collection Proposal</em></p>
+</div>
+
+<!-- FC extensions -->
 <div id="0xFC00">
 	<p>saturating form of i32.trunc_f32_s</p>
 	<p><em>Non-trapping float-to-int Conversion Proposal</em></p>
@@ -3476,6 +3585,14 @@
 	</p>
 	
 	<br>
+	
+	<h2>Acknowledgements</h2>
+	<p>WebAssembly Opcodes by Pengo Wray</p>
+	<p>Contributors: nokotan (かめのこにょこにょこ)</p>
+	<!-- <p>Javascript libs: popper, tippy, xregexp</p> -->
+	
+	<h2>Development</h2>
+
 	<p><a href="https://github.com/pengowray/wasm-ops">View on GitHub</a></p>
 </span>
 </body>
