@@ -8,9 +8,11 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://unpkg.com/popper.js@1"></script>
 	<script src="https://unpkg.com/tippy.js@5/dist/tippy-bundle.iife.min.js"></script>
-
 	<script src="https://unpkg.com/xregexp/xregexp-all.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"/>
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&family=Source+Code+Pro&display=swap" rel="stylesheet">
 
 	<link href="html/optable.css" rel="stylesheet"/>
 	<script src="html/optable.js"></script>
@@ -2292,11 +2294,11 @@
 	<p><em>Garbage Collection Proposal</em></p>
 </div>
 <div id="0xFB03">
-	<p>reads field 'i' from a structure</p>
+	<p>reads field <code>i</code> from a structure</p>
 	<p><em>Garbage Collection Proposal</em></p>
 </div>
 <div id="0xFB06">
-	<p>writes field 'i' of a structure</p>
+	<p>writes field <code>i</code> of a structure</p>
 	<p><em>Garbage Collection Proposal</em></p>
 </div>
 <div id="0xFB11">
@@ -3245,6 +3247,127 @@
 <div id="0xFDE2"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
 <div id="0xFDD4"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
 <div id="0xFDEE"><p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p></div>
+
+<div id="0xFD100">
+	<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,
+indices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result
+for any out of range indices is implementation-defined (i.e. if the index is
+<code>[16-255]</code>.</p>
+</div>
+<div id="0xFD101">
+	<p><code>relaxed i32x4.trunc_f32x4_s</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_s</code>)</p>
+	<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>
+</div>
+<div id="0xFD102">
+	<p><code>relaxed i32x4.trunc_f32x4_u</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_u</code>)</p>
+	<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>
+</div>
+<div id="0xFD103">
+	<p><code>relaxed i32x4.trunc_f64x2_s_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_s_zero</code>)</p>
+	<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>
+</div>
+<div id="0xFD104">
+	<p><code>relaxed i32x4.trunc_f64x2_u_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_u_zero</code>)</p>
+	<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>
+</div>
+<div id="0xFD105">
+	<p><span class="name">Relaxed fused multiply-add</span></p>
+	<p><code>relaxed f32x4.madd(a, b, c) = a * b + c</code></p>
+	<p>where:
+	<ul>
+	<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>
+	<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>
+	</ul>
+	</p>
+</div>
+<div id="0xFD106">
+	<p>Relaxed fused negative multiply-add</p>
+	<p><code>relaxed f32x4.nmadd(a, b, c) = -(a * b) + c</code></p>
+	<p>where:
+	<ul>
+	<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>
+	<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>
+	</ul>
+	</p>
+</div>
+<div id="0xFD107">
+	<p>Relaxed fused multiply-add</p>
+	<p><code>relaxed f64x2.madd(a, b, c) = a * b + c</code></p>
+	<p>where:
+	<ul>
+	<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>
+	<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>
+	</ul>
+	</p>
+</div>
+<div id="0xFD108">
+	<p>Relaxed fused negative multiply-add</p>
+	<p><code>relaxed f64x2.nmadd(a, b, c) = -(a * b) + c</code></p>
+	<p>where:
+	<ul>
+	<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>
+	<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>
+	</ul>
+	</p>
+</div>
+<div id="0xFD109">
+	<p><code>i8x16.laneselect(a: v128, b: v128, m: v128) -> v128</code></p>
+	<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>
+</div>
+<div id="0xFD10A">
+	<p><code>i16x8.laneselect(a: v128, b: v128, m: v128) -> v128</code></p>
+	<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>
+</div>
+<div id="0xFD10B">
+	<p><code>i32x4.laneselect(a: v128, b: v128, m: v128) -> v128</code></p>
+	<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>
+</div>
+<div id="0xFD10C">
+	<p><code>i64x2.laneselect(a: v128, b: v128, m: v128) -> v128</code></p>
+	<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>
+</div>
+<div id="0xFD10D">
+	<p>Relaxed min</p>
+	<p><code>f32x4.min(a: v128, b: v128) -> v128</code></p>
+	<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>
+</div>
+<div id="0xFD10E">
+	<p>Relaxed max</p>
+	<p><code>f32x4.max(a: v128, b: v128) -> v128</code></p>
+	<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>
+</div>
+<div id="0xFD10F">
+	<p>Relaxed min</p>
+	<p><code>f64x2.min(a: v128, b: v128) -> v128</code></p>
+	<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>
+</div>
+<div id="0xFD110">
+	<p>Relaxed max</p>
+	<p><code>f64x2.max(a: v128, b: v128) -> v128</code></p>
+	<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>
+</div>
+<div id="0xFD111">
+	<p>Relaxed Rounding Q-format Multiplication</p>
+	<p><code>i16x8.q15mulr_s(a: v128, b: v128) -> v128</code></p>
+	<p>Returns the multiplication of 2 fixed-point numbers in Q15 format. If both inputs are <code>INT16_MIN</code>, the result overflows, and the return value is implementation defined (either <code>INT16_MIN</code> or <code>INT16_MAX</code>).</p>
+</div>
+<div id="0xFD112">
+	<p>Relaxed integer dot product</p>
+	<p><code>i16x8.dot_i8x16_i7x16_s(a: v128, b: v128) -> v128</code></p>
+	<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>
+	<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>
+</div>
+<div id="0xFD113">
+	<p>Relaxed integer dot product</p>
+	<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -> v128</code></p>
+	<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>
+	<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>
+</div>
+<div id="0xFD114">
+	<p>Relaxed BFloat16 dot product</p>
+	<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -> v128</code></p>
+	<p>BFloat16 is a 16-bit floating-point format that represents the IEEE FP32 numbers truncated to the high 16 bits. This instruction computes a FP32 dot product of 2 BFloat16 with accumulation into another FP32.</p>
+</div>
 
 <!-- Ordered as at https://github.com/WebAssembly/threads/blob/main/proposals/threads/Overview.md#read-modify-write -->
 

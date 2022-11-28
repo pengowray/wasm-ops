@@ -36,7 +36,9 @@ function get_shorthand_group(op, hex) {
 }
 
 function toHex(d) {
-    return  ("0"+(Number(d).toString(16))).slice(-2).toUpperCase();
+	var hex = (Number(d).toString(16)).toUpperCase();
+	if (hex.length == 1) return "0" + hex;
+	return hex;
 }
 
 function isNull(v) {
@@ -68,7 +70,7 @@ function ApplyFormattingAll() {
 	ApplyFormatting(document.getElementById('opcodes_FC'), 'FC', 0);
 	ApplyFormatting(document.getElementById('opcodes_FD'), 'FD', 0);
 	ApplyFormatting(document.getElementById('opcodes_FE'), 'FE', 0);
-	ApplyFormatting(document.getElementById('opcodes_FD1'), 'FD1', 0);
+	ApplyFormatting(document.getElementById('opcodes_FD1'), 'FD', 0x100);
 	
 }
 
@@ -81,7 +83,7 @@ function ApplyFormatting(table, prefix, start) {
 	for (var n=0; n<tds.length;n++) {
 		var cell = tds[n];
 
-		var hex = "0x" + prefix + toHex(n + start); // e.g. '0x8F' or '0xFD23'
+		var hex = "0x" + prefix + toHex(start + n); // e.g. '0x8F' or '0xFD23'
 		var op_hex = 'op_' + hex
 		cell.classList.add(op_hex);
 

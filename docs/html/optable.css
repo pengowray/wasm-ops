@@ -138,3 +138,11 @@ p.bigsign {
 	font-size: 15.5pt;
 	text-align: center;
 }
+code, pre, .code {
+  font-family: "Source Code Pro", monospace;
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: #555555;
+  border-radius: 6px;
+}
