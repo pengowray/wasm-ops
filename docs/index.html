@@ -2543,8 +2543,8 @@
 </div>
 <div id="0xFD20"> <!-- f32x4.replace_lane -->
 	<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>
-	<p>Replaces the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>
-	<!-- todo: definition of variables: https://doc.rust-lang.org/stable/core/arch/wasm/fn.f32x4_replace_lane.html -->
+	<p>Rust: <code>fn f32x4_replace_lane<const N: usize>(a: v128, val: f32) -> v128</code></p>
+	<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>
 </div>
 <div id="0xFD13"> <!-- f32x4.splat -->
 	<p>Creates a vector with identical lanes.</p>
@@ -2671,9 +2671,10 @@
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>
 	<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>
 </div>
-<div id="0xFD15"><!-- i8x16.extract_lane [_s]-->
+<div id="0xFD15"><!-- i8x16.extract_lane [_s] [i8x16.extract_lane_s + ]-->
+	<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>
 	<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>
-	<p>Extracts the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>
+	<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>
 </div>
 <div id="0xFD2B"><!-- i8x16.ge [_s] -->
 	<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>
@@ -2812,6 +2813,7 @@
 	<p>Negates a 128-bit vectors interpreted as eight 16-bit signed integers</p>
 </div>
 <div id="0xFD82">
+	<p>Rust: <code>fn i16x8_q15mulr_sat(a: v128, b: v128) -> v128</code></p>
 	<p>Lane-wise saturating rounding multiplication in Q15 format.</p>
 </div>
 <div id="0xFD1A"><!-- i16x8.replace_lane + u16x8.replace_lane -->
@@ -3169,7 +3171,8 @@
 	<p>Returns true if any bit in a is set, or false otherwise.</p>
 </div>
 <div id="0xFD52"><!-- v128.bitselect -->
-	<p>Use the bitmask in c to select bits from v1 when 1 and v2 when 0.</p>
+	<p>Rust: <code>fn v128_bitselect(v1: v128, v2: v128, c: v128) -> v128</code></p>
+	<p>Use the bitmask in <code>c</code> to select bits from <code>v1</code> when 1 and <code>v2</code> when 0.</p>	
 </div>
 <div id="0xFD00"><!-- v128.load -->
 	<p>Loads a v128 vector from the given heap address.</p>
