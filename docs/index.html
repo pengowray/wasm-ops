@@ -13,14 +13,37 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&family=Source+Code+Pro&display=swap" rel="stylesheet">
-
-	<link href="html/optable.css" rel="stylesheet"/>
+	<link id="stylesheet" href="html/light.css" rel="stylesheet"/>
 	<script src="html/optable.js"></script>
+	
+  <script>
+  function toggleCSS() {
+    var css = document.getElementById('stylesheet');
+    if (css.getAttribute('href') == 'html/light.css') {
+      css.setAttribute('href', 'html/dark.css');
+      document.cookie = "css=html/dark.css";
+    } else {
+      css.setAttribute('href', 'html/light.css');
+      document.cookie = "css=html/light.css";
+    }
+  }
+  
+  function restoreCSS() {
+    var css = document.getElementById('stylesheet');
+    var cookie = document.cookie;
+    if (cookie.indexOf('css=') != -1) {
+      var cssValue = cookie.substring(cookie.indexOf('css=') + 4);
+      css.setAttribute('href', cssValue);
+    }
+  }
+  restoreCSS();
+  </script>
+
 </head>
 <body>
-
 <h1>WebAssembly Opcodes</h1>
 <p><b>by Pengo Wray</b></p>
+<p><button onclick="toggleCSS()">Toggle Dark Mode</button></p>
 <table id="opcodes">
 <thead>
 <tr>

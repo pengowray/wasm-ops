@@ -1,0 +1,149 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #1c1c1c;
+    color: #f2f2f2;
+}
+
+.crosshatch .proposal, .diagonal-stripe-1 { 
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPg0KICA8cmVjdCB3aWR0aD0nOCcgaGVpZ2h0PSc4JyBmaWxsPScjMDAwJy8+DQogIDxwYXRoIGQ9J00wIDBMOCA4Wk04IDBMMCA4Wicgc3Ryb2tlLXdpZHRoPScwLjUnIHN0cm9rZT0nIzc3NycvPg0KPC9zdmc+"); 
+    background-repeat: repeat; 
+    background-color: #1c1c1c;
+}
+
+.hex {
+    text-align: left;
+    color: khaki;
+}
+
+a:link {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+a:active {
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+table {
+    border-collapse:collapse; 
+    table-layout:fixed; 
+    width:336mm;
+    font-size: 9pt;
+}
+td, th {
+    word-wrap:break-word; 
+    vertical-align: top;
+    text-align: center; 
+}
+td {
+    border:solid 1px #ccc;
+    color: #f2f2f2;
+    padding: 4px;
+    background-clip: padding-box;
+}
+td.reserved {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPg0KICA8cmVjdCB3aWR0aD0nOCcgaGVpZ2h0PSc4JyBmaWxsPScjMDAwJy8+DQogIDxwYXRoIGQ9J00wIDBMOCA4Wk04IDBMMCA4Wicgc3Ryb2tlLXdpZHRoPScwLjUnIHN0cm9rZT0nIzc3NycvPg0KPC9zdmc+"); 
+    background-color: #222;
+    background-repeat: repeat; 
+    background-clip: padding-box;
+    padding: 4px;
+}
+.reserved span {
+    color:#ccc;
+    background-color: #222;
+}
+
+td:not(.reserved), th {
+
+}
+
+.op {
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+/* line break which doesn't get copied into clipboard */
+.op::before { content: "\A"; white-space: pre; }
+.post::before { content: "\A"; white-space: pre; }
+
+.op-imm-args {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    padding-left: .8em;
+}
+
+.op-type {
+    padding-left: .8em;
+}
+
+.op-type.large {
+    font-size:large;
+}
+
+.immediate-args {
+    color: lightgrey;
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+.mathsy {
+    font-family: Georgia, serif;
+}
+.mathsy-i {
+    font-family: Georgia, serif;
+    font-style: italic;
+}
+
+.supsub {
+    display: inline-block;
+}
+.supsub sup,
+.supsub sub {
+    position: relative;
+    display: block;
+    font-size: .5em;
+    line-height: 1.2;
+}
+.supsub sub {
+    top: .3em;
+}
+
+.highlight-selection {
+    color: white;
+    background-color:#646464;
+}
+.highlight-shorthand {
+    background-color:#646464;
+}
+.highlight-opcode:not(.highlight-shorthand){
+    background-color:#666;
+}
+.highlight-opcode {
+    background-color:#646464;
+}
+.highlight-pre {
+	background-color: rgba(220, 110, 16, 0.616);
+}
+p.bigsign {
+	font-size: 15.5pt;
+	text-align: center;
+}
+code, pre, .code {
+  font-family: "Source Code Pro", monospace;
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: #555555;
+  border-radius: 6px;
+}
