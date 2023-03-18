@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>WebAssembly Opcode Table</title>
-	<!-- <p>WebAssembly is an open, industry-wide effort to bring a safe, efficient assembly language to the web. WebAssembly technology is developed collaboratively by major browser vendors including Mozilla, Google, Microsoft, and Apple. WebAssembly modules can be downloaded and executed by the majority of browsers in use today.</p> -->
+	
 	<!-- https://atomiks.github.io/tippyjs/ -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://unpkg.com/popper.js@1"></script>
@@ -43,7 +43,9 @@
 <body>
 <h1>WebAssembly Opcodes</h1>
 <p><b>by Pengo Wray</b></p>
+<p>WebAssembly is an open, industry-wide effort to bring a safe, efficient assembly language to the web. WebAssembly technology is developed collaboratively by major browser vendors including Mozilla, Google, Microsoft, and Apple. WebAssembly modules can be downloaded and executed by the majority of browsers in use today.</p>
 <p><button onclick="toggleCSS()">Toggle Dark Mode</button></p>
+
 <table id="opcodes">
 <thead>
 <tr>
@@ -3277,8 +3279,7 @@
 <div id="0xFD100">
 	<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,
 indices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result
-for any out of range indices is implementation-defined (i.e. if the index is
-<code>[16-255]</code>.</p>
+for any out of range indices is implementation-defined (i.e. if the index is <code>[16-255]</code>.</p>
 </div>
 <div id="0xFD101">
 	<p><code>relaxed i32x4.trunc_f32x4_s</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_s</code>)</p>
@@ -3617,90 +3618,11 @@ for any out of range indices is implementation-defined (i.e. if the index is
 <div id="0xFE4E"><!-- i64.atomic.rmw32.cmpxchg_u --><p>Load as loaded:4 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes</p><p>Return loaded: zero-extended from i32 to i64</p></div>
 <div id="0xFE49"><!-- i64.atomic.rmw.cmpxchg --><p>Load as loaded: 8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p></div>
 
-<!-- todo: remaining threading instructions -->
 
-<div id="0x69_old_unused">
-	<p></p>
-	Stack:
-	<span class="mopen">[</span><a href="#syntax-valtype"><span class="mord"><span class="mord mathsf">i</span><span class="mord mathsf">3</span><span class="mord mathsf">2</span></span></a><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><a href="#syntax-functype"><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></a><span class="mopen">[</span><a href="#syntax-valtype"><span class="mord"><span class="mord mathsf">i</span><span class="mord mathsf">3</span><span class="mord mathsf">2</span></span></a><span class="mclose">]</span>
-	<!-- Numeric Instructions,  t.unop -->
-	<div class="section" id="op-ipopcnt">
-	<span id="id18②"></span>
-	<h5 class="no-toc heading settled" data-level="4.3.2.20" id="-hrefop-ipopcntmathrmipopcnt_n-i"><span class="secno">4.3.2.20. </span><span class="content"><span class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><a href="#op-ipopcnt"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">p</span><span class="mord mathrm">o</span><span class="mord mathrm">p</span><span class="mord mathrm">c</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathrm">i</span><span class="mclose">)</span></span></span></span></span></span></span></span><a class="self-link" href="#-hrefop-ipopcntmathrmipopcnt_n-i"></a></h5>
-	<ul class="simple">
-	<li>Return the count of non-zero bits in <span class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66786em;vertical-align:0em;"></span><span class="mord"><span class="mord mathrm">i</span></span></span></span></span></span></span>.
-	</li></ul>
-	<div class=" "><span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.209108em;vertical-align:-0.354554em;"></span><span class="mord"><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><a href="#op-ipopcnt"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">p</span><span class="mord mathrm">o</span><span class="mord mathrm">p</span><span class="mord mathrm">c</span><span class="mord mathrm">n</span><span class="mord mathrm">t</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mrel">=</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-3.005446em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mopen">(</span><span class="mrel"><span class="mord text"><span class="mord">if</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><a href="#aux-ibits"><span class="mord"><span class="mord mathrm">i</span><span class="mord mathrm">b</span><span class="mord mathrm">i</span><span class="mord mathrm">t</span><span class="mord mathrm">s</span></span></a><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03148em;">k</span></span></span></span></span></span></span></span><span class="mspace nobreak">&nbsp;</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">∗</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></span></div>
-	</div>
-</div>
+
+
 </div>
 &nbsp;
-<!--
-<p>
-<a href="https://github.com/WebAssembly/exception-handling/blob/master/proposals/Exceptions.md">Exception handling proposal</a>
-<pre>
-0x06 == try 	
-0x07 == catch 	
-0x08 == throw
-0x09 == rethrow
-0x0a == br_on_exn
--0x18 == exnref
-</pre>
-</p>
-<p>
-<a href="https://github.com/WebAssembly/tail-call">Tail Call proposal</a>
-<pre>
-0x12 == return_call 
-0x13 == return_call_indirect
-</pre>
-</p>
--->
-<!--
-<p>
-<a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping Float-to-int Conversions proposal</a>
-<pre>
-0xfc 0x00 == i32.trunc_sat_f32_s
-0xfc 0x01 == i32.trunc_sat_f32_u
-0xfc 0x02 == i32.trunc_sat_f64_s
-0xfc 0x03 == i32.trunc_sat_f64_u
-0xfc 0x04 == i64.trunc_sat_f32_s
-0xfc 0x05 == i64.trunc_sat_f32_u
-0xfc 0x06 == i64.trunc_sat_f64_s
-0xfc 0x07 == i64.trunc_sat_f64_u
-</pre>
-</p>
-<p>
-<a href="https://github.com/WebAssembly/reference-types">Reference Types proposal</a> [only 0xfc.. opcodes listed below] (22-Aug-2019)
-<pre>
-0xfc 0x08 == memory.init 
-0xfc 0x09 == data.drop 
-0xfc 0x0a == memory.copy 
-0xfc 0x0b == memory.fill 
-0xfc 0x0c == table.init 
-0xfc 0x0d == elem.drop 
-0xfc 0x0e == table.copy 
-</pre>
-</p>
-<p><a href="https://github.com/webassembly/bulk-memory-operations">Bulk Memory proposal</a>
-<pre>
-0xfc 0x0f == table.grow 
-0xfc 0x10 == table.size 
-0xfc 0x11 == table.fill 		
-</pre>
-</p>
--->
-<!--
-<p>
-<a href="https://github.com/WebAssembly/sign-extension-ops">Sign-extension operators proposal</a>
-<pre>
-0xC0 == i32.extend8_s
-0xC1 == i32.extend16_s
-0xC2 == i64.extend8_s
-0xC3 == i64.extend16_s
-0xC4 == i64.extend32_s
-</pre>
-</p>
--->
 <!--<p>Gaps in the byte code ranges for encoding instructions are reserved for future extensions.</p>-->
 <span>
 	<p>
