@@ -12,7 +12,20 @@ body {
 
 .hex {
     text-align: left;
+    font-weight: 800;
     color: khaki;
+}
+
+.leb {
+	text-align: left;
+    font-weight: 800;
+	color: rgb(233, 165, 109);
+}
+
+.hexlight {
+    text-align: left;
+    font-size: smaller;
+    color: rgb(183, 183, 183);
 }
 
 a:link {

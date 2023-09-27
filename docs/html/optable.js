@@ -40,6 +40,20 @@ function toHex(d) {
 	if (hex.length == 1) return "0" + hex;
 	return hex;
 }
+function toLebHex(d) {
+	if (d >= 384) {
+		return "toobig [todo: fix large LEB encoding]";
+	} else if (d >= 256) {
+		var hex = (Number(d-128).toString(16)).toUpperCase();
+		if (hex.length == 1) return "0" + hex + "02";
+		return hex + "02";
+	} else if (d >= 128) {
+		var hex = (Number(d).toString(16)).toUpperCase();
+		return hex + "01";
+	} else {
+		return toHex(d);
+	}
+}
 
 function isNull(v) {
 	return (v === undefined) || v === null; 
@@ -86,6 +100,14 @@ function ApplyFormatting(table, prefix, start) {
 		var hex = "0x" + prefix + toHex(start + n); // e.g. '0x8F' or '0xFD23'
 		var op_hex = 'op_' + hex
 		cell.classList.add(op_hex);
+
+		var hexDisplay = hex;
+		if (!prefix) {
+			hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + toHex(start + n) + "</span>";
+		} else { // if (hex.length > 4) {
+			hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + "</span><span class='hexlight'>, LEB(</span><span class='leb'>" + (start + n) + "</span><span class='hexlight'>) = 0x" + toLebHex(start + n) + "</span>";
+			//hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + ", " + toLebHex(start + n) + "</span><span class='hexlight'>, LEB128:</span><span class='leb'>" + (start + n) + "</span>";
+		}
 
 		// take opcode from "opcode" attribute if available, but usually it's from the cell text
 		var opcode = cell.getAttribute("opcode");
@@ -198,7 +220,7 @@ function ApplyFormatting(table, prefix, start) {
 			}
 		}
 		
-		var tooltiptext = "<div><div class='hex'>" + hex + "</div><h3>" + opcodeText + immediateArg + "</h3>" + helpText + "</div>";
+		var tooltiptext = "<div>" + hexDisplay + "<h3>" + opcodeText + immediateArg + "</h3>" + helpText + "</div>";
 		tippy(cell, {
 			content: tooltiptext, 
 			delay: [100, 0], 
