@@ -42,6 +42,7 @@ function toHex(d) {
 }
 function toLebHex(d) {
 	if (d >= 384) {
+		//todo: generalize
 		return "toobig [todo: fix large LEB encoding]";
 	} else if (d >= 256) {
 		var hex = (Number(d-128).toString(16)).toUpperCase();
@@ -105,8 +106,9 @@ function ApplyFormatting(table, prefix, start) {
 		if (!prefix) {
 			hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + toHex(start + n) + "</span>";
 		} else { // if (hex.length > 4) {
-			hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + "</span><span class='hexlight'>, LEB(</span><span class='leb'>" + (start + n) + "</span><span class='hexlight'>) = 0x" + toLebHex(start + n) + "</span>";
 			//hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + ", " + toLebHex(start + n) + "</span><span class='hexlight'>, LEB128:</span><span class='leb'>" + (start + n) + "</span>";
+			//hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + "</span><span class='hexlight'>, LEB(</span><span class='leb'>" + (start + n) + "</span><span class='hexlight'>) = (0x" + toLebHex(start + n) + ")</span>";
+			hexDisplay = "<span class='hexlight'>0x</span><span class='hex'>" + prefix + "</span><span class='hexlight'>, LEB(0x</span><span class='leb'>" + toHex(start + n) + "</span><span class='hexlight'>) = 0x" + toLebHex(start + n) + "</span>";
 		}
 
 		// take opcode from "opcode" attribute if available, but usually it's from the cell text
