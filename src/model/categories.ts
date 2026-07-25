@@ -223,9 +223,35 @@ export function operationParts(op: Opcode): { op: string; rest: string } {
   return first ? { op: first, rest: others.join('_') } : { op: parts.mainop, rest: '' };
 }
 
-/** Just the operation word — the heading an instruction files under by name. */
+/**
+ * Words that name a type rather than an action, and so cannot be an operation
+ * however the decomposition reads them.
+ */
+const TYPE_WORDS = new Set([
+  'i8', 'i16', 'i31', 'i32', 'i64', 'f16', 'f32', 'f64', 'v128',
+  'i8x16', 'i16x8', 'i32x4', 'i64x2', 'f16x8', 'f32x4', 'f64x2',
+  'funcref', 'externref', 'anyref', 'eqref', 'structref', 'arrayref', 'nullref',
+]);
+
+/**
+ * The heading an instruction files under when grouping by name.
+ *
+ * Usually the operation word, which is the whole point: every `add` together,
+ * every `load` together. But `ref.i31` has no verb in it at all — what it does
+ * is make an `i31`, so the decomposition offers the type as the operation, and
+ * a heading called `i31` sitting in an alphabetical list between `gt` and
+ * `le` names a thing where every heading around it names an action.
+ *
+ * Where the operation word is a type, the namespace is the more useful shelf:
+ * `ref.i31` and `ref.i31_shared` file under `ref`.
+ */
 export function operationKey(op: Opcode): string {
-  return operationParts(op).op;
+  const { op: word } = operationParts(op);
+  if (TYPE_WORDS.has(word)) {
+    const namespace = (op.parts?.pre ?? '').split('.')[0];
+    if (namespace) return namespace;
+  }
+  return word;
 }
 
 const COMPARE = new Set(['eq', 'ne', 'lt', 'gt', 'le', 'ge', 'eqz', 'any_true', 'all_true']);
