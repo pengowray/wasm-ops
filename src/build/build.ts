@@ -8,7 +8,7 @@
  *   npm run build
  */
 
-import { mkdirSync, readFileSync, writeFileSync, rmSync, copyFileSync, existsSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync, rmSync, copyFileSync, cpSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { build as esbuild } from 'esbuild';
 import { loadData, loadMeta } from '../model/load.ts';
@@ -17,6 +17,7 @@ import { renderPage } from '../render/page.ts';
 const ROOT = new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 const DIST = join(ROOT, 'dist');
 const ASSETS = join(DIST, 'assets');
+const OLD = join(DIST, 'old');
 
 async function main(): Promise<void> {
   rmSync(DIST, { recursive: true, force: true });
@@ -48,6 +49,14 @@ async function main(): Promise<void> {
   // The custom domain has to be republished with every deploy or Pages drops it.
   const cname = join(ROOT, 'docs', 'CNAME');
   if (existsSync(cname)) copyFileSync(cname, join(DIST, 'CNAME'));
+
+  // The hand-written page this site replaced, kept reachable at /old/. It is
+  // self-contained and uses relative links, so a straight copy is enough.
+  // CNAME is excluded: only the one at the root of dist/ means anything.
+  cpSync(join(ROOT, 'docs'), OLD, {
+    recursive: true,
+    filter: (source) => source !== cname,
+  });
 
   const size = (path: string) => `${(readFileSync(path).byteLength / 1024).toFixed(0)} kB`;
   console.log(`index.html      ${size(join(DIST, 'index.html'))}`);

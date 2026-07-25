@@ -21,7 +21,17 @@ const TYPES: Record<string, string> = {
 
 createServer(async (request, response) => {
   const url = new URL(request.url ?? '/', 'http://localhost');
-  const path = url.pathname === '/' ? '/index.html' : url.pathname;
+
+  // Pages redirects a directory without its trailing slash, and the old page
+  // under /old/ has relative links that resolve against the wrong directory
+  // without it. Do the same here rather than serve a subtly broken page.
+  if (extname(url.pathname) === '' && !url.pathname.endsWith('/')) {
+    response.writeHead(301, { location: `${url.pathname}/${url.search}` });
+    response.end();
+    return;
+  }
+
+  const path = url.pathname.endsWith('/') ? `${url.pathname}index.html` : url.pathname;
   // Keep the served tree inside dist/.
   const file = join(ROOT, normalize(path).replace(/^(\.\.[/\\])+/, ''));
 
