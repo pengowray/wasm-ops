@@ -13,7 +13,7 @@
  */
 
 import type { Opcode } from '../model/types.ts';
-import { byteSequence, renderEncoding, renderHeading } from '../render/items.ts';
+import { renderEncoding, renderHeading } from '../render/items.ts';
 
 export class Panel {
   readonly #panel: HTMLElement;
@@ -48,30 +48,29 @@ export class Panel {
     const op = this.#opcodes.get(key);
     if (!op) return;
 
-    const parts = document.createDocumentFragment();
-
-    const bytes = document.createElement('p');
-    bytes.className = 'detail-bytes';
-    bytes.innerHTML = `<code>${byteSequence(op)}</code>`;
-    parts.append(bytes);
+    const encoding = document.createElement('div');
+    encoding.className = 'detail-encoding';
+    encoding.innerHTML = renderEncoding(op);
 
     // Instructions with something written about them have an article to clone.
     // Unassigned slots do not, and get a heading so that clicking one still
     // answers the question it implies: what is this byte, and is it free?
     const described = this.#details.querySelector(`#detail-${CSS.escape(key)}`);
+    let content: Element;
     if (described) {
-      parts.append(described.cloneNode(true));
+      content = described.cloneNode(true) as Element;
     } else {
-      const heading = document.createElement('div');
-      heading.innerHTML = renderHeading(op);
-      parts.append(heading);
+      content = document.createElement('div');
+      content.innerHTML = renderHeading(op);
     }
 
-    const encoding = document.createElement('div');
-    encoding.innerHTML = renderEncoding(op);
-    parts.append(encoding);
+    // The bytes go directly under the name: it is the first thing wanted of an
+    // opcode chart, and putting it here means it is not also needed above.
+    const heading = content.querySelector('.detail-name');
+    if (heading) heading.after(encoding);
+    else content.prepend(encoding);
 
-    this.#body.replaceChildren(parts);
+    this.#body.replaceChildren(content);
     this.#panel.hidden = false;
     this.#currentKey = key;
     this.#panel.scrollTop = 0;

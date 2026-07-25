@@ -20,62 +20,67 @@ export function escapeHtml(value: string): string {
     .replace(/"/g, '&quot;');
 }
 
-/** `0xFD 0x80 0x02` — the bytes as they appear in the module. */
-export function byteSequence(op: Opcode): string {
-  return op.bytes.map((b) => '0x' + b.toString(16).toUpperCase().padStart(2, '0')).join(' ');
+/**
+ * A byte as a bare uppercase pair, the usual convention for a byte dump.
+ * Reserving the `0x` form for single values lets the notation itself say which
+ * is which: `0xE8` is a number, `E8 01` is a run of bytes.
+ */
+function hexByte(byte: number): string {
+  return byte.toString(16).toUpperCase().padStart(2, '0');
 }
 
 /**
- * How an instruction is encoded, spelled out.
+ * How an instruction is encoded.
  *
- * The old page compressed this into `0xFB, LEB(0x14) = 0x14`, which asks the
- * reader to already know that the second number is a sub-opcode, that LEB means
- * LEB128, and why a function of a value would equal itself. Broken into named
- * rows, each part says what it is, and the LEB128 step is only shown when it
- * actually changes the bytes.
+ * Shows the actual bytes once, split into their parts with a caption under
+ * each, so the correspondence is visible rather than described. Reading it
+ * should not require reading it: the shape says which byte is the prefix and
+ * which bytes carry the sub-opcode.
+ *
+ * Everything is hex except one place. A sub-opcode is a u32, not a byte, and
+ * writing it in two bases side by side invites transposing them — `232` and
+ * `0xE8` do not look like the same number, so nothing catches it if they drift
+ * apart. Decimal therefore appears only in the spec-notation line, where the
+ * `:u32` tag says what it is. That line is how the binary format section of the
+ * specification writes the instruction, so it is also the form to search for.
  */
 export function renderEncoding(op: Opcode): string {
-  const rows: string[] = [];
-  const code = (text: string) => `<code>${text}</code>`;
+  const groups: string[] = [];
 
   if (!op.prefix) {
-    // A single-byte instruction is its own byte sequence; there is no second
-    // row to add that would not just repeat the first.
-    rows.push(row('Opcode byte', code('0x' + toHex(op.code)), `${op.code} in decimal`));
-    return `<h4>Encoding</h4><table class="encoding">${rows.join('')}</table>`;
-  }
-  {
-    rows.push(row('Prefix byte', code('0x' + op.prefix), 'says which extension follows'));
-
-    const sub = '0x' + toHex(op.code);
-    rows.push(row('Sub-opcode', code(sub), `${op.code} in decimal`));
-
-    const encoded = op.bytes.slice(1);
-    const encodedHex = encoded
-      .map((b) => '0x' + b.toString(16).toUpperCase().padStart(2, '0'))
-      .join(' ');
-    rows.push(
-      row(
-        `${code(`to_LEB(${sub})`)}`,
-        code(encodedHex),
-        encoded.length > 1
-          ? `the sub-opcode is above 127, so LEB128 spreads it over ${encoded.length} bytes`
-          : 'unchanged: values below 128 encode as a single byte',
-      ),
-    );
+    groups.push(group(hexByte(op.code), 'opcode byte'));
+    return wrap(groups.join(''), '');
   }
 
-  rows.push(row('Byte sequence', code(byteSequence(op))));
+  groups.push(group(op.prefix, 'prefix byte', 'prefix'));
 
-  return `<h4>Encoding</h4><table class="encoding">${rows.join('')}</table>`;
+  const encoded = op.bytes.slice(1);
+  groups.push(
+    group(
+      encoded.map(hexByte).join(' '),
+      `sub-opcode <code>0x${toHex(op.code)}</code>` +
+        `<span class="enc-sub">${
+          encoded.length > 1 ? `LEB128, ${encoded.length} bytes` : 'LEB128'
+        }</span>`,
+      'sub',
+    ),
+  );
+
+  const spec = `<code>0x${op.prefix} ${op.code}:u32</code>`;
+  return wrap(groups.join(''), `<p class="enc-spec">Specification notation: ${spec}</p>`);
 }
 
-function row(label: string, value: string, note?: string): string {
+function group(bytes: string, caption: string, part = 'opcode'): string {
   return (
-    `<tr><th scope="row">${label}</th><td>${value}` +
-    (note ? `<span class="encoding-note">${note}</span>` : '') +
-    `</td></tr>`
+    `<span class="enc-group" data-part="${part}">` +
+    `<span class="enc-bytes">${bytes}</span>` +
+    `<span class="enc-caption">${caption}</span>` +
+    `</span>`
   );
+}
+
+function wrap(groups: string, footer: string): string {
+  return `<h4>Encoding</h4><div class="encoding"><div class="enc-row">${groups}</div>${footer}</div>`;
 }
 
 /**

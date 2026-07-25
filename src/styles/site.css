@@ -30,6 +30,10 @@
 	--hl-op-fg: #14343d;
 	--hl-pre: rgba(219, 223, 16, 0.62);
 
+	/* Distinguish the parts of an encoding at a glance. */
+	--enc-prefix: #9a5b00;
+	--enc-sub: #1a6f7d;
+
 	--radius: 6px;
 	--move: 320ms;
 	--ease: cubic-bezier(0.2, 0.7, 0.3, 1);
@@ -58,6 +62,9 @@
 		--hl-op: #2f5f6d;
 		--hl-op-fg: #eaf7fb;
 		--hl-pre: rgba(220, 110, 16, 0.62);
+
+		--enc-prefix: #e0a45a;
+		--enc-sub: #5fc9dc;
 	}
 }
 
@@ -81,6 +88,9 @@
 	--hl-op: #2f5f6d;
 	--hl-op-fg: #eaf7fb;
 	--hl-pre: rgba(220, 110, 16, 0.62);
+
+	--enc-prefix: #e0a45a;
+	--enc-sub: #5fc9dc;
 }
 
 * { box-sizing: border-box; }
@@ -596,32 +606,51 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .js .details { display: none; }
 
 .detail { padding: 1rem 0; border-top: 1px solid var(--rule-soft); scroll-margin-top: 5rem; }
-.detail-bytes { font-family: 'Source Code Pro', monospace; font-size: .8rem; margin: 0; }
 .detail-name { margin: .2rem 0 .5rem; }
 
-/* How the instruction is encoded, one named part per row. */
-.encoding {
-	width: 100%;
-	border-collapse: collapse;
-	font-size: .85rem;
+/*
+ * The bytes, shown once and split into their parts. The captions sit under the
+ * bytes they describe and each group is tinted, so which byte is which reads
+ * off the layout instead of having to be spelled out in prose.
+ */
+.enc-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .3rem .9rem;
+	align-items: flex-start;
+	margin: .2rem 0 .1rem;
 }
-.encoding th {
-	width: 10.5rem;
-	padding: .3rem .6rem .3rem 0;
-	text-align: left;
-	font-weight: 400;
-	color: var(--fg-dim);
-	vertical-align: top;
-}
-.encoding th code { background: none; padding: 0; color: var(--fg-dim); }
-.encoding td { padding: .3rem 0; vertical-align: top; }
-.encoding tr + tr th, .encoding tr + tr td { border-top: 1px solid var(--rule-soft); }
-.encoding-note {
+
+.enc-group { display: block; }
+
+.enc-bytes {
 	display: block;
-	margin-top: .1rem;
+	padding: .1rem .35rem;
+	font-family: 'Source Code Pro', monospace;
+	font-size: 1.5rem;
+	letter-spacing: .04em;
+	line-height: 1.25;
+	border-bottom: 2px solid currentColor;
+}
+.enc-group[data-part='prefix'] .enc-bytes { color: var(--enc-prefix); }
+.enc-group[data-part='sub'] .enc-bytes { color: var(--enc-sub); }
+.enc-group[data-part='opcode'] .enc-bytes { color: var(--fg); }
+
+.enc-caption {
+	display: block;
+	padding: .2rem .35rem 0;
+	font-size: .75rem;
+	color: var(--fg-dim);
+}
+.enc-caption code { background: none; padding: 0; font-size: 1em; color: var(--fg); }
+.enc-caption .enc-sub { display: block; color: var(--fg-faint); }
+
+.enc-spec {
+	margin: .7rem 0 0;
 	font-size: .78rem;
 	color: var(--fg-faint);
 }
+.enc-spec code { color: var(--fg-dim); }
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
 .op-imm-args { font-family: Georgia, serif; font-size: .95rem; }
