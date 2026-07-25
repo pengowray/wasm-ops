@@ -404,6 +404,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 /* Which instructions are on screen right now — the "you are here". */
 .map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
 
+/* Hidden by the chart's filters: present on the map, but plainly not in play. */
+.map-cell[data-filtered] { background: var(--rule-soft); opacity: .35; cursor: default; }
+
 /*
  * A map square is five pixels across, so the gentle tints the chart uses
  * disappear at that size. These are the loud versions of the same three
@@ -614,7 +617,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .chart[data-layout='cards'] .cell { min-height: 4rem; padding: .45rem .35rem; }
 .chart[data-layout='cards'] .cell-name { font-size: .95rem; line-height: 1.25; }
-.chart[data-layout='cards'] .op { font-size: 1em; }
+.chart[data-layout='cards'] .op,
+.chart[data-layout='cards'] .op-x { font-size: 1em; }
 .chart[data-layout='cards'] .cell-summary {
 	display: block;
 	margin-top: .2rem;
@@ -816,7 +820,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 /* The generated line breaks belong to the byte grid, where cells are narrow. */
 .chart[data-layout='table'] .op::before,
 .chart[data-layout='table'] .post::before { content: none; }
-.chart[data-layout='table'] .op { font-size: 1em; }
+.chart[data-layout='table'] .op,
+.chart[data-layout='table'] .op-x { font-size: 1em; }
 
 .chart[data-layout='table'] .cell-imm {
 	display: block;
@@ -845,9 +850,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	.chart[data-layout='table'] .cell-cat { display: none; }
 }
 
-.pre { color: inherit; }
-.op { font-size: 1.05em; font-weight: 700; }
-.post { color: inherit; }
+.pre, .pre-x { color: inherit; }
+.op, .op-x { font-size: 1.05em; font-weight: 700; }
+.post, .post-x { color: inherit; }
 
 /* A line break that is not picked up by the clipboard, so copying a cell still
    yields `i64.load16_u` on a single line. */
@@ -859,16 +864,51 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 /* ---------------------------------------------------------------- highlights */
 
-/* Hovering a cell lights up every cell sharing its operation, and the type
-   prefix within them. Driven by data attributes set at build time. */
-.cell.hl-op { --cell-bg: var(--hl-op); color: var(--hl-op-fg); }
-.cell.hl-self { --cell-bg: var(--hl-self); color: var(--hl-self-fg); }
-.cell.hl-pre .pre { background-color: var(--hl-pre); }
-.cell.pinned { outline: 2px solid var(--accent); outline-offset: -2px; }
+/*
+ * Hovering tints the matching *words*, not the cells. Every part of a name is
+ * its own span, so hovering the `i64` of `i64.trunc_sat_f64_s` lights every
+ * `i64` and hovering `trunc` lights every `trunc`. Understated on purpose: it
+ * answers a question you asked by moving the mouse, and a wash of colour across
+ * the chart is too loud a reply.
+ */
+.part-lit {
+	background-color: var(--hl-pre);
+	border-radius: 2px;
+	box-shadow: 0 0 0 1px var(--hl-pre);
+}
 
-/* A lit cell keeps its status border but drops the muting, since the point of
-   lighting it is to be seen. */
-.cell.hl-op, .cell.hl-self { font-style: normal; }
+/* The map has no words, only squares, so it answers at cell level — and has to
+   be bold about it at five pixels across. */
+.map-cell.map-part-lit {
+	background: var(--map-hl-op);
+	box-shadow: 0 0 0 1px var(--map-hl-op);
+}
+
+/* A pinned property is a deliberate question and gets a deliberate answer. */
+.cell.hl-tag {
+	--cell-bg: var(--hl-op);
+	color: var(--hl-op-fg);
+	background-image: none;
+	box-shadow: inset 0 0 0 1.5px var(--hl-ring);
+}
+.map-cell.hl-tag {
+	background: var(--map-hl-op);
+	box-shadow: 0 0 0 1px var(--map-hl-op);
+}
+.chart[data-colour='proposal'] .cell[data-proposal].hl-tag {
+	--cell-bg: var(--hl-op);
+	color: var(--hl-op-fg);
+}
+
+/* Selection is an outline: it marks one cell rather than relating many. */
+.cell.pinned {
+	outline: 2px solid var(--accent);
+	outline-offset: -2px;
+}
+.map-cell.pinned {
+	outline: 1px solid var(--fg);
+	outline-offset: 1px;
+}
 
 /* ------------------------------------------------------------------ movement */
 

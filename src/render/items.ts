@@ -8,7 +8,7 @@
 
 import type { Opcode } from '../model/types.ts';
 import { toHex } from '../model/types.ts';
-import { addWordBreaks } from '../model/names.ts';
+import { addWordBreaks, tokenise } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
 import { proposal, standing } from '../model/proposals.ts';
 import { summarize } from '../model/summary.ts';
@@ -139,38 +139,25 @@ export function renderName(op: Opcode): string {
   if (op.displayName) return `<span class="op">${op.displayName}</span>`;
   if (!op.name) return '';
 
-  const parts = op.parts;
-  if (!parts || (!parts.pre && !parts.mainop)) {
-    return `<span class="op">${addWordBreaks(escapeHtml(op.name))}</span>`;
-  }
+  const tokens = tokenise(op.parts, op.name);
+  return tokens
+    .map((t, i) => {
+      const cls = t.first ? t.role : `${t.role}-x`;
+      // Between spans rather than inside them: the separators are where the
+      // name wants to wrap, and each span is now one whole part.
+      const wbr = i > 0 ? '<wbr>' : '';
+      return (
+        `${wbr}<span class="${cls}" data-p="${escapeHtml(t.token)}">` +
+        `${addWordBreaks(escapeHtml(t.text))}</span>`
+      );
+    })
+    .join('');
+}
 
-  let html = '';
-  if (parts.pre) {
-    // The dot goes in before the breaks are added, so the name can wrap after
-    // it rather than only inside it.
-    html += `<span class="pre">${addWordBreaks(escapeHtml(parts.pre + '.'))}</span>`;
-  }
-  if (parts.relaxed) html += `<span class="relaxed"><wbr>relaxed.</span>`;
-  // Words that qualify the operation rather than describe its operands. They
-  // belong with the bolded verb: the instruction is an "extadd_pairwise" of
-  // i8x16 lanes, not an "extadd" of pairwise-i8x16. Anything after them —
-  // the source shape and the signedness — is the operand description.
-  const MODIFIERS = new Set(['pairwise', 'sat', 'low', 'high', 'zero', 'lane']);
-  const postWords = (parts.post ?? '').split('_').filter(Boolean);
-  const qualifiers: string[] = [];
-  while (postWords.length && MODIFIERS.has(postWords[0]!)) {
-    qualifiers.push(postWords.shift()!);
-  }
-
-  if (parts.mainop || parts.opbits) {
-    const text = [(parts.mainop ?? '') + (parts.opbits ?? ''), ...qualifiers].join('_');
-    html += `<span class="op">${addWordBreaks(escapeHtml(text))}</span>`;
-  }
-  const tail = [postWords.join('_'), parts.sign, parts.rest].filter(Boolean).join('_');
-  if (tail) {
-    html += `<span class="post">${addWordBreaks(escapeHtml('_' + tail))}</span>`;
-  }
-  return html;
+/** The distinct tokens of a name, for matching a hovered part across cells. */
+export function partTokens(op: Opcode): string {
+  if (!op.name) return '';
+  return [...new Set(tokenise(op.parts, op.name).map((t) => t.token))].join(' ');
 }
 
 /** Attributes that let the highlight logic select related cells with plain CSS. */
@@ -186,6 +173,7 @@ function cellData(op: Opcode): string {
     'data-post': op.parts?.post,
     'data-sign': op.parts?.sign,
     'data-tags': op.name ? tagTokens(op) : undefined,
+    'data-parts': op.name ? partTokens(op) : undefined,
     'data-proposal': op.proposal,
   };
   return Object.entries(attrs)

@@ -16,7 +16,7 @@
  */
 
 import type { OpcodeData } from '../model/types.ts';
-import { escapeHtml, specText } from '../render/items.ts';
+import { escapeHtml, partTokens, specText } from '../render/items.ts';
 import { tagTokens } from '../model/tags.ts';
 
 export class NavMap {
@@ -45,6 +45,7 @@ export class NavMap {
             (op.parts?.pre ? ` data-pre="${escapeHtml(op.parts.pre)}"` : '') +
             (op.parts?.mainop ? ` data-op="${escapeHtml(op.parts.mainop)}"` : '') +
             (op.name ? ` data-tags="${escapeHtml(tagTokens(op))}"` : '') +
+            (op.name ? ` data-parts="${escapeHtml(partTokens(op))}"` : '') +
             (op.proposal ? ` data-proposal="${escapeHtml(op.proposal)}"` : '');
           const label = `${specText(op)} ${op.name ?? 'unassigned'}`;
           return `<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
@@ -111,6 +112,28 @@ export class NavMap {
     this.#observer.disconnect();
     for (const cell of this.#chart.querySelectorAll('.cell')) {
       this.#observer.observe(cell);
+    }
+    this.syncFiltered();
+  }
+
+  /**
+   * Mirrors the chart's filtering onto the map.
+   *
+   * The map draws every byte whatever the filters say — that is what makes it a
+   * map — but an instruction the reader has hidden should not light up in it
+   * either, and should not look present. Without this the map answered a
+   * hover with a few more matches than the chart showed.
+   */
+  syncFiltered(): void {
+    const hidden = new Set<string>();
+    for (const cell of this.#chart.querySelectorAll<HTMLElement>('.cell[data-filtered]')) {
+      const key = cell.dataset['key'];
+      if (key) hidden.add(key);
+    }
+    for (const square of this.#root.querySelectorAll<HTMLElement>('.map-cell')) {
+      const key = square.dataset['key'];
+      if (key && hidden.has(key)) square.dataset['filtered'] = '1';
+      else delete square.dataset['filtered'];
     }
   }
 }

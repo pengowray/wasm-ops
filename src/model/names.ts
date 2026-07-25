@@ -79,3 +79,61 @@ export function addWordBreaks(escaped: string): string {
   for (const [from, to] of IN_WORD) out = out.split(from).join(to);
   return out;
 }
+
+/**
+ * One piece of a name, as it is drawn and as it is matched.
+ *
+ * A name is a sentence about an instruction — a type, an operation, a width, a
+ * source type, a signedness — and each of those is worth asking "what else has
+ * this?" about. So each becomes its own span, and hovering one relates by that
+ * piece alone rather than by the whole cell.
+ */
+export interface NameToken {
+  /** Text as drawn, including the separator that introduces it. */
+  text: string;
+  /** What it matches on. Bare, so `f64` as a type and `f64` as a source type
+   *  are the same thing — which is what a reader hovering it means. */
+  token: string;
+  /** Structural role, which decides weight and where a line may break. */
+  role: 'pre' | 'op' | 'post';
+  /** First of its role, so it carries the forced line break in the grid. */
+  first: boolean;
+}
+
+/** Words that qualify an operation rather than describing its operands. */
+export const OP_QUALIFIERS = new Set(['pairwise', 'sat', 'low', 'high', 'zero', 'lane']);
+
+export function tokenise(parts: NameParts | undefined, name: string): NameToken[] {
+  const out: NameToken[] = [];
+  const push = (text: string, token: string, role: NameToken['role']) => {
+    out.push({ text, token, role, first: !out.some((t) => t.role === role) });
+  };
+
+  if (!parts?.mainop && !parts?.pre) {
+    push(name, name, 'op');
+    return out;
+  }
+
+  // `i32.atomic.rmw16.` is three separate facts, so it is three spans.
+  for (const segment of (parts.pre ?? '').split('.').filter(Boolean)) {
+    push(`${segment}.`, segment, 'pre');
+  }
+  if (parts.relaxed) push('relaxed.', 'relaxed', 'pre');
+
+  if (parts.mainop) push(parts.mainop, parts.mainop, 'op');
+  // The width in `load16` is its own fact: every 16-bit access shares it.
+  if (parts.opbits) push(parts.opbits, parts.opbits, 'op');
+
+  const postWords = (parts.post ?? '').split('_').filter(Boolean);
+  while (postWords.length && OP_QUALIFIERS.has(postWords[0]!)) {
+    const word = postWords.shift()!;
+    push(`_${word}`, word, 'op');
+  }
+  for (const word of postWords) push(`_${word}`, word, 'post');
+  if (parts.sign) push(`_${parts.sign}`, parts.sign, 'post');
+  for (const word of (parts.rest ?? '').split('_').filter(Boolean)) {
+    push(`_${word}`, word, 'post');
+  }
+
+  return out;
+}
