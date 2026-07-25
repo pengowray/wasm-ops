@@ -65,7 +65,12 @@ export type ViewItem =
       intro?: string;
       count: number;
     }
-  | { kind: 'corner'; key: string }
+  /**
+   * The top-left cell of a byte grid. It carries the section's prefix, so the
+   * grid reads as an equation: corner `0xFD` + row `E_` + column `_8` is the
+   * sub-opcode 0xE8. Without it the axes are unlabelled hex nibbles.
+   */
+  | { kind: 'corner'; key: string; label: string }
   | { kind: 'colhead'; key: string; label: string }
   | { kind: 'rowhead'; key: string; label: string }
   /**
@@ -141,7 +146,11 @@ function sortOpcodes(ops: Opcode[], order: OrderBy): Opcode[] {
 /** Lays one section out as a 16-wide byte grid, with row and column headers. */
 function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): ViewItem[] {
   const items: ViewItem[] = [];
-  items.push({ kind: 'corner', key: `corner:${section.id}` });
+  items.push({
+    kind: 'corner',
+    key: `corner:${section.id}`,
+    label: section.prefix ? `0x${section.prefix}` : '0x',
+  });
   for (let i = 0; i < 16; i++) {
     items.push({
       kind: 'colhead',

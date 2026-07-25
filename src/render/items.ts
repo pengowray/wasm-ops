@@ -44,30 +44,63 @@ function hexByte(byte: number): string {
  * `:u32` tag says what it is. That line is how the binary format section of the
  * specification writes the instruction, so it is also the form to search for.
  */
-export function renderEncoding(op: Opcode): string {
+export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
   const groups: string[] = [];
 
   if (!op.prefix) {
     groups.push(group(hexByte(op.code), 'opcode byte'));
-    return wrap(groups.join(''), '');
+  } else {
+    groups.push(group(op.prefix, 'prefix byte', 'prefix'));
+
+    const encoded = op.bytes.slice(1);
+    groups.push(
+      group(
+        encoded.map(hexByte).join(' '),
+        `sub-opcode ${specValue(op.code)}` +
+          `<span class="enc-sub">LEB128, ${encoded.length} byte${
+            encoded.length > 1 ? 's' : ''
+          }</span>`,
+        'sub',
+      ),
+    );
   }
 
-  groups.push(group(op.prefix, 'prefix byte', 'prefix'));
+  // Immediate operands are part of how the instruction is encoded, so they
+  // belong in this picture — but they are variable length and are described
+  // rather than enumerated, hence the different treatment.
+  if (op.immediateArgs) {
+    groups.push(
+      group(
+        op.immediateArgs,
+        'immediate operands' +
+          (hasFollowedBy ? '<span class="enc-sub">see “Followed by”</span>' : ''),
+        'imm',
+      ),
+    );
+  }
 
-  const encoded = op.bytes.slice(1);
-  groups.push(
-    group(
-      encoded.map(hexByte).join(' '),
-      `sub-opcode <code>0x${toHex(op.code)}</code>` +
-        `<span class="enc-sub">${
-          encoded.length > 1 ? `LEB128, ${encoded.length} bytes` : 'LEB128'
-        }</span>`,
-      'sub',
-    ),
-  );
+  return `<h4>Encoding</h4><div class="encoding"><div class="enc-row">${groups.join('')}</div></div>`;
+}
 
-  const spec = `<code>0x${op.prefix} ${op.code}:u32</code>`;
-  return wrap(groups.join(''), `<p class="enc-spec">Specification notation: ${spec}</p>`);
+/**
+ * A sub-opcode written the way the specification's binary format section does:
+ * the value in decimal with a `:u32` type tag. The tag is what makes the
+ * decimal safe to read beside hex bytes — it says this is a u32 value, not a
+ * byte — so it travels with the number wherever the number goes.
+ */
+function specValue(code: number): string {
+  return `<strong class="enc-value">${code}</strong><span class="enc-type">:u32</span>`;
+}
+
+/** The full spec form of an instruction's opcode: `0xFD 263:u32`, or `0x28`. */
+export function specLabel(op: Opcode): string {
+  if (!op.prefix) return `<span class="enc-value">0x${toHex(op.code)}</span>`;
+  return `<span class="enc-value">0x${op.prefix} ${op.code}</span><span class="enc-type">:u32</span>`;
+}
+
+/** The same, as plain text, for aria-labels and tooltips. */
+export function specText(op: Opcode): string {
+  return op.prefix ? `0x${op.prefix} ${op.code}:u32` : `0x${toHex(op.code)}`;
 }
 
 function group(bytes: string, caption: string, part = 'opcode'): string {
@@ -77,10 +110,6 @@ function group(bytes: string, caption: string, part = 'opcode'): string {
     `<span class="enc-caption">${caption}</span>` +
     `</span>`
   );
-}
-
-function wrap(groups: string, footer: string): string {
-  return `<h4>Encoding</h4><div class="encoding"><div class="enc-row">${groups}</div>${footer}</div>`;
 }
 
 /**
@@ -158,11 +187,11 @@ export function renderCell(op: Opcode, filtered = false): string {
   const tag = linkable ? 'a' : 'div';
   const href = linkable ? ` href="#detail-${op.id}"` : '';
   const hidden = filtered ? ' data-filtered="1"' : '';
-  const label = op.name ? ` aria-label="${escapeHtml(`${op.id} ${op.name}`)}"` : '';
+  const label = op.name ? ` aria-label="${escapeHtml(`${specText(op)} ${op.name}`)}"` : '';
 
   return (
     `<${tag} class="cell"${href}${cellData(op)}${hidden}${label}>` +
-    `<span class="cell-hex">${escapeHtml(op.id)}</span>` +
+    `<span class="cell-hex">${specLabel(op)}</span>` +
     `<span class="cell-name">${inner}</span>` +
     `</${tag}>`
   );
@@ -179,7 +208,10 @@ export function renderItem(item: ViewItem): string {
         `</h2>`
       );
     case 'corner':
-      return `<div class="corner" data-key="${escapeHtml(item.key)}" aria-hidden="true"></div>`;
+      return (
+        `<div class="corner" data-key="${escapeHtml(item.key)}" ` +
+        `title="Row and column are the sub-opcode in hex">${escapeHtml(item.label)}</div>`
+      );
     case 'colhead':
       return `<div class="colhead" data-key="${escapeHtml(item.key)}">${escapeHtml(item.label)}</div>`;
     case 'rowhead':
@@ -212,7 +244,11 @@ export function renderDetail(op: Opcode): string {
     rows.push(`<p class="detail-status"><em>Proposal</em></p>`);
   }
 
-  if (op.description) rows.push(op.description);
+  // Every part of the panel is labelled, so the eye can go straight to the one
+  // it wants instead of reading down to find it.
+  if (op.description) {
+    rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
+  }
 
   if (op.followedBy) {
     rows.push(`<h4>Followed by</h4><div class="detail-followed">${op.followedBy}</div>`);

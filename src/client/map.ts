@@ -16,7 +16,7 @@
  */
 
 import type { OpcodeData } from '../model/types.ts';
-import { escapeHtml } from '../render/items.ts';
+import { escapeHtml, specText } from '../render/items.ts';
 
 export class NavMap {
   readonly #root: HTMLElement;
@@ -41,7 +41,7 @@ export class NavMap {
             ` data-key="${op.id}" data-status="${op.status}"` +
             (op.parts?.pre ? ` data-pre="${escapeHtml(op.parts.pre)}"` : '') +
             (op.parts?.mainop ? ` data-op="${escapeHtml(op.parts.mainop)}"` : '');
-          const label = op.name ? `${op.id} ${op.name}` : `${op.id} unassigned`;
+          const label = `${specText(op)} ${op.name ?? 'unassigned'}`;
           return `<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
         })
         .join('');

@@ -436,6 +436,15 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-weight: 700;
 	color: var(--fg-faint);
 }
+
+/* The corner states the section's prefix, so the axes are readable as an
+   equation rather than as bare nibbles: 0xFD + E_ + _8. */
+.corner {
+	font-family: 'Source Code Pro', monospace;
+	font-size: .68rem;
+	color: var(--enc-prefix);
+	cursor: help;
+}
 .chart[data-layout='list'] .corner,
 .chart[data-layout='list'] .colhead,
 .chart[data-layout='list'] .rowhead { display: none; }
@@ -509,6 +518,11 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-weight: 700;
 	color: var(--fg);
 }
+
+/* The identifier is the spec form here too, but at cell scale the type tag
+   should not compete with the value it qualifies. */
+.cell-hex .enc-value { font-size: 1em; color: inherit; }
+.cell-hex .enc-type { font-size: .85em; font-weight: 400; }
 
 /* Hugs the text rather than filling the cell, so the flat background over the
    crosshatch is only as wide as the lettering needs. */
@@ -636,21 +650,35 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .enc-group[data-part='sub'] .enc-bytes { color: var(--enc-sub); }
 .enc-group[data-part='opcode'] .enc-bytes { color: var(--fg); }
 
+/* Immediate operands are not a fixed run of bytes, so they are drawn as an
+   open-ended slot rather than a solid one. */
+.enc-group[data-part='imm'] .enc-bytes {
+	color: var(--fg-dim);
+	font-family: Georgia, serif;
+	font-style: italic;
+	border-bottom-style: dashed;
+}
+
 .enc-caption {
 	display: block;
 	padding: .2rem .35rem 0;
 	font-size: .75rem;
 	color: var(--fg-dim);
 }
-.enc-caption code { background: none; padding: 0; font-size: 1em; color: var(--fg); }
 .enc-caption .enc-sub { display: block; color: var(--fg-faint); }
 
-.enc-spec {
-	margin: .7rem 0 0;
-	font-size: .78rem;
+/* The sub-opcode's value carries the weight; the type tag rides along quietly
+   but is never dropped, because it is what says the number is not a byte. */
+.enc-value {
+	font-family: 'Source Code Pro', monospace;
+	font-weight: 700;
+	font-size: 1.05em;
+	color: var(--fg);
+}
+.enc-type {
+	font-family: 'Source Code Pro', monospace;
 	color: var(--fg-faint);
 }
-.enc-spec code { color: var(--fg-dim); }
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
 .op-imm-args { font-family: Georgia, serif; font-size: .95rem; }

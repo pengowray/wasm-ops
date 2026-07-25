@@ -23,14 +23,17 @@ export interface PageContent {
 }
 
 /**
- * The data the client needs to rearrange the chart: everything except the
- * prose, which is already in the page as the detail block and would otherwise
- * be shipped twice. Roughly a fifth of the full dataset.
+ * The data the client needs to rearrange the chart and build the encoding
+ * breakdown: everything except the prose, which is already in the page as the
+ * detail block and would otherwise be shipped twice.
+ *
+ * `immediateArgs` stays — it is a few words on forty instructions, and the
+ * encoding block names the operands that follow the opcode.
  */
 function clientData(data: OpcodeData): string {
   const slim = {
     sections: data.sections,
-    opcodes: data.opcodes.map(({ description, followedBy, stack, immediateArgs, ...rest }) => rest),
+    opcodes: data.opcodes.map(({ description, followedBy, stack, ...rest }) => rest),
   };
   // `<` is escaped so the JSON can never terminate its own script element.
   return JSON.stringify(slim).replace(/</g, '\\u003c');

@@ -48,10 +48,6 @@ export class Panel {
     const op = this.#opcodes.get(key);
     if (!op) return;
 
-    const encoding = document.createElement('div');
-    encoding.className = 'detail-encoding';
-    encoding.innerHTML = renderEncoding(op);
-
     // Instructions with something written about them have an article to clone.
     // Unassigned slots do not, and get a heading so that clicking one still
     // answers the question it implies: what is this byte, and is it free?
@@ -63,6 +59,13 @@ export class Panel {
       content = document.createElement('div');
       content.innerHTML = renderHeading(op);
     }
+
+    const encoding = document.createElement('div');
+    encoding.className = 'detail-encoding';
+    // Whether there is a "Followed by" section to point the operands at is a
+    // property of the prose, so it is read off the article rather than shipped
+    // as another field.
+    encoding.innerHTML = renderEncoding(op, Boolean(content.querySelector('.detail-followed')));
 
     // The bytes go directly under the name: it is the first thing wanted of an
     // opcode chart, and putting it here means it is not also needed above.
