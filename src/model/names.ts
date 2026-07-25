@@ -48,38 +48,31 @@ export function chopUp(name: string): NameParts {
 }
 
 /**
- * Points at which a long name may wrap. The old page hard-coded these as
- * `<wbr>` insertions during rendering; they are name knowledge, so they live
- * here and the renderer just applies them.
+ * Where a long name may wrap.
+ *
+ * Separators are the natural places: after a dot, before an underscore, so
+ * `i64.atomic.rmw16.cmpxchg_u` breaks into `i64.` `atomic.` `rmw16.`
+ * `cmpxchg` `_u` rather than being chopped mid-word into `ato` `mic.` and
+ * `cmpxch` `g`. Every part stays a part.
+ *
+ * A handful of long words contain no separator at all, so they carry an
+ * explicit split.
  */
-const BREAK_AFTER = [
-  'atomic.rmw',
-  'memory.atomic',
-  'stringview_iter',
-  'return_call',
-  'call_indirect',
-  'br_on_',
+const IN_WORD: readonly (readonly [string, string])[] = [
+  ['laneselect', 'lane<wbr>select'],
+  ['unreachable', 'unreach<wbr>able'],
+  ['externalize', 'external<wbr>ize'],
+  ['internalize', 'internal<wbr>ize'],
+  // Both are wider than a grid cell on their own, so they will be broken
+  // whatever happens. Better at the seam in the word than two letters from
+  // the end.
+  ['reinterpret', 're<wbr>interpret'],
+  ['pairwise', 'pair<wbr>wise'],
 ];
 
 /** Inserts `<wbr>` hints into an already-escaped name fragment. */
 export function addWordBreaks(escaped: string): string {
-  let out = escaped;
-  for (const token of BREAK_AFTER) {
-    // Break before the final segment of the token, matching the old output.
-    const idx = token.lastIndexOf('_') > token.lastIndexOf('.')
-      ? token.lastIndexOf('_')
-      : token.lastIndexOf('.');
-    const replacement = token.slice(0, idx + 1) + '<wbr>' + token.slice(idx + 1);
-    out = out.split(token).join(replacement);
-  }
-  // Whole-word splits that have no separator to hang off.
-  for (const [from, to] of [
-    ['laneselect', 'lane<wbr>select'],
-    ['unreachable', 'unreach<wbr>able'],
-    ['externalize', 'external<wbr>ize'],
-    ['internalize', 'internal<wbr>ize'],
-  ] as const) {
-    out = out.split(from).join(to);
-  }
+  let out = escaped.replace(/\./g, '.<wbr>').replace(/_/g, '<wbr>_');
+  for (const [from, to] of IN_WORD) out = out.split(from).join(to);
   return out;
 }

@@ -146,7 +146,9 @@ export function renderName(op: Opcode): string {
 
   let html = '';
   if (parts.pre) {
-    html += `<span class="pre">${addWordBreaks(escapeHtml(parts.pre))}.</span>`;
+    // The dot goes in before the breaks are added, so the name can wrap after
+    // it rather than only inside it.
+    html += `<span class="pre">${addWordBreaks(escapeHtml(parts.pre + '.'))}</span>`;
   }
   if (parts.relaxed) html += `<span class="relaxed"><wbr>relaxed.</span>`;
   // Words that qualify the operation rather than describe its operands. They
@@ -166,7 +168,7 @@ export function renderName(op: Opcode): string {
   }
   const tail = [postWords.join('_'), parts.sign, parts.rest].filter(Boolean).join('_');
   if (tail) {
-    html += `<span class="post">${escapeHtml('_' + tail).replace(/_/g, '<wbr>_')}</span>`;
+    html += `<span class="post">${addWordBreaks(escapeHtml('_' + tail))}</span>`;
   }
   return html;
 }

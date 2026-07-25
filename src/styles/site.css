@@ -527,7 +527,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	background-color: var(--cell-bg);
 	border: 1px solid var(--rule);
 	background-clip: padding-box;
-	overflow-wrap: anywhere;
+	/* `anywhere` let the browser split words even when a break opportunity was
+	   available further back. With separators marked, breaking mid-word is a
+	   last resort again. */
+	overflow-wrap: break-word;
 	text-decoration: none;
 	transition: background-color 120ms linear, color 120ms linear;
 }
