@@ -817,9 +817,15 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * exactly what makes it too much to have on all the time. One hue per
  * proposal, emitted into the page from the registry.
  */
+/*
+ * The fill carries the hue; the border does not. Tinting the border too meant
+ * every cell was ruled in a slightly different colour, so the grid had no lines
+ * of its own — the edge between two cells changed character depending on which
+ * two proposals met there. One rule colour throughout, and the tints sit inside
+ * it.
+ */
 .chart[data-colour='proposal'] .cell[data-proposal] {
 	--cell-bg: hsl(var(--proposal-hue) var(--proposal-s) var(--proposal-l));
-	border-color: hsl(var(--proposal-hue) var(--proposal-s) calc(var(--proposal-l) - 12%));
 }
 .map[data-colour='proposal'] .map-cell[data-proposal] {
 	background: hsl(var(--proposal-hue) calc(var(--proposal-s) + 15%) calc(var(--proposal-l) - 8%));
@@ -941,9 +947,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	--cell-bg: var(--hl-self);
 	color: var(--hl-self-fg);
 }
-.chart[data-colour='proposal'] .cell[data-proposal].pinned {
-	border-color: var(--accent);
-}
+/* The pinned cell needed its border recoloured only because the proposal tint
+   had taken it; now that the border is the same everywhere, the outline that
+   marks a selection is the whole mark. */
 
 /* ------------------------------------------------------------ table layout */
 
