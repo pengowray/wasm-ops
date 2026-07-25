@@ -10,6 +10,8 @@ import type { Opcode } from '../model/types.ts';
 import { toHex } from '../model/types.ts';
 import { addWordBreaks } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
+import { summarize } from '../model/summary.ts';
+import { tagsFor, tagTokens } from '../model/tags.ts';
 import type { ViewItem } from '../model/view.ts';
 
 export function escapeHtml(value: string): string {
@@ -169,6 +171,7 @@ function cellData(op: Opcode): string {
     'data-bits': op.parts?.opbits,
     'data-post': op.parts?.post,
     'data-sign': op.parts?.sign,
+    'data-tags': op.name ? tagTokens(op) : undefined,
   };
   return Object.entries(attrs)
     .filter(([, value]) => value !== undefined && value !== '')
@@ -204,7 +207,9 @@ export function renderCell(op: Opcode, filtered = false): string {
   // The extra columns are only shown by the table layout, but they are written
   // here rather than injected later: a cell is rendered once at build time and
   // then only ever moved, which is what lets the animation follow it.
+  const summary = summarize(op);
   const columns =
+    `<span class="cell-summary">${summary ? escapeHtml(summary) : ''}</span>` +
     `<span class="cell-imm">${op.immediateArgs ?? ''}</span>` +
     `<span class="cell-stack">${op.stack?.html ?? ''}</span>` +
     `<span class="cell-cat">${op.name ? CATEGORY_LABELS[categorize(op)] : ''}</span>`;
@@ -227,6 +232,11 @@ export function renderItem(item: ViewItem): string {
         `${escapeHtml(item.label)} <span class="group-count">${item.count}</span>` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
         `</h2>`
+      );
+    case 'subgroup':
+      return (
+        `<h3 class="subgroup" data-key="${escapeHtml(item.key)}">` +
+        `${escapeHtml(item.label)}</h3>`
       );
     case 'tablehead':
       return (
@@ -252,10 +262,32 @@ export function renderItem(item: ViewItem): string {
 /** The opcode's name as a panel heading, with its immediate operands. */
 export function renderHeading(op: Opcode): string {
   const name = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
+  const summary = summarize(op);
   return (
     `<h3 class="detail-name">${name}` +
     (op.immediateArgs ? ` <span class="immediate-args">${op.immediateArgs}</span>` : '') +
-    `</h3>`
+    `</h3>` +
+    (summary ? `<p class="detail-summary">${escapeHtml(summary)}</p>` : '')
+  );
+}
+
+/**
+ * The property chips. Each is a button rather than a link: it does not go
+ * anywhere, it lights up everything sharing that property.
+ */
+export function renderTags(op: Opcode): string {
+  const tags = tagsFor(op);
+  if (!tags.length) return '';
+  return (
+    `<h4>Properties</h4><p class="detail-tags">` +
+    tags
+      .map(
+        (tag) =>
+          `<button type="button" class="tag" data-tag="${escapeHtml(tag.id)}" ` +
+          `data-kind="${tag.kind}">${escapeHtml(tag.label)}</button>`,
+      )
+      .join('') +
+    `</p>`
   );
 }
 
@@ -267,6 +299,7 @@ export function renderHeading(op: Opcode): string {
  */
 export function renderDetail(op: Opcode): string {
   const rows: string[] = [renderHeading(op)];
+  const tags = renderTags(op);
 
   const STATUS_NOTE: Partial<Record<Opcode['status'], string>> = {
     proposal: 'Proposal — not yet standardised',
@@ -302,6 +335,8 @@ export function renderDetail(op: Opcode): string {
         (op.stack.note ? `<div class="detail-stack-note">${op.stack.note}</div>` : ''),
     );
   }
+
+  if (tags) rows.push(tags);
 
   return (
     `<article class="detail" id="${op.id}" data-key="${op.id}">` +

@@ -149,3 +149,59 @@ export function categorize(op: Opcode): CategoryId {
   if (op.section === 'threads') return 'atomic';
   return 'other';
 }
+
+/**
+ * A finer split within a category, used to break the long groups in the card
+ * layout into readable runs. "Numeric" alone is 140 instructions, which is a
+ * wall; "comparison", "arithmetic", "bitwise" and "conversion" are four
+ * shelves you can scan.
+ *
+ * Returns null where a category is small enough to need no dividing.
+ */
+export function subcategorize(op: Opcode): { id: string; label: string } | null {
+  const mainop = op.parts?.mainop ?? '';
+  const category = categorize(op);
+
+  const of = (id: string, label: string) => ({ id, label });
+
+  if (category === 'numeric' || category === 'vector') {
+    if (['eq', 'ne', 'lt', 'gt', 'le', 'ge', 'eqz'].includes(mainop)) return of('compare', 'Comparison');
+    if (['and', 'or', 'xor', 'shl', 'shr', 'rotl', 'rotr', 'clz', 'ctz', 'popcnt', 'bitselect', 'bitmask'].includes(mainop)) {
+      return of('bitwise', 'Bitwise');
+    }
+    if (['wrap', 'extend', 'convert', 'demote', 'promote', 'reinterpret', 'trunc'].includes(mainop)) {
+      return of('convert', 'Conversion');
+    }
+    if (['splat', 'shuffle', 'swizzle'].includes(mainop) || /_lane$/.test(op.name ?? '')) {
+      return of('lanes', 'Lane access');
+    }
+    if (mainop === 'const') return of('const', 'Constants');
+    if (['ceil', 'floor', 'nearest'].includes(mainop)) return of('round', 'Rounding');
+    return of('arith', 'Arithmetic');
+  }
+
+  if (category === 'memory') {
+    if (mainop === 'load') return of('load', 'Loads');
+    if (mainop === 'store') return of('store', 'Stores');
+    return of('manage', 'Managing memory');
+  }
+
+  if (category === 'control') {
+    if (mainop.startsWith('br')) return of('branch', 'Branches');
+    if (['call', 'return_call', 'return'].includes(mainop) || mainop.startsWith('call')) {
+      return of('call', 'Calls');
+    }
+    if (['try', 'catch', 'throw', 'rethrow', 'delegate'].includes(mainop) || /throw|catch|try/.test(op.name ?? '')) {
+      return of('exception', 'Exceptions');
+    }
+    return of('block', 'Blocks');
+  }
+
+  if (category === 'atomic') {
+    if (/rmw/.test(op.parts?.pre ?? '')) return of('rmw', 'Read-modify-write');
+    if (mainop === 'load' || mainop === 'store') return of('access', 'Atomic load and store');
+    return of('sync', 'Synchronisation');
+  }
+
+  return null;
+}

@@ -17,6 +17,7 @@
 
 import type { OpcodeData } from '../model/types.ts';
 import { escapeHtml, specText } from '../render/items.ts';
+import { tagTokens } from '../model/tags.ts';
 
 export class NavMap {
   readonly #root: HTMLElement;
@@ -37,10 +38,13 @@ export class NavMap {
       const cells = data.opcodes
         .filter((op) => op.section === section.id)
         .map((op) => {
+          // The map carries the same selectable attributes as a cell, so a
+          // highlight reaches it too — which is the whole point of having it.
           const attrs =
             ` data-key="${op.id}" data-status="${op.status}"` +
             (op.parts?.pre ? ` data-pre="${escapeHtml(op.parts.pre)}"` : '') +
-            (op.parts?.mainop ? ` data-op="${escapeHtml(op.parts.mainop)}"` : '');
+            (op.parts?.mainop ? ` data-op="${escapeHtml(op.parts.mainop)}"` : '') +
+            (op.name ? ` data-tags="${escapeHtml(tagTokens(op))}"` : '');
           const label = `${specText(op)} ${op.name ?? 'unassigned'}`;
           return `<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
         })

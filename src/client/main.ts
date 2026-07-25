@@ -236,6 +236,16 @@ function start(
     history.replaceState(null, '', `#${key}`);
   });
 
+  // Property chips live inside the panel, which is rebuilt on every open, so
+  // the listener sits on the document rather than on the chips.
+  document.addEventListener('click', (event) => {
+    const chip = (event.target as Element).closest<HTMLElement>('.tag');
+    const tag = chip?.dataset['tag'];
+    if (!tag) return;
+    event.preventDefault();
+    highlighter.pinTag(tag);
+  });
+
   // --- deep links ---------------------------------------------------------
 
   // Ids look like `0x28` or `0xFD.256`. Matched case-insensitively against the

@@ -9,7 +9,13 @@
 
 import type { Opcode, OpcodeData, Section, SectionId } from './types.ts';
 import { HISTORICAL, toHex } from './types.ts';
-import { CATEGORY_LABELS, CATEGORY_ORDER, categorize, type CategoryId } from './categories.ts';
+import {
+  CATEGORY_LABELS,
+  CATEGORY_ORDER,
+  categorize,
+  subcategorize,
+  type CategoryId,
+} from './categories.ts';
 
 /**
  * - `matrix` lays each section out as the familiar 16-wide byte grid, where a
@@ -84,6 +90,8 @@ export type ViewItem =
   | { kind: 'colhead'; key: string; label: string }
   /** Column headings for the table layout, one per group. */
   | { kind: 'tablehead'; key: string }
+  /** A divider within a group — "Comparison", "Loads" — in the card layout. */
+  | { kind: 'subgroup'; key: string; label: string }
   | { kind: 'rowhead'; key: string; label: string }
   /**
    * `filtered` cells are shown as empty slots rather than dropped. In the byte
@@ -218,6 +226,28 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
   const head = (key: string): ViewItem[] =>
     options.layout === 'table' ? [{ kind: 'tablehead', key: `head:${key}` }] : [];
 
+  /**
+   * Writes a run of cells, breaking it with sub-group dividers. Only the card
+   * layout gets them: the table has its own column headings to sit under, and
+   * the byte grid is not grouped by anything but position.
+   */
+  const emit = (into: ViewItem[], group: string, ops: Opcode[]): void => {
+    let current: string | null = null;
+    for (const op of ops) {
+      if (options.layout === 'cards') {
+        const sub = subcategorize(op);
+        const id = sub?.id ?? null;
+        if (id !== current) {
+          current = id;
+          if (sub) {
+            into.push({ kind: 'subgroup', key: `sub:${group}:${sub.id}`, label: sub.label });
+          }
+        }
+      }
+      into.push({ kind: 'cell', key: op.id, op });
+    }
+  };
+
   // `linkTo` cells are the prefix bytes, which exist to point at the sub-table
   // that decodes them. In the byte grid they occupy a real byte value and have
   // to be there; in a list of instructions they are not instructions.
@@ -254,7 +284,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         count: group.length,
       });
       items.push(...head(section.id));
-      for (const op of group) items.push({ kind: 'cell', key: op.id, op });
+      emit(items, section.id, group);
     }
     return items;
   }
@@ -279,7 +309,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       count: sorted.length,
     });
     items.push(...head(category));
-    for (const op of sorted) items.push({ kind: 'cell', key: op.id, op });
+    emit(items, category, sorted);
   }
   return items;
 }

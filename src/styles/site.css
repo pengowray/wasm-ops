@@ -542,6 +542,13 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .chart[data-layout='cards'] .cell { min-height: 4rem; padding: .45rem .35rem; }
 .chart[data-layout='cards'] .cell-name { font-size: .95rem; line-height: 1.25; }
 .chart[data-layout='cards'] .op { font-size: 1em; }
+.chart[data-layout='cards'] .cell-summary {
+	display: block;
+	margin-top: .2rem;
+	font-size: .68rem;
+	line-height: 1.2;
+	color: var(--fg-faint);
+}
 
 /* The identifier is the spec form here too, but at cell scale the type tag
    should not compete with the value it qualifies. */
@@ -552,8 +559,52 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    crosshatch is only as wide as the lettering needs. */
 .cell-name { display: inline-block; align-self: center; max-width: 100%; }
 
-/* Extra columns, shown only by the table layout. */
-.cell-imm, .cell-stack, .cell-cat { display: none; }
+/* Extra columns, shown only by the card and table layouts. */
+.cell-summary, .cell-imm, .cell-stack, .cell-cat { display: none; }
+
+/* --------------------------------------------------------------- subgroups */
+
+/*
+ * A divider inside a category. "Numeric" alone runs to 140 instructions, which
+ * is a wall; broken into comparison, arithmetic, bitwise and conversion it is
+ * four shelves you can scan.
+ */
+.subgroup {
+	grid-column: 1 / -1;
+	margin: 1rem 0 .1rem;
+	font-size: .72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .07em;
+	color: var(--fg-faint);
+}
+.chart:not([data-layout='cards']) .subgroup { display: none; }
+
+/* -------------------------------------------------------------- properties */
+
+.detail-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0; }
+
+.tag {
+	padding: .12rem .5rem;
+	font: inherit;
+	font-size: .78rem;
+	color: var(--fg-dim);
+	background: var(--surface-sunk);
+	border: 1px solid transparent;
+	border-radius: 999px;
+	cursor: pointer;
+}
+.tag:hover { color: var(--fg); border-color: var(--rule); }
+.tag[aria-pressed='true'] {
+	color: var(--hl-self-fg);
+	background: var(--hl-self);
+	border-color: var(--accent);
+}
+.tag[data-kind='status'] { background: var(--legacy-bg); }
+
+/* Cells matching a pinned property. */
+.cell.hl-tag { --cell-bg: var(--hl-op); color: var(--hl-op-fg); background-image: none; }
+.map-cell.hl-tag { background: var(--hl-op); }
 
 /* ------------------------------------------------------------ table layout */
 
@@ -625,6 +676,13 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--fg-dim);
 }
 .chart[data-layout='table'] .cell-cat { display: block; color: var(--fg-faint); font-size: .78rem; }
+.chart[data-layout='table'] .cell-summary {
+	display: block;
+	grid-column: 2;
+	margin-top: .05rem;
+	font-size: .76rem;
+	color: var(--fg-faint);
+}
 
 /* Narrow windows cannot carry five columns; the row becomes a stack. */
 @media (max-width: 800px) {
@@ -763,7 +821,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .js .details { display: none; }
 
 .detail { padding: 1rem 0; border-top: 1px solid var(--rule-soft); scroll-margin-top: 5rem; }
-.detail-name { margin: .2rem 0 .5rem; }
+.detail-name { margin: .2rem 0 .15rem; }
+.detail-summary { margin: 0 0 .6rem; color: var(--fg-dim); font-size: .92rem; }
 
 .detail-status {
 	margin: .4rem 0;

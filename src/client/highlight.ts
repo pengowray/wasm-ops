@@ -18,7 +18,7 @@
  * container and selects by the data attributes baked in at build time.
  */
 
-const CLASSES = ['hl-self', 'hl-op', 'hl-pre'] as const;
+const CLASSES = ['hl-self', 'hl-op', 'hl-pre', 'hl-tag'] as const;
 
 /** Cells in the chart and squares in the map both carry these attributes. */
 const TARGET = '.cell, .map-cell';
@@ -42,9 +42,29 @@ export class Highlighter {
     }
   }
 
+  #pinnedTag: string | null = null;
+
+  /**
+   * Lights up everything carrying a property tag, and keeps it lit. This is a
+   * different question from the hover highlight — "what else is atomic?"
+   * rather than "what else is this operation?" — so it has its own state and
+   * survives the pointer moving.
+   */
+  pinTag(tag: string | null): void {
+    this.#pinnedTag = this.#pinnedTag === tag ? null : tag;
+    this.#pinnedKey = null;
+    this.restore();
+    return;
+  }
+
+  get pinnedTag(): string | null {
+    return this.#pinnedTag;
+  }
+
   /** Pins the highlight to a cell, or clears the pin when given null. */
   pin(cell: HTMLElement | null): void {
     this.#pinnedKey = cell?.dataset['key'] ?? null;
+    this.#pinnedTag = null;
     this.restore();
   }
 
@@ -58,6 +78,24 @@ export class Highlighter {
     for (const el of document.querySelectorAll<HTMLElement>('.pinned')) {
       el.classList.remove('pinned');
     }
+    if (this.#pinnedTag) {
+      const selector = `[data-tags~="${CSS.escape(this.#pinnedTag)}"]`;
+      for (const el of document.querySelectorAll<HTMLElement>(selector)) {
+        el.classList.add('hl-tag');
+        this.#lit.push(el);
+      }
+      for (const chip of document.querySelectorAll<HTMLElement>('.tag')) {
+        chip.setAttribute(
+          'aria-pressed',
+          String(chip.dataset['tag'] === this.#pinnedTag),
+        );
+      }
+      return;
+    }
+    for (const chip of document.querySelectorAll<HTMLElement>('.tag')) {
+      chip.setAttribute('aria-pressed', 'false');
+    }
+
     if (!this.#pinnedKey) return;
 
     const selector = `[data-key="${CSS.escape(this.#pinnedKey)}"]`;
