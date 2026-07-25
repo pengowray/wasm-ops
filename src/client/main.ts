@@ -60,6 +60,43 @@ function start(
   const themeButton = document.getElementById('theme-toggle');
   if (themeButton) initTheme(themeButton);
 
+  // The toolbar is unpinned by default; the choice is remembered.
+  const pin = document.getElementById('pin-toolbar');
+  if (pin) {
+    const setPinned = (on: boolean) => {
+      toolbar.classList.toggle('pinned', on);
+      pin.setAttribute('aria-pressed', String(on));
+    };
+    try {
+      setPinned(localStorage.getItem('pinToolbar') === 'true');
+    } catch {
+      // Storage blocked; the toolbar just starts unpinned every time.
+    }
+    pin.addEventListener('click', () => {
+      const on = pin.getAttribute('aria-pressed') !== 'true';
+      setPinned(on);
+      try {
+        localStorage.setItem('pinToolbar', String(on));
+      } catch {
+        // As above.
+      }
+    });
+  }
+
+  /*
+   * Clicking away closes the details. On a phone the sheet covers most of the
+   * screen and the close button is a small target in a corner; tapping the page
+   * behind it is the gesture people already expect. Clicks on another cell are
+   * left alone, so moving from one instruction to the next still works.
+   */
+  document.addEventListener('click', (event) => {
+    if (!panel.openKey) return;
+    const target = event.target as Element;
+    if (target.closest('#panel') || target.closest('.cell') || target.closest('.map-cell')) return;
+    if (target.closest('#toolbar')) return;
+    panel.close();
+  });
+
   toolbar.dataset['layout'] = options.layout;
 
   // --- arranging ----------------------------------------------------------

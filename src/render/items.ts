@@ -82,20 +82,32 @@ export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
   return `<h4>Encoding</h4><div class="encoding"><div class="enc-row">${groups.join('')}</div></div>`;
 }
 
-/**
- * A sub-opcode written the way the specification's binary format section does:
- * the value in decimal with a `:u32` type tag. The tag is what makes the
- * decimal safe to read beside hex bytes — it says this is a u32 value, not a
- * byte — so it travels with the number wherever the number goes.
+/*
+ * One spelling of an opcode, used everywhere it appears — cells, the encoding
+ * breakdown, the detail heading. A hex prefix and a decimal sub-opcode are
+ * different kinds of number, so they get different colours, and those are the
+ * same two colours the encoding breakdown tints its byte groups with. Once you
+ * have learnt which is which in one place you have learnt it everywhere.
  */
+
+/** The prefix byte: `0xFD`. */
+function hexPart(text: string): string {
+  return `<span class="op-hex">${text}</span>`;
+}
+
+/** The sub-opcode, in decimal, with the type tag that says it is not a byte. */
+function decPart(code: number): string {
+  return `<span class="op-dec">${code}</span><span class="op-utype">:u32</span>`;
+}
+
 function specValue(code: number): string {
-  return `<strong class="enc-value">${code}</strong><span class="enc-type">:u32</span>`;
+  return decPart(code);
 }
 
 /** The full spec form of an instruction's opcode: `0xFD 263:u32`, or `0x28`. */
 export function specLabel(op: Opcode): string {
-  if (!op.prefix) return `<span class="enc-value">0x${toHex(op.code)}</span>`;
-  return `<span class="enc-value">0x${op.prefix} ${op.code}</span><span class="enc-type">:u32</span>`;
+  if (!op.prefix) return hexPart(`0x${toHex(op.code)}`);
+  return `${hexPart(`0x${op.prefix}`)} ${decPart(op.code)}`;
 }
 
 /** The same, as plain text, for aria-labels and tooltips. */

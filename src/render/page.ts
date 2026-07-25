@@ -116,6 +116,9 @@ export function renderPage(
 		</div>
 	</details>
 	<div class="control control-actions">
+		<button type="button" id="pin-toolbar" class="icon-button" aria-pressed="false" aria-label="Keep these controls on screen" title="Keep these controls on screen">
+			<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M9 3h6l-1 6 4 3v2h-5v7l-1 0-1 0v-7H6v-2l4-3z"/></svg>
+		</button>
 		<button type="button" id="theme-toggle" class="icon-button" aria-label="Switch colour theme" title="Switch colour theme">
 			<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="12" cy="12" r="4.2"/><g class="rays"><line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/><line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/><line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/><line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/></g></svg>
 			<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M20 14.4A8.6 8.6 0 0 1 9.6 4a8.6 8.6 0 1 0 10.4 10.4z"/></svg>

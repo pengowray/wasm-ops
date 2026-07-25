@@ -23,10 +23,12 @@
 
 	--legacy-bg: #fdf4e3;
 
-	--hl-self: #24dff0;
-	--hl-self-fg: #10262a;
-	--hl-op: #b5e9f7;
-	--hl-op-fg: #14343d;
+	/* The selected cell was a saturated cyan, which shouted down everything
+	   around it. Both are now tints of the same hue, a step apart. */
+	--hl-self: #a8e2ee;
+	--hl-self-fg: #10343d;
+	--hl-op: #dcf2f8;
+	--hl-op-fg: #1c4049;
 	--hl-pre: rgba(219, 223, 16, 0.62);
 
 	/* Distinguish the parts of an encoding at a glance. */
@@ -55,10 +57,10 @@
 
 		/* These sit on a #1c1c1c background. The previous values were only a
 		   few points lighter than it, so a lit cell read as unlit. */
-		--hl-self: #46c8dc;
-		--hl-self-fg: #08222a;
-		--hl-op: #2f5f6d;
-		--hl-op-fg: #eaf7fb;
+		--hl-self: #35707e;
+		--hl-self-fg: #eaf7fb;
+		--hl-op: #27484f;
+		--hl-op-fg: #dceef3;
 		--hl-pre: rgba(220, 110, 16, 0.62);
 
 		--enc-prefix: #e0a45a;
@@ -80,10 +82,10 @@
 
 	--legacy-bg: #2e2820;
 
-	--hl-self: #46c8dc;
-	--hl-self-fg: #08222a;
-	--hl-op: #2f5f6d;
-	--hl-op-fg: #eaf7fb;
+	--hl-self: #35707e;
+	--hl-self-fg: #eaf7fb;
+	--hl-op: #27484f;
+	--hl-op-fg: #dceef3;
 	--hl-pre: rgba(220, 110, 16, 0.62);
 
 	--enc-prefix: #e0a45a;
@@ -116,9 +118,12 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 
 /* ------------------------------------------------------------------ toolbar */
 
+/*
+ * Not pinned by default. It is a band of controls that are set once and then
+ * left alone, and holding it on screen costs a strip of every page of a chart
+ * that is already several screens tall. The pin button opts in.
+ */
 .toolbar {
-	position: sticky;
-	top: 0;
 	z-index: 20;
 	flex-wrap: wrap;
 	gap: .5rem 1.25rem;
@@ -162,6 +167,13 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 }
 
 .control-actions { margin-left: auto; gap: .4rem; }
+
+.toolbar.pinned {
+	position: sticky;
+	top: 0;
+}
+#pin-toolbar[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); }
+#pin-toolbar[aria-pressed='true'] svg { fill: currentColor; }
 
 /* --------------------------------------------------------------- filtering */
 
@@ -227,8 +239,8 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 /* Grouping and sorting have no meaning in the byte grid, where position is
    fixed by the opcode; unassigned slots have no meaning outside it. Controls
    are dimmed rather than hidden so the toolbar does not reflow as you use it. */
-.toolbar[data-layout='matrix'] [data-when-layout='list'],
-.toolbar[data-layout='cards'] [data-when-layout='matrix'] {
+.toolbar[data-layout='matrix'] [data-needs-grouping],
+.toolbar:not([data-layout='matrix']) [data-matrix-only] {
 	opacity: .4;
 	pointer-events: none;
 }
@@ -519,19 +531,22 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	letter-spacing: .02em;
 	color: var(--fg-dim);
 }
-/* In the byte grid a cell's position already states its opcode; in a list it
-   has to be spelled out, and has to be legible while it does so. */
+/* In the byte grid a cell's position already states its opcode; in the card
+   and table layouts it has to be spelled out. It still labels the card rather
+   than titling it, so it sits smaller and quieter than the name. */
 .chart[data-layout='cards'] .cell-hex {
 	display: block;
-	margin-bottom: .15rem;
-	font-weight: 700;
-	color: var(--fg);
+	margin-bottom: .2rem;
+	font-size: .68rem;
 }
+.chart[data-layout='cards'] .cell { min-height: 4rem; padding: .45rem .35rem; }
+.chart[data-layout='cards'] .cell-name { font-size: .95rem; line-height: 1.25; }
+.chart[data-layout='cards'] .op { font-size: 1em; }
 
 /* The identifier is the spec form here too, but at cell scale the type tag
    should not compete with the value it qualifies. */
-.cell-hex .enc-value { font-size: 1em; color: inherit; }
-.cell-hex .enc-type { font-size: .85em; font-weight: 400; }
+/* In a cell the opcode labels the instruction; it should not outshout it. */
+.cell-hex .op-utype { display: none; }
 
 /* Hugs the text rather than filling the cell, so the flat background over the
    crosshatch is only as wide as the lettering needs. */
@@ -575,7 +590,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 .tablehead {
 	position: sticky;
-	top: 3.6rem;
+	top: 0;
 	z-index: 5;
 	grid-column: 1 / -1;
 	font-size: .68rem;
@@ -809,18 +824,16 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .enc-caption .enc-sub { display: block; color: var(--fg-faint); }
 
-/* The sub-opcode's value carries the weight; the type tag rides along quietly
-   but is never dropped, because it is what says the number is not a byte. */
-.enc-value {
-	font-family: 'Source Code Pro', monospace;
-	font-weight: 700;
-	font-size: 1.05em;
-	color: var(--fg);
-}
-.enc-type {
-	font-family: 'Source Code Pro', monospace;
-	color: var(--fg-faint);
-}
+/*
+ * Hex and decimal are told apart by colour, matching the tints the encoding
+ * breakdown gives the prefix byte and the sub-opcode bytes. The `:u32` tag
+ * rides along quietly but is never dropped: it is what says the decimal is a
+ * value and not a byte.
+ */
+.op-hex, .op-dec, .op-utype { font-family: 'Source Code Pro', monospace; }
+.op-hex { color: var(--enc-prefix); }
+.op-dec { color: var(--enc-sub); font-weight: 700; }
+.op-utype { color: var(--fg-faint); font-size: .85em; }
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
 .op-imm-args { font-family: Georgia, serif; font-size: .95rem; }
