@@ -15,6 +15,7 @@ import { flip } from './flip.ts';
 import { Highlighter } from './highlight.ts';
 import { NavMap } from './map.ts';
 import { Panel } from './panel.ts';
+import { Search } from './search.ts';
 import { initTheme } from './theme.ts';
 
 const chart = document.getElementById('chart');
@@ -133,13 +134,19 @@ function start(
     return el;
   }
 
-  function relayout(): void {
+  function relayout(animate = true): void {
     const items = buildView(data, options);
 
     flip(chart, () => {
       const next: HTMLElement[] = [];
       for (const item of items) {
         const el = elementFor(item.key, () => renderItem(item));
+        // Headings come from the pool with the count they were rendered with,
+        // which is the count before whatever filter or search is now running.
+        if (item.kind === 'group') {
+          const count = el.querySelector('.group-count');
+          if (count) count.textContent = String(item.count);
+        }
         if (item.kind === 'cell') {
           // A cell filtered out of the byte grid keeps its slot but is blanked.
           if (item.filtered) el.dataset['filtered'] = '1';
@@ -150,7 +157,7 @@ function start(
       chart.replaceChildren(...next);
       chart.dataset['layout'] = options.layout;
       toolbar.dataset['layout'] = options.layout;
-    });
+    }, animate);
 
     // Both of these hold references into the chart's DOM, which has just been
     // rebuilt from the pool.
@@ -187,11 +194,91 @@ function start(
     badge.hidden = !filtering;
   }
 
-  toolbar.addEventListener('change', () => {
+  toolbar.addEventListener('change', (event) => {
+    // The search box lives in the toolbar but is not one of its settings: it
+    // fires `change` on blur, and re-laying the chart out for that would move
+    // everything a second time for no reason.
+    if ((event.target as HTMLElement).id === 'search') return;
     readToolbar();
     updateBadge();
     relayout();
   });
+
+  // --- search ---------------------------------------------------------------
+
+  const search = new Search(data, detailsEl);
+  const searchInput = document.getElementById('search') as HTMLInputElement | null;
+  const searchCount = document.getElementById('search-count');
+  const searchEmpty = document.getElementById('search-empty');
+  const emptyTerm = searchEmpty?.querySelector('.search-empty-term');
+
+  /**
+   * Applies whatever is in the box.
+   *
+   * Unanimated by default: this runs while the reader is still typing, and a
+   * cell sliding to a new home only to be moved again by the next letter reads
+   * as the page struggling rather than as continuity.
+   */
+  function applySearch(animate = false): void {
+    const query = searchInput?.value.trim() ?? '';
+    options.match = search.predicate(query);
+
+    const found = options.match ? search.count(options.match) : search.total;
+    if (searchCount) searchCount.textContent = query ? `${found} of ${search.total}` : '';
+    if (searchEmpty) searchEmpty.hidden = !query || found > 0;
+    if (emptyTerm) emptyTerm.textContent = query;
+
+    // Shareable, and survives a reload: the URL carries the query alongside any
+    // selected instruction in the hash.
+    const url = new URL(location.href);
+    if (query) url.searchParams.set('q', query);
+    else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
+
+    relayout(animate);
+  }
+
+  let searchTimer = 0;
+  searchInput?.addEventListener('input', () => {
+    window.clearTimeout(searchTimer);
+    // Long enough to gather a burst of typing, short enough that the chart
+    // looks like it is following the query rather than catching up with it.
+    searchTimer = window.setTimeout(() => applySearch(), 110);
+  });
+
+  searchInput?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    if (searchInput.value) {
+      searchInput.value = '';
+      applySearch();
+    } else {
+      searchInput.blur();
+    }
+  });
+
+  document.getElementById('search-clear')?.addEventListener('click', () => {
+    if (!searchInput) return;
+    searchInput.value = '';
+    applySearch();
+    searchInput.focus();
+  });
+
+  // `/` focuses the box, as it does nearly everywhere else — but never while
+  // the reader is already typing into something.
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
+    const active = document.activeElement;
+    if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) return;
+    event.preventDefault();
+    searchInput?.focus();
+    searchInput?.select();
+  });
+
+  const startingQuery = new URLSearchParams(location.search).get('q');
+  if (startingQuery && searchInput) {
+    searchInput.value = startingQuery;
+    applySearch();
+  }
 
   // A dropdown that stays open after you click away from it reads as stuck.
   document.addEventListener('click', (event) => {

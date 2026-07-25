@@ -41,9 +41,14 @@ function prefersReducedMotion(): boolean {
  *
  * All reads happen before all writes on each side of the mutation, so the
  * browser does two layouts rather than one per element.
+ *
+ * `animate` is off for changes that happen while the reader is still acting —
+ * every keystroke of a search re-lays out the chart, and animating a cell
+ * across the page only for the next letter to move it again is noise, not
+ * continuity.
  */
-export function flip(container: HTMLElement, mutate: () => void): void {
-  if (prefersReducedMotion()) {
+export function flip(container: HTMLElement, mutate: () => void, animate = true): void {
+  if (!animate || prefersReducedMotion()) {
     mutate();
     return;
   }

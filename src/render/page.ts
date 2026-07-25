@@ -93,6 +93,16 @@ export function renderPage(
 </header>
 
 <form class="toolbar js-only" id="toolbar" aria-label="Chart display options">
+	<!-- First, because it is the fastest way to the one instruction someone came
+	     for. It filters rather than ranks: the chart stays the chart, with
+	     everything that does not match taken out of it. -->
+	<div class="control control-search">
+		<label for="search">Search</label>
+		<input type="search" id="search" name="q" placeholder="name, byte, or words"
+			autocomplete="off" autocorrect="off" spellcheck="false"
+			aria-describedby="search-count">
+		<span class="search-count" id="search-count" role="status"></span>
+	</div>
 	<fieldset class="control">
 		<legend>Arrange</legend>
 		<label><input type="radio" name="layout" value="matrix" checked> Grid</label>
@@ -144,6 +154,11 @@ export function renderPage(
 		</button>
 	</div>
 </form>
+
+<p class="search-empty js-only" id="search-empty" hidden>
+	Nothing matches <strong class="search-empty-term"></strong>.
+	<button type="button" class="ghost" id="search-clear">Clear search</button>
+</p>
 
 <div class="layout">
 

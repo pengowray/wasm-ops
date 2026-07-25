@@ -57,6 +57,12 @@ export interface ViewOptions {
    * reading the chart to understand a module today is looking for.
    */
   showHistorical: boolean;
+  /**
+   * A search, if one is running. The predicate rather than the query string,
+   * because what an instruction can be found by is partly the prose in the
+   * page, which the client has and the build does not need to duplicate.
+   */
+  match?: (op: Opcode) => boolean;
 }
 
 export const DEFAULT_VIEW: ViewOptions = {
@@ -117,11 +123,17 @@ function distinctProposals(ops: Opcode[]): string[] {
   return seen;
 }
 
-/** Whether an opcode passes the status filters (section filtering is separate). */
+/**
+ * Whether an opcode survives the filters and the search (section filtering is
+ * separate). A search is a filter like any other, so it goes here: the byte
+ * grid blanks what it hides and the other layouts drop it, which is what
+ * searching should do in each.
+ */
 function passesStatus(op: Opcode, options: ViewOptions): boolean {
   if (op.status === 'reserved' && !options.showReserved) return false;
   if (op.status === 'proposal' && !options.showProposals) return false;
   if (HISTORICAL.includes(op.status) && !options.showHistorical) return false;
+  if (options.match && !options.match(op)) return false;
   return true;
 }
 

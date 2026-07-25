@@ -125,14 +125,18 @@ export class NavMap {
    * hover with a few more matches than the chart showed.
    */
   syncFiltered(): void {
-    const hidden = new Set<string>();
-    for (const cell of this.#chart.querySelectorAll<HTMLElement>('.cell[data-filtered]')) {
+    // Taken from what the chart is showing rather than from what it is hiding,
+    // because the two layouts hide differently: the byte grid blanks a cell in
+    // place, while the card and table layouts drop it from the document
+    // altogether. Only the set that survived is common to both.
+    const showing = new Set<string>();
+    for (const cell of this.#chart.querySelectorAll<HTMLElement>('.cell:not([data-filtered])')) {
       const key = cell.dataset['key'];
-      if (key) hidden.add(key);
+      if (key) showing.add(key);
     }
     for (const square of this.#root.querySelectorAll<HTMLElement>('.map-cell')) {
       const key = square.dataset['key'];
-      if (key && hidden.has(key)) square.dataset['filtered'] = '1';
+      if (key && !showing.has(key)) square.dataset['filtered'] = '1';
       else delete square.dataset['filtered'];
     }
   }

@@ -210,6 +210,59 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 
 .control-actions { margin-left: auto; gap: .4rem; }
 
+/* ----------------------------------------------------------------- search */
+
+.control-search { gap: .4rem; }
+.control-search label {
+	color: var(--fg-faint);
+	font-size: .72rem;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+}
+#search {
+	width: 11rem;
+	padding: .25rem .55rem;
+	font: inherit;
+	font-size: .85rem;
+	color: var(--fg);
+	background: var(--surface-sunk);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+}
+#search:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+#search::placeholder { color: var(--fg-faint); }
+/* The count is live text, so it must not shift the controls beside it as the
+   number changes width. */
+.search-count {
+	min-width: 5.5rem;
+	font-size: .75rem;
+	color: var(--fg-faint);
+	font-variant-numeric: tabular-nums;
+}
+
+.search-count:empty { min-width: 0; }
+
+/*
+ * `js-only` reveals its elements with `display: flex`, which beats the `hidden`
+ * attribute and, here, would also swallow the spaces between the words by
+ * making each text node a flex item. This one is a sentence, so it is a block,
+ * and it stays hidden when it says it is.
+ */
+.js .search-empty { display: block; }
+.js .search-empty[hidden] { display: none; }
+
+.search-empty {
+	margin: .6rem 0 0;
+	padding: .5rem .7rem;
+	font-size: .9rem;
+	color: var(--fg-dim);
+	background: var(--surface-sunk);
+	border-left: 3px solid var(--rule);
+	border-radius: 0 var(--radius) var(--radius) 0;
+}
+.search-empty strong { color: var(--fg); }
+.search-empty .ghost { margin-left: .4rem; }
+
 .toolbar.toolbar-pinned {
 	position: sticky;
 	top: 0;
