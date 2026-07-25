@@ -234,23 +234,41 @@ const TYPE_WORDS = new Set([
 ]);
 
 /**
+ * Words that introduce an operation without being one. `as` and `is` are always
+ * the first half of something — `as_non_null`, `is_usv_sequence` — so a heading
+ * of either is a sentence broken off in the middle.
+ */
+const FRAGMENT_WORDS = new Set(['as', 'is']);
+
+/**
  * The heading an instruction files under when grouping by name.
  *
  * Usually the operation word, which is the whole point: every `add` together,
- * every `load` together. But `ref.i31` has no verb in it at all — what it does
- * is make an `i31`, so the decomposition offers the type as the operation, and
- * a heading called `i31` sitting in an alphabetical list between `gt` and
- * `le` names a thing where every heading around it names an action.
+ * every `load` together, whatever the type and width qualifying it.
  *
- * Where the operation word is a type, the namespace is the more useful shelf:
- * `ref.i31` and `ref.i31_shared` file under `ref`.
+ * Two kinds of name do not yield an operation that way. `ref.i31` has no verb
+ * in it at all — what it does is make an `i31` — so the decomposition offers
+ * the type, and a heading called `i31` names a thing where every heading around
+ * it names an action; those file under their namespace instead. And a name may
+ * begin with a word that only ever introduces an operation, where `as` and
+ * `is` are not what `ref.as_non_null` and `string.is_usv_sequence` do; those
+ * take the whole operation, which is what `ref.is_null` already did by being
+ * decomposed as one word.
  */
 export function operationKey(op: Opcode): string {
   const { op: word } = operationParts(op);
+
   if (TYPE_WORDS.has(word)) {
     const namespace = (op.parts?.pre ?? '').split('.')[0];
     if (namespace) return namespace;
   }
+
+  if (FRAGMENT_WORDS.has(word)) {
+    // Signedness is a qualifier like any other and stays out of the heading.
+    const tail = [op.parts?.post, op.parts?.rest].filter(Boolean).join('_');
+    if (tail) return `${word}_${tail}`;
+  }
+
   return word;
 }
 
