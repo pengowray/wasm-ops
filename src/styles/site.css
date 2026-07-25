@@ -175,7 +175,7 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 
 .control-actions { margin-left: auto; gap: .4rem; }
 
-.toolbar.pinned {
+.toolbar.toolbar-pinned {
 	position: sticky;
 	top: 0;
 }
@@ -363,6 +363,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .map-cell[data-status='reserved'] { background: var(--rule-soft); cursor: default; }
 .map-cell[data-status='proposal'] { background: var(--rule); }
 .map-cell[data-status='legacy'],
+.map-cell[data-status='dormant'],
 .map-cell[data-status='withdrawn'] { background: var(--rule-soft); opacity: .7; }
 
 /* Which instructions are on screen right now — the "you are here". */
@@ -525,10 +526,22 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-style: italic;
 }
 
-/* A cell hidden by a filter keeps its slot but loses its content. */
+/* A stalled proposal: present, but nothing is built on it. */
+.cell[data-status='dormant'] {
+	--cell-bg: var(--surface-sunk);
+	border-style: dashed;
+	color: var(--fg-faint);
+}
+
+/*
+ * A cell hidden by a filter keeps its slot but loses its content. It stays
+ * clickable: an apparently empty square in the middle of a run is exactly the
+ * one a reader wants to ask about, and the panel can explain why it is empty.
+ */
 .cell[data-filtered] .cell-name,
-.cell[data-filtered] .cell-hex { visibility: hidden; }
-.cell[data-filtered] { pointer-events: none; }
+.cell[data-filtered] .cell-hex,
+.cell[data-filtered] .cell-summary { visibility: hidden; }
+.cell[data-filtered] { cursor: help; }
 
 .cell-hex {
 	display: none;
@@ -832,8 +845,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .detail-summary { margin: 0 0 .6rem; color: var(--fg-dim); font-size: .92rem; }
 
 .detail-status {
+	display: flex;
+	gap: .45rem;
 	margin: .4rem 0;
-	padding: .4rem .6rem;
+	padding: .45rem .6rem;
 	font-size: .82rem;
 	color: var(--fg-dim);
 	background: var(--surface-sunk);
@@ -841,9 +856,16 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	border-radius: 0 var(--radius) var(--radius) 0;
 }
 .detail-status[data-status='legacy'] { background: var(--legacy-bg); border-left-color: var(--enc-prefix); }
+.detail-status[data-status='proposal'] { border-left-style: dashed; }
+.detail-status[data-status='dormant'] { border-left-style: dashed; }
 .detail-status[data-status='withdrawn'] { border-left-style: dotted; }
-.detail-proposal { color: var(--fg-faint); }
-.detail-superseded { display: block; margin-top: .2rem; color: var(--fg-faint); }
+.status-mark { flex: none; line-height: 1.4; }
+.status-text strong { color: var(--fg); }
+.detail-proposal, .detail-superseded {
+	display: block;
+	margin-top: .25rem;
+	color: var(--fg-faint);
+}
 
 /*
  * The bytes, shown once and split into their parts. The captions sit under the

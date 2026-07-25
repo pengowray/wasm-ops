@@ -7,7 +7,7 @@
     "prefix": "FB",
     "start": 128,
     "count": 64,
-    "intro": "Instructions for working with strings as a reference type. This proposal has been at phase 1 and inactive since 2023; no engine implements it, and the encoding may still change."
+    "intro": "Instructions for working with strings as a reference type. The proposal has been at phase 1 and inactive since 2023: no engine implements it, and the encoding may still change. Shown only when \"Legacy, withdrawn &amp; dormant\" is on."
   },
   "opcodes": [
     {
@@ -21,13 +21,14 @@
         1
       ],
       "name": "string.new_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "sign": "u",
         "rest": "tf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.129",
@@ -40,12 +41,13 @@
         1
       ],
       "name": "string.new_wtf16",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "rest": "_wtf16"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.130",
@@ -58,11 +60,12 @@
         1
       ],
       "name": "string.const",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "const"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.131",
@@ -75,13 +78,14 @@
         1
       ],
       "name": "string.measure_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "measure",
         "sign": "u",
         "rest": "tf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.132",
@@ -94,12 +98,13 @@
         1
       ],
       "name": "string.measure_wtf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "measure",
         "rest": "_wtf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.133",
@@ -112,12 +117,13 @@
         1
       ],
       "name": "string.measure_wtf16",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "measure",
         "rest": "_wtf16"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.134",
@@ -130,13 +136,14 @@
         1
       ],
       "name": "string.encode_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "sign": "u",
         "rest": "tf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.135",
@@ -149,12 +156,13 @@
         1
       ],
       "name": "string.encode_wtf16",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "rest": "_wtf16"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.136",
@@ -167,11 +175,12 @@
         1
       ],
       "name": "string.concat",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "concat"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.137",
@@ -184,11 +193,12 @@
         1
       ],
       "name": "string.eq",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "eq"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.138",
@@ -201,13 +211,14 @@
         1
       ],
       "name": "string.is_usv_sequence",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "is_usv",
         "sign": "s",
         "rest": "equence"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.139",
@@ -220,12 +231,13 @@
         1
       ],
       "name": "string.new_lossy_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "rest": "_lossy_utf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.140",
@@ -238,12 +250,13 @@
         1
       ],
       "name": "string.new_wtf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "rest": "_wtf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.141",
@@ -256,12 +269,13 @@
         1
       ],
       "name": "string.encode_lossy_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "rest": "_lossy_utf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.142",
@@ -274,12 +288,13 @@
         1
       ],
       "name": "string.encode_wtf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "rest": "_wtf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.143",
@@ -305,12 +320,13 @@
         1
       ],
       "name": "string.as_wtf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "as",
         "rest": "_wtf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.145",
@@ -323,11 +339,12 @@
         1
       ],
       "name": "stringview_wtf8.advance",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "advance"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.146",
@@ -340,13 +357,14 @@
         1
       ],
       "name": "stringview_wtf8.encode_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "encode",
         "sign": "u",
         "rest": "tf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.147",
@@ -359,11 +377,12 @@
         1
       ],
       "name": "stringview_wtf8.slice",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "slice"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.148",
@@ -376,12 +395,13 @@
         1
       ],
       "name": "stringview_wtf8.encode_lossy_utf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "encode",
         "rest": "_lossy_utf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.149",
@@ -394,12 +414,13 @@
         1
       ],
       "name": "stringview_wtf8.encode_wtf8",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "encode",
         "rest": "_wtf8"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.150",
@@ -438,12 +459,13 @@
         1
       ],
       "name": "string.as_wtf16",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "as",
         "rest": "_wtf16"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.153",
@@ -456,11 +478,12 @@
         1
       ],
       "name": "stringview_wtf16.length",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf16",
         "mainop": "length"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.154",
@@ -473,12 +496,13 @@
         1
       ],
       "name": "stringview_wtf16.get_codeunit",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf16",
         "mainop": "get",
         "rest": "_codeunit"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.155",
@@ -491,11 +515,12 @@
         1
       ],
       "name": "stringview_wtf16.encode",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf16",
         "mainop": "encode"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.156",
@@ -508,11 +533,12 @@
         1
       ],
       "name": "stringview_wtf16.slice",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_wtf16",
         "mainop": "slice"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.157",
@@ -564,13 +590,14 @@
         1
       ],
       "name": "string.as_iter",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "as",
         "post": "i",
         "rest": "ter"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.161",
@@ -583,11 +610,12 @@
         1
       ],
       "name": "stringview_iter.next",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_iter",
         "mainop": "next"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.162",
@@ -600,11 +628,12 @@
         1
       ],
       "name": "stringview_iter.advance",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_iter",
         "mainop": "advance"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.163",
@@ -617,11 +646,12 @@
         1
       ],
       "name": "stringview_iter.rewind",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_iter",
         "mainop": "rewind"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.164",
@@ -634,11 +664,12 @@
         1
       ],
       "name": "stringview_iter.slice",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "stringview_iter",
         "mainop": "slice"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.165",
@@ -794,13 +825,14 @@
         1
       ],
       "name": "string.new_utf8_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "sign": "u",
         "rest": "tf8_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.177",
@@ -813,12 +845,13 @@
         1
       ],
       "name": "string.new_wtf16_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "rest": "_wtf16_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.178",
@@ -831,13 +864,14 @@
         1
       ],
       "name": "string.encode_utf8_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "sign": "u",
         "rest": "tf8_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.179",
@@ -850,12 +884,13 @@
         1
       ],
       "name": "string.encode_wtf16_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "rest": "_wtf16_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.180",
@@ -868,12 +903,13 @@
         1
       ],
       "name": "string.new_lossy_utf8_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "rest": "_lossy_utf8_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.181",
@@ -886,12 +922,13 @@
         1
       ],
       "name": "string.new_wtf8_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "new",
         "rest": "_wtf8_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.182",
@@ -904,12 +941,13 @@
         1
       ],
       "name": "string.encode_lossy_utf8_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "rest": "_lossy_utf8_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.183",
@@ -922,12 +960,13 @@
         1
       ],
       "name": "string.encode_wtf8_array",
-      "status": "standard",
+      "status": "dormant",
       "parts": {
         "pre": "string",
         "mainop": "encode",
         "rest": "_wtf8_array"
-      }
+      },
+      "proposal": "Reference-Typed Strings"
     },
     {
       "id": "0xFB.184",

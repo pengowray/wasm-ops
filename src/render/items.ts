@@ -259,6 +259,31 @@ export function renderItem(item: ViewItem): string {
   }
 }
 
+/**
+ * How each status is announced. Every one that is not `standard` carries the
+ * same warning mark and the same shape — label, then what it means for someone
+ * reading a module today — so the difference between them is in the words and
+ * not in how hard they are to notice.
+ */
+const STATUS_NOTES: Partial<Record<Opcode['status'], { label: string; detail: string }>> = {
+  proposal: {
+    label: 'Proposal',
+    detail: 'not standardised. Engine support varies and the encoding may still change.',
+  },
+  legacy: {
+    label: 'Legacy',
+    detail: 'superseded by a newer encoding, though still emitted and accepted.',
+  },
+  dormant: {
+    label: 'Dormant',
+    detail: 'an inactive proposal. No engine implements it and the encoding may still change.',
+  },
+  withdrawn: {
+    label: 'Withdrawn',
+    detail: 'this encoding was abandoned. The slot is unassigned today.',
+  },
+};
+
 /** The opcode's name as a panel heading, with its immediate operands. */
 export function renderHeading(op: Opcode): string {
   const name = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
@@ -301,25 +326,20 @@ export function renderDetail(op: Opcode): string {
   const rows: string[] = [renderHeading(op)];
   const tags = renderTags(op);
 
-  const STATUS_NOTE: Partial<Record<Opcode['status'], string>> = {
-    proposal: 'Proposal — not yet standardised',
-    legacy: 'Legacy — superseded, but still emitted and accepted',
-    withdrawn: 'Withdrawn — this encoding was abandoned; the slot is unassigned',
-  };
-  const note = STATUS_NOTE[op.status];
+  const note = STATUS_NOTES[op.status];
   if (note) {
     rows.push(
-      `<p class="detail-status" data-status="${op.status}">${note}` +
-        (op.proposal ? ` <span class="detail-proposal">${escapeHtml(op.proposal)}</span>` : '') +
+      `<p class="detail-status" data-status="${op.status}">` +
+        `<span class="status-mark" aria-hidden="true">⚠️</span>` +
+        `<span class="status-text"><strong>${note.label}</strong> — ${note.detail}` +
+        (op.proposal ? `<span class="detail-proposal">${escapeHtml(op.proposal)}</span>` : '') +
         (op.supersededBy
           ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`
           : '') +
-        `</p>`,
+        `</span></p>`,
     );
   }
 
-  // Every part of the panel is labelled, so the eye can go straight to the one
-  // it wants instead of reading down to find it.
   if (op.description) {
     rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
   }

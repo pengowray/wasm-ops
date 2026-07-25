@@ -53,8 +53,15 @@ export function tagsFor(op: Opcode): Tag[] {
   if (op.parts?.sign === 's') add('signed', 'signed', 'trait');
   if (op.parts?.sign === 'u') add('unsigned', 'unsigned', 'trait');
 
-  if (op.section === 'simd' || op.section === 'simd-ext') add('vector', 'vector (SIMD)', 'trait');
-  if (pre.includes('atomic') || op.name.startsWith('atomic.')) add('atomic', 'atomic', 'trait');
+  // Traits that merely restate the category are dropped: an instruction whose
+  // category is already "Vector (SIMD)" gained nothing from a "vector (SIMD)"
+  // trait beside it except the appearance of a duplicate.
+  if ((op.section === 'simd' || op.section === 'simd-ext') && category !== 'vector') {
+    add('vector', 'vector (SIMD)', 'trait');
+  }
+  if ((pre.includes('atomic') || op.name.startsWith('atomic.')) && category !== 'atomic') {
+    add('atomic', 'atomic', 'trait');
+  }
   if (op.prefix) add('prefixed', 'multi-byte opcode', 'trait');
   if (op.immediateArgs) add('immediates', 'takes immediates', 'trait');
   if (op.stack) add('documented-stack', 'stack signature known', 'trait');

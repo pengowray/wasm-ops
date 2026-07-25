@@ -43,9 +43,17 @@ export class Highlighter {
         // The type prefix lights up only while the pointer is over the `i32`
         // itself, not anywhere in the cell — otherwise every cell of that type
         // flashes yellow just from crossing the chart.
+        // A pinned tag was asked for explicitly. Letting the pointer wipe it
+        // out on the way past would make it useless for comparing.
+        if (this.#pinnedTag) return;
+        // A cell emptied by filtering is showing nothing, so there is nothing
+        // to be related to.
+        if (cell?.hasAttribute('data-filtered')) return;
         if (cell) this.#apply(cell, Boolean(target.closest('.pre')));
       });
-      root.addEventListener('pointerleave', () => this.restore());
+      root.addEventListener('pointerleave', () => {
+        if (!this.#pinnedTag) this.restore();
+      });
     }
   }
 
@@ -82,7 +90,10 @@ export class Highlighter {
   /** Reapplies the pinned highlight, e.g. after a rearrangement replaced nodes. */
   restore(): void {
     this.#clear();
-    for (const el of document.querySelectorAll<HTMLElement>('.pinned')) {
+    // Scoped to cells. An unscoped `.pinned` also matched the toolbar, which
+    // uses that class to mean "kept on screen" — so selecting an instruction
+    // silently unpinned the toolbar.
+    for (const el of document.querySelectorAll<HTMLElement>('.cell.pinned, .map-cell.pinned')) {
       el.classList.remove('pinned');
     }
     if (this.#pinnedTag) {

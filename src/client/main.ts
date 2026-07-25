@@ -64,7 +64,7 @@ function start(
   const pin = document.getElementById('pin-toolbar');
   if (pin) {
     const setPinned = (on: boolean) => {
-      toolbar.classList.toggle('pinned', on);
+      toolbar.classList.toggle('toolbar-pinned', on);
       pin.setAttribute('aria-pressed', String(on));
     };
     try {

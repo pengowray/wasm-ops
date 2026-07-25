@@ -43,18 +43,27 @@ export interface Section {
  * - `proposal`   an active proposal, not yet standardised
  * - `legacy`     superseded, but still emitted and accepted in practice — the
  *                pre-`try_table` exception handling instructions
+ * - `dormant`    a proposal that has stalled — no engine implements it and the
+ *                encoding may still change. Not withdrawn, but not something
+ *                to write code against either
  * - `withdrawn`  an encoding that was used during a proposal's development and
  *                then abandoned. The slot is unassigned today; this records
  *                what a reader may find in an old module or an old tool
  * - `reserved`   unassigned, nothing was ever here
  *
- * `legacy` and `withdrawn` are history rather than reference material, so the
- * chart hides them unless asked.
+ * The middle three are not what a byte means today, so the chart hides them
+ * unless asked.
  */
-export type OpcodeStatus = 'standard' | 'proposal' | 'legacy' | 'withdrawn' | 'reserved';
+export type OpcodeStatus =
+  | 'standard'
+  | 'proposal'
+  | 'legacy'
+  | 'dormant'
+  | 'withdrawn'
+  | 'reserved';
 
-/** Statuses that describe what an instruction *was*, rather than what it is. */
-export const HISTORICAL: readonly OpcodeStatus[] = ['legacy', 'withdrawn'];
+/** Statuses that are not what a byte means today. */
+export const HISTORICAL: readonly OpcodeStatus[] = ['legacy', 'dormant', 'withdrawn'];
 
 /**
  * A structured decomposition of an opcode name, e.g. `i64.load16_u` becomes
