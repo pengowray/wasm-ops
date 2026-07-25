@@ -39,6 +39,11 @@
 	   it is not. Everything else that sticks to the top offsets by it. */
 	--toolbar-h: 0px;
 
+	/* The map's squares are tiny, so its highlights are stronger than the
+	   chart's rather than the same colours scaled down. */
+	--map-hl-op: #1a86a0;
+	--map-hl-self: #f5a623;
+
 	/* Tint strength for "colour by proposal". */
 	--proposal-s: 55%;
 	--proposal-l: 94%;
@@ -76,6 +81,9 @@
 
 		--proposal-s: 28%;
 		--proposal-l: 17%;
+
+		--map-hl-op: #38b6d4;
+		--map-hl-self: #ffb52e;
 	}
 }
 
@@ -104,6 +112,9 @@
 
 	--proposal-s: 28%;
 	--proposal-l: 17%;
+
+	--map-hl-op: #38b6d4;
+	--map-hl-self: #ffb52e;
 }
 
 * { box-sizing: border-box; }
@@ -383,9 +394,24 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 /* Which instructions are on screen right now — the "you are here". */
 .map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
 
-.map-cell.hl-op { background: var(--hl-op); }
-.map-cell.hl-self { background: var(--hl-self); }
-.map-cell.pinned { outline: 1px solid var(--accent); }
+/*
+ * A map square is five pixels across, so the gentle tints the chart uses
+ * disappear at that size. These are the loud versions of the same three
+ * states — the map's whole job is to be readable at a glance from the corner
+ * of your eye.
+ */
+.map-cell.hl-op,
+.map-cell.hl-tag {
+	background: var(--map-hl-op);
+	box-shadow: 0 0 0 1px var(--map-hl-op);
+}
+.map-cell.hl-self {
+	background: var(--map-hl-self);
+	box-shadow: 0 0 0 2px var(--map-hl-self);
+	position: relative;
+	z-index: 1;
+}
+.map-cell.pinned { outline: 1px solid var(--fg); outline-offset: 1px; }
 
 /*
  * Wide enough for the rail plus a chart still worth looking at. A container
@@ -629,6 +655,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .map[data-colour='proposal'] .map-cell[data-proposal] {
 	background: hsl(var(--proposal-hue) calc(var(--proposal-s) + 15%) calc(var(--proposal-l) - 8%));
 }
+.map[data-colour='proposal'] .map-cell.hl-op,
+.map[data-colour='proposal'] .map-cell.hl-tag { background: var(--map-hl-op); }
+.map[data-colour='proposal'] .map-cell.hl-self { background: var(--map-hl-self); }
 
 /* A chip carrying its proposal's colour, so the legend and the chart agree. */
 .group-proposals {
@@ -1020,6 +1049,20 @@ code, .code {
 }
 .accordion > summary:hover { color: var(--accent); }
 .accordion ul { margin: .3rem 0; }
+.accordion > summary { font-size: 1rem; }
+
+/* Four topics inside one disclosure, side by side where there is room. */
+.footer-columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+	gap: .5rem 2rem;
+	margin-top: .5rem;
+}
+.footer-columns h3 { margin: .6rem 0 .2rem; font-size: .95rem; }
+.footer-columns section { break-inside: avoid; }
+
+.reviewed { color: var(--fg-faint); font-size: .82rem; }
+.site-header .reviewed { margin: .6rem 0 0; max-width: 68ch; }
 
 /* ------------------------------------------------------------------- mobile */
 

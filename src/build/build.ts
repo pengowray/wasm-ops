@@ -11,7 +11,7 @@
 import { mkdirSync, readFileSync, writeFileSync, rmSync, copyFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { build as esbuild } from 'esbuild';
-import { loadData } from '../model/load.ts';
+import { loadData, loadMeta } from '../model/load.ts';
 import { renderPage } from '../render/page.ts';
 
 const ROOT = new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -26,6 +26,7 @@ async function main(): Promise<void> {
   const content = {
     intro: readFileSync(join(ROOT, 'content', 'intro.html'), 'utf8'),
     footer: readFileSync(join(ROOT, 'content', 'footer.html'), 'utf8'),
+    meta: loadMeta(),
   };
 
   const html = renderPage(data, content);

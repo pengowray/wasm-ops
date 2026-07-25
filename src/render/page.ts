@@ -2,6 +2,7 @@ import type { OpcodeData } from '../model/types.ts';
 import { buildView, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { hasDetail, renderDetail, renderItem } from './items.ts';
 import { allProposals } from '../model/proposals.ts';
+import type { DataMeta } from '../model/load.ts';
 
 /**
  * Runs before first paint to avoid a flash of the wrong theme, and to reveal
@@ -21,6 +22,7 @@ const BOOTSTRAP = `
 export interface PageContent {
   intro: string;
   footer: string;
+  meta: DataMeta;
 }
 
 /**
@@ -87,6 +89,7 @@ export function renderPage(
 	<h1>WebAssembly Opcodes</h1>
 	<p class="byline">by Pengo Wray</p>
 	<div class="lede">${content.intro}</div>
+	<p class="reviewed">Instruction data reviewed <strong>${content.meta.reviewed}</strong>. WebAssembly is still gaining instructions; check the specification if this page is older than you are comfortable with.</p>
 </header>
 
 <form class="toolbar js-only" id="toolbar" aria-label="Chart display options">
@@ -122,7 +125,7 @@ export function renderPage(
 				<label class="toggle" title="Superseded, abandoned and stalled encodings — not what these bytes mean today"><input type="checkbox" name="showHistorical"><span>Legacy, withdrawn &amp; dormant</span></label>
 			</div>
 			<div class="filter-group">
-				<label class="toggle" title="Tint each instruction by the proposal it arrived through"><input type="checkbox" name="colourByProposal"><span>Colour by proposal</span></label>
+				<label class="toggle" title="Tint each instruction by the proposal it arrived through"><input type="checkbox" name="colourByProposal" checked><span>Colour by proposal</span></label>
 			</div>
 			<div class="filter-group filter-presets">
 				<button type="button" id="preset-default" class="ghost">Default</button>
@@ -155,7 +158,7 @@ export function renderPage(
 	</details>
 </aside>
 
-<main id="chart" class="chart" data-layout="${options.layout}">
+<main id="chart" class="chart" data-layout="${options.layout}" data-colour="proposal">
 ${chart}
 </main>
 
@@ -179,6 +182,7 @@ ${details}
 
 <footer class="site-footer">
 ${content.footer}
+<p class="reviewed">Instruction data reviewed ${content.meta.reviewed}.</p>
 </footer>
 
 <script type="application/json" id="opcode-data">${clientData(data)}</script>

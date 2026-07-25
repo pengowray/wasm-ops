@@ -18,6 +18,15 @@ const DATA_DIR = join(
   'data',
 );
 
+/** When the data was last checked against the specification. */
+export interface DataMeta {
+  reviewed: string;
+}
+
+export function loadMeta(dir: string = DATA_DIR): DataMeta {
+  return JSON.parse(readFileSync(join(dir, 'meta.json'), 'utf8')) as DataMeta;
+}
+
 interface SectionFile {
   section: Section;
   opcodes: Opcode[];

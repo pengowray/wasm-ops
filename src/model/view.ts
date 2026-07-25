@@ -191,9 +191,22 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
     });
   }
 
-  // Walk the section's full code range so gaps keep their position, and drop
+  /*
+   * Trailing empty rows say nothing — the section simply does not reach that
+   * far — so the grid stops after the last row with something in it. Interior
+   * gaps are kept: a hole in the middle of a run is a fact about the encoding.
+   * The GC table is 128 slots for 31 instructions, and most of that emptiness
+   * is at the end.
+   */
+  const lastUsed = ops.reduce(
+    (last, op) => (op.name && passesStatus(op, options) ? Math.max(last, op.code) : last),
+    section.start,
+  );
+  const end = Math.min(section.start + section.count, (lastUsed | 0xf) + 1);
+
+  // Walk the section's code range so gaps keep their position, and drop
   // any row that filtering has emptied entirely.
-  for (let base = section.start; base < section.start + section.count; base += 16) {
+  for (let base = section.start; base < end; base += 16) {
     const row = ops.filter((op) => op.code >= base && op.code < base + 16);
     // Row labels are explicit rather than positional, so a row in which
     // everything has been filtered away can be dropped without misaligning
