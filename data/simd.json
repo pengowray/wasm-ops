@@ -25,7 +25,9 @@
         "pre": "v128",
         "mainop": "load"
       },
-      "description": "<p>Loads a v128 vector from the given heap address.</p>"
+      "description": "<p>Loads a v128 vector from the given heap address.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.1",
@@ -43,7 +45,9 @@
         "mainop": "load",
         "opbits": "8x8",
         "sign": "s"
-      }
+      },
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.2",
@@ -61,7 +65,9 @@
         "mainop": "load",
         "opbits": "8x8",
         "sign": "u"
-      }
+      },
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.3",
@@ -79,7 +85,9 @@
         "mainop": "load",
         "opbits": "16x4",
         "sign": "s"
-      }
+      },
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.4",
@@ -97,7 +105,9 @@
         "mainop": "load",
         "opbits": "16x4",
         "sign": "u"
-      }
+      },
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.5",
@@ -115,7 +125,9 @@
         "mainop": "load",
         "opbits": "32x2",
         "sign": "s"
-      }
+      },
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.6",
@@ -133,7 +145,9 @@
         "mainop": "load",
         "opbits": "32x2",
         "sign": "u"
-      }
+      },
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.7",
@@ -153,7 +167,9 @@
         "sign": "s",
         "rest": "plat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
+      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.8",
@@ -173,7 +189,9 @@
         "sign": "s",
         "rest": "plat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
+      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.9",
@@ -193,7 +211,9 @@
         "sign": "s",
         "rest": "plat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
+      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.10",
@@ -213,7 +233,9 @@
         "sign": "s",
         "rest": "plat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
+      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.11",
@@ -230,7 +252,9 @@
         "pre": "v128",
         "mainop": "store"
       },
-      "description": "<p>Stores a v128 vector to the given heap address.</p>"
+      "description": "<p>Stores a v128 vector to the given heap address.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.12",
@@ -246,7 +270,9 @@
       "parts": {
         "pre": "v128",
         "mainop": "const"
-      }
+      },
+      "immediateArgs": "b*",
+      "followedBy": "<span class=\"op-imm-args\"><i>b*</i> : 16 bytes, little-endian</span>"
     },
     {
       "id": "0xFD.13",
@@ -263,7 +289,9 @@
         "pre": "i8x16",
         "mainop": "shuffle"
       },
-      "description": "<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>"
+      "description": "<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>",
+      "immediateArgs": "l*",
+      "followedBy": "<span class=\"op-imm-args\"><i>l*</i> : 16 laneidx, one byte each</span>"
     },
     {
       "id": "0xFD.14",
@@ -401,7 +429,9 @@
         "post": "lane",
         "sign": "s"
       },
-      "description": "<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>\n<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>"
+      "description": "<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>\n<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.22",
@@ -420,7 +450,9 @@
         "post": "lane",
         "sign": "u"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 16 packed u8 numbers.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 16 packed u8 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.23",
@@ -438,7 +470,9 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>"
+      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.24",
@@ -457,7 +491,9 @@
         "post": "lane",
         "sign": "s"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.25",
@@ -476,7 +512,9 @@
         "post": "lane",
         "sign": "u"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed u16 numbers.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed u16 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.26",
@@ -494,7 +532,9 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>"
+      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.27",
@@ -512,7 +552,9 @@
         "mainop": "extract",
         "post": "lane"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.28",
@@ -530,7 +572,9 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>"
+      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.29",
@@ -548,7 +592,9 @@
         "mainop": "extract",
         "post": "lane"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.30",
@@ -566,7 +612,9 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>"
+      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.31",
@@ -584,7 +632,9 @@
         "mainop": "extract",
         "post": "lane"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.32",
@@ -602,7 +652,9 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Rust: <code>fn f32x4_replace_lane&lt;const N: usize&gt;(a: v128, val: f32) -&gt; v128</code></p>\n<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>"
+      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Rust: <code>fn f32x4_replace_lane&lt;const N: usize&gt;(a: v128, val: f32) -&gt; v128</code></p>\n<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.33",
@@ -620,7 +672,9 @@
         "mainop": "extract",
         "post": "lane"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>"
+      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.34",
@@ -638,7 +692,9 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>"
+      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
     },
     {
       "id": "0xFD.35",
@@ -1514,7 +1570,9 @@
         "opbits": "8",
         "post": "lane"
       },
-      "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>"
+      "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.85",
@@ -1533,7 +1591,9 @@
         "opbits": "16",
         "post": "lane"
       },
-      "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>"
+      "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.86",
@@ -1552,7 +1612,9 @@
         "opbits": "32",
         "post": "lane"
       },
-      "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>"
+      "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.87",
@@ -1571,7 +1633,9 @@
         "opbits": "64",
         "post": "lane"
       },
-      "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>"
+      "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.88",
@@ -1590,7 +1654,9 @@
         "opbits": "8",
         "post": "lane"
       },
-      "description": "<p>Stores the 8-bit value from lane L of v into m</p>"
+      "description": "<p>Stores the 8-bit value from lane L of v into m</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.89",
@@ -1609,7 +1675,9 @@
         "opbits": "16",
         "post": "lane"
       },
-      "description": "<p>Stores the 16-bit value from lane L of v into m</p>"
+      "description": "<p>Stores the 16-bit value from lane L of v into m</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.90",
@@ -1628,7 +1696,9 @@
         "opbits": "32",
         "post": "lane"
       },
-      "description": "<p>Stores the 32-bit value from lane L of v into m</p>"
+      "description": "<p>Stores the 32-bit value from lane L of v into m</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.91",
@@ -1647,7 +1717,9 @@
         "opbits": "64",
         "post": "lane"
       },
-      "description": "<p>Stores the 64-bit value from lane L of v into m</p>"
+      "description": "<p>Stores the 64-bit value from lane L of v into m</p>",
+      "immediateArgs": "m l",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
     },
     {
       "id": "0xFD.92",
@@ -1666,7 +1738,9 @@
         "opbits": "32",
         "rest": "_zero"
       },
-      "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>"
+      "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.93",
@@ -1685,7 +1759,9 @@
         "opbits": "64",
         "rest": "_zero"
       },
-      "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>"
+      "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
     },
     {
       "id": "0xFD.94",

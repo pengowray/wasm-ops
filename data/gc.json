@@ -25,7 +25,9 @@
         "pre": "struct",
         "mainop": "new"
       },
-      "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>"
+      "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.1",
@@ -43,7 +45,9 @@
         "mainop": "new",
         "rest": "_default"
       },
-      "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>"
+      "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.2",
@@ -60,7 +64,9 @@
         "pre": "struct",
         "mainop": "get"
       },
-      "description": "<p>reads field <code>i</code> from a structure</p>"
+      "description": "<p>reads field <code>i</code> from a structure</p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
     },
     {
       "id": "0xFB.3",
@@ -77,7 +83,9 @@
         "pre": "struct",
         "mainop": "get",
         "sign": "s"
-      }
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
     },
     {
       "id": "0xFB.4",
@@ -94,7 +102,9 @@
         "pre": "struct",
         "mainop": "get",
         "sign": "u"
-      }
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
     },
     {
       "id": "0xFB.5",
@@ -111,7 +121,9 @@
         "pre": "struct",
         "mainop": "set"
       },
-      "description": "<p>writes field <code>i</code> of a structure</p>"
+      "description": "<p>writes field <code>i</code> of a structure</p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
     },
     {
       "id": "0xFB.6",
@@ -128,7 +140,9 @@
         "pre": "array",
         "mainop": "new"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type)</p>"
+      "description": "<p>allocates an array with canonical RTT (runtime type)</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.7",
@@ -146,7 +160,9 @@
         "mainop": "new",
         "rest": "_default"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>"
+      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.8",
@@ -165,7 +181,9 @@
         "post": "fix",
         "rest": "ed"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>"
+      "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>",
+      "immediateArgs": "x n",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>n</i> : number of elements</span></li></ol>"
     },
     {
       "id": "0xFB.9",
@@ -183,7 +201,9 @@
         "mainop": "new",
         "rest": "_data"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>"
+      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>"
     },
     {
       "id": "0xFB.10",
@@ -201,7 +221,9 @@
         "mainop": "new",
         "rest": "_elem"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>"
+      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>"
     },
     {
       "id": "0xFB.11",
@@ -218,7 +240,9 @@
         "pre": "array",
         "mainop": "get"
       },
-      "description": "<p>reads an element from an array</p>"
+      "description": "<p>reads an element from an array</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.12",
@@ -235,7 +259,9 @@
         "pre": "array",
         "mainop": "get",
         "sign": "s"
-      }
+      },
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.13",
@@ -252,7 +278,9 @@
         "pre": "array",
         "mainop": "get",
         "sign": "u"
-      }
+      },
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.14",
@@ -269,7 +297,9 @@
         "pre": "array",
         "mainop": "set"
       },
-      "description": "<p>writes an element to an array</p>"
+      "description": "<p>writes an element to an array</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.15",
@@ -302,7 +332,9 @@
       "parts": {
         "pre": "array",
         "mainop": "fill"
-      }
+      },
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xFB.17",
@@ -318,7 +350,9 @@
       "parts": {
         "pre": "array",
         "mainop": "copy"
-      }
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li></ol>"
     },
     {
       "id": "0xFB.18",
@@ -335,7 +369,9 @@
         "pre": "array",
         "mainop": "init",
         "rest": "_data"
-      }
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>"
     },
     {
       "id": "0xFB.19",
@@ -352,7 +388,9 @@
         "pre": "array",
         "mainop": "init",
         "rest": "_elem"
-      }
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>"
     },
     {
       "id": "0xFB.20",
@@ -369,7 +407,9 @@
         "pre": "ref",
         "mainop": "test"
       },
-      "description": "<p>checks whether a reference has a given heap type</p>"
+      "description": "<p>checks whether a reference has a given heap type</p>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.21",
@@ -386,7 +426,9 @@
         "pre": "ref",
         "mainop": "test"
       },
-      "description": "<p>checks whether a reference has a given heap type</p>"
+      "description": "<p>checks whether a reference has a given heap type</p>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.22",
@@ -403,7 +445,9 @@
         "pre": "ref",
         "mainop": "cast"
       },
-      "description": "<p>tries to convert to a given heap type</p>"
+      "description": "<p>tries to convert to a given heap type</p>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.23",
@@ -420,7 +464,9 @@
         "pre": "ref",
         "mainop": "cast"
       },
-      "description": "<p>tries to convert to a given heap type</p>"
+      "description": "<p>tries to convert to a given heap type</p>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.24",
@@ -436,7 +482,9 @@
       "parts": {
         "mainop": "br_on_cast"
       },
-      "description": "<p>branches if a reference has a given heap type</p>"
+      "description": "<p>branches if a reference has a given heap type</p>",
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
     },
     {
       "id": "0xFB.25",
@@ -452,7 +500,9 @@
       "parts": {
         "mainop": "br_on_cast_fail"
       },
-      "description": "<p>branches if a reference does not have a given heap type</p>"
+      "description": "<p>branches if a reference does not have a given heap type</p>",
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
     },
     {
       "id": "0xFB.26",
@@ -980,7 +1030,9 @@
       "parts": {
         "pre": "ref",
         "mainop": "test"
-      }
+      },
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.65",
@@ -999,7 +1051,9 @@
       "parts": {
         "pre": "ref",
         "mainop": "cast"
-      }
+      },
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.66",
@@ -1017,7 +1071,9 @@
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast (0xFB 24)</code>.</p>",
       "parts": {
         "mainop": "br_on_cast"
-      }
+      },
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
     },
     {
       "id": "0xFB.67",
@@ -1035,7 +1091,9 @@
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast_fail (0xFB 25)</code>.</p>",
       "parts": {
         "mainop": "br_on_cast_fail"
-      }
+      },
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
     },
     {
       "id": "0xFB.68",
@@ -1102,7 +1160,9 @@
       "parts": {
         "pre": "ref",
         "mainop": "test"
-      }
+      },
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.73",
@@ -1121,7 +1181,9 @@
       "parts": {
         "pre": "ref",
         "mainop": "cast"
-      }
+      },
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
     },
     {
       "id": "0xFB.74",
@@ -1139,7 +1201,9 @@
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast (0xFB 24)</code>.</p>",
       "parts": {
         "mainop": "br_on_cast"
-      }
+      },
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
     },
     {
       "id": "0xFB.75",
@@ -1157,7 +1221,9 @@
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast_fail (0xFB 25)</code>.</p>",
       "parts": {
         "mainop": "br_on_cast_fail"
-      }
+      },
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
     },
     {
       "id": "0xFB.76",

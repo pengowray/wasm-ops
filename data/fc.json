@@ -177,7 +177,9 @@
         "pre": "memory",
         "mainop": "init"
       },
-      "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>"
     },
     {
       "id": "0xFC.9",
@@ -194,7 +196,9 @@
         "pre": "data",
         "mainop": "drop"
       },
-      "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span>"
     },
     {
       "id": "0xFC.10",
@@ -211,7 +215,9 @@
         "pre": "memory",
         "mainop": "copy"
       },
-      "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : memidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>"
     },
     {
       "id": "0xFC.11",
@@ -228,7 +234,9 @@
         "pre": "memory",
         "mainop": "fill"
       },
-      "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>"
     },
     {
       "id": "0xFC.12",
@@ -245,7 +253,9 @@
         "pre": "table",
         "mainop": "init"
       },
-      "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "y x",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>"
     },
     {
       "id": "0xFC.13",
@@ -262,7 +272,9 @@
         "pre": "elem",
         "mainop": "drop"
       },
-      "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : elemidx</span>"
     },
     {
       "id": "0xFC.14",
@@ -279,7 +291,9 @@
         "pre": "table",
         "mainop": "copy"
       },
-      "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>"
+      "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : tableidx</span></li></ol>"
     },
     {
       "id": "0xFC.15",
@@ -296,7 +310,9 @@
         "pre": "table",
         "mainop": "grow"
       },
-      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
     },
     {
       "id": "0xFC.16",
@@ -313,7 +329,9 @@
         "pre": "table",
         "mainop": "size"
       },
-      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
     },
     {
       "id": "0xFC.17",
@@ -330,7 +348,9 @@
         "pre": "table",
         "mainop": "fill"
       },
-      "description": "<p>fills a range in a table with a value</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>fills a range in a table with a value</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
     },
     {
       "id": "0xFC.18",

@@ -71,6 +71,27 @@ function parseReference(source: string): RefOpcode[] {
  */
 const COVERED = new Set(['', 'FB', 'FC', 'FD', 'FE']);
 
+/**
+ * Differences that have been looked at and are correct as they stand. Keeping
+ * them here rather than deleting the check means a clean run says "nothing
+ * unexplained", which is the only kind of clean run worth having.
+ */
+const ACCEPTED: Record<string, string> = {
+  '0xD3':
+    'ref.eq is a GC instruction and wabt implements no GC, so it is absent from ' +
+    'that list. The specification puts it here.',
+  '0x1C':
+    'The typed select. The specification writes it `select t*`, wabt calls both ' +
+    'forms `select` and distinguishes them by whether types follow.',
+  '0xE0': 'Stack switching (phase 3). wabt uses 0xE0+ for its own interpreter opcodes.',
+  '0xE1': 'Stack switching (phase 3).',
+  '0xE2': 'Stack switching (phase 3).',
+  '0xE3': 'Stack switching (phase 3).',
+  '0xE4': 'Stack switching (phase 3).',
+  '0xE5': 'Stack switching (phase 3).',
+  '0xE6': 'Stack switching (phase 3).',
+};
+
 /** The GC list is authored from the proposal, since wabt carries no 0xFB. */
 function loadGcReference(): RefOpcode[] {
   const file = JSON.parse(readFileSync(join(ROOT, 'reference', 'gc-opcodes.json'), 'utf8')) as {
@@ -93,6 +114,7 @@ function main(): void {
   for (const op of data.opcodes) ours.set(op.id, op);
 
   let historical = 0;
+  const accepted: string[] = [];
   const missing: string[] = [];
   const extra: string[] = [];
   const renamed: string[] = [];
@@ -116,7 +138,11 @@ function main(): void {
     }
 
     const ref = refById.get(op.id);
-    if (op.name && !ref) {
+    const mismatched = op.name && (!ref || ref.name !== op.name);
+    if (mismatched && ACCEPTED[op.id]) {
+      accepted.push(`${op.id.padEnd(11)} ${op.name}
+              ${ACCEPTED[op.id]}`);
+    } else if (op.name && !ref) {
       extra.push(`${op.id.padEnd(11)} ${op.name}  (${op.status})`);
     } else if (op.name && ref && ref.name !== op.name) {
       renamed.push(`${op.id.padEnd(11)} ours: ${op.name.padEnd(32)} ref: ${ref.name}`);
@@ -149,9 +175,16 @@ function main(): void {
   report('In the reference, missing or unnamed here', missing);
   report('Named here, absent from the reference', extra);
   report('Named differently', renamed);
+  report('Differences already accounted for', accepted);
 
-  console.log(`
-Skipped: ${historical} legacy or withdrawn encodings, kept as history.`);
+  console.log(`\nSkipped: ${historical} legacy or withdrawn encodings, kept as history.`);
+
+  const unexplained = missing.length + extra.length + renamed.length;
+  console.log(
+    unexplained
+      ? `\n${unexplained} difference(s) need a decision.`
+      : '\nNothing unexplained.',
+  );
 
   const uncovered = data.opcodes.filter((o) => o.name && !checked(o)).length;
   console.log(

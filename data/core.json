@@ -157,7 +157,9 @@
       },
       "description": "<p>begins the catch block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
       "proposal": "Legacy exception handling",
-      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tagidx</span>"
     },
     {
       "id": "0x08",
@@ -173,7 +175,9 @@
         "mainop": "throw"
       },
       "description": "<p>Creates an exception defined by the tag and then throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Exception handling"
+      "proposal": "Exception handling",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tagidx</span>"
     },
     {
       "id": "0x09",
@@ -190,7 +194,9 @@
       },
       "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
       "proposal": "Legacy exception handling",
-      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
     },
     {
       "id": "0x0A",
@@ -362,7 +368,9 @@
       "parts": {
         "mainop": "return_call"
       },
-      "description": "<p>the tail-call version of call</p>\n<p><em>Tail calls proposal</em></p>"
+      "description": "<p>the tail-call version of call</p>\n<p><em>Tail calls proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : funcidx</span>"
     },
     {
       "id": "0x13",
@@ -377,7 +385,9 @@
       "parts": {
         "mainop": "return_call_indirect"
       },
-      "description": "<p>the tail-call version of call</p>\n<p><em>Tail calls proposal</em></p>"
+      "description": "<p>the tail-call version of call</p>\n<p><em>Tail calls proposal</em></p>",
+      "immediateArgs": "y x",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>"
     },
     {
       "id": "0x14",
@@ -392,7 +402,9 @@
       "parts": {
         "mainop": "call_ref"
       },
-      "description": "<p>call a function through a ref $t</p>\n<p><em>Typed Function References Proposal</em></p>"
+      "description": "<p>call a function through a ref $t</p>\n<p><em>Typed Function References Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0x15",
@@ -407,7 +419,9 @@
       "parts": {
         "mainop": "return_call_ref"
       },
-      "description": "<p><em>Typed Function References Proposal</em></p>"
+      "description": "<p><em>Typed Function References Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0x16",
@@ -446,7 +460,9 @@
       },
       "description": "<p>begins the delegate block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
       "proposal": "Legacy exception handling",
-      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
     },
     {
       "id": "0x19",
@@ -516,7 +532,9 @@
       "parts": {
         "mainop": "select t"
       },
-      "description": "<p>Only annotated 'select' can be used with reference types.</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>Only annotated 'select' can be used with reference types.</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "t*",
+      "followedBy": "<span class=\"op-imm-args\"><i>t*</i> : vec(valtype)</span>"
     },
     {
       "id": "0x1D",
@@ -554,7 +572,9 @@
         "mainop": "try_table"
       },
       "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Exception handling"
+      "proposal": "Exception handling",
+      "immediateArgs": "bt c*",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>bt</i> : blocktype</span></li><li><span class=\"op-imm-args\"><i>c*</i> : vec(catch)</span></li></ol><p>Then instructions, then <i>end</i> (0x0B).</p>"
     },
     {
       "id": "0x20",
@@ -679,7 +699,9 @@
         "pre": "table",
         "mainop": "get"
       },
-      "description": "<p>Access tables</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>Access tables</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
     },
     {
       "id": "0x26",
@@ -695,7 +717,9 @@
         "pre": "table",
         "mainop": "set"
       },
-      "description": "<p>Access tables</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>Access tables</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
     },
     {
       "id": "0x27",
@@ -1216,7 +1240,9 @@
       "stack": {
         "html": "[] → [i32]"
       },
-      "description": "<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>\n<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>"
+      "description": "<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>\n<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>"
     },
     {
       "id": "0x40",
@@ -1235,7 +1261,9 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.</p>\n<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>"
+      "description": "<p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.</p>\n<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>"
     },
     {
       "id": "0x41",
@@ -3954,7 +3982,9 @@
         "pre": "ref",
         "mainop": "null"
       },
-      "description": "<p>evaluates to the null reference constant</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>evaluates to the null reference constant</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "t",
+      "followedBy": "<span class=\"op-imm-args\"><i>t</i> : reftype</span>"
     },
     {
       "id": "0xD1",
@@ -3986,7 +4016,9 @@
         "pre": "ref",
         "mainop": "func"
       },
-      "description": "<p>creates a reference to a given function</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>creates a reference to a given function</p>\n<p><em>Reference Types Proposal</em></p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : funcidx</span>"
     },
     {
       "id": "0xD3",
@@ -4034,7 +4066,9 @@
       "parts": {
         "mainop": "br_on_null"
       },
-      "description": "<p>converts a nullable reference to a non-nullable one or branches if null</p>\n<p><em>Typed Function References Proposal</em></p>"
+      "description": "<p>converts a nullable reference to a non-nullable one or branches if null</p>\n<p><em>Typed Function References Proposal</em></p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
     },
     {
       "id": "0xD6",
@@ -4049,7 +4083,9 @@
       "parts": {
         "mainop": "br_on_non_null"
       },
-      "description": "<p>checks for null and branches if present</p>\n<p><em>Typed Function References Proposal, GC Proposal</em></p>"
+      "description": "<p>checks for null and branches if present</p>\n<p><em>Typed Function References Proposal, GC Proposal</em></p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
     },
     {
       "id": "0xD7",
@@ -4158,8 +4194,16 @@
       "bytes": [
         224
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "cont.new",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "pre": "cont",
+        "mainop": "new"
+      },
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
     },
     {
       "id": "0xE1",
@@ -4169,8 +4213,16 @@
       "bytes": [
         225
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "cont.bind",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "pre": "cont",
+        "mainop": "bind"
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li></ol>"
     },
     {
       "id": "0xE2",
@@ -4180,8 +4232,15 @@
       "bytes": [
         226
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "suspend",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "mainop": "suspend"
+      },
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tagidx</span>"
     },
     {
       "id": "0xE3",
@@ -4191,8 +4250,15 @@
       "bytes": [
         227
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "resume",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "mainop": "resume"
+      },
+      "immediateArgs": "x h*",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : vec(handler)</span></li></ol>"
     },
     {
       "id": "0xE4",
@@ -4202,8 +4268,15 @@
       "bytes": [
         228
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "resume_throw",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "mainop": "resume_throw"
+      },
+      "immediateArgs": "x e h*",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>e</i> : tagidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : vec(handler)</span></li></ol>"
     },
     {
       "id": "0xE5",
@@ -4213,8 +4286,15 @@
       "bytes": [
         229
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "resume_throw_ref",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "mainop": "resume_throw_ref"
+      },
+      "immediateArgs": "x h*",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : vec(handler)</span></li></ol>"
     },
     {
       "id": "0xE6",
@@ -4224,8 +4304,15 @@
       "bytes": [
         230
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "switch",
+      "status": "proposal",
+      "proposal": "Stack switching",
+      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "parts": {
+        "mainop": "switch"
+      },
+      "immediateArgs": "x y",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : tagidx</span></li></ol>"
     },
     {
       "id": "0xE7",
