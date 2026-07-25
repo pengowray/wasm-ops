@@ -538,7 +538,25 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	position: relative;
 	z-index: 1;
 }
-.map-cell.pinned { outline: 1px solid var(--fg); outline-offset: 1px; }
+/*
+ * The selected instruction. Two rings rather than one: the page colour first,
+ * so the mark is separated from whatever it sits among, then the text colour
+ * outside it.
+ *
+ * A single light ring was legible only against the squares the map had set
+ * back, which is to say only while the selection was scrolled off screen —
+ * exactly when it matters least. Against its own neighbours at full strength it
+ * disappeared. It was drawn with `outline` and an offset, too, so it reached
+ * into the gap around the square and the squares that come after it in the
+ * document painted over its right and bottom edges. Lifting it out of the flow
+ * fixes that; a ring drawn by `box-shadow` cannot be sliced by a neighbour.
+ */
+.map-cell.pinned {
+	position: relative;
+	z-index: 3;
+	outline: none;
+	box-shadow: 0 0 0 1px var(--bg), 0 0 0 2.5px var(--fg);
+}
 
 /*
  * Wide enough for the rail plus a chart still worth looking at. A container
@@ -1074,10 +1092,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	outline: 2px solid var(--accent);
 	outline-offset: -2px;
 }
-.map-cell.pinned {
-	outline: 1px solid var(--fg);
-	outline-offset: 1px;
-}
+/* The map's own is up with the rest of its rules — it is a pair of rings there,
+   not an outline, for the reasons written beside it. */
 
 /* ------------------------------------------------------------------ movement */
 
