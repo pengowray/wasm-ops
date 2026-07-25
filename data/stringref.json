@@ -25,8 +25,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "sign": "u",
-        "rest": "tf8"
+        "rest": "utf8"
       },
       "proposal": "stringref"
     },
@@ -82,8 +81,7 @@
       "parts": {
         "pre": "string",
         "mainop": "measure",
-        "sign": "u",
-        "rest": "tf8"
+        "rest": "utf8"
       },
       "proposal": "stringref"
     },
@@ -140,8 +138,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "sign": "u",
-        "rest": "tf8"
+        "rest": "utf8"
       },
       "proposal": "stringref"
     },
@@ -214,9 +211,8 @@
       "status": "dormant",
       "parts": {
         "pre": "string",
-        "mainop": "is_usv",
-        "sign": "s",
-        "rest": "equence"
+        "mainop": "is",
+        "rest": "usv_sequence"
       },
       "proposal": "stringref"
     },
@@ -361,8 +357,7 @@
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "encode",
-        "sign": "u",
-        "rest": "tf8"
+        "rest": "utf8"
       },
       "proposal": "stringref"
     },
@@ -594,8 +589,7 @@
       "parts": {
         "pre": "string",
         "mainop": "as",
-        "post": "i",
-        "rest": "ter"
+        "rest": "iter"
       },
       "proposal": "stringref"
     },
@@ -829,8 +823,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "sign": "u",
-        "rest": "tf8_array"
+        "rest": "utf8_array"
       },
       "proposal": "stringref"
     },
@@ -868,8 +861,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "sign": "u",
-        "rest": "tf8_array"
+        "rest": "utf8_array"
       },
       "proposal": "stringref"
     },

@@ -28,7 +28,7 @@ import {
  * - `table` puts one instruction per row with its details in columns.
  */
 export type Layout = 'matrix' | 'cards' | 'table';
-export type GroupBy = 'section' | 'category' | 'none';
+export type GroupBy = 'section' | 'category' | 'name' | 'none';
 /**
  * `name` sorts on the operation, ignoring the type it acts on, so every
  * `store` sits together regardless of whether it is `f32.store` or `i64.store`.
@@ -171,6 +171,35 @@ function operationOf(op: Opcode): string {
   const pre = op.parts?.pre;
   if (!op.name) return '';
   return pre && op.name.startsWith(pre + '.') ? op.name.slice(pre.length + 1) : op.name;
+}
+
+/**
+ * The single word an instruction is about — `add`, `load`, `trunc` — which is
+ * the heading it files under when grouping by name.
+ *
+ * Narrower than `operationOf`: that keeps the widths and signedness, so
+ * `load8_u` and `load16_s` would be two headings of one entry each rather than
+ * two entries under `load`. This is the operation itself and nothing else,
+ * which is what makes the grouping read as an index.
+ *
+ * Relaxed SIMD is the exception the data forces. Those names are decomposed
+ * with `relaxed` as the operation and the real one in the remainder, so
+ * `f32x4.relaxed_madd` would file under `relaxed` along with thirty-six
+ * unrelated instructions. It files under `madd`, beside the ordinary one.
+ */
+export function operationKey(op: Opcode): string {
+  const parts = op.parts;
+  if (!parts?.mainop) return op.name ?? '';
+  if (parts.mainop === 'relaxed') {
+    const next = (parts.post ?? parts.rest ?? '').split('_')[0];
+    if (next) return next;
+  }
+  return parts.mainop;
+}
+
+/** `select t` is the only operation with a space in it, and ids cannot have one. */
+function anchorSafe(name: string): string {
+  return name.replace(/[^a-z0-9_]+/gi, '-');
 }
 
 function sortOpcodes(ops: Opcode[], order: OrderBy): Opcode[] {
@@ -375,6 +404,34 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       });
       items.push(...head(section.id));
       emit(items, section.id, group);
+    }
+    return items;
+  }
+
+  /*
+   * One heading per operation, in alphabetical order: an index. `add` collects
+   * the twenty-six additions across every type and width, and a heading with a
+   * single entry under it is not a failure of the grouping — it is the answer
+   * that this operation exists once.
+   */
+  if (options.group === 'name') {
+    const byName = new Map<string, Opcode[]>();
+    for (const op of listable) {
+      const key = operationKey(op);
+      let bucket = byName.get(key);
+      if (!bucket) byName.set(key, (bucket = []));
+      bucket.push(op);
+    }
+    for (const [name, group] of [...byName].sort((a, b) => a[0].localeCompare(b[0]))) {
+      items.push({
+        kind: 'group',
+        key: `group:name:${name}`,
+        anchor: `op-${anchorSafe(name)}`,
+        label: name,
+        count: group.length,
+      });
+      items.push(...head(`name:${name}`));
+      emit(items, `name:${name}`, sortOpcodes(group, options.order));
     }
     return items;
   }

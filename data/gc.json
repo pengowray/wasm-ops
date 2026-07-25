@@ -186,8 +186,7 @@
       "parts": {
         "pre": "array",
         "mainop": "new",
-        "post": "fix",
-        "rest": "ed"
+        "rest": "fixed"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>",
       "immediateArgs": "x n",

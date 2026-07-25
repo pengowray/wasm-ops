@@ -1124,9 +1124,15 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * deliberately short — long enough to follow a cell with your eye, not long
  * enough to wait for.
  */
+/*
+ * No `will-change` here. It was promoting every moving element to a compositor
+ * layer of its own, and a rearrangement moves hundreds at once — building that
+ * many layers and then tearing them all down again cost more than the hint ever
+ * bought, and it was paid as a stall right after the animation finished. A
+ * plain transform transition composites perfectly well without it.
+ */
 .cell.moving, .rowhead.moving, .colhead.moving, .corner.moving, .group.moving {
 	transition: transform var(--move) var(--ease);
-	will-change: transform;
 }
 .chart.settling .cell { pointer-events: none; }
 

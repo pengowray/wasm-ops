@@ -25,8 +25,7 @@
       "parts": {
         "pre": "i8x16",
         "mainop": "relaxed",
-        "sign": "s",
-        "rest": "wizzle"
+        "rest": "swizzle"
       },
       "description": "<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,\nindices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result\nfor any out of range indices is implementation-defined (i.e. if the index is <code>[16-255]</code>.</p>",
       "proposal": "relaxed-simd"
@@ -206,8 +205,7 @@
       "parts": {
         "pre": "i8x16",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       },
       "description": "<p><code>i8x16.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
       "proposal": "relaxed-simd"
@@ -227,8 +225,7 @@
       "parts": {
         "pre": "i16x8",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       },
       "description": "<p><code>i16x8.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
       "proposal": "relaxed-simd"
@@ -248,8 +245,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       },
       "description": "<p><code>i32x4.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
       "proposal": "relaxed-simd"
@@ -269,8 +265,7 @@
       "parts": {
         "pre": "i64x2",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       },
       "description": "<p><code>i64x2.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
       "proposal": "relaxed-simd"

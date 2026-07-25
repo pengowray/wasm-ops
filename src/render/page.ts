@@ -120,6 +120,7 @@ export function renderPage(
 		<legend>Group by</legend>
 		<label><input type="radio" name="group" value="category" checked> Category</label>
 		<label><input type="radio" name="group" value="section"> Section</label>
+		<label title="One heading per operation — every add together, every load together"><input type="radio" name="group" value="name"> Name</label>
 		<label><input type="radio" name="group" value="none"> Nothing</label>
 	</fieldset>
 	<fieldset class="control" data-needs-grouping>

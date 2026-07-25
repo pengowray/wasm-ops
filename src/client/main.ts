@@ -207,11 +207,32 @@ function start(
     badge.hidden = !filtering;
   }
 
+  /**
+   * The table is an index, so it arrives arranged as one: a heading per
+   * operation, alphabetically, with each operation's encodings under it in byte
+   * order. Applied on the way into the table layout and not while in it, so it
+   * is a starting point rather than something that keeps overriding the reader.
+   */
+  function preferIndexOrder(): void {
+    const set = (name: string, value: string) => {
+      const input = toolbar.querySelector<HTMLInputElement>(
+        `input[name="${name}"][value="${value}"]`,
+      );
+      if (input) input.checked = true;
+    };
+    set('group', 'name');
+    set('order', 'opcode');
+  }
+
   toolbar.addEventListener('change', (event) => {
     // The search box lives in the toolbar but is not one of its settings: it
     // fires `change` on blur, and re-laying the chart out for that would move
     // everything a second time for no reason.
     if ((event.target as HTMLElement).id === 'search') return;
+    const target = event.target as HTMLInputElement;
+    if (target.name === 'layout' && target.value === 'table' && options.layout !== 'table') {
+      preferIndexOrder();
+    }
     readToolbar();
     updateBadge();
     updateSearchCount();

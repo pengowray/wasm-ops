@@ -171,8 +171,7 @@
         "pre": "v128",
         "mainop": "load",
         "opbits": "8",
-        "sign": "s",
-        "rest": "plat"
+        "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
@@ -194,8 +193,7 @@
         "pre": "v128",
         "mainop": "load",
         "opbits": "16",
-        "sign": "s",
-        "rest": "plat"
+        "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
@@ -217,8 +215,7 @@
         "pre": "v128",
         "mainop": "load",
         "opbits": "32",
-        "sign": "s",
-        "rest": "plat"
+        "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
@@ -240,8 +237,7 @@
         "pre": "v128",
         "mainop": "load",
         "opbits": "64",
-        "sign": "s",
-        "rest": "plat"
+        "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
@@ -3194,8 +3190,7 @@
       "parts": {
         "pre": "i8x16",
         "mainop": "relaxed",
-        "sign": "s",
-        "rest": "wizzle"
+        "rest": "swizzle"
       }
     },
     {
@@ -3519,8 +3514,7 @@
       "parts": {
         "pre": "i8x16",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       }
     },
     {
@@ -3541,8 +3535,7 @@
       "parts": {
         "pre": "i16x8",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       }
     },
     {
@@ -4155,8 +4148,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       }
     },
     {
@@ -4177,8 +4169,7 @@
       "parts": {
         "pre": "i64x2",
         "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
+        "rest": "laneselect"
       }
     },
     {

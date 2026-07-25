@@ -57,12 +57,30 @@ export function flip(container: HTMLElement, mutate: () => void, animate = true)
   mutate();
   const after = measure(container.children);
 
+  /*
+   * Only what the reader could actually watch.
+   *
+   * The chart is thirty thousand pixels tall and a rearrangement moves nearly
+   * every cell in it, so animating all of them meant hundreds of transitions
+   * and web animations running for a journey nobody was looking at — the whole
+   * cost of the effect, off screen, for none of the benefit. Anything outside
+   * the band simply appears in its new place.
+   *
+   * A screen's worth of margin either side, so a cell that travels in from just
+   * beyond the edge still arrives rather than materialising at the boundary.
+   */
+  const margin = window.innerHeight;
+  const top = window.scrollY - margin;
+  const bottom = window.scrollY + window.innerHeight + margin;
+  const watchable = (spot: Spot | undefined) => spot && spot.y >= top && spot.y <= bottom;
+
   const moved: HTMLElement[] = [];
   for (const el of Array.from(container.children) as HTMLElement[]) {
     const key = el.dataset['key'];
     if (!key) continue;
     const from = before.get(key);
     const to = after.get(key);
+    if (!watchable(from) && !watchable(to)) continue;
     if (!from || !to) {
       // Newly present: it has nowhere to travel from, so fade it up instead.
       el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, easing: 'ease-out' });
@@ -89,10 +107,7 @@ export function flip(container: HTMLElement, mutate: () => void, animate = true)
   });
 
   const settle = () => {
-    for (const el of moved) {
-      el.classList.remove(MOVING);
-      el.style.willChange = '';
-    }
+    for (const el of moved) el.classList.remove(MOVING);
     container.classList.remove('settling');
   };
 
