@@ -44,6 +44,10 @@
 	--map-hl-op: #1a86a0;
 	--map-hl-self: #f5a623;
 
+	/* Rings, so a highlight reads over any proposal tint. */
+	--hl-ring: #1a86a0;
+	--hl-ring-strong: #0d5e70;
+
 	/* Tint strength for "colour by proposal". */
 	--proposal-s: 55%;
 	--proposal-l: 94%;
@@ -84,6 +88,9 @@
 
 		--map-hl-op: #38b6d4;
 		--map-hl-self: #ffb52e;
+
+		--hl-ring: #45b9d6;
+		--hl-ring-strong: #8fe3f7;
 	}
 }
 
@@ -115,6 +122,9 @@
 
 	--map-hl-op: #38b6d4;
 	--map-hl-self: #ffb52e;
+
+	--hl-ring: #45b9d6;
+	--hl-ring-strong: #8fe3f7;
 }
 
 * { box-sizing: border-box; }
@@ -717,6 +727,38 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 /* Cells matching a pinned property. */
 .cell.hl-tag { --cell-bg: var(--hl-op); color: var(--hl-op-fg); background-image: none; }
 .map-cell.hl-tag { background: var(--hl-op); }
+
+/*
+ * Highlighting has to survive the proposal colouring, in two senses.
+ *
+ * It has to win the cascade: the tint is applied by a more specific selector,
+ * so without these the lit cells simply kept their proposal colour and nothing
+ * appeared to happen at all.
+ *
+ * And it has to be legible over any hue. A tint alone cannot be — whatever
+ * colour it is, some proposal is already near it — so highlights also draw a
+ * ring, which reads against anything and makes a scattered set of matches
+ * countable at a glance.
+ */
+.cell.hl-op, .cell.hl-tag {
+	box-shadow: inset 0 0 0 1.5px var(--hl-ring);
+}
+.cell.hl-self {
+	box-shadow: inset 0 0 0 2.5px var(--hl-ring-strong);
+}
+
+.chart[data-colour='proposal'] .cell[data-proposal].hl-op,
+.chart[data-colour='proposal'] .cell[data-proposal].hl-tag {
+	--cell-bg: var(--hl-op);
+	color: var(--hl-op-fg);
+}
+.chart[data-colour='proposal'] .cell[data-proposal].hl-self {
+	--cell-bg: var(--hl-self);
+	color: var(--hl-self-fg);
+}
+.chart[data-colour='proposal'] .cell[data-proposal].pinned {
+	border-color: var(--accent);
+}
 
 /* ------------------------------------------------------------ table layout */
 

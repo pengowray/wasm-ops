@@ -68,6 +68,9 @@ const IN_WORD: readonly (readonly [string, string])[] = [
   // the end.
   ['reinterpret', 're<wbr>interpret'],
   ['pairwise', 'pair<wbr>wise'],
+  // Fits a grid cell by less than a pixel, so it drops its last letter at the
+  // slightest provocation. Compare-and-exchange, so this is the seam.
+  ['cmpxchg', 'cmp<wbr>xchg'],
 ];
 
 /** Inserts `<wbr>` hints into an already-escaped name fragment. */
