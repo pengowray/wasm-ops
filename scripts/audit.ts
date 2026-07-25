@@ -91,8 +91,8 @@ const ACCEPTED: Record<string, string> = {
  * an instruction to one of these does not also mean adding a line here.
  */
 const ACCEPTED_PROPOSALS: Record<string, string> = {
-  'Stack switching': 'phase 3; wabt uses 0xE0+ for its own interpreter opcodes',
-  'Half precision (FP16)': 'phase 1; not implemented by wabt',
+  'stack-switching': 'phase 3; wabt uses 0xE0+ for its own interpreter opcodes',
+  'half-precision': 'phase 1; not implemented by wabt',
 };
 
 /** The GC list is authored from the proposal, since wabt carries no 0xFB. */

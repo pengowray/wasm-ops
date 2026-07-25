@@ -60,12 +60,28 @@ function start(
   const themeButton = document.getElementById('theme-toggle');
   if (themeButton) initTheme(themeButton);
 
+  /*
+   * The docked panel and the table's column headings stick to the top of the
+   * window, and so does the toolbar once pinned. They need to know how tall it
+   * is to sit below it rather than behind it, and it wraps to a different
+   * number of lines at different widths, so the height is measured rather than
+   * assumed.
+   */
+  const trackToolbarHeight = () => {
+    const height = toolbar.classList.contains('toolbar-pinned')
+      ? toolbar.getBoundingClientRect().height
+      : 0;
+    document.documentElement.style.setProperty('--toolbar-h', `${Math.round(height)}px`);
+  };
+  new ResizeObserver(trackToolbarHeight).observe(toolbar);
+
   // The toolbar is unpinned by default; the choice is remembered.
   const pin = document.getElementById('pin-toolbar');
   if (pin) {
     const setPinned = (on: boolean) => {
       toolbar.classList.toggle('toolbar-pinned', on);
       pin.setAttribute('aria-pressed', String(on));
+      trackToolbarHeight();
     };
     try {
       setPinned(localStorage.getItem('pinToolbar') === 'true');
@@ -153,6 +169,9 @@ function start(
     options.showProposals = form.get('showProposals') !== null;
     options.showReserved = form.get('showReserved') !== null;
     options.showHistorical = form.get('showHistorical') !== null;
+    const colour = form.get('colourByProposal') !== null ? 'proposal' : '';
+    chart.dataset['colour'] = colour;
+    if (mapEl) mapEl.dataset['colour'] = colour;
   }
 
   const filter = document.getElementById('filter') as HTMLDetailsElement | null;
@@ -193,6 +212,23 @@ function start(
       input.checked = on(input.value);
     }
   }
+
+  /** Puts every filter back to how the page arrives. */
+  document.getElementById('preset-default')?.addEventListener('click', () => {
+    setChecks('section', () => true);
+    for (const [name, on] of [
+      ['showProposals', true],
+      ['showReserved', true],
+      ['showHistorical', false],
+      ['colourByProposal', false],
+    ] as [string, boolean][]) {
+      const input = toolbar.querySelector<HTMLInputElement>(`input[name="${name}"]`);
+      if (input) input.checked = on;
+    }
+    readToolbar();
+    updateBadge();
+    relayout();
+  });
 
   document.getElementById('preset-base')?.addEventListener('click', () => {
     setChecks('section', (value) => value === 'core');

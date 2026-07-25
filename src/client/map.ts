@@ -44,7 +44,8 @@ export class NavMap {
             ` data-key="${op.id}" data-status="${op.status}"` +
             (op.parts?.pre ? ` data-pre="${escapeHtml(op.parts.pre)}"` : '') +
             (op.parts?.mainop ? ` data-op="${escapeHtml(op.parts.mainop)}"` : '') +
-            (op.name ? ` data-tags="${escapeHtml(tagTokens(op))}"` : '');
+            (op.name ? ` data-tags="${escapeHtml(tagTokens(op))}"` : '') +
+            (op.proposal ? ` data-proposal="${escapeHtml(op.proposal)}"` : '');
           const label = `${specText(op)} ${op.name ?? 'unassigned'}`;
           return `<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
         })

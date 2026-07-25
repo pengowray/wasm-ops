@@ -10,6 +10,7 @@ import type { Opcode } from '../model/types.ts';
 import { toHex } from '../model/types.ts';
 import { addWordBreaks } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
+import { proposal, standing } from '../model/proposals.ts';
 import { summarize } from '../model/summary.ts';
 import { tagsFor, tagTokens } from '../model/tags.ts';
 import type { ViewItem } from '../model/view.ts';
@@ -172,6 +173,7 @@ function cellData(op: Opcode): string {
     'data-post': op.parts?.post,
     'data-sign': op.parts?.sign,
     'data-tags': op.name ? tagTokens(op) : undefined,
+    'data-proposal': op.proposal,
   };
   return Object.entries(attrs)
     .filter(([, value]) => value !== undefined && value !== '')
@@ -223,6 +225,21 @@ export function renderCell(op: Opcode, filtered = false): string {
   );
 }
 
+/** The proposals represented in a group, as chips that light up their own. */
+function renderGroupProposals(ids: string[] | undefined): string {
+  if (!ids?.length) return '';
+  const chips = ids
+    .map((id) => proposal(id))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p))
+    .map(
+      (p) =>
+        `<button type="button" class="tag" data-tag="from-${p.id}" data-kind="status" ` +
+        `data-proposal="${escapeHtml(p.id)}">${escapeHtml(p.name)}</button>`,
+    )
+    .join('');
+  return chips ? `<span class="group-proposals">${chips}</span>` : '';
+}
+
 export function renderItem(item: ViewItem): string {
   switch (item.kind) {
     case 'group':
@@ -231,6 +248,7 @@ export function renderItem(item: ViewItem): string {
         (item.emoji ? `<span class="group-emoji">${item.emoji}</span> ` : '') +
         `${escapeHtml(item.label)} <span class="group-count">${item.count}</span>` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
+        renderGroupProposals(item.proposals) +
         `</h2>`
       );
     case 'subgroup':
@@ -265,20 +283,26 @@ export function renderItem(item: ViewItem): string {
  * reading a module today — so the difference between them is in the words and
  * not in how hard they are to notice.
  */
-const STATUS_NOTES: Partial<Record<Opcode['status'], { label: string; detail: string }>> = {
+const STATUS_NOTES: Partial<
+  Record<Opcode['status'], { mark: string; label: string; detail: string }>
+> = {
   proposal: {
+    mark: '\u{1F9EA}',
     label: 'Proposal',
     detail: 'not standardised. Engine support varies and the encoding may still change.',
   },
   legacy: {
+    mark: '\u26A0\uFE0F',
     label: 'Legacy',
     detail: 'superseded by a newer encoding, though still emitted and accepted.',
   },
   dormant: {
+    mark: '\u{1F4A4}',
     label: 'Dormant',
     detail: 'an inactive proposal. No engine implements it and the encoding may still change.',
   },
   withdrawn: {
+    mark: '\u26D4',
     label: 'Withdrawn',
     detail: 'this encoding was abandoned. The slot is unassigned today.',
   },
@@ -293,6 +317,26 @@ export function renderHeading(op: Opcode): string {
     (op.immediateArgs ? ` <span class="immediate-args">${op.immediateArgs}</span>` : '') +
     `</h3>` +
     (summary ? `<p class="detail-summary">${escapeHtml(summary)}</p>` : '')
+  );
+}
+
+/**
+ * Where an instruction came from, and where that proposal got to.
+ *
+ * The text belongs to the proposal, not to the instruction, so it is looked up
+ * rather than repeated. The old page pasted "Reference Types Proposal" into
+ * dozens of descriptions; when the proposal finished, every one of them became
+ * wrong at the same moment.
+ */
+export function renderHistory(op: Opcode): string {
+  const p = proposal(op.proposal);
+  if (!p) return '';
+  return (
+    `<h4>History</h4><p class="detail-history">` +
+    `<a class="history-name" href="${escapeHtml(p.url)}">${escapeHtml(p.name)}</a>` +
+    `<span class="history-standing">${escapeHtml(standing(p))}</span>` +
+    `<span class="history-note">${escapeHtml(p.note)}</span>` +
+    `</p>`
   );
 }
 
@@ -332,7 +376,6 @@ export function renderDetail(op: Opcode): string {
       `<p class="detail-status" data-status="${op.status}">` +
         `<span class="status-mark" aria-hidden="true">⚠️</span>` +
         `<span class="status-text"><strong>${note.label}</strong> — ${note.detail}` +
-        (op.proposal ? `<span class="detail-proposal">${escapeHtml(op.proposal)}</span>` : '') +
         (op.supersededBy
           ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`
           : '') +
@@ -343,6 +386,8 @@ export function renderDetail(op: Opcode): string {
   if (op.description) {
     rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
   }
+
+  rows.push(renderHistory(op));
 
   if (op.followedBy) {
     rows.push(`<h4>Followed by</h4><div class="detail-followed">${op.followedBy}</div>`);

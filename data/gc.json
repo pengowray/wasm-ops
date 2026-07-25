@@ -27,7 +27,8 @@
       },
       "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.1",
@@ -47,7 +48,8 @@
       },
       "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.2",
@@ -66,7 +68,8 @@
       },
       "description": "<p>reads field <code>i</code> from a structure</p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.3",
@@ -85,7 +88,8 @@
         "sign": "s"
       },
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.4",
@@ -104,7 +108,8 @@
         "sign": "u"
       },
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.5",
@@ -123,7 +128,8 @@
       },
       "description": "<p>writes field <code>i</code> of a structure</p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.6",
@@ -142,7 +148,8 @@
       },
       "description": "<p>allocates an array with canonical RTT (runtime type)</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.7",
@@ -162,7 +169,8 @@
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.8",
@@ -183,7 +191,8 @@
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>",
       "immediateArgs": "x n",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>n</i> : number of elements</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>n</i> : number of elements</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.9",
@@ -203,7 +212,8 @@
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.10",
@@ -223,7 +233,8 @@
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.11",
@@ -242,7 +253,8 @@
       },
       "description": "<p>reads an element from an array</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.12",
@@ -261,7 +273,8 @@
         "sign": "s"
       },
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.13",
@@ -280,7 +293,8 @@
         "sign": "u"
       },
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.14",
@@ -299,7 +313,8 @@
       },
       "description": "<p>writes an element to an array</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.15",
@@ -316,7 +331,8 @@
         "pre": "array",
         "mainop": "len"
       },
-      "description": "<p>inquires the length of an array</p>"
+      "description": "<p>inquires the length of an array</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.16",
@@ -334,7 +350,8 @@
         "mainop": "fill"
       },
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.17",
@@ -352,7 +369,8 @@
         "mainop": "copy"
       },
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.18",
@@ -371,7 +389,8 @@
         "rest": "_data"
       },
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.19",
@@ -390,7 +409,8 @@
         "rest": "_elem"
       },
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.20",
@@ -409,7 +429,8 @@
       },
       "description": "<p>checks whether a reference has a given heap type</p>",
       "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.21",
@@ -428,7 +449,8 @@
       },
       "description": "<p>checks whether a reference has a given heap type</p>",
       "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.22",
@@ -447,7 +469,8 @@
       },
       "description": "<p>tries to convert to a given heap type</p>",
       "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.23",
@@ -466,7 +489,8 @@
       },
       "description": "<p>tries to convert to a given heap type</p>",
       "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.24",
@@ -484,7 +508,8 @@
       },
       "description": "<p>branches if a reference has a given heap type</p>",
       "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.25",
@@ -502,7 +527,8 @@
       },
       "description": "<p>branches if a reference does not have a given heap type</p>",
       "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.26",
@@ -520,7 +546,8 @@
         "mainop": "convert",
         "rest": "_extern"
       },
-      "description": "<p>converts an external value into the internal representation</p>"
+      "description": "<p>converts an external value into the internal representation</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.27",
@@ -538,7 +565,8 @@
         "mainop": "convert",
         "rest": "_any"
       },
-      "description": "<p>converts an internal value into the external representation</p>"
+      "description": "<p>converts an internal value into the external representation</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.28",
@@ -556,7 +584,8 @@
         "mainop": "i",
         "opbits": "31"
       },
-      "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>"
+      "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.29",
@@ -574,7 +603,8 @@
         "mainop": "get",
         "sign": "s"
       },
-      "description": "<p>extracts the value, sign-extending</p>"
+      "description": "<p>extracts the value, sign-extending</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.30",
@@ -592,7 +622,8 @@
         "mainop": "get",
         "sign": "u"
       },
-      "description": "<p>extracts the value, zero-extending</p>"
+      "description": "<p>extracts the value, zero-extending</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xFB.31",
@@ -617,7 +648,7 @@
       ],
       "name": "i31.new",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "ref.i31 (0xFB 28)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>ref.i31 (0xFB 28)</code>.</p>",
       "parts": {
@@ -636,7 +667,7 @@
       ],
       "name": "i31.get_s",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "i31.get_s (0xFB 29)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>i31.get_s (0xFB 29)</code>.</p>",
       "parts": {
@@ -656,7 +687,7 @@
       ],
       "name": "i31.get_u",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "i31.get_u (0xFB 30)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>i31.get_u (0xFB 30)</code>.</p>",
       "parts": {
@@ -1024,7 +1055,7 @@
       ],
       "name": "ref.test",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "ref.test (0xFB 20)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>ref.test (0xFB 20)</code>.</p>",
       "parts": {
@@ -1045,7 +1076,7 @@
       ],
       "name": "ref.cast",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "ref.cast (0xFB 22)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>ref.cast (0xFB 22)</code>.</p>",
       "parts": {
@@ -1066,7 +1097,7 @@
       ],
       "name": "br_on_cast",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "br_on_cast (0xFB 24)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast (0xFB 24)</code>.</p>",
       "parts": {
@@ -1086,7 +1117,7 @@
       ],
       "name": "br_on_cast_fail",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "br_on_cast_fail (0xFB 25)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast_fail (0xFB 25)</code>.</p>",
       "parts": {
@@ -1154,7 +1185,7 @@
       ],
       "name": "ref.test",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "ref.test null (0xFB 21)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>ref.test null (0xFB 21)</code>.</p>",
       "parts": {
@@ -1175,7 +1206,7 @@
       ],
       "name": "ref.cast",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "ref.cast null (0xFB 23)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>ref.cast null (0xFB 23)</code>.</p>",
       "parts": {
@@ -1196,7 +1227,7 @@
       ],
       "name": "br_on_cast",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "br_on_cast (0xFB 24)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast (0xFB 24)</code>.</p>",
       "parts": {
@@ -1216,7 +1247,7 @@
       ],
       "name": "br_on_cast_fail",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "br_on_cast_fail (0xFB 25)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>br_on_cast_fail (0xFB 25)</code>.</p>",
       "parts": {
@@ -1668,7 +1699,7 @@
       ],
       "name": "extern.internalize",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "any.convert_extern (0xFB 26)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>any.convert_extern (0xFB 26)</code>.</p>",
       "parts": {
@@ -1687,7 +1718,7 @@
       ],
       "name": "extern.externalize",
       "status": "withdrawn",
-      "proposal": "GC (2022 draft encoding)",
+      "proposal": "gc-draft-2022",
       "supersededBy": "extern.convert_any (0xFB 27)",
       "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>extern.convert_any (0xFB 27)</code>.</p>",
       "parts": {

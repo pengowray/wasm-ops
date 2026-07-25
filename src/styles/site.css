@@ -35,6 +35,14 @@
 	--enc-prefix: #9a5b00;
 	--enc-sub: #1a6f7d;
 
+	/* Set by the client: the height of the toolbar when it is pinned, zero when
+	   it is not. Everything else that sticks to the top offsets by it. */
+	--toolbar-h: 0px;
+
+	/* Tint strength for "colour by proposal". */
+	--proposal-s: 55%;
+	--proposal-l: 94%;
+
 	--radius: 6px;
 	--move: 320ms;
 	--ease: cubic-bezier(0.2, 0.7, 0.3, 1);
@@ -65,6 +73,9 @@
 
 		--enc-prefix: #e0a45a;
 		--enc-sub: #5fc9dc;
+
+		--proposal-s: 28%;
+		--proposal-l: 17%;
 	}
 }
 
@@ -90,6 +101,9 @@
 
 	--enc-prefix: #e0a45a;
 	--enc-sub: #5fc9dc;
+
+	--proposal-s: 28%;
+	--proposal-l: 17%;
 }
 
 * { box-sizing: border-box; }
@@ -390,9 +404,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 	.map-dock {
 		position: sticky;
-		top: 5rem;
+		top: calc(var(--toolbar-h) + 1rem);
 		margin: 0;
-		max-height: calc(100dvh - 6rem);
+		max-height: calc(100dvh - var(--toolbar-h) - 2rem);
 		overflow-y: auto;
 	}
 
@@ -600,6 +614,52 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .chart:not([data-layout='cards']) .subgroup { display: none; }
 
+/* ----------------------------------------------------- colour by proposal */
+
+/*
+ * Optional, and off by default: it paints the whole chart, which is exactly
+ * what makes it useful for seeing where a proposal's instructions landed, and
+ * exactly what makes it too much to have on all the time. One hue per
+ * proposal, emitted into the page from the registry.
+ */
+.chart[data-colour='proposal'] .cell[data-proposal] {
+	--cell-bg: hsl(var(--proposal-hue) var(--proposal-s) var(--proposal-l));
+	border-color: hsl(var(--proposal-hue) var(--proposal-s) calc(var(--proposal-l) - 12%));
+}
+.map[data-colour='proposal'] .map-cell[data-proposal] {
+	background: hsl(var(--proposal-hue) calc(var(--proposal-s) + 15%) calc(var(--proposal-l) - 8%));
+}
+
+/* A chip carrying its proposal's colour, so the legend and the chart agree. */
+.group-proposals {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .25rem;
+	margin-top: .4rem;
+	font-weight: 400;
+}
+.group-proposals .tag[data-proposal] {
+	background: hsl(var(--proposal-hue) var(--proposal-s) var(--proposal-l));
+	color: hsl(var(--proposal-hue) 40% 25%);
+}
+:root[data-theme='dark'] .group-proposals .tag[data-proposal],
+.group-proposals .tag[data-proposal] { }
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) .group-proposals .tag[data-proposal] {
+		color: hsl(var(--proposal-hue) 45% 82%);
+	}
+}
+:root[data-theme='dark'] .group-proposals .tag[data-proposal] {
+	color: hsl(var(--proposal-hue) 45% 82%);
+}
+
+/* --------------------------------------------------------------- history */
+
+.detail-history { display: grid; gap: .15rem; margin: .3rem 0; }
+.history-name { font-weight: 700; }
+.history-standing { font-size: .82rem; color: var(--fg-dim); }
+.history-note { font-size: .85rem; color: var(--fg-faint); }
+
 /* -------------------------------------------------------------- properties */
 
 .detail-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0; }
@@ -661,7 +721,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 .tablehead {
 	position: sticky;
-	top: 0;
+	top: var(--toolbar-h);
 	z-index: 5;
 	grid-column: 1 / -1;
 	font-size: .68rem;
@@ -762,12 +822,14 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  */
 .panel {
 	position: fixed;
-	top: 0;
+	/* Starts below a pinned toolbar and is shortened to match. The toolbar
+	   paints above the panel, so without this its top rows sit behind it. */
+	top: var(--toolbar-h);
 	right: 0;
 	z-index: 30;
 	flex-direction: column;
 	width: min(28rem, 92vw);
-	height: 100dvh;
+	height: calc(100dvh - var(--toolbar-h));
 	padding: 0 1.25rem 1.5rem;
 	background: var(--bg);
 	border-left: 1px solid var(--rule);
@@ -814,10 +876,12 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	.js .panel[data-open='false'] {
 		display: flex;
 		position: sticky;
-		top: 5rem;
+		/* Below a pinned toolbar, not behind it — and shortened to match, so
+		   the bottom of the panel stays on screen. */
+		top: calc(var(--toolbar-h) + 1rem);
 		width: auto;
 		height: auto;
-		max-height: calc(100dvh - 6rem);
+		max-height: calc(100dvh - var(--toolbar-h) - 2rem);
 		padding: 0 0 1rem 1.25rem;
 		border-left: 1px solid var(--rule-soft);
 		box-shadow: none;

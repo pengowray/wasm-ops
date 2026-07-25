@@ -1,6 +1,7 @@
 import type { OpcodeData } from '../model/types.ts';
 import { buildView, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { hasDetail, renderDetail, renderItem } from './items.ts';
+import { allProposals } from '../model/proposals.ts';
 
 /**
  * Runs before first paint to avoid a flash of the wrong theme, and to reveal
@@ -39,6 +40,16 @@ function clientData(data: OpcodeData): string {
   return JSON.stringify(slim).replace(/</g, '\\u003c');
 }
 
+/**
+ * A hue per proposal, emitted from the registry rather than written into the
+ * stylesheet, so adding a proposal cannot leave its colour behind.
+ */
+function proposalHues(): string {
+  return allProposals()
+    .map((p) => `[data-proposal="${p.id}"]{--proposal-hue:${p.hue};}`)
+    .join('');
+}
+
 export function renderPage(
   data: OpcodeData,
   content: PageContent,
@@ -67,6 +78,7 @@ export function renderPage(
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<style>${proposalHues()}</style>
 <script>${BOOTSTRAP}</script>
 </head>
 <body>
@@ -80,7 +92,7 @@ export function renderPage(
 <form class="toolbar js-only" id="toolbar" aria-label="Chart display options">
 	<fieldset class="control">
 		<legend>Arrange</legend>
-		<label><input type="radio" name="layout" value="matrix" checked> Byte grid</label>
+		<label><input type="radio" name="layout" value="matrix" checked> Grid</label>
 		<label><input type="radio" name="layout" value="cards"> Cards</label>
 		<label><input type="radio" name="layout" value="table"> Table</label>
 	</fieldset>
@@ -109,7 +121,11 @@ export function renderPage(
 				<label class="toggle" data-matrix-only><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
 				<label class="toggle" title="Superseded, abandoned and stalled encodings — not what these bytes mean today"><input type="checkbox" name="showHistorical"><span>Legacy, withdrawn &amp; dormant</span></label>
 			</div>
+			<div class="filter-group">
+				<label class="toggle" title="Tint each instruction by the proposal it arrived through"><input type="checkbox" name="colourByProposal"><span>Colour by proposal</span></label>
+			</div>
 			<div class="filter-group filter-presets">
+				<button type="button" id="preset-default" class="ghost">Default</button>
 				<button type="button" id="preset-base" class="ghost">Base opcodes only</button>
 				<button type="button" id="preset-all" class="ghost">Everything</button>
 			</div>

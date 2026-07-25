@@ -20,13 +20,14 @@
         0
       ],
       "name": "memory.atomic.notify",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "memory.atomic",
         "mainop": "notify"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.1",
@@ -38,14 +39,15 @@
         1
       ],
       "name": "memory.atomic.wait32",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "memory.atomic",
         "mainop": "wait",
         "opbits": "32"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.2",
@@ -57,14 +59,15 @@
         2
       ],
       "name": "memory.atomic.wait64",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "memory.atomic",
         "mainop": "wait",
         "opbits": "64"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.3",
@@ -76,11 +79,12 @@
         3
       ],
       "name": "atomic.fence",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "atomic",
         "mainop": "fence"
-      }
+      },
+      "proposal": "threads"
     },
     {
       "id": "0xFE.4",
@@ -236,14 +240,15 @@
         16
       ],
       "name": "i32.atomic.load",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic",
         "mainop": "load"
       },
       "description": "<p>atomically load 4 bytes as i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.17",
@@ -255,14 +260,15 @@
         17
       ],
       "name": "i64.atomic.load",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "load"
       },
       "description": "<p>atomically load 8 bytes as i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.18",
@@ -274,7 +280,7 @@
         18
       ],
       "name": "i32.atomic.load8_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic",
         "mainop": "load",
@@ -283,7 +289,8 @@
       },
       "description": "<p>atomically load 1 byte and zero-extend i8 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.19",
@@ -295,7 +302,7 @@
         19
       ],
       "name": "i32.atomic.load16_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic",
         "mainop": "load",
@@ -304,7 +311,8 @@
       },
       "description": "<p>atomically load 2 bytes and zero-extend i16 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.20",
@@ -316,7 +324,7 @@
         20
       ],
       "name": "i64.atomic.load8_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "load",
@@ -325,7 +333,8 @@
       },
       "description": "<p>atomically load 1 byte and zero-extend i8 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.21",
@@ -337,7 +346,7 @@
         21
       ],
       "name": "i64.atomic.load16_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "load",
@@ -346,7 +355,8 @@
       },
       "description": "<p>atomically load 2 bytes and zero-extend i16 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.22",
@@ -358,7 +368,7 @@
         22
       ],
       "name": "i64.atomic.load32_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "load",
@@ -367,7 +377,8 @@
       },
       "description": "<p>atomically load 4 bytes and zero-extend i32 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.23",
@@ -379,14 +390,15 @@
         23
       ],
       "name": "i32.atomic.store",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic",
         "mainop": "store"
       },
       "description": "<p>(no conversion) atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.24",
@@ -398,14 +410,15 @@
         24
       ],
       "name": "i64.atomic.store",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "store"
       },
       "description": "<p>(no conversion) atomically store 8 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.25",
@@ -417,7 +430,7 @@
         25
       ],
       "name": "i32.atomic.store8",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic",
         "mainop": "store",
@@ -425,7 +438,8 @@
       },
       "description": "<p>wrap i32 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.26",
@@ -437,7 +451,7 @@
         26
       ],
       "name": "i32.atomic.store16",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic",
         "mainop": "store",
@@ -445,7 +459,8 @@
       },
       "description": "<p>wrap i32 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.27",
@@ -457,7 +472,7 @@
         27
       ],
       "name": "i64.atomic.store8",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "store",
@@ -465,7 +480,8 @@
       },
       "description": "<p>wrap i64 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.28",
@@ -477,7 +493,7 @@
         28
       ],
       "name": "i64.atomic.store16",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "store",
@@ -485,7 +501,8 @@
       },
       "description": "<p>wrap i64 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.29",
@@ -497,7 +514,7 @@
         29
       ],
       "name": "i64.atomic.store32",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic",
         "mainop": "store",
@@ -505,7 +522,8 @@
       },
       "description": "<p>wrap i64 to i32 and atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.30",
@@ -517,14 +535,15 @@
         30
       ],
       "name": "i32.atomic.rmw.add",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "add"
       },
       "description": "<p>32-bit sign-agnostic addition</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.31",
@@ -536,14 +555,15 @@
         31
       ],
       "name": "i64.atomic.rmw.add",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "add"
       },
       "description": "<p>64-bit sign-agnostic addition</p>\n<p>Read: 8 bytes, Write: 8 bytes</p>\n<p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.32",
@@ -555,7 +575,7 @@
         32
       ],
       "name": "i32.atomic.rmw8.add_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "add",
@@ -563,7 +583,8 @@
       },
       "description": "<p>8-bit sign-agnostic addition</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.33",
@@ -575,7 +596,7 @@
         33
       ],
       "name": "i32.atomic.rmw16.add_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "add",
@@ -583,7 +604,8 @@
       },
       "description": "<p>16-bit sign-agnostic addition</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.34",
@@ -595,7 +617,7 @@
         34
       ],
       "name": "i64.atomic.rmw8.add_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "add",
@@ -603,7 +625,8 @@
       },
       "description": "<p>8-bit sign-agnostic addition</p>\n<p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.35",
@@ -615,7 +638,7 @@
         35
       ],
       "name": "i64.atomic.rmw16.add_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "add",
@@ -623,7 +646,8 @@
       },
       "description": "<p>64-bit sign-agnostic addition</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.36",
@@ -635,7 +659,7 @@
         36
       ],
       "name": "i64.atomic.rmw32.add_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "add",
@@ -643,7 +667,8 @@
       },
       "description": "<p>32-bit sign-agnostic addition</p>\n<p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.37",
@@ -655,14 +680,15 @@
         37
       ],
       "name": "i32.atomic.rmw.sub",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "sub"
       },
       "description": "<p>32-bit sign-agnostic subtraction</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.38",
@@ -674,14 +700,15 @@
         38
       ],
       "name": "i64.atomic.rmw.sub",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "sub"
       },
       "description": "<p>64-bit sign-agnostic subtraction</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.39",
@@ -693,7 +720,7 @@
         39
       ],
       "name": "i32.atomic.rmw8.sub_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "sub",
@@ -701,7 +728,8 @@
       },
       "description": "<p>8-bit sign-agnostic subtraction</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.40",
@@ -713,7 +741,7 @@
         40
       ],
       "name": "i32.atomic.rmw16.sub_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "sub",
@@ -721,7 +749,8 @@
       },
       "description": "<p>16-bit sign-agnostic subtraction</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.41",
@@ -733,7 +762,7 @@
         41
       ],
       "name": "i64.atomic.rmw8.sub_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "sub",
@@ -741,7 +770,8 @@
       },
       "description": "<p>8-bit sign-agnostic subtraction</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.42",
@@ -753,7 +783,7 @@
         42
       ],
       "name": "i64.atomic.rmw16.sub_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "sub",
@@ -761,7 +791,8 @@
       },
       "description": "<p>16-bit sign-agnostic subtraction</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.43",
@@ -773,7 +804,7 @@
         43
       ],
       "name": "i64.atomic.rmw32.sub_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "sub",
@@ -781,7 +812,8 @@
       },
       "description": "<p>32-bit sign-agnostic subtraction</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.44",
@@ -793,14 +825,15 @@
         44
       ],
       "name": "i32.atomic.rmw.and",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "and"
       },
       "description": "<p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.45",
@@ -812,14 +845,15 @@
         45
       ],
       "name": "i64.atomic.rmw.and",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "and"
       },
       "description": "<p>64-bit sign-agnostic bitwise and</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.46",
@@ -831,7 +865,7 @@
         46
       ],
       "name": "i32.atomic.rmw8.and_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "and",
@@ -839,7 +873,8 @@
       },
       "description": "<p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.47",
@@ -851,7 +886,7 @@
         47
       ],
       "name": "i32.atomic.rmw16.and_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "and",
@@ -859,7 +894,8 @@
       },
       "description": "<p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.48",
@@ -871,7 +907,7 @@
         48
       ],
       "name": "i64.atomic.rmw8.and_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "and",
@@ -879,7 +915,8 @@
       },
       "description": "<p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.49",
@@ -891,7 +928,7 @@
         49
       ],
       "name": "i64.atomic.rmw16.and_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "and",
@@ -899,7 +936,8 @@
       },
       "description": "<p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.50",
@@ -911,7 +949,7 @@
         50
       ],
       "name": "i64.atomic.rmw32.and_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "and",
@@ -919,7 +957,8 @@
       },
       "description": "<p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.51",
@@ -931,14 +970,15 @@
         51
       ],
       "name": "i32.atomic.rmw.or",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "or"
       },
       "description": "<p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.52",
@@ -950,14 +990,15 @@
         52
       ],
       "name": "i64.atomic.rmw.or",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "or"
       },
       "description": "<p>64-bit sign-agnostic bitwise inclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.53",
@@ -969,7 +1010,7 @@
         53
       ],
       "name": "i32.atomic.rmw8.or_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "or",
@@ -977,7 +1018,8 @@
       },
       "description": "<p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.54",
@@ -989,7 +1031,7 @@
         54
       ],
       "name": "i32.atomic.rmw16.or_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "or",
@@ -997,7 +1039,8 @@
       },
       "description": "<p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.55",
@@ -1009,7 +1052,7 @@
         55
       ],
       "name": "i64.atomic.rmw8.or_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "or",
@@ -1017,7 +1060,8 @@
       },
       "description": "<p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.56",
@@ -1029,7 +1073,7 @@
         56
       ],
       "name": "i64.atomic.rmw16.or_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "or",
@@ -1037,7 +1081,8 @@
       },
       "description": "<p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.57",
@@ -1049,7 +1094,7 @@
         57
       ],
       "name": "i64.atomic.rmw32.or_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "or",
@@ -1057,7 +1102,8 @@
       },
       "description": "<p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.58",
@@ -1069,14 +1115,15 @@
         58
       ],
       "name": "i32.atomic.rmw.xor",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "xor"
       },
       "description": "<p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.59",
@@ -1088,14 +1135,15 @@
         59
       ],
       "name": "i64.atomic.rmw.xor",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "xor"
       },
       "description": "<p>64-bit sign-agnostic bitwise exclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.60",
@@ -1107,7 +1155,7 @@
         60
       ],
       "name": "i32.atomic.rmw8.xor_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "xor",
@@ -1115,7 +1163,8 @@
       },
       "description": "<p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.61",
@@ -1127,7 +1176,7 @@
         61
       ],
       "name": "i32.atomic.rmw16.xor_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "xor",
@@ -1135,7 +1184,8 @@
       },
       "description": "<p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.62",
@@ -1147,7 +1197,7 @@
         62
       ],
       "name": "i64.atomic.rmw8.xor_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "xor",
@@ -1155,7 +1205,8 @@
       },
       "description": "<p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.63",
@@ -1167,7 +1218,7 @@
         63
       ],
       "name": "i64.atomic.rmw16.xor_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "xor",
@@ -1175,7 +1226,8 @@
       },
       "description": "<p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.64",
@@ -1187,7 +1239,7 @@
         64
       ],
       "name": "i64.atomic.rmw32.xor_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "xor",
@@ -1195,7 +1247,8 @@
       },
       "description": "<p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.65",
@@ -1207,14 +1260,15 @@
         65
       ],
       "name": "i32.atomic.rmw.xchg",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "xchg"
       },
       "description": "<p>nop</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.66",
@@ -1226,14 +1280,15 @@
         66
       ],
       "name": "i64.atomic.rmw.xchg",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "xchg"
       },
       "description": "<p>nop</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.67",
@@ -1245,7 +1300,7 @@
         67
       ],
       "name": "i32.atomic.rmw8.xchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "xchg",
@@ -1253,7 +1308,8 @@
       },
       "description": "<p>nop</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.68",
@@ -1265,7 +1321,7 @@
         68
       ],
       "name": "i32.atomic.rmw16.xchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "xchg",
@@ -1273,7 +1329,8 @@
       },
       "description": "<p>nop</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.69",
@@ -1285,7 +1342,7 @@
         69
       ],
       "name": "i64.atomic.rmw8.xchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "xchg",
@@ -1293,7 +1350,8 @@
       },
       "description": "<p>nop</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.70",
@@ -1305,7 +1363,7 @@
         70
       ],
       "name": "i64.atomic.rmw16.xchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "xchg",
@@ -1313,7 +1371,8 @@
       },
       "description": "<p>nop</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.71",
@@ -1325,7 +1384,7 @@
         71
       ],
       "name": "i64.atomic.rmw32.xchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "xchg",
@@ -1333,7 +1392,8 @@
       },
       "description": "<p>nop</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.72",
@@ -1345,14 +1405,15 @@
         72
       ],
       "name": "i32.atomic.rmw.cmpxchg",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw",
         "mainop": "cmpxchg"
       },
       "description": "<p>Load as loaded: 4 bytes</p><p>Compare expected with loaded: 32-bit compare equal</p><p>Conditionally Store replacement: store 4 bytes</p><p>Return loaded: as i32</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.73",
@@ -1364,14 +1425,15 @@
         73
       ],
       "name": "i64.atomic.rmw.cmpxchg",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw",
         "mainop": "cmpxchg"
       },
       "description": "<p>Load as loaded: 8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.74",
@@ -1383,7 +1445,7 @@
         74
       ],
       "name": "i32.atomic.rmw8.cmpxchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw8",
         "mainop": "cmpxchg",
@@ -1391,7 +1453,8 @@
       },
       "description": "<p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i32</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.75",
@@ -1403,7 +1466,7 @@
         75
       ],
       "name": "i32.atomic.rmw16.cmpxchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i32.atomic.rmw16",
         "mainop": "cmpxchg",
@@ -1411,7 +1474,8 @@
       },
       "description": "<p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i8 to i32</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.76",
@@ -1423,7 +1487,7 @@
         76
       ],
       "name": "i64.atomic.rmw8.cmpxchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw8",
         "mainop": "cmpxchg",
@@ -1431,7 +1495,8 @@
       },
       "description": "<p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i64</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.77",
@@ -1443,7 +1508,7 @@
         77
       ],
       "name": "i64.atomic.rmw16.cmpxchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw16",
         "mainop": "cmpxchg",
@@ -1451,7 +1516,8 @@
       },
       "description": "<p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i16 to i64</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.78",
@@ -1463,7 +1529,7 @@
         78
       ],
       "name": "i64.atomic.rmw32.cmpxchg_u",
-      "status": "standard",
+      "status": "proposal",
       "parts": {
         "pre": "i64.atomic.rmw32",
         "mainop": "cmpxchg",
@@ -1471,7 +1537,8 @@
       },
       "description": "<p>Load as loaded:4 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes</p><p>Return loaded: zero-extended from i32 to i64</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "threads"
     },
     {
       "id": "0xFE.79",

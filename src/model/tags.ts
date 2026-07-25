@@ -12,6 +12,7 @@
 
 import type { Opcode } from './types.ts';
 import { CATEGORY_LABELS, categorize } from './categories.ts';
+import { proposal } from './proposals.ts';
 
 export interface Tag {
   /** Stable token, used as the selector and in `data-tags`. */
@@ -69,9 +70,8 @@ export function tagsFor(op: Opcode): Tag[] {
   if (op.status !== 'standard') {
     add(op.status, op.status, 'status');
   }
-  if (op.proposal) {
-    add(`proposal-${op.proposal.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`, op.proposal, 'status');
-  }
+  const from = proposal(op.proposal);
+  if (from) add(`from-${from.id}`, from.name, 'status');
 
   return tags;
 }

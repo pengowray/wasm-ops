@@ -27,7 +27,8 @@
         "post": "sat_f32",
         "sign": "s"
       },
-      "description": "<p>saturating form of i32.trunc_f32_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i32.trunc_f32_s</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.1",
@@ -46,7 +47,8 @@
         "post": "sat_f32",
         "sign": "u"
       },
-      "description": "<p>saturating form of i32.trunc_f32_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i32.trunc_f32_u</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.2",
@@ -65,7 +67,8 @@
         "post": "sat_f64",
         "sign": "s"
       },
-      "description": "<p>saturating form of i32.trunc_f64_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i32.trunc_f64_s</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.3",
@@ -84,7 +87,8 @@
         "post": "sat_f64",
         "sign": "u"
       },
-      "description": "<p>saturating form of i32.trunc_f64_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i32.trunc_f64_u</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.4",
@@ -103,7 +107,8 @@
         "post": "sat_f32",
         "sign": "s"
       },
-      "description": "<p>saturating form of i64.trunc_f32_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i64.trunc_f32_s</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.5",
@@ -122,7 +127,8 @@
         "post": "sat_f32",
         "sign": "u"
       },
-      "description": "<p>saturating form of i64.trunc_f32_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i64.trunc_f32_u</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.6",
@@ -141,7 +147,8 @@
         "post": "sat_f64",
         "sign": "s"
       },
-      "description": "<p>saturating form of i64.trunc_f64_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i64.trunc_f64_s</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.7",
@@ -160,7 +167,8 @@
         "post": "sat_f64",
         "sign": "u"
       },
-      "description": "<p>saturating form of i64.trunc_f64_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+      "description": "<p>saturating form of i64.trunc_f64_u</p>",
+      "proposal": "nontrapping-float-to-int"
     },
     {
       "id": "0xFC.8",
@@ -179,7 +187,8 @@
       },
       "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>",
+      "proposal": "bulk-memory"
     },
     {
       "id": "0xFC.9",
@@ -198,7 +207,8 @@
       },
       "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span>",
+      "proposal": "bulk-memory"
     },
     {
       "id": "0xFC.10",
@@ -217,7 +227,8 @@
       },
       "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : memidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : memidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>",
+      "proposal": "bulk-memory"
     },
     {
       "id": "0xFC.11",
@@ -236,7 +247,8 @@
       },
       "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>",
+      "proposal": "bulk-memory"
     },
     {
       "id": "0xFC.12",
@@ -255,7 +267,8 @@
       },
       "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "y x",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xFC.13",
@@ -274,7 +287,8 @@
       },
       "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : elemidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : elemidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xFC.14",
@@ -293,7 +307,8 @@
       },
       "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
       "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : tableidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : tableidx</span></li></ol>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xFC.15",
@@ -310,9 +325,10 @@
         "pre": "table",
         "mainop": "grow"
       },
-      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>manipulate the size of a table</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xFC.16",
@@ -329,9 +345,10 @@
         "pre": "table",
         "mainop": "size"
       },
-      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>manipulate the size of a table</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xFC.17",
@@ -348,9 +365,10 @@
         "pre": "table",
         "mainop": "fill"
       },
-      "description": "<p>fills a range in a table with a value</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>fills a range in a table with a value</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xFC.18",
@@ -373,7 +391,7 @@
         252,
         19
       ],
-      "proposal": "Wide Arithmetic",
+      "proposal": "wide-arithmetic",
       "name": "i64.add128",
       "status": "proposal",
       "parts": {
@@ -391,7 +409,7 @@
         252,
         20
       ],
-      "proposal": "Wide Arithmetic",
+      "proposal": "wide-arithmetic",
       "name": "i64.sub128",
       "status": "proposal",
       "parts": {
@@ -409,7 +427,7 @@
         252,
         21
       ],
-      "proposal": "Wide Arithmetic",
+      "proposal": "wide-arithmetic",
       "name": "i64.mul_wide_s",
       "status": "proposal",
       "parts": {
@@ -427,7 +445,7 @@
         252,
         22
       ],
-      "proposal": "Wide Arithmetic",
+      "proposal": "wide-arithmetic",
       "name": "i64.mul_wide_u",
       "status": "proposal",
       "parts": {
@@ -747,7 +765,7 @@
       ],
       "name": "f32.load_f16",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Loads two bytes as an f16 and promotes the result to f32.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span>",
@@ -768,7 +786,7 @@
       ],
       "name": "f32.store_f16",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Demotes an f32 to f16 and stores it as two bytes.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span>",

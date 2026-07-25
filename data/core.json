@@ -28,7 +28,8 @@
         "large": true,
         "note": "<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
-      "description": "<p>The unreachable instruction causes an unconditional trap.</p>\n<p>A trap immediately aborts execution. Traps cannot be handled by WebAssembly code, but are reported to the outside environment, where they typically can be caught.</p>"
+      "description": "<p>The unreachable instruction causes an unconditional trap.</p>\n<p>A trap immediately aborts execution. Traps cannot be handled by WebAssembly code, but are reported to the outside environment, where they typically can be caught.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x01",
@@ -46,7 +47,8 @@
       "stack": {
         "html": "[] → []"
       },
-      "description": "<p>The nop instruction does nothing.</p>"
+      "description": "<p>The nop instruction does nothing.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x02",
@@ -67,7 +69,8 @@
         "html": "[] → [t<sup>∗</sup>]",
         "note": "<p>The result type of the instructions must match the blocktype. </p>\n<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. They must be well-nested.</p>"
       },
-      "description": "<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>"
+      "description": "<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x03",
@@ -87,7 +90,8 @@
       "stack": {
         "html": "[] → [t<sup>∗</sup>]"
       },
-      "description": "<p>a block with a label at the beginning which may be used to form loops</p>"
+      "description": "<p>a block with a label at the beginning which may be used to form loops</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x04",
@@ -108,7 +112,8 @@
         "html": "[i32] → [t<sup>∗</sup>]",
         "note": "<span class=\"op-type\">i32 <i>c</i> → [t<sup>∗</sup>]</span>\n<span class=\"op-type\">if <i>c</i> is non-zero, enter block instructions<sub>1</sub>, else enter block instructions<sub>2</sub></span>"
       },
-      "description": "<p>the beginning of an if construct with an implicit <i>then</i> block</p>"
+      "description": "<p>the beginning of an if construct with an implicit <i>then</i> block</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x05",
@@ -123,7 +128,8 @@
       "parts": {
         "mainop": "else"
       },
-      "description": "<p>Marks the else block of an <i>if</i>.</p>"
+      "description": "<p>Marks the else block of an <i>if</i>.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x06",
@@ -138,8 +144,8 @@
       "parts": {
         "mainop": "try"
       },
-      "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Legacy exception handling",
+      "description": "<p>begins a block which can handle thrown exceptions</p>",
+      "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
@@ -155,8 +161,8 @@
       "parts": {
         "mainop": "catch"
       },
-      "description": "<p>begins the catch block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Legacy exception handling",
+      "description": "<p>begins the catch block of the try block</p>",
+      "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediateArgs": "x",
       "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tagidx</span>"
@@ -174,8 +180,8 @@
       "parts": {
         "mainop": "throw"
       },
-      "description": "<p>Creates an exception defined by the tag and then throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Exception handling",
+      "description": "<p>Creates an exception defined by the tag and then throws it</p>",
+      "proposal": "exception-handling",
       "immediateArgs": "x",
       "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tagidx</span>"
     },
@@ -192,8 +198,8 @@
       "parts": {
         "mainop": "rethrow"
       },
-      "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Legacy exception handling",
+      "description": "<p>Pops the exnref on top of the stack and throws it</p>",
+      "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediateArgs": "l",
       "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
@@ -211,8 +217,8 @@
       "parts": {
         "mainop": "throw_ref"
       },
-      "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Exception handling"
+      "description": "<p>Pops the exnref on top of the stack and throws it</p>",
+      "proposal": "exception-handling"
     },
     {
       "id": "0x0B",
@@ -227,7 +233,8 @@
       "parts": {
         "mainop": "end"
       },
-      "description": "<p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p>"
+      "description": "<p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x0C",
@@ -249,7 +256,8 @@
         "large": true,
         "note": "<p>A branch targeting a <i>block</i> or <i>if</i> behaves like a break statement in most C-like languages, while a branch targeting a <i>loop</i> behaves like a continue statement.</p>\n<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
-      "description": "<p>Branch to a given label in an enclosing construct.</p>\n<p>Performs an unconditional branch.</p>"
+      "description": "<p>Branch to a given label in an enclosing construct.</p>\n<p>Performs an unconditional branch.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x0D",
@@ -269,7 +277,8 @@
       "stack": {
         "html": "[t<sup>?</sup> i32] → [t<sup>?</sup>]"
       },
-      "description": "<p>Performs a conditional branch, branching if i32 <i>c</i> is non-zero.</p>\n<p>Conditionally branch to a given label in an enclosing construct.</p>"
+      "description": "<p>Performs a conditional branch, branching if i32 <i>c</i> is non-zero.</p>\n<p>Conditionally branch to a given label in an enclosing construct.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x0E",
@@ -291,7 +300,8 @@
         "large": true,
         "note": "<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
-      "description": "<p>A jump table which jumps to a label in an enclosing construct.</p>\n<p>Performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p>"
+      "description": "<p>A jump table which jumps to a label in an enclosing construct.</p>\n<p>Performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x0F",
@@ -311,7 +321,8 @@
         "large": true,
         "note": "<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
-      "description": "<p>return zero or more values from this function.</p>\n<p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p>"
+      "description": "<p>return zero or more values from this function.</p>\n<p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x10",
@@ -332,7 +343,8 @@
         "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
         "large": true
       },
-      "description": "<p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p>"
+      "description": "<p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x11",
@@ -353,7 +365,8 @@
         "html": "[t<sup>?</sup> i32] → [t<sup>?</sup>]",
         "note": "<p>In future versions of WebAssembly, the zero byte may be used to index additional tables.</p>"
       },
-      "description": "<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>"
+      "description": "<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x12",
@@ -368,9 +381,10 @@
       "parts": {
         "mainop": "return_call"
       },
-      "description": "<p>the tail-call version of call</p>\n<p><em>Tail calls proposal</em></p>",
+      "description": "<p>the tail-call version of call</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : funcidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : funcidx</span>",
+      "proposal": "tail-call"
     },
     {
       "id": "0x13",
@@ -385,9 +399,10 @@
       "parts": {
         "mainop": "return_call_indirect"
       },
-      "description": "<p>the tail-call version of call</p>\n<p><em>Tail calls proposal</em></p>",
+      "description": "<p>the tail-call version of call</p>",
       "immediateArgs": "y x",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>",
+      "proposal": "tail-call"
     },
     {
       "id": "0x14",
@@ -402,9 +417,10 @@
       "parts": {
         "mainop": "call_ref"
       },
-      "description": "<p>call a function through a ref $t</p>\n<p><em>Typed Function References Proposal</em></p>",
+      "description": "<p>call a function through a ref $t</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "function-references"
     },
     {
       "id": "0x15",
@@ -419,9 +435,9 @@
       "parts": {
         "mainop": "return_call_ref"
       },
-      "description": "<p><em>Typed Function References Proposal</em></p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "function-references"
     },
     {
       "id": "0x16",
@@ -458,8 +474,8 @@
       "parts": {
         "mainop": "delegate"
       },
-      "description": "<p>begins the delegate block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Legacy exception handling",
+      "description": "<p>begins the delegate block of the try block</p>",
+      "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediateArgs": "l",
       "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
@@ -477,8 +493,8 @@
       "parts": {
         "mainop": "catch_all"
       },
-      "description": "<p>begins the catch_all block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Legacy exception handling",
+      "description": "<p>begins the catch_all block of the try block</p>",
+      "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
@@ -498,7 +514,8 @@
         "html": "[t] → []",
         "note": "(value-polymorphic)"
       },
-      "description": "<p>The drop instruction simply throws away a single operand.</p>"
+      "description": "<p>The drop instruction simply throws away a single operand.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x1B",
@@ -517,7 +534,8 @@
         "html": "[t t i32] → [t]",
         "note": "(value-polymorphic)"
       },
-      "description": "<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>"
+      "description": "<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x1C",
@@ -528,13 +546,14 @@
         28
       ],
       "name": "select t",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "select t"
       },
-      "description": "<p>Only annotated 'select' can be used with reference types.</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>Only annotated 'select' can be used with reference types.</p>",
       "immediateArgs": "t*",
-      "followedBy": "<span class=\"op-imm-args\"><i>t*</i> : vec(valtype)</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>t*</i> : vec(valtype)</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0x1D",
@@ -571,8 +590,8 @@
       "parts": {
         "mainop": "try_table"
       },
-      "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>",
-      "proposal": "Exception handling",
+      "description": "<p>begins a block which can handle thrown exceptions</p>",
+      "proposal": "exception-handling",
       "immediateArgs": "bt c*",
       "followedBy": "<ol><li><span class=\"op-imm-args\"><i>bt</i> : blocktype</span></li><li><span class=\"op-imm-args\"><i>c*</i> : vec(catch)</span></li></ol><p>Then instructions, then <i>end</i> (0x0B).</p>"
     },
@@ -596,7 +615,8 @@
         "html": "[] → [t]",
         "note": "<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>\n<p>The <i>locals</i> context refers to the list of locals declared in the current function (including parameters), represented by their value type.</p>"
       },
-      "description": "<p>This instruction gets the value of a variable.</p>"
+      "description": "<p>This instruction gets the value of a variable.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x21",
@@ -618,7 +638,8 @@
         "html": "[t] → []",
         "note": "<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>"
       },
-      "description": "<p>This instruction sets the value of a variable.</p>"
+      "description": "<p>This instruction sets the value of a variable.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x22",
@@ -640,7 +661,8 @@
         "html": "[t] → [t]",
         "note": "<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>"
       },
-      "description": "<p>The local.tee instruction is like local.set but also returns its argument.</p>"
+      "description": "<p>The local.tee instruction is like local.set but also returns its argument.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x23",
@@ -662,7 +684,8 @@
         "html": "[] → [t]",
         "note": "<p>The <i>globals</i> context is the list of globals declared in the current module, represented by their global type.</p>"
       },
-      "description": "<p>This instruction gets the value of a variable.</p>"
+      "description": "<p>This instruction gets the value of a variable.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x24",
@@ -683,7 +706,8 @@
       "stack": {
         "html": "[t] → []"
       },
-      "description": "<p>This instruction sets the value of a variable </p>"
+      "description": "<p>This instruction sets the value of a variable </p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x25",
@@ -694,14 +718,15 @@
         37
       ],
       "name": "table.get",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "table",
         "mainop": "get"
       },
-      "description": "<p>Access tables</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>Access tables</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0x26",
@@ -712,14 +737,15 @@
         38
       ],
       "name": "table.set",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "table",
         "mainop": "set"
       },
-      "description": "<p>Access tables</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>Access tables</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0x27",
@@ -752,7 +778,8 @@
         "html": "[i32] → [i32]",
         "note": "<span class=\"op-type\">i : address-operand → c : result</span>\n<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment.</p>\n<p>The immediate value memarg.align is an alignment hint about the effective-address. It is a power-of 2 encoded as log2(memarg.align). In practice, its value may be: 0 (8-bit), 1 (16-bit), 2 (32-bit), or (64-bit; used only with wasm64). </p>\n<p><code>effective-address = address-operand + memarg.offset </code></p>\n<p>If memarg.align is incorrect it is considered \"misaligned\". Misaligned access still has the same behavior as aligned access, only possibly much slower.</p>"
       },
-      "description": "<p>load 4 bytes as i32.</p>"
+      "description": "<p>load 4 bytes as i32.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x29",
@@ -774,7 +801,8 @@
         "html": "[i32] → [i64]",
         "note": "<p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p>"
       },
-      "description": "<p>load 8 bytes as i64.</p>"
+      "description": "<p>load 8 bytes as i64.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x2A",
@@ -795,7 +823,8 @@
         "html": "[i32] → [f32]",
         "note": "<p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p>"
       },
-      "description": "<p>load 4 bytes as f32.</p>"
+      "description": "<p>load 4 bytes as f32.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x2B",
@@ -815,7 +844,8 @@
       "stack": {
         "html": "[i32] → [f64]"
       },
-      "description": "<p>load 8 bytes as f64.</p>"
+      "description": "<p>load 8 bytes as f64.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x2C",
@@ -838,7 +868,8 @@
         "html": "[i32] → [i32]",
         "note": "<p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p>"
       },
-      "description": "<p>load 1 byte and sign-extend i8 to i32.</p>"
+      "description": "<p>load 1 byte and sign-extend i8 to i32.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x2D",
@@ -860,7 +891,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>load 1 byte and zero-extend i8 to i32</p>"
+      "description": "<p>load 1 byte and zero-extend i8 to i32</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x2E",
@@ -882,7 +914,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>load 2 bytes and sign-extend i16 to i32</p>"
+      "description": "<p>load 2 bytes and sign-extend i16 to i32</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x2F",
@@ -904,7 +937,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>load 2 bytes and zero-extend i16 to i32</p>"
+      "description": "<p>load 2 bytes and zero-extend i16 to i32</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x30",
@@ -926,7 +960,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>load 1 byte and sign-extend i8 to i64</p>"
+      "description": "<p>load 1 byte and sign-extend i8 to i64</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x31",
@@ -948,7 +983,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>load 1 byte and zero-extend i8 to i64</p>"
+      "description": "<p>load 1 byte and zero-extend i8 to i64</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x32",
@@ -970,7 +1006,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>load 2 bytes and sign-extend i16 to i64</p>"
+      "description": "<p>load 2 bytes and sign-extend i16 to i64</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x33",
@@ -992,7 +1029,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>load 2 bytes and zero-extend i16 to i64</p>"
+      "description": "<p>load 2 bytes and zero-extend i16 to i64</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x34",
@@ -1014,7 +1052,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>load 4 bytes and sign-extend i32 to i64</p>"
+      "description": "<p>load 4 bytes and sign-extend i32 to i64</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x35",
@@ -1036,7 +1075,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>load 4 bytes and zero-extend i32 to i64</p>"
+      "description": "<p>load 4 bytes and zero-extend i32 to i64</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x36",
@@ -1056,7 +1096,8 @@
       "stack": {
         "html": "[i32 i32] → []"
       },
-      "description": "<p>store 4 bytes (no conversion)</p>"
+      "description": "<p>store 4 bytes (no conversion)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x37",
@@ -1076,7 +1117,8 @@
       "stack": {
         "html": "[i32 i64] → []"
       },
-      "description": "<p>store 8 bytes (no conversion)</p>"
+      "description": "<p>store 8 bytes (no conversion)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x38",
@@ -1096,7 +1138,8 @@
       "stack": {
         "html": "[i32 f32] → []"
       },
-      "description": "<p>store 4 bytes (no conversion)</p>"
+      "description": "<p>store 4 bytes (no conversion)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x39",
@@ -1116,7 +1159,8 @@
       "stack": {
         "html": "[i32 f64] → []"
       },
-      "description": "<p>store 8 bytes (no conversion)</p>"
+      "description": "<p>store 8 bytes (no conversion)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x3A",
@@ -1137,7 +1181,8 @@
       "stack": {
         "html": "[i32 i32] → []"
       },
-      "description": "<p>wrap i32 to i8 and store 1 byte</p>"
+      "description": "<p>wrap i32 to i8 and store 1 byte</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x3B",
@@ -1158,7 +1203,8 @@
       "stack": {
         "html": "[i32 i32] → []"
       },
-      "description": "<p>wrap i32 to i16 and store 2 bytes</p>"
+      "description": "<p>wrap i32 to i16 and store 2 bytes</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x3C",
@@ -1179,7 +1225,8 @@
       "stack": {
         "html": "[i32 i64] → []"
       },
-      "description": "<p>wrap i64 to i8 and store 1 byte</p>"
+      "description": "<p>wrap i64 to i8 and store 1 byte</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x3D",
@@ -1200,7 +1247,8 @@
       "stack": {
         "html": "[i32 i64] → []"
       },
-      "description": "<p>wrap i64 to i16 and store 2 bytes</p>"
+      "description": "<p>wrap i64 to i16 and store 2 bytes</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x3E",
@@ -1221,7 +1269,8 @@
       "stack": {
         "html": "[i32 i64] → []"
       },
-      "description": "<p>wrap i64 to i32 and store 4 bytes</p>"
+      "description": "<p>wrap i64 to i32 and store 4 bytes</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x3F",
@@ -1242,7 +1291,8 @@
       },
       "description": "<p>The <b>memory.size</b> instruction returns the current size of a memory.</p>\n<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>",
+      "proposal": "mvp"
     },
     {
       "id": "0x40",
@@ -1263,7 +1313,8 @@
       },
       "description": "<p>The memory.grow instruction grows memory by a given delta and returns the previous size, or −1 if enough memory cannot be allocated.</p>\n<p>Operates in units of page size. Each page is 65,536 bytes (64KB).</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>",
+      "proposal": "mvp"
     },
     {
       "id": "0x41",
@@ -1284,7 +1335,8 @@
       "stack": {
         "html": "[] → [i32]"
       },
-      "description": "<p>Push a 32-bit integer value to the stack.</p>"
+      "description": "<p>Push a 32-bit integer value to the stack.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x42",
@@ -1305,7 +1357,8 @@
       "stack": {
         "html": "[] → [i64]"
       },
-      "description": "<p>Push a 64-bit integer value to the stack.</p>"
+      "description": "<p>Push a 64-bit integer value to the stack.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x43",
@@ -1326,7 +1379,8 @@
       "stack": {
         "html": "[] → [f32]"
       },
-      "description": "<p>Push a 32-bit float value to the stack.</p>"
+      "description": "<p>Push a 32-bit float value to the stack.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x44",
@@ -1347,7 +1401,8 @@
       "stack": {
         "html": "[] → [f64]"
       },
-      "description": "<p>Push a 64-bit float value to the stack.</p>"
+      "description": "<p>Push a 64-bit float value to the stack.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x45",
@@ -1366,7 +1421,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p>"
+      "description": "<p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x46",
@@ -1385,7 +1441,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">==</p>\n<p>sign-agnostic compare equal</p>"
+      "description": "<p class=\"bigsign\">==</p>\n<p>sign-agnostic compare equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x47",
@@ -1404,7 +1461,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≠</p>\n<p>sign-agnostic compare unequal</p>"
+      "description": "<p class=\"bigsign\">≠</p>\n<p>sign-agnostic compare unequal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x48",
@@ -1424,7 +1482,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&lt;</p>\n<p>signed less than</p>"
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>signed less than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x49",
@@ -1444,7 +1503,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&lt;</p>\n<p>unsigned less than</p>"
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>unsigned less than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x4A",
@@ -1464,7 +1524,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p>signed greater than</p>"
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>signed greater than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x4B",
@@ -1484,7 +1545,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p>unsigned greater than</p>"
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>unsigned greater than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x4C",
@@ -1504,7 +1566,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≤</p>\n<p>signed less than or equal</p>"
+      "description": "<p class=\"bigsign\">≤</p>\n<p>signed less than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x4D",
@@ -1524,7 +1587,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≤</p>\n<p>unsigned less than or equal</p>"
+      "description": "<p class=\"bigsign\">≤</p>\n<p>unsigned less than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x4E",
@@ -1544,7 +1608,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≥</p>\n<p>signed greater than or equal</p>"
+      "description": "<p class=\"bigsign\">≥</p>\n<p>signed greater than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x4F",
@@ -1564,7 +1629,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≥</p>\n<p>unsigned greater than or equal</p>"
+      "description": "<p class=\"bigsign\">≥</p>\n<p>unsigned greater than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x50",
@@ -1583,7 +1649,8 @@
       "stack": {
         "html": "[i64] → [i32]"
       },
-      "description": "<p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p>"
+      "description": "<p>compare equal to zero.</p><p>Return 1 if operand is zero, 0 otherwise.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x51",
@@ -1602,7 +1669,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">==</p>\n<p>sign-agnostic compare equal</p>"
+      "description": "<p class=\"bigsign\">==</p>\n<p>sign-agnostic compare equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x52",
@@ -1621,7 +1689,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≠</p>\n<p>sign-agnostic compare unequal</p>"
+      "description": "<p class=\"bigsign\">≠</p>\n<p>sign-agnostic compare unequal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x53",
@@ -1641,7 +1710,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&lt;</p>\n<p>signed less than</p>"
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>signed less than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x54",
@@ -1661,7 +1731,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&lt;</p>\n<p>unsigned less than</p>"
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>unsigned less than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x55",
@@ -1681,7 +1752,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p>signed greater than</p>"
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>signed greater than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x56",
@@ -1701,7 +1773,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p>unsigned greater than</p>"
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>unsigned greater than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x57",
@@ -1721,7 +1794,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≤</p>\n<p>signed less than or equal</p>"
+      "description": "<p class=\"bigsign\">≤</p>\n<p>signed less than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x58",
@@ -1741,7 +1815,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≤</p>\n<p>unsigned less than or equal</p>"
+      "description": "<p class=\"bigsign\">≤</p>\n<p>unsigned less than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x59",
@@ -1761,7 +1836,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≥</p>\n<p>signed greater than or equal</p>"
+      "description": "<p class=\"bigsign\">≥</p>\n<p>signed greater than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x5A",
@@ -1781,7 +1857,8 @@
       "stack": {
         "html": "[i64 i64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≥</p>\n<p>unsigned greater than or equal</p>"
+      "description": "<p class=\"bigsign\">≥</p>\n<p>unsigned greater than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x5B",
@@ -1800,7 +1877,8 @@
       "stack": {
         "html": "[f32 f32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">==</p>\n<p>compare equal</p>"
+      "description": "<p class=\"bigsign\">==</p>\n<p>compare equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x5C",
@@ -1819,7 +1897,8 @@
       "stack": {
         "html": "[f32 f32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≠</p>\n<p>compare unordered or unequal</p>"
+      "description": "<p class=\"bigsign\">≠</p>\n<p>compare unordered or unequal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x5D",
@@ -1838,7 +1917,8 @@
       "stack": {
         "html": "[f32 f32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&lt;</p>\n<p>less than</p>"
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>less than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x5E",
@@ -1857,7 +1937,8 @@
       "stack": {
         "html": "[f32 f32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p>greater than</p>"
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>greater than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x5F",
@@ -1876,7 +1957,8 @@
       "stack": {
         "html": "[f32 f32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≤</p>\n<p>less than or equal</p>"
+      "description": "<p class=\"bigsign\">≤</p>\n<p>less than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x60",
@@ -1895,7 +1977,8 @@
       "stack": {
         "html": "[f32 f32] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≥</p>\n<p>greater than or equal</p>"
+      "description": "<p class=\"bigsign\">≥</p>\n<p>greater than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x61",
@@ -1914,7 +1997,8 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">==</p>\n<p>compare equal</p>"
+      "description": "<p class=\"bigsign\">==</p>\n<p>compare equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x62",
@@ -1933,7 +2017,8 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≠</p>\n<p>compare unordered or unequal</p>"
+      "description": "<p class=\"bigsign\">≠</p>\n<p>compare unordered or unequal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x63",
@@ -1952,7 +2037,8 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&lt;</p>\n<p>less than</p>"
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>less than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x64",
@@ -1971,7 +2057,8 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p> greater than</p>"
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p> greater than</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x65",
@@ -1990,7 +2077,8 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≤</p>\n<p>less than or equal</p>"
+      "description": "<p class=\"bigsign\">≤</p>\n<p>less than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x66",
@@ -2009,7 +2097,8 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">≥</p>\n<p>greater than or equal</p>"
+      "description": "<p class=\"bigsign\">≥</p>\n<p>greater than or equal</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x67",
@@ -2028,7 +2117,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>sign-agnostic count leading zero bits</p>\n<p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p>"
+      "description": "<p>sign-agnostic count leading zero bits</p>\n<p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x68",
@@ -2047,7 +2137,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>sign-agnostic count trailing zero bits</p>\n<p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p>"
+      "description": "<p>sign-agnostic count trailing zero bits</p>\n<p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x69",
@@ -2066,7 +2157,8 @@
       "stack": {
         "html": "[i32] → [i32]"
       },
-      "description": "<p>sign-agnostic count number of one bits</p>\n<p>Return the count of non-zero bits in i.</p>"
+      "description": "<p>sign-agnostic count number of one bits</p>\n<p>Return the count of non-zero bits in i.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x6A",
@@ -2085,7 +2177,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic addition</p>"
+      "description": "<p>sign-agnostic addition</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x6B",
@@ -2104,7 +2197,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic subtraction</p>"
+      "description": "<p>sign-agnostic subtraction</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x6C",
@@ -2123,7 +2217,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic multiplication, modulo 2<sup>32</sup></p>"
+      "description": "<p>sign-agnostic multiplication, modulo 2<sup>32</sup></p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x6D",
@@ -2143,7 +2238,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>signed division (result is truncated toward zero)</p>"
+      "description": "<p>signed division (result is truncated toward zero)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x6E",
@@ -2163,7 +2259,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>unsigned division (result is floored)</p>"
+      "description": "<p>unsigned division (result is floored)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x6F",
@@ -2183,7 +2280,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>signed remainder (result has the sign of the dividend)</p>"
+      "description": "<p>signed remainder (result has the sign of the dividend)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x70",
@@ -2203,7 +2301,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>unsigned remainder</p>"
+      "description": "<p>unsigned remainder</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x71",
@@ -2222,7 +2321,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic bitwise <i>and</i>.</p>\n<p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p>"
+      "description": "<p>sign-agnostic bitwise <i>and</i>.</p>\n<p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x72",
@@ -2241,7 +2341,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic bitwise <i>inclusive or</i>.</p>\n<p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p>"
+      "description": "<p>sign-agnostic bitwise <i>inclusive or</i>.</p>\n<p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x73",
@@ -2260,7 +2361,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic bitwise <i>exclusive or</i>.</p>\n<p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p>"
+      "description": "<p>sign-agnostic bitwise <i>exclusive or</i>.</p>\n<p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x74",
@@ -2279,7 +2381,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic shift left</p>\n<p>Return the result of shifting i1 left by k bits, modulo 2<sup>32</sup></p>"
+      "description": "<p>sign-agnostic shift left</p>\n<p>Return the result of shifting i1 left by k bits, modulo 2<sup>32</sup></p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x75",
@@ -2299,7 +2402,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-replicating (arithmetic) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p>"
+      "description": "<p>sign-replicating (arithmetic) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x76",
@@ -2319,7 +2423,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>zero-replicating (logical) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p>"
+      "description": "<p>zero-replicating (logical) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x77",
@@ -2338,7 +2443,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic rotate left</p>\n<p>Return the result of rotating i1 left by k bits.</p>"
+      "description": "<p>sign-agnostic rotate left</p>\n<p>Return the result of rotating i1 left by k bits.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x78",
@@ -2357,7 +2463,8 @@
       "stack": {
         "html": "[i32 i32] → [i32]"
       },
-      "description": "<p>sign-agnostic rotate right</p>\n<p>Return the result of rotating i1 right by k bits.</p>"
+      "description": "<p>sign-agnostic rotate right</p>\n<p>Return the result of rotating i1 right by k bits.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x79",
@@ -2376,7 +2483,8 @@
       "stack": {
         "html": "[i64] → [i64]"
       },
-      "description": "<p>sign-agnostic count leading zero bits</p>\n<p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p>"
+      "description": "<p>sign-agnostic count leading zero bits</p>\n<p>Return the count of leading zero bits in i. All zero bits are considered leading if the value is zero.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x7A",
@@ -2395,7 +2503,8 @@
       "stack": {
         "html": "[i64] → [i64]"
       },
-      "description": "<p>sign-agnostic count trailing zero bits</p>\n<p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p>"
+      "description": "<p>sign-agnostic count trailing zero bits</p>\n<p>Return the count of trailing zero bits in i. All zero bits are considered trailing if the value is zero.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x7B",
@@ -2414,7 +2523,8 @@
       "stack": {
         "html": "[i64] → [i64]"
       },
-      "description": "<p>sign-agnostic count number of one bits</p>\n<p>Return the count of non-zero bits in i.</p>"
+      "description": "<p>sign-agnostic count number of one bits</p>\n<p>Return the count of non-zero bits in i.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x7C",
@@ -2433,7 +2543,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic addition</p>"
+      "description": "<p>sign-agnostic addition</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x7D",
@@ -2452,7 +2563,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic subtraction</p>"
+      "description": "<p>sign-agnostic subtraction</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x7E",
@@ -2471,7 +2583,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic multiplication, modulo 2<sup>64</sup></p>"
+      "description": "<p>sign-agnostic multiplication, modulo 2<sup>64</sup></p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x7F",
@@ -2491,7 +2604,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>signed division (result is truncated toward zero)</p>"
+      "description": "<p>signed division (result is truncated toward zero)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x80",
@@ -2511,7 +2625,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>unsigned division (result is floored)</p>"
+      "description": "<p>unsigned division (result is floored)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x81",
@@ -2531,7 +2646,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>signed remainder (result has the sign of the dividend)</p>"
+      "description": "<p>signed remainder (result has the sign of the dividend)</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x82",
@@ -2551,7 +2667,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>unsigned remainder</p>"
+      "description": "<p>unsigned remainder</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x83",
@@ -2570,7 +2687,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic bitwise <i>and</i>.</p>\n<p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p>"
+      "description": "<p>sign-agnostic bitwise <i>and</i>.</p>\n<p>Return the bitwise conjunction of 𝑖1 and 𝑖2.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x84",
@@ -2589,7 +2707,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic bitwise <i>inclusive or</i>.</p>\n<p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p>"
+      "description": "<p>sign-agnostic bitwise <i>inclusive or</i>.</p>\n<p>Return the bitwise disjunction of 𝑖1 and 𝑖2.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x85",
@@ -2608,7 +2727,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic bitwise <i>exclusive or</i>.</p>\n<p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p>"
+      "description": "<p>sign-agnostic bitwise <i>exclusive or</i>.</p>\n<p>Return the bitwise exclusive disjunction of 𝑖1 and 𝑖2.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x86",
@@ -2627,7 +2747,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic shift left</p>\n<p>Return the result of shifting i1 left by k bits, modulo 2<sup>64</sup></p>"
+      "description": "<p>sign-agnostic shift left</p>\n<p>Return the result of shifting i1 left by k bits, modulo 2<sup>64</sup></p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x87",
@@ -2647,7 +2768,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-replicating (arithmetic) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p>"
+      "description": "<p>sign-replicating (arithmetic) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with the most significant bit of the original value.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x88",
@@ -2667,7 +2789,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>zero-replicating (logical) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p>"
+      "description": "<p>zero-replicating (logical) shift right</p>\n<p>Return the result of shifting i1 right by k bits, extended with 0 bits.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x89",
@@ -2686,7 +2809,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic rotate left</p>\n<p>Return the result of rotating i1 left by k bits.</p>"
+      "description": "<p>sign-agnostic rotate left</p>\n<p>Return the result of rotating i1 left by k bits.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x8A",
@@ -2705,7 +2829,8 @@
       "stack": {
         "html": "[i64 i64] → [i64]"
       },
-      "description": "<p>sign-agnostic rotate right</p>\n<p>Return the result of rotating i1 right by k bits.</p>"
+      "description": "<p>sign-agnostic rotate right</p>\n<p>Return the result of rotating i1 right by k bits.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x8B",
@@ -2724,7 +2849,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>absolute value</p>"
+      "description": "<p>absolute value</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x8C",
@@ -2743,7 +2869,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>negation</p>"
+      "description": "<p>negation</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x8D",
@@ -2762,7 +2889,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>ceiling operator</p>"
+      "description": "<p>ceiling operator</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x8E",
@@ -2781,7 +2909,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>floor operator</p>"
+      "description": "<p>floor operator</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x8F",
@@ -2800,7 +2929,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>round to nearest integer towards zero</p>"
+      "description": "<p>round to nearest integer towards zero</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x90",
@@ -2819,7 +2949,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>round to nearest integer, ties to even</p>"
+      "description": "<p>round to nearest integer, ties to even</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x91",
@@ -2838,7 +2969,8 @@
       "stack": {
         "html": "[f32] → [f32]"
       },
-      "description": "<p>square root</p>"
+      "description": "<p>square root</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x92",
@@ -2857,7 +2989,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>addition</p>"
+      "description": "<p>addition</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x93",
@@ -2876,7 +3009,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>subtraction</p>"
+      "description": "<p>subtraction</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x94",
@@ -2895,7 +3029,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>multiplication</p>"
+      "description": "<p>multiplication</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x95",
@@ -2914,7 +3049,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>division</p>\n<p>partial function: division by 0 is undefined</p>"
+      "description": "<p>division</p>\n<p>partial function: division by 0 is undefined</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x96",
@@ -2933,7 +3069,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>minimum (binary operator); if either operand is NaN, returns NaN</p>"
+      "description": "<p>minimum (binary operator); if either operand is NaN, returns NaN</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x97",
@@ -2952,7 +3089,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>maximum (binary operator); if either operand is NaN, returns NaN</p>"
+      "description": "<p>maximum (binary operator); if either operand is NaN, returns NaN</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x98",
@@ -2971,7 +3109,8 @@
       "stack": {
         "html": "[f32 f32] → [f32]"
       },
-      "description": "<p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p>"
+      "description": "<p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x99",
@@ -2990,7 +3129,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>absolute value</p>"
+      "description": "<p>absolute value</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x9A",
@@ -3009,7 +3149,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>negation</p>"
+      "description": "<p>negation</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x9B",
@@ -3028,7 +3169,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>ceiling operator</p>"
+      "description": "<p>ceiling operator</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x9C",
@@ -3047,7 +3189,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>floor operator</p>"
+      "description": "<p>floor operator</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x9D",
@@ -3066,7 +3209,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>round to nearest integer towards zero</p>"
+      "description": "<p>round to nearest integer towards zero</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x9E",
@@ -3085,7 +3229,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>round to nearest integer, ties to even</p>"
+      "description": "<p>round to nearest integer, ties to even</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0x9F",
@@ -3104,7 +3249,8 @@
       "stack": {
         "html": "[f64] → [f64]"
       },
-      "description": "<p>square root</p>"
+      "description": "<p>square root</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA0",
@@ -3123,7 +3269,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>addition</p>"
+      "description": "<p>addition</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA1",
@@ -3142,7 +3289,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>subtraction</p>"
+      "description": "<p>subtraction</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA2",
@@ -3161,7 +3309,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>multiplication</p>"
+      "description": "<p>multiplication</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA3",
@@ -3180,7 +3329,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>division</p>\n<p>partial function: division by 0 is undefined</p>"
+      "description": "<p>division</p>\n<p>partial function: division by 0 is undefined</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA4",
@@ -3199,7 +3349,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>minimum (binary operator); if either operand is NaN, returns NaN</p>"
+      "description": "<p>minimum (binary operator); if either operand is NaN, returns NaN</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA5",
@@ -3218,7 +3369,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>maximum (binary operator); if either operand is NaN, returns NaN</p>"
+      "description": "<p>maximum (binary operator); if either operand is NaN, returns NaN</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA6",
@@ -3237,7 +3389,8 @@
       "stack": {
         "html": "[f64 f64] → [f64]"
       },
-      "description": "<p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p>"
+      "description": "<p>If z1 and z2 have the same sign, then return z1. Else return z1 with negated sign.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA7",
@@ -3257,7 +3410,8 @@
       "stack": {
         "html": "[i64] → [i32]"
       },
-      "description": "<p>wrap a 64-bit integer to a 32-bit integer.</p>\n<p>Return i modulo 2<sup>32</sup>.</p>"
+      "description": "<p>wrap a 64-bit integer to a 32-bit integer.</p>\n<p>Return i modulo 2<sup>32</sup>.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA8",
@@ -3278,7 +3432,8 @@
       "stack": {
         "html": "[f32] → [i32]"
       },
-      "description": "<p>truncate a 32-bit float to a signed 32-bit integer</p>"
+      "description": "<p>truncate a 32-bit float to a signed 32-bit integer</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xA9",
@@ -3299,7 +3454,8 @@
       "stack": {
         "html": "[f32] → [i32]"
       },
-      "description": "<p>truncate a 32-bit float to an unsigned 32-bit integer</p>"
+      "description": "<p>truncate a 32-bit float to an unsigned 32-bit integer</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xAA",
@@ -3320,7 +3476,8 @@
       "stack": {
         "html": "[f64] → [i32]"
       },
-      "description": "<p>truncate a 64-bit float to a signed 32-bit integer</p>"
+      "description": "<p>truncate a 64-bit float to a signed 32-bit integer</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xAB",
@@ -3341,7 +3498,8 @@
       "stack": {
         "html": "[f64] → [i32]"
       },
-      "description": "<p>truncate a 64-bit float to an unsigned 32-bit integer</p>"
+      "description": "<p>truncate a 64-bit float to an unsigned 32-bit integer</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xAC",
@@ -3362,7 +3520,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>extend a signed 32-bit integer to a 64-bit integer.</p>"
+      "description": "<p>extend a signed 32-bit integer to a 64-bit integer.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xAD",
@@ -3383,7 +3542,8 @@
       "stack": {
         "html": "[i32] → [i64]"
       },
-      "description": "<p>extend an unsigned 32-bit integer to a 64-bit integer.</p>"
+      "description": "<p>extend an unsigned 32-bit integer to a 64-bit integer.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xAE",
@@ -3404,7 +3564,8 @@
       "stack": {
         "html": "[f32] → [i64]"
       },
-      "description": "<p>truncate a 32-bit float to a signed 64-bit integer.</p>"
+      "description": "<p>truncate a 32-bit float to a signed 64-bit integer.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xAF",
@@ -3425,7 +3586,8 @@
       "stack": {
         "html": "[f32] → [i64]"
       },
-      "description": "<p>truncate a 32-bit float to an unsigned 64-bit integer.</p>"
+      "description": "<p>truncate a 32-bit float to an unsigned 64-bit integer.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB0",
@@ -3446,7 +3608,8 @@
       "stack": {
         "html": "[f64] → [i64]"
       },
-      "description": "<p>truncate a 64-bit float to a signed 64-bit integer.</p>"
+      "description": "<p>truncate a 64-bit float to a signed 64-bit integer.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB1",
@@ -3467,7 +3630,8 @@
       "stack": {
         "html": "[f64] → [i64]"
       },
-      "description": "<p>truncate a 64-bit float to an unsigned 64-bit integer.</p>"
+      "description": "<p>truncate a 64-bit float to an unsigned 64-bit integer.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB2",
@@ -3488,7 +3652,8 @@
       "stack": {
         "html": "[i32] → [f32]"
       },
-      "description": "<p>convert a signed 32-bit integer to a 32-bit float.</p>"
+      "description": "<p>convert a signed 32-bit integer to a 32-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB3",
@@ -3509,7 +3674,8 @@
       "stack": {
         "html": "[i32] → [f32]"
       },
-      "description": "<p>convert an unsigned 32-bit integer to a 32-bit float.</p>"
+      "description": "<p>convert an unsigned 32-bit integer to a 32-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB4",
@@ -3530,7 +3696,8 @@
       "stack": {
         "html": "[i64] → [f32]"
       },
-      "description": "<p>convert a signed 64-bit integer to a 32-bit float.</p>"
+      "description": "<p>convert a signed 64-bit integer to a 32-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB5",
@@ -3551,7 +3718,8 @@
       "stack": {
         "html": "[i64] → [f32]"
       },
-      "description": "<p>convert an unsigned 64-bit integer to a 32-bit float.</p>"
+      "description": "<p>convert an unsigned 64-bit integer to a 32-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB6",
@@ -3571,7 +3739,8 @@
       "stack": {
         "html": "[f64] → [f32]"
       },
-      "description": "<p>demote a 64-bit float to a 32-bit float</p>"
+      "description": "<p>demote a 64-bit float to a 32-bit float</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB7",
@@ -3592,7 +3761,8 @@
       "stack": {
         "html": "[i32] → [f64]"
       },
-      "description": "<p>convert a signed 32-bit integer to a 64-bit float.</p>"
+      "description": "<p>convert a signed 32-bit integer to a 64-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB8",
@@ -3613,7 +3783,8 @@
       "stack": {
         "html": "[i32] → [f64]"
       },
-      "description": "<p>convert an unsigned 32-bit integer to a 64-bit float.</p>"
+      "description": "<p>convert an unsigned 32-bit integer to a 64-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xB9",
@@ -3634,7 +3805,8 @@
       "stack": {
         "html": "[i64] → [f64]"
       },
-      "description": "<p>convert a signed 64-bit integer to a 64-bit float.</p>"
+      "description": "<p>convert a signed 64-bit integer to a 64-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xBA",
@@ -3655,7 +3827,8 @@
       "stack": {
         "html": "[i64] → [f64]"
       },
-      "description": "<p>convert an unsigned 64-bit integer to a 64-bit float.</p>"
+      "description": "<p>convert an unsigned 64-bit integer to a 64-bit float.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xBB",
@@ -3675,7 +3848,8 @@
       "stack": {
         "html": "[f32] → [f64]"
       },
-      "description": "<p>promote a 32-bit float to a 64-bit float</p>"
+      "description": "<p>promote a 32-bit float to a 64-bit float</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xBC",
@@ -3695,7 +3869,8 @@
       "stack": {
         "html": "[f32] → [i32]"
       },
-      "description": "<p>reinterpret the bits of a 32-bit float as a 32-bit integer</p>"
+      "description": "<p>reinterpret the bits of a 32-bit float as a 32-bit integer</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xBD",
@@ -3715,7 +3890,8 @@
       "stack": {
         "html": "[f64] → [i64]"
       },
-      "description": "<p>reinterpret the bits of a 64-bit float as a 64-bit integer</p>"
+      "description": "<p>reinterpret the bits of a 64-bit float as a 64-bit integer</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xBE",
@@ -3735,7 +3911,8 @@
       "stack": {
         "html": "[i32] → [f32]"
       },
-      "description": "<p>reinterpret the bits of a 32-bit integer as a 32-bit float</p>"
+      "description": "<p>reinterpret the bits of a 32-bit integer as a 32-bit float</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xBF",
@@ -3755,7 +3932,8 @@
       "stack": {
         "html": "[i64] → [f64]"
       },
-      "description": "<p>reinterpret the bits of a 64-bit integer as a 64-bit float</p>"
+      "description": "<p>reinterpret the bits of a 64-bit integer as a 64-bit float</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xC0",
@@ -3766,14 +3944,15 @@
         192
       ],
       "name": "i32.extend8_s",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "i32",
         "mainop": "extend",
         "opbits": "8",
         "sign": "s"
       },
-      "description": "<p>extend a signed 8-bit integer to a 32-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>"
+      "description": "<p>extend a signed 8-bit integer to a 32-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
+      "proposal": "sign-extension"
     },
     {
       "id": "0xC1",
@@ -3784,14 +3963,15 @@
         193
       ],
       "name": "i32.extend16_s",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "i32",
         "mainop": "extend",
         "opbits": "16",
         "sign": "s"
       },
-      "description": "<p>extend a signed 16-bit integer to a 32-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>"
+      "description": "<p>extend a signed 16-bit integer to a 32-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
+      "proposal": "sign-extension"
     },
     {
       "id": "0xC2",
@@ -3802,14 +3982,15 @@
         194
       ],
       "name": "i64.extend8_s",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "i64",
         "mainop": "extend",
         "opbits": "8",
         "sign": "s"
       },
-      "description": "<p>extend a signed 8-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>"
+      "description": "<p>extend a signed 8-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
+      "proposal": "sign-extension"
     },
     {
       "id": "0xC3",
@@ -3820,14 +4001,15 @@
         195
       ],
       "name": "i64.extend16_s",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "i64",
         "mainop": "extend",
         "opbits": "16",
         "sign": "s"
       },
-      "description": "<p>extend a signed 16-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>"
+      "description": "<p>extend a signed 16-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
+      "proposal": "sign-extension"
     },
     {
       "id": "0xC4",
@@ -3838,14 +4020,15 @@
         196
       ],
       "name": "i64.extend32_s",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "i64",
         "mainop": "extend",
         "opbits": "32",
         "sign": "s"
       },
-      "description": "<p>extend a signed 32-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>"
+      "description": "<p>extend a signed 32-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
+      "proposal": "sign-extension"
     },
     {
       "id": "0xC5",
@@ -3977,14 +4160,15 @@
         208
       ],
       "name": "ref.null",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "ref",
         "mainop": "null"
       },
-      "description": "<p>evaluates to the null reference constant</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>evaluates to the null reference constant</p>",
       "immediateArgs": "t",
-      "followedBy": "<span class=\"op-imm-args\"><i>t</i> : reftype</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>t</i> : reftype</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xD1",
@@ -3995,12 +4179,13 @@
         209
       ],
       "name": "ref.is_null",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "ref",
         "mainop": "is_null"
       },
-      "description": "<p>checks for null</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>checks for null</p>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xD2",
@@ -4011,14 +4196,15 @@
         210
       ],
       "name": "ref.func",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "ref",
         "mainop": "func"
       },
-      "description": "<p>creates a reference to a given function</p>\n<p><em>Reference Types Proposal</em></p>",
+      "description": "<p>creates a reference to a given function</p>",
       "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : funcidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : funcidx</span>",
+      "proposal": "reference-types"
     },
     {
       "id": "0xD3",
@@ -4034,7 +4220,8 @@
         "pre": "ref",
         "mainop": "eq"
       },
-      "description": "<p>[eqref eqref] -&gt; [i32]</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>[eqref eqref] -&gt; [i32]</p>",
+      "proposal": "gc"
     },
     {
       "id": "0xD4",
@@ -4051,7 +4238,8 @@
         "mainop": "as",
         "rest": "_non_null"
       },
-      "description": "<p>converts a nullable reference to a non-nullable one or traps if null</p>\n<p><em>Typed Function References Proposal</em></p>"
+      "description": "<p>converts a nullable reference to a non-nullable one or traps if null</p>",
+      "proposal": "function-references"
     },
     {
       "id": "0xD5",
@@ -4066,9 +4254,10 @@
       "parts": {
         "mainop": "br_on_null"
       },
-      "description": "<p>converts a nullable reference to a non-nullable one or branches if null</p>\n<p><em>Typed Function References Proposal</em></p>",
+      "description": "<p>converts a nullable reference to a non-nullable one or branches if null</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>",
+      "proposal": "function-references"
     },
     {
       "id": "0xD6",
@@ -4083,9 +4272,10 @@
       "parts": {
         "mainop": "br_on_non_null"
       },
-      "description": "<p>checks for null and branches if present</p>\n<p><em>Typed Function References Proposal, GC Proposal</em></p>",
+      "description": "<p>checks for null and branches if present</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>"
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>",
+      "proposal": "function-references"
     },
     {
       "id": "0xD7",
@@ -4196,7 +4386,7 @@
       ],
       "name": "cont.new",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "pre": "cont",
@@ -4215,7 +4405,7 @@
       ],
       "name": "cont.bind",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "pre": "cont",
@@ -4234,7 +4424,7 @@
       ],
       "name": "suspend",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "mainop": "suspend"
@@ -4252,7 +4442,7 @@
       ],
       "name": "resume",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "mainop": "resume"
@@ -4270,7 +4460,7 @@
       ],
       "name": "resume_throw",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "mainop": "resume_throw"
@@ -4288,7 +4478,7 @@
       ],
       "name": "resume_throw_ref",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "mainop": "resume_throw_ref"
@@ -4306,7 +4496,7 @@
       ],
       "name": "switch",
       "status": "proposal",
-      "proposal": "Stack switching",
+      "proposal": "stack-switching",
       "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
       "parts": {
         "mainop": "switch"
@@ -4559,7 +4749,8 @@
         "pre": "twobytefb",
         "mainop": "gc"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFB.</p>\n<ul>\n<li>Proposal to add garbage collection (GC) support.</li>\n<li>Proposal to add reference-typed strings.</li>\n</ul>\n<p>See table below for full opcodes.</p>"
+      "description": "<p>Multibyte instructions beginning with the prefix 0xFB.</p><ul><li>Garbage collection — structs, arrays and typed references.</li><li>Reference-typed strings, a dormant proposal.</li></ul><p>See the tables below for the full opcodes.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xFC",
@@ -4582,7 +4773,8 @@
         "pre": "twobytefc",
         "mainop": "fc"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFC.</p>\n<p>Includes opcodes from the following extensions:\n<ul>\n<li>Non-trapping float-to-int conversion</li>\n<li>Bulk Memory Operations</li>\n<li>Reference Types Proposal</li>\n</ul>\n</p>\n<p>See table below for full opcodes.</p>"
+      "description": "<p>Multibyte instructions beginning with the prefix 0xFC.</p><ul><li>Non-trapping float-to-int conversions</li><li>Bulk memory operations</li><li>Reference types — table and element instructions</li><li>Wide arithmetic and half precision, both still proposals</li></ul><p>See the table below for the full opcodes.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xFD",
@@ -4605,7 +4797,8 @@
         "pre": "twobytefd",
         "mainop": "simd"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFD.</p>\n<p>SIMD opcodes (Vector instructions).</p>\n<p>The opcode which follows the prefix uses variable-length integer encoding (LEB128)</p>\n<p>See table below for full opcodes.</p>"
+      "description": "<p>Multibyte instructions beginning with the prefix 0xFD.</p>\n<p>SIMD opcodes (Vector instructions).</p>\n<p>The opcode which follows the prefix uses variable-length integer encoding (LEB128)</p>\n<p>See table below for full opcodes.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xFE",
@@ -4628,7 +4821,8 @@
         "pre": "twobytefe",
         "mainop": "threads"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFE.</p>\n<p>Threads Proposal for WebAssembly.</p>\n<p>See table below for full opcodes.</p>"
+      "description": "<p>Multibyte instructions beginning with the prefix 0xFE.</p>\n<p>Threads Proposal for WebAssembly.</p>\n<p>See table below for full opcodes.</p>",
+      "proposal": "mvp"
     },
     {
       "id": "0xFF",

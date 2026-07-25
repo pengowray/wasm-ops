@@ -80,6 +80,8 @@ export type ViewItem =
       emoji?: string;
       intro?: string;
       count: number;
+      /** Proposals the instructions in this group came through. */
+      proposals?: string[];
     }
   /**
    * The top-left cell of a byte grid. It carries the section's prefix, so the
@@ -102,6 +104,15 @@ export type ViewItem =
 
 /** The grid is a row-label column plus 16 value columns. */
 export const MATRIX_COLUMNS = 17;
+
+/** The proposals represented in a run of instructions, in first-seen order. */
+function distinctProposals(ops: Opcode[]): string[] {
+  const seen: string[] = [];
+  for (const op of ops) {
+    if (op.proposal && !seen.includes(op.proposal)) seen.push(op.proposal);
+  }
+  return seen;
+}
 
 /** Whether an opcode passes the status filters (section filtering is separate). */
 function passesStatus(op: Opcode, options: ViewOptions): boolean {
@@ -205,7 +216,10 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
     for (const section of data.sections) {
       if (!options.sections.includes(section.id)) continue;
       const sectionOps = data.opcodes.filter((op) => op.section === section.id);
-      if (!sectionOps.length) continue;
+      const showing = sectionOps.filter((op) => passesStatus(op, options) && op.name);
+      // A section with nothing left to show is a heading over a field of
+      // blanks. Drop it rather than make the reader work out that it is empty.
+      if (!showing.length) continue;
       items.push({
         kind: 'group',
         key: `group:section:${section.id}`,
@@ -213,7 +227,8 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         label: section.title,
         ...(section.emoji ? { emoji: section.emoji } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
-        count: sectionOps.filter((op) => passesStatus(op, options) && op.name).length,
+        count: showing.length,
+        proposals: distinctProposals(showing),
       });
       items.push(...matrixItems(section, sectionOps, options));
     }
@@ -282,6 +297,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         ...(section.emoji ? { emoji: section.emoji } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
         count: group.length,
+        proposals: distinctProposals(group),
       });
       items.push(...head(section.id));
       emit(items, section.id, group);

@@ -27,7 +27,8 @@
       },
       "description": "<p>Loads a v128 vector from the given heap address.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.1",
@@ -47,7 +48,8 @@
         "sign": "s"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.2",
@@ -67,7 +69,8 @@
         "sign": "u"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.3",
@@ -87,7 +90,8 @@
         "sign": "s"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.4",
@@ -107,7 +111,8 @@
         "sign": "u"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.5",
@@ -127,7 +132,8 @@
         "sign": "s"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.6",
@@ -147,7 +153,8 @@
         "sign": "u"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.7",
@@ -169,7 +176,8 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.8",
@@ -191,7 +199,8 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.9",
@@ -213,7 +222,8 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.10",
@@ -235,7 +245,8 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.11",
@@ -254,7 +265,8 @@
       },
       "description": "<p>Stores a v128 vector to the given heap address.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.12",
@@ -272,7 +284,8 @@
         "mainop": "const"
       },
       "immediateArgs": "b*",
-      "followedBy": "<span class=\"op-imm-args\"><i>b*</i> : 16 bytes, little-endian</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>b*</i> : 16 bytes, little-endian</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.13",
@@ -291,7 +304,8 @@
       },
       "description": "<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>",
       "immediateArgs": "l*",
-      "followedBy": "<span class=\"op-imm-args\"><i>l*</i> : 16 laneidx, one byte each</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l*</i> : 16 laneidx, one byte each</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.14",
@@ -308,7 +322,8 @@
         "pre": "i8x16",
         "mainop": "swizzle"
       },
-      "description": "<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>\n<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>"
+      "description": "<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>\n<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.15",
@@ -325,7 +340,8 @@
         "pre": "i8x16",
         "mainop": "splat"
       },
-      "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 16 lanes.</p>"
+      "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 16 lanes.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.16",
@@ -342,7 +358,8 @@
         "pre": "i16x8",
         "mainop": "splat"
       },
-      "description": "<p>Creates a vector with identical lanes.</p>"
+      "description": "<p>Creates a vector with identical lanes.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.17",
@@ -359,7 +376,8 @@
         "pre": "i32x4",
         "mainop": "splat"
       },
-      "description": "<p>Creates a vector with identical lanes.</p>"
+      "description": "<p>Creates a vector with identical lanes.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.18",
@@ -376,7 +394,8 @@
         "pre": "i64x2",
         "mainop": "splat"
       },
-      "description": "<p>Creates a vector with identical lanes.</p>"
+      "description": "<p>Creates a vector with identical lanes.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.19",
@@ -393,7 +412,8 @@
         "pre": "f32x4",
         "mainop": "splat"
       },
-      "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 4 lanes.</p>"
+      "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 4 lanes.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.20",
@@ -410,7 +430,8 @@
         "pre": "f64x2",
         "mainop": "splat"
       },
-      "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 2 lanes.</p>"
+      "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 2 lanes.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.21",
@@ -431,7 +452,8 @@
       },
       "description": "<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>\n<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.22",
@@ -452,7 +474,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 16 packed u8 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.23",
@@ -472,7 +495,8 @@
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.24",
@@ -493,7 +517,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.25",
@@ -514,7 +539,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed u16 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.26",
@@ -534,7 +560,8 @@
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.27",
@@ -554,7 +581,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.28",
@@ -574,7 +602,8 @@
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.29",
@@ -594,7 +623,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.30",
@@ -614,7 +644,8 @@
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.31",
@@ -634,7 +665,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.32",
@@ -654,7 +686,8 @@
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Rust: <code>fn f32x4_replace_lane&lt;const N: usize&gt;(a: v128, val: f32) -&gt; v128</code></p>\n<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.33",
@@ -674,7 +707,8 @@
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.34",
@@ -694,7 +728,8 @@
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
       "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>"
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.35",
@@ -711,7 +746,8 @@
         "pre": "i8x16",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.36",
@@ -728,7 +764,8 @@
         "pre": "i8x16",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.37",
@@ -746,7 +783,8 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.38",
@@ -764,7 +802,8 @@
         "mainop": "lt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.39",
@@ -782,7 +821,8 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.40",
@@ -800,7 +840,8 @@
         "mainop": "gt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.41",
@@ -818,7 +859,8 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.42",
@@ -836,7 +878,8 @@
         "mainop": "le",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.43",
@@ -854,7 +897,8 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.44",
@@ -872,7 +916,8 @@
         "mainop": "ge",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.45",
@@ -889,7 +934,8 @@
         "pre": "i16x8",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.46",
@@ -906,7 +952,8 @@
         "pre": "i16x8",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.47",
@@ -924,7 +971,8 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.48",
@@ -942,7 +990,8 @@
         "mainop": "lt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.49",
@@ -960,7 +1009,8 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.50",
@@ -978,7 +1028,8 @@
         "mainop": "gt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.51",
@@ -996,7 +1047,8 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.52",
@@ -1014,7 +1066,8 @@
         "mainop": "le",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.53",
@@ -1032,7 +1085,8 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.54",
@@ -1050,7 +1104,8 @@
         "mainop": "ge",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.55",
@@ -1067,7 +1122,8 @@
         "pre": "i32x4",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.56",
@@ -1084,7 +1140,8 @@
         "pre": "i32x4",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.57",
@@ -1102,7 +1159,8 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.58",
@@ -1120,7 +1178,8 @@
         "mainop": "lt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.59",
@@ -1138,7 +1197,8 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.60",
@@ -1156,7 +1216,8 @@
         "mainop": "gt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.61",
@@ -1174,7 +1235,8 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.62",
@@ -1192,7 +1254,8 @@
         "mainop": "le",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.63",
@@ -1210,7 +1273,8 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.64",
@@ -1228,7 +1292,8 @@
         "mainop": "ge",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.65",
@@ -1245,7 +1310,8 @@
         "pre": "f32x4",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.66",
@@ -1262,7 +1328,8 @@
         "pre": "f32x4",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.67",
@@ -1279,7 +1346,8 @@
         "pre": "f32x4",
         "mainop": "lt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.68",
@@ -1296,7 +1364,8 @@
         "pre": "f32x4",
         "mainop": "gt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.69",
@@ -1313,7 +1382,8 @@
         "pre": "f32x4",
         "mainop": "le"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than [or equal] the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than [or equal] the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.70",
@@ -1330,7 +1400,8 @@
         "pre": "f32x4",
         "mainop": "ge"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than [or equal] the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than [or equal] the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.71",
@@ -1347,7 +1418,8 @@
         "pre": "f64x2",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.72",
@@ -1364,7 +1436,8 @@
         "pre": "f64x2",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.73",
@@ -1381,7 +1454,8 @@
         "pre": "f64x2",
         "mainop": "lt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.74",
@@ -1398,7 +1472,8 @@
         "pre": "f64x2",
         "mainop": "gt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.75",
@@ -1415,7 +1490,8 @@
         "pre": "f64x2",
         "mainop": "le"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.76",
@@ -1432,7 +1508,8 @@
         "pre": "f64x2",
         "mainop": "ge"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.77",
@@ -1449,7 +1526,8 @@
         "pre": "v128",
         "mainop": "not"
       },
-      "description": "<p>Flips each bit of the 128-bit input vector.</p>"
+      "description": "<p>Flips each bit of the 128-bit input vector.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.78",
@@ -1466,7 +1544,8 @@
         "pre": "v128",
         "mainop": "and"
       },
-      "description": "<p>Performs a bitwise and of the two input 128-bit vectors, returning the resulting vector.</p>"
+      "description": "<p>Performs a bitwise and of the two input 128-bit vectors, returning the resulting vector.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.79",
@@ -1483,7 +1562,8 @@
         "pre": "v128",
         "mainop": "andnot"
       },
-      "description": "<p>Bitwise AND of bits of a and the logical inverse of bits of b.</p>"
+      "description": "<p>Bitwise AND of bits of a and the logical inverse of bits of b.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.80",
@@ -1500,7 +1580,8 @@
         "pre": "v128",
         "mainop": "or"
       },
-      "description": "<p>Performs a bitwise or of the two input 128-bit vectors, returning the resulting vector.</p>"
+      "description": "<p>Performs a bitwise or of the two input 128-bit vectors, returning the resulting vector.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.81",
@@ -1517,7 +1598,8 @@
         "pre": "v128",
         "mainop": "xor"
       },
-      "description": "<p>Performs a bitwise xor of the two input 128-bit vectors, returning the resulting vector.</p>"
+      "description": "<p>Performs a bitwise xor of the two input 128-bit vectors, returning the resulting vector.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.82",
@@ -1534,7 +1616,8 @@
         "pre": "v128",
         "mainop": "bitselect"
       },
-      "description": "<p>Rust: <code>fn v128_bitselect(v1: v128, v2: v128, c: v128) -&gt; v128</code></p>\n<p>Use the bitmask in <code>c</code> to select bits from <code>v1</code> when 1 and <code>v2</code> when 0.</p>"
+      "description": "<p>Rust: <code>fn v128_bitselect(v1: v128, v2: v128, c: v128) -&gt; v128</code></p>\n<p>Use the bitmask in <code>c</code> to select bits from <code>v1</code> when 1 and <code>v2</code> when 0.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.83",
@@ -1551,7 +1634,8 @@
         "pre": "v128",
         "mainop": "any_true"
       },
-      "description": "<p>Returns true if any bit in a is set, or false otherwise.</p>"
+      "description": "<p>Returns true if any bit in a is set, or false otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.84",
@@ -1572,7 +1656,8 @@
       },
       "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.85",
@@ -1593,7 +1678,8 @@
       },
       "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.86",
@@ -1614,7 +1700,8 @@
       },
       "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.87",
@@ -1635,7 +1722,8 @@
       },
       "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.88",
@@ -1656,7 +1744,8 @@
       },
       "description": "<p>Stores the 8-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.89",
@@ -1677,7 +1766,8 @@
       },
       "description": "<p>Stores the 16-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.90",
@@ -1698,7 +1788,8 @@
       },
       "description": "<p>Stores the 32-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.91",
@@ -1719,7 +1810,8 @@
       },
       "description": "<p>Stores the 64-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.92",
@@ -1740,7 +1832,8 @@
       },
       "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.93",
@@ -1761,7 +1854,8 @@
       },
       "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>"
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.94",
@@ -1780,7 +1874,8 @@
         "post": "f64x2",
         "rest": "_zero"
       },
-      "description": "<p>Conversion of the two double-precision floating point lanes to two lower single-precision lanes of the result. The two higher lanes of the result are initialized to zero. If the conversion result is not representable as a single-precision floating point number, it is rounded to the nearest-even representable number.</p>"
+      "description": "<p>Conversion of the two double-precision floating point lanes to two lower single-precision lanes of the result. The two higher lanes of the result are initialized to zero. If the conversion result is not representable as a single-precision floating point number, it is rounded to the nearest-even representable number.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.95",
@@ -1798,7 +1893,8 @@
         "mainop": "promote",
         "post": "low_f32x4"
       },
-      "description": "<p>Conversion of the two lower single-precision floating point lanes to the two double-precision lanes of the result.</p>"
+      "description": "<p>Conversion of the two lower single-precision floating point lanes to the two double-precision lanes of the result.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.96",
@@ -1815,7 +1911,8 @@
         "pre": "i8x16",
         "mainop": "abs"
       },
-      "description": "<p>Lane-wise wrapping absolute value.</p>"
+      "description": "<p>Lane-wise wrapping absolute value.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.97",
@@ -1832,7 +1929,8 @@
         "pre": "i8x16",
         "mainop": "neg"
       },
-      "description": "<p>Negates a 128-bit vectors interpreted as sixteen 8-bit signed integers</p>"
+      "description": "<p>Negates a 128-bit vectors interpreted as sixteen 8-bit signed integers</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.98",
@@ -1849,7 +1947,8 @@
         "pre": "i8x16",
         "mainop": "popcnt"
       },
-      "description": "<p>Count the number of bits set to one within each lane.</p>"
+      "description": "<p>Count the number of bits set to one within each lane.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.99",
@@ -1866,7 +1965,8 @@
         "pre": "i8x16",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
+      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.100",
@@ -1883,7 +1983,8 @@
         "pre": "i8x16",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>"
+      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.101",
@@ -1902,7 +2003,8 @@
         "post": "i16x8",
         "sign": "s"
       },
-      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>\n<p>Signed saturation to 0x7f or 0x80 is used and the input lanes are always interpreted as signed integers.</p>"
+      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>\n<p>Signed saturation to 0x7f or 0x80 is used and the input lanes are always interpreted as signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.102",
@@ -1921,7 +2023,8 @@
         "post": "i16x8",
         "sign": "u"
       },
-      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>"
+      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.103",
@@ -1938,7 +2041,8 @@
         "pre": "f32x4",
         "mainop": "ceil"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.104",
@@ -1955,7 +2059,8 @@
         "pre": "f32x4",
         "mainop": "floor"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.105",
@@ -1972,7 +2077,8 @@
         "pre": "f32x4",
         "mainop": "trunc"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.106",
@@ -1989,7 +2095,8 @@
         "pre": "f32x4",
         "mainop": "nearest"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.107",
@@ -2006,7 +2113,8 @@
         "pre": "i8x16",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>"
+      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.108",
@@ -2024,7 +2132,8 @@
         "mainop": "shr",
         "sign": "s"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.109",
@@ -2042,7 +2151,8 @@
         "mainop": "shr",
         "sign": "u"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.110",
@@ -2059,7 +2169,8 @@
         "pre": "i8x16",
         "mainop": "add"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.111",
@@ -2078,7 +2189,8 @@
         "post": "sat",
         "sign": "s"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MAX.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MAX.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.112",
@@ -2097,7 +2209,8 @@
         "post": "sat",
         "sign": "u"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to u8::MAX.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to u8::MAX.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.113",
@@ -2114,7 +2227,8 @@
         "pre": "i8x16",
         "mainop": "sub"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.114",
@@ -2133,7 +2247,8 @@
         "post": "sat",
         "sign": "s"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MIN.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MIN.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.115",
@@ -2152,7 +2267,8 @@
         "post": "sat",
         "sign": "u"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to 0.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to 0.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.116",
@@ -2169,7 +2285,8 @@
         "pre": "f64x2",
         "mainop": "ceil"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.117",
@@ -2186,7 +2303,8 @@
         "pre": "f64x2",
         "mainop": "floor"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.118",
@@ -2204,7 +2322,8 @@
         "mainop": "min",
         "sign": "s"
       },
-      "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>"
+      "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.119",
@@ -2222,7 +2341,8 @@
         "mainop": "min",
         "sign": "u"
       },
-      "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>"
+      "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.120",
@@ -2240,7 +2360,8 @@
         "mainop": "max",
         "sign": "s"
       },
-      "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>"
+      "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.121",
@@ -2258,7 +2379,8 @@
         "mainop": "max",
         "sign": "u"
       },
-      "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>"
+      "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.122",
@@ -2275,7 +2397,8 @@
         "pre": "f64x2",
         "mainop": "trunc"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.123",
@@ -2293,7 +2416,8 @@
         "mainop": "avgr",
         "sign": "u"
       },
-      "description": "<p>Lane-wise rounding average.</p>"
+      "description": "<p>Lane-wise rounding average.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.124",
@@ -2312,7 +2436,8 @@
         "post": "pairwise",
         "rest": "_i8x16_s"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
+      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.125",
@@ -2331,7 +2456,8 @@
         "post": "pairwise",
         "rest": "_i8x16_u"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
+      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.126",
@@ -2350,7 +2476,8 @@
         "post": "pairwise",
         "rest": "_i16x8_s"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
+      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.127",
@@ -2369,7 +2496,8 @@
         "post": "pairwise",
         "rest": "_i16x8_u"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
+      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.128",
@@ -2387,7 +2515,8 @@
         "pre": "i16x8",
         "mainop": "abs"
       },
-      "description": "<p>Lane-wise wrapping absolute value.</p>"
+      "description": "<p>Lane-wise wrapping absolute value.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.129",
@@ -2405,7 +2534,8 @@
         "pre": "i16x8",
         "mainop": "neg"
       },
-      "description": "<p>Negates a 128-bit vectors interpreted as eight 16-bit signed integers</p>"
+      "description": "<p>Negates a 128-bit vectors interpreted as eight 16-bit signed integers</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.130",
@@ -2425,7 +2555,8 @@
         "post": "sat",
         "sign": "s"
       },
-      "description": "<p>Rust: <code>fn i16x8_q15mulr_sat(a: v128, b: v128) -&gt; v128</code></p>\n<p>Lane-wise saturating rounding multiplication in Q15 format.</p>"
+      "description": "<p>Rust: <code>fn i16x8_q15mulr_sat(a: v128, b: v128) -&gt; v128</code></p>\n<p>Lane-wise saturating rounding multiplication in Q15 format.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.131",
@@ -2443,7 +2574,8 @@
         "pre": "i16x8",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
+      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.132",
@@ -2461,7 +2593,8 @@
         "pre": "i16x8",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>"
+      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.133",
@@ -2481,7 +2614,8 @@
         "post": "i32x4",
         "sign": "s"
       },
-      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>"
+      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.134",
@@ -2501,7 +2635,8 @@
         "post": "i32x4",
         "sign": "u"
       },
-      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>"
+      "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.135",
@@ -2521,7 +2656,8 @@
         "post": "low_i8x16",
         "sign": "s"
       },
-      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>"
+      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.136",
@@ -2541,7 +2677,8 @@
         "post": "high_i8x16",
         "sign": "s"
       },
-      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>"
+      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.137",
@@ -2561,7 +2698,8 @@
         "post": "low_i8x16",
         "sign": "u"
       },
-      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>"
+      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.138",
@@ -2581,7 +2719,8 @@
         "post": "high_i8x16",
         "sign": "u"
       },
-      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>"
+      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.139",
@@ -2599,7 +2738,8 @@
         "pre": "i16x8",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>"
+      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.140",
@@ -2618,7 +2758,8 @@
         "mainop": "shr",
         "sign": "s"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.141",
@@ -2637,7 +2778,8 @@
         "mainop": "shr",
         "sign": "u"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.142",
@@ -2655,7 +2797,8 @@
         "pre": "i16x8",
         "mainop": "add"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit integers.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.143",
@@ -2675,7 +2818,8 @@
         "post": "sat",
         "sign": "s"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MAX.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MAX.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.144",
@@ -2695,7 +2839,8 @@
         "post": "sat",
         "sign": "u"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to u16::MAX.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to u16::MAX.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.145",
@@ -2713,7 +2858,8 @@
         "pre": "i16x8",
         "mainop": "sub"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit integers.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.146",
@@ -2733,7 +2879,8 @@
         "post": "sat",
         "sign": "s"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MIN.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MIN.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.147",
@@ -2753,7 +2900,8 @@
         "post": "sat",
         "sign": "u"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to 0.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to 0.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.148",
@@ -2771,7 +2919,8 @@
         "pre": "f64x2",
         "mainop": "nearest"
       },
-      "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>"
+      "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.149",
@@ -2789,7 +2938,8 @@
         "pre": "i16x8",
         "mainop": "mul"
       },
-      "description": "<p>Multiplies two 128-bit vectors as if they were two packed eight 16-bit integers.</p>"
+      "description": "<p>Multiplies two 128-bit vectors as if they were two packed eight 16-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.150",
@@ -2808,7 +2958,8 @@
         "mainop": "min",
         "sign": "s"
       },
-      "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>"
+      "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.151",
@@ -2827,7 +2978,8 @@
         "mainop": "min",
         "sign": "u"
       },
-      "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>"
+      "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.152",
@@ -2846,7 +2998,8 @@
         "mainop": "max",
         "sign": "s"
       },
-      "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>"
+      "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.153",
@@ -2865,7 +3018,8 @@
         "mainop": "max",
         "sign": "u"
       },
-      "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>"
+      "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.154",
@@ -2897,7 +3051,8 @@
         "mainop": "avgr",
         "sign": "u"
       },
-      "description": "<p>Lane-wise rounding average.</p>"
+      "description": "<p>Lane-wise rounding average.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.156",
@@ -2917,7 +3072,8 @@
         "post": "low_i8x16",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.157",
@@ -2937,7 +3093,8 @@
         "post": "high_i8x16",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.158",
@@ -2957,7 +3114,8 @@
         "post": "low_i8x16",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.159",
@@ -2977,7 +3135,8 @@
         "post": "high_i8x16",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.160",
@@ -2995,7 +3154,8 @@
         "pre": "i32x4",
         "mainop": "abs"
       },
-      "description": "<p>Lane-wise wrapping absolute value.</p>"
+      "description": "<p>Lane-wise wrapping absolute value.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.161",
@@ -3013,7 +3173,8 @@
         "pre": "i32x4",
         "mainop": "neg"
       },
-      "description": "<p>Negates a 128-bit vectors interpreted as four 32-bit signed integers</p>"
+      "description": "<p>Negates a 128-bit vectors interpreted as four 32-bit signed integers</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.162",
@@ -3027,7 +3188,7 @@
       ],
       "name": "i8x16.relaxed_swizzle",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3053,7 +3214,8 @@
         "pre": "i32x4",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
+      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.164",
@@ -3071,7 +3233,8 @@
         "pre": "i32x4",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>"
+      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.165",
@@ -3085,7 +3248,7 @@
       ],
       "name": "i32x4.relaxed_trunc_f32x4_s",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3106,7 +3269,7 @@
       ],
       "name": "i32x4.relaxed_trunc_f32x4_u",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3133,7 +3296,8 @@
         "post": "low_i16x8",
         "sign": "s"
       },
-      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>"
+      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.168",
@@ -3153,7 +3317,8 @@
         "post": "high_i16x8",
         "sign": "s"
       },
-      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>"
+      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.169",
@@ -3173,7 +3338,8 @@
         "post": "low_i16x8",
         "sign": "u"
       },
-      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>"
+      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.170",
@@ -3193,7 +3359,8 @@
         "post": "high_i16x8",
         "sign": "u"
       },
-      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>"
+      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.171",
@@ -3211,7 +3378,8 @@
         "pre": "i32x4",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>"
+      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.172",
@@ -3230,7 +3398,8 @@
         "mainop": "shr",
         "sign": "s"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.173",
@@ -3249,7 +3418,8 @@
         "mainop": "shr",
         "sign": "u"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.174",
@@ -3267,7 +3437,8 @@
         "pre": "i32x4",
         "mainop": "add"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed four 32-bit integers.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed four 32-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.175",
@@ -3281,7 +3452,7 @@
       ],
       "name": "f32x4.relaxed_madd",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3302,7 +3473,7 @@
       ],
       "name": "f32x4.relaxed_nmadd",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3327,7 +3498,8 @@
         "pre": "i32x4",
         "mainop": "sub"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed four 32-bit integers.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed four 32-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.178",
@@ -3341,7 +3513,7 @@
       ],
       "name": "i8x16.relaxed_laneselect",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3363,7 +3535,7 @@
       ],
       "name": "i16x8.relaxed_laneselect",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3385,7 +3557,7 @@
       ],
       "name": "f32x4.relaxed_min",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3410,7 +3582,8 @@
         "pre": "i32x4",
         "mainop": "mul"
       },
-      "description": "<p>Multiplies two 128-bit vectors as if they were two packed four 32-bit signed integers.</p>"
+      "description": "<p>Multiplies two 128-bit vectors as if they were two packed four 32-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.182",
@@ -3429,7 +3602,8 @@
         "mainop": "min",
         "sign": "s"
       },
-      "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>"
+      "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.183",
@@ -3448,7 +3622,8 @@
         "mainop": "min",
         "sign": "u"
       },
-      "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>"
+      "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.184",
@@ -3467,7 +3642,8 @@
         "mainop": "max",
         "sign": "s"
       },
-      "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>"
+      "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.185",
@@ -3486,7 +3662,8 @@
         "mainop": "max",
         "sign": "u"
       },
-      "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>"
+      "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.186",
@@ -3506,7 +3683,8 @@
         "post": "i16x8",
         "sign": "s"
       },
-      "description": "<p>Lane-wise multiply signed 16-bit integers in the two input vectors and add adjacent pairs of the full 32-bit results.</p>"
+      "description": "<p>Lane-wise multiply signed 16-bit integers in the two input vectors and add adjacent pairs of the full 32-bit results.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.187",
@@ -3539,7 +3717,8 @@
         "post": "low_i16x8",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.189",
@@ -3559,7 +3738,8 @@
         "post": "high_i16x8",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.190",
@@ -3579,7 +3759,8 @@
         "post": "low_i16x8",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.191",
@@ -3599,7 +3780,8 @@
         "post": "high_i16x8",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.192",
@@ -3617,7 +3799,8 @@
         "pre": "i64x2",
         "mainop": "abs"
       },
-      "description": "<p>Lane-wise wrapping absolute value.</p>"
+      "description": "<p>Lane-wise wrapping absolute value.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.193",
@@ -3635,7 +3818,8 @@
         "pre": "i64x2",
         "mainop": "neg"
       },
-      "description": "<p>Negates a 128-bit vectors interpreted as two 64-bit signed integers</p>"
+      "description": "<p>Negates a 128-bit vectors interpreted as two 64-bit signed integers</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.194",
@@ -3666,7 +3850,8 @@
         "pre": "i64x2",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
+      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.196",
@@ -3684,7 +3869,8 @@
         "pre": "i64x2",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in 'a' and produce a scalar mask with all bits concatenated.</p>"
+      "description": "<p>Extracts the high bit for each lane in 'a' and produce a scalar mask with all bits concatenated.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.197",
@@ -3698,7 +3884,7 @@
       ],
       "name": "i32x4.relaxed_trunc_f64x2_s_zero",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3719,7 +3905,7 @@
       ],
       "name": "i32x4.relaxed_trunc_f64x2_u_zero",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3746,7 +3932,8 @@
         "post": "low_i32x4",
         "sign": "s"
       },
-      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>"
+      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.200",
@@ -3766,7 +3953,8 @@
         "post": "high_i32x4",
         "sign": "s"
       },
-      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>"
+      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.201",
@@ -3786,7 +3974,8 @@
         "post": "low_i32x4",
         "sign": "u"
       },
-      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>"
+      "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.202",
@@ -3806,7 +3995,8 @@
         "post": "high_i32x4",
         "sign": "u"
       },
-      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>"
+      "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.203",
@@ -3824,7 +4014,8 @@
         "pre": "i64x2",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>"
+      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.204",
@@ -3843,7 +4034,8 @@
         "mainop": "shr",
         "sign": "s"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.205",
@@ -3862,7 +4054,8 @@
         "mainop": "shr",
         "sign": "u"
       },
-      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
+      "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.206",
@@ -3880,7 +4073,8 @@
         "pre": "i64x2",
         "mainop": "add"
       },
-      "description": "<p>Adds two 128-bit vectors as if they were two packed two 64-bit integers.</p>"
+      "description": "<p>Adds two 128-bit vectors as if they were two packed two 64-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.207",
@@ -3894,7 +4088,7 @@
       ],
       "name": "f64x2.relaxed_madd",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3915,7 +4109,7 @@
       ],
       "name": "f64x2.relaxed_nmadd",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3940,7 +4134,8 @@
         "pre": "i64x2",
         "mainop": "sub"
       },
-      "description": "<p>Subtracts two 128-bit vectors as if they were two packed two 64-bit integers.</p>"
+      "description": "<p>Subtracts two 128-bit vectors as if they were two packed two 64-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.210",
@@ -3954,7 +4149,7 @@
       ],
       "name": "i32x4.relaxed_laneselect",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3976,7 +4171,7 @@
       ],
       "name": "i64x2.relaxed_laneselect",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -3998,7 +4193,7 @@
       ],
       "name": "f64x2.relaxed_min",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -4023,7 +4218,8 @@
         "pre": "i64x2",
         "mainop": "mul"
       },
-      "description": "<p>Multiplies two 128-bit vectors as if they were two packed two 64-bit integers.</p>"
+      "description": "<p>Multiplies two 128-bit vectors as if they were two packed two 64-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.214",
@@ -4041,7 +4237,8 @@
         "pre": "i64x2",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.215",
@@ -4059,7 +4256,8 @@
         "pre": "i64x2",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.216",
@@ -4078,7 +4276,8 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.217",
@@ -4097,7 +4296,8 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.218",
@@ -4116,7 +4316,8 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.219",
@@ -4135,7 +4336,8 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
+      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.220",
@@ -4155,7 +4357,8 @@
         "post": "low_i32x4",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.221",
@@ -4175,7 +4378,8 @@
         "post": "high_i32x4",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.222",
@@ -4195,7 +4399,8 @@
         "post": "low_i32x4",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.223",
@@ -4215,7 +4420,8 @@
         "post": "high_i32x4",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
+      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.224",
@@ -4233,7 +4439,8 @@
         "pre": "f32x4",
         "mainop": "abs"
       },
-      "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.225",
@@ -4251,7 +4458,8 @@
         "pre": "f32x4",
         "mainop": "neg"
       },
-      "description": "<p>Negates each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Negates each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.226",
@@ -4265,7 +4473,7 @@
       ],
       "name": "f32x4.relaxed_max",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -4290,7 +4498,8 @@
         "pre": "f32x4",
         "mainop": "sqrt"
       },
-      "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.228",
@@ -4308,7 +4517,8 @@
         "pre": "f32x4",
         "mainop": "add"
       },
-      "description": "<p>Lane-wise addition of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise addition of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.229",
@@ -4326,7 +4536,8 @@
         "pre": "f32x4",
         "mainop": "sub"
       },
-      "description": "<p>Lane-wise subtraction of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise subtraction of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.230",
@@ -4344,7 +4555,8 @@
         "pre": "f32x4",
         "mainop": "mul"
       },
-      "description": "<p>Lane-wise multiplication of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise multiplication of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.231",
@@ -4362,7 +4574,8 @@
         "pre": "f32x4",
         "mainop": "div"
       },
-      "description": "<p>Lane-wise division of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise division of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.232",
@@ -4380,7 +4593,8 @@
         "pre": "f32x4",
         "mainop": "min"
       },
-      "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.233",
@@ -4398,7 +4612,8 @@
         "pre": "f32x4",
         "mainop": "max"
       },
-      "description": "<p>Calculates the lane-wise [maximum] of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
+      "description": "<p>Calculates the lane-wise [maximum] of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.234",
@@ -4416,7 +4631,8 @@
         "pre": "f32x4",
         "mainop": "pmin"
       },
-      "description": "<p>Lane-wise minimum value, defined as b &lt; a ? b : a</p>"
+      "description": "<p>Lane-wise minimum value, defined as b &lt; a ? b : a</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.235",
@@ -4434,7 +4650,8 @@
         "pre": "f32x4",
         "mainop": "pmax"
       },
-      "description": "<p>Lane-wise maximum value, defined as a &lt; b ? b : a</p>"
+      "description": "<p>Lane-wise maximum value, defined as a &lt; b ? b : a</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.236",
@@ -4452,7 +4669,8 @@
         "pre": "f64x2",
         "mainop": "abs"
       },
-      "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.237",
@@ -4470,7 +4688,8 @@
         "pre": "f64x2",
         "mainop": "neg"
       },
-      "description": "<p>Negates each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Negates each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.238",
@@ -4484,7 +4703,7 @@
       ],
       "name": "f64x2.relaxed_max",
       "status": "withdrawn",
-      "proposal": "Relaxed SIMD (prototype encoding)",
+      "proposal": "relaxed-simd-prototype",
       "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
       "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
       "parts": {
@@ -4509,7 +4728,8 @@
         "pre": "f64x2",
         "mainop": "sqrt"
       },
-      "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.240",
@@ -4527,7 +4747,8 @@
         "pre": "f64x2",
         "mainop": "add"
       },
-      "description": "<p>Lane-wise add of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise add of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.241",
@@ -4545,7 +4766,8 @@
         "pre": "f64x2",
         "mainop": "sub"
       },
-      "description": "<p>Lane-wise subtract of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise subtract of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.242",
@@ -4563,7 +4785,8 @@
         "pre": "f64x2",
         "mainop": "mul"
       },
-      "description": "<p>Lane-wise multiply of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>"
+      "description": "<p>Lane-wise multiply of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.243",
@@ -4581,7 +4804,8 @@
         "pre": "f64x2",
         "mainop": "div"
       },
-      "description": "<p>Lane-wise divide of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Lane-wise divide of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.244",
@@ -4599,7 +4823,8 @@
         "pre": "f64x2",
         "mainop": "min"
       },
-      "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>"
+      "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.245",
@@ -4617,7 +4842,8 @@
         "pre": "f64x2",
         "mainop": "max"
       },
-      "description": "<p>Calculates the lane-wise maximum of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
+      "description": "<p>Calculates the lane-wise maximum of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.246",
@@ -4635,7 +4861,8 @@
         "pre": "f64x2",
         "mainop": "pmin"
       },
-      "description": "<p>Lane-wise minimum value</p>"
+      "description": "<p>Lane-wise minimum value</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.247",
@@ -4653,7 +4880,8 @@
         "pre": "f64x2",
         "mainop": "pmax"
       },
-      "description": "<p>Lane-wise maximum value</p>"
+      "description": "<p>Lane-wise maximum value</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.248",
@@ -4673,7 +4901,8 @@
         "post": "sat_f32x4",
         "sign": "s"
       },
-      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit signed integers.</p>"
+      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit signed integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.249",
@@ -4693,7 +4922,8 @@
         "post": "sat_f32x4",
         "sign": "u"
       },
-      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit unsigned integers.</p>"
+      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit unsigned integers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.250",
@@ -4713,7 +4943,8 @@
         "post": "i32x4",
         "sign": "s"
       },
-      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit signed integers into a 128-bit vector of four 32-bit floating point numbers.</p>"
+      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit signed integers into a 128-bit vector of four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.251",
@@ -4733,7 +4964,8 @@
         "post": "i32x4",
         "sign": "u"
       },
-      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit unsigned integers into a 128-bit vector of four 32-bit floating point numbers.</p>"
+      "description": "<p>Converts a 128-bit vector interpreted as four 32-bit unsigned integers into a 128-bit vector of four 32-bit floating point numbers.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.252",
@@ -4754,7 +4986,8 @@
         "sign": "s",
         "rest": "_zero"
       },
-      "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>"
+      "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.253",
@@ -4775,7 +5008,8 @@
         "sign": "u",
         "rest": "_zero"
       },
-      "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>"
+      "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.254",
@@ -4795,7 +5029,8 @@
         "post": "low_i32x4",
         "sign": "s"
       },
-      "description": "<p>Lane-wise conversion from signed integer to floating point.</p>"
+      "description": "<p>Lane-wise conversion from signed integer to floating point.</p>",
+      "proposal": "simd"
     },
     {
       "id": "0xFD.255",
@@ -4815,7 +5050,8 @@
         "post": "low_i32x4",
         "sign": "u"
       },
-      "description": "<p>Lane-wise conversion from unsigned integer to floating point.</p>"
+      "description": "<p>Lane-wise conversion from unsigned integer to floating point.</p>",
+      "proposal": "simd"
     }
   ]
 }

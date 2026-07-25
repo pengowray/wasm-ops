@@ -28,7 +28,8 @@
         "sign": "s",
         "rest": "wizzle"
       },
-      "description": "<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,\nindices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result\nfor any out of range indices is implementation-defined (i.e. if the index is <code>[16-255]</code>.</p>"
+      "description": "<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,\nindices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result\nfor any out of range indices is implementation-defined (i.e. if the index is <code>[16-255]</code>.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.257",
@@ -47,7 +48,8 @@
         "mainop": "relaxed",
         "rest": "_trunc_f32x4_s"
       },
-      "description": "<p><code>relaxed i32x4.trunc_f32x4_s</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_s</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>"
+      "description": "<p><code>relaxed i32x4.trunc_f32x4_s</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_s</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.258",
@@ -66,7 +68,8 @@
         "mainop": "relaxed",
         "rest": "_trunc_f32x4_u"
       },
-      "description": "<p><code>relaxed i32x4.trunc_f32x4_u</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_u</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>"
+      "description": "<p><code>relaxed i32x4.trunc_f32x4_u</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_u</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.259",
@@ -85,7 +88,8 @@
         "mainop": "relaxed",
         "rest": "_trunc_f64x2_s_zero"
       },
-      "description": "<p><code>relaxed i32x4.trunc_f64x2_s_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_s_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>"
+      "description": "<p><code>relaxed i32x4.trunc_f64x2_s_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_s_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.260",
@@ -104,7 +108,8 @@
         "mainop": "relaxed",
         "rest": "_trunc_f64x2_u_zero"
       },
-      "description": "<p><code>relaxed i32x4.trunc_f64x2_u_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_u_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>"
+      "description": "<p><code>relaxed i32x4.trunc_f64x2_u_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_u_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.261",
@@ -123,7 +128,8 @@
         "mainop": "relaxed",
         "rest": "_madd"
       },
-      "description": "<p><span class=\"name\">Relaxed fused multiply-add</span></p>\n<p><code>relaxed f32x4.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>"
+      "description": "<p><span class=\"name\">Relaxed fused multiply-add</span></p>\n<p><code>relaxed f32x4.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.262",
@@ -142,7 +148,8 @@
         "mainop": "relaxed",
         "rest": "_nmadd"
       },
-      "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f32x4.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>"
+      "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f32x4.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.263",
@@ -161,7 +168,8 @@
         "mainop": "relaxed",
         "rest": "_madd"
       },
-      "description": "<p>Relaxed fused multiply-add</p>\n<p><code>relaxed f64x2.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>"
+      "description": "<p>Relaxed fused multiply-add</p>\n<p><code>relaxed f64x2.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.264",
@@ -180,7 +188,8 @@
         "mainop": "relaxed",
         "rest": "_nmadd"
       },
-      "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f64x2.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>"
+      "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f64x2.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.265",
@@ -200,7 +209,8 @@
         "post": "lane",
         "rest": "select"
       },
-      "description": "<p><code>i8x16.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>"
+      "description": "<p><code>i8x16.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.266",
@@ -220,7 +230,8 @@
         "post": "lane",
         "rest": "select"
       },
-      "description": "<p><code>i16x8.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>"
+      "description": "<p><code>i16x8.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.267",
@@ -240,7 +251,8 @@
         "post": "lane",
         "rest": "select"
       },
-      "description": "<p><code>i32x4.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>"
+      "description": "<p><code>i32x4.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.268",
@@ -260,7 +272,8 @@
         "post": "lane",
         "rest": "select"
       },
-      "description": "<p><code>i64x2.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>"
+      "description": "<p><code>i64x2.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.269",
@@ -279,7 +292,8 @@
         "mainop": "relaxed",
         "rest": "_min"
       },
-      "description": "<p>Relaxed min</p>\n<p><code>f32x4.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>"
+      "description": "<p>Relaxed min</p>\n<p><code>f32x4.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.270",
@@ -298,7 +312,8 @@
         "mainop": "relaxed",
         "rest": "_max"
       },
-      "description": "<p>Relaxed max</p>\n<p><code>f32x4.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>"
+      "description": "<p>Relaxed max</p>\n<p><code>f32x4.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.271",
@@ -317,7 +332,8 @@
         "mainop": "relaxed",
         "rest": "_min"
       },
-      "description": "<p>Relaxed min</p>\n<p><code>f64x2.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>"
+      "description": "<p>Relaxed min</p>\n<p><code>f64x2.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.272",
@@ -336,7 +352,8 @@
         "mainop": "relaxed",
         "rest": "_max"
       },
-      "description": "<p>Relaxed max</p>\n<p><code>f64x2.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>"
+      "description": "<p>Relaxed max</p>\n<p><code>f64x2.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.273",
@@ -355,7 +372,8 @@
         "mainop": "relaxed",
         "rest": "_q15mulr_s"
       },
-      "description": "<p>Relaxed Rounding Q-format Multiplication</p>\n<p><code>i16x8.q15mulr_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 2 fixed-point numbers in Q15 format. If both inputs are <code>INT16_MIN</code>, the result overflows, and the return value is implementation defined (either <code>INT16_MIN</code> or <code>INT16_MAX</code>).</p>"
+      "description": "<p>Relaxed Rounding Q-format Multiplication</p>\n<p><code>i16x8.q15mulr_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 2 fixed-point numbers in Q15 format. If both inputs are <code>INT16_MIN</code>, the result overflows, and the return value is implementation defined (either <code>INT16_MIN</code> or <code>INT16_MAX</code>).</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.274",
@@ -374,7 +392,8 @@
         "mainop": "relaxed",
         "rest": "_dot_i8x16_i7x16_s"
       },
-      "description": "<p>Relaxed integer dot product</p>\n<p><code>i16x8.dot_i8x16_i7x16_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>"
+      "description": "<p>Relaxed integer dot product</p>\n<p><code>i16x8.dot_i8x16_i7x16_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.275",
@@ -393,7 +412,8 @@
         "mainop": "relaxed",
         "rest": "_dot_i8x16_i7x16_add_s"
       },
-      "description": "<p>Relaxed integer dot product</p>\n<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>"
+      "description": "<p>Relaxed integer dot product</p>\n<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
+      "proposal": "relaxed-simd"
     },
     {
       "id": "0xFD.276",
@@ -563,7 +583,7 @@
       ],
       "name": "f16x8.splat",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -582,7 +602,7 @@
       ],
       "name": "f16x8.extract_lane",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "immediateArgs": "l",
       "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
@@ -604,7 +624,7 @@
       ],
       "name": "f16x8.replace_lane",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "immediateArgs": "l",
       "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
@@ -795,7 +815,7 @@
       ],
       "name": "f16x8.abs",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -814,7 +834,7 @@
       ],
       "name": "f16x8.neg",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -833,7 +853,7 @@
       ],
       "name": "f16x8.sqrt",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -852,7 +872,7 @@
       ],
       "name": "f16x8.ceil",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -871,7 +891,7 @@
       ],
       "name": "f16x8.floor",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -890,7 +910,7 @@
       ],
       "name": "f16x8.trunc",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -909,7 +929,7 @@
       ],
       "name": "f16x8.nearest",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -928,7 +948,7 @@
       ],
       "name": "f16x8.eq",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -947,7 +967,7 @@
       ],
       "name": "f16x8.ne",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -966,7 +986,7 @@
       ],
       "name": "f16x8.lt",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -985,7 +1005,7 @@
       ],
       "name": "f16x8.gt",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1004,7 +1024,7 @@
       ],
       "name": "f16x8.le",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1023,7 +1043,7 @@
       ],
       "name": "f16x8.ge",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1042,7 +1062,7 @@
       ],
       "name": "f16x8.add",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1061,7 +1081,7 @@
       ],
       "name": "f16x8.sub",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1080,7 +1100,7 @@
       ],
       "name": "f16x8.mul",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1099,7 +1119,7 @@
       ],
       "name": "f16x8.div",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1118,7 +1138,7 @@
       ],
       "name": "f16x8.min",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1137,7 +1157,7 @@
       ],
       "name": "f16x8.max",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1156,7 +1176,7 @@
       ],
       "name": "f16x8.pmin",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1175,7 +1195,7 @@
       ],
       "name": "f16x8.pmax",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1194,7 +1214,7 @@
       ],
       "name": "i16x8.trunc_sat_f16x8_s",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "i16x8",
@@ -1215,7 +1235,7 @@
       ],
       "name": "i16x8.trunc_sat_f16x8_u",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "i16x8",
@@ -1236,7 +1256,7 @@
       ],
       "name": "f16x8.convert_i16x8_s",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1257,7 +1277,7 @@
       ],
       "name": "f16x8.convert_i16x8_u",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1278,7 +1298,7 @@
       ],
       "name": "f16x8.demote_f32x4_zero",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1299,7 +1319,7 @@
       ],
       "name": "f16x8.demote_f64x2_zero",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1320,7 +1340,7 @@
       ],
       "name": "f32x4.promote_f16x8_low",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f32x4",
@@ -1341,7 +1361,7 @@
       ],
       "name": "i16x8.trunc_f16x8_s",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "i16x8",
@@ -1362,7 +1382,7 @@
       ],
       "name": "i16x8.trunc_f16x8_u",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "i16x8",
@@ -1383,7 +1403,7 @@
       ],
       "name": "f16x8.madd",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
@@ -1402,7 +1422,7 @@
       ],
       "name": "f16x8.nmadd",
       "status": "proposal",
-      "proposal": "Half precision (FP16)",
+      "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
       "parts": {
         "pre": "f16x8",
