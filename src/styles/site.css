@@ -485,8 +485,23 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    stay in line — see `NavMap.trim`. */
 .map-cell[data-offgrid] { display: none; }
 
-/* Which instructions are on screen right now — the "you are here". */
-.map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
+/*
+ * Which instructions are on screen right now — the "you are here".
+ *
+ * Said by holding those squares at full strength and setting the rest back,
+ * rather than by marking each one. An outline per square drew a box round every
+ * cell of the run instead of round the run, which at five pixels and a one-pixel
+ * gap was a shimmering grid rather than a region; it was clipped on the squares
+ * at either edge of the map; and it is the same property the pinned square
+ * uses, so the two fought over it.
+ *
+ * Anything the reader has lit or pinned keeps its strength wherever it is. A
+ * highlight exists to be seen when it is off screen — that is what the map is
+ * for — so it is the one thing "off screen" must not dim.
+ */
+.map-cell:not(.in-view, .hl-op, .hl-self, .hl-tag, .map-part-lit, .pinned) {
+	opacity: .45;
+}
 
 /*
  * Hidden by the chart's filters or a search: the square keeps its place, since
@@ -546,6 +561,14 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 		margin: 0;
 		max-height: calc(100dvh - var(--toolbar-h) - 2rem);
 		overflow-y: auto;
+		/*
+		 * Setting either axis to something other than `visible` makes the other
+		 * one scroll too, so this box clips horizontally as well — and a
+		 * highlighted square at the left or right edge of the map draws its ring
+		 * outside its own five pixels. Enough room for the widest of them.
+		 */
+		padding: 2px 3px;
+		margin-inline: -3px;
 	}
 
 	/* In the margin there is height to spend and no width, so the sections
