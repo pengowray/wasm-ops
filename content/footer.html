@@ -49,14 +49,15 @@
 			<li><a href="https://github.com/WebAssembly/threads">Threads</a> — phase 4 — the <code>0xFE</code> prefix</li>
 			<li><a href="https://github.com/WebAssembly/wide-arithmetic">Wide arithmetic</a> — phase 3 — <code>0xFC 19</code>–<code>22</code></li>
 			<li><a href="https://github.com/WebAssembly/stack-switching">Stack switching</a> — phase 3 — <code>0xE0</code>–<code>0xE6</code></li>
-			<li><a href="https://github.com/WebAssembly/relaxed-atomics">Relaxed atomics</a> — phase 2</li>
+			<li><a href="https://github.com/WebAssembly/custom-descriptors">Custom descriptors</a> — phase 3 — <code>0xFB 32</code>–<code>38</code>. Attaches a value of your own to each GC type, for prototypes and vtables. It takes three bytes the 2022 GC draft had used for <code>i31.new</code> and its accessors; that draft never standardised, so the bytes were free again</li>
+			<li><a href="https://github.com/WebAssembly/relaxed-atomics">Relaxed atomics</a> — phase 2 — <code>pause</code> at <code>0xFE 4</code>. Otherwise a change to the atomic instructions rather than an addition to them: it gives them an ordering immediate</li>
 			<li><a href="https://github.com/WebAssembly/multibyte-array-access">Multibyte array access</a> — phase 2 — no new opcodes: it lets the existing load and store instructions address arrays, by adding a type index to their <code>memarg</code></li>
-			<li><a href="https://github.com/WebAssembly/rounding-mode-control">Rounding variants</a> — phase 2</li>
+			<li><a href="https://github.com/WebAssembly/rounding-mode-control">Rounding variants</a> — phase 2 — <code>0xFC 128</code>–<code>191</code>: <code>_ceil</code>, <code>_floor</code> and <code>_trunc</code> forms of the float arithmetic and conversions. Not charted here yet. It would treble the size of the <code>0xFC</code> table for a proposal no engine has implemented, so it waits until it moves</li>
 			<li><a href="https://github.com/WebAssembly/half-precision">Half precision</a> — phase 1 — <code>0xFC 48</code>–<code>49</code> and <code>0xFD 288</code>–<code>335</code></li>
-			<li><a href="https://github.com/WebAssembly/more-array-constructors">More array constructors</a> — phase 1</li>
-			<li><a href="https://github.com/WebAssembly/memory-control">Memory control</a> — phase 1 — <code>memory.discard</code> and related</li>
-			<li><a href="https://github.com/WebAssembly/flexible-vectors">Flexible vectors</a> — phase 1</li>
-			<li><a href="https://github.com/WebAssembly/shared-everything-threads">Shared-everything threads</a> — phase 1</li>
+			<li><a href="https://github.com/WebAssembly/more-array-constructors">More array constructors</a> — phase 1 — three instructions, no opcodes assigned yet</li>
+			<li><a href="https://github.com/WebAssembly/memory-control">Memory control</a> — phase 1 — <code>memory.discard</code> and related, no opcodes assigned yet</li>
+			<li><a href="https://github.com/WebAssembly/flexible-vectors">Flexible vectors</a> — phase 1 — vectors whose width is the machine's rather than a fixed 128 bits. Not charted here, and it could not be: it does not use a prefix byte and a table of sub-opcodes at all. The lane type is the prefix — <code>0x7A</code> for <code>vec.i8</code> through <code>0x75</code> for <code>vec.f64</code> — and the instruction after it is a LEB128 number, so it is six overlapping numbering spaces rather than one grid</li>
+			<li><a href="https://github.com/WebAssembly/shared-everything-threads">Shared-everything threads</a> — phase 1 — <code>0xFE 79</code>–<code>113</code>, and <code>ref.i31_shared</code> at <code>0xFB 31</code>. Atomics for globals, tables, struct fields and array elements, where the <code>0xFE</code> table previously covered linear memory only</li>
 			<li><a href="https://github.com/WebAssembly/stringref">Reference-typed strings</a> — phase 1 — <code>0xFB 128</code>+. Dormant since 2023; no engine implements it</li>
 		</ul>
 		<p>Proposals reaching phase 5 move to <a href="https://github.com/WebAssembly/proposals/blob/main/finished-proposals.md">finished proposals</a>. Ones that stall are listed as <a href="https://github.com/WebAssembly/proposals/blob/main/inactive-proposals.md">inactive</a> — among them the constant-time extension and call tags, which earlier versions of this page listed as upcoming.</p>

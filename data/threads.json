@@ -6,7 +6,7 @@
     "emoji": "🧵",
     "prefix": "FE",
     "start": 0,
-    "count": 80,
+    "count": 128,
     "intro": "Multibyte instructions beginning with 0xFE."
   },
   "opcodes": [
@@ -95,8 +95,13 @@
         254,
         4
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "pause",
+      "status": "proposal",
+      "parts": {
+        "mainop": "pause"
+      },
+      "description": "<p>hints that the thread is spinning and the core may back off. Semantically a no-op</p>",
+      "proposal": "relaxed-atomics"
     },
     {
       "id": "0xFE.5",
@@ -1548,6 +1553,866 @@
       "bytes": [
         254,
         79
+      ],
+      "name": "global.atomic.get",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic",
+        "mainop": "get"
+      },
+      "description": "<p>atomically reads a shared global</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.80",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 80,
+      "bytes": [
+        254,
+        80
+      ],
+      "name": "global.atomic.set",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic",
+        "mainop": "set"
+      },
+      "description": "<p>atomically writes a shared global</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.81",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 81,
+      "bytes": [
+        254,
+        81
+      ],
+      "name": "global.atomic.rmw.add",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "add"
+      },
+      "description": "<p>atomically adds to a shared global, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.82",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 82,
+      "bytes": [
+        254,
+        82
+      ],
+      "name": "global.atomic.rmw.sub",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "sub"
+      },
+      "description": "<p>atomically subtracts from a shared global, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.83",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 83,
+      "bytes": [
+        254,
+        83
+      ],
+      "name": "global.atomic.rmw.and",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "and"
+      },
+      "description": "<p>atomically bitwise-ands a shared global, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.84",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 84,
+      "bytes": [
+        254,
+        84
+      ],
+      "name": "global.atomic.rmw.or",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "or"
+      },
+      "description": "<p>atomically bitwise-ors a shared global, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.85",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 85,
+      "bytes": [
+        254,
+        85
+      ],
+      "name": "global.atomic.rmw.xor",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "xor"
+      },
+      "description": "<p>atomically bitwise-xors a shared global, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.86",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 86,
+      "bytes": [
+        254,
+        86
+      ],
+      "name": "global.atomic.rmw.xchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "xchg"
+      },
+      "description": "<p>atomically replaces a shared global, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.87",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 87,
+      "bytes": [
+        254,
+        87
+      ],
+      "name": "global.atomic.rmw.cmpxchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "global.atomic.rmw",
+        "mainop": "cmpxchg"
+      },
+      "description": "<p>atomically replaces a shared global, if it holds an expected value, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : globalidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.88",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 88,
+      "bytes": [
+        254,
+        88
+      ],
+      "name": "table.atomic.get",
+      "status": "proposal",
+      "parts": {
+        "pre": "table.atomic",
+        "mainop": "get"
+      },
+      "description": "<p>atomically reads a table element</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : tableidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.89",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 89,
+      "bytes": [
+        254,
+        89
+      ],
+      "name": "table.atomic.set",
+      "status": "proposal",
+      "parts": {
+        "pre": "table.atomic",
+        "mainop": "set"
+      },
+      "description": "<p>atomically writes a table element</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : tableidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.90",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 90,
+      "bytes": [
+        254,
+        90
+      ],
+      "name": "table.atomic.rmw.xchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "table.atomic.rmw",
+        "mainop": "xchg"
+      },
+      "description": "<p>atomically replaces a table element, returning the reference it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : tableidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.91",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 91,
+      "bytes": [
+        254,
+        91
+      ],
+      "name": "table.atomic.rmw.cmpxchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "table.atomic.rmw",
+        "mainop": "cmpxchg"
+      },
+      "description": "<p>atomically replaces a table element, if it matches an expected reference, returning the reference it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : tableidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.92",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 92,
+      "bytes": [
+        254,
+        92
+      ],
+      "name": "struct.atomic.get",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic",
+        "mainop": "get"
+      },
+      "description": "<p>atomically reads a struct field</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.93",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 93,
+      "bytes": [
+        254,
+        93
+      ],
+      "name": "struct.atomic.get_s",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic",
+        "mainop": "get",
+        "sign": "s"
+      },
+      "description": "<p>atomically reads a packed struct field, sign-extending</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.94",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 94,
+      "bytes": [
+        254,
+        94
+      ],
+      "name": "struct.atomic.get_u",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic",
+        "mainop": "get",
+        "sign": "u"
+      },
+      "description": "<p>atomically reads a packed struct field, zero-extending</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.95",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 95,
+      "bytes": [
+        254,
+        95
+      ],
+      "name": "struct.atomic.set",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic",
+        "mainop": "set"
+      },
+      "description": "<p>atomically writes a struct field</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.96",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 96,
+      "bytes": [
+        254,
+        96
+      ],
+      "name": "struct.atomic.rmw.add",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "add"
+      },
+      "description": "<p>atomically adds to a struct field, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.97",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 97,
+      "bytes": [
+        254,
+        97
+      ],
+      "name": "struct.atomic.rmw.sub",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "sub"
+      },
+      "description": "<p>atomically subtracts from a struct field, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.98",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 98,
+      "bytes": [
+        254,
+        98
+      ],
+      "name": "struct.atomic.rmw.and",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "and"
+      },
+      "description": "<p>atomically bitwise-ands a struct field, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.99",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 99,
+      "bytes": [
+        254,
+        99
+      ],
+      "name": "struct.atomic.rmw.or",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "or"
+      },
+      "description": "<p>atomically bitwise-ors a struct field, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.100",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 100,
+      "bytes": [
+        254,
+        100
+      ],
+      "name": "struct.atomic.rmw.xor",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "xor"
+      },
+      "description": "<p>atomically bitwise-xors a struct field, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.101",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 101,
+      "bytes": [
+        254,
+        101
+      ],
+      "name": "struct.atomic.rmw.xchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "xchg"
+      },
+      "description": "<p>atomically replaces a struct field, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.102",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 102,
+      "bytes": [
+        254,
+        102
+      ],
+      "name": "struct.atomic.rmw.cmpxchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "struct.atomic.rmw",
+        "mainop": "cmpxchg"
+      },
+      "description": "<p>atomically replaces a struct field, if it holds an expected value, returning the value it held before</p>",
+      "immediateArgs": "ord x y",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx<br>u32 <i>y</i> : fieldidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.103",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 103,
+      "bytes": [
+        254,
+        103
+      ],
+      "name": "array.atomic.get",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic",
+        "mainop": "get"
+      },
+      "description": "<p>atomically reads an array element</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.104",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 104,
+      "bytes": [
+        254,
+        104
+      ],
+      "name": "array.atomic.get_s",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic",
+        "mainop": "get",
+        "sign": "s"
+      },
+      "description": "<p>atomically reads a packed array element, sign-extending</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.105",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 105,
+      "bytes": [
+        254,
+        105
+      ],
+      "name": "array.atomic.get_u",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic",
+        "mainop": "get",
+        "sign": "u"
+      },
+      "description": "<p>atomically reads a packed array element, zero-extending</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.106",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 106,
+      "bytes": [
+        254,
+        106
+      ],
+      "name": "array.atomic.set",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic",
+        "mainop": "set"
+      },
+      "description": "<p>atomically writes an array element</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.107",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 107,
+      "bytes": [
+        254,
+        107
+      ],
+      "name": "array.atomic.rmw.add",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "add"
+      },
+      "description": "<p>atomically adds to an array element, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.108",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 108,
+      "bytes": [
+        254,
+        108
+      ],
+      "name": "array.atomic.rmw.sub",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "sub"
+      },
+      "description": "<p>atomically subtracts from an array element, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.109",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 109,
+      "bytes": [
+        254,
+        109
+      ],
+      "name": "array.atomic.rmw.and",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "and"
+      },
+      "description": "<p>atomically bitwise-ands an array element, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.110",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 110,
+      "bytes": [
+        254,
+        110
+      ],
+      "name": "array.atomic.rmw.or",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "or"
+      },
+      "description": "<p>atomically bitwise-ors an array element, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.111",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 111,
+      "bytes": [
+        254,
+        111
+      ],
+      "name": "array.atomic.rmw.xor",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "xor"
+      },
+      "description": "<p>atomically bitwise-xors an array element, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.112",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 112,
+      "bytes": [
+        254,
+        112
+      ],
+      "name": "array.atomic.rmw.xchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "xchg"
+      },
+      "description": "<p>atomically replaces an array element, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.113",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 113,
+      "bytes": [
+        254,
+        113
+      ],
+      "name": "array.atomic.rmw.cmpxchg",
+      "status": "proposal",
+      "parts": {
+        "pre": "array.atomic.rmw",
+        "mainop": "cmpxchg"
+      },
+      "description": "<p>atomically replaces an array element, if it holds an expected value, returning the value it held before</p>",
+      "immediateArgs": "ord x",
+      "followedBy": "<span class=\"op-imm-args\">u8 <i>ord</i> : ordering — 0 seqcst, 1 acqrel<br>u32 <i>x</i> : typeidx</span>",
+      "proposal": "shared-everything-threads"
+    },
+    {
+      "id": "0xFE.114",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 114,
+      "bytes": [
+        254,
+        114
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.115",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 115,
+      "bytes": [
+        254,
+        115
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.116",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 116,
+      "bytes": [
+        254,
+        116
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.117",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 117,
+      "bytes": [
+        254,
+        117
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.118",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 118,
+      "bytes": [
+        254,
+        118
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.119",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 119,
+      "bytes": [
+        254,
+        119
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.120",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 120,
+      "bytes": [
+        254,
+        120
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.121",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 121,
+      "bytes": [
+        254,
+        121
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.122",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 122,
+      "bytes": [
+        254,
+        122
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.123",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 123,
+      "bytes": [
+        254,
+        123
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.124",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 124,
+      "bytes": [
+        254,
+        124
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.125",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 125,
+      "bytes": [
+        254,
+        125
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.126",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 126,
+      "bytes": [
+        254,
+        126
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFE.127",
+      "section": "threads",
+      "prefix": "FE",
+      "code": 127,
+      "bytes": [
+        254,
+        127
       ],
       "name": null,
       "status": "reserved"

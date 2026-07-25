@@ -634,8 +634,16 @@
         251,
         31
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "ref.i31_shared",
+      "status": "proposal",
+      "parts": {
+        "pre": "ref",
+        "mainop": "i",
+        "opbits": "31",
+        "rest": "shared"
+      },
+      "description": "<p>creates a shared i31ref from a 32-bit value, truncating the high bit</p>",
+      "proposal": "shared-everything-threads"
     },
     {
       "id": "0xFB.32",
@@ -646,15 +654,17 @@
         251,
         32
       ],
-      "name": "i31.new",
-      "status": "withdrawn",
-      "proposal": "gc-draft-2022",
-      "supersededBy": "ref.i31 (0xFB 28)",
-      "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>ref.i31 (0xFB 28)</code>.</p>",
+      "name": "struct.new_desc",
+      "status": "proposal",
       "parts": {
-        "pre": "i31",
-        "mainop": "new"
-      }
+        "pre": "struct",
+        "mainop": "new",
+        "rest": "desc"
+      },
+      "description": "<p>allocates a struct with an explicit descriptor, taking the descriptor and the field values</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.new</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.33",
@@ -665,16 +675,17 @@
         251,
         33
       ],
-      "name": "i31.get_s",
-      "status": "withdrawn",
-      "proposal": "gc-draft-2022",
-      "supersededBy": "i31.get_s (0xFB 29)",
-      "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>i31.get_s (0xFB 29)</code>.</p>",
+      "name": "struct.new_default_desc",
+      "status": "proposal",
       "parts": {
-        "pre": "i31",
-        "mainop": "get",
-        "sign": "s"
-      }
+        "pre": "struct",
+        "mainop": "new",
+        "rest": "default_desc"
+      },
+      "description": "<p>allocates a struct with an explicit descriptor, its fields set to their defaults</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_s</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.34",
@@ -685,16 +696,17 @@
         251,
         34
       ],
-      "name": "i31.get_u",
-      "status": "withdrawn",
-      "proposal": "gc-draft-2022",
-      "supersededBy": "i31.get_u (0xFB 30)",
-      "description": "<p>An encoding from the 2022 draft of the GC proposal. The final encoding, standardised in 2023, has this as <code>i31.get_u (0xFB 30)</code>.</p>",
+      "name": "ref.get_desc",
+      "status": "proposal",
       "parts": {
-        "pre": "i31",
+        "pre": "ref",
         "mainop": "get",
-        "sign": "u"
-      }
+        "rest": "desc"
+      },
+      "description": "<p>reads the descriptor a reference was allocated with</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_u</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
+      "immediateArgs": "x",
+      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.35",
@@ -705,8 +717,17 @@
         251,
         35
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "ref.cast_desc_eq",
+      "status": "proposal",
+      "parts": {
+        "pre": "ref",
+        "mainop": "cast",
+        "rest": "desc_eq"
+      },
+      "description": "<p>casts a reference, checking that its descriptor is the one given rather than checking its type</p>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.36",
@@ -717,8 +738,17 @@
         251,
         36
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "ref.cast_desc_eq null",
+      "status": "proposal",
+      "parts": {
+        "pre": "ref",
+        "mainop": "cast",
+        "rest": "desc_eq"
+      },
+      "description": "<p>casts a reference, checking that its descriptor is the one given rather than checking its type. The nullable form</p>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.37",
@@ -729,8 +759,15 @@
         251,
         37
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "br_on_cast_desc_eq",
+      "status": "proposal",
+      "parts": {
+        "mainop": "br_on_cast_desc_eq"
+      },
+      "description": "<p>branches if a reference’s descriptor is the one given</p>",
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable<br>u32 <i>l</i> : labelidx<br><i>ht</i>1 : heaptype — the source type<br><i>ht</i>2 : heaptype — the type being tested for</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.38",
@@ -741,8 +778,15 @@
         251,
         38
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "br_on_cast_desc_eq_fail",
+      "status": "proposal",
+      "parts": {
+        "mainop": "br_on_cast_desc_eq_fail"
+      },
+      "description": "<p>branches if a reference’s descriptor is not the one given</p>",
+      "immediateArgs": "f l ht ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable<br>u32 <i>l</i> : labelidx<br><i>ht</i>1 : heaptype — the source type<br><i>ht</i>2 : heaptype — the type being tested for</span>",
+      "proposal": "custom-descriptors"
     },
     {
       "id": "0xFB.39",
