@@ -85,11 +85,17 @@ export function renderPage(
 </head>
 <body>
 
+<!-- One line, because what is worth the top of the screen is the chart. The
+     introduction, the reference links and the credits are all a click away in
+     the About dialog, which is where someone goes when they want them and
+     nowhere at all when they do not. -->
 <header class="site-header">
 	<h1>WebAssembly Opcodes</h1>
 	<p class="byline">by Pengo Wray</p>
-	<div class="lede">${content.intro}</div>
-	<p class="reviewed">Instruction data reviewed <strong>${content.meta.reviewed}</strong>. WebAssembly is still gaining instructions; check the specification if this page is older than you are comfortable with.</p>
+	<span class="header-meta">
+		<span class="reviewed">Reviewed ${content.meta.reviewed}</span>
+		<button type="button" class="ghost about-open js-only">About &amp; reference</button>
+	</span>
 </header>
 
 <form class="toolbar js-only" id="toolbar" aria-label="Chart display options">
@@ -197,9 +203,25 @@ ${details}
 </section>
 
 <footer class="site-footer">
-${content.footer}
-<p class="reviewed">Instruction data reviewed ${content.meta.reviewed}.</p>
+	<button type="button" class="ghost about-open js-only">About, reference &amp; credits</button>
+	<span class="reviewed">Instruction data reviewed ${content.meta.reviewed}.</span>
 </footer>
+
+<!-- A dialog, so it covers the chart rather than pushing it down the page, and
+     is out of the way until asked for. Without JavaScript there is nothing to
+     open it, so the stylesheet leaves it as an ordinary block at the foot of
+     the page: the text is in the document either way. -->
+<dialog id="about" class="about">
+	<div class="about-head">
+		<h2>About this chart</h2>
+		<button type="button" class="icon-button about-close js-only" aria-label="Close">&times;</button>
+	</div>
+	<div class="about-body">
+		<div class="lede">${content.intro}</div>
+		<p class="reviewed">Instruction data reviewed <strong>${content.meta.reviewed}</strong>. WebAssembly is still gaining instructions; check the specification if this page is older than you are comfortable with.</p>
+${content.footer}
+	</div>
+</dialog>
 
 <script type="application/json" id="opcode-data">${clientData(data)}</script>
 <script src="assets/main.js" defer></script>

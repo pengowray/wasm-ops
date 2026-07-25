@@ -32,6 +32,13 @@ export interface Proposal {
   standardisedIn?: string;
   /** For unfinished ones: the phase it has reached, 1 to 4. */
   phase?: number;
+  /**
+   * How the feature table on webassembly.org names this proposal, where it has
+   * a row. Used to link straight at that row: the table's own ids are
+   * positional (`feat-row-header-21`) and would rot, so the link points at the
+   * text instead and lets the browser find and highlight it.
+   */
+  feature?: string;
   /** One sentence on what it means to a reader today. Shared by every
    *  instruction the proposal introduced. */
   note: string;
@@ -53,6 +60,7 @@ const LIST: Proposal[] = [
   {
     id: 'sign-extension',
     name: 'Sign-extension operators',
+    feature: 'Sign-extension Operators',
     stage: 'standard',
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
@@ -62,6 +70,7 @@ const LIST: Proposal[] = [
   {
     id: 'nontrapping-float-to-int',
     name: 'Non-trapping float-to-int conversions',
+    feature: 'Non-trapping float-to-int Conversions',
     stage: 'standard',
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
@@ -71,6 +80,7 @@ const LIST: Proposal[] = [
   {
     id: 'bulk-memory',
     name: 'Bulk memory operations',
+    feature: 'Bulk Memory Operations',
     stage: 'standard',
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
@@ -80,6 +90,7 @@ const LIST: Proposal[] = [
   {
     id: 'reference-types',
     name: 'Reference types',
+    feature: 'Reference Types',
     stage: 'standard',
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
@@ -89,6 +100,7 @@ const LIST: Proposal[] = [
   {
     id: 'simd',
     name: 'Fixed-width SIMD',
+    feature: 'Fixed-width SIMD',
     stage: 'standard',
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
@@ -98,6 +110,7 @@ const LIST: Proposal[] = [
   {
     id: 'tail-call',
     name: 'Tail call',
+    feature: 'Tail Call',
     stage: 'standard',
     standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Shipping in current browsers; check support if you target older engines.',
@@ -107,6 +120,7 @@ const LIST: Proposal[] = [
   {
     id: 'function-references',
     name: 'Typed function references',
+    feature: 'Typed Function References',
     stage: 'standard',
     standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Shipping in current browsers; check support if you target older engines.',
@@ -116,6 +130,7 @@ const LIST: Proposal[] = [
   {
     id: 'gc',
     name: 'Garbage collection',
+    feature: 'Garbage Collection',
     stage: 'standard',
     standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Shipping in current browsers; check support if you target older engines. The encoding changed substantially from the 2022 draft.',
@@ -125,6 +140,7 @@ const LIST: Proposal[] = [
   {
     id: 'exception-handling',
     name: 'Exception handling',
+    feature: 'Exception Handling with exnref',
     stage: 'standard',
     standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. This is the try_table form; the earlier try/catch encoding is still emitted by older toolchains.',
@@ -134,6 +150,7 @@ const LIST: Proposal[] = [
   {
     id: 'legacy-exception-handling',
     name: 'Legacy exception handling',
+    feature: 'Legacy Exception Handling',
     stage: 'superseded',
     note: 'The exception handling design that preceded try_table. Engines still accept it and older toolchains still emit it, but new code should use the standardised form.',
     url: 'https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/legacy/Exceptions.md',
@@ -142,6 +159,7 @@ const LIST: Proposal[] = [
   {
     id: 'relaxed-simd',
     name: 'Relaxed SIMD',
+    feature: 'Relaxed SIMD',
     stage: 'standard',
     standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Results may differ between engines by design — that is the point of the relaxation.',
@@ -151,6 +169,7 @@ const LIST: Proposal[] = [
   {
     id: 'threads',
     name: 'Threads and atomics',
+    feature: 'Threads',
     stage: 'active',
     phase: 4,
     note: 'At phase 4 and widely implemented, but not yet folded into the specification.',
@@ -160,6 +179,7 @@ const LIST: Proposal[] = [
   {
     id: 'wide-arithmetic',
     name: 'Wide arithmetic',
+    feature: 'Wide Arithmetic',
     stage: 'active',
     phase: 3,
     note: 'At phase 3. Implemented in some engines; the encoding is unlikely to change but is not final.',
@@ -169,6 +189,7 @@ const LIST: Proposal[] = [
   {
     id: 'stack-switching',
     name: 'Stack switching',
+    feature: 'Stack Switching',
     stage: 'active',
     phase: 3,
     note: 'At phase 3. Adds continuations for coroutines, generators and async. Encoding not final.',
@@ -178,6 +199,7 @@ const LIST: Proposal[] = [
   {
     id: 'half-precision',
     name: 'Half precision',
+    feature: 'Half Precision',
     stage: 'active',
     phase: 1,
     note: 'At phase 1. Adds the f16 type. Early: no engine ships it and the encoding may still change.',
@@ -187,6 +209,7 @@ const LIST: Proposal[] = [
   {
     id: 'stringref',
     name: 'Reference-typed strings',
+    feature: 'Reference-Typed Strings',
     stage: 'dormant',
     phase: 1,
     note: 'At phase 1 and inactive since 2023. No engine implements it, and the encoding may still change. Included for reference rather than for use.',

@@ -142,8 +142,27 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
-.byline { margin: 0 0 1rem; color: var(--fg-dim); font-weight: 700; }
+/*
+ * The masthead is a single line: title, author, when the data was last checked,
+ * and the way in to everything else. The prose that used to be here reads once
+ * and then sits between the reader and the chart on every visit after that.
+ */
+.site-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: .1rem .7rem;
+	margin-bottom: .8rem;
+}
+h1 { font-size: 1.5rem; margin: 0; }
+.byline { margin: 0; color: var(--fg-dim); font-weight: 700; font-size: .9rem; }
+.header-meta {
+	display: flex;
+	align-items: baseline;
+	gap: .7rem;
+	margin-left: auto;
+}
+
 .lede { max-width: 68ch; color: var(--fg-dim); font-size: .95rem; }
 .lede p { margin: .4rem 0; }
 
@@ -1220,23 +1239,75 @@ code, .code {
 
 /* ------------------------------------------------------------------- footer */
 
-.site-footer { margin-top: 3rem; font-size: .9rem; }
-
-.accordion {
-	padding: .5rem 0;
+.site-footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: .5rem 1rem;
+	margin-top: 3rem;
+	padding-top: .8rem;
+	font-size: .9rem;
 	border-top: 1px solid var(--rule-soft);
 }
-.accordion > summary {
-	cursor: pointer;
-	font-weight: 700;
-	padding: .4rem 0;
-	list-style-position: outside;
-}
-.accordion > summary:hover { color: var(--accent); }
-.accordion ul { margin: .3rem 0; }
-.accordion > summary { font-size: 1rem; }
 
-/* Four topics inside one disclosure, side by side where there is room. */
+/* ------------------------------------------------------------------- about */
+
+/* A column, so the body is the only thing that scrolls — sizing the two
+   independently gave the dialog a scrollbar of its own beside the body's. */
+.about {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	width: min(64rem, calc(100vw - 2rem));
+	max-height: min(80vh, 52rem);
+	padding: 0;
+	color: var(--fg);
+	background: var(--surface);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	box-shadow: 0 12px 40px rgb(0 0 0 / .35);
+}
+.about::backdrop { background: rgb(0 0 0 / .55); }
+
+/* The heading stays put while the reference material scrolls under it, so the
+   way out is always in the same place. */
+.about-head {
+	display: flex;
+	flex: none;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: .8rem 1.2rem;
+	background: var(--surface);
+	border-bottom: 1px solid var(--rule-soft);
+}
+.about-head h2 { margin: 0; font-size: 1.1rem; }
+.about-body {
+	flex: 1;
+	min-height: 0;
+	overflow-y: auto;
+	padding: 1rem 1.2rem 1.5rem;
+	font-size: .9rem;
+}
+.about-body ul { margin: .3rem 0; }
+
+/*
+ * Without JavaScript nothing can open it, so it is not a dialog at all: it
+ * unfolds at the foot of the page as ordinary text. The content is in the
+ * document either way — only the way it is reached changes.
+ */
+html:not(.js) #about {
+	display: block;
+	position: static;
+	width: auto;
+	max-height: none;
+	margin: 2rem 0 0;
+	border-color: var(--rule-soft);
+	box-shadow: none;
+}
+html:not(.js) .about-body { overflow: visible; }
+
+/* Four topics side by side where there is room. */
 .footer-columns {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
@@ -1247,7 +1318,7 @@ code, .code {
 .footer-columns section { break-inside: avoid; }
 
 .reviewed { color: var(--fg-faint); font-size: .82rem; }
-.site-header .reviewed { margin: .6rem 0 0; max-width: 68ch; }
+.about-body .reviewed { display: block; margin: .6rem 0 1rem; max-width: 68ch; }
 
 /* ------------------------------------------------------------------- mobile */
 

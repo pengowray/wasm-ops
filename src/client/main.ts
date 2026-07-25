@@ -11,6 +11,7 @@
 import type { OpcodeData, SectionId } from '../model/types.ts';
 import { buildView, countShown, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { renderItem } from '../render/items.ts';
+import { initAbout } from './about.ts';
 import { flip } from './flip.ts';
 import { Highlighter } from './highlight.ts';
 import { NavMap } from './map.ts';
@@ -23,6 +24,10 @@ const toolbar = document.getElementById('toolbar') as HTMLFormElement | null;
 const dataScript = document.getElementById('opcode-data');
 const panelEl = document.getElementById('panel');
 const detailsEl = document.getElementById('details');
+
+// Independent of the chart, so the reference material is reachable even if the
+// chart cannot start.
+initAbout();
 
 if (chart && toolbar && dataScript && panelEl && detailsEl) {
   start(chart, toolbar, JSON.parse(dataScript.textContent!) as OpcodeData, panelEl, detailsEl);

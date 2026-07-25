@@ -387,23 +387,35 @@ export function renderHeading(op: Opcode): string {
  * The feature table on webassembly.org: which engines and tools have shipped
  * each proposal, kept current in a way a chart reviewed once a year cannot be.
  *
- * Linked without a fragment on purpose. The table's rows carry ids, but they
- * are positional — `feat-row-header-21` — so a link to one would silently
- * start pointing at a different feature the next time a proposal is added.
+ * The link points at the row by its text rather than by its id. The ids there
+ * are positional — `feat-row-header-21` — so a link to one would quietly start
+ * pointing at a different feature the next time a proposal is added, whereas
+ * the name is what actually identifies the row.
+ *
+ * Tested end to end, and today the highlight does not fire: that table is
+ * built by JavaScript after the page loads, and the browser looks for the text
+ * before it exists. (An id fragment does scroll, because fragment scrolling is
+ * retried as content arrives; text fragments are not.) The link still lands on
+ * the right page, which is where it went before, and it starts working by
+ * itself if webassembly.org ever renders that table server-side. Firefox does
+ * not implement text fragments at all.
  */
 const SUPPORT_URL = 'https://webassembly.org/features/';
+
+function supportLink(feature: string): string {
+  return `${SUPPORT_URL}#:~:text=${encodeURIComponent(feature)}`;
+}
 
 export function renderHistory(op: Opcode): string {
   const p = proposal(op.proposal);
   if (!p) return '';
-  // Superseded encodings are not features anyone can adopt, so they have no
-  // row in that table and no support to check.
-  const support =
-    p.stage === 'superseded'
-      ? ''
-      : `<a class="history-support" href="${SUPPORT_URL}" ` +
-        `title="Which engines and tools have shipped this, on webassembly.org">` +
-        `Engine support</a>`;
+  // Only where the table has a row to point at. The original release is not a
+  // feature anyone opts into, and the abandoned draft encodings never were.
+  const support = p.feature
+    ? `<a class="history-support" href="${escapeHtml(supportLink(p.feature))}" ` +
+      `title="Which engines and tools have shipped “${escapeHtml(p.feature)}”, on webassembly.org">` +
+      `Engine support</a>`
+    : '';
   return (
     `<h4>History</h4><p class="detail-history">` +
     `<a class="history-name" href="${escapeHtml(p.url)}">${escapeHtml(p.name)}</a>` +
