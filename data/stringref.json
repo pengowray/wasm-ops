@@ -45,7 +45,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "rest": "_wtf16"
+        "rest": "wtf16"
       },
       "proposal": "stringref"
     },
@@ -102,7 +102,7 @@
       "parts": {
         "pre": "string",
         "mainop": "measure",
-        "rest": "_wtf8"
+        "rest": "wtf8"
       },
       "proposal": "stringref"
     },
@@ -121,7 +121,7 @@
       "parts": {
         "pre": "string",
         "mainop": "measure",
-        "rest": "_wtf16"
+        "rest": "wtf16"
       },
       "proposal": "stringref"
     },
@@ -160,7 +160,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "rest": "_wtf16"
+        "rest": "wtf16"
       },
       "proposal": "stringref"
     },
@@ -235,7 +235,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "rest": "_lossy_utf8"
+        "rest": "lossy_utf8"
       },
       "proposal": "stringref"
     },
@@ -254,7 +254,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "rest": "_wtf8"
+        "rest": "wtf8"
       },
       "proposal": "stringref"
     },
@@ -273,7 +273,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "rest": "_lossy_utf8"
+        "rest": "lossy_utf8"
       },
       "proposal": "stringref"
     },
@@ -292,7 +292,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "rest": "_wtf8"
+        "rest": "wtf8"
       },
       "proposal": "stringref"
     },
@@ -324,7 +324,7 @@
       "parts": {
         "pre": "string",
         "mainop": "as",
-        "rest": "_wtf8"
+        "rest": "wtf8"
       },
       "proposal": "stringref"
     },
@@ -399,7 +399,7 @@
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "encode",
-        "rest": "_lossy_utf8"
+        "rest": "lossy_utf8"
       },
       "proposal": "stringref"
     },
@@ -418,7 +418,7 @@
       "parts": {
         "pre": "stringview_wtf8",
         "mainop": "encode",
-        "rest": "_wtf8"
+        "rest": "wtf8"
       },
       "proposal": "stringref"
     },
@@ -463,7 +463,7 @@
       "parts": {
         "pre": "string",
         "mainop": "as",
-        "rest": "_wtf16"
+        "rest": "wtf16"
       },
       "proposal": "stringref"
     },
@@ -500,7 +500,7 @@
       "parts": {
         "pre": "stringview_wtf16",
         "mainop": "get",
-        "rest": "_codeunit"
+        "rest": "codeunit"
       },
       "proposal": "stringref"
     },
@@ -849,7 +849,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "rest": "_wtf16_array"
+        "rest": "wtf16_array"
       },
       "proposal": "stringref"
     },
@@ -888,7 +888,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "rest": "_wtf16_array"
+        "rest": "wtf16_array"
       },
       "proposal": "stringref"
     },
@@ -907,7 +907,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "rest": "_lossy_utf8_array"
+        "rest": "lossy_utf8_array"
       },
       "proposal": "stringref"
     },
@@ -926,7 +926,7 @@
       "parts": {
         "pre": "string",
         "mainop": "new",
-        "rest": "_wtf8_array"
+        "rest": "wtf8_array"
       },
       "proposal": "stringref"
     },
@@ -945,7 +945,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "rest": "_lossy_utf8_array"
+        "rest": "lossy_utf8_array"
       },
       "proposal": "stringref"
     },
@@ -964,7 +964,7 @@
       "parts": {
         "pre": "string",
         "mainop": "encode",
-        "rest": "_wtf8_array"
+        "rest": "wtf8_array"
       },
       "proposal": "stringref"
     },

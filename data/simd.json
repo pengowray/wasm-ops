@@ -1828,7 +1828,7 @@
         "pre": "v128",
         "mainop": "load",
         "opbits": "32",
-        "rest": "_zero"
+        "rest": "zero"
       },
       "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>",
       "immediateArgs": "m",
@@ -1850,7 +1850,7 @@
         "pre": "v128",
         "mainop": "load",
         "opbits": "64",
-        "rest": "_zero"
+        "rest": "zero"
       },
       "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>",
       "immediateArgs": "m",
@@ -1872,7 +1872,7 @@
         "pre": "f32x4",
         "mainop": "demote",
         "post": "f64x2",
-        "rest": "_zero"
+        "rest": "zero"
       },
       "description": "<p>Conversion of the two double-precision floating point lanes to two lower single-precision lanes of the result. The two higher lanes of the result are initialized to zero. If the conversion result is not representable as a single-precision floating point number, it is rounded to the nearest-even representable number.</p>",
       "proposal": "simd"
@@ -2434,7 +2434,7 @@
         "pre": "i16x8",
         "mainop": "extadd",
         "post": "pairwise",
-        "rest": "_i8x16_s"
+        "rest": "i8x16_s"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
       "proposal": "simd"
@@ -2454,7 +2454,7 @@
         "pre": "i16x8",
         "mainop": "extadd",
         "post": "pairwise",
-        "rest": "_i8x16_u"
+        "rest": "i8x16_u"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
       "proposal": "simd"
@@ -2474,7 +2474,7 @@
         "pre": "i32x4",
         "mainop": "extadd",
         "post": "pairwise",
-        "rest": "_i16x8_s"
+        "rest": "i16x8_s"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
       "proposal": "simd"
@@ -2494,7 +2494,7 @@
         "pre": "i32x4",
         "mainop": "extadd",
         "post": "pairwise",
-        "rest": "_i16x8_u"
+        "rest": "i16x8_u"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
       "proposal": "simd"
@@ -3254,7 +3254,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f32x4_s"
+        "rest": "trunc_f32x4_s"
       }
     },
     {
@@ -3275,7 +3275,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f32x4_u"
+        "rest": "trunc_f32x4_u"
       }
     },
     {
@@ -3458,7 +3458,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_madd"
+        "rest": "madd"
       }
     },
     {
@@ -3479,7 +3479,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_nmadd"
+        "rest": "nmadd"
       }
     },
     {
@@ -3563,7 +3563,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_min"
+        "rest": "min"
       }
     },
     {
@@ -3890,7 +3890,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f64x2_s_zero"
+        "rest": "trunc_f64x2_s_zero"
       }
     },
     {
@@ -3911,7 +3911,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f64x2_u_zero"
+        "rest": "trunc_f64x2_u_zero"
       }
     },
     {
@@ -4094,7 +4094,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_madd"
+        "rest": "madd"
       }
     },
     {
@@ -4115,7 +4115,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_nmadd"
+        "rest": "nmadd"
       }
     },
     {
@@ -4199,7 +4199,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_min"
+        "rest": "min"
       }
     },
     {
@@ -4479,7 +4479,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_max"
+        "rest": "max"
       }
     },
     {
@@ -4709,7 +4709,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_max"
+        "rest": "max"
       }
     },
     {
@@ -4984,7 +4984,7 @@
         "mainop": "trunc",
         "post": "sat_f64x2",
         "sign": "s",
-        "rest": "_zero"
+        "rest": "zero"
       },
       "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>",
       "proposal": "simd"
@@ -5006,7 +5006,7 @@
         "mainop": "trunc",
         "post": "sat_f64x2",
         "sign": "u",
-        "rest": "_zero"
+        "rest": "zero"
       },
       "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>",
       "proposal": "simd"

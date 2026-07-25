@@ -44,7 +44,7 @@
       "parts": {
         "pre": "struct",
         "mainop": "new",
-        "rest": "_default"
+        "rest": "default"
       },
       "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>",
       "immediateArgs": "x",
@@ -165,7 +165,7 @@
       "parts": {
         "pre": "array",
         "mainop": "new",
-        "rest": "_default"
+        "rest": "default"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>",
       "immediateArgs": "x",
@@ -208,7 +208,7 @@
       "parts": {
         "pre": "array",
         "mainop": "new",
-        "rest": "_data"
+        "rest": "data"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>",
       "immediateArgs": "x y",
@@ -229,7 +229,7 @@
       "parts": {
         "pre": "array",
         "mainop": "new",
-        "rest": "_elem"
+        "rest": "elem"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>",
       "immediateArgs": "x y",
@@ -386,7 +386,7 @@
       "parts": {
         "pre": "array",
         "mainop": "init",
-        "rest": "_data"
+        "rest": "data"
       },
       "immediateArgs": "x y",
       "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>",
@@ -406,7 +406,7 @@
       "parts": {
         "pre": "array",
         "mainop": "init",
-        "rest": "_elem"
+        "rest": "elem"
       },
       "immediateArgs": "x y",
       "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>",
@@ -544,7 +544,7 @@
       "parts": {
         "pre": "any",
         "mainop": "convert",
-        "rest": "_extern"
+        "rest": "extern"
       },
       "description": "<p>converts an external value into the internal representation</p>",
       "proposal": "gc"
@@ -563,7 +563,7 @@
       "parts": {
         "pre": "extern",
         "mainop": "convert",
-        "rest": "_any"
+        "rest": "any"
       },
       "description": "<p>converts an internal value into the external representation</p>",
       "proposal": "gc"

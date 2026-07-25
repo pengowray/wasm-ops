@@ -433,7 +433,7 @@
       "parts": {
         "pre": "i64",
         "mainop": "mul",
-        "rest": "_wide_s"
+        "rest": "wide_s"
       }
     },
     {
@@ -451,7 +451,7 @@
       "parts": {
         "pre": "i64",
         "mainop": "mul",
-        "rest": "_wide_u"
+        "rest": "wide_u"
       }
     },
     {

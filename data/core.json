@@ -4236,7 +4236,7 @@
       "parts": {
         "pre": "ref",
         "mainop": "as",
-        "rest": "_non_null"
+        "rest": "non_null"
       },
       "description": "<p>converts a nullable reference to a non-nullable one or traps if null</p>",
       "proposal": "function-references"

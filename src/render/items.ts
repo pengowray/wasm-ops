@@ -149,11 +149,22 @@ export function renderName(op: Opcode): string {
     html += `<span class="pre">${addWordBreaks(escapeHtml(parts.pre))}.</span>`;
   }
   if (parts.relaxed) html += `<span class="relaxed"><wbr>relaxed.</span>`;
+  // Words that qualify the operation rather than describe its operands. They
+  // belong with the bolded verb: the instruction is an "extadd_pairwise" of
+  // i8x16 lanes, not an "extadd" of pairwise-i8x16. Anything after them —
+  // the source shape and the signedness — is the operand description.
+  const MODIFIERS = new Set(['pairwise', 'sat', 'low', 'high', 'zero', 'lane']);
+  const postWords = (parts.post ?? '').split('_').filter(Boolean);
+  const qualifiers: string[] = [];
+  while (postWords.length && MODIFIERS.has(postWords[0]!)) {
+    qualifiers.push(postWords.shift()!);
+  }
+
   if (parts.mainop || parts.opbits) {
-    const text = (parts.mainop ?? '') + (parts.opbits ?? '');
+    const text = [(parts.mainop ?? '') + (parts.opbits ?? ''), ...qualifiers].join('_');
     html += `<span class="op">${addWordBreaks(escapeHtml(text))}</span>`;
   }
-  const tail = [parts.post, parts.sign, parts.rest].filter(Boolean).join('_');
+  const tail = [postWords.join('_'), parts.sign, parts.rest].filter(Boolean).join('_');
   if (tail) {
     html += `<span class="post">${escapeHtml('_' + tail).replace(/_/g, '<wbr>_')}</span>`;
   }

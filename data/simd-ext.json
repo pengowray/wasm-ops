@@ -46,7 +46,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f32x4_s"
+        "rest": "trunc_f32x4_s"
       },
       "description": "<p><code>relaxed i32x4.trunc_f32x4_s</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_s</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
       "proposal": "relaxed-simd"
@@ -66,7 +66,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f32x4_u"
+        "rest": "trunc_f32x4_u"
       },
       "description": "<p><code>relaxed i32x4.trunc_f32x4_u</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_u</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
       "proposal": "relaxed-simd"
@@ -86,7 +86,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f64x2_s_zero"
+        "rest": "trunc_f64x2_s_zero"
       },
       "description": "<p><code>relaxed i32x4.trunc_f64x2_s_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_s_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
       "proposal": "relaxed-simd"
@@ -106,7 +106,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_trunc_f64x2_u_zero"
+        "rest": "trunc_f64x2_u_zero"
       },
       "description": "<p><code>relaxed i32x4.trunc_f64x2_u_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_u_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
       "proposal": "relaxed-simd"
@@ -126,7 +126,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_madd"
+        "rest": "madd"
       },
       "description": "<p><span class=\"name\">Relaxed fused multiply-add</span></p>\n<p><code>relaxed f32x4.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
       "proposal": "relaxed-simd"
@@ -146,7 +146,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_nmadd"
+        "rest": "nmadd"
       },
       "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f32x4.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
       "proposal": "relaxed-simd"
@@ -166,7 +166,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_madd"
+        "rest": "madd"
       },
       "description": "<p>Relaxed fused multiply-add</p>\n<p><code>relaxed f64x2.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
       "proposal": "relaxed-simd"
@@ -186,7 +186,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_nmadd"
+        "rest": "nmadd"
       },
       "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f64x2.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
       "proposal": "relaxed-simd"
@@ -290,7 +290,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_min"
+        "rest": "min"
       },
       "description": "<p>Relaxed min</p>\n<p><code>f32x4.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
       "proposal": "relaxed-simd"
@@ -310,7 +310,7 @@
       "parts": {
         "pre": "f32x4",
         "mainop": "relaxed",
-        "rest": "_max"
+        "rest": "max"
       },
       "description": "<p>Relaxed max</p>\n<p><code>f32x4.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
       "proposal": "relaxed-simd"
@@ -330,7 +330,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_min"
+        "rest": "min"
       },
       "description": "<p>Relaxed min</p>\n<p><code>f64x2.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
       "proposal": "relaxed-simd"
@@ -350,7 +350,7 @@
       "parts": {
         "pre": "f64x2",
         "mainop": "relaxed",
-        "rest": "_max"
+        "rest": "max"
       },
       "description": "<p>Relaxed max</p>\n<p><code>f64x2.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
       "proposal": "relaxed-simd"
@@ -370,7 +370,7 @@
       "parts": {
         "pre": "i16x8",
         "mainop": "relaxed",
-        "rest": "_q15mulr_s"
+        "rest": "q15mulr_s"
       },
       "description": "<p>Relaxed Rounding Q-format Multiplication</p>\n<p><code>i16x8.q15mulr_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 2 fixed-point numbers in Q15 format. If both inputs are <code>INT16_MIN</code>, the result overflows, and the return value is implementation defined (either <code>INT16_MIN</code> or <code>INT16_MAX</code>).</p>",
       "proposal": "relaxed-simd"
@@ -390,7 +390,7 @@
       "parts": {
         "pre": "i16x8",
         "mainop": "relaxed",
-        "rest": "_dot_i8x16_i7x16_s"
+        "rest": "dot_i8x16_i7x16_s"
       },
       "description": "<p>Relaxed integer dot product</p>\n<p><code>i16x8.dot_i8x16_i7x16_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
       "proposal": "relaxed-simd"
@@ -410,7 +410,7 @@
       "parts": {
         "pre": "i32x4",
         "mainop": "relaxed",
-        "rest": "_dot_i8x16_i7x16_add_s"
+        "rest": "dot_i8x16_i7x16_add_s"
       },
       "description": "<p>Relaxed integer dot product</p>\n<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
       "proposal": "relaxed-simd"
@@ -1304,7 +1304,7 @@
         "pre": "f16x8",
         "mainop": "demote",
         "post": "f32x4",
-        "rest": "_zero"
+        "rest": "zero"
       }
     },
     {
@@ -1325,7 +1325,7 @@
         "pre": "f16x8",
         "mainop": "demote",
         "post": "f64x2",
-        "rest": "_zero"
+        "rest": "zero"
       }
     },
     {
@@ -1346,7 +1346,7 @@
         "pre": "f32x4",
         "mainop": "promote",
         "post": "f16x8",
-        "rest": "_low"
+        "rest": "low"
       }
     },
     {

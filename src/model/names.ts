@@ -40,7 +40,10 @@ export function chopUp(name: string): NameParts {
   if (g['opbits']) parts.opbits = g['opbits'];
   if (g['post']) parts.post = g['post'].replace(/^_/, '');
   if (g['sign']) parts.sign = g['sign'].replace(/^_/, '') as 's' | 'u';
-  if (g['rest']) parts.rest = g['rest'];
+  // Stripped of its leading underscore like post and sign, so callers can
+  // join the three with a single separator. Leaving it on produced
+  // `_pairwise__i8x16_s`, a doubled underscore and a stray break opportunity.
+  if (g['rest']) parts.rest = g['rest'].replace(/^_/, '');
   return parts;
 }
 
