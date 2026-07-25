@@ -161,6 +161,9 @@ function start(
       }
       chart.replaceChildren(...next);
       chart.dataset['layout'] = options.layout;
+      // The table's column headings can only stick when there is one of them,
+      // which is to say when nothing is grouped.
+      chart.dataset['group'] = options.group;
       toolbar.dataset['layout'] = options.layout;
     }, animate);
 

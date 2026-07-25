@@ -179,14 +179,20 @@ h1 { font-size: 1.5rem; margin: 0; }
  */
 .toolbar {
 	/*
-	 * Always positioned, so it reliably creates one stacking context that sits
-	 * above the detail panel — otherwise the "Show" dropdown inside it is
-	 * trapped below and the panel covers it. `backdrop-filter` used to create
-	 * that context implicitly, at the wrong level and for no benefit: the
-	 * background here is opaque, so there was nothing to blur.
+	 * Always positioned, so it reliably creates one stacking context for the
+	 * "Show" dropdown to sit in. `backdrop-filter` used to create that context
+	 * implicitly, at the wrong level and for no benefit: the background here is
+	 * opaque, so there was nothing to blur.
+	 *
+	 * Below the detail panel while it is unpinned, because then the panel is a
+	 * sheet laid over the page and an unpinned toolbar is part of the page:
+	 * with it above, the toolbar cut the top off the sheet whenever the reader
+	 * was near the top of the chart. Pinned, the toolbar goes above instead —
+	 * it then has a band of its own and the panel starts below it, so nothing
+	 * overlaps and the dropdown is never covered.
 	 */
 	position: relative;
-	z-index: 45;
+	z-index: 20;
 	flex-wrap: wrap;
 	gap: .5rem 1.25rem;
 	align-items: flex-start;
@@ -285,6 +291,7 @@ h1 { font-size: 1.5rem; margin: 0; }
 .toolbar.toolbar-pinned {
 	position: sticky;
 	top: 0;
+	z-index: 45;
 }
 #pin-toolbar[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); }
 #pin-toolbar[aria-pressed='true'] svg { fill: currentColor; }
@@ -915,9 +922,6 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .chart[data-layout='table'] .cell[data-status='withdrawn'] { border-bottom-style: dashed; }
 
 .tablehead {
-	position: sticky;
-	top: var(--toolbar-h);
-	z-index: 5;
 	grid-column: 1 / -1;
 	font-size: .68rem;
 	text-transform: uppercase;
@@ -927,6 +931,27 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	border-bottom: 1px solid var(--rule);
 }
 .chart:not([data-layout='table']) .tablehead { display: none; }
+
+/*
+ * Ungrouped there is one heading row and it sticks, which is the whole point of
+ * a table that runs for six hundred rows.
+ *
+ * Grouped there is one per group, and they cannot: every cell of the chart is a
+ * child of the same grid, so a sticky row has no group to be bounded by and
+ * pins to the top of the window for the rest of the page. All eleven ended up
+ * stacked in the same place, and the group headings — the thing the reader just
+ * asked for — slid underneath them and were gone.
+ */
+.chart[data-layout='table'][data-group='none'] .tablehead {
+	position: sticky;
+	top: var(--toolbar-h);
+	z-index: 5;
+}
+
+/* Sits with the group it belongs to rather than floating above the first row. */
+.chart[data-layout='table']:not([data-group='none']) .tablehead {
+	margin-top: .1rem;
+}
 
 .chart[data-layout='table'] .cell-hex { display: block; margin: 0; }
 .chart[data-layout='table'] .cell-name {
@@ -1255,7 +1280,6 @@ code, .code {
 /* A column, so the body is the only thing that scrolls — sizing the two
    independently gave the dialog a scrollbar of its own beside the body's. */
 .about {
-	display: flex;
 	flex-direction: column;
 	overflow: hidden;
 	width: min(64rem, calc(100vw - 2rem));
@@ -1267,6 +1291,13 @@ code, .code {
 	border-radius: var(--radius);
 	box-shadow: 0 12px 40px rgb(0 0 0 / .35);
 }
+/*
+ * Only when it is open. The browser hides a closed `<dialog>` from its own
+ * stylesheet, and any author `display` at all beats that however specific it
+ * is — so declaring the column layout unconditionally left the whole reference
+ * section sitting at the foot of the page, open or not.
+ */
+.about[open] { display: flex; }
 .about::backdrop { background: rgb(0 0 0 / .55); }
 
 /* The heading stays put while the reference material scrolls under it, so the
