@@ -12,12 +12,15 @@ import { HISTORICAL, toHex } from './types.ts';
 import { CATEGORY_LABELS, CATEGORY_ORDER, categorize, type CategoryId } from './categories.ts';
 
 /**
- * `matrix` lays each section out as the familiar 16-wide byte grid, where a
- * cell's position *is* its opcode. That only means anything when ordering by
- * opcode within a section, so choosing it fixes the grouping and sort.
- * `list` flows cells in whatever order and grouping is asked for.
+ * - `matrix` lays each section out as the familiar 16-wide byte grid, where a
+ *   cell's position *is* its opcode. That only means anything when ordering by
+ *   opcode within a section, so choosing it fixes the grouping and sort.
+ * - `cards` flows the same cells as tiles, in whatever order and grouping is
+ *   asked for. (This was called `list`, which described the byte grid just as
+ *   badly as it described this.)
+ * - `table` puts one instruction per row with its details in columns.
  */
-export type Layout = 'matrix' | 'list';
+export type Layout = 'matrix' | 'cards' | 'table';
 export type GroupBy = 'section' | 'category' | 'none';
 /**
  * `name` sorts on the operation, ignoring the type it acts on, so every
@@ -35,8 +38,8 @@ export interface ViewOptions {
   sections: SectionId[];
   /**
    * Include unassigned slots. Only applies to the byte grid, where a gap tells
-   * you that a byte value is unused. A list of blanks tells you nothing, so
-   * list layouts drop them regardless.
+   * you that a byte value is unused. A row or tile of nothing tells you
+   * nothing, so the other layouts drop them regardless.
    */
   showReserved: boolean;
   /** Include instructions that are still proposals. */
@@ -79,6 +82,8 @@ export type ViewItem =
    */
   | { kind: 'corner'; key: string; label: string }
   | { kind: 'colhead'; key: string; label: string }
+  /** Column headings for the table layout, one per group. */
+  | { kind: 'tablehead'; key: string }
   | { kind: 'rowhead'; key: string; label: string }
   /**
    * `filtered` cells are shown as empty slots rather than dropped. In the byte
@@ -207,18 +212,26 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
     return items;
   }
 
-  // --- list layouts -------------------------------------------------------
+  // --- cards and table ----------------------------------------------------
+  // Both flow the same cells; only the styling of a cell differs, so they share
+  // every decision about what appears and in what order.
+  const head = (key: string): ViewItem[] =>
+    options.layout === 'table' ? [{ kind: 'tablehead', key: `head:${key}` }] : [];
+
   // `linkTo` cells are the prefix bytes, which exist to point at the sub-table
   // that decodes them. In the byte grid they occupy a real byte value and have
   // to be there; in a list of instructions they are not instructions.
   const listable = data.opcodes.filter((op) => op.name && !op.linkTo && visible(op, options));
 
   if (options.group === 'none') {
-    return sortOpcodes(listable, options.order).map((op) => ({
-      kind: 'cell' as const,
-      key: op.id,
-      op,
-    }));
+    return [
+      ...head('all'),
+      ...sortOpcodes(listable, options.order).map((op) => ({
+        kind: 'cell' as const,
+        key: op.id,
+        op,
+      })),
+    ];
   }
 
   const items: ViewItem[] = [];
@@ -240,6 +253,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         ...(section.intro ? { intro: section.intro } : {}),
         count: group.length,
       });
+      items.push(...head(section.id));
       for (const op of group) items.push({ kind: 'cell', key: op.id, op });
     }
     return items;
@@ -264,6 +278,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       label: CATEGORY_LABELS[category],
       count: sorted.length,
     });
+    items.push(...head(category));
     for (const op of sorted) items.push({ kind: 'cell', key: op.id, op });
   }
   return items;

@@ -9,7 +9,7 @@
 import type { Opcode } from '../model/types.ts';
 import { toHex } from '../model/types.ts';
 import { addWordBreaks } from '../model/names.ts';
-import { categorize } from '../model/categories.ts';
+import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
 import type { ViewItem } from '../model/view.ts';
 
 export function escapeHtml(value: string): string {
@@ -189,10 +189,19 @@ export function renderCell(op: Opcode, filtered = false): string {
   const hidden = filtered ? ' data-filtered="1"' : '';
   const label = op.name ? ` aria-label="${escapeHtml(`${specText(op)} ${op.name}`)}"` : '';
 
+  // The extra columns are only shown by the table layout, but they are written
+  // here rather than injected later: a cell is rendered once at build time and
+  // then only ever moved, which is what lets the animation follow it.
+  const columns =
+    `<span class="cell-imm">${op.immediateArgs ?? ''}</span>` +
+    `<span class="cell-stack">${op.stack?.html ?? ''}</span>` +
+    `<span class="cell-cat">${op.name ? CATEGORY_LABELS[categorize(op)] : ''}</span>`;
+
   return (
     `<${tag} class="cell"${href}${cellData(op)}${hidden}${label}>` +
     `<span class="cell-hex">${specLabel(op)}</span>` +
     `<span class="cell-name">${inner}</span>` +
+    columns +
     `</${tag}>`
   );
 }
@@ -206,6 +215,13 @@ export function renderItem(item: ViewItem): string {
         `${escapeHtml(item.label)} <span class="group-count">${item.count}</span>` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
         `</h2>`
+      );
+    case 'tablehead':
+      return (
+        `<div class="tablehead" data-key="${escapeHtml(item.key)}" aria-hidden="true">` +
+        `<span>Opcode</span><span>Instruction</span><span>Immediates</span>` +
+        `<span>Stack</span><span>Category</span>` +
+        `</div>`
       );
     case 'corner':
       return (

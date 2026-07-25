@@ -228,7 +228,7 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
    fixed by the opcode; unassigned slots have no meaning outside it. Controls
    are dimmed rather than hidden so the toolbar does not reflow as you use it. */
 .toolbar[data-layout='matrix'] [data-when-layout='list'],
-.toolbar[data-layout='list'] [data-when-layout='matrix'] {
+.toolbar[data-layout='cards'] [data-when-layout='matrix'] {
 	opacity: .4;
 	pointer-events: none;
 }
@@ -394,7 +394,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	grid-template-columns: 2.6rem repeat(16, minmax(0, 1fr));
 }
 
-.chart[data-layout='list'] {
+.chart[data-layout='cards'] {
 	grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
 	gap: .3rem;
 }
@@ -444,9 +444,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--enc-prefix);
 	cursor: help;
 }
-.chart[data-layout='list'] .corner,
-.chart[data-layout='list'] .colhead,
-.chart[data-layout='list'] .rowhead { display: none; }
+.chart[data-layout='cards'] .corner,
+.chart[data-layout='cards'] .colhead,
+.chart[data-layout='cards'] .rowhead { display: none; }
 
 /* --------------------------------------------------------------------- cell */
 
@@ -521,7 +521,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 /* In the byte grid a cell's position already states its opcode; in a list it
    has to be spelled out, and has to be legible while it does so. */
-.chart[data-layout='list'] .cell-hex {
+.chart[data-layout='cards'] .cell-hex {
 	display: block;
 	margin-bottom: .15rem;
 	font-weight: 700;
@@ -537,6 +537,87 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    crosshatch is only as wide as the lettering needs. */
 .cell-name { display: inline-block; align-self: center; max-width: 100%; }
 
+/* Extra columns, shown only by the table layout. */
+.cell-imm, .cell-stack, .cell-cat { display: none; }
+
+/* ------------------------------------------------------------ table layout */
+
+/*
+ * One instruction per row, its details in aligned columns. Each cell carries
+ * the same column template rather than the container doing it, so a cell stays
+ * a single box — which is what the animation measures and moves. `display:
+ * contents` would align just as well and have no box at all.
+ */
+.chart[data-layout='table'] { grid-template-columns: minmax(0, 1fr); gap: 0; }
+
+.chart[data-layout='table'] .cell,
+.tablehead {
+	display: grid;
+	grid-template-columns:
+		minmax(7rem, 8rem) minmax(9rem, 1.3fr) minmax(4rem, .5fr)
+		minmax(9rem, 1.2fr) minmax(6rem, .6fr);
+	gap: .25rem .9rem;
+	align-items: baseline;
+	text-align: left;
+	padding: .35rem .5rem;
+}
+
+.chart[data-layout='table'] .cell {
+	min-height: 0;
+	border-width: 0 0 1px 0;
+	border-style: solid;
+	border-color: var(--rule-soft);
+	font-size: .84rem;
+}
+.chart[data-layout='table'] .cell[data-status='proposal'],
+.chart[data-layout='table'] .cell[data-status='legacy'],
+.chart[data-layout='table'] .cell[data-status='withdrawn'] { border-bottom-style: dashed; }
+
+.tablehead {
+	position: sticky;
+	top: 3.6rem;
+	z-index: 5;
+	grid-column: 1 / -1;
+	font-size: .68rem;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: var(--fg-faint);
+	background: var(--bg);
+	border-bottom: 1px solid var(--rule);
+}
+.chart:not([data-layout='table']) .tablehead { display: none; }
+
+.chart[data-layout='table'] .cell-hex { display: block; margin: 0; }
+.chart[data-layout='table'] .cell-name {
+	display: block;
+	align-self: baseline;
+	font-size: .95rem;
+}
+/* The generated line breaks belong to the byte grid, where cells are narrow. */
+.chart[data-layout='table'] .op::before,
+.chart[data-layout='table'] .post::before { content: none; }
+.chart[data-layout='table'] .op { font-size: 1em; }
+
+.chart[data-layout='table'] .cell-imm {
+	display: block;
+	font-family: Georgia, serif;
+	font-style: italic;
+	color: var(--fg-dim);
+}
+.chart[data-layout='table'] .cell-stack {
+	display: block;
+	font-family: Georgia, serif;
+	color: var(--fg-dim);
+}
+.chart[data-layout='table'] .cell-cat { display: block; color: var(--fg-faint); font-size: .78rem; }
+
+/* Narrow windows cannot carry five columns; the row becomes a stack. */
+@media (max-width: 800px) {
+	.chart[data-layout='table'] .cell { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+	.tablehead { display: none; }
+	.chart[data-layout='table'] .cell-cat { display: none; }
+}
+
 .pre { color: inherit; }
 .op { font-size: 1.05em; font-weight: 700; }
 .post { color: inherit; }
@@ -544,8 +625,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 /* A line break that is not picked up by the clipboard, so copying a cell still
    yields `i64.load16_u` on a single line. */
 .op::before, .post::before { content: '\A'; white-space: pre; }
-.chart[data-layout='list'] .op::before,
-.chart[data-layout='list'] .post::before { content: none; }
+.chart[data-layout='cards'] .op::before,
+.chart[data-layout='cards'] .post::before { content: none; }
 
 .cell .jump { display: block; font-weight: 700; }
 
@@ -582,12 +663,15 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 /* -------------------------------------------------------------------- panel */
 
+/*
+ * Below the docking width the panel is a sheet over the page: there is no room
+ * to put it beside anything.
+ */
 .panel {
 	position: fixed;
 	top: 0;
 	right: 0;
 	z-index: 30;
-	display: flex;
 	flex-direction: column;
 	width: min(28rem, 92vw);
 	height: 100dvh;
@@ -598,7 +682,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	overflow-y: auto;
 	overscroll-behavior: contain;
 }
-.panel[hidden] { display: none; }
+.js .panel[data-open='true'] { display: flex; }
+.js .panel[data-open='false'] { display: none; }
 
 .panel-head {
 	position: sticky;
@@ -608,6 +693,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	padding: .6rem 0;
 	background: var(--bg);
 }
+
+.panel-empty { display: none; }
 
 .panel-body { font-size: .92rem; }
 .panel-body h3 { margin: .2rem 0 .6rem; font-size: 1.3rem; word-break: break-word; }
@@ -621,6 +708,37 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .panel-body p { margin: .5rem 0; }
 .panel-body ol, .panel-body ul { margin: .4rem 0; padding-left: 1.4rem; }
 .panel-body li { margin: .2rem 0; }
+
+/*
+ * Wide enough to give the panel a column instead of laying it over the chart.
+ * It stays in place when nothing is selected, so choosing an instruction does
+ * not shove the whole chart sideways.
+ */
+@media (min-width: 1500px) {
+	.layout { grid-template-columns: max-content minmax(0, 1fr) 24rem; }
+
+	.js .panel,
+	.js .panel[data-open='false'] {
+		display: flex;
+		position: sticky;
+		top: 5rem;
+		width: auto;
+		height: auto;
+		max-height: calc(100dvh - 6rem);
+		padding: 0 0 1rem 1.25rem;
+		border-left: 1px solid var(--rule-soft);
+		box-shadow: none;
+	}
+
+	.panel[data-open='false'] .panel-head { display: none; }
+	.panel[data-open='false'] .panel-empty {
+		display: block;
+		margin: 0;
+		padding-top: .5rem;
+		font-size: .85rem;
+		color: var(--fg-faint);
+	}
+}
 
 /* ------------------------------------------------------------------ details */
 

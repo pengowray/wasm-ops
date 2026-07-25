@@ -81,15 +81,16 @@ export function renderPage(
 	<fieldset class="control">
 		<legend>Arrange</legend>
 		<label><input type="radio" name="layout" value="matrix" checked> Byte grid</label>
-		<label><input type="radio" name="layout" value="list"> List</label>
+		<label><input type="radio" name="layout" value="cards"> Cards</label>
+		<label><input type="radio" name="layout" value="table"> Table</label>
 	</fieldset>
-	<fieldset class="control" data-when-layout="list">
+	<fieldset class="control" data-needs-grouping>
 		<legend>Group by</legend>
 		<label><input type="radio" name="group" value="category" checked> Category</label>
 		<label><input type="radio" name="group" value="section"> Section</label>
 		<label><input type="radio" name="group" value="none"> Nothing</label>
 	</fieldset>
-	<fieldset class="control" data-when-layout="list">
+	<fieldset class="control" data-needs-grouping>
 		<legend>Sort by</legend>
 		<label><input type="radio" name="order" value="opcode" checked> Opcode</label>
 		<label title="Sort on the operation, so every store sits together"><input type="radio" name="order" value="name"> Name</label>
@@ -105,7 +106,7 @@ export function renderPage(
 			</div>
 			<div class="filter-group">
 				<label class="toggle"><input type="checkbox" name="showProposals" checked><span>Proposals</span></label>
-				<label class="toggle" data-when-layout="matrix"><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
+				<label class="toggle" data-matrix-only><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
 				<label class="toggle" title="Superseded and abandoned encodings — what these bytes used to mean"><input type="checkbox" name="showHistorical"><span>Legacy &amp; withdrawn</span></label>
 			</div>
 			<div class="filter-group filter-presets">
@@ -139,14 +140,18 @@ export function renderPage(
 ${chart}
 </main>
 
-</div>
-
-<aside id="panel" class="panel" hidden aria-live="polite">
+<!-- Inside the layout, so that on a wide window it can take a column of its own
+     and the chart reflows beside it instead of running underneath. On a narrow
+     one it goes back to being a sheet over the top. -->
+<aside id="panel" class="panel js-only" data-open="false" aria-live="polite">
 	<div class="panel-head">
 		<button type="button" class="icon-button panel-close" aria-label="Close details">&times;</button>
 	</div>
 	<div class="panel-body"></div>
+	<p class="panel-empty">Select an instruction to see its details.</p>
 </aside>
+
+</div>
 
 <section id="details" class="details">
 	<h2 class="details-heading">Instruction reference</h2>

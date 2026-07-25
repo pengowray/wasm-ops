@@ -32,7 +32,7 @@ export class Panel {
     panel.querySelector('.panel-close')?.addEventListener('click', () => this.close());
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !this.#panel.hidden) this.close();
+      if (event.key === 'Escape' && this.#panel.dataset['open'] === 'true') this.close();
     });
   }
 
@@ -77,13 +77,13 @@ export class Panel {
     else content.prepend(encoding);
 
     this.#body.replaceChildren(content);
-    this.#panel.hidden = false;
+    this.#panel.dataset['open'] = 'true';
     this.#currentKey = key;
     this.#panel.scrollTop = 0;
   }
 
   close(): void {
-    this.#panel.hidden = true;
+    this.#panel.dataset['open'] = 'false';
     this.#body.replaceChildren();
     this.#currentKey = null;
     this.#onClose?.();
