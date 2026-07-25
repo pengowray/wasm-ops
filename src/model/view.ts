@@ -13,6 +13,7 @@ import {
   CATEGORY_LABELS,
   CATEGORY_ORDER,
   categorize,
+  operationKey,
   subcategorize,
   subcategoryRank,
   type CategoryId,
@@ -173,29 +174,14 @@ function operationOf(op: Opcode): string {
   return pre && op.name.startsWith(pre + '.') ? op.name.slice(pre.length + 1) : op.name;
 }
 
-/**
- * The single word an instruction is about — `add`, `load`, `trunc` — which is
- * the heading it files under when grouping by name.
- *
- * Narrower than `operationOf`: that keeps the widths and signedness, so
- * `load8_u` and `load16_s` would be two headings of one entry each rather than
- * two entries under `load`. This is the operation itself and nothing else,
- * which is what makes the grouping read as an index.
- *
- * Relaxed SIMD is the exception the data forces. Those names are decomposed
- * with `relaxed` as the operation and the real one in the remainder, so
- * `f32x4.relaxed_madd` would file under `relaxed` along with thirty-six
- * unrelated instructions. It files under `madd`, beside the ordinary one.
+/*
+ * The heading an instruction files under when grouping by name is
+ * `operationKey` from the categories module — the same reading of a name that
+ * decides its sub-group, so the two cannot disagree about what `relaxed_madd`
+ * is an instance of. It is narrower than `operationOf` above, which keeps the
+ * widths and signedness: `load8_u` and `load16_s` are two entries under `load`
+ * rather than two headings of one entry each.
  */
-export function operationKey(op: Opcode): string {
-  const parts = op.parts;
-  if (!parts?.mainop) return op.name ?? '';
-  if (parts.mainop === 'relaxed') {
-    const next = (parts.post ?? parts.rest ?? '').split('_')[0];
-    if (next) return next;
-  }
-  return parts.mainop;
-}
 
 /** `select t` is the only operation with a space in it, and ids cannot have one. */
 function anchorSafe(name: string): string {

@@ -11,7 +11,7 @@
  */
 
 import type { Opcode } from './types.ts';
-import { CATEGORY_LABELS, categorize, subcategorize } from './categories.ts';
+import { CATEGORY_LABELS, categorize, conceptFor, subcategorize } from './categories.ts';
 import { proposal } from './proposals.ts';
 
 export interface Tag {
@@ -55,6 +55,21 @@ export function tagsFor(op: Opcode): Tag[] {
   const sub = subcategorize(op);
   if (sub) add(sub.tag, sub.label, 'category');
 
+  /*
+   * The property named by the operation itself, where the sub-group did not
+   * already name it.
+   *
+   * A sub-group is a division of one category, so it can only ever gather what
+   * is in that category: the numeric and vector arithmetic found each other
+   * through "Arithmetic", but `i64.atomic.rmw.add` is filed under
+   * "Read-modify-write" and carried no chip saying it adds. Adding is adding
+   * wherever it happens, so it gets the same tag the others have — and clicking
+   * "Arithmetic" now lights every instruction that computes a number, not the
+   * ones that share a category with whichever you clicked.
+   */
+  const concept = conceptFor(op);
+  if (concept && concept.tag !== sub?.tag) add(concept.tag, concept.label, 'category');
+
   const mainop = op.parts?.mainop;
   if (mainop) add(`op-${mainop}`, mainop, 'operation');
 
@@ -94,8 +109,20 @@ export function tagsFor(op: Opcode): Tag[] {
   if (op.status !== 'standard') {
     add(op.status, op.status, 'status');
   }
+  /*
+   * The proposal an instruction arrived through.
+   *
+   * Named "<proposal> proposal" where the bare name is also a category, because
+   * otherwise two chips on the same instruction both read "Garbage collection"
+   * — one meaning "this is a GC instruction" and lighting 28, the other "this
+   * came through the GC proposal" and lighting 32, including `ref.eq` over in
+   * the core table. Two different questions cannot share a label.
+   */
   const from = proposal(op.proposal);
-  if (from) add(`from-${from.id}`, from.name, 'status');
+  if (from) {
+    const collides = Object.values(CATEGORY_LABELS).includes(from.name);
+    add(`from-${from.id}`, collides ? `${from.name} proposal` : from.name, 'status');
+  }
 
   return tags;
 }
