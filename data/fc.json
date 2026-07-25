@@ -353,8 +353,14 @@
         252,
         19
       ],
-      "name": null,
-      "status": "reserved"
+      "proposal": "Wide Arithmetic",
+      "name": "i64.add128",
+      "status": "proposal",
+      "parts": {
+        "pre": "i64",
+        "mainop": "add",
+        "opbits": "128"
+      }
     },
     {
       "id": "0xFC.20",
@@ -365,8 +371,14 @@
         252,
         20
       ],
-      "name": null,
-      "status": "reserved"
+      "proposal": "Wide Arithmetic",
+      "name": "i64.sub128",
+      "status": "proposal",
+      "parts": {
+        "pre": "i64",
+        "mainop": "sub",
+        "opbits": "128"
+      }
     },
     {
       "id": "0xFC.21",
@@ -377,8 +389,14 @@
         252,
         21
       ],
-      "name": null,
-      "status": "reserved"
+      "proposal": "Wide Arithmetic",
+      "name": "i64.mul_wide_s",
+      "status": "proposal",
+      "parts": {
+        "pre": "i64",
+        "mainop": "mul",
+        "rest": "_wide_s"
+      }
     },
     {
       "id": "0xFC.22",
@@ -389,8 +407,14 @@
         252,
         22
       ],
-      "name": null,
-      "status": "reserved"
+      "proposal": "Wide Arithmetic",
+      "name": "i64.mul_wide_u",
+      "status": "proposal",
+      "parts": {
+        "pre": "i64",
+        "mainop": "mul",
+        "rest": "_wide_u"
+      }
     },
     {
       "id": "0xFC.23",

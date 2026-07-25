@@ -3983,6 +3983,22 @@
       "bytes": [
         211
       ],
+      "name": "ref.eq",
+      "status": "proposal",
+      "parts": {
+        "pre": "ref",
+        "mainop": "eq"
+      },
+      "description": "<p>[eqref eqref] -&gt; [i32]</p>\n<p><em>Reference Types Proposal</em></p>"
+    },
+    {
+      "id": "0xD4",
+      "section": "core",
+      "prefix": "",
+      "code": 212,
+      "bytes": [
+        212
+      ],
       "name": "ref.as_non_null",
       "status": "proposal",
       "parts": {
@@ -3993,21 +4009,6 @@
       "description": "<p>converts a nullable reference to a non-nullable one or traps if null</p>\n<p><em>Typed Function References Proposal</em></p>"
     },
     {
-      "id": "0xD4",
-      "section": "core",
-      "prefix": "",
-      "code": 212,
-      "bytes": [
-        212
-      ],
-      "name": "br_on_null",
-      "status": "proposal",
-      "parts": {
-        "mainop": "br_on_null"
-      },
-      "description": "<p>converts a nullable reference to a non-nullable one or branches if null</p>\n<p><em>Typed Function References Proposal</em></p>"
-    },
-    {
       "id": "0xD5",
       "section": "core",
       "prefix": "",
@@ -4015,13 +4016,12 @@
       "bytes": [
         213
       ],
-      "name": "ref.eq",
+      "name": "br_on_null",
       "status": "proposal",
       "parts": {
-        "pre": "ref",
-        "mainop": "eq"
+        "mainop": "br_on_null"
       },
-      "description": "<p>[eqref eqref] -&gt; [i32]</p>\n<p><em>Reference Types Proposal</em></p>"
+      "description": "<p>converts a nullable reference to a non-nullable one or branches if null</p>\n<p><em>Typed Function References Proposal</em></p>"
     },
     {
       "id": "0xD6",

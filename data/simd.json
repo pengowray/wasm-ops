@@ -2949,15 +2949,8 @@
         162,
         1
       ],
-      "name": "i8x16.relaxed_swizzle",
-      "status": "proposal",
-      "parts": {
-        "pre": "i8x16",
-        "mainop": "relaxed",
-        "sign": "s",
-        "rest": "wizzle"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.163",
@@ -3005,14 +2998,8 @@
         165,
         1
       ],
-      "name": "i32x4.relaxed_trunc_f32x4_s",
-      "status": "proposal",
-      "parts": {
-        "pre": "i32x4",
-        "mainop": "relaxed",
-        "rest": "_trunc_f32x4_s"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.166",
@@ -3024,14 +3011,8 @@
         166,
         1
       ],
-      "name": "i32x4.relaxed_trunc_f32x4_u",
-      "status": "proposal",
-      "parts": {
-        "pre": "i32x4",
-        "mainop": "relaxed",
-        "rest": "_trunc_f32x4_u"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.167",
@@ -3197,14 +3178,8 @@
         175,
         1
       ],
-      "name": "f32x4.relaxed_madd",
-      "status": "proposal",
-      "parts": {
-        "pre": "f32x4",
-        "mainop": "relaxed",
-        "rest": "_madd"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.176",
@@ -3216,14 +3191,8 @@
         176,
         1
       ],
-      "name": "f32x4.relaxed_nmadd",
-      "status": "proposal",
-      "parts": {
-        "pre": "f32x4",
-        "mainop": "relaxed",
-        "rest": "_nmadd"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.177",
@@ -3253,15 +3222,8 @@
         178,
         1
       ],
-      "name": "i8x16.relaxed_laneselect",
-      "status": "proposal",
-      "parts": {
-        "pre": "i8x16",
-        "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.179",
@@ -3273,15 +3235,8 @@
         179,
         1
       ],
-      "name": "i16x8.relaxed_laneselect",
-      "status": "proposal",
-      "parts": {
-        "pre": "i16x8",
-        "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.180",
@@ -3293,14 +3248,8 @@
         180,
         1
       ],
-      "name": "f32x4.relaxed_min",
-      "status": "proposal",
-      "parts": {
-        "pre": "f32x4",
-        "mainop": "relaxed",
-        "rest": "_min"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.181",
@@ -3604,14 +3553,8 @@
         197,
         1
       ],
-      "name": "i32x4.relaxed_trunc_f64x2_s_zero",
-      "status": "proposal",
-      "parts": {
-        "pre": "i32x4",
-        "mainop": "relaxed",
-        "rest": "_trunc_f64x2_s_zero"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.198",
@@ -3623,14 +3566,8 @@
         198,
         1
       ],
-      "name": "i32x4.relaxed_trunc_f64x2_u_zero",
-      "status": "proposal",
-      "parts": {
-        "pre": "i32x4",
-        "mainop": "relaxed",
-        "rest": "_trunc_f64x2_u_zero"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.199",
@@ -3796,14 +3733,8 @@
         207,
         1
       ],
-      "name": "f64x2.relaxed_madd",
-      "status": "proposal",
-      "parts": {
-        "pre": "f64x2",
-        "mainop": "relaxed",
-        "rest": "_madd"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.208",
@@ -3815,14 +3746,8 @@
         208,
         1
       ],
-      "name": "f64x2.relaxed_nmadd",
-      "status": "proposal",
-      "parts": {
-        "pre": "f64x2",
-        "mainop": "relaxed",
-        "rest": "_nmadd"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.209",
@@ -3852,15 +3777,8 @@
         210,
         1
       ],
-      "name": "i32x4.relaxed_laneselect",
-      "status": "proposal",
-      "parts": {
-        "pre": "i32x4",
-        "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.211",
@@ -3872,15 +3790,8 @@
         211,
         1
       ],
-      "name": "i64x2.relaxed_laneselect",
-      "status": "proposal",
-      "parts": {
-        "pre": "i64x2",
-        "mainop": "relaxed",
-        "post": "lane",
-        "rest": "select"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.212",
@@ -3892,14 +3803,8 @@
         212,
         1
       ],
-      "name": "f64x2.relaxed_min",
-      "status": "proposal",
-      "parts": {
-        "pre": "f64x2",
-        "mainop": "relaxed",
-        "rest": "_min"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.213",
@@ -4157,14 +4062,8 @@
         226,
         1
       ],
-      "name": "f32x4.relaxed_max",
-      "status": "proposal",
-      "parts": {
-        "pre": "f32x4",
-        "mainop": "relaxed",
-        "rest": "_max"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.227",
@@ -4374,14 +4273,8 @@
         238,
         1
       ],
-      "name": "f64x2.relaxed_max",
-      "status": "proposal",
-      "parts": {
-        "pre": "f64x2",
-        "mainop": "relaxed",
-        "rest": "_max"
-      },
-      "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.239",

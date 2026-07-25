@@ -404,14 +404,8 @@
         148,
         2
       ],
-      "name": "f32x4.relaxed_dot_bf16x8_add_f32x4",
-      "status": "standard",
-      "parts": {
-        "pre": "f32x4",
-        "mainop": "relaxed",
-        "rest": "_dot_bf16x8_add_f32x4"
-      },
-      "description": "<p>Relaxed BFloat16 dot product</p>\n<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -&gt; v128</code></p>\n<p>BFloat16 is a 16-bit floating-point format that represents the IEEE FP32 numbers truncated to the high 16 bits. This instruction computes a FP32 dot product of 2 BFloat16 with accumulation into another FP32.</p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFD.277",

@@ -20,6 +20,7 @@ import { loadData } from '../src/model/load.ts';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 const LEGACY = join(ROOT, 'data', '.legacy-help.json');
+const REVISIONS = join(ROOT, 'data', 'revisions.json');
 
 /**
  * Visible text as a word list.
@@ -119,11 +120,25 @@ function main(): void {
     );
   } else {
     const legacy: Record<string, string> = JSON.parse(readFileSync(LEGACY, 'utf8'));
+
+    // Slots whose content has deliberately changed since the old page — a
+    // correction, a rename, a re-encoding. Without this the legacy check would
+    // fight every intentional fix, and the usual way that ends is with the
+    // check being deleted, taking the protection for the other few hundred
+    // fragments with it.
+    const revisions: Record<string, string> = existsSync(REVISIONS)
+      ? JSON.parse(readFileSync(REVISIONS, 'utf8'))
+      : {};
     // Keyed by the legacy id, since that is what the snapshot uses.
     const byId = new Map(data.opcodes.map((o) => [legacyHexId(o.prefix, o.code), o]));
     let compared = 0;
 
+    let revised = 0;
     for (const [id, raw] of Object.entries(legacy)) {
+      if (revisions[id]) {
+        revised++;
+        continue;
+      }
       const op = byId.get(id);
       if (!op) {
         failures.push(`legacy help ${id} has no matching opcode`);
@@ -135,7 +150,10 @@ function main(): void {
         failures.push(`${id} (${op.name}): dropped ${lost.length} word(s): ${lost.join(' ')}`);
       }
     }
-    console.log(`compared ${compared} help fragments against the legacy page`);
+    console.log(
+      `compared ${compared} help fragments against the legacy page` +
+        (revised ? `; ${revised} deliberately revised since` : ''),
+    );
   }
 
   // --- report -------------------------------------------------------------

@@ -9,7 +9,8 @@
     "extract": "node --experimental-strip-types scripts/extract.ts",
     "verify": "node --experimental-strip-types scripts/verify.ts",
     "typecheck": "tsc --noEmit",
-    "serve": "node --experimental-strip-types scripts/serve.ts"
+    "serve": "node --experimental-strip-types scripts/serve.ts",
+    "audit": "node --experimental-strip-types scripts/audit.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

@@ -2,12 +2,12 @@
   "section": {
     "id": "gc",
     "anchor": "gc",
-    "title": "GC Proposal",
+    "title": "Garbage collection",
     "emoji": "⭕",
     "prefix": "FB",
     "start": 0,
     "count": 128,
-    "intro": "Proposal to add garbage collection (GC) support."
+    "intro": "Structs, arrays and typed references. Standardised as part of WebAssembly 3.0 and shipping in browsers since late 2023; these encodings replace the 2022 draft, which used <code>*_canon</code> names and a sparser numbering."
   },
   "opcodes": [
     {
@@ -19,8 +19,13 @@
         251,
         0
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "struct.new",
+      "status": "standard",
+      "parts": {
+        "pre": "struct",
+        "mainop": "new"
+      },
+      "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.1",
@@ -31,14 +36,14 @@
         251,
         1
       ],
-      "name": "struct.new_canon",
+      "name": "struct.new_default",
       "status": "standard",
       "parts": {
         "pre": "struct",
         "mainop": "new",
-        "rest": "_canon"
+        "rest": "_default"
       },
-      "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.2",
@@ -49,14 +54,13 @@
         251,
         2
       ],
-      "name": "struct.new_canon_default",
+      "name": "struct.get",
       "status": "standard",
       "parts": {
         "pre": "struct",
-        "mainop": "new",
-        "rest": "_canon_default"
+        "mainop": "get"
       },
-      "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>reads field <code>i</code> from a structure</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.3",
@@ -67,13 +71,13 @@
         251,
         3
       ],
-      "name": "struct.get",
+      "name": "struct.get_s",
       "status": "standard",
       "parts": {
         "pre": "struct",
-        "mainop": "get"
-      },
-      "description": "<p>reads field <code>i</code> from a structure</p>\n<p><em>Garbage Collection Proposal</em></p>"
+        "mainop": "get",
+        "sign": "s"
+      }
     },
     {
       "id": "0xFB.4",
@@ -84,12 +88,12 @@
         251,
         4
       ],
-      "name": "struct.get_s",
+      "name": "struct.get_u",
       "status": "standard",
       "parts": {
         "pre": "struct",
         "mainop": "get",
-        "sign": "s"
+        "sign": "u"
       }
     },
     {
@@ -101,13 +105,13 @@
         251,
         5
       ],
-      "name": "struct.get_u",
+      "name": "struct.set",
       "status": "standard",
       "parts": {
         "pre": "struct",
-        "mainop": "get",
-        "sign": "u"
-      }
+        "mainop": "set"
+      },
+      "description": "<p>writes field <code>i</code> of a structure</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.6",
@@ -118,13 +122,13 @@
         251,
         6
       ],
-      "name": "struct.set",
+      "name": "array.new",
       "status": "standard",
       "parts": {
-        "pre": "struct",
-        "mainop": "set"
+        "pre": "array",
+        "mainop": "new"
       },
-      "description": "<p>writes field <code>i</code> of a structure</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>allocates an array with canonical RTT (runtime type)</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.7",
@@ -135,8 +139,14 @@
         251,
         7
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.new_default",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "new",
+        "rest": "_default"
+      },
+      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.8",
@@ -147,8 +157,15 @@
         251,
         8
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.new_fixed",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "new",
+        "post": "fix",
+        "rest": "ed"
+      },
+      "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.9",
@@ -159,8 +176,14 @@
         251,
         9
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.new_data",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "new",
+        "rest": "_data"
+      },
+      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.10",
@@ -171,8 +194,14 @@
         251,
         10
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.new_elem",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "new",
+        "rest": "_elem"
+      },
+      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.11",
@@ -183,8 +212,13 @@
         251,
         11
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.get",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "get"
+      },
+      "description": "<p>reads an element from an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.12",
@@ -195,8 +229,13 @@
         251,
         12
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.get_s",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "get",
+        "sign": "s"
+      }
     },
     {
       "id": "0xFB.13",
@@ -207,8 +246,13 @@
         251,
         13
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.get_u",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "get",
+        "sign": "u"
+      }
     },
     {
       "id": "0xFB.14",
@@ -219,8 +263,13 @@
         251,
         14
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.set",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "set"
+      },
+      "description": "<p>writes an element to an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.15",
@@ -231,8 +280,13 @@
         251,
         15
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.len",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "len"
+      },
+      "description": "<p>inquires the length of an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.16",
@@ -243,8 +297,12 @@
         251,
         16
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "array.fill",
+      "status": "standard",
+      "parts": {
+        "pre": "array",
+        "mainop": "fill"
+      }
     },
     {
       "id": "0xFB.17",
@@ -255,14 +313,12 @@
         251,
         17
       ],
-      "name": "array.new_canon",
+      "name": "array.copy",
       "status": "standard",
       "parts": {
         "pre": "array",
-        "mainop": "new",
-        "rest": "_canon"
-      },
-      "description": "<p>allocates an array with canonical RTT (runtime type)</p>\n<p><em>Garbage Collection Proposal</em></p>"
+        "mainop": "copy"
+      }
     },
     {
       "id": "0xFB.18",
@@ -273,14 +329,13 @@
         251,
         18
       ],
-      "name": "array.new_canon_default",
+      "name": "array.init_data",
       "status": "standard",
       "parts": {
         "pre": "array",
-        "mainop": "new",
-        "rest": "_canon_default"
-      },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>\n<p><em>Garbage Collection Proposal</em></p>"
+        "mainop": "init",
+        "rest": "_data"
+      }
     },
     {
       "id": "0xFB.19",
@@ -291,13 +346,13 @@
         251,
         19
       ],
-      "name": "array.get",
+      "name": "array.init_elem",
       "status": "standard",
       "parts": {
         "pre": "array",
-        "mainop": "get"
-      },
-      "description": "<p>reads an element from an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
+        "mainop": "init",
+        "rest": "_elem"
+      }
     },
     {
       "id": "0xFB.20",
@@ -308,13 +363,13 @@
         251,
         20
       ],
-      "name": "array.get_s",
+      "name": "ref.test",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "get",
-        "sign": "s"
-      }
+        "pre": "ref",
+        "mainop": "test"
+      },
+      "description": "<p>checks whether a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.21",
@@ -325,13 +380,13 @@
         251,
         21
       ],
-      "name": "array.get_u",
+      "name": "ref.test null",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "get",
-        "sign": "u"
-      }
+        "pre": "ref",
+        "mainop": "test"
+      },
+      "description": "<p>checks whether a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.22",
@@ -342,13 +397,13 @@
         251,
         22
       ],
-      "name": "array.set",
+      "name": "ref.cast",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "set"
+        "pre": "ref",
+        "mainop": "cast"
       },
-      "description": "<p>writes an element to an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>tries to convert to a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.23",
@@ -359,13 +414,13 @@
         251,
         23
       ],
-      "name": "array.len",
+      "name": "ref.cast null",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "len"
+        "pre": "ref",
+        "mainop": "cast"
       },
-      "description": "<p>inquires the length of an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>tries to convert to a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.24",
@@ -376,8 +431,12 @@
         251,
         24
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "br_on_cast",
+      "status": "standard",
+      "parts": {
+        "mainop": "br_on_cast"
+      },
+      "description": "<p>branches if a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.25",
@@ -388,14 +447,12 @@
         251,
         25
       ],
-      "name": "array.new_canon_fixed",
+      "name": "br_on_cast_fail",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "new",
-        "rest": "_canon_fixed"
+        "mainop": "br_on_cast_fail"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>branches if a reference does not have a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.26",
@@ -406,8 +463,14 @@
         251,
         26
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "any.convert_extern",
+      "status": "standard",
+      "parts": {
+        "pre": "any",
+        "mainop": "convert",
+        "rest": "_extern"
+      },
+      "description": "<p>converts an external value into the internal representation</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.27",
@@ -418,14 +481,14 @@
         251,
         27
       ],
-      "name": "array.new_canon_data",
+      "name": "extern.convert_any",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "new",
-        "rest": "_canon_data"
+        "pre": "extern",
+        "mainop": "convert",
+        "rest": "_any"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>converts an internal value into the external representation</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.28",
@@ -436,14 +499,14 @@
         251,
         28
       ],
-      "name": "array.new_canon_elem",
+      "name": "ref.i31",
       "status": "standard",
       "parts": {
-        "pre": "array",
-        "mainop": "new",
-        "rest": "_canon_elem"
+        "pre": "ref",
+        "mainop": "i",
+        "opbits": "31"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.29",
@@ -454,8 +517,14 @@
         251,
         29
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i31.get_s",
+      "status": "standard",
+      "parts": {
+        "pre": "i31",
+        "mainop": "get",
+        "sign": "s"
+      },
+      "description": "<p>extracts the value, sign-extending</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.30",
@@ -466,8 +535,14 @@
         251,
         30
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i31.get_u",
+      "status": "standard",
+      "parts": {
+        "pre": "i31",
+        "mainop": "get",
+        "sign": "u"
+      },
+      "description": "<p>extracts the value, zero-extending</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
       "id": "0xFB.31",
@@ -490,13 +565,8 @@
         251,
         32
       ],
-      "name": "i31.new",
-      "status": "standard",
-      "parts": {
-        "pre": "i31",
-        "mainop": "new"
-      },
-      "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.33",
@@ -507,14 +577,8 @@
         251,
         33
       ],
-      "name": "i31.get_s",
-      "status": "standard",
-      "parts": {
-        "pre": "i31",
-        "mainop": "get",
-        "sign": "s"
-      },
-      "description": "<p>extracts the value, sign-extending</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.34",
@@ -525,14 +589,8 @@
         251,
         34
       ],
-      "name": "i31.get_u",
-      "status": "standard",
-      "parts": {
-        "pre": "i31",
-        "mainop": "get",
-        "sign": "u"
-      },
-      "description": "<p>extracts the value, zero-extending</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.35",
@@ -891,13 +949,8 @@
         251,
         64
       ],
-      "name": "ref.test",
-      "status": "standard",
-      "parts": {
-        "pre": "ref",
-        "mainop": "test"
-      },
-      "description": "<p>checks whether a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.65",
@@ -908,13 +961,8 @@
         251,
         65
       ],
-      "name": "ref.cast",
-      "status": "standard",
-      "parts": {
-        "pre": "ref",
-        "mainop": "cast"
-      },
-      "description": "<p>tries to convert to a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.66",
@@ -925,12 +973,8 @@
         251,
         66
       ],
-      "name": "br_on_cast",
-      "status": "standard",
-      "parts": {
-        "mainop": "br_on_cast"
-      },
-      "description": "<p>branches if a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.67",
@@ -941,12 +985,8 @@
         251,
         67
       ],
-      "name": "br_on_cast_fail",
-      "status": "standard",
-      "parts": {
-        "mainop": "br_on_cast_fail"
-      },
-      "description": "<p>branches if a reference does not have a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.68",
@@ -1005,13 +1045,8 @@
         251,
         72
       ],
-      "name": "ref.test",
-      "status": "standard",
-      "parts": {
-        "pre": "ref",
-        "mainop": "test"
-      },
-      "description": "<p>checks whether a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.73",
@@ -1022,13 +1057,8 @@
         251,
         73
       ],
-      "name": "ref.cast",
-      "status": "standard",
-      "parts": {
-        "pre": "ref",
-        "mainop": "cast"
-      },
-      "description": "<p>tries to convert to a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.74",
@@ -1039,12 +1069,8 @@
         251,
         74
       ],
-      "name": "br_on_cast",
-      "status": "standard",
-      "parts": {
-        "mainop": "br_on_cast"
-      },
-      "description": "<p>branches if a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.75",
@@ -1055,12 +1081,8 @@
         251,
         75
       ],
-      "name": "br_on_cast_fail",
-      "status": "standard",
-      "parts": {
-        "mainop": "br_on_cast_fail"
-      },
-      "description": "<p>branches if a reference does not have a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.76",
@@ -1503,13 +1525,8 @@
         251,
         112
       ],
-      "name": "extern.internalize",
-      "status": "standard",
-      "parts": {
-        "pre": "extern",
-        "mainop": "internalize"
-      },
-      "description": "<p>converts an external value into the internal representation</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.113",
@@ -1520,13 +1537,8 @@
         251,
         113
       ],
-      "name": "extern.externalize",
-      "status": "standard",
-      "parts": {
-        "pre": "extern",
-        "mainop": "externalize"
-      },
-      "description": "<p>converts an internal value into the external representation</p>\n<p><em>Garbage Collection Proposal</em></p>"
+      "name": null,
+      "status": "reserved"
     },
     {
       "id": "0xFB.114",
