@@ -293,6 +293,18 @@ h1 { font-size: 1.5rem; margin: 0; }
 	top: 0;
 	z-index: 45;
 }
+
+/*
+ * While the "Show" menu is open, and only then.
+ *
+ * The menu is inside the toolbar, so it can never rise above anything the
+ * toolbar sits below — and unpinned, the toolbar sits below the detail panel on
+ * purpose, since the panel is then a sheet laid over the page and was having
+ * its top cut off. Both are right, and they only disagree for as long as the
+ * menu is actually open, so that is exactly how long the toolbar comes forward
+ * for. Last of the three, so it wins whether or not the toolbar is pinned.
+ */
+.toolbar:has(.control-filter[open]) { z-index: 50; }
 #pin-toolbar[aria-pressed='true'] { color: var(--accent); border-color: var(--accent); }
 #pin-toolbar[aria-pressed='true'] svg { fill: currentColor; }
 
