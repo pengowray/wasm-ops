@@ -488,11 +488,14 @@ export function renderDetail(op: Opcode): string {
     rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
   }
 
-  rows.push(renderStatus(op));
-
+  // Before the status: it finishes the encoding the panel opened with, so it
+  // belongs with the reading of the bytes rather than after an aside about
+  // where the instruction stands.
   if (op.followedBy) {
     rows.push(`<h4>Followed by</h4><div class="detail-followed">${op.followedBy}</div>`);
   }
+
+  rows.push(renderStatus(op));
 
   if (op.stack) {
     const cls = op.stack.large ? 'op-type large' : 'op-type';
