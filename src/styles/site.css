@@ -262,6 +262,117 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	:root:not([data-theme='light']) .icon-sun { display: none; }
 }
 
+/* ---------------------------------------------------------------------- map */
+
+/*
+ * The map sits before the chart in the document, so with no layout applied it
+ * lands above it — which is where it belongs on a narrow window. Given a wide
+ * enough window it moves into the margin instead and stays there while you
+ * scroll. Nothing scripted decides this; the container query below does.
+ */
+/* Overrides the flex that `.js-only` applies to reveal it. */
+.js .map-dock { display: block; }
+.map-dock { margin: 0 0 1rem; }
+
+.map-fold > summary {
+	display: inline-flex;
+	align-items: center;
+	gap: .3rem;
+	padding: .15rem .5rem;
+	font-size: .72rem;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: var(--fg-faint);
+	border: 1px solid var(--rule-soft);
+	border-radius: var(--radius);
+	cursor: pointer;
+	list-style: none;
+}
+.map-fold > summary::-webkit-details-marker { display: none; }
+.map-fold > summary::after {
+	content: '';
+	width: .35rem;
+	height: .35rem;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+}
+.map-fold[open] > summary::after { transform: translateY(1px) rotate(225deg); }
+.map-fold > summary:hover { color: var(--fg); }
+
+/* Above the chart: the sections run across, to spend width rather than height. */
+.map {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .6rem 1rem;
+	padding: .6rem 0;
+}
+
+.map-section { display: grid; gap: .2rem; }
+
+.map-label {
+	font-size: .62rem;
+	color: var(--fg-faint);
+	white-space: nowrap;
+}
+
+.map-grid {
+	display: grid;
+	grid-template-columns: repeat(16, 1fr);
+	gap: 1px;
+	width: max-content;
+}
+
+/* Small enough above the chart that all seven sections fit on one line, so the
+   map costs one band of height rather than two. The rail has width to spare and
+   sizes them up again. */
+.map-cell {
+	width: 5px;
+	height: 5px;
+	background: var(--fg-faint);
+	border-radius: 1px;
+	cursor: pointer;
+	transition: background-color 120ms linear;
+}
+.map-cell[data-status='reserved'] { background: var(--rule-soft); cursor: default; }
+.map-cell[data-status='proposal'] { background: var(--rule); }
+
+/* Which instructions are on screen right now — the "you are here". */
+.map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
+
+.map-cell.hl-op { background: var(--hl-op); }
+.map-cell.hl-self { background: var(--hl-self); }
+.map-cell.pinned { outline: 1px solid var(--accent); }
+
+/*
+ * Wide enough for the rail plus a chart still worth looking at. A container
+ * query would read more naturally here, but the element that has to change is
+ * the container itself, which `@container` cannot style — and putting the
+ * container further up would apply `contain: layout`, which makes that element
+ * a containing block for the fixed-position detail panel.
+ */
+@media (min-width: 1220px) {
+	.layout {
+		display: grid;
+		grid-template-columns: max-content minmax(0, 1fr);
+		gap: 1.5rem;
+		align-items: start;
+	}
+
+	.map-dock {
+		position: sticky;
+		top: 5rem;
+		margin: 0;
+		max-height: calc(100dvh - 6rem);
+		overflow-y: auto;
+	}
+
+	/* In the margin there is height to spend and no width, so the sections
+	   stack instead of running across. */
+	.map { flex-direction: column; flex-wrap: nowrap; gap: .5rem; padding: 0; }
+	.map-cell { width: 7px; height: 7px; }
+}
+
 /* -------------------------------------------------------------------- chart */
 
 .chart {

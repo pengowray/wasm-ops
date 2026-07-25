@@ -118,9 +118,24 @@ export function renderPage(
 	</div>
 </form>
 
+<div class="layout">
+
+<!-- Filled in by the client: the map is a miniature of the byte grids, entirely
+     derivable from the data, so it is not worth repeating in the markup. Where
+     it sits is decided by CSS — beside the chart when the window is wide enough,
+     otherwise folded up above it. -->
+<aside class="map-dock js-only" id="map-dock">
+	<details class="map-fold" id="map-fold" open>
+		<summary>Map</summary>
+		<div class="map" id="map"></div>
+	</details>
+</aside>
+
 <main id="chart" class="chart" data-layout="${options.layout}">
 ${chart}
 </main>
+
+</div>
 
 <aside id="panel" class="panel" hidden aria-live="polite">
 	<div class="panel-head">

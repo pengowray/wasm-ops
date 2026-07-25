@@ -16,7 +16,8 @@ content/*.html   the page's prose (intro, further reading)
 src/model/       the typed opcode model, name decomposition, categories, and
                  the view logic that turns options into an ordered layout
 src/render/      HTML generation, used by both the build and the client
-src/client/      browser behaviour: rearranging, highlighting, detail panel
+src/client/      browser behaviour: rearranging, highlighting, detail panel,
+                 navigation map
 src/build/       the static site generator
 scripts/         extraction from the old page, verification, dev server
 ```
@@ -38,6 +39,11 @@ npm run typecheck
 
 To change what an instruction says, edit its entry in `data/<section>.json` and
 rebuild. Nothing needs to be edited in two places.
+
+Anything that follows from the data rather than being written down — the byte
+encoding breakdown, the navigation map — is generated in the browser rather than
+baked into the HTML, so the page does not carry hundreds of copies of the same
+derived markup.
 
 `npm run extract` regenerates `data/` from the legacy `docs/index.html`. That was
 the one-time conversion; now that `data/` is edited directly, running it again

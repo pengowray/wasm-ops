@@ -184,22 +184,24 @@ export function renderItem(item: ViewItem): string {
   }
 }
 
+/** The opcode's name as a panel heading, with its immediate operands. */
+export function renderHeading(op: Opcode): string {
+  const name = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
+  return (
+    `<h3 class="detail-name">${name}` +
+    (op.immediateArgs ? ` <span class="immediate-args">${op.immediateArgs}</span>` : '') +
+    `</h3>`
+  );
+}
+
 /**
- * The full description for one opcode. Rendered once into a hidden block; the
- * detail panel clones from there rather than refetching, and readers without
- * JavaScript reach it by following the cell's link.
+ * The written description of one opcode — the part that cannot be derived and
+ * so has to be shipped. The byte sequence and encoding breakdown are not here:
+ * they follow from the prefix and code, and baking 630 copies of the same table
+ * into the page would be repeating what the client can work out.
  */
 export function renderDetail(op: Opcode): string {
-  const rows: string[] = [];
-
-  rows.push(`<p class="detail-bytes"><code>${byteSequence(op)}</code></p>`);
-
-  const heading = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
-  rows.push(
-    `<h3 class="detail-name">${heading}` +
-      (op.immediateArgs ? ` <span class="immediate-args">${op.immediateArgs}</span>` : '') +
-      `</h3>`,
-  );
+  const rows: string[] = [renderHeading(op)];
 
   if (op.status === 'proposal') {
     rows.push(`<p class="detail-status"><em>Proposal</em></p>`);
@@ -218,8 +220,6 @@ export function renderDetail(op: Opcode): string {
         (op.stack.note ? `<div class="detail-stack-note">${op.stack.note}</div>` : ''),
     );
   }
-
-  rows.push(renderEncoding(op));
 
   return (
     `<article class="detail" id="detail-${op.id}" data-key="${op.id}">` +

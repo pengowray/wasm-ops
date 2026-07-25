@@ -13,6 +13,7 @@ import { buildView, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { renderItem } from '../render/items.ts';
 import { flip } from './flip.ts';
 import { Highlighter } from './highlight.ts';
+import { NavMap } from './map.ts';
 import { Panel } from './panel.ts';
 import { initTheme } from './theme.ts';
 
@@ -44,8 +45,13 @@ function start(
     if (key) pool.set(key, el);
   }
 
-  const highlighter = new Highlighter(chart);
-  const panel = new Panel(panelEl, detailsEl);
+  const byId = new Map(data.opcodes.map((op) => [op.id, op]));
+
+  const mapEl = document.getElementById('map');
+  const navMap = mapEl ? new NavMap(mapEl, chart, data) : null;
+
+  const highlighter = new Highlighter(mapEl ? [chart, mapEl] : [chart]);
+  const panel = new Panel(panelEl, detailsEl, byId);
   panel.onClose(() => {
     highlighter.pin(null);
     history.replaceState(null, '', location.pathname + location.search);
@@ -93,7 +99,10 @@ function start(
       toolbar.dataset['layout'] = options.layout;
     });
 
-    highlighter.repin();
+    // Both of these hold references into the chart's DOM, which has just been
+    // rebuilt from the pool.
+    highlighter.restore();
+    navMap?.observe();
   }
 
   // --- controls -----------------------------------------------------------
