@@ -11,7 +11,7 @@
   },
   "opcodes": [
     {
-      "id": "0xFB00",
+      "id": "0xFB.0",
       "section": "gc",
       "prefix": "FB",
       "code": 0,
@@ -23,7 +23,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB01",
+      "id": "0xFB.1",
       "section": "gc",
       "prefix": "FB",
       "code": 1,
@@ -41,7 +41,7 @@
       "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB02",
+      "id": "0xFB.2",
       "section": "gc",
       "prefix": "FB",
       "code": 2,
@@ -59,7 +59,7 @@
       "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB03",
+      "id": "0xFB.3",
       "section": "gc",
       "prefix": "FB",
       "code": 3,
@@ -76,7 +76,7 @@
       "description": "<p>reads field <code>i</code> from a structure</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB04",
+      "id": "0xFB.4",
       "section": "gc",
       "prefix": "FB",
       "code": 4,
@@ -93,7 +93,7 @@
       }
     },
     {
-      "id": "0xFB05",
+      "id": "0xFB.5",
       "section": "gc",
       "prefix": "FB",
       "code": 5,
@@ -110,7 +110,7 @@
       }
     },
     {
-      "id": "0xFB06",
+      "id": "0xFB.6",
       "section": "gc",
       "prefix": "FB",
       "code": 6,
@@ -127,7 +127,7 @@
       "description": "<p>writes field <code>i</code> of a structure</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB07",
+      "id": "0xFB.7",
       "section": "gc",
       "prefix": "FB",
       "code": 7,
@@ -139,7 +139,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB08",
+      "id": "0xFB.8",
       "section": "gc",
       "prefix": "FB",
       "code": 8,
@@ -151,7 +151,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB09",
+      "id": "0xFB.9",
       "section": "gc",
       "prefix": "FB",
       "code": 9,
@@ -163,7 +163,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB0A",
+      "id": "0xFB.10",
       "section": "gc",
       "prefix": "FB",
       "code": 10,
@@ -175,7 +175,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB0B",
+      "id": "0xFB.11",
       "section": "gc",
       "prefix": "FB",
       "code": 11,
@@ -187,7 +187,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB0C",
+      "id": "0xFB.12",
       "section": "gc",
       "prefix": "FB",
       "code": 12,
@@ -199,7 +199,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB0D",
+      "id": "0xFB.13",
       "section": "gc",
       "prefix": "FB",
       "code": 13,
@@ -211,7 +211,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB0E",
+      "id": "0xFB.14",
       "section": "gc",
       "prefix": "FB",
       "code": 14,
@@ -223,7 +223,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB0F",
+      "id": "0xFB.15",
       "section": "gc",
       "prefix": "FB",
       "code": 15,
@@ -235,7 +235,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB10",
+      "id": "0xFB.16",
       "section": "gc",
       "prefix": "FB",
       "code": 16,
@@ -247,7 +247,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB11",
+      "id": "0xFB.17",
       "section": "gc",
       "prefix": "FB",
       "code": 17,
@@ -265,7 +265,7 @@
       "description": "<p>allocates an array with canonical RTT (runtime type)</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB12",
+      "id": "0xFB.18",
       "section": "gc",
       "prefix": "FB",
       "code": 18,
@@ -283,7 +283,7 @@
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB13",
+      "id": "0xFB.19",
       "section": "gc",
       "prefix": "FB",
       "code": 19,
@@ -300,7 +300,7 @@
       "description": "<p>reads an element from an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB14",
+      "id": "0xFB.20",
       "section": "gc",
       "prefix": "FB",
       "code": 20,
@@ -317,7 +317,7 @@
       }
     },
     {
-      "id": "0xFB15",
+      "id": "0xFB.21",
       "section": "gc",
       "prefix": "FB",
       "code": 21,
@@ -334,7 +334,7 @@
       }
     },
     {
-      "id": "0xFB16",
+      "id": "0xFB.22",
       "section": "gc",
       "prefix": "FB",
       "code": 22,
@@ -351,7 +351,7 @@
       "description": "<p>writes an element to an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB17",
+      "id": "0xFB.23",
       "section": "gc",
       "prefix": "FB",
       "code": 23,
@@ -368,7 +368,7 @@
       "description": "<p>inquires the length of an array</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB18",
+      "id": "0xFB.24",
       "section": "gc",
       "prefix": "FB",
       "code": 24,
@@ -380,7 +380,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB19",
+      "id": "0xFB.25",
       "section": "gc",
       "prefix": "FB",
       "code": 25,
@@ -398,7 +398,7 @@
       "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB1A",
+      "id": "0xFB.26",
       "section": "gc",
       "prefix": "FB",
       "code": 26,
@@ -410,7 +410,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB1B",
+      "id": "0xFB.27",
       "section": "gc",
       "prefix": "FB",
       "code": 27,
@@ -428,7 +428,7 @@
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB1C",
+      "id": "0xFB.28",
       "section": "gc",
       "prefix": "FB",
       "code": 28,
@@ -446,7 +446,7 @@
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB1D",
+      "id": "0xFB.29",
       "section": "gc",
       "prefix": "FB",
       "code": 29,
@@ -458,7 +458,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB1E",
+      "id": "0xFB.30",
       "section": "gc",
       "prefix": "FB",
       "code": 30,
@@ -470,7 +470,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB1F",
+      "id": "0xFB.31",
       "section": "gc",
       "prefix": "FB",
       "code": 31,
@@ -482,7 +482,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB20",
+      "id": "0xFB.32",
       "section": "gc",
       "prefix": "FB",
       "code": 32,
@@ -499,7 +499,7 @@
       "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB21",
+      "id": "0xFB.33",
       "section": "gc",
       "prefix": "FB",
       "code": 33,
@@ -517,7 +517,7 @@
       "description": "<p>extracts the value, sign-extending</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB22",
+      "id": "0xFB.34",
       "section": "gc",
       "prefix": "FB",
       "code": 34,
@@ -535,7 +535,7 @@
       "description": "<p>extracts the value, zero-extending</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB23",
+      "id": "0xFB.35",
       "section": "gc",
       "prefix": "FB",
       "code": 35,
@@ -547,7 +547,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB24",
+      "id": "0xFB.36",
       "section": "gc",
       "prefix": "FB",
       "code": 36,
@@ -559,7 +559,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB25",
+      "id": "0xFB.37",
       "section": "gc",
       "prefix": "FB",
       "code": 37,
@@ -571,7 +571,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB26",
+      "id": "0xFB.38",
       "section": "gc",
       "prefix": "FB",
       "code": 38,
@@ -583,7 +583,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB27",
+      "id": "0xFB.39",
       "section": "gc",
       "prefix": "FB",
       "code": 39,
@@ -595,7 +595,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB28",
+      "id": "0xFB.40",
       "section": "gc",
       "prefix": "FB",
       "code": 40,
@@ -607,7 +607,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB29",
+      "id": "0xFB.41",
       "section": "gc",
       "prefix": "FB",
       "code": 41,
@@ -619,7 +619,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB2A",
+      "id": "0xFB.42",
       "section": "gc",
       "prefix": "FB",
       "code": 42,
@@ -631,7 +631,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB2B",
+      "id": "0xFB.43",
       "section": "gc",
       "prefix": "FB",
       "code": 43,
@@ -643,7 +643,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB2C",
+      "id": "0xFB.44",
       "section": "gc",
       "prefix": "FB",
       "code": 44,
@@ -655,7 +655,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB2D",
+      "id": "0xFB.45",
       "section": "gc",
       "prefix": "FB",
       "code": 45,
@@ -667,7 +667,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB2E",
+      "id": "0xFB.46",
       "section": "gc",
       "prefix": "FB",
       "code": 46,
@@ -679,7 +679,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB2F",
+      "id": "0xFB.47",
       "section": "gc",
       "prefix": "FB",
       "code": 47,
@@ -691,7 +691,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB30",
+      "id": "0xFB.48",
       "section": "gc",
       "prefix": "FB",
       "code": 48,
@@ -703,7 +703,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB31",
+      "id": "0xFB.49",
       "section": "gc",
       "prefix": "FB",
       "code": 49,
@@ -715,7 +715,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB32",
+      "id": "0xFB.50",
       "section": "gc",
       "prefix": "FB",
       "code": 50,
@@ -727,7 +727,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB33",
+      "id": "0xFB.51",
       "section": "gc",
       "prefix": "FB",
       "code": 51,
@@ -739,7 +739,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB34",
+      "id": "0xFB.52",
       "section": "gc",
       "prefix": "FB",
       "code": 52,
@@ -751,7 +751,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB35",
+      "id": "0xFB.53",
       "section": "gc",
       "prefix": "FB",
       "code": 53,
@@ -763,7 +763,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB36",
+      "id": "0xFB.54",
       "section": "gc",
       "prefix": "FB",
       "code": 54,
@@ -775,7 +775,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB37",
+      "id": "0xFB.55",
       "section": "gc",
       "prefix": "FB",
       "code": 55,
@@ -787,7 +787,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB38",
+      "id": "0xFB.56",
       "section": "gc",
       "prefix": "FB",
       "code": 56,
@@ -799,7 +799,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB39",
+      "id": "0xFB.57",
       "section": "gc",
       "prefix": "FB",
       "code": 57,
@@ -811,7 +811,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB3A",
+      "id": "0xFB.58",
       "section": "gc",
       "prefix": "FB",
       "code": 58,
@@ -823,7 +823,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB3B",
+      "id": "0xFB.59",
       "section": "gc",
       "prefix": "FB",
       "code": 59,
@@ -835,7 +835,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB3C",
+      "id": "0xFB.60",
       "section": "gc",
       "prefix": "FB",
       "code": 60,
@@ -847,7 +847,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB3D",
+      "id": "0xFB.61",
       "section": "gc",
       "prefix": "FB",
       "code": 61,
@@ -859,7 +859,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB3E",
+      "id": "0xFB.62",
       "section": "gc",
       "prefix": "FB",
       "code": 62,
@@ -871,7 +871,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB3F",
+      "id": "0xFB.63",
       "section": "gc",
       "prefix": "FB",
       "code": 63,
@@ -883,7 +883,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB40",
+      "id": "0xFB.64",
       "section": "gc",
       "prefix": "FB",
       "code": 64,
@@ -900,7 +900,7 @@
       "description": "<p>checks whether a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB41",
+      "id": "0xFB.65",
       "section": "gc",
       "prefix": "FB",
       "code": 65,
@@ -917,7 +917,7 @@
       "description": "<p>tries to convert to a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB42",
+      "id": "0xFB.66",
       "section": "gc",
       "prefix": "FB",
       "code": 66,
@@ -933,7 +933,7 @@
       "description": "<p>branches if a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB43",
+      "id": "0xFB.67",
       "section": "gc",
       "prefix": "FB",
       "code": 67,
@@ -949,7 +949,7 @@
       "description": "<p>branches if a reference does not have a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB44",
+      "id": "0xFB.68",
       "section": "gc",
       "prefix": "FB",
       "code": 68,
@@ -961,7 +961,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB45",
+      "id": "0xFB.69",
       "section": "gc",
       "prefix": "FB",
       "code": 69,
@@ -973,7 +973,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB46",
+      "id": "0xFB.70",
       "section": "gc",
       "prefix": "FB",
       "code": 70,
@@ -985,7 +985,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB47",
+      "id": "0xFB.71",
       "section": "gc",
       "prefix": "FB",
       "code": 71,
@@ -997,7 +997,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB48",
+      "id": "0xFB.72",
       "section": "gc",
       "prefix": "FB",
       "code": 72,
@@ -1014,7 +1014,7 @@
       "description": "<p>checks whether a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB49",
+      "id": "0xFB.73",
       "section": "gc",
       "prefix": "FB",
       "code": 73,
@@ -1031,7 +1031,7 @@
       "description": "<p>tries to convert to a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB4A",
+      "id": "0xFB.74",
       "section": "gc",
       "prefix": "FB",
       "code": 74,
@@ -1047,7 +1047,7 @@
       "description": "<p>branches if a reference has a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB4B",
+      "id": "0xFB.75",
       "section": "gc",
       "prefix": "FB",
       "code": 75,
@@ -1063,7 +1063,7 @@
       "description": "<p>branches if a reference does not have a given heap type</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB4C",
+      "id": "0xFB.76",
       "section": "gc",
       "prefix": "FB",
       "code": 76,
@@ -1075,7 +1075,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB4D",
+      "id": "0xFB.77",
       "section": "gc",
       "prefix": "FB",
       "code": 77,
@@ -1087,7 +1087,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB4E",
+      "id": "0xFB.78",
       "section": "gc",
       "prefix": "FB",
       "code": 78,
@@ -1099,7 +1099,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB4F",
+      "id": "0xFB.79",
       "section": "gc",
       "prefix": "FB",
       "code": 79,
@@ -1111,7 +1111,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB50",
+      "id": "0xFB.80",
       "section": "gc",
       "prefix": "FB",
       "code": 80,
@@ -1123,7 +1123,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB51",
+      "id": "0xFB.81",
       "section": "gc",
       "prefix": "FB",
       "code": 81,
@@ -1135,7 +1135,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB52",
+      "id": "0xFB.82",
       "section": "gc",
       "prefix": "FB",
       "code": 82,
@@ -1147,7 +1147,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB53",
+      "id": "0xFB.83",
       "section": "gc",
       "prefix": "FB",
       "code": 83,
@@ -1159,7 +1159,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB54",
+      "id": "0xFB.84",
       "section": "gc",
       "prefix": "FB",
       "code": 84,
@@ -1171,7 +1171,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB55",
+      "id": "0xFB.85",
       "section": "gc",
       "prefix": "FB",
       "code": 85,
@@ -1183,7 +1183,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB56",
+      "id": "0xFB.86",
       "section": "gc",
       "prefix": "FB",
       "code": 86,
@@ -1195,7 +1195,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB57",
+      "id": "0xFB.87",
       "section": "gc",
       "prefix": "FB",
       "code": 87,
@@ -1207,7 +1207,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB58",
+      "id": "0xFB.88",
       "section": "gc",
       "prefix": "FB",
       "code": 88,
@@ -1219,7 +1219,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB59",
+      "id": "0xFB.89",
       "section": "gc",
       "prefix": "FB",
       "code": 89,
@@ -1231,7 +1231,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB5A",
+      "id": "0xFB.90",
       "section": "gc",
       "prefix": "FB",
       "code": 90,
@@ -1243,7 +1243,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB5B",
+      "id": "0xFB.91",
       "section": "gc",
       "prefix": "FB",
       "code": 91,
@@ -1255,7 +1255,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB5C",
+      "id": "0xFB.92",
       "section": "gc",
       "prefix": "FB",
       "code": 92,
@@ -1267,7 +1267,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB5D",
+      "id": "0xFB.93",
       "section": "gc",
       "prefix": "FB",
       "code": 93,
@@ -1279,7 +1279,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB5E",
+      "id": "0xFB.94",
       "section": "gc",
       "prefix": "FB",
       "code": 94,
@@ -1291,7 +1291,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB5F",
+      "id": "0xFB.95",
       "section": "gc",
       "prefix": "FB",
       "code": 95,
@@ -1303,7 +1303,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB60",
+      "id": "0xFB.96",
       "section": "gc",
       "prefix": "FB",
       "code": 96,
@@ -1315,7 +1315,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB61",
+      "id": "0xFB.97",
       "section": "gc",
       "prefix": "FB",
       "code": 97,
@@ -1327,7 +1327,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB62",
+      "id": "0xFB.98",
       "section": "gc",
       "prefix": "FB",
       "code": 98,
@@ -1339,7 +1339,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB63",
+      "id": "0xFB.99",
       "section": "gc",
       "prefix": "FB",
       "code": 99,
@@ -1351,7 +1351,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB64",
+      "id": "0xFB.100",
       "section": "gc",
       "prefix": "FB",
       "code": 100,
@@ -1363,7 +1363,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB65",
+      "id": "0xFB.101",
       "section": "gc",
       "prefix": "FB",
       "code": 101,
@@ -1375,7 +1375,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB66",
+      "id": "0xFB.102",
       "section": "gc",
       "prefix": "FB",
       "code": 102,
@@ -1387,7 +1387,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB67",
+      "id": "0xFB.103",
       "section": "gc",
       "prefix": "FB",
       "code": 103,
@@ -1399,7 +1399,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB68",
+      "id": "0xFB.104",
       "section": "gc",
       "prefix": "FB",
       "code": 104,
@@ -1411,7 +1411,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB69",
+      "id": "0xFB.105",
       "section": "gc",
       "prefix": "FB",
       "code": 105,
@@ -1423,7 +1423,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB6A",
+      "id": "0xFB.106",
       "section": "gc",
       "prefix": "FB",
       "code": 106,
@@ -1435,7 +1435,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB6B",
+      "id": "0xFB.107",
       "section": "gc",
       "prefix": "FB",
       "code": 107,
@@ -1447,7 +1447,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB6C",
+      "id": "0xFB.108",
       "section": "gc",
       "prefix": "FB",
       "code": 108,
@@ -1459,7 +1459,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB6D",
+      "id": "0xFB.109",
       "section": "gc",
       "prefix": "FB",
       "code": 109,
@@ -1471,7 +1471,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB6E",
+      "id": "0xFB.110",
       "section": "gc",
       "prefix": "FB",
       "code": 110,
@@ -1483,7 +1483,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB6F",
+      "id": "0xFB.111",
       "section": "gc",
       "prefix": "FB",
       "code": 111,
@@ -1495,7 +1495,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB70",
+      "id": "0xFB.112",
       "section": "gc",
       "prefix": "FB",
       "code": 112,
@@ -1512,7 +1512,7 @@
       "description": "<p>converts an external value into the internal representation</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB71",
+      "id": "0xFB.113",
       "section": "gc",
       "prefix": "FB",
       "code": 113,
@@ -1529,7 +1529,7 @@
       "description": "<p>converts an internal value into the external representation</p>\n<p><em>Garbage Collection Proposal</em></p>"
     },
     {
-      "id": "0xFB72",
+      "id": "0xFB.114",
       "section": "gc",
       "prefix": "FB",
       "code": 114,
@@ -1541,7 +1541,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB73",
+      "id": "0xFB.115",
       "section": "gc",
       "prefix": "FB",
       "code": 115,
@@ -1553,7 +1553,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB74",
+      "id": "0xFB.116",
       "section": "gc",
       "prefix": "FB",
       "code": 116,
@@ -1565,7 +1565,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB75",
+      "id": "0xFB.117",
       "section": "gc",
       "prefix": "FB",
       "code": 117,
@@ -1577,7 +1577,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB76",
+      "id": "0xFB.118",
       "section": "gc",
       "prefix": "FB",
       "code": 118,
@@ -1589,7 +1589,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB77",
+      "id": "0xFB.119",
       "section": "gc",
       "prefix": "FB",
       "code": 119,
@@ -1601,7 +1601,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB78",
+      "id": "0xFB.120",
       "section": "gc",
       "prefix": "FB",
       "code": 120,
@@ -1613,7 +1613,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB79",
+      "id": "0xFB.121",
       "section": "gc",
       "prefix": "FB",
       "code": 121,
@@ -1625,7 +1625,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB7A",
+      "id": "0xFB.122",
       "section": "gc",
       "prefix": "FB",
       "code": 122,
@@ -1637,7 +1637,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB7B",
+      "id": "0xFB.123",
       "section": "gc",
       "prefix": "FB",
       "code": 123,
@@ -1649,7 +1649,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB7C",
+      "id": "0xFB.124",
       "section": "gc",
       "prefix": "FB",
       "code": 124,
@@ -1661,7 +1661,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB7D",
+      "id": "0xFB.125",
       "section": "gc",
       "prefix": "FB",
       "code": 125,
@@ -1673,7 +1673,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB7E",
+      "id": "0xFB.126",
       "section": "gc",
       "prefix": "FB",
       "code": 126,
@@ -1685,7 +1685,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFB7F",
+      "id": "0xFB.127",
       "section": "gc",
       "prefix": "FB",
       "code": 127,

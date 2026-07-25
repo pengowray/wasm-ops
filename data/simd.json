@@ -11,7 +11,7 @@
   },
   "opcodes": [
     {
-      "id": "0xFD00",
+      "id": "0xFD.0",
       "section": "simd",
       "prefix": "FD",
       "code": 0,
@@ -28,7 +28,7 @@
       "description": "<p>Loads a v128 vector from the given heap address.</p>"
     },
     {
-      "id": "0xFD01",
+      "id": "0xFD.1",
       "section": "simd",
       "prefix": "FD",
       "code": 1,
@@ -46,7 +46,7 @@
       }
     },
     {
-      "id": "0xFD02",
+      "id": "0xFD.2",
       "section": "simd",
       "prefix": "FD",
       "code": 2,
@@ -64,7 +64,7 @@
       }
     },
     {
-      "id": "0xFD03",
+      "id": "0xFD.3",
       "section": "simd",
       "prefix": "FD",
       "code": 3,
@@ -82,7 +82,7 @@
       }
     },
     {
-      "id": "0xFD04",
+      "id": "0xFD.4",
       "section": "simd",
       "prefix": "FD",
       "code": 4,
@@ -100,7 +100,7 @@
       }
     },
     {
-      "id": "0xFD05",
+      "id": "0xFD.5",
       "section": "simd",
       "prefix": "FD",
       "code": 5,
@@ -118,7 +118,7 @@
       }
     },
     {
-      "id": "0xFD06",
+      "id": "0xFD.6",
       "section": "simd",
       "prefix": "FD",
       "code": 6,
@@ -136,7 +136,7 @@
       }
     },
     {
-      "id": "0xFD07",
+      "id": "0xFD.7",
       "section": "simd",
       "prefix": "FD",
       "code": 7,
@@ -156,7 +156,7 @@
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
     },
     {
-      "id": "0xFD08",
+      "id": "0xFD.8",
       "section": "simd",
       "prefix": "FD",
       "code": 8,
@@ -176,7 +176,7 @@
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
     },
     {
-      "id": "0xFD09",
+      "id": "0xFD.9",
       "section": "simd",
       "prefix": "FD",
       "code": 9,
@@ -196,7 +196,7 @@
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
     },
     {
-      "id": "0xFD0A",
+      "id": "0xFD.10",
       "section": "simd",
       "prefix": "FD",
       "code": 10,
@@ -216,7 +216,7 @@
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>"
     },
     {
-      "id": "0xFD0B",
+      "id": "0xFD.11",
       "section": "simd",
       "prefix": "FD",
       "code": 11,
@@ -233,7 +233,7 @@
       "description": "<p>Stores a v128 vector to the given heap address.</p>"
     },
     {
-      "id": "0xFD0C",
+      "id": "0xFD.12",
       "section": "simd",
       "prefix": "FD",
       "code": 12,
@@ -249,7 +249,7 @@
       }
     },
     {
-      "id": "0xFD0D",
+      "id": "0xFD.13",
       "section": "simd",
       "prefix": "FD",
       "code": 13,
@@ -266,7 +266,7 @@
       "description": "<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>"
     },
     {
-      "id": "0xFD0E",
+      "id": "0xFD.14",
       "section": "simd",
       "prefix": "FD",
       "code": 14,
@@ -283,7 +283,7 @@
       "description": "<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>\n<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>"
     },
     {
-      "id": "0xFD0F",
+      "id": "0xFD.15",
       "section": "simd",
       "prefix": "FD",
       "code": 15,
@@ -300,7 +300,7 @@
       "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 16 lanes.</p>"
     },
     {
-      "id": "0xFD10",
+      "id": "0xFD.16",
       "section": "simd",
       "prefix": "FD",
       "code": 16,
@@ -317,7 +317,7 @@
       "description": "<p>Creates a vector with identical lanes.</p>"
     },
     {
-      "id": "0xFD11",
+      "id": "0xFD.17",
       "section": "simd",
       "prefix": "FD",
       "code": 17,
@@ -334,7 +334,7 @@
       "description": "<p>Creates a vector with identical lanes.</p>"
     },
     {
-      "id": "0xFD12",
+      "id": "0xFD.18",
       "section": "simd",
       "prefix": "FD",
       "code": 18,
@@ -351,7 +351,7 @@
       "description": "<p>Creates a vector with identical lanes.</p>"
     },
     {
-      "id": "0xFD13",
+      "id": "0xFD.19",
       "section": "simd",
       "prefix": "FD",
       "code": 19,
@@ -368,7 +368,7 @@
       "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 4 lanes.</p>"
     },
     {
-      "id": "0xFD14",
+      "id": "0xFD.20",
       "section": "simd",
       "prefix": "FD",
       "code": 20,
@@ -385,7 +385,7 @@
       "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 2 lanes.</p>"
     },
     {
-      "id": "0xFD15",
+      "id": "0xFD.21",
       "section": "simd",
       "prefix": "FD",
       "code": 21,
@@ -404,7 +404,7 @@
       "description": "<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>\n<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>"
     },
     {
-      "id": "0xFD16",
+      "id": "0xFD.22",
       "section": "simd",
       "prefix": "FD",
       "code": 22,
@@ -423,7 +423,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 16 packed u8 numbers.</p>"
     },
     {
-      "id": "0xFD17",
+      "id": "0xFD.23",
       "section": "simd",
       "prefix": "FD",
       "code": 23,
@@ -441,7 +441,7 @@
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>"
     },
     {
-      "id": "0xFD18",
+      "id": "0xFD.24",
       "section": "simd",
       "prefix": "FD",
       "code": 24,
@@ -460,7 +460,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>"
     },
     {
-      "id": "0xFD19",
+      "id": "0xFD.25",
       "section": "simd",
       "prefix": "FD",
       "code": 25,
@@ -479,7 +479,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed u16 numbers.</p>"
     },
     {
-      "id": "0xFD1A",
+      "id": "0xFD.26",
       "section": "simd",
       "prefix": "FD",
       "code": 26,
@@ -497,7 +497,7 @@
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>"
     },
     {
-      "id": "0xFD1B",
+      "id": "0xFD.27",
       "section": "simd",
       "prefix": "FD",
       "code": 27,
@@ -515,7 +515,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>"
     },
     {
-      "id": "0xFD1C",
+      "id": "0xFD.28",
       "section": "simd",
       "prefix": "FD",
       "code": 28,
@@ -533,7 +533,7 @@
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>"
     },
     {
-      "id": "0xFD1D",
+      "id": "0xFD.29",
       "section": "simd",
       "prefix": "FD",
       "code": 29,
@@ -551,7 +551,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>"
     },
     {
-      "id": "0xFD1E",
+      "id": "0xFD.30",
       "section": "simd",
       "prefix": "FD",
       "code": 30,
@@ -569,7 +569,7 @@
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>"
     },
     {
-      "id": "0xFD1F",
+      "id": "0xFD.31",
       "section": "simd",
       "prefix": "FD",
       "code": 31,
@@ -587,7 +587,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>"
     },
     {
-      "id": "0xFD20",
+      "id": "0xFD.32",
       "section": "simd",
       "prefix": "FD",
       "code": 32,
@@ -605,7 +605,7 @@
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Rust: <code>fn f32x4_replace_lane&lt;const N: usize&gt;(a: v128, val: f32) -&gt; v128</code></p>\n<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>"
     },
     {
-      "id": "0xFD21",
+      "id": "0xFD.33",
       "section": "simd",
       "prefix": "FD",
       "code": 33,
@@ -623,7 +623,7 @@
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>"
     },
     {
-      "id": "0xFD22",
+      "id": "0xFD.34",
       "section": "simd",
       "prefix": "FD",
       "code": 34,
@@ -641,7 +641,7 @@
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>"
     },
     {
-      "id": "0xFD23",
+      "id": "0xFD.35",
       "section": "simd",
       "prefix": "FD",
       "code": 35,
@@ -658,7 +658,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD24",
+      "id": "0xFD.36",
       "section": "simd",
       "prefix": "FD",
       "code": 36,
@@ -675,7 +675,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD25",
+      "id": "0xFD.37",
       "section": "simd",
       "prefix": "FD",
       "code": 37,
@@ -693,7 +693,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD26",
+      "id": "0xFD.38",
       "section": "simd",
       "prefix": "FD",
       "code": 38,
@@ -711,7 +711,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD27",
+      "id": "0xFD.39",
       "section": "simd",
       "prefix": "FD",
       "code": 39,
@@ -729,7 +729,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD28",
+      "id": "0xFD.40",
       "section": "simd",
       "prefix": "FD",
       "code": 40,
@@ -747,7 +747,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD29",
+      "id": "0xFD.41",
       "section": "simd",
       "prefix": "FD",
       "code": 41,
@@ -765,7 +765,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD2A",
+      "id": "0xFD.42",
       "section": "simd",
       "prefix": "FD",
       "code": 42,
@@ -783,7 +783,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD2B",
+      "id": "0xFD.43",
       "section": "simd",
       "prefix": "FD",
       "code": 43,
@@ -801,7 +801,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD2C",
+      "id": "0xFD.44",
       "section": "simd",
       "prefix": "FD",
       "code": 44,
@@ -819,7 +819,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD2D",
+      "id": "0xFD.45",
       "section": "simd",
       "prefix": "FD",
       "code": 45,
@@ -836,7 +836,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>"
     },
     {
-      "id": "0xFD2E",
+      "id": "0xFD.46",
       "section": "simd",
       "prefix": "FD",
       "code": 46,
@@ -853,7 +853,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>"
     },
     {
-      "id": "0xFD2F",
+      "id": "0xFD.47",
       "section": "simd",
       "prefix": "FD",
       "code": 47,
@@ -871,7 +871,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
     },
     {
-      "id": "0xFD30",
+      "id": "0xFD.48",
       "section": "simd",
       "prefix": "FD",
       "code": 48,
@@ -889,7 +889,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD31",
+      "id": "0xFD.49",
       "section": "simd",
       "prefix": "FD",
       "code": 49,
@@ -907,7 +907,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
     },
     {
-      "id": "0xFD32",
+      "id": "0xFD.50",
       "section": "simd",
       "prefix": "FD",
       "code": 50,
@@ -925,7 +925,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD33",
+      "id": "0xFD.51",
       "section": "simd",
       "prefix": "FD",
       "code": 51,
@@ -943,7 +943,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
     },
     {
-      "id": "0xFD34",
+      "id": "0xFD.52",
       "section": "simd",
       "prefix": "FD",
       "code": 52,
@@ -961,7 +961,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD35",
+      "id": "0xFD.53",
       "section": "simd",
       "prefix": "FD",
       "code": 53,
@@ -979,7 +979,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>"
     },
     {
-      "id": "0xFD36",
+      "id": "0xFD.54",
       "section": "simd",
       "prefix": "FD",
       "code": 54,
@@ -997,7 +997,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD37",
+      "id": "0xFD.55",
       "section": "simd",
       "prefix": "FD",
       "code": 55,
@@ -1014,7 +1014,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>"
     },
     {
-      "id": "0xFD38",
+      "id": "0xFD.56",
       "section": "simd",
       "prefix": "FD",
       "code": 56,
@@ -1031,7 +1031,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>"
     },
     {
-      "id": "0xFD39",
+      "id": "0xFD.57",
       "section": "simd",
       "prefix": "FD",
       "code": 57,
@@ -1049,7 +1049,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit signed integers.</p>"
     },
     {
-      "id": "0xFD3A",
+      "id": "0xFD.58",
       "section": "simd",
       "prefix": "FD",
       "code": 58,
@@ -1067,7 +1067,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD3B",
+      "id": "0xFD.59",
       "section": "simd",
       "prefix": "FD",
       "code": 59,
@@ -1085,7 +1085,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>"
     },
     {
-      "id": "0xFD3C",
+      "id": "0xFD.60",
       "section": "simd",
       "prefix": "FD",
       "code": 60,
@@ -1103,7 +1103,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD3D",
+      "id": "0xFD.61",
       "section": "simd",
       "prefix": "FD",
       "code": 61,
@@ -1121,7 +1121,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>"
     },
     {
-      "id": "0xFD3E",
+      "id": "0xFD.62",
       "section": "simd",
       "prefix": "FD",
       "code": 62,
@@ -1139,7 +1139,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD3F",
+      "id": "0xFD.63",
       "section": "simd",
       "prefix": "FD",
       "code": 63,
@@ -1157,7 +1157,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>"
     },
     {
-      "id": "0xFD40",
+      "id": "0xFD.64",
       "section": "simd",
       "prefix": "FD",
       "code": 64,
@@ -1175,7 +1175,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFD41",
+      "id": "0xFD.65",
       "section": "simd",
       "prefix": "FD",
       "code": 65,
@@ -1192,7 +1192,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD42",
+      "id": "0xFD.66",
       "section": "simd",
       "prefix": "FD",
       "code": 66,
@@ -1209,7 +1209,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD43",
+      "id": "0xFD.67",
       "section": "simd",
       "prefix": "FD",
       "code": 67,
@@ -1226,7 +1226,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD44",
+      "id": "0xFD.68",
       "section": "simd",
       "prefix": "FD",
       "code": 68,
@@ -1243,7 +1243,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD45",
+      "id": "0xFD.69",
       "section": "simd",
       "prefix": "FD",
       "code": 69,
@@ -1260,7 +1260,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than [or equal] the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD46",
+      "id": "0xFD.70",
       "section": "simd",
       "prefix": "FD",
       "code": 70,
@@ -1277,7 +1277,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than [or equal] the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD47",
+      "id": "0xFD.71",
       "section": "simd",
       "prefix": "FD",
       "code": 71,
@@ -1294,7 +1294,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD48",
+      "id": "0xFD.72",
       "section": "simd",
       "prefix": "FD",
       "code": 72,
@@ -1311,7 +1311,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD49",
+      "id": "0xFD.73",
       "section": "simd",
       "prefix": "FD",
       "code": 73,
@@ -1328,7 +1328,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD4A",
+      "id": "0xFD.74",
       "section": "simd",
       "prefix": "FD",
       "code": 74,
@@ -1345,7 +1345,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD4B",
+      "id": "0xFD.75",
       "section": "simd",
       "prefix": "FD",
       "code": 75,
@@ -1362,7 +1362,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD4C",
+      "id": "0xFD.76",
       "section": "simd",
       "prefix": "FD",
       "code": 76,
@@ -1379,7 +1379,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>"
     },
     {
-      "id": "0xFD4D",
+      "id": "0xFD.77",
       "section": "simd",
       "prefix": "FD",
       "code": 77,
@@ -1396,7 +1396,7 @@
       "description": "<p>Flips each bit of the 128-bit input vector.</p>"
     },
     {
-      "id": "0xFD4E",
+      "id": "0xFD.78",
       "section": "simd",
       "prefix": "FD",
       "code": 78,
@@ -1413,7 +1413,7 @@
       "description": "<p>Performs a bitwise and of the two input 128-bit vectors, returning the resulting vector.</p>"
     },
     {
-      "id": "0xFD4F",
+      "id": "0xFD.79",
       "section": "simd",
       "prefix": "FD",
       "code": 79,
@@ -1430,7 +1430,7 @@
       "description": "<p>Bitwise AND of bits of a and the logical inverse of bits of b.</p>"
     },
     {
-      "id": "0xFD50",
+      "id": "0xFD.80",
       "section": "simd",
       "prefix": "FD",
       "code": 80,
@@ -1447,7 +1447,7 @@
       "description": "<p>Performs a bitwise or of the two input 128-bit vectors, returning the resulting vector.</p>"
     },
     {
-      "id": "0xFD51",
+      "id": "0xFD.81",
       "section": "simd",
       "prefix": "FD",
       "code": 81,
@@ -1464,7 +1464,7 @@
       "description": "<p>Performs a bitwise xor of the two input 128-bit vectors, returning the resulting vector.</p>"
     },
     {
-      "id": "0xFD52",
+      "id": "0xFD.82",
       "section": "simd",
       "prefix": "FD",
       "code": 82,
@@ -1481,7 +1481,7 @@
       "description": "<p>Rust: <code>fn v128_bitselect(v1: v128, v2: v128, c: v128) -&gt; v128</code></p>\n<p>Use the bitmask in <code>c</code> to select bits from <code>v1</code> when 1 and <code>v2</code> when 0.</p>"
     },
     {
-      "id": "0xFD53",
+      "id": "0xFD.83",
       "section": "simd",
       "prefix": "FD",
       "code": 83,
@@ -1498,7 +1498,7 @@
       "description": "<p>Returns true if any bit in a is set, or false otherwise.</p>"
     },
     {
-      "id": "0xFD54",
+      "id": "0xFD.84",
       "section": "simd",
       "prefix": "FD",
       "code": 84,
@@ -1517,7 +1517,7 @@
       "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>"
     },
     {
-      "id": "0xFD55",
+      "id": "0xFD.85",
       "section": "simd",
       "prefix": "FD",
       "code": 85,
@@ -1536,7 +1536,7 @@
       "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>"
     },
     {
-      "id": "0xFD56",
+      "id": "0xFD.86",
       "section": "simd",
       "prefix": "FD",
       "code": 86,
@@ -1555,7 +1555,7 @@
       "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>"
     },
     {
-      "id": "0xFD57",
+      "id": "0xFD.87",
       "section": "simd",
       "prefix": "FD",
       "code": 87,
@@ -1574,7 +1574,7 @@
       "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>"
     },
     {
-      "id": "0xFD58",
+      "id": "0xFD.88",
       "section": "simd",
       "prefix": "FD",
       "code": 88,
@@ -1593,7 +1593,7 @@
       "description": "<p>Stores the 8-bit value from lane L of v into m</p>"
     },
     {
-      "id": "0xFD59",
+      "id": "0xFD.89",
       "section": "simd",
       "prefix": "FD",
       "code": 89,
@@ -1612,7 +1612,7 @@
       "description": "<p>Stores the 16-bit value from lane L of v into m</p>"
     },
     {
-      "id": "0xFD5A",
+      "id": "0xFD.90",
       "section": "simd",
       "prefix": "FD",
       "code": 90,
@@ -1631,7 +1631,7 @@
       "description": "<p>Stores the 32-bit value from lane L of v into m</p>"
     },
     {
-      "id": "0xFD5B",
+      "id": "0xFD.91",
       "section": "simd",
       "prefix": "FD",
       "code": 91,
@@ -1650,7 +1650,7 @@
       "description": "<p>Stores the 64-bit value from lane L of v into m</p>"
     },
     {
-      "id": "0xFD5C",
+      "id": "0xFD.92",
       "section": "simd",
       "prefix": "FD",
       "code": 92,
@@ -1669,7 +1669,7 @@
       "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>"
     },
     {
-      "id": "0xFD5D",
+      "id": "0xFD.93",
       "section": "simd",
       "prefix": "FD",
       "code": 93,
@@ -1688,7 +1688,7 @@
       "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>"
     },
     {
-      "id": "0xFD5E",
+      "id": "0xFD.94",
       "section": "simd",
       "prefix": "FD",
       "code": 94,
@@ -1707,7 +1707,7 @@
       "description": "<p>Conversion of the two double-precision floating point lanes to two lower single-precision lanes of the result. The two higher lanes of the result are initialized to zero. If the conversion result is not representable as a single-precision floating point number, it is rounded to the nearest-even representable number.</p>"
     },
     {
-      "id": "0xFD5F",
+      "id": "0xFD.95",
       "section": "simd",
       "prefix": "FD",
       "code": 95,
@@ -1725,7 +1725,7 @@
       "description": "<p>Conversion of the two lower single-precision floating point lanes to the two double-precision lanes of the result.</p>"
     },
     {
-      "id": "0xFD60",
+      "id": "0xFD.96",
       "section": "simd",
       "prefix": "FD",
       "code": 96,
@@ -1742,7 +1742,7 @@
       "description": "<p>Lane-wise wrapping absolute value.</p>"
     },
     {
-      "id": "0xFD61",
+      "id": "0xFD.97",
       "section": "simd",
       "prefix": "FD",
       "code": 97,
@@ -1759,7 +1759,7 @@
       "description": "<p>Negates a 128-bit vectors interpreted as sixteen 8-bit signed integers</p>"
     },
     {
-      "id": "0xFD62",
+      "id": "0xFD.98",
       "section": "simd",
       "prefix": "FD",
       "code": 98,
@@ -1776,7 +1776,7 @@
       "description": "<p>Count the number of bits set to one within each lane.</p>"
     },
     {
-      "id": "0xFD63",
+      "id": "0xFD.99",
       "section": "simd",
       "prefix": "FD",
       "code": 99,
@@ -1793,7 +1793,7 @@
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
     },
     {
-      "id": "0xFD64",
+      "id": "0xFD.100",
       "section": "simd",
       "prefix": "FD",
       "code": 100,
@@ -1810,7 +1810,7 @@
       "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>"
     },
     {
-      "id": "0xFD65",
+      "id": "0xFD.101",
       "section": "simd",
       "prefix": "FD",
       "code": 101,
@@ -1829,7 +1829,7 @@
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>\n<p>Signed saturation to 0x7f or 0x80 is used and the input lanes are always interpreted as signed integers.</p>"
     },
     {
-      "id": "0xFD66",
+      "id": "0xFD.102",
       "section": "simd",
       "prefix": "FD",
       "code": 102,
@@ -1848,7 +1848,7 @@
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>"
     },
     {
-      "id": "0xFD67",
+      "id": "0xFD.103",
       "section": "simd",
       "prefix": "FD",
       "code": 103,
@@ -1865,7 +1865,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>"
     },
     {
-      "id": "0xFD68",
+      "id": "0xFD.104",
       "section": "simd",
       "prefix": "FD",
       "code": 104,
@@ -1882,7 +1882,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>"
     },
     {
-      "id": "0xFD69",
+      "id": "0xFD.105",
       "section": "simd",
       "prefix": "FD",
       "code": 105,
@@ -1899,7 +1899,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>"
     },
     {
-      "id": "0xFD6A",
+      "id": "0xFD.106",
       "section": "simd",
       "prefix": "FD",
       "code": 106,
@@ -1916,7 +1916,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>"
     },
     {
-      "id": "0xFD6B",
+      "id": "0xFD.107",
       "section": "simd",
       "prefix": "FD",
       "code": 107,
@@ -1933,7 +1933,7 @@
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>"
     },
     {
-      "id": "0xFD6C",
+      "id": "0xFD.108",
       "section": "simd",
       "prefix": "FD",
       "code": 108,
@@ -1951,7 +1951,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>"
     },
     {
-      "id": "0xFD6D",
+      "id": "0xFD.109",
       "section": "simd",
       "prefix": "FD",
       "code": 109,
@@ -1969,7 +1969,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
     },
     {
-      "id": "0xFD6E",
+      "id": "0xFD.110",
       "section": "simd",
       "prefix": "FD",
       "code": 110,
@@ -1986,7 +1986,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>"
     },
     {
-      "id": "0xFD6F",
+      "id": "0xFD.111",
       "section": "simd",
       "prefix": "FD",
       "code": 111,
@@ -2005,7 +2005,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MAX.</p>"
     },
     {
-      "id": "0xFD70",
+      "id": "0xFD.112",
       "section": "simd",
       "prefix": "FD",
       "code": 112,
@@ -2024,7 +2024,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to u8::MAX.</p>"
     },
     {
-      "id": "0xFD71",
+      "id": "0xFD.113",
       "section": "simd",
       "prefix": "FD",
       "code": 113,
@@ -2041,7 +2041,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>"
     },
     {
-      "id": "0xFD72",
+      "id": "0xFD.114",
       "section": "simd",
       "prefix": "FD",
       "code": 114,
@@ -2060,7 +2060,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MIN.</p>"
     },
     {
-      "id": "0xFD73",
+      "id": "0xFD.115",
       "section": "simd",
       "prefix": "FD",
       "code": 115,
@@ -2079,7 +2079,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to 0.</p>"
     },
     {
-      "id": "0xFD74",
+      "id": "0xFD.116",
       "section": "simd",
       "prefix": "FD",
       "code": 116,
@@ -2096,7 +2096,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>"
     },
     {
-      "id": "0xFD75",
+      "id": "0xFD.117",
       "section": "simd",
       "prefix": "FD",
       "code": 117,
@@ -2113,7 +2113,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>"
     },
     {
-      "id": "0xFD76",
+      "id": "0xFD.118",
       "section": "simd",
       "prefix": "FD",
       "code": 118,
@@ -2131,7 +2131,7 @@
       "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>"
     },
     {
-      "id": "0xFD77",
+      "id": "0xFD.119",
       "section": "simd",
       "prefix": "FD",
       "code": 119,
@@ -2149,7 +2149,7 @@
       "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>"
     },
     {
-      "id": "0xFD78",
+      "id": "0xFD.120",
       "section": "simd",
       "prefix": "FD",
       "code": 120,
@@ -2167,7 +2167,7 @@
       "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>"
     },
     {
-      "id": "0xFD79",
+      "id": "0xFD.121",
       "section": "simd",
       "prefix": "FD",
       "code": 121,
@@ -2185,7 +2185,7 @@
       "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>"
     },
     {
-      "id": "0xFD7A",
+      "id": "0xFD.122",
       "section": "simd",
       "prefix": "FD",
       "code": 122,
@@ -2202,7 +2202,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>"
     },
     {
-      "id": "0xFD7B",
+      "id": "0xFD.123",
       "section": "simd",
       "prefix": "FD",
       "code": 123,
@@ -2220,7 +2220,7 @@
       "description": "<p>Lane-wise rounding average.</p>"
     },
     {
-      "id": "0xFD7C",
+      "id": "0xFD.124",
       "section": "simd",
       "prefix": "FD",
       "code": 124,
@@ -2239,7 +2239,7 @@
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
     },
     {
-      "id": "0xFD7D",
+      "id": "0xFD.125",
       "section": "simd",
       "prefix": "FD",
       "code": 125,
@@ -2258,7 +2258,7 @@
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
     },
     {
-      "id": "0xFD7E",
+      "id": "0xFD.126",
       "section": "simd",
       "prefix": "FD",
       "code": 126,
@@ -2277,7 +2277,7 @@
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
     },
     {
-      "id": "0xFD7F",
+      "id": "0xFD.127",
       "section": "simd",
       "prefix": "FD",
       "code": 127,
@@ -2296,7 +2296,7 @@
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>"
     },
     {
-      "id": "0xFD80",
+      "id": "0xFD.128",
       "section": "simd",
       "prefix": "FD",
       "code": 128,
@@ -2314,7 +2314,7 @@
       "description": "<p>Lane-wise wrapping absolute value.</p>"
     },
     {
-      "id": "0xFD81",
+      "id": "0xFD.129",
       "section": "simd",
       "prefix": "FD",
       "code": 129,
@@ -2332,7 +2332,7 @@
       "description": "<p>Negates a 128-bit vectors interpreted as eight 16-bit signed integers</p>"
     },
     {
-      "id": "0xFD82",
+      "id": "0xFD.130",
       "section": "simd",
       "prefix": "FD",
       "code": 130,
@@ -2352,7 +2352,7 @@
       "description": "<p>Rust: <code>fn i16x8_q15mulr_sat(a: v128, b: v128) -&gt; v128</code></p>\n<p>Lane-wise saturating rounding multiplication in Q15 format.</p>"
     },
     {
-      "id": "0xFD83",
+      "id": "0xFD.131",
       "section": "simd",
       "prefix": "FD",
       "code": 131,
@@ -2370,7 +2370,7 @@
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
     },
     {
-      "id": "0xFD84",
+      "id": "0xFD.132",
       "section": "simd",
       "prefix": "FD",
       "code": 132,
@@ -2388,7 +2388,7 @@
       "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>"
     },
     {
-      "id": "0xFD85",
+      "id": "0xFD.133",
       "section": "simd",
       "prefix": "FD",
       "code": 133,
@@ -2408,7 +2408,7 @@
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>"
     },
     {
-      "id": "0xFD86",
+      "id": "0xFD.134",
       "section": "simd",
       "prefix": "FD",
       "code": 134,
@@ -2428,7 +2428,7 @@
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>"
     },
     {
-      "id": "0xFD87",
+      "id": "0xFD.135",
       "section": "simd",
       "prefix": "FD",
       "code": 135,
@@ -2448,7 +2448,7 @@
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>"
     },
     {
-      "id": "0xFD88",
+      "id": "0xFD.136",
       "section": "simd",
       "prefix": "FD",
       "code": 136,
@@ -2468,7 +2468,7 @@
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>"
     },
     {
-      "id": "0xFD89",
+      "id": "0xFD.137",
       "section": "simd",
       "prefix": "FD",
       "code": 137,
@@ -2488,7 +2488,7 @@
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>"
     },
     {
-      "id": "0xFD8A",
+      "id": "0xFD.138",
       "section": "simd",
       "prefix": "FD",
       "code": 138,
@@ -2508,7 +2508,7 @@
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>"
     },
     {
-      "id": "0xFD8B",
+      "id": "0xFD.139",
       "section": "simd",
       "prefix": "FD",
       "code": 139,
@@ -2526,7 +2526,7 @@
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>"
     },
     {
-      "id": "0xFD8C",
+      "id": "0xFD.140",
       "section": "simd",
       "prefix": "FD",
       "code": 140,
@@ -2545,7 +2545,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>"
     },
     {
-      "id": "0xFD8D",
+      "id": "0xFD.141",
       "section": "simd",
       "prefix": "FD",
       "code": 141,
@@ -2564,7 +2564,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
     },
     {
-      "id": "0xFD8E",
+      "id": "0xFD.142",
       "section": "simd",
       "prefix": "FD",
       "code": 142,
@@ -2582,7 +2582,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit integers.</p>"
     },
     {
-      "id": "0xFD8F",
+      "id": "0xFD.143",
       "section": "simd",
       "prefix": "FD",
       "code": 143,
@@ -2602,7 +2602,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MAX.</p>"
     },
     {
-      "id": "0xFD90",
+      "id": "0xFD.144",
       "section": "simd",
       "prefix": "FD",
       "code": 144,
@@ -2622,7 +2622,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to u16::MAX.</p>"
     },
     {
-      "id": "0xFD91",
+      "id": "0xFD.145",
       "section": "simd",
       "prefix": "FD",
       "code": 145,
@@ -2640,7 +2640,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit integers.</p>"
     },
     {
-      "id": "0xFD92",
+      "id": "0xFD.146",
       "section": "simd",
       "prefix": "FD",
       "code": 146,
@@ -2660,7 +2660,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MIN.</p>"
     },
     {
-      "id": "0xFD93",
+      "id": "0xFD.147",
       "section": "simd",
       "prefix": "FD",
       "code": 147,
@@ -2680,7 +2680,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to 0.</p>"
     },
     {
-      "id": "0xFD94",
+      "id": "0xFD.148",
       "section": "simd",
       "prefix": "FD",
       "code": 148,
@@ -2698,7 +2698,7 @@
       "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>"
     },
     {
-      "id": "0xFD95",
+      "id": "0xFD.149",
       "section": "simd",
       "prefix": "FD",
       "code": 149,
@@ -2716,7 +2716,7 @@
       "description": "<p>Multiplies two 128-bit vectors as if they were two packed eight 16-bit integers.</p>"
     },
     {
-      "id": "0xFD96",
+      "id": "0xFD.150",
       "section": "simd",
       "prefix": "FD",
       "code": 150,
@@ -2735,7 +2735,7 @@
       "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>"
     },
     {
-      "id": "0xFD97",
+      "id": "0xFD.151",
       "section": "simd",
       "prefix": "FD",
       "code": 151,
@@ -2754,7 +2754,7 @@
       "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>"
     },
     {
-      "id": "0xFD98",
+      "id": "0xFD.152",
       "section": "simd",
       "prefix": "FD",
       "code": 152,
@@ -2773,7 +2773,7 @@
       "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>"
     },
     {
-      "id": "0xFD99",
+      "id": "0xFD.153",
       "section": "simd",
       "prefix": "FD",
       "code": 153,
@@ -2792,7 +2792,7 @@
       "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>"
     },
     {
-      "id": "0xFD9A",
+      "id": "0xFD.154",
       "section": "simd",
       "prefix": "FD",
       "code": 154,
@@ -2805,7 +2805,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFD9B",
+      "id": "0xFD.155",
       "section": "simd",
       "prefix": "FD",
       "code": 155,
@@ -2824,7 +2824,7 @@
       "description": "<p>Lane-wise rounding average.</p>"
     },
     {
-      "id": "0xFD9C",
+      "id": "0xFD.156",
       "section": "simd",
       "prefix": "FD",
       "code": 156,
@@ -2844,7 +2844,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFD9D",
+      "id": "0xFD.157",
       "section": "simd",
       "prefix": "FD",
       "code": 157,
@@ -2864,7 +2864,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFD9E",
+      "id": "0xFD.158",
       "section": "simd",
       "prefix": "FD",
       "code": 158,
@@ -2884,7 +2884,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFD9F",
+      "id": "0xFD.159",
       "section": "simd",
       "prefix": "FD",
       "code": 159,
@@ -2904,7 +2904,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDA0",
+      "id": "0xFD.160",
       "section": "simd",
       "prefix": "FD",
       "code": 160,
@@ -2922,7 +2922,7 @@
       "description": "<p>Lane-wise wrapping absolute value.</p>"
     },
     {
-      "id": "0xFDA1",
+      "id": "0xFD.161",
       "section": "simd",
       "prefix": "FD",
       "code": 161,
@@ -2940,7 +2940,7 @@
       "description": "<p>Negates a 128-bit vectors interpreted as four 32-bit signed integers</p>"
     },
     {
-      "id": "0xFDA2",
+      "id": "0xFD.162",
       "section": "simd",
       "prefix": "FD",
       "code": 162,
@@ -2960,7 +2960,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDA3",
+      "id": "0xFD.163",
       "section": "simd",
       "prefix": "FD",
       "code": 163,
@@ -2978,7 +2978,7 @@
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
     },
     {
-      "id": "0xFDA4",
+      "id": "0xFD.164",
       "section": "simd",
       "prefix": "FD",
       "code": 164,
@@ -2996,7 +2996,7 @@
       "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>"
     },
     {
-      "id": "0xFDA5",
+      "id": "0xFD.165",
       "section": "simd",
       "prefix": "FD",
       "code": 165,
@@ -3015,7 +3015,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDA6",
+      "id": "0xFD.166",
       "section": "simd",
       "prefix": "FD",
       "code": 166,
@@ -3034,7 +3034,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDA7",
+      "id": "0xFD.167",
       "section": "simd",
       "prefix": "FD",
       "code": 167,
@@ -3054,7 +3054,7 @@
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>"
     },
     {
-      "id": "0xFDA8",
+      "id": "0xFD.168",
       "section": "simd",
       "prefix": "FD",
       "code": 168,
@@ -3074,7 +3074,7 @@
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>"
     },
     {
-      "id": "0xFDA9",
+      "id": "0xFD.169",
       "section": "simd",
       "prefix": "FD",
       "code": 169,
@@ -3094,7 +3094,7 @@
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>"
     },
     {
-      "id": "0xFDAA",
+      "id": "0xFD.170",
       "section": "simd",
       "prefix": "FD",
       "code": 170,
@@ -3114,7 +3114,7 @@
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>"
     },
     {
-      "id": "0xFDAB",
+      "id": "0xFD.171",
       "section": "simd",
       "prefix": "FD",
       "code": 171,
@@ -3132,7 +3132,7 @@
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>"
     },
     {
-      "id": "0xFDAC",
+      "id": "0xFD.172",
       "section": "simd",
       "prefix": "FD",
       "code": 172,
@@ -3151,7 +3151,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>"
     },
     {
-      "id": "0xFDAD",
+      "id": "0xFD.173",
       "section": "simd",
       "prefix": "FD",
       "code": 173,
@@ -3170,7 +3170,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
     },
     {
-      "id": "0xFDAE",
+      "id": "0xFD.174",
       "section": "simd",
       "prefix": "FD",
       "code": 174,
@@ -3188,7 +3188,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed four 32-bit integers.</p>"
     },
     {
-      "id": "0xFDAF",
+      "id": "0xFD.175",
       "section": "simd",
       "prefix": "FD",
       "code": 175,
@@ -3207,7 +3207,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDB0",
+      "id": "0xFD.176",
       "section": "simd",
       "prefix": "FD",
       "code": 176,
@@ -3226,7 +3226,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDB1",
+      "id": "0xFD.177",
       "section": "simd",
       "prefix": "FD",
       "code": 177,
@@ -3244,7 +3244,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed four 32-bit integers.</p>"
     },
     {
-      "id": "0xFDB2",
+      "id": "0xFD.178",
       "section": "simd",
       "prefix": "FD",
       "code": 178,
@@ -3264,7 +3264,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDB3",
+      "id": "0xFD.179",
       "section": "simd",
       "prefix": "FD",
       "code": 179,
@@ -3284,7 +3284,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDB4",
+      "id": "0xFD.180",
       "section": "simd",
       "prefix": "FD",
       "code": 180,
@@ -3303,7 +3303,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDB5",
+      "id": "0xFD.181",
       "section": "simd",
       "prefix": "FD",
       "code": 181,
@@ -3321,7 +3321,7 @@
       "description": "<p>Multiplies two 128-bit vectors as if they were two packed four 32-bit signed integers.</p>"
     },
     {
-      "id": "0xFDB6",
+      "id": "0xFD.182",
       "section": "simd",
       "prefix": "FD",
       "code": 182,
@@ -3340,7 +3340,7 @@
       "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>"
     },
     {
-      "id": "0xFDB7",
+      "id": "0xFD.183",
       "section": "simd",
       "prefix": "FD",
       "code": 183,
@@ -3359,7 +3359,7 @@
       "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>"
     },
     {
-      "id": "0xFDB8",
+      "id": "0xFD.184",
       "section": "simd",
       "prefix": "FD",
       "code": 184,
@@ -3378,7 +3378,7 @@
       "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>"
     },
     {
-      "id": "0xFDB9",
+      "id": "0xFD.185",
       "section": "simd",
       "prefix": "FD",
       "code": 185,
@@ -3397,7 +3397,7 @@
       "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>"
     },
     {
-      "id": "0xFDBA",
+      "id": "0xFD.186",
       "section": "simd",
       "prefix": "FD",
       "code": 186,
@@ -3417,7 +3417,7 @@
       "description": "<p>Lane-wise multiply signed 16-bit integers in the two input vectors and add adjacent pairs of the full 32-bit results.</p>"
     },
     {
-      "id": "0xFDBB",
+      "id": "0xFD.187",
       "section": "simd",
       "prefix": "FD",
       "code": 187,
@@ -3430,7 +3430,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFDBC",
+      "id": "0xFD.188",
       "section": "simd",
       "prefix": "FD",
       "code": 188,
@@ -3450,7 +3450,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDBD",
+      "id": "0xFD.189",
       "section": "simd",
       "prefix": "FD",
       "code": 189,
@@ -3470,7 +3470,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDBE",
+      "id": "0xFD.190",
       "section": "simd",
       "prefix": "FD",
       "code": 190,
@@ -3490,7 +3490,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDBF",
+      "id": "0xFD.191",
       "section": "simd",
       "prefix": "FD",
       "code": 191,
@@ -3510,7 +3510,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDC0",
+      "id": "0xFD.192",
       "section": "simd",
       "prefix": "FD",
       "code": 192,
@@ -3528,7 +3528,7 @@
       "description": "<p>Lane-wise wrapping absolute value.</p>"
     },
     {
-      "id": "0xFDC1",
+      "id": "0xFD.193",
       "section": "simd",
       "prefix": "FD",
       "code": 193,
@@ -3546,7 +3546,7 @@
       "description": "<p>Negates a 128-bit vectors interpreted as two 64-bit signed integers</p>"
     },
     {
-      "id": "0xFDC2",
+      "id": "0xFD.194",
       "section": "simd",
       "prefix": "FD",
       "code": 194,
@@ -3559,7 +3559,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFDC3",
+      "id": "0xFD.195",
       "section": "simd",
       "prefix": "FD",
       "code": 195,
@@ -3577,7 +3577,7 @@
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>"
     },
     {
-      "id": "0xFDC4",
+      "id": "0xFD.196",
       "section": "simd",
       "prefix": "FD",
       "code": 196,
@@ -3595,7 +3595,7 @@
       "description": "<p>Extracts the high bit for each lane in 'a' and produce a scalar mask with all bits concatenated.</p>"
     },
     {
-      "id": "0xFDC5",
+      "id": "0xFD.197",
       "section": "simd",
       "prefix": "FD",
       "code": 197,
@@ -3614,7 +3614,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDC6",
+      "id": "0xFD.198",
       "section": "simd",
       "prefix": "FD",
       "code": 198,
@@ -3633,7 +3633,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDC7",
+      "id": "0xFD.199",
       "section": "simd",
       "prefix": "FD",
       "code": 199,
@@ -3653,7 +3653,7 @@
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>"
     },
     {
-      "id": "0xFDC8",
+      "id": "0xFD.200",
       "section": "simd",
       "prefix": "FD",
       "code": 200,
@@ -3673,7 +3673,7 @@
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>"
     },
     {
-      "id": "0xFDC9",
+      "id": "0xFD.201",
       "section": "simd",
       "prefix": "FD",
       "code": 201,
@@ -3693,7 +3693,7 @@
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>"
     },
     {
-      "id": "0xFDCA",
+      "id": "0xFD.202",
       "section": "simd",
       "prefix": "FD",
       "code": 202,
@@ -3713,7 +3713,7 @@
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>"
     },
     {
-      "id": "0xFDCB",
+      "id": "0xFD.203",
       "section": "simd",
       "prefix": "FD",
       "code": 203,
@@ -3731,7 +3731,7 @@
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>"
     },
     {
-      "id": "0xFDCC",
+      "id": "0xFD.204",
       "section": "simd",
       "prefix": "FD",
       "code": 204,
@@ -3750,7 +3750,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>"
     },
     {
-      "id": "0xFDCD",
+      "id": "0xFD.205",
       "section": "simd",
       "prefix": "FD",
       "code": 205,
@@ -3769,7 +3769,7 @@
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>"
     },
     {
-      "id": "0xFDCE",
+      "id": "0xFD.206",
       "section": "simd",
       "prefix": "FD",
       "code": 206,
@@ -3787,7 +3787,7 @@
       "description": "<p>Adds two 128-bit vectors as if they were two packed two 64-bit integers.</p>"
     },
     {
-      "id": "0xFDCF",
+      "id": "0xFD.207",
       "section": "simd",
       "prefix": "FD",
       "code": 207,
@@ -3806,7 +3806,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDD0",
+      "id": "0xFD.208",
       "section": "simd",
       "prefix": "FD",
       "code": 208,
@@ -3825,7 +3825,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDD1",
+      "id": "0xFD.209",
       "section": "simd",
       "prefix": "FD",
       "code": 209,
@@ -3843,7 +3843,7 @@
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed two 64-bit integers.</p>"
     },
     {
-      "id": "0xFDD2",
+      "id": "0xFD.210",
       "section": "simd",
       "prefix": "FD",
       "code": 210,
@@ -3863,7 +3863,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDD3",
+      "id": "0xFD.211",
       "section": "simd",
       "prefix": "FD",
       "code": 211,
@@ -3883,7 +3883,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDD4",
+      "id": "0xFD.212",
       "section": "simd",
       "prefix": "FD",
       "code": 212,
@@ -3902,7 +3902,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDD5",
+      "id": "0xFD.213",
       "section": "simd",
       "prefix": "FD",
       "code": 213,
@@ -3920,7 +3920,7 @@
       "description": "<p>Multiplies two 128-bit vectors as if they were two packed two 64-bit integers.</p>"
     },
     {
-      "id": "0xFDD6",
+      "id": "0xFD.214",
       "section": "simd",
       "prefix": "FD",
       "code": 214,
@@ -3938,7 +3938,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>"
     },
     {
-      "id": "0xFDD7",
+      "id": "0xFD.215",
       "section": "simd",
       "prefix": "FD",
       "code": 215,
@@ -3956,7 +3956,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>"
     },
     {
-      "id": "0xFDD8",
+      "id": "0xFD.216",
       "section": "simd",
       "prefix": "FD",
       "code": 216,
@@ -3975,7 +3975,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
     },
     {
-      "id": "0xFDD9",
+      "id": "0xFD.217",
       "section": "simd",
       "prefix": "FD",
       "code": 217,
@@ -3994,7 +3994,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
     },
     {
-      "id": "0xFDDA",
+      "id": "0xFD.218",
       "section": "simd",
       "prefix": "FD",
       "code": 218,
@@ -4013,7 +4013,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
     },
     {
-      "id": "0xFDDB",
+      "id": "0xFD.219",
       "section": "simd",
       "prefix": "FD",
       "code": 219,
@@ -4032,7 +4032,7 @@
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>"
     },
     {
-      "id": "0xFDDC",
+      "id": "0xFD.220",
       "section": "simd",
       "prefix": "FD",
       "code": 220,
@@ -4052,7 +4052,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDDD",
+      "id": "0xFD.221",
       "section": "simd",
       "prefix": "FD",
       "code": 221,
@@ -4072,7 +4072,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDDE",
+      "id": "0xFD.222",
       "section": "simd",
       "prefix": "FD",
       "code": 222,
@@ -4092,7 +4092,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDDF",
+      "id": "0xFD.223",
       "section": "simd",
       "prefix": "FD",
       "code": 223,
@@ -4112,7 +4112,7 @@
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>"
     },
     {
-      "id": "0xFDE0",
+      "id": "0xFD.224",
       "section": "simd",
       "prefix": "FD",
       "code": 224,
@@ -4130,7 +4130,7 @@
       "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE1",
+      "id": "0xFD.225",
       "section": "simd",
       "prefix": "FD",
       "code": 225,
@@ -4148,7 +4148,7 @@
       "description": "<p>Negates each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE2",
+      "id": "0xFD.226",
       "section": "simd",
       "prefix": "FD",
       "code": 226,
@@ -4167,7 +4167,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDE3",
+      "id": "0xFD.227",
       "section": "simd",
       "prefix": "FD",
       "code": 227,
@@ -4185,7 +4185,7 @@
       "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE4",
+      "id": "0xFD.228",
       "section": "simd",
       "prefix": "FD",
       "code": 228,
@@ -4203,7 +4203,7 @@
       "description": "<p>Lane-wise addition of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE5",
+      "id": "0xFD.229",
       "section": "simd",
       "prefix": "FD",
       "code": 229,
@@ -4221,7 +4221,7 @@
       "description": "<p>Lane-wise subtraction of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE6",
+      "id": "0xFD.230",
       "section": "simd",
       "prefix": "FD",
       "code": 230,
@@ -4239,7 +4239,7 @@
       "description": "<p>Lane-wise multiplication of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE7",
+      "id": "0xFD.231",
       "section": "simd",
       "prefix": "FD",
       "code": 231,
@@ -4257,7 +4257,7 @@
       "description": "<p>Lane-wise division of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE8",
+      "id": "0xFD.232",
       "section": "simd",
       "prefix": "FD",
       "code": 232,
@@ -4275,7 +4275,7 @@
       "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDE9",
+      "id": "0xFD.233",
       "section": "simd",
       "prefix": "FD",
       "code": 233,
@@ -4293,7 +4293,7 @@
       "description": "<p>Calculates the lane-wise [maximum] of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDEA",
+      "id": "0xFD.234",
       "section": "simd",
       "prefix": "FD",
       "code": 234,
@@ -4311,7 +4311,7 @@
       "description": "<p>Lane-wise minimum value, defined as b &lt; a ? b : a</p>"
     },
     {
-      "id": "0xFDEB",
+      "id": "0xFD.235",
       "section": "simd",
       "prefix": "FD",
       "code": 235,
@@ -4329,7 +4329,7 @@
       "description": "<p>Lane-wise maximum value, defined as a &lt; b ? b : a</p>"
     },
     {
-      "id": "0xFDEC",
+      "id": "0xFD.236",
       "section": "simd",
       "prefix": "FD",
       "code": 236,
@@ -4347,7 +4347,7 @@
       "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDED",
+      "id": "0xFD.237",
       "section": "simd",
       "prefix": "FD",
       "code": 237,
@@ -4365,7 +4365,7 @@
       "description": "<p>Negates each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDEE",
+      "id": "0xFD.238",
       "section": "simd",
       "prefix": "FD",
       "code": 238,
@@ -4384,7 +4384,7 @@
       "description": "<p>Opcode location during prototyping.</p><p><em>Relaxed SIMD proposal</em></p>"
     },
     {
-      "id": "0xFDEF",
+      "id": "0xFD.239",
       "section": "simd",
       "prefix": "FD",
       "code": 239,
@@ -4402,7 +4402,7 @@
       "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDF0",
+      "id": "0xFD.240",
       "section": "simd",
       "prefix": "FD",
       "code": 240,
@@ -4420,7 +4420,7 @@
       "description": "<p>Lane-wise add of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDF1",
+      "id": "0xFD.241",
       "section": "simd",
       "prefix": "FD",
       "code": 241,
@@ -4438,7 +4438,7 @@
       "description": "<p>Lane-wise subtract of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDF2",
+      "id": "0xFD.242",
       "section": "simd",
       "prefix": "FD",
       "code": 242,
@@ -4456,7 +4456,7 @@
       "description": "<p>Lane-wise multiply of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>"
     },
     {
-      "id": "0xFDF3",
+      "id": "0xFD.243",
       "section": "simd",
       "prefix": "FD",
       "code": 243,
@@ -4474,7 +4474,7 @@
       "description": "<p>Lane-wise divide of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDF4",
+      "id": "0xFD.244",
       "section": "simd",
       "prefix": "FD",
       "code": 244,
@@ -4492,7 +4492,7 @@
       "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>"
     },
     {
-      "id": "0xFDF5",
+      "id": "0xFD.245",
       "section": "simd",
       "prefix": "FD",
       "code": 245,
@@ -4510,7 +4510,7 @@
       "description": "<p>Calculates the lane-wise maximum of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDF6",
+      "id": "0xFD.246",
       "section": "simd",
       "prefix": "FD",
       "code": 246,
@@ -4528,7 +4528,7 @@
       "description": "<p>Lane-wise minimum value</p>"
     },
     {
-      "id": "0xFDF7",
+      "id": "0xFD.247",
       "section": "simd",
       "prefix": "FD",
       "code": 247,
@@ -4546,7 +4546,7 @@
       "description": "<p>Lane-wise maximum value</p>"
     },
     {
-      "id": "0xFDF8",
+      "id": "0xFD.248",
       "section": "simd",
       "prefix": "FD",
       "code": 248,
@@ -4566,7 +4566,7 @@
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit signed integers.</p>"
     },
     {
-      "id": "0xFDF9",
+      "id": "0xFD.249",
       "section": "simd",
       "prefix": "FD",
       "code": 249,
@@ -4586,7 +4586,7 @@
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit unsigned integers.</p>"
     },
     {
-      "id": "0xFDFA",
+      "id": "0xFD.250",
       "section": "simd",
       "prefix": "FD",
       "code": 250,
@@ -4606,7 +4606,7 @@
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit signed integers into a 128-bit vector of four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDFB",
+      "id": "0xFD.251",
       "section": "simd",
       "prefix": "FD",
       "code": 251,
@@ -4626,7 +4626,7 @@
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit unsigned integers into a 128-bit vector of four 32-bit floating point numbers.</p>"
     },
     {
-      "id": "0xFDFC",
+      "id": "0xFD.252",
       "section": "simd",
       "prefix": "FD",
       "code": 252,
@@ -4647,7 +4647,7 @@
       "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>"
     },
     {
-      "id": "0xFDFD",
+      "id": "0xFD.253",
       "section": "simd",
       "prefix": "FD",
       "code": 253,
@@ -4668,7 +4668,7 @@
       "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>"
     },
     {
-      "id": "0xFDFE",
+      "id": "0xFD.254",
       "section": "simd",
       "prefix": "FD",
       "code": 254,
@@ -4688,7 +4688,7 @@
       "description": "<p>Lane-wise conversion from signed integer to floating point.</p>"
     },
     {
-      "id": "0xFDFF",
+      "id": "0xFD.255",
       "section": "simd",
       "prefix": "FD",
       "code": 255,

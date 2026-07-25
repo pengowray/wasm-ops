@@ -51,7 +51,10 @@ export class Panel {
     // Instructions with something written about them have an article to clone.
     // Unassigned slots do not, and get a heading so that clicking one still
     // answers the question it implies: what is this byte, and is it free?
-    const described = this.#details.querySelector(`#detail-${CSS.escape(key)}`);
+    // getElementById rather than a selector: ids like `0xFD.256` would need
+    // escaping to survive being parsed as a selector, and there is no reason
+    // to make them.
+    const described = document.getElementById(key);
     let content: Element;
     if (described) {
       content = described.cloneNode(true) as Element;

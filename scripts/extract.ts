@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse, type HTMLElement } from 'node-html-parser';
 import { chopUp } from '../src/model/names.ts';
-import { opcodeBytes, opcodeId } from '../src/model/types.ts';
+import { legacyHexId, opcodeBytes, opcodeId } from '../src/model/types.ts';
 import type { Opcode, OpcodeStatus, Section, SectionId } from '../src/model/types.ts';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -274,9 +274,10 @@ function main(): void {
         if (Object.keys(parts).length) op.parts = parts;
       }
 
-      const fragment = help.get(id);
+      // The legacy page keyed its help divs by the old concatenated hex id.
+      const fragment = help.get(legacyHexId(spec.prefix, code));
       if (fragment) {
-        usedHelp.add(id);
+        usedHelp.add(legacyHexId(spec.prefix, code));
         Object.assign(op, fragment);
       }
 

@@ -11,7 +11,7 @@
   },
   "opcodes": [
     {
-      "id": "0xFC00",
+      "id": "0xFC.0",
       "section": "fc",
       "prefix": "FC",
       "code": 0,
@@ -30,7 +30,7 @@
       "description": "<p>saturating form of i32.trunc_f32_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC01",
+      "id": "0xFC.1",
       "section": "fc",
       "prefix": "FC",
       "code": 1,
@@ -49,7 +49,7 @@
       "description": "<p>saturating form of i32.trunc_f32_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC02",
+      "id": "0xFC.2",
       "section": "fc",
       "prefix": "FC",
       "code": 2,
@@ -68,7 +68,7 @@
       "description": "<p>saturating form of i32.trunc_f64_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC03",
+      "id": "0xFC.3",
       "section": "fc",
       "prefix": "FC",
       "code": 3,
@@ -87,7 +87,7 @@
       "description": "<p>saturating form of i32.trunc_f64_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC04",
+      "id": "0xFC.4",
       "section": "fc",
       "prefix": "FC",
       "code": 4,
@@ -106,7 +106,7 @@
       "description": "<p>saturating form of i64.trunc_f32_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC05",
+      "id": "0xFC.5",
       "section": "fc",
       "prefix": "FC",
       "code": 5,
@@ -125,7 +125,7 @@
       "description": "<p>saturating form of i64.trunc_f32_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC06",
+      "id": "0xFC.6",
       "section": "fc",
       "prefix": "FC",
       "code": 6,
@@ -144,7 +144,7 @@
       "description": "<p>saturating form of i64.trunc_f64_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC07",
+      "id": "0xFC.7",
       "section": "fc",
       "prefix": "FC",
       "code": 7,
@@ -163,7 +163,7 @@
       "description": "<p>saturating form of i64.trunc_f64_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
     },
     {
-      "id": "0xFC08",
+      "id": "0xFC.8",
       "section": "fc",
       "prefix": "FC",
       "code": 8,
@@ -180,7 +180,7 @@
       "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC09",
+      "id": "0xFC.9",
       "section": "fc",
       "prefix": "FC",
       "code": 9,
@@ -197,7 +197,7 @@
       "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC0A",
+      "id": "0xFC.10",
       "section": "fc",
       "prefix": "FC",
       "code": 10,
@@ -214,7 +214,7 @@
       "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC0B",
+      "id": "0xFC.11",
       "section": "fc",
       "prefix": "FC",
       "code": 11,
@@ -231,7 +231,7 @@
       "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC0C",
+      "id": "0xFC.12",
       "section": "fc",
       "prefix": "FC",
       "code": 12,
@@ -248,7 +248,7 @@
       "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC0D",
+      "id": "0xFC.13",
       "section": "fc",
       "prefix": "FC",
       "code": 13,
@@ -265,7 +265,7 @@
       "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC0E",
+      "id": "0xFC.14",
       "section": "fc",
       "prefix": "FC",
       "code": 14,
@@ -282,7 +282,7 @@
       "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>"
     },
     {
-      "id": "0xFC0F",
+      "id": "0xFC.15",
       "section": "fc",
       "prefix": "FC",
       "code": 15,
@@ -299,7 +299,7 @@
       "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>"
     },
     {
-      "id": "0xFC10",
+      "id": "0xFC.16",
       "section": "fc",
       "prefix": "FC",
       "code": 16,
@@ -316,7 +316,7 @@
       "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>"
     },
     {
-      "id": "0xFC11",
+      "id": "0xFC.17",
       "section": "fc",
       "prefix": "FC",
       "code": 17,
@@ -333,7 +333,7 @@
       "description": "<p>fills a range in a table with a value</p>\n<p><em>Reference Types Proposal</em></p>"
     },
     {
-      "id": "0xFC12",
+      "id": "0xFC.18",
       "section": "fc",
       "prefix": "FC",
       "code": 18,
@@ -345,7 +345,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC13",
+      "id": "0xFC.19",
       "section": "fc",
       "prefix": "FC",
       "code": 19,
@@ -357,7 +357,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC14",
+      "id": "0xFC.20",
       "section": "fc",
       "prefix": "FC",
       "code": 20,
@@ -369,7 +369,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC15",
+      "id": "0xFC.21",
       "section": "fc",
       "prefix": "FC",
       "code": 21,
@@ -381,7 +381,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC16",
+      "id": "0xFC.22",
       "section": "fc",
       "prefix": "FC",
       "code": 22,
@@ -393,7 +393,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC17",
+      "id": "0xFC.23",
       "section": "fc",
       "prefix": "FC",
       "code": 23,
@@ -405,7 +405,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC18",
+      "id": "0xFC.24",
       "section": "fc",
       "prefix": "FC",
       "code": 24,
@@ -417,7 +417,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC19",
+      "id": "0xFC.25",
       "section": "fc",
       "prefix": "FC",
       "code": 25,
@@ -429,7 +429,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC1A",
+      "id": "0xFC.26",
       "section": "fc",
       "prefix": "FC",
       "code": 26,
@@ -441,7 +441,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC1B",
+      "id": "0xFC.27",
       "section": "fc",
       "prefix": "FC",
       "code": 27,
@@ -453,7 +453,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC1C",
+      "id": "0xFC.28",
       "section": "fc",
       "prefix": "FC",
       "code": 28,
@@ -465,7 +465,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC1D",
+      "id": "0xFC.29",
       "section": "fc",
       "prefix": "FC",
       "code": 29,
@@ -477,7 +477,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC1E",
+      "id": "0xFC.30",
       "section": "fc",
       "prefix": "FC",
       "code": 30,
@@ -489,7 +489,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFC1F",
+      "id": "0xFC.31",
       "section": "fc",
       "prefix": "FC",
       "code": 31,

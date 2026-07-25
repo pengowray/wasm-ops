@@ -185,7 +185,7 @@ export function renderCell(op: Opcode, filtered = false): string {
 
   const linkable = hasDetail(op) && !op.linkTo;
   const tag = linkable ? 'a' : 'div';
-  const href = linkable ? ` href="#detail-${op.id}"` : '';
+  const href = linkable ? ` href="#${op.id}"` : '';
   const hidden = filtered ? ' data-filtered="1"' : '';
   const label = op.name ? ` aria-label="${escapeHtml(`${specText(op)} ${op.name}`)}"` : '';
 
@@ -263,7 +263,7 @@ export function renderDetail(op: Opcode): string {
   }
 
   return (
-    `<article class="detail" id="detail-${op.id}" data-key="${op.id}">` +
+    `<article class="detail" id="${op.id}" data-key="${op.id}">` +
     rows.join('\n') +
     `</article>`
   );

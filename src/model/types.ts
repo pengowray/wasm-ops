@@ -76,8 +76,12 @@ export interface StackSignature {
 
 export interface Opcode {
   /**
-   * Canonical id, and the anchor used in URLs: `0x00`, `0xFB80`, `0xFD100`.
-   * Matches the ids the old help divs used, so existing deep links survive.
+   * Canonical id, and the anchor used in URLs: `0x00`, `0xFB.128`, `0xFD.256`.
+   *
+   * Follows the specification's notation — prefix in hex, sub-opcode in decimal
+   * — with a dot for the separator so it survives a URL. The old form
+   * concatenated the two into `0xFD100`, which reads as a run of bytes and is
+   * not one: that instruction encodes as FD 80 02.
    */
   id: string;
   section: SectionId;
@@ -142,6 +146,15 @@ export function toHex(value: number): string {
 
 /** The canonical id for a (prefix, code) pair. */
 export function opcodeId(prefix: string, code: number): string {
+  return prefix ? `0x${prefix}.${code}` : `0x${toHex(code)}`;
+}
+
+/**
+ * The id the pre-2026 page used: prefix and sub-opcode run together in hex,
+ * `0xFD100`. Retained only to match against the legacy page during
+ * verification; nothing on the site uses it.
+ */
+export function legacyHexId(prefix: string, code: number): string {
   return `0x${prefix}${toHex(code)}`;
 }
 

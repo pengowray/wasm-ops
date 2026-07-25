@@ -27,7 +27,12 @@ createServer(async (request, response) => {
 
   try {
     const body = await readFile(file);
-    response.writeHead(200, { 'content-type': TYPES[extname(file)] ?? 'application/octet-stream' });
+    response.writeHead(200, {
+      'content-type': TYPES[extname(file)] ?? 'application/octet-stream',
+      // Without this the browser happily serves a previous build back to you
+      // after a rebuild, and you debug a page that no longer exists on disk.
+      'cache-control': 'no-store',
+    });
     response.end(body);
   } catch {
     response.writeHead(404, { 'content-type': 'text/plain' });

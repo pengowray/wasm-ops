@@ -195,16 +195,21 @@ function start(
     }
     panel.open(key);
     highlighter.pin(cell);
-    history.replaceState(null, '', `#detail-${key}`);
+    history.replaceState(null, '', `#${key}`);
   });
 
   // --- deep links ---------------------------------------------------------
 
-  const match = /^#(?:detail-)?(0x[0-9A-Fa-f]+)$/.exec(location.hash);
-  if (match) {
-    const key = match[1]!.toUpperCase().replace('0X', '0x');
-    const cell = chart.querySelector<HTMLElement>(`.cell[data-key="${CSS.escape(key)}"]`);
-    if (cell) {
+  // Ids look like `0x28` or `0xFD.256`. Matched case-insensitively against the
+  // real keys rather than normalised by hand, since only the hex part has a
+  // case to get wrong.
+  const wanted = decodeURIComponent(location.hash.slice(1)).toLowerCase();
+  if (wanted) {
+    const key = [...byId.keys()].find((id) => id.toLowerCase() === wanted);
+    const cell = key
+      ? chart.querySelector<HTMLElement>(`.cell[data-key="${CSS.escape(key)}"]`)
+      : null;
+    if (key && cell) {
       panel.open(key);
       highlighter.pin(cell);
       cell.scrollIntoView({ block: 'center' });

@@ -14,7 +14,7 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'node-html-parser';
-import { opcodeBytes, opcodeId } from '../src/model/types.ts';
+import { legacyHexId, opcodeBytes, opcodeId } from '../src/model/types.ts';
 import type { Opcode } from '../src/model/types.ts';
 import { loadData } from '../src/model/load.ts';
 
@@ -119,7 +119,8 @@ function main(): void {
     );
   } else {
     const legacy: Record<string, string> = JSON.parse(readFileSync(LEGACY, 'utf8'));
-    const byId = new Map(data.opcodes.map((o) => [o.id, o]));
+    // Keyed by the legacy id, since that is what the snapshot uses.
+    const byId = new Map(data.opcodes.map((o) => [legacyHexId(o.prefix, o.code), o]));
     let compared = 0;
 
     for (const [id, raw] of Object.entries(legacy)) {

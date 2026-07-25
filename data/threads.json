@@ -11,7 +11,7 @@
   },
   "opcodes": [
     {
-      "id": "0xFE00",
+      "id": "0xFE.0",
       "section": "threads",
       "prefix": "FE",
       "code": 0,
@@ -27,7 +27,7 @@
       }
     },
     {
-      "id": "0xFE01",
+      "id": "0xFE.1",
       "section": "threads",
       "prefix": "FE",
       "code": 1,
@@ -44,7 +44,7 @@
       }
     },
     {
-      "id": "0xFE02",
+      "id": "0xFE.2",
       "section": "threads",
       "prefix": "FE",
       "code": 2,
@@ -61,7 +61,7 @@
       }
     },
     {
-      "id": "0xFE03",
+      "id": "0xFE.3",
       "section": "threads",
       "prefix": "FE",
       "code": 3,
@@ -77,7 +77,7 @@
       }
     },
     {
-      "id": "0xFE04",
+      "id": "0xFE.4",
       "section": "threads",
       "prefix": "FE",
       "code": 4,
@@ -89,7 +89,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE05",
+      "id": "0xFE.5",
       "section": "threads",
       "prefix": "FE",
       "code": 5,
@@ -101,7 +101,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE06",
+      "id": "0xFE.6",
       "section": "threads",
       "prefix": "FE",
       "code": 6,
@@ -113,7 +113,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE07",
+      "id": "0xFE.7",
       "section": "threads",
       "prefix": "FE",
       "code": 7,
@@ -125,7 +125,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE08",
+      "id": "0xFE.8",
       "section": "threads",
       "prefix": "FE",
       "code": 8,
@@ -137,7 +137,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE09",
+      "id": "0xFE.9",
       "section": "threads",
       "prefix": "FE",
       "code": 9,
@@ -149,7 +149,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE0A",
+      "id": "0xFE.10",
       "section": "threads",
       "prefix": "FE",
       "code": 10,
@@ -161,7 +161,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE0B",
+      "id": "0xFE.11",
       "section": "threads",
       "prefix": "FE",
       "code": 11,
@@ -173,7 +173,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE0C",
+      "id": "0xFE.12",
       "section": "threads",
       "prefix": "FE",
       "code": 12,
@@ -185,7 +185,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE0D",
+      "id": "0xFE.13",
       "section": "threads",
       "prefix": "FE",
       "code": 13,
@@ -197,7 +197,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE0E",
+      "id": "0xFE.14",
       "section": "threads",
       "prefix": "FE",
       "code": 14,
@@ -209,7 +209,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE0F",
+      "id": "0xFE.15",
       "section": "threads",
       "prefix": "FE",
       "code": 15,
@@ -221,7 +221,7 @@
       "status": "reserved"
     },
     {
-      "id": "0xFE10",
+      "id": "0xFE.16",
       "section": "threads",
       "prefix": "FE",
       "code": 16,
@@ -238,7 +238,7 @@
       "description": "<p>atomically load 4 bytes as i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE11",
+      "id": "0xFE.17",
       "section": "threads",
       "prefix": "FE",
       "code": 17,
@@ -255,7 +255,7 @@
       "description": "<p>atomically load 8 bytes as i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE12",
+      "id": "0xFE.18",
       "section": "threads",
       "prefix": "FE",
       "code": 18,
@@ -274,7 +274,7 @@
       "description": "<p>atomically load 1 byte and zero-extend i8 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE13",
+      "id": "0xFE.19",
       "section": "threads",
       "prefix": "FE",
       "code": 19,
@@ -293,7 +293,7 @@
       "description": "<p>atomically load 2 bytes and zero-extend i16 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE14",
+      "id": "0xFE.20",
       "section": "threads",
       "prefix": "FE",
       "code": 20,
@@ -312,7 +312,7 @@
       "description": "<p>atomically load 1 byte and zero-extend i8 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE15",
+      "id": "0xFE.21",
       "section": "threads",
       "prefix": "FE",
       "code": 21,
@@ -331,7 +331,7 @@
       "description": "<p>atomically load 2 bytes and zero-extend i16 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE16",
+      "id": "0xFE.22",
       "section": "threads",
       "prefix": "FE",
       "code": 22,
@@ -350,7 +350,7 @@
       "description": "<p>atomically load 4 bytes and zero-extend i32 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE17",
+      "id": "0xFE.23",
       "section": "threads",
       "prefix": "FE",
       "code": 23,
@@ -367,7 +367,7 @@
       "description": "<p>(no conversion) atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE18",
+      "id": "0xFE.24",
       "section": "threads",
       "prefix": "FE",
       "code": 24,
@@ -384,7 +384,7 @@
       "description": "<p>(no conversion) atomically store 8 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE19",
+      "id": "0xFE.25",
       "section": "threads",
       "prefix": "FE",
       "code": 25,
@@ -402,7 +402,7 @@
       "description": "<p>wrap i32 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE1A",
+      "id": "0xFE.26",
       "section": "threads",
       "prefix": "FE",
       "code": 26,
@@ -420,7 +420,7 @@
       "description": "<p>wrap i32 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE1B",
+      "id": "0xFE.27",
       "section": "threads",
       "prefix": "FE",
       "code": 27,
@@ -438,7 +438,7 @@
       "description": "<p>wrap i64 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE1C",
+      "id": "0xFE.28",
       "section": "threads",
       "prefix": "FE",
       "code": 28,
@@ -456,7 +456,7 @@
       "description": "<p>wrap i64 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE1D",
+      "id": "0xFE.29",
       "section": "threads",
       "prefix": "FE",
       "code": 29,
@@ -474,7 +474,7 @@
       "description": "<p>wrap i64 to i32 and atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>"
     },
     {
-      "id": "0xFE1E",
+      "id": "0xFE.30",
       "section": "threads",
       "prefix": "FE",
       "code": 30,
@@ -491,7 +491,7 @@
       "description": "<p>32-bit sign-agnostic addition</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE1F",
+      "id": "0xFE.31",
       "section": "threads",
       "prefix": "FE",
       "code": 31,
@@ -508,7 +508,7 @@
       "description": "<p>64-bit sign-agnostic addition</p>\n<p>Read: 8 bytes, Write: 8 bytes</p>\n<p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE20",
+      "id": "0xFE.32",
       "section": "threads",
       "prefix": "FE",
       "code": 32,
@@ -526,7 +526,7 @@
       "description": "<p>8-bit sign-agnostic addition</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE21",
+      "id": "0xFE.33",
       "section": "threads",
       "prefix": "FE",
       "code": 33,
@@ -544,7 +544,7 @@
       "description": "<p>16-bit sign-agnostic addition</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE22",
+      "id": "0xFE.34",
       "section": "threads",
       "prefix": "FE",
       "code": 34,
@@ -562,7 +562,7 @@
       "description": "<p>8-bit sign-agnostic addition</p>\n<p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE23",
+      "id": "0xFE.35",
       "section": "threads",
       "prefix": "FE",
       "code": 35,
@@ -580,7 +580,7 @@
       "description": "<p>64-bit sign-agnostic addition</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE24",
+      "id": "0xFE.36",
       "section": "threads",
       "prefix": "FE",
       "code": 36,
@@ -598,7 +598,7 @@
       "description": "<p>32-bit sign-agnostic addition</p>\n<p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE25",
+      "id": "0xFE.37",
       "section": "threads",
       "prefix": "FE",
       "code": 37,
@@ -615,7 +615,7 @@
       "description": "<p>32-bit sign-agnostic subtraction</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE26",
+      "id": "0xFE.38",
       "section": "threads",
       "prefix": "FE",
       "code": 38,
@@ -632,7 +632,7 @@
       "description": "<p>64-bit sign-agnostic subtraction</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE27",
+      "id": "0xFE.39",
       "section": "threads",
       "prefix": "FE",
       "code": 39,
@@ -650,7 +650,7 @@
       "description": "<p>8-bit sign-agnostic subtraction</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE28",
+      "id": "0xFE.40",
       "section": "threads",
       "prefix": "FE",
       "code": 40,
@@ -668,7 +668,7 @@
       "description": "<p>16-bit sign-agnostic subtraction</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE29",
+      "id": "0xFE.41",
       "section": "threads",
       "prefix": "FE",
       "code": 41,
@@ -686,7 +686,7 @@
       "description": "<p>8-bit sign-agnostic subtraction</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE2A",
+      "id": "0xFE.42",
       "section": "threads",
       "prefix": "FE",
       "code": 42,
@@ -704,7 +704,7 @@
       "description": "<p>16-bit sign-agnostic subtraction</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE2B",
+      "id": "0xFE.43",
       "section": "threads",
       "prefix": "FE",
       "code": 43,
@@ -722,7 +722,7 @@
       "description": "<p>32-bit sign-agnostic subtraction</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE2C",
+      "id": "0xFE.44",
       "section": "threads",
       "prefix": "FE",
       "code": 44,
@@ -739,7 +739,7 @@
       "description": "<p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE2D",
+      "id": "0xFE.45",
       "section": "threads",
       "prefix": "FE",
       "code": 45,
@@ -756,7 +756,7 @@
       "description": "<p>64-bit sign-agnostic bitwise and</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE2E",
+      "id": "0xFE.46",
       "section": "threads",
       "prefix": "FE",
       "code": 46,
@@ -774,7 +774,7 @@
       "description": "<p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE2F",
+      "id": "0xFE.47",
       "section": "threads",
       "prefix": "FE",
       "code": 47,
@@ -792,7 +792,7 @@
       "description": "<p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE30",
+      "id": "0xFE.48",
       "section": "threads",
       "prefix": "FE",
       "code": 48,
@@ -810,7 +810,7 @@
       "description": "<p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE31",
+      "id": "0xFE.49",
       "section": "threads",
       "prefix": "FE",
       "code": 49,
@@ -828,7 +828,7 @@
       "description": "<p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE32",
+      "id": "0xFE.50",
       "section": "threads",
       "prefix": "FE",
       "code": 50,
@@ -846,7 +846,7 @@
       "description": "<p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE33",
+      "id": "0xFE.51",
       "section": "threads",
       "prefix": "FE",
       "code": 51,
@@ -863,7 +863,7 @@
       "description": "<p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE34",
+      "id": "0xFE.52",
       "section": "threads",
       "prefix": "FE",
       "code": 52,
@@ -880,7 +880,7 @@
       "description": "<p>64-bit sign-agnostic bitwise inclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE35",
+      "id": "0xFE.53",
       "section": "threads",
       "prefix": "FE",
       "code": 53,
@@ -898,7 +898,7 @@
       "description": "<p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE36",
+      "id": "0xFE.54",
       "section": "threads",
       "prefix": "FE",
       "code": 54,
@@ -916,7 +916,7 @@
       "description": "<p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE37",
+      "id": "0xFE.55",
       "section": "threads",
       "prefix": "FE",
       "code": 55,
@@ -934,7 +934,7 @@
       "description": "<p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE38",
+      "id": "0xFE.56",
       "section": "threads",
       "prefix": "FE",
       "code": 56,
@@ -952,7 +952,7 @@
       "description": "<p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE39",
+      "id": "0xFE.57",
       "section": "threads",
       "prefix": "FE",
       "code": 57,
@@ -970,7 +970,7 @@
       "description": "<p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE3A",
+      "id": "0xFE.58",
       "section": "threads",
       "prefix": "FE",
       "code": 58,
@@ -987,7 +987,7 @@
       "description": "<p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE3B",
+      "id": "0xFE.59",
       "section": "threads",
       "prefix": "FE",
       "code": 59,
@@ -1004,7 +1004,7 @@
       "description": "<p>64-bit sign-agnostic bitwise exclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE3C",
+      "id": "0xFE.60",
       "section": "threads",
       "prefix": "FE",
       "code": 60,
@@ -1022,7 +1022,7 @@
       "description": "<p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE3D",
+      "id": "0xFE.61",
       "section": "threads",
       "prefix": "FE",
       "code": 61,
@@ -1040,7 +1040,7 @@
       "description": "<p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE3E",
+      "id": "0xFE.62",
       "section": "threads",
       "prefix": "FE",
       "code": 62,
@@ -1058,7 +1058,7 @@
       "description": "<p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE3F",
+      "id": "0xFE.63",
       "section": "threads",
       "prefix": "FE",
       "code": 63,
@@ -1076,7 +1076,7 @@
       "description": "<p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE40",
+      "id": "0xFE.64",
       "section": "threads",
       "prefix": "FE",
       "code": 64,
@@ -1094,7 +1094,7 @@
       "description": "<p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE41",
+      "id": "0xFE.65",
       "section": "threads",
       "prefix": "FE",
       "code": 65,
@@ -1111,7 +1111,7 @@
       "description": "<p>nop</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE42",
+      "id": "0xFE.66",
       "section": "threads",
       "prefix": "FE",
       "code": 66,
@@ -1128,7 +1128,7 @@
       "description": "<p>nop</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE43",
+      "id": "0xFE.67",
       "section": "threads",
       "prefix": "FE",
       "code": 67,
@@ -1146,7 +1146,7 @@
       "description": "<p>nop</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE44",
+      "id": "0xFE.68",
       "section": "threads",
       "prefix": "FE",
       "code": 68,
@@ -1164,7 +1164,7 @@
       "description": "<p>nop</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE45",
+      "id": "0xFE.69",
       "section": "threads",
       "prefix": "FE",
       "code": 69,
@@ -1182,7 +1182,7 @@
       "description": "<p>nop</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE46",
+      "id": "0xFE.70",
       "section": "threads",
       "prefix": "FE",
       "code": 70,
@@ -1200,7 +1200,7 @@
       "description": "<p>nop</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE47",
+      "id": "0xFE.71",
       "section": "threads",
       "prefix": "FE",
       "code": 71,
@@ -1218,7 +1218,7 @@
       "description": "<p>nop</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>"
     },
     {
-      "id": "0xFE48",
+      "id": "0xFE.72",
       "section": "threads",
       "prefix": "FE",
       "code": 72,
@@ -1235,7 +1235,7 @@
       "description": "<p>Load as loaded: 4 bytes</p><p>Compare expected with loaded: 32-bit compare equal</p><p>Conditionally Store replacement: store 4 bytes</p><p>Return loaded: as i32</p>"
     },
     {
-      "id": "0xFE49",
+      "id": "0xFE.73",
       "section": "threads",
       "prefix": "FE",
       "code": 73,
@@ -1252,7 +1252,7 @@
       "description": "<p>Load as loaded: 8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p>"
     },
     {
-      "id": "0xFE4A",
+      "id": "0xFE.74",
       "section": "threads",
       "prefix": "FE",
       "code": 74,
@@ -1270,7 +1270,7 @@
       "description": "<p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i32</p>"
     },
     {
-      "id": "0xFE4B",
+      "id": "0xFE.75",
       "section": "threads",
       "prefix": "FE",
       "code": 75,
@@ -1288,7 +1288,7 @@
       "description": "<p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i8 to i32</p>"
     },
     {
-      "id": "0xFE4C",
+      "id": "0xFE.76",
       "section": "threads",
       "prefix": "FE",
       "code": 76,
@@ -1306,7 +1306,7 @@
       "description": "<p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i64</p>"
     },
     {
-      "id": "0xFE4D",
+      "id": "0xFE.77",
       "section": "threads",
       "prefix": "FE",
       "code": 77,
@@ -1324,7 +1324,7 @@
       "description": "<p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i16 to i64</p>"
     },
     {
-      "id": "0xFE4E",
+      "id": "0xFE.78",
       "section": "threads",
       "prefix": "FE",
       "code": 78,
@@ -1342,7 +1342,7 @@
       "description": "<p>Load as loaded:4 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes</p><p>Return loaded: zero-extended from i32 to i64</p>"
     },
     {
-      "id": "0xFE4F",
+      "id": "0xFE.79",
       "section": "threads",
       "prefix": "FE",
       "code": 79,
