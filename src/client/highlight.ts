@@ -23,6 +23,13 @@ const CLASSES = ['hl-self', 'hl-op', 'hl-pre', 'hl-tag'] as const;
 /** Cells in the chart and squares in the map both carry these attributes. */
 const TARGET = '.cell, .map-cell';
 
+/**
+ * A cell that filtering has emptied keeps its place in the byte grid but is
+ * showing nothing. Lighting it up would put colour in a slot the reader has
+ * asked not to see, which reads as though something is there.
+ */
+const NOT_HIDDEN = ':not([data-filtered])';
+
 export class Highlighter {
   #pinnedKey: string | null = null;
   #lit: HTMLElement[] = [];
@@ -79,7 +86,7 @@ export class Highlighter {
       el.classList.remove('pinned');
     }
     if (this.#pinnedTag) {
-      const selector = `[data-tags~="${CSS.escape(this.#pinnedTag)}"]`;
+      const selector = `[data-tags~="${CSS.escape(this.#pinnedTag)}"]${NOT_HIDDEN}`;
       for (const el of document.querySelectorAll<HTMLElement>(selector)) {
         el.classList.add('hl-tag');
         this.#lit.push(el);
@@ -98,7 +105,9 @@ export class Highlighter {
 
     if (!this.#pinnedKey) return;
 
-    const selector = `[data-key="${CSS.escape(this.#pinnedKey)}"]`;
+    // Same reasoning as the highlight: a pinned outline on an emptied slot
+    // would claim there is something in it.
+    const selector = `[data-key="${CSS.escape(this.#pinnedKey)}"]${NOT_HIDDEN}`;
     for (const el of document.querySelectorAll<HTMLElement>(selector)) {
       if (el.matches(TARGET)) el.classList.add('pinned');
     }
@@ -125,12 +134,15 @@ export class Highlighter {
       }
     };
 
-    if (op) light(`[data-op="${CSS.escape(op)}"]`, 'hl-op');
-    if (pre && includeType) light(`[data-pre="${CSS.escape(pre)}"]`, 'hl-pre');
+    if (op) light(`[data-op="${CSS.escape(op)}"]${NOT_HIDDEN}`, 'hl-op');
+    if (pre && includeType) light(`[data-pre="${CSS.escape(pre)}"]${NOT_HIDDEN}`, 'hl-pre');
     // The instruction itself, in both the chart and the map.
     if (key) {
       const escaped = CSS.escape(key);
-      light(`.cell[data-key="${escaped}"], .map-cell[data-key="${escaped}"]`, 'hl-self');
+      light(
+        `.cell[data-key="${escaped}"]${NOT_HIDDEN}, .map-cell[data-key="${escaped}"]`,
+        'hl-self',
+      );
     }
 
     // The hovered element itself always counts, even if it carried no

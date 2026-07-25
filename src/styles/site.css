@@ -124,7 +124,15 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
  * that is already several screens tall. The pin button opts in.
  */
 .toolbar {
-	z-index: 20;
+	/*
+	 * Always positioned, so it reliably creates one stacking context that sits
+	 * above the detail panel — otherwise the "Show" dropdown inside it is
+	 * trapped below and the panel covers it. `backdrop-filter` used to create
+	 * that context implicitly, at the wrong level and for no benefit: the
+	 * background here is opaque, so there was nothing to blur.
+	 */
+	position: relative;
+	z-index: 45;
 	flex-wrap: wrap;
 	gap: .5rem 1.25rem;
 	align-items: flex-start;
@@ -134,7 +142,6 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 	border: 1px solid var(--rule-soft);
 	border-radius: var(--radius);
 	font-size: .85rem;
-	backdrop-filter: blur(6px);
 }
 
 .control {
