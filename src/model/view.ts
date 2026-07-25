@@ -202,6 +202,38 @@ function sortOpcodes(ops: Opcode[], order: OrderBy): Opcode[] {
   );
 }
 
+/**
+ * Which rows of a section's byte grid are worth drawing, as the base code of
+ * each — 0x30 for the row 0x30–0x3F.
+ *
+ * Trailing empty rows say nothing: the section simply does not reach that far.
+ * The GC table is 128 slots for 31 instructions and most of that emptiness is
+ * at the end, all of it beyond the last row anything survives in once the
+ * superseded encodings are hidden. Interior gaps are kept — a hole in the
+ * middle of a run is a fact about the encoding — but a row that filtering has
+ * emptied entirely goes too, since row labels are explicit rather than
+ * positional and dropping one cannot misalign the rest.
+ *
+ * Exported because the navigation map draws the same grid and has to reach the
+ * same answer; when it did this by eye instead, the map kept six blank rows of
+ * GC that the chart had already stopped drawing.
+ */
+export function gridRows(section: Section, ops: Opcode[], options: ViewOptions): number[] {
+  const lastUsed = ops.reduce(
+    (last, op) => (op.name && passesStatus(op, options) ? Math.max(last, op.code) : last),
+    section.start,
+  );
+  const end = Math.min(section.start + section.count, (lastUsed | 0xf) + 1);
+
+  const rows: number[] = [];
+  for (let base = section.start; base < end; base += 16) {
+    const row = ops.filter((op) => op.code >= base && op.code < base + 16);
+    if (!row.length || row.every((op) => !passesStatus(op, options))) continue;
+    rows.push(base);
+  }
+  return rows;
+}
+
 /** Lays one section out as a 16-wide byte grid, with row and column headers. */
 function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): ViewItem[] {
   const items: ViewItem[] = [];
@@ -218,29 +250,9 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
     });
   }
 
-  /*
-   * Trailing empty rows say nothing — the section simply does not reach that
-   * far — so the grid stops after the last row with something in it. Interior
-   * gaps are kept: a hole in the middle of a run is a fact about the encoding.
-   * The GC table is 128 slots for 31 instructions, and most of that emptiness
-   * is at the end.
-   */
-  const lastUsed = ops.reduce(
-    (last, op) => (op.name && passesStatus(op, options) ? Math.max(last, op.code) : last),
-    section.start,
-  );
-  const end = Math.min(section.start + section.count, (lastUsed | 0xf) + 1);
-
-  // Walk the section's code range so gaps keep their position, and drop
-  // any row that filtering has emptied entirely.
-  for (let base = section.start; base < end; base += 16) {
-    const row = ops.filter((op) => op.code >= base && op.code < base + 16);
-    // Row labels are explicit rather than positional, so a row in which
-    // everything has been filtered away can be dropped without misaligning
-    // the rows that remain.
-    if (!row.length || row.every((op) => !passesStatus(op, options))) continue;
+  for (const base of gridRows(section, ops, options)) {
     items.push({ kind: 'rowhead', key: `rowhead:${section.id}:${base}`, label: rowLabel(base) });
-    for (const op of row) {
+    for (const op of ops.filter((op) => op.code >= base && op.code < base + 16)) {
       const filtered = !passesStatus(op, options);
       items.push({ kind: 'cell', key: op.id, op, ...(filtered ? { filtered } : {}) });
     }

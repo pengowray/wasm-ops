@@ -16,17 +16,20 @@
  */
 
 import type { OpcodeData } from '../model/types.ts';
+import { gridRows, type ViewOptions } from '../model/view.ts';
 import { escapeHtml, partTokens, specText } from '../render/items.ts';
 import { tagTokens } from '../model/tags.ts';
 
 export class NavMap {
   readonly #root: HTMLElement;
   readonly #chart: HTMLElement;
+  readonly #data: OpcodeData;
   #observer: IntersectionObserver | null = null;
 
   constructor(root: HTMLElement, chart: HTMLElement, data: OpcodeData) {
     this.#root = root;
     this.#chart = chart;
+    this.#data = data;
 
     root.innerHTML = this.#render(data);
     this.#wireClicks();
@@ -41,7 +44,7 @@ export class NavMap {
           // The map carries the same selectable attributes as a cell, so a
           // highlight reaches it too — which is the whole point of having it.
           const attrs =
-            ` data-key="${op.id}" data-status="${op.status}"` +
+            ` data-key="${op.id}" data-status="${op.status}" data-row="${op.code >> 4}"` +
             (op.parts?.pre ? ` data-pre="${escapeHtml(op.parts.pre)}"` : '') +
             (op.parts?.mainop ? ` data-op="${escapeHtml(op.parts.mainop)}"` : '') +
             (op.name ? ` data-tags="${escapeHtml(tagTokens(op))}"` : '') +
@@ -53,7 +56,7 @@ export class NavMap {
         .join('');
 
       return (
-        `<div class="map-section">` +
+        `<div class="map-section" data-section="${section.id}">` +
         `<span class="map-label">${section.emoji ? section.emoji + ' ' : ''}` +
         `${escapeHtml(shortTitle(section.title))}</span>` +
         `<div class="map-grid">${cells}</div>` +
@@ -106,6 +109,36 @@ export class NavMap {
     this.observe();
   }
 
+  /**
+   * Drops the rows the byte grid is not drawing.
+   *
+   * A hidden square keeps its place — the map is a picture of the byte space
+   * and closing a gap would move every square after it — but a row where every
+   * square is hidden is not a gap, it is a band of nothing. The GC table is 128
+   * slots, and with the superseded 2022 encodings hidden the chart stops after
+   * the second row; the map went on drawing all eight.
+   *
+   * Driven by the filters alone, deliberately, and not by the search: hiding
+   * the historical encodings is a decision, and the map reshaping to match it
+   * is the answer to that decision. A query is typed a letter at a time, and a
+   * map that folded up and unfolded on every keystroke would be unreadable.
+   */
+  trim(options: ViewOptions): void {
+    const unsearched: ViewOptions = { ...options, match: undefined };
+    for (const section of this.#data.sections) {
+      const ops = this.#data.opcodes.filter((op) => op.section === section.id);
+      const rows = new Set(gridRows(section, ops, unsearched).map((base) => base >> 4));
+      const el = this.#root.querySelector<HTMLElement>(
+        `.map-section[data-section="${CSS.escape(section.id)}"]`,
+      );
+      for (const square of el?.querySelectorAll<HTMLElement>('.map-cell') ?? []) {
+        const row = Number(square.dataset['row']);
+        if (rows.has(row)) delete square.dataset['offgrid'];
+        else square.dataset['offgrid'] = '1';
+      }
+    }
+  }
+
   /** Re-attaches the observer after a rearrangement replaced the chart's nodes. */
   observe(): void {
     if (!this.#observer) return;
@@ -144,7 +177,7 @@ export class NavMap {
     // chart drops those; so does the map. Hiding the dormant string proposal
     // should take its heading with it, not leave an empty frame behind.
     for (const section of this.#root.querySelectorAll<HTMLElement>('.map-section')) {
-      const any = section.querySelector('.map-cell:not([data-filtered])');
+      const any = section.querySelector('.map-cell:not([data-filtered]):not([data-offgrid])');
       if (any) delete section.dataset['empty'];
       else section.dataset['empty'] = '1';
     }

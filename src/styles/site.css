@@ -481,6 +481,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .map-cell[data-status='dormant'],
 .map-cell[data-status='withdrawn'] { background: var(--rule-soft); opacity: .7; }
 
+/* A row the byte grid is not drawing at all. Whole rows only, so the columns
+   stay in line — see `NavMap.trim`. */
+.map-cell[data-offgrid] { display: none; }
+
 /* Which instructions are on screen right now — the "you are here". */
 .map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
 

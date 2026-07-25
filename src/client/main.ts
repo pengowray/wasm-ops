@@ -55,6 +55,10 @@ function start(
 
   const mapEl = document.getElementById('map');
   const navMap = mapEl ? new NavMap(mapEl, chart, data) : null;
+  // The page arrives already filtered, so the map has rows to drop before the
+  // reader has touched anything.
+  navMap?.trim(options);
+  navMap?.observe();
 
   const highlighter = new Highlighter(mapEl ? [chart, mapEl] : [chart]);
   const panel = new Panel(panelEl, detailsEl, byId);
@@ -170,6 +174,7 @@ function start(
     // Both of these hold references into the chart's DOM, which has just been
     // rebuilt from the pool.
     highlighter.restore();
+    navMap?.trim(options);
     navMap?.observe();
   }
 
