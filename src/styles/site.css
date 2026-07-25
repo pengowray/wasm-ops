@@ -1,0 +1,463 @@
+/*
+ * One stylesheet for both themes.
+ *
+ * The old page shipped two near-identical files and swapped the <link href> at
+ * runtime, which meant a flash of unstyled content and two copies of every
+ * rule to keep in sync. Colours are custom properties now: the theme follows
+ * the OS by default, and the toggle sets data-theme on <html> to override it.
+ */
+
+:root {
+	color-scheme: light dark;
+
+	--bg: #ffffff;
+	--fg: #1c1c1c;
+	--fg-dim: #666666;
+	--fg-faint: #999999;
+	--rule: #cccccc;
+	--rule-soft: #e6e6e6;
+	--surface: #f7f7f7;
+	--surface-sunk: #eeeeee;
+	--accent: #1a7f8e;
+	--accent-contrast: #ffffff;
+
+	--hatch: #aaaaaa;
+	--hatch-bg: #ffffff;
+
+	--hl-self: #24dff0;
+	--hl-op: #cff1fc;
+	--hl-pre: rgba(219, 223, 16, 0.62);
+	--hl-pinned: #ffe9a8;
+
+	--radius: 6px;
+	--move: 320ms;
+	--ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--bg: #1c1c1c;
+		--fg: #f2f2f2;
+		--fg-dim: #b4b4b4;
+		--fg-faint: #7d7d7d;
+		--rule: #3d3d3d;
+		--rule-soft: #2c2c2c;
+		--surface: #262626;
+		--surface-sunk: #222222;
+		--accent: #4fd0e0;
+		--accent-contrast: #10262a;
+
+		--hatch: #777777;
+		--hatch-bg: #1c1c1c;
+
+		--hl-self: #1d7c88;
+		--hl-op: #24414a;
+		--hl-pre: rgba(220, 110, 16, 0.62);
+		--hl-pinned: #5a4718;
+	}
+}
+
+:root[data-theme='dark'] {
+	--bg: #1c1c1c;
+	--fg: #f2f2f2;
+	--fg-dim: #b4b4b4;
+	--fg-faint: #7d7d7d;
+	--rule: #3d3d3d;
+	--rule-soft: #2c2c2c;
+	--surface: #262626;
+	--surface-sunk: #222222;
+	--accent: #4fd0e0;
+	--accent-contrast: #10262a;
+
+	--hatch: #777777;
+	--hatch-bg: #1c1c1c;
+
+	--hl-self: #1d7c88;
+	--hl-op: #24414a;
+	--hl-pre: rgba(220, 110, 16, 0.62);
+	--hl-pinned: #5a4718;
+}
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0 auto;
+	padding: 1.5rem 1rem 4rem;
+	max-width: 1600px;
+	font-family: Roboto, system-ui, sans-serif;
+	background: var(--bg);
+	color: var(--fg);
+	-webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
+.byline { margin: 0 0 1rem; color: var(--fg-dim); font-weight: 700; }
+.lede { max-width: 68ch; color: var(--fg-dim); font-size: .95rem; }
+.lede p { margin: .4rem 0; }
+
+/* Shown only once the bootstrap script has confirmed JavaScript is running. */
+.js-only { display: none; }
+.js .js-only { display: flex; }
+
+/* ------------------------------------------------------------------ toolbar */
+
+.toolbar {
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	flex-wrap: wrap;
+	gap: .5rem 1.25rem;
+	align-items: flex-start;
+	margin: 1.25rem 0;
+	padding: .6rem .8rem;
+	background: var(--surface);
+	border: 1px solid var(--rule-soft);
+	border-radius: var(--radius);
+	font-size: .85rem;
+	backdrop-filter: blur(6px);
+}
+
+.control {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .1rem .7rem;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.control legend {
+	padding: 0 .5rem 0 0;
+	color: var(--fg-faint);
+	font-size: .72rem;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+}
+
+/* `legend` cannot be a flex item, so it is floated out of the flex flow. */
+.control legend { float: left; line-height: 1.9; }
+
+.control label {
+	display: inline-flex;
+	align-items: center;
+	gap: .25rem;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.control-actions { margin-left: auto; gap: .4rem; }
+
+/* Grouping and sorting have no meaning in the byte grid, where position is
+   fixed by the opcode; unassigned slots have no meaning outside it. Controls
+   are dimmed rather than hidden so the toolbar does not reflow as you use it. */
+.toolbar[data-layout='matrix'] [data-when-layout='list'],
+.toolbar[data-layout='list'] [data-when-layout='matrix'] {
+	opacity: .4;
+	pointer-events: none;
+}
+
+button.ghost {
+	padding: .25rem .6rem;
+	font: inherit;
+	color: var(--fg-dim);
+	background: transparent;
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	cursor: pointer;
+}
+button.ghost:hover { color: var(--fg); border-color: var(--accent); }
+
+.icon-button {
+	display: inline-grid;
+	place-items: center;
+	width: 2rem;
+	height: 2rem;
+	padding: 0;
+	color: var(--fg-dim);
+	background: transparent;
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	cursor: pointer;
+}
+.icon-button:hover { color: var(--accent); border-color: var(--accent); }
+.icon-button svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+.icon-moon { fill: currentColor; stroke: none; }
+
+/* Show whichever icon represents the theme you would switch *to*. */
+.icon-moon { display: none; }
+:root[data-theme='dark'] .icon-moon { display: block; }
+:root[data-theme='dark'] .icon-sun { display: none; }
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) .icon-moon { display: block; }
+	:root:not([data-theme='light']) .icon-sun { display: none; }
+}
+
+/* -------------------------------------------------------------------- chart */
+
+.chart {
+	display: grid;
+	gap: 0;
+	align-items: stretch;
+}
+
+.chart[data-layout='matrix'] {
+	grid-template-columns: 2.6rem repeat(16, minmax(0, 1fr));
+}
+
+.chart[data-layout='list'] {
+	grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+	gap: .3rem;
+}
+
+.group {
+	grid-column: 1 / -1;
+	margin: 2rem 0 .5rem;
+	font-size: 1.25rem;
+	font-weight: 700;
+	scroll-margin-top: 5rem;
+}
+.chart > .group:first-child { margin-top: .5rem; }
+
+.group-count {
+	margin-left: .4rem;
+	padding: .05rem .4rem;
+	font-size: .7rem;
+	font-weight: 400;
+	color: var(--fg-faint);
+	border: 1px solid var(--rule);
+	border-radius: 999px;
+	vertical-align: middle;
+}
+
+.group-intro {
+	display: block;
+	margin-top: .25rem;
+	font-size: .85rem;
+	font-weight: 400;
+	color: var(--fg-dim);
+}
+
+.corner, .colhead, .rowhead {
+	display: grid;
+	place-items: center;
+	padding: .25rem;
+	font-size: .75rem;
+	font-weight: 700;
+	color: var(--fg-faint);
+}
+.chart[data-layout='list'] .corner,
+.chart[data-layout='list'] .colhead,
+.chart[data-layout='list'] .rowhead { display: none; }
+
+/* --------------------------------------------------------------------- cell */
+
+.cell {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	min-height: 3.4rem;
+	padding: .3rem .2rem;
+	font-size: .8rem;
+	line-height: 1.15;
+	text-align: center;
+	color: var(--fg-dim);
+	background: var(--bg);
+	border: 1px solid var(--rule);
+	background-clip: padding-box;
+	overflow-wrap: anywhere;
+	text-decoration: none;
+	transition: background-color 120ms linear, color 120ms linear;
+}
+.cell:hover { text-decoration: none; }
+
+/* Unassigned slots and proposals get the crosshatch the old page used, drawn
+   with a gradient rather than a base64 SVG so it follows the theme. */
+.cell[data-status='reserved'],
+.cell[data-status='proposal'],
+.cell[data-filtered] {
+	background-image:
+		repeating-linear-gradient(45deg, transparent 0 5px, var(--hatch) 5px 5.5px),
+		repeating-linear-gradient(-45deg, transparent 0 5px, var(--hatch) 5px 5.5px);
+	background-color: var(--surface-sunk);
+	color: var(--fg-faint);
+}
+
+/* A cell hidden by a filter keeps its slot but loses its content. */
+.cell[data-filtered] .cell-name,
+.cell[data-filtered] .cell-hex { visibility: hidden; }
+.cell[data-filtered] { pointer-events: none; }
+
+.cell-hex {
+	display: none;
+	font-family: 'Source Code Pro', monospace;
+	font-size: .68rem;
+	color: var(--fg-faint);
+}
+/* In the byte grid a cell's position already states its opcode; in a list it
+   has to be spelled out. */
+.chart[data-layout='list'] .cell-hex { display: block; }
+
+.cell-name { display: block; }
+
+.pre { color: inherit; }
+.op { font-size: 1.05em; font-weight: 700; }
+.post { color: inherit; }
+
+/* A line break that is not picked up by the clipboard, so copying a cell still
+   yields `i64.load16_u` on a single line. */
+.op::before, .post::before { content: '\A'; white-space: pre; }
+.chart[data-layout='list'] .op::before,
+.chart[data-layout='list'] .post::before { content: none; }
+
+.cell .jump { display: block; font-weight: 700; }
+
+/* ---------------------------------------------------------------- highlights */
+
+/* Hovering a cell lights up every cell sharing its operation, and the type
+   prefix within them. Driven by data attributes set at build time. */
+.cell.hl-op { background-color: var(--hl-op); color: var(--fg); }
+.cell.hl-self { background-color: var(--hl-self); color: var(--fg); }
+.cell.hl-pre .pre { background-color: var(--hl-pre); }
+.cell.pinned { outline: 2px solid var(--accent); outline-offset: -2px; }
+.cell.selected { background-color: var(--hl-self); color: var(--fg); }
+
+/* ------------------------------------------------------------------ movement */
+
+/*
+ * Cells are moved by the FLIP technique: after a re-layout each cell is
+ * transformed back to where it used to be, then released. The transition is
+ * deliberately short — long enough to follow a cell with your eye, not long
+ * enough to wait for.
+ */
+.cell.moving, .rowhead.moving, .colhead.moving, .corner.moving, .group.moving {
+	transition: transform var(--move) var(--ease);
+	will-change: transform;
+}
+.chart.settling .cell { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+	:root { --move: 1ms; }
+}
+
+/* -------------------------------------------------------------------- panel */
+
+.panel {
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 30;
+	display: flex;
+	flex-direction: column;
+	width: min(28rem, 92vw);
+	height: 100dvh;
+	padding: 0 1.25rem 1.5rem;
+	background: var(--bg);
+	border-left: 1px solid var(--rule);
+	box-shadow: -12px 0 32px rgba(0, 0, 0, .12);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+.panel[hidden] { display: none; }
+
+.panel-head {
+	position: sticky;
+	top: 0;
+	display: flex;
+	justify-content: flex-end;
+	padding: .6rem 0;
+	background: var(--bg);
+}
+
+.panel-body { font-size: .92rem; }
+.panel-body h3 { margin: .2rem 0 .6rem; font-size: 1.3rem; word-break: break-word; }
+.panel-body h4 {
+	margin: 1.2rem 0 .3rem;
+	font-size: .72rem;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: var(--fg-faint);
+}
+.panel-body p { margin: .5rem 0; }
+.panel-body ol, .panel-body ul { margin: .4rem 0; padding-left: 1.4rem; }
+.panel-body li { margin: .2rem 0; }
+
+/* ------------------------------------------------------------------ details */
+
+.details { margin-top: 3rem; }
+/* With JavaScript the detail panel replaces this block; without it, it is the
+   destination of every cell link and has to stay reachable. */
+.js .details { display: none; }
+
+.detail { padding: 1rem 0; border-top: 1px solid var(--rule-soft); scroll-margin-top: 5rem; }
+.detail-bytes { font-family: 'Source Code Pro', monospace; font-size: .8rem; margin: 0; }
+.detail-name { margin: .2rem 0 .5rem; }
+
+.hex { font-weight: 800; color: #b8860b; }
+.leb { font-weight: 800; color: rgb(233, 165, 109); }
+.hex-dim { font-size: smaller; color: var(--fg-faint); }
+:root[data-theme='dark'] .hex { color: khaki; }
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) .hex { color: khaki; }
+}
+
+.immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
+.op-imm-args { font-family: Georgia, serif; font-size: .95rem; }
+.op-type { font-family: Georgia, serif; }
+.op-type.large { font-size: 1.1rem; }
+
+.supsub { display: inline-block; }
+.supsub sup, .supsub sub { position: relative; display: block; font-size: .5em; line-height: 1.2; }
+.supsub sub { top: .3em; }
+
+code, .code {
+	font-family: 'Source Code Pro', monospace;
+	padding: .1em .35em;
+	font-size: 85%;
+	background: var(--surface-sunk);
+	border-radius: var(--radius);
+}
+
+/* ------------------------------------------------------------------- footer */
+
+.site-footer { margin-top: 3rem; font-size: .9rem; }
+
+.accordion {
+	padding: .5rem 0;
+	border-top: 1px solid var(--rule-soft);
+}
+.accordion > summary {
+	cursor: pointer;
+	font-weight: 700;
+	padding: .4rem 0;
+	list-style-position: outside;
+}
+.accordion > summary:hover { color: var(--accent); }
+.accordion ul { margin: .3rem 0; }
+
+/* ------------------------------------------------------------------- mobile */
+
+@media (max-width: 900px) {
+	body { padding: 1rem .5rem 3rem; }
+
+	.chart[data-layout='matrix'] { grid-template-columns: 1.9rem repeat(16, minmax(0, 1fr)); }
+	.cell { font-size: .62rem; min-height: 2.8rem; padding: .2rem .1rem; }
+	.toolbar { font-size: .78rem; }
+
+	/* On a narrow screen a side panel would leave nothing beside it, so the
+	   details come up as a bottom sheet instead. */
+	.panel {
+		top: auto;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: min(70dvh, 34rem);
+		border-left: 0;
+		border-top: 1px solid var(--rule);
+		border-radius: var(--radius) var(--radius) 0 0;
+		box-shadow: 0 -12px 32px rgba(0, 0, 0, .18);
+	}
+}

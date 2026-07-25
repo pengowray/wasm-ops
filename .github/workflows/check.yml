@@ -1,0 +1,22 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Checks the opcode data for internal consistency, and against the
+      # original page for content that has gone missing.
+      - run: npm run verify
+      - run: npm run build
