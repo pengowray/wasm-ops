@@ -70,10 +70,12 @@ export class Panel {
     // as another field.
     encoding.innerHTML = renderEncoding(op, Boolean(content.querySelector('.detail-followed')));
 
-    // The bytes go directly under the name: it is the first thing wanted of an
-    // opcode chart, and putting it here means it is not also needed above.
-    const heading = content.querySelector('.detail-name');
-    if (heading) heading.after(encoding);
+    // The summary belongs to the name — it says what the instruction does, and
+    // reads as one unit with it. The bytes come after that pair, not between
+    // them.
+    const anchor =
+      content.querySelector('.detail-summary') ?? content.querySelector('.detail-name');
+    if (anchor) anchor.after(encoding);
     else content.prepend(encoding);
 
     this.#body.replaceChildren(content);
