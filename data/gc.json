@@ -580,8 +580,7 @@
       "status": "standard",
       "parts": {
         "pre": "ref",
-        "mainop": "i",
-        "opbits": "31"
+        "mainop": "i31"
       },
       "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>",
       "proposal": "gc"
@@ -637,8 +636,7 @@
       "status": "proposal",
       "parts": {
         "pre": "ref",
-        "mainop": "i",
-        "opbits": "31",
+        "mainop": "i31",
         "rest": "shared"
       },
       "description": "<p>creates a shared i31ref from a 32-bit value, truncating the high bit</p>",
