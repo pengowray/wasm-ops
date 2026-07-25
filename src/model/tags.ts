@@ -84,11 +84,19 @@ export function tagsFor(op: Opcode): Tag[] {
     if (lane) add(`lane-${lane[1]}${lane[2]}`, `${lane[1]}${lane[2]} lanes`, 'type');
   }
 
-  // Instructions whose whole effect is moving a value on or off the operand
-  // stack: they compute nothing, touch no memory and branch nowhere. They cut
-  // across categories — `drop` is parametric, `local.get` is a variable
-  // instruction — which is exactly why it is a tag and not a category.
-  if (STACK_OPS.has(op.name)) add('stack', 'stack manipulation', 'trait');
+  /*
+   * Instructions whose subject is the stack itself.
+   *
+   * Two kinds, and they cut across categories in both cases — which is exactly
+   * why this is a tag and not a category. The operand stack: values moved on
+   * and off it without anything being computed, memory touched or a branch
+   * taken, which in WebAssembly is `drop`, `select` and the three local
+   * instructions. And the execution stack: the stack switching proposal's
+   * continuations, which suspend one and resume another.
+   */
+  if (STACK_OPS.has(op.name) || op.proposal === 'stack-switching') {
+    add('stack', 'stack manipulation', 'trait');
+  }
 
   if (op.parts?.sign === 's') add('signed', 'signed', 'trait');
   if (op.parts?.sign === 'u') add('unsigned', 'unsigned', 'trait');

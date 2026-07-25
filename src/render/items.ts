@@ -142,11 +142,14 @@ function group(bytes: string, caption: string, part = 'opcode'): string {
  */
 function renderFragment(text: string): string {
   return text
-    .split(/([._])/)
+    .split(/([._ ])/)
     .filter(Boolean)
     .map((piece) => {
       if (piece === '.') return `<span class="part-sep">.</span><wbr>`;
       if (piece === '_') return `<wbr><span class="part-sep">_</span>`;
+      // The space in `ref.test null`, which separates two words as much as an
+      // underscore does and should no more be lit than one.
+      if (piece === ' ') return `<span class="part-sep"> </span><wbr>`;
       return `<span class="part-word">${addWordBreaks(escapeHtml(piece))}</span>`;
     })
     .join('');

@@ -136,13 +136,27 @@ export function tokenise(parts: NameParts | undefined, name: string): NameToken[
   }
 
   /*
+   * A word written after a space rather than joined by an underscore.
+   *
+   * `ref.test null` and `ref.cast null` are the nullable forms, and the space
+   * is the specification's own notation for an immediate written as part of the
+   * name. The decomposition in data/ describes the instruction and stops at
+   * `test`, so without this the reassembly came up short and the whole name
+   * fell back to a single token: the cell drew it correctly but filed it under
+   * `ref.test null` rather than under `test`, and hovering `null` in one of
+   * them found the others not at all.
+   */
+  const drawn = out.map((t) => t.text).join('');
+  const trailing = name.startsWith(drawn) ? name.slice(drawn.length) : '';
+  if (/^ [a-z0-9_]+$/i.test(trailing)) push(trailing, trailing.slice(1), 'post');
+
+  /*
    * The decomposition is reassembled and checked against the name it came from.
    * It is written by hand in data/, and where it is wrong the pieces do not add
    * up to the name — `v128.load32_splat` decomposed as sign `s` plus `plat` was
-   * being drawn as `v128.load32_s_plat`, an instruction that does not exist,
-   * and `ref.test null` simply lost its `null`. Falling back to one token draws
-   * the name the data actually gives; only the hover granularity is lost, and
-   * that is the right way round.
+   * being drawn as `v128.load32_s_plat`, an instruction that does not exist.
+   * Falling back to one token draws the name the data actually gives; only the
+   * hover granularity is lost, and that is the right way round.
    */
   if (out.map((t) => t.text).join('') !== name) {
     return [{ text: name, token: name, role: 'op', first: true }];
