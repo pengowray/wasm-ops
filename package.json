@@ -1,0 +1,21 @@
+{
+  "name": "wasm-ops",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Chart of WebAssembly instructions",
+  "type": "module",
+  "scripts": {
+    "build": "node --experimental-strip-types src/build/build.ts",
+    "extract": "node --experimental-strip-types scripts/extract.ts",
+    "verify": "node --experimental-strip-types scripts/verify.ts",
+    "typecheck": "tsc --noEmit",
+    "serve": "node --experimental-strip-types scripts/serve.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "esbuild": "^0.28.1",
+    "node-html-parser": "^7.0.1",
+    "typescript": "^5.7.2"
+  },
+  "license": "(MIT OR Apache-2.0)"
+}

@@ -1,0 +1,1036 @@
+{
+  "section": {
+    "id": "stringref",
+    "title": "Reference-Typed Strings Proposal",
+    "emoji": "➰",
+    "prefix": "FB",
+    "start": 128,
+    "count": 64,
+    "intro": "This is a phase 1 proposal and may change in future. [As of 2022]"
+  },
+  "opcodes": [
+    {
+      "id": "0xFB80",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 128,
+      "bytes": [
+        251,
+        128,
+        1
+      ],
+      "name": "string.new_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "sign": "u",
+        "rest": "tf8"
+      }
+    },
+    {
+      "id": "0xFB81",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 129,
+      "bytes": [
+        251,
+        129,
+        1
+      ],
+      "name": "string.new_wtf16",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "_wtf16"
+      }
+    },
+    {
+      "id": "0xFB82",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 130,
+      "bytes": [
+        251,
+        130,
+        1
+      ],
+      "name": "string.const",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "const"
+      }
+    },
+    {
+      "id": "0xFB83",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 131,
+      "bytes": [
+        251,
+        131,
+        1
+      ],
+      "name": "string.measure_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "measure",
+        "sign": "u",
+        "rest": "tf8"
+      }
+    },
+    {
+      "id": "0xFB84",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 132,
+      "bytes": [
+        251,
+        132,
+        1
+      ],
+      "name": "string.measure_wtf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "measure",
+        "rest": "_wtf8"
+      }
+    },
+    {
+      "id": "0xFB85",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 133,
+      "bytes": [
+        251,
+        133,
+        1
+      ],
+      "name": "string.measure_wtf16",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "measure",
+        "rest": "_wtf16"
+      }
+    },
+    {
+      "id": "0xFB86",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 134,
+      "bytes": [
+        251,
+        134,
+        1
+      ],
+      "name": "string.encode_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "sign": "u",
+        "rest": "tf8"
+      }
+    },
+    {
+      "id": "0xFB87",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 135,
+      "bytes": [
+        251,
+        135,
+        1
+      ],
+      "name": "string.encode_wtf16",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "_wtf16"
+      }
+    },
+    {
+      "id": "0xFB88",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 136,
+      "bytes": [
+        251,
+        136,
+        1
+      ],
+      "name": "string.concat",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "concat"
+      }
+    },
+    {
+      "id": "0xFB89",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 137,
+      "bytes": [
+        251,
+        137,
+        1
+      ],
+      "name": "string.eq",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "eq"
+      }
+    },
+    {
+      "id": "0xFB8A",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 138,
+      "bytes": [
+        251,
+        138,
+        1
+      ],
+      "name": "string.is_usv_sequence",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "is_usv",
+        "sign": "s",
+        "rest": "equence"
+      }
+    },
+    {
+      "id": "0xFB8B",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 139,
+      "bytes": [
+        251,
+        139,
+        1
+      ],
+      "name": "string.new_lossy_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "_lossy_utf8"
+      }
+    },
+    {
+      "id": "0xFB8C",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 140,
+      "bytes": [
+        251,
+        140,
+        1
+      ],
+      "name": "string.new_wtf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "_wtf8"
+      }
+    },
+    {
+      "id": "0xFB8D",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 141,
+      "bytes": [
+        251,
+        141,
+        1
+      ],
+      "name": "string.encode_lossy_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "_lossy_utf8"
+      }
+    },
+    {
+      "id": "0xFB8E",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 142,
+      "bytes": [
+        251,
+        142,
+        1
+      ],
+      "name": "string.encode_wtf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "_wtf8"
+      }
+    },
+    {
+      "id": "0xFB8F",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 143,
+      "bytes": [
+        251,
+        143,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB90",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 144,
+      "bytes": [
+        251,
+        144,
+        1
+      ],
+      "name": "string.as_wtf8",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "as",
+        "rest": "_wtf8"
+      }
+    },
+    {
+      "id": "0xFB91",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 145,
+      "bytes": [
+        251,
+        145,
+        1
+      ],
+      "name": "stringview_wtf8.advance",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "advance"
+      }
+    },
+    {
+      "id": "0xFB92",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 146,
+      "bytes": [
+        251,
+        146,
+        1
+      ],
+      "name": "stringview_wtf8.encode_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "encode",
+        "sign": "u",
+        "rest": "tf8"
+      }
+    },
+    {
+      "id": "0xFB93",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 147,
+      "bytes": [
+        251,
+        147,
+        1
+      ],
+      "name": "stringview_wtf8.slice",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "slice"
+      }
+    },
+    {
+      "id": "0xFB94",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 148,
+      "bytes": [
+        251,
+        148,
+        1
+      ],
+      "name": "stringview_wtf8.encode_lossy_utf8",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "encode",
+        "rest": "_lossy_utf8"
+      }
+    },
+    {
+      "id": "0xFB95",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 149,
+      "bytes": [
+        251,
+        149,
+        1
+      ],
+      "name": "stringview_wtf8.encode_wtf8",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "encode",
+        "rest": "_wtf8"
+      }
+    },
+    {
+      "id": "0xFB96",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 150,
+      "bytes": [
+        251,
+        150,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB97",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 151,
+      "bytes": [
+        251,
+        151,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB98",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 152,
+      "bytes": [
+        251,
+        152,
+        1
+      ],
+      "name": "string.as_wtf16",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "as",
+        "rest": "_wtf16"
+      }
+    },
+    {
+      "id": "0xFB99",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 153,
+      "bytes": [
+        251,
+        153,
+        1
+      ],
+      "name": "stringview_wtf16.length",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "length"
+      }
+    },
+    {
+      "id": "0xFB9A",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 154,
+      "bytes": [
+        251,
+        154,
+        1
+      ],
+      "name": "stringview_wtf16.get_codeunit",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "get",
+        "rest": "_codeunit"
+      }
+    },
+    {
+      "id": "0xFB9B",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 155,
+      "bytes": [
+        251,
+        155,
+        1
+      ],
+      "name": "stringview_wtf16.encode",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "encode"
+      }
+    },
+    {
+      "id": "0xFB9C",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 156,
+      "bytes": [
+        251,
+        156,
+        1
+      ],
+      "name": "stringview_wtf16.slice",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "slice"
+      }
+    },
+    {
+      "id": "0xFB9D",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 157,
+      "bytes": [
+        251,
+        157,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB9E",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 158,
+      "bytes": [
+        251,
+        158,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB9F",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 159,
+      "bytes": [
+        251,
+        159,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBA0",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 160,
+      "bytes": [
+        251,
+        160,
+        1
+      ],
+      "name": "string.as_iter",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "as",
+        "post": "i",
+        "rest": "ter"
+      }
+    },
+    {
+      "id": "0xFBA1",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 161,
+      "bytes": [
+        251,
+        161,
+        1
+      ],
+      "name": "stringview_iter.next",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "next"
+      }
+    },
+    {
+      "id": "0xFBA2",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 162,
+      "bytes": [
+        251,
+        162,
+        1
+      ],
+      "name": "stringview_iter.advance",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "advance"
+      }
+    },
+    {
+      "id": "0xFBA3",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 163,
+      "bytes": [
+        251,
+        163,
+        1
+      ],
+      "name": "stringview_iter.rewind",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "rewind"
+      }
+    },
+    {
+      "id": "0xFBA4",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 164,
+      "bytes": [
+        251,
+        164,
+        1
+      ],
+      "name": "stringview_iter.slice",
+      "status": "standard",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "slice"
+      }
+    },
+    {
+      "id": "0xFBA5",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 165,
+      "bytes": [
+        251,
+        165,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBA6",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 166,
+      "bytes": [
+        251,
+        166,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBA7",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 167,
+      "bytes": [
+        251,
+        167,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBA8",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 168,
+      "bytes": [
+        251,
+        168,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBA9",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 169,
+      "bytes": [
+        251,
+        169,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBAA",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 170,
+      "bytes": [
+        251,
+        170,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBAB",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 171,
+      "bytes": [
+        251,
+        171,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBAC",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 172,
+      "bytes": [
+        251,
+        172,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBAD",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 173,
+      "bytes": [
+        251,
+        173,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBAE",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 174,
+      "bytes": [
+        251,
+        174,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBAF",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 175,
+      "bytes": [
+        251,
+        175,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBB0",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 176,
+      "bytes": [
+        251,
+        176,
+        1
+      ],
+      "name": "string.new_utf8_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "sign": "u",
+        "rest": "tf8_array"
+      }
+    },
+    {
+      "id": "0xFBB1",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 177,
+      "bytes": [
+        251,
+        177,
+        1
+      ],
+      "name": "string.new_wtf16_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "_wtf16_array"
+      }
+    },
+    {
+      "id": "0xFBB2",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 178,
+      "bytes": [
+        251,
+        178,
+        1
+      ],
+      "name": "string.encode_utf8_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "sign": "u",
+        "rest": "tf8_array"
+      }
+    },
+    {
+      "id": "0xFBB3",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 179,
+      "bytes": [
+        251,
+        179,
+        1
+      ],
+      "name": "string.encode_wtf16_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "_wtf16_array"
+      }
+    },
+    {
+      "id": "0xFBB4",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 180,
+      "bytes": [
+        251,
+        180,
+        1
+      ],
+      "name": "string.new_lossy_utf8_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "_lossy_utf8_array"
+      }
+    },
+    {
+      "id": "0xFBB5",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 181,
+      "bytes": [
+        251,
+        181,
+        1
+      ],
+      "name": "string.new_wtf8_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "_wtf8_array"
+      }
+    },
+    {
+      "id": "0xFBB6",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 182,
+      "bytes": [
+        251,
+        182,
+        1
+      ],
+      "name": "string.encode_lossy_utf8_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "_lossy_utf8_array"
+      }
+    },
+    {
+      "id": "0xFBB7",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 183,
+      "bytes": [
+        251,
+        183,
+        1
+      ],
+      "name": "string.encode_wtf8_array",
+      "status": "standard",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "_wtf8_array"
+      }
+    },
+    {
+      "id": "0xFBB8",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 184,
+      "bytes": [
+        251,
+        184,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBB9",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 185,
+      "bytes": [
+        251,
+        185,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBBA",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 186,
+      "bytes": [
+        251,
+        186,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBBB",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 187,
+      "bytes": [
+        251,
+        187,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBBC",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 188,
+      "bytes": [
+        251,
+        188,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBBD",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 189,
+      "bytes": [
+        251,
+        189,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBBE",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 190,
+      "bytes": [
+        251,
+        190,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFBBF",
+      "section": "stringref",
+      "prefix": "FB",
+      "code": 191,
+      "bytes": [
+        251,
+        191,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    }
+  ]
+}

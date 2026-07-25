@@ -1,0 +1,503 @@
+{
+  "section": {
+    "id": "fc",
+    "title": "FC extensions",
+    "emoji": "⭐",
+    "prefix": "FC",
+    "start": 0,
+    "count": 32,
+    "intro": "Multibyte instructions beginning with 0xFC."
+  },
+  "opcodes": [
+    {
+      "id": "0xFC00",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 0,
+      "bytes": [
+        252,
+        0
+      ],
+      "name": "i32.trunc_sat_f32_s",
+      "status": "standard",
+      "parts": {
+        "pre": "i32",
+        "mainop": "trunc",
+        "post": "sat_f32",
+        "sign": "s"
+      },
+      "description": "<p>saturating form of i32.trunc_f32_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC01",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 1,
+      "bytes": [
+        252,
+        1
+      ],
+      "name": "i32.trunc_sat_f32_u",
+      "status": "standard",
+      "parts": {
+        "pre": "i32",
+        "mainop": "trunc",
+        "post": "sat_f32",
+        "sign": "u"
+      },
+      "description": "<p>saturating form of i32.trunc_f32_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC02",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 2,
+      "bytes": [
+        252,
+        2
+      ],
+      "name": "i32.trunc_sat_f64_s",
+      "status": "standard",
+      "parts": {
+        "pre": "i32",
+        "mainop": "trunc",
+        "post": "sat_f64",
+        "sign": "s"
+      },
+      "description": "<p>saturating form of i32.trunc_f64_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC03",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 3,
+      "bytes": [
+        252,
+        3
+      ],
+      "name": "i32.trunc_sat_f64_u",
+      "status": "standard",
+      "parts": {
+        "pre": "i32",
+        "mainop": "trunc",
+        "post": "sat_f64",
+        "sign": "u"
+      },
+      "description": "<p>saturating form of i32.trunc_f64_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC04",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 4,
+      "bytes": [
+        252,
+        4
+      ],
+      "name": "i64.trunc_sat_f32_s",
+      "status": "standard",
+      "parts": {
+        "pre": "i64",
+        "mainop": "trunc",
+        "post": "sat_f32",
+        "sign": "s"
+      },
+      "description": "<p>saturating form of i64.trunc_f32_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC05",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 5,
+      "bytes": [
+        252,
+        5
+      ],
+      "name": "i64.trunc_sat_f32_u",
+      "status": "standard",
+      "parts": {
+        "pre": "i64",
+        "mainop": "trunc",
+        "post": "sat_f32",
+        "sign": "u"
+      },
+      "description": "<p>saturating form of i64.trunc_f32_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC06",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 6,
+      "bytes": [
+        252,
+        6
+      ],
+      "name": "i64.trunc_sat_f64_s",
+      "status": "standard",
+      "parts": {
+        "pre": "i64",
+        "mainop": "trunc",
+        "post": "sat_f64",
+        "sign": "s"
+      },
+      "description": "<p>saturating form of i64.trunc_f64_s</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC07",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 7,
+      "bytes": [
+        252,
+        7
+      ],
+      "name": "i64.trunc_sat_f64_u",
+      "status": "standard",
+      "parts": {
+        "pre": "i64",
+        "mainop": "trunc",
+        "post": "sat_f64",
+        "sign": "u"
+      },
+      "description": "<p>saturating form of i64.trunc_f64_u</p>\n<p><em>Non-trapping float-to-int Conversion Proposal</em></p>"
+    },
+    {
+      "id": "0xFC08",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 8,
+      "bytes": [
+        252,
+        8
+      ],
+      "name": "memory.init",
+      "status": "standard",
+      "parts": {
+        "pre": "memory",
+        "mainop": "init"
+      },
+      "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC09",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 9,
+      "bytes": [
+        252,
+        9
+      ],
+      "name": "data.drop",
+      "status": "standard",
+      "parts": {
+        "pre": "data",
+        "mainop": "drop"
+      },
+      "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC0A",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 10,
+      "bytes": [
+        252,
+        10
+      ],
+      "name": "memory.copy",
+      "status": "standard",
+      "parts": {
+        "pre": "memory",
+        "mainop": "copy"
+      },
+      "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC0B",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 11,
+      "bytes": [
+        252,
+        11
+      ],
+      "name": "memory.fill",
+      "status": "standard",
+      "parts": {
+        "pre": "memory",
+        "mainop": "fill"
+      },
+      "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC0C",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 12,
+      "bytes": [
+        252,
+        12
+      ],
+      "name": "table.init",
+      "status": "standard",
+      "parts": {
+        "pre": "table",
+        "mainop": "init"
+      },
+      "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC0D",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 13,
+      "bytes": [
+        252,
+        13
+      ],
+      "name": "elem.drop",
+      "status": "standard",
+      "parts": {
+        "pre": "elem",
+        "mainop": "drop"
+      },
+      "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC0E",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 14,
+      "bytes": [
+        252,
+        14
+      ],
+      "name": "table.copy",
+      "status": "standard",
+      "parts": {
+        "pre": "table",
+        "mainop": "copy"
+      },
+      "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>"
+    },
+    {
+      "id": "0xFC0F",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 15,
+      "bytes": [
+        252,
+        15
+      ],
+      "name": "table.grow",
+      "status": "standard",
+      "parts": {
+        "pre": "table",
+        "mainop": "grow"
+      },
+      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>"
+    },
+    {
+      "id": "0xFC10",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 16,
+      "bytes": [
+        252,
+        16
+      ],
+      "name": "table.size",
+      "status": "standard",
+      "parts": {
+        "pre": "table",
+        "mainop": "size"
+      },
+      "description": "<p>manipulate the size of a table</p>\n<p><em>Reference Types Proposal</em></p>"
+    },
+    {
+      "id": "0xFC11",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 17,
+      "bytes": [
+        252,
+        17
+      ],
+      "name": "table.fill",
+      "status": "standard",
+      "parts": {
+        "pre": "table",
+        "mainop": "fill"
+      },
+      "description": "<p>fills a range in a table with a value</p>\n<p><em>Reference Types Proposal</em></p>"
+    },
+    {
+      "id": "0xFC12",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 18,
+      "bytes": [
+        252,
+        18
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC13",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 19,
+      "bytes": [
+        252,
+        19
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC14",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 20,
+      "bytes": [
+        252,
+        20
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC15",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 21,
+      "bytes": [
+        252,
+        21
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC16",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 22,
+      "bytes": [
+        252,
+        22
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC17",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 23,
+      "bytes": [
+        252,
+        23
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC18",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 24,
+      "bytes": [
+        252,
+        24
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC19",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 25,
+      "bytes": [
+        252,
+        25
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC1A",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 26,
+      "bytes": [
+        252,
+        26
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC1B",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 27,
+      "bytes": [
+        252,
+        27
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC1C",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 28,
+      "bytes": [
+        252,
+        28
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC1D",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 29,
+      "bytes": [
+        252,
+        29
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC1E",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 30,
+      "bytes": [
+        252,
+        30
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC1F",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 31,
+      "bytes": [
+        252,
+        31
+      ],
+      "name": null,
+      "status": "reserved"
+    }
+  ]
+}
