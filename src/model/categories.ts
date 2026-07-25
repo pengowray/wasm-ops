@@ -152,31 +152,74 @@ export function categorize(op: Opcode): CategoryId {
 
 /**
  * A finer split within a category, used to break the long groups in the card
- * layout into readable runs. "Numeric" alone is 140 instructions, which is a
- * wall; "comparison", "arithmetic", "bitwise" and "conversion" are four
- * shelves you can scan.
+ * layout into readable runs. "Numeric" alone is 144 instructions, which is a
+ * wall; "arithmetic", "rounding", "comparison" and "conversion" are shelves you
+ * can scan.
  *
  * Returns null where a category is small enough to need no dividing.
  */
-export function subcategorize(op: Opcode): { id: string; label: string } | null {
-  const mainop = op.parts?.mainop ?? '';
-  const category = categorize(op);
+export interface Subcategory {
+  /** Short id, unique within its category. */
+  id: string;
+  label: string;
+  /** Selector token, qualified by category since ids repeat across them. */
+  tag: string;
+  /** Position within the category, so a sub-group appears once and whole. */
+  rank: number;
+}
 
-  const of = (id: string, label: string) => ({ id, label });
+/**
+ * The order sub-groups appear in, per category, and — since each is listed
+ * once — the guarantee that a sub-group is a single run rather than a label
+ * that reappears every time the byte order happens to come back to it.
+ */
+const SUB_ORDER: Partial<Record<CategoryId, readonly string[]>> = {
+  control: ['block', 'branch', 'call', 'exception'],
+  variable: ['local', 'global'],
+  memory: ['load', 'store', 'manage'],
+  numeric: ['const', 'arith', 'round', 'compare', 'bitwise', 'convert'],
+  vector: ['const', 'access', 'lanes', 'arith', 'round', 'compare', 'bitwise', 'convert'],
+  atomic: ['access', 'rmw', 'sync'],
+  gc: ['struct', 'array', 'i31', 'cast', 'extern'],
+};
+
+const COMPARE = new Set(['eq', 'ne', 'lt', 'gt', 'le', 'ge', 'eqz', 'any_true', 'all_true']);
+const BITWISE = new Set([
+  'and', 'or', 'xor', 'not', 'andnot', 'shl', 'shr', 'rotl', 'rotr',
+  'clz', 'ctz', 'popcnt', 'bitselect', 'bitmask',
+]);
+/** Rounding only when nothing follows: `f32.trunc` rounds, `i32.trunc_f32_s` converts. */
+const ROUND = new Set(['ceil', 'floor', 'nearest', 'trunc']);
+const CONVERT = new Set([
+  'wrap', 'extend', 'convert', 'demote', 'promote', 'reinterpret', 'trunc', 'narrow',
+]);
+/** Getting values into and out of vector lanes, rather than operating on them. */
+const LANES = new Set(['splat', 'shuffle', 'swizzle', 'extract', 'replace']);
+
+function pick(category: CategoryId, id: string, label: string): Subcategory {
+  const order = SUB_ORDER[category] ?? [];
+  const rank = order.indexOf(id);
+  return { id, label, tag: `sub-${category}-${id}`, rank: rank < 0 ? order.length : rank };
+}
+
+export function subcategorize(op: Opcode): Subcategory | null {
+  const mainop = op.parts?.mainop ?? '';
+  const post = op.parts?.post ?? '';
+  const pre = op.parts?.pre ?? '';
+  const name = op.name ?? '';
+  const category = categorize(op);
+  const of = (id: string, label: string) => pick(category, id, label);
 
   if (category === 'numeric' || category === 'vector') {
-    if (['eq', 'ne', 'lt', 'gt', 'le', 'ge', 'eqz'].includes(mainop)) return of('compare', 'Comparison');
-    if (['and', 'or', 'xor', 'shl', 'shr', 'rotl', 'rotr', 'clz', 'ctz', 'popcnt', 'bitselect', 'bitmask'].includes(mainop)) {
-      return of('bitwise', 'Bitwise');
-    }
-    if (['wrap', 'extend', 'convert', 'demote', 'promote', 'reinterpret', 'trunc'].includes(mainop)) {
-      return of('convert', 'Conversion');
-    }
-    if (['splat', 'shuffle', 'swizzle'].includes(mainop) || /_lane$/.test(op.name ?? '')) {
-      return of('lanes', 'Lane access');
-    }
     if (mainop === 'const') return of('const', 'Constants');
-    if (['ceil', 'floor', 'nearest'].includes(mainop)) return of('round', 'Rounding');
+    // v128 loads and stores are the vector half of memory access; the numeric
+    // types' loads and stores are categorised as memory and never reach here.
+    if (mainop === 'load' || mainop === 'store') return of('access', 'Loads and stores');
+    if (LANES.has(mainop) || post === 'lane') return of('lanes', 'Lane access');
+    if (ROUND.has(mainop) && !post) return of('round', 'Rounding');
+    if (CONVERT.has(mainop)) return of('convert', 'Conversion');
+    if (COMPARE.has(mainop)) return of('compare', 'Comparison');
+    if (BITWISE.has(mainop)) return of('bitwise', 'Bitwise');
     return of('arith', 'Arithmetic');
   }
 
@@ -186,22 +229,39 @@ export function subcategorize(op: Opcode): { id: string; label: string } | null 
     return of('manage', 'Managing memory');
   }
 
+  if (category === 'variable') {
+    return name.startsWith('global.') ? of('global', 'Globals') : of('local', 'Locals');
+  }
+
   if (category === 'control') {
+    if (/throw|catch|try|delegate/.test(name)) return of('exception', 'Exceptions');
     if (mainop.startsWith('br')) return of('branch', 'Branches');
-    if (['call', 'return_call', 'return'].includes(mainop) || mainop.startsWith('call')) {
-      return of('call', 'Calls');
-    }
-    if (['try', 'catch', 'throw', 'rethrow', 'delegate'].includes(mainop) || /throw|catch|try/.test(op.name ?? '')) {
-      return of('exception', 'Exceptions');
-    }
+    if (mainop.startsWith('call') || mainop.startsWith('return')) return of('call', 'Calls');
     return of('block', 'Blocks');
   }
 
   if (category === 'atomic') {
-    if (/rmw/.test(op.parts?.pre ?? '')) return of('rmw', 'Read-modify-write');
+    if (/rmw/.test(pre)) return of('rmw', 'Read-modify-write');
     if (mainop === 'load' || mainop === 'store') return of('access', 'Atomic load and store');
     return of('sync', 'Synchronisation');
   }
 
+  if (category === 'gc') {
+    const head = pre.split('.')[0] ?? '';
+    if (name.startsWith('br_on_cast') || mainop === 'test' || mainop === 'cast') {
+      return of('cast', 'Casts and tests');
+    }
+    if (head === 'struct') return of('struct', 'Structs');
+    if (head === 'array') return of('array', 'Arrays');
+    if (head === 'i31') return of('i31', 'i31 references');
+    if (head === 'any' || head === 'extern') return of('extern', 'Host conversions');
+    return null;
+  }
+
   return null;
+}
+
+/** Sort key that keeps each sub-group together, in `SUB_ORDER` order. */
+export function subcategoryRank(op: Opcode): number {
+  return subcategorize(op)?.rank ?? -1;
 }

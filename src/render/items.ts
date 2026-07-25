@@ -241,13 +241,31 @@ function renderGroupProposals(ids: string[] | undefined): string {
   return chips ? `<span class="group-proposals">${chips}</span>` : '';
 }
 
+/**
+ * A heading that is also its own property chip.
+ *
+ * A group heading names a property every instrument under it shares, which is
+ * the same thing a chip in the panel names — so clicking it lights the same
+ * cells, including the ones scrolled far away or in another section. Headings
+ * for groupings that are not properties (the byte-grid sections) stay plain
+ * text.
+ */
+function headingTag(label: string, tag: string | undefined): string {
+  if (!tag) return escapeHtml(label);
+  return (
+    `<button type="button" class="tag heading-tag" data-tag="${escapeHtml(tag)}" ` +
+    `data-kind="category">${escapeHtml(label)}</button>`
+  );
+}
+
 export function renderItem(item: ViewItem): string {
   switch (item.kind) {
     case 'group':
       return (
         `<h2 class="group" data-key="${escapeHtml(item.key)}" id="${escapeHtml(item.anchor)}">` +
         (item.emoji ? `<span class="group-emoji">${item.emoji}</span> ` : '') +
-        `${escapeHtml(item.label)} <span class="group-count">${item.count}</span>` +
+        headingTag(item.label, item.tag) +
+        ` <span class="group-count">${item.count}</span>` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
         renderGroupProposals(item.proposals) +
         `</h2>`
@@ -255,7 +273,8 @@ export function renderItem(item: ViewItem): string {
     case 'subgroup':
       return (
         `<h3 class="subgroup" data-key="${escapeHtml(item.key)}">` +
-        `${escapeHtml(item.label)}</h3>`
+        headingTag(item.label, item.tag) +
+        `</h3>`
       );
     case 'tablehead':
       return (

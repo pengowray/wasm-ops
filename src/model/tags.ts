@@ -11,7 +11,7 @@
  */
 
 import type { Opcode } from './types.ts';
-import { CATEGORY_LABELS, categorize } from './categories.ts';
+import { CATEGORY_LABELS, categorize, subcategorize } from './categories.ts';
 import { proposal } from './proposals.ts';
 
 export interface Tag {
@@ -25,6 +25,20 @@ export interface Tag {
 /** Value types that appear as a name prefix. */
 const VALUE_TYPES = new Set(['i32', 'i64', 'f32', 'f64', 'v128']);
 
+/**
+ * Instructions that move values around the operand stack without computing
+ * anything with them — which in WebAssembly is a very short list. There is no
+ * `dup` or `swap`: `drop` and `select` are the whole of the rearranging, and
+ * anything beyond them goes through a local, which is why `local.get`,
+ * `local.set` and `local.tee` belong here too.
+ *
+ * `const` is left out — it pushes an immediate rather than moving something
+ * already on the stack, and is already gathered under "Constants". Globals are
+ * left out as storage: they are a place to keep a value, not a way to reorder
+ * the stack.
+ */
+const STACK_OPS = new Set(['drop', 'select', 'select t', 'local.get', 'local.set', 'local.tee']);
+
 /** Vector lane shapes. */
 const LANE_SHAPES = new Set(['i8x16', 'i16x8', 'i32x4', 'i64x2', 'f16x8', 'f32x4', 'f64x2']);
 
@@ -36,6 +50,10 @@ export function tagsFor(op: Opcode): Tag[] {
 
   const category = categorize(op);
   add(`cat-${category}`, CATEGORY_LABELS[category], 'category');
+  // The card layout's headings are these two, so they answer the same question
+  // a chip does — "what else is here?" — and are worth being clickable.
+  const sub = subcategorize(op);
+  if (sub) add(sub.tag, sub.label, 'category');
 
   const mainop = op.parts?.mainop;
   if (mainop) add(`op-${mainop}`, mainop, 'operation');
@@ -50,6 +68,12 @@ export function tagsFor(op: Opcode): Tag[] {
     const lane = /^([if])(\d+)x/.exec(head);
     if (lane) add(`lane-${lane[1]}${lane[2]}`, `${lane[1]}${lane[2]} lanes`, 'type');
   }
+
+  // Instructions whose whole effect is moving a value on or off the operand
+  // stack: they compute nothing, touch no memory and branch nowhere. They cut
+  // across categories — `drop` is parametric, `local.get` is a variable
+  // instruction — which is exactly why it is a tag and not a category.
+  if (STACK_OPS.has(op.name)) add('stack', 'stack manipulation', 'trait');
 
   if (op.parts?.sign === 's') add('signed', 'signed', 'trait');
   if (op.parts?.sign === 'u') add('unsigned', 'unsigned', 'trait');

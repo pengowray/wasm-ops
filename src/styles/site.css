@@ -728,6 +728,27 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .tag[data-kind='status'] { background: var(--legacy-bg); }
 
+/*
+ * A heading that doubles as a chip. It has to keep looking like the heading it
+ * is — the chip treatment on an <h2> would read as a control rather than a
+ * title — so it only takes on the chip's colour once it is pinned.
+ */
+.heading-tag {
+	padding: 0;
+	font: inherit;
+	color: inherit;
+	background: none;
+	border-radius: .3rem;
+}
+.heading-tag:hover { color: var(--accent); border-color: transparent; }
+.heading-tag[aria-pressed='true'] {
+	padding: 0 .3rem;
+	margin: 0 -.3rem;
+	color: var(--hl-self-fg);
+	background: var(--hl-self);
+	border-color: transparent;
+}
+
 /* Cells matching a pinned property. */
 .cell.hl-tag { --cell-bg: var(--hl-op); color: var(--hl-op-fg); background-image: none; }
 .map-cell.hl-tag { background: var(--hl-op); }

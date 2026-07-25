@@ -14,6 +14,7 @@ import {
   CATEGORY_ORDER,
   categorize,
   subcategorize,
+  subcategoryRank,
   type CategoryId,
 } from './categories.ts';
 
@@ -82,6 +83,8 @@ export type ViewItem =
       count: number;
       /** Proposals the instructions in this group came through. */
       proposals?: string[];
+      /** Tag the heading pins when clicked, where the group *is* a property. */
+      tag?: string;
     }
   /**
    * The top-left cell of a byte grid. It carries the section's prefix, so the
@@ -93,7 +96,7 @@ export type ViewItem =
   /** Column headings for the table layout, one per group. */
   | { kind: 'tablehead'; key: string }
   /** A divider within a group — "Comparison", "Loads" — in the card layout. */
-  | { kind: 'subgroup'; key: string; label: string }
+  | { kind: 'subgroup'; key: string; label: string; tag: string }
   | { kind: 'rowhead'; key: string; label: string }
   /**
    * `filtered` cells are shown as empty slots rather than dropped. In the byte
@@ -255,20 +258,42 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
     options.layout === 'table' ? [{ kind: 'tablehead', key: `head:${key}` }] : [];
 
   /**
+   * Gathers a group into its sub-groups, in `SUB_ORDER` order, keeping the
+   * requested order within each.
+   *
+   * Without this the dividers went in wherever the byte order happened to cross
+   * a boundary, so "Loads" appeared twice — once for the memory loads and again
+   * 200 opcodes later over `f32.load_f16` alone — and a card could sit under a
+   * heading that described the instruction before it rather than itself.
+   */
+  const bySubgroup = (ops: Opcode[]): Opcode[] => {
+    if (options.layout !== 'cards') return ops;
+    return ops
+      .map((op, index) => ({ op, index, rank: subcategoryRank(op) }))
+      .sort((a, b) => a.rank - b.rank || a.index - b.index)
+      .map((entry) => entry.op);
+  };
+
+  /**
    * Writes a run of cells, breaking it with sub-group dividers. Only the card
    * layout gets them: the table has its own column headings to sit under, and
    * the byte grid is not grouped by anything but position.
    */
   const emit = (into: ViewItem[], group: string, ops: Opcode[]): void => {
     let current: string | null = null;
-    for (const op of ops) {
+    for (const op of bySubgroup(ops)) {
       if (options.layout === 'cards') {
         const sub = subcategorize(op);
         const id = sub?.id ?? null;
         if (id !== current) {
           current = id;
           if (sub) {
-            into.push({ kind: 'subgroup', key: `sub:${group}:${sub.id}`, label: sub.label });
+            into.push({
+              kind: 'subgroup',
+              key: `sub:${group}:${sub.id}`,
+              label: sub.label,
+              tag: sub.tag,
+            });
           }
         }
       }
@@ -336,6 +361,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       anchor: `cat-${category}`,
       label: CATEGORY_LABELS[category],
       count: sorted.length,
+      tag: `cat-${category}`,
     });
     items.push(...head(category));
     emit(items, category, sorted);

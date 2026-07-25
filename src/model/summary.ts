@@ -42,6 +42,9 @@ const GLOSS: Record<string, string> = {
   ceil: 'round up to the nearest integer',
   floor: 'round down to the nearest integer',
   nearest: 'round to the nearest integer, ties to even',
+  // As a rounding mode. With a source type after it (`i32.trunc_f32_s`) the
+  // same word names a conversion, handled below.
+  trunc: 'round toward zero',
 
   // Bitwise
   and: 'bitwise and',
@@ -111,6 +114,17 @@ export function summarize(op: Opcode): string | null {
     return fill ? `read ${width} from memory, ${fill}` : `read ${width} from memory`;
   }
   if (mainop === 'store' && width) return `write the low ${width} to memory`;
+
+  // `trunc` with a source type is a float-to-integer conversion, not a rounding
+  // mode — and the saturating variants differ in what they do out of range,
+  // which is the only thing worth saying about them.
+  const post = parts?.post ?? '';
+  if (mainop === 'trunc' && post) {
+    const how = post.startsWith('sat')
+      ? 'float to integer, clamped to the range'
+      : 'float to integer, trapping out of range';
+    return sign ? `${how}, ${sign === 's' ? 'signed' : 'unsigned'}` : how;
+  }
 
   if (sign) return `${gloss}, ${sign === 's' ? 'signed' : 'unsigned'}`;
   return gloss;
