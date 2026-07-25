@@ -383,14 +383,33 @@ export function renderHeading(op: Opcode): string {
  * dozens of descriptions; when the proposal finished, every one of them became
  * wrong at the same moment.
  */
+/**
+ * The feature table on webassembly.org: which engines and tools have shipped
+ * each proposal, kept current in a way a chart reviewed once a year cannot be.
+ *
+ * Linked without a fragment on purpose. The table's rows carry ids, but they
+ * are positional — `feat-row-header-21` — so a link to one would silently
+ * start pointing at a different feature the next time a proposal is added.
+ */
+const SUPPORT_URL = 'https://webassembly.org/features/';
+
 export function renderHistory(op: Opcode): string {
   const p = proposal(op.proposal);
   if (!p) return '';
+  // Superseded encodings are not features anyone can adopt, so they have no
+  // row in that table and no support to check.
+  const support =
+    p.stage === 'superseded'
+      ? ''
+      : `<a class="history-support" href="${SUPPORT_URL}" ` +
+        `title="Which engines and tools have shipped this, on webassembly.org">` +
+        `Engine support</a>`;
   return (
     `<h4>History</h4><p class="detail-history">` +
     `<a class="history-name" href="${escapeHtml(p.url)}">${escapeHtml(p.name)}</a>` +
     `<span class="history-standing">${escapeHtml(standing(p))}</span>` +
     `<span class="history-note">${escapeHtml(p.note)}</span>` +
+    support +
     `</p>`
   );
 }

@@ -774,6 +774,14 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .history-name { font-weight: 700; }
 .history-standing { font-size: .82rem; color: var(--fg-dim); }
 .history-note { font-size: .85rem; color: var(--fg-faint); }
+/* Set apart from the note above it: that says where the proposal stands in
+   the standards process, this says who has actually shipped it. */
+.history-support {
+	justify-self: start;
+	margin-top: .25rem;
+	font-size: .82rem;
+}
+.history-support::after { content: ' ↗'; }
 
 /* -------------------------------------------------------------- properties */
 

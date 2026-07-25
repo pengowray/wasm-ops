@@ -100,7 +100,8 @@ export function renderPage(
 		<label for="search">Search</label>
 		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
 			autocomplete="off" autocorrect="off" spellcheck="false"
-			aria-describedby="search-count">
+			aria-describedby="search-count"
+			title="Searches names, opcodes and descriptions. All words must match. Use tag:signed, tag:loads or tag:vector-simd to match a property exactly.">
 		<span class="search-count" id="search-count" role="status"></span>
 	</div>
 	<fieldset class="control">
