@@ -52,6 +52,21 @@
 	--proposal-s: 55%;
 	--proposal-l: 94%;
 
+	/*
+	 * The map's version of the same colours, stated rather than derived from the
+	 * chart's. A cell is a hundred pixels of tint behind text and wants to be
+	 * barely there; a map square is five pixels of nothing else and wants to be
+	 * a colour. Deriving one from the other by shifting the lightness went the
+	 * right way in the light theme and exactly the wrong way in the dark one,
+	 * where the chart tint is already at 17% and the map took it down to 9% —
+	 * squares that were, on a #1c1c1c page, black on black.
+	 *
+	 * Mid-lightness in both themes, because that is what reads against a white
+	 * page and a near-black one alike.
+	 */
+	--proposal-map-s: 62%;
+	--proposal-map-l: 45%;
+
 	--radius: 6px;
 	--move: 320ms;
 	--ease: cubic-bezier(0.2, 0.7, 0.3, 1);
@@ -85,6 +100,8 @@
 
 		--proposal-s: 28%;
 		--proposal-l: 17%;
+		--proposal-map-s: 58%;
+		--proposal-map-l: 62%;
 
 		--map-hl-op: #38b6d4;
 		--map-hl-self: #ffb52e;
@@ -119,6 +136,8 @@
 
 	--proposal-s: 28%;
 	--proposal-l: 17%;
+	--proposal-map-s: 58%;
+	--proposal-map-l: 62%;
 
 	--map-hl-op: #38b6d4;
 	--map-hl-self: #ffb52e;
@@ -828,7 +847,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	--cell-bg: hsl(var(--proposal-hue) var(--proposal-s) var(--proposal-l));
 }
 .map[data-colour='proposal'] .map-cell[data-proposal] {
-	background: hsl(var(--proposal-hue) calc(var(--proposal-s) + 15%) calc(var(--proposal-l) - 8%));
+	background: hsl(var(--proposal-hue) var(--proposal-map-s) var(--proposal-map-l));
 }
 .map[data-colour='proposal'] .map-cell.hl-op,
 .map[data-colour='proposal'] .map-cell.hl-tag { background: var(--map-hl-op); }

@@ -125,6 +125,16 @@ function start(
 
   toolbar.dataset['layout'] = options.layout;
 
+  /*
+   * The chart arrives from the server already carrying how it is coloured; the
+   * map is built here, so nothing has told it. Only `readToolbar` set that, and
+   * it does not run until the reader changes a control — so the map started
+   * uncoloured and stayed that way until something, anything, was clicked. It
+   * looked like colouring that worked in the card and table layouts but not in
+   * the grid, because switching layout was the click that turned it on.
+   */
+  if (mapEl) mapEl.dataset['colour'] = chart.dataset['colour'] ?? '';
+
   // --- arranging ----------------------------------------------------------
 
   const template = document.createElement('div');
