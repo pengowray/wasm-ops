@@ -1076,7 +1076,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * answers a question you asked by moving the mouse, and a wash of colour across
  * the chart is too loud a reply.
  */
-.part-lit {
+/* On the word, not on the whole part: the dot or underscore that joins it to
+   its neighbour is punctuation shared between two words, and lighting it made
+   the mark look as though it had overrun the thing it was answering about. */
+.part-lit .part-word {
 	background-color: var(--hl-pre);
 	border-radius: 2px;
 	box-shadow: 0 0 0 1px var(--hl-pre);

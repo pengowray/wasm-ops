@@ -129,6 +129,30 @@ function group(bytes: string, caption: string, part = 'opcode'): string {
 }
 
 /**
+ * Splits a drawn fragment into its words and the punctuation between them.
+ *
+ * The dots and underscores of a name belong to no one word — they join two —
+ * so a highlight paints the words and leaves them alone. Without this, hovering
+ * the `load` of `i64.load16_s` lit `.load`, and a name the parser could not
+ * decompose at all, like `return_call_indirect`, lit as one unbroken block of
+ * colour with its underscores in it.
+ *
+ * The `<wbr>` hints sit where `addWordBreaks` used to put them: after a dot,
+ * before an underscore. That is where these names want to wrap.
+ */
+function renderFragment(text: string): string {
+  return text
+    .split(/([._])/)
+    .filter(Boolean)
+    .map((piece) => {
+      if (piece === '.') return `<span class="part-sep">.</span><wbr>`;
+      if (piece === '_') return `<wbr><span class="part-sep">_</span>`;
+      return `<span class="part-word">${addWordBreaks(escapeHtml(piece))}</span>`;
+    })
+    .join('');
+}
+
+/**
  * The instruction name, split into its parts so each can be styled and so long
  * names get sensible break opportunities.
  *
@@ -149,7 +173,7 @@ export function renderName(op: Opcode): string {
       const wbr = i > 0 ? '<wbr>' : '';
       return (
         `${wbr}<span class="${cls}" data-p="${escapeHtml(t.token)}">` +
-        `${addWordBreaks(escapeHtml(t.text))}</span>`
+        `${renderFragment(t.text)}</span>`
       );
     })
     .join('');

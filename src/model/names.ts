@@ -135,5 +135,18 @@ export function tokenise(parts: NameParts | undefined, name: string): NameToken[
     push(`_${word}`, word, 'post');
   }
 
+  /*
+   * The decomposition is reassembled and checked against the name it came from.
+   * It is written by hand in data/, and where it is wrong the pieces do not add
+   * up to the name — `v128.load32_splat` decomposed as sign `s` plus `plat` was
+   * being drawn as `v128.load32_s_plat`, an instruction that does not exist,
+   * and `ref.test null` simply lost its `null`. Falling back to one token draws
+   * the name the data actually gives; only the hover granularity is lost, and
+   * that is the right way round.
+   */
+  if (out.map((t) => t.text).join('') !== name) {
+    return [{ text: name, token: name, role: 'op', first: true }];
+  }
+
   return out;
 }
