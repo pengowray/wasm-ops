@@ -217,22 +217,31 @@ function start(
     badge.hidden = !filtering;
   }
 
-  /**
-   * The table is an index, so it arrives arranged as one: a heading per
-   * operation, alphabetically, with each operation's encodings under it in byte
-   * order. Applied on the way into the table layout and not while in it, so it
-   * is a starting point rather than something that keeps overriding the reader.
+  /*
+   * Grouping and sorting, remembered per layout.
+   *
+   * The two layouts are read differently and want arranging differently. The
+   * table is an index: a heading per operation, alphabetically, with each
+   * operation's encodings under it in byte order. The cards are a survey, and
+   * category is the useful shelf to break them onto. One shared setting made
+   * choosing an arrangement for one of them undo the arrangement of the other,
+   * so each keeps its own — and keeps whatever the reader last chose in it,
+   * rather than being reset to these on every visit.
+   *
+   * The byte grid has no entry: position there is the opcode, so neither
+   * control applies and the toolbar dims both.
    */
-  function preferIndexOrder(): void {
-    const set = (name: string, value: string) => {
-      const input = toolbar.querySelector<HTMLInputElement>(
-        `input[name="${name}"][value="${value}"]`,
-      );
-      if (input) input.checked = true;
-    };
-    set('group', 'name');
-    set('order', 'opcode');
-  }
+  const arrangements: Record<string, { group: string; order: string }> = {
+    cards: { group: 'category', order: 'opcode' },
+    table: { group: 'name', order: 'opcode' },
+  };
+
+  const choose = (name: string, value: string): void => {
+    const input = toolbar.querySelector<HTMLInputElement>(
+      `input[name="${name}"][value="${value}"]`,
+    );
+    if (input) input.checked = true;
+  };
 
   toolbar.addEventListener('change', (event) => {
     // The search box lives in the toolbar but is not one of its settings: it
@@ -240,9 +249,20 @@ function start(
     // everything a second time for no reason.
     if ((event.target as HTMLElement).id === 'search') return;
     const target = event.target as HTMLInputElement;
-    if (target.name === 'layout' && target.value === 'table' && options.layout !== 'table') {
-      preferIndexOrder();
+
+    const current = arrangements[options.layout];
+    if (current && (target.name === 'group' || target.name === 'order')) {
+      current[target.name] = target.value;
     }
+
+    if (target.name === 'layout' && target.value !== options.layout) {
+      const wanted = arrangements[target.value];
+      if (wanted) {
+        choose('group', wanted.group);
+        choose('order', wanted.order);
+      }
+    }
+
     readToolbar();
     updateBadge();
     updateSearchCount();
