@@ -91,15 +91,25 @@ export function renderPage(
 		<label><input type="radio" name="order" value="opcode" checked> Opcode</label>
 		<label><input type="radio" name="order" value="name"> Name</label>
 	</fieldset>
-	<fieldset class="control control-sections">
-		<legend>Show</legend>
-		${sectionToggles}
-		<label class="toggle"><input type="checkbox" name="showProposals" checked><span>Proposals</span></label>
-		<label class="toggle" data-when-layout="matrix"><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
-	</fieldset>
+	<!-- Filtering is occasional, so it folds away rather than sitting across the
+	     toolbar. A <details> keeps it working as a disclosure without script. -->
+	<details class="control control-filter" id="filter">
+		<summary>Show<span class="filter-badge" hidden></span></summary>
+		<div class="filter-panel">
+			<div class="filter-group">
+				${sectionToggles}
+			</div>
+			<div class="filter-group">
+				<label class="toggle"><input type="checkbox" name="showProposals" checked><span>Proposals</span></label>
+				<label class="toggle" data-when-layout="matrix"><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
+			</div>
+			<div class="filter-group filter-presets">
+				<button type="button" id="preset-base" class="ghost">Base opcodes only</button>
+				<button type="button" id="preset-all" class="ghost">Everything</button>
+			</div>
+		</div>
+	</details>
 	<div class="control control-actions">
-		<button type="button" id="preset-base" class="ghost">Base opcodes only</button>
-		<button type="button" id="preset-all" class="ghost">Everything</button>
 		<button type="button" id="theme-toggle" class="icon-button" aria-label="Switch colour theme" title="Switch colour theme">
 			<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><circle cx="12" cy="12" r="4.2"/><g class="rays"><line x1="12" y1="1.8" x2="12" y2="4.4"/><line x1="12" y1="19.6" x2="12" y2="22.2"/><line x1="1.8" y1="12" x2="4.4" y2="12"/><line x1="19.6" y1="12" x2="22.2" y2="12"/><line x1="4.8" y1="4.8" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.2" y2="19.2"/><line x1="4.8" y1="19.2" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.2" y2="4.8"/></g></svg>
 			<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path d="M20 14.4A8.6 8.6 0 0 1 9.6 4a8.6 8.6 0 1 0 10.4 10.4z"/></svg>

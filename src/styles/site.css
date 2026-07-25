@@ -151,6 +151,67 @@ h1 { font-size: 1.9rem; margin: 0 0 .2rem; }
 
 .control-actions { margin-left: auto; gap: .4rem; }
 
+/* --------------------------------------------------------------- filtering */
+
+/* Section and status filters are set once and then left alone, so they fold
+   away into a dropdown instead of spanning the toolbar. */
+.control-filter { position: relative; }
+
+.control-filter > summary {
+	display: inline-flex;
+	align-items: center;
+	gap: .3rem;
+	padding: .25rem .6rem;
+	color: var(--fg-dim);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	cursor: pointer;
+	list-style: none;
+	user-select: none;
+}
+.control-filter > summary::-webkit-details-marker { display: none; }
+.control-filter > summary::after {
+	content: '';
+	width: .4rem;
+	height: .4rem;
+	margin-left: .1rem;
+	border-right: 1.5px solid currentColor;
+	border-bottom: 1.5px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+}
+.control-filter[open] > summary::after { transform: translateY(1px) rotate(225deg); }
+.control-filter > summary:hover,
+.control-filter[open] > summary { color: var(--fg); border-color: var(--accent); }
+
+/* A dot on the summary when the view is filtered, so a collapsed panel can
+   still say that something is being hidden. */
+.filter-badge:not([hidden]) {
+	width: .45rem;
+	height: .45rem;
+	border-radius: 50%;
+	background: var(--accent);
+}
+
+.filter-panel {
+	position: absolute;
+	top: calc(100% + .3rem);
+	left: 0;
+	z-index: 40;
+	display: grid;
+	gap: .5rem;
+	min-width: 15rem;
+	padding: .7rem .8rem;
+	background: var(--bg);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, .16);
+}
+
+.filter-group { display: grid; gap: .15rem; }
+.filter-group + .filter-group { padding-top: .5rem; border-top: 1px solid var(--rule-soft); }
+.filter-panel .toggle { display: flex; align-items: center; gap: .35rem; cursor: pointer; }
+.filter-presets { grid-auto-flow: column; gap: .4rem; justify-content: start; }
+
 /* Grouping and sorting have no meaning in the byte grid, where position is
    fixed by the opcode; unassigned slots have no meaning outside it. Controls
    are dimmed rather than hidden so the toolbar does not reflow as you use it. */

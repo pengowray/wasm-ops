@@ -47,7 +47,16 @@ export const DEFAULT_VIEW: ViewOptions = {
 };
 
 export type ViewItem =
-  | { kind: 'group'; key: string; label: string; emoji?: string; intro?: string; count: number }
+  | {
+      kind: 'group';
+      key: string;
+      /** HTML id for the heading — the link target for jumps and deep links. */
+      anchor: string;
+      label: string;
+      emoji?: string;
+      intro?: string;
+      count: number;
+    }
   | { kind: 'corner'; key: string }
   | { kind: 'colhead'; key: string; label: string }
   | { kind: 'rowhead'; key: string; label: string }
@@ -141,6 +150,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       items.push({
         kind: 'group',
         key: `group:section:${section.id}`,
+        anchor: section.anchor,
         label: section.title,
         ...(section.emoji ? { emoji: section.emoji } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
@@ -178,6 +188,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       items.push({
         kind: 'group',
         key: `group:section:${section.id}`,
+        anchor: section.anchor,
         label: section.title,
         ...(section.emoji ? { emoji: section.emoji } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
@@ -203,6 +214,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
     items.push({
       kind: 'group',
       key: `group:category:${category}`,
+      anchor: `cat-${category}`,
       label: CATEGORY_LABELS[category],
       count: sorted.length,
     });

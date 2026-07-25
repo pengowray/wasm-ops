@@ -1,6 +1,7 @@
 {
   "section": {
     "id": "simd",
+    "anchor": "simd",
     "title": "SIMD opcodes (Vector instructions)",
     "emoji": "🌀",
     "prefix": "FD",

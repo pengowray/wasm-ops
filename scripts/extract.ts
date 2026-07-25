@@ -30,34 +30,34 @@ interface SectionSpec extends Section {
 
 const SECTIONS: SectionSpec[] = [
   {
-    id: 'core', tableId: 'opcodes', title: 'Core instructions', prefix: '', start: 0, count: 0,
+    id: 'core', tableId: 'opcodes', anchor: 'core', title: 'Core instructions', prefix: '', start: 0, count: 0,
     intro: 'Single-byte instructions. Gaps are reserved for future extensions.',
   },
   {
-    id: 'gc', tableId: 'opcodes_FB', title: 'GC Proposal', emoji: '⭕', prefix: 'FB', start: 0, count: 0,
+    id: 'gc', tableId: 'opcodes_FB', anchor: 'gc', title: 'GC Proposal', emoji: '⭕', prefix: 'FB', start: 0, count: 0,
     intro: 'Proposal to add garbage collection (GC) support.',
   },
   {
-    id: 'stringref', tableId: 'opcodes_FB_strings', title: 'Reference-Typed Strings Proposal',
+    id: 'stringref', tableId: 'opcodes_FB_strings', anchor: 'strings', title: 'Reference-Typed Strings Proposal',
     emoji: '➰', prefix: 'FB', start: 0x80, count: 0,
     intro: 'This is a phase 1 proposal and may change in future. [As of 2022]',
   },
   {
-    id: 'fc', tableId: 'opcodes_FC', title: 'FC extensions', emoji: '⭐', prefix: 'FC', start: 0, count: 0,
+    id: 'fc', tableId: 'opcodes_FC', anchor: 'fc', title: 'FC extensions', emoji: '⭐', prefix: 'FC', start: 0, count: 0,
     intro: 'Multibyte instructions beginning with 0xFC.',
   },
   {
-    id: 'simd', tableId: 'opcodes_FD', title: 'SIMD opcodes (Vector instructions)',
+    id: 'simd', tableId: 'opcodes_FD', anchor: 'simd', title: 'SIMD opcodes (Vector instructions)',
     emoji: '🌀', prefix: 'FD', start: 0, count: 0,
     intro: 'SIMD (single instruction, multiple data) instructions begin with 0xFD.',
   },
   {
-    id: 'relaxed-simd', tableId: 'opcodes_FD1', title: 'Relaxed SIMD proposal',
+    id: 'relaxed-simd', tableId: 'opcodes_FD1', anchor: 'relaxed-simd', title: 'Relaxed SIMD proposal',
     prefix: 'FD', start: 0x100, count: 0,
     intro: 'Relaxed SIMD prototype opcodes, in the 0xFD 0x1__ range.',
   },
   {
-    id: 'threads', tableId: 'opcodes_FE', title: 'Threads', emoji: '🧵', prefix: 'FE', start: 0, count: 0,
+    id: 'threads', tableId: 'opcodes_FE', anchor: 'threads', title: 'Threads', emoji: '🧵', prefix: 'FE', start: 0, count: 0,
     intro: 'Multibyte instructions beginning with 0xFE.',
   },
 ];

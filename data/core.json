@@ -1,6 +1,7 @@
 {
   "section": {
     "id": "core",
+    "anchor": "core",
     "title": "Core instructions",
     "prefix": "",
     "start": 0,

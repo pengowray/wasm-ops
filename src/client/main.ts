@@ -108,9 +108,32 @@ function start(
     options.showReserved = form.get('showReserved') !== null;
   }
 
+  const filter = document.getElementById('filter') as HTMLDetailsElement | null;
+  const badge = filter?.querySelector<HTMLElement>('.filter-badge');
+
+  /** Marks the collapsed filter control when something is being hidden. */
+  function updateBadge(): void {
+    if (!badge) return;
+    const filtering =
+      options.sections.length < data.sections.length ||
+      !options.showProposals ||
+      (options.layout === 'matrix' && !options.showReserved);
+    badge.hidden = !filtering;
+  }
+
   toolbar.addEventListener('change', () => {
     readToolbar();
+    updateBadge();
     relayout();
+  });
+
+  // A dropdown that stays open after you click away from it reads as stuck.
+  document.addEventListener('click', (event) => {
+    if (!filter?.open) return;
+    if (!filter.contains(event.target as Node)) filter.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && filter?.open) filter.open = false;
   });
 
   // Submitting would reload the page and lose the arrangement.
@@ -128,6 +151,7 @@ function start(
     setChecks('section', (value) => value === 'core');
     (toolbar.querySelector('input[name="showProposals"]') as HTMLInputElement).checked = false;
     readToolbar();
+    updateBadge();
     relayout();
   });
 
@@ -137,6 +161,7 @@ function start(
       (toolbar.querySelector(`input[name="${name}"]`) as HTMLInputElement).checked = true;
     }
     readToolbar();
+    updateBadge();
     relayout();
   });
 

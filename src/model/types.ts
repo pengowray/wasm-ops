@@ -20,6 +20,12 @@ export interface Section {
   /** Heading text, without the emoji. */
   title: string;
   emoji?: string;
+  /**
+   * The heading's HTML id. Kept as whatever the old page used — `strings` for
+   * stringref, for instance — because those anchors are linked from inside the
+   * chart and from outside the site.
+   */
+  anchor: string;
   /** Prefix byte as uppercase hex, e.g. "FB". Empty for single-byte opcodes. */
   prefix: string;
   /** Sub-opcode value of the first cell of this section's 16-wide grid. */

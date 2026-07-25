@@ -1,6 +1,7 @@
 {
   "section": {
     "id": "threads",
+    "anchor": "threads",
     "title": "Threads",
     "emoji": "🧵",
     "prefix": "FE",

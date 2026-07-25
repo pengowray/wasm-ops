@@ -1,6 +1,7 @@
 {
   "section": {
     "id": "fc",
+    "anchor": "fc",
     "title": "FC extensions",
     "emoji": "⭐",
     "prefix": "FC",

@@ -125,7 +125,7 @@ export function renderItem(item: ViewItem): string {
   switch (item.kind) {
     case 'group':
       return (
-        `<h2 class="group" data-key="${escapeHtml(item.key)}" id="${escapeHtml(item.key)}">` +
+        `<h2 class="group" data-key="${escapeHtml(item.key)}" id="${escapeHtml(item.anchor)}">` +
         (item.emoji ? `<span class="group-emoji">${item.emoji}</span> ` : '') +
         `${escapeHtml(item.label)} <span class="group-count">${item.count}</span>` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
