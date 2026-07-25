@@ -22,10 +22,31 @@ import { summarize } from './summary.ts';
 import { tagsFor } from './tags.ts';
 
 /** A compiled search term. */
-export type Term = string | RegExp;
+export type Term =
+  /** A word, matched anywhere in the text. */
+  | { kind: 'text'; value: string }
+  /** A number, matched whole. */
+  | { kind: 'text'; value: string; whole: RegExp }
+  /** `tag:signed` — matched against the property tags alone. */
+  | { kind: 'tag'; value: string };
+
+/** What a search is matched against. */
+export interface Haystack {
+  text: string;
+  /** Tag ids and labels, normalised — `signed`, `stack-manipulation`. */
+  tags: string[];
+}
 
 /** `12`, `0xfd`, `0x28` — a term that names a number rather than spells a word. */
 const NUMERIC = /^(0x[0-9a-f]+|[0-9]+)$/;
+
+/** One spelling for a tag, so `Vector (SIMD)` and `vector-simd` are the same. */
+export function normaliseTag(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 /**
  * Splits a query into terms, all of which must match.
@@ -38,23 +59,40 @@ const NUMERIC = /^(0x[0-9a-f]+|[0-9]+)$/;
  * Numbers are matched whole. Searching `0xFD 12` for a sub-opcode should not
  * also return everything containing 12 somewhere — `0xFD 120`, `i32x4` — which
  * as a substring is most of the SIMD table.
+ *
+ * `tag:` narrows to the property tags, where the plain form cannot: `signed`
+ * as a word appears in the prose of half the instructions on the page and in
+ * the middle of `unsigned`, while `tag:signed` is exactly the 111 instructions
+ * carrying that property — the same set clicking the chip lights up.
  */
 export function compileQuery(query: string): Term[] {
   return query
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean)
-    .map((term) =>
-      NUMERIC.test(term)
-        ? new RegExp(`(?:^|[^0-9a-z])${term.replace('.', '\\.')}(?![0-9a-z])`)
-        : term,
-    );
+    .map((term): Term => {
+      const tag = /^(?:tag|is):(.+)$/.exec(term);
+      if (tag) return { kind: 'tag', value: normaliseTag(tag[1]!) };
+      if (NUMERIC.test(term)) {
+        return {
+          kind: 'text',
+          value: term,
+          whole: new RegExp(`(?:^|[^0-9a-z])${term}(?![0-9a-z])`),
+        };
+      }
+      return { kind: 'text', value: term };
+    });
 }
 
-export function matchesQuery(haystack: string, terms: Term[]): boolean {
-  return terms.every((term) =>
-    typeof term === 'string' ? haystack.includes(term) : term.test(haystack),
-  );
+export function matchesQuery(haystack: Haystack, terms: Term[]): boolean {
+  return terms.every((term) => {
+    if (term.kind === 'tag') {
+      // A prefix, so `tag:load` finds the Loads group without the reader
+      // having to know whether the label is singular or plural.
+      return haystack.tags.some((tag) => tag.startsWith(term.value));
+    }
+    return 'whole' in term ? term.whole.test(haystack.text) : haystack.text.includes(term.value);
+  });
 }
 
 /**
@@ -65,6 +103,19 @@ export function matchesQuery(haystack: string, terms: Term[]): boolean {
  * itself shows it in more than one, and a reader searching for a byte they saw
  * in a hex dump should not have to know which spelling this page favours.
  */
+/**
+ * The tags an instruction can be found by, each in both spellings it has: the
+ * token used as a selector, and the label the chip is drawn with.
+ */
+export function searchTagsFor(op: Opcode): string[] {
+  const tags = new Set<string>();
+  for (const tag of tagsFor(op)) {
+    tags.add(normaliseTag(tag.id));
+    tags.add(normaliseTag(tag.label));
+  }
+  return [...tags];
+}
+
 export function searchTextFor(op: Opcode): string {
   const bits: string[] = [];
   if (op.name) bits.push(op.name);

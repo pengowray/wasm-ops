@@ -423,6 +423,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 
 .map-section { display: grid; gap: .2rem; }
+.map-section[data-empty] { display: none; }
 
 .map-label {
 	font-size: .62rem;
@@ -457,8 +458,23 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 /* Which instructions are on screen right now — the "you are here". */
 .map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
 
-/* Hidden by the chart's filters: present on the map, but plainly not in play. */
-.map-cell[data-filtered] { background: var(--rule-soft); opacity: .35; cursor: default; }
+/*
+ * Hidden by the chart's filters or a search: the square keeps its place, since
+ * the map is a picture of the byte space and closing the gap would move every
+ * square after it, but it shows nothing. A dimmed square still reads as an
+ * instruction that is there; an empty one reads as what the reader asked for —
+ * these bytes are not in play.
+ *
+ * Listed against the proposal colouring too, which is on by default and whose
+ * selector is otherwise more specific: without that, hiding the legacy
+ * encodings left them sitting in the map in full colour.
+ */
+.map-cell[data-filtered],
+.map[data-colour='proposal'] .map-cell[data-filtered] {
+	background: transparent;
+	cursor: default;
+	box-shadow: none;
+}
 
 /*
  * A map square is five pixels across, so the gentle tints the chart uses

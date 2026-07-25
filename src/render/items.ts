@@ -11,6 +11,7 @@ import { toHex } from '../model/types.ts';
 import { addWordBreaks, tokenise } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
 import { proposal, standing } from '../model/proposals.ts';
+import { normaliseTag } from '../model/search.ts';
 import { summarize } from '../model/summary.ts';
 import { tagsFor, tagTokens } from '../model/tags.ts';
 import type { ViewItem } from '../model/view.ts';
@@ -254,8 +255,19 @@ function headingTag(label: string, tag: string | undefined): string {
   if (!tag) return escapeHtml(label);
   return (
     `<button type="button" class="tag heading-tag" data-tag="${escapeHtml(tag)}" ` +
-    `data-kind="category">${escapeHtml(label)}</button>`
+    `data-kind="category" title="${escapeHtml(tagHint(label))}">${escapeHtml(label)}</button>`
   );
+}
+
+/**
+ * Clicking a tag highlights; searching it filters. The two are worth having
+ * separately — a highlight keeps the chart intact so you can see *where* the
+ * matches are, a filter clears everything else away — and the tooltip is where
+ * the second one is discoverable, since nothing about a chip suggests you
+ * could type it.
+ */
+function tagHint(label: string): string {
+  return `Highlight everything tagged “${label}” — or search tag:${normaliseTag(label)} to filter`;
 }
 
 export function renderItem(item: ViewItem): string {
@@ -396,7 +408,8 @@ export function renderTags(op: Opcode): string {
       .map(
         (tag) =>
           `<button type="button" class="tag" data-tag="${escapeHtml(tag.id)}" ` +
-          `data-kind="${tag.kind}">${escapeHtml(tag.label)}</button>`,
+          `data-kind="${tag.kind}" title="${escapeHtml(tagHint(tag.label))}">` +
+          `${escapeHtml(tag.label)}</button>`,
       )
       .join('') +
     `</p>`

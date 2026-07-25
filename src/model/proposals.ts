@@ -22,7 +22,13 @@ export interface Proposal {
   id: string;
   name: string;
   stage: ProposalStage;
-  /** For finished proposals: which release folded it in. */
+  /**
+   * For finished proposals: which release folded it in, and when that release
+   * was finished by the working group — 1.0 in 2017, 2.0 in early 2022, 3.0 in
+   * September 2025. The W3C's own stamp comes later and by a different
+   * schedule (2.0 only became official in December 2024), so the year here is
+   * when the specification was settled, not when the paperwork caught up.
+   */
   standardisedIn?: string;
   /** For unfinished ones: the phase it has reached, 1 to 4. */
   phase?: number;
@@ -48,7 +54,7 @@ const LIST: Proposal[] = [
     id: 'sign-extension',
     name: 'Sign-extension operators',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 2.0',
+    standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/sign-extension-ops',
     hue: 200,
@@ -57,7 +63,7 @@ const LIST: Proposal[] = [
     id: 'nontrapping-float-to-int',
     name: 'Non-trapping float-to-int conversions',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 2.0',
+    standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/nontrapping-float-to-int-conversions',
     hue: 190,
@@ -66,7 +72,7 @@ const LIST: Proposal[] = [
     id: 'bulk-memory',
     name: 'Bulk memory operations',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 2.0',
+    standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/bulk-memory-operations',
     hue: 155,
@@ -75,7 +81,7 @@ const LIST: Proposal[] = [
     id: 'reference-types',
     name: 'Reference types',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 2.0',
+    standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/reference-types',
     hue: 265,
@@ -84,7 +90,7 @@ const LIST: Proposal[] = [
     id: 'simd',
     name: 'Fixed-width SIMD',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 2.0',
+    standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/simd',
     hue: 285,
@@ -93,7 +99,7 @@ const LIST: Proposal[] = [
     id: 'tail-call',
     name: 'Tail call',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 3.0',
+    standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Shipping in current browsers; check support if you target older engines.',
     url: 'https://github.com/WebAssembly/tail-call',
     hue: 20,
@@ -102,7 +108,7 @@ const LIST: Proposal[] = [
     id: 'function-references',
     name: 'Typed function references',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 3.0',
+    standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Shipping in current browsers; check support if you target older engines.',
     url: 'https://github.com/WebAssembly/function-references',
     hue: 250,
@@ -111,7 +117,7 @@ const LIST: Proposal[] = [
     id: 'gc',
     name: 'Garbage collection',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 3.0',
+    standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Shipping in current browsers; check support if you target older engines. The encoding changed substantially from the 2022 draft.',
     url: 'https://github.com/WebAssembly/gc',
     hue: 130,
@@ -120,7 +126,7 @@ const LIST: Proposal[] = [
     id: 'exception-handling',
     name: 'Exception handling',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 3.0',
+    standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. This is the try_table form; the earlier try/catch encoding is still emitted by older toolchains.',
     url: 'https://github.com/WebAssembly/exception-handling',
     hue: 0,
@@ -137,7 +143,7 @@ const LIST: Proposal[] = [
     id: 'relaxed-simd',
     name: 'Relaxed SIMD',
     stage: 'standard',
-    standardisedIn: 'WebAssembly 3.0',
+    standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Results may differ between engines by design — that is the point of the relaxation.',
     url: 'https://github.com/WebAssembly/relaxed-simd',
     hue: 305,

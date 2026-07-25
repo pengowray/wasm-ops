@@ -142,6 +142,18 @@ function visible(op: Opcode, options: ViewOptions): boolean {
 }
 
 /**
+ * How many instructions the current options leave visible.
+ *
+ * The search count is quoted against this rather than against every
+ * instruction in the data, so it agrees with what is on the page: with the
+ * historical encodings hidden, `tag:signed` should not claim 106 matches over
+ * a chart showing 103.
+ */
+export function countShown(data: OpcodeData, options: ViewOptions): number {
+  return data.opcodes.filter((op) => op.name && !op.linkTo && visible(op, options)).length;
+}
+
+/**
  * Row label for a run of 16 opcodes, e.g. `3_` for 0x30–0x3F, `10_` for
  * 0x100–0x10F. Derived from the code so sections that do not start at zero
  * (stringref at 0x80, relaxed SIMD at 0x100) label correctly.

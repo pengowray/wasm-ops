@@ -14,19 +14,27 @@
  */
 
 import type { Opcode, OpcodeData } from '../model/types.ts';
-import { compileQuery, matchesQuery, searchTextFor } from '../model/search.ts';
+import {
+  compileQuery,
+  matchesQuery,
+  searchTagsFor,
+  searchTextFor,
+  type Haystack,
+} from '../model/search.ts';
+
+const EMPTY: Haystack = { text: '', tags: [] };
 
 export class Search {
   readonly #data: OpcodeData;
   readonly #details: HTMLElement | null;
-  #haystacks: Map<string, string> | null = null;
+  #haystacks: Map<string, Haystack> | null = null;
 
   constructor(data: OpcodeData, details: HTMLElement | null) {
     this.#data = data;
     this.#details = details;
   }
 
-  #index(): Map<string, string> {
+  #index(): Map<string, Haystack> {
     if (this.#haystacks) return this.#haystacks;
 
     const prose = new Map<string, string>();
@@ -35,9 +43,12 @@ export class Search {
       if (key) prose.set(key, (el.textContent ?? '').replace(/\s+/g, ' ').toLowerCase());
     }
 
-    const haystacks = new Map<string, string>();
+    const haystacks = new Map<string, Haystack>();
     for (const op of this.#data.opcodes) {
-      haystacks.set(op.id, `${searchTextFor(op)} ${prose.get(op.id) ?? ''}`);
+      haystacks.set(op.id, {
+        text: `${searchTextFor(op)} ${prose.get(op.id) ?? ''}`,
+        tags: op.name ? searchTagsFor(op) : [],
+      });
     }
     this.#haystacks = haystacks;
     return haystacks;
@@ -52,16 +63,7 @@ export class Search {
     const terms = compileQuery(query);
     if (!terms.length) return undefined;
     const haystacks = this.#index();
-    return (op) => matchesQuery(haystacks.get(op.id) ?? '', terms);
+    return (op) => matchesQuery(haystacks.get(op.id) ?? EMPTY, terms);
   }
 
-  /** How many named instructions a predicate keeps, for the running count. */
-  count(match: (op: Opcode) => boolean): number {
-    return this.#data.opcodes.filter((op) => op.name && match(op)).length;
-  }
-
-  /** The total it is counted against: instructions, not byte slots. */
-  get total(): number {
-    return this.#data.opcodes.filter((op) => op.name).length;
-  }
 }

@@ -98,7 +98,7 @@ export function renderPage(
 	     everything that does not match taken out of it. -->
 	<div class="control control-search">
 		<label for="search">Search</label>
-		<input type="search" id="search" name="q" placeholder="name, byte, or words"
+		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
 			autocomplete="off" autocorrect="off" spellcheck="false"
 			aria-describedby="search-count">
 		<span class="search-count" id="search-count" role="status"></span>

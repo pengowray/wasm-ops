@@ -9,7 +9,7 @@
  */
 
 import type { OpcodeData, SectionId } from '../model/types.ts';
-import { buildView, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
+import { buildView, countShown, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { renderItem } from '../render/items.ts';
 import { flip } from './flip.ts';
 import { Highlighter } from './highlight.ts';
@@ -201,6 +201,7 @@ function start(
     if ((event.target as HTMLElement).id === 'search') return;
     readToolbar();
     updateBadge();
+    updateSearchCount();
     relayout();
   });
 
@@ -213,6 +214,24 @@ function start(
   const emptyTerm = searchEmpty?.querySelector('.search-empty-term');
 
   /**
+   * The running count, and the empty state.
+   *
+   * Counted against what the other filters leave rather than against the whole
+   * data set, so the number describes the chart in front of the reader: with
+   * the historical encodings hidden, `tag:signed` should not claim 106 matches
+   * over a chart showing 103. It therefore has to be recomputed when those
+   * filters change, not only when the query does.
+   */
+  function updateSearchCount(): void {
+    const query = searchInput?.value.trim() ?? '';
+    const total = countShown(data, { ...options, match: undefined });
+    const found = options.match ? countShown(data, options) : total;
+    if (searchCount) searchCount.textContent = query ? `${found} of ${total}` : '';
+    if (searchEmpty) searchEmpty.hidden = !query || found > 0;
+    if (emptyTerm) emptyTerm.textContent = query;
+  }
+
+  /**
    * Applies whatever is in the box.
    *
    * Unanimated by default: this runs while the reader is still typing, and a
@@ -222,11 +241,7 @@ function start(
   function applySearch(animate = false): void {
     const query = searchInput?.value.trim() ?? '';
     options.match = search.predicate(query);
-
-    const found = options.match ? search.count(options.match) : search.total;
-    if (searchCount) searchCount.textContent = query ? `${found} of ${search.total}` : '';
-    if (searchEmpty) searchEmpty.hidden = !query || found > 0;
-    if (emptyTerm) emptyTerm.textContent = query;
+    updateSearchCount();
 
     // Shareable, and survives a reload: the URL carries the query alongside any
     // selected instruction in the hash.
@@ -314,6 +329,7 @@ function start(
     }
     readToolbar();
     updateBadge();
+    updateSearchCount();
     relayout();
   });
 
@@ -322,6 +338,7 @@ function start(
     (toolbar.querySelector('input[name="showProposals"]') as HTMLInputElement).checked = false;
     readToolbar();
     updateBadge();
+    updateSearchCount();
     relayout();
   });
 
@@ -332,6 +349,7 @@ function start(
     }
     readToolbar();
     updateBadge();
+    updateSearchCount();
     relayout();
   });
 

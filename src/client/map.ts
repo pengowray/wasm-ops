@@ -139,6 +139,15 @@ export class NavMap {
       if (key && !showing.has(key)) square.dataset['filtered'] = '1';
       else delete square.dataset['filtered'];
     }
+
+    // A section with nothing left in it is a label over a blank rectangle. The
+    // chart drops those; so does the map. Hiding the dormant string proposal
+    // should take its heading with it, not leave an empty frame behind.
+    for (const section of this.#root.querySelectorAll<HTMLElement>('.map-section')) {
+      const any = section.querySelector('.map-cell:not([data-filtered])');
+      if (any) delete section.dataset['empty'];
+      else section.dataset['empty'] = '1';
+    }
   }
 }
 
