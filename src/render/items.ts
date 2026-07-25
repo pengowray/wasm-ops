@@ -406,9 +406,34 @@ function supportLink(feature: string): string {
   return `${SUPPORT_URL}#:~:text=${encodeURIComponent(feature)}`;
 }
 
-export function renderHistory(op: Opcode): string {
+/**
+ * Where an instruction stands: whether the byte means today what the cell says
+ * it means, and which proposal it came through.
+ *
+ * The two were separate — a caution near the top of the panel, and a "History"
+ * section further down — which put the same question in two places. "This is
+ * still a proposal" and "it is the stack-switching proposal, at phase 3" are
+ * one answer, so they are one section, and it is called what it answers.
+ */
+export function renderStatus(op: Opcode): string {
+  const note = statusNote(op);
   const p = proposal(op.proposal);
-  if (!p) return '';
+  if (!note && !p) return '';
+
+  const caution = note
+    ? `<p class="detail-status" data-status="${op.status}"` +
+      (note === AT_PHASE_4 ? ` data-tone="settled"` : '') +
+      `>` +
+      `<span class="status-mark" aria-hidden="true">${note.mark}</span>` +
+      `<span class="status-text"><strong>${note.label}</strong> — ${note.detail}` +
+      (op.supersededBy
+        ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`
+        : '') +
+      `</span></p>`
+    : '';
+
+  if (!p) return `<h4>Status</h4>${caution}`;
+
   // Only where the table has a row to point at. The original release is not a
   // feature anyone opts into, and the abandoned draft encodings never were.
   const support = p.feature
@@ -417,7 +442,9 @@ export function renderHistory(op: Opcode): string {
       `Engine support</a>`
     : '';
   return (
-    `<h4>History</h4><p class="detail-history">` +
+    `<h4>Status</h4>` +
+    caution +
+    `<p class="detail-history">` +
     `<a class="history-name" href="${escapeHtml(p.url)}">${escapeHtml(p.name)}</a>` +
     `<span class="history-standing">${escapeHtml(standing(p))}</span>` +
     `<span class="history-note">${escapeHtml(p.note)}</span>` +
@@ -457,26 +484,11 @@ export function renderDetail(op: Opcode): string {
   const rows: string[] = [renderHeading(op)];
   const tags = renderTags(op);
 
-  const note = statusNote(op);
-  if (note) {
-    rows.push(
-      `<p class="detail-status" data-status="${op.status}"` +
-        (note === AT_PHASE_4 ? ` data-tone="settled"` : '') +
-        `>` +
-        `<span class="status-mark" aria-hidden="true">${note.mark}</span>` +
-        `<span class="status-text"><strong>${note.label}</strong> — ${note.detail}` +
-        (op.supersededBy
-          ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`
-          : '') +
-        `</span></p>`,
-    );
-  }
-
   if (op.description) {
     rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
   }
 
-  rows.push(renderHistory(op));
+  rows.push(renderStatus(op));
 
   if (op.followedBy) {
     rows.push(`<h4>Followed by</h4><div class="detail-followed">${op.followedBy}</div>`);

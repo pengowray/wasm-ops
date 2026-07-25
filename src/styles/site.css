@@ -1170,12 +1170,26 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 .panel-body { font-size: .92rem; }
 .panel-body h3 { margin: .2rem 0 .6rem; font-size: 1.3rem; word-break: break-word; }
-.panel-body h4 {
-	margin: 1.2rem 0 .3rem;
+/*
+ * The panel is six or seven short sections in a narrow column, and small faint
+ * uppercase was not enough to tell one from the next — the encoding, the
+ * description and the stack signature ran together as one column of text. A
+ * hairline above each heading draws the break; the lettering itself is only a
+ * little stronger, since it is a label on a section and not a title over it.
+ *
+ * The static detail blocks are the same content in a wider column, and are what
+ * the page falls back to without JavaScript, so they are ruled the same way.
+ */
+.panel-body h4,
+.detail h4 {
+	margin: 1.4rem 0 .35rem;
+	padding-top: .55rem;
+	border-top: 1px solid var(--rule-soft);
 	font-size: .72rem;
+	font-weight: 700;
 	text-transform: uppercase;
-	letter-spacing: .06em;
-	color: var(--fg-faint);
+	letter-spacing: .08em;
+	color: var(--fg-dim);
 }
 .panel-body p { margin: .5rem 0; }
 .panel-body ol, .panel-body ul { margin: .4rem 0; padding-left: 1.4rem; }
