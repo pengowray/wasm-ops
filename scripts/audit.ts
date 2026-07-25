@@ -83,13 +83,16 @@ const ACCEPTED: Record<string, string> = {
   '0x1C':
     'The typed select. The specification writes it `select t*`, wabt calls both ' +
     'forms `select` and distinguishes them by whether types follow.',
-  '0xE0': 'Stack switching (phase 3). wabt uses 0xE0+ for its own interpreter opcodes.',
-  '0xE1': 'Stack switching (phase 3).',
-  '0xE2': 'Stack switching (phase 3).',
-  '0xE3': 'Stack switching (phase 3).',
-  '0xE4': 'Stack switching (phase 3).',
-  '0xE5': 'Stack switching (phase 3).',
-  '0xE6': 'Stack switching (phase 3).',
+};
+
+/**
+ * Proposals the reference does not carry, so their instructions are expected to
+ * be absent from it. Accepting by proposal rather than by opcode means adding
+ * an instruction to one of these does not also mean adding a line here.
+ */
+const ACCEPTED_PROPOSALS: Record<string, string> = {
+  'Stack switching': 'phase 3; wabt uses 0xE0+ for its own interpreter opcodes',
+  'Half precision (FP16)': 'phase 1; not implemented by wabt',
 };
 
 /** The GC list is authored from the proposal, since wabt carries no 0xFB. */
@@ -114,7 +117,7 @@ function main(): void {
   for (const op of data.opcodes) ours.set(op.id, op);
 
   let historical = 0;
-  const accepted: string[] = [];
+  const acceptedBy = new Map<string, number>();
   const missing: string[] = [];
   const extra: string[] = [];
   const renamed: string[] = [];
@@ -139,9 +142,13 @@ function main(): void {
 
     const ref = refById.get(op.id);
     const mismatched = op.name && (!ref || ref.name !== op.name);
-    if (mismatched && ACCEPTED[op.id]) {
-      accepted.push(`${op.id.padEnd(11)} ${op.name}
-              ${ACCEPTED[op.id]}`);
+    const reason =
+      ACCEPTED[op.id] ??
+      (op.proposal && ACCEPTED_PROPOSALS[op.proposal]
+        ? `${op.proposal} — ${ACCEPTED_PROPOSALS[op.proposal]}`
+        : undefined);
+    if (mismatched && reason) {
+      acceptedBy.set(reason, (acceptedBy.get(reason) ?? 0) + 1);
     } else if (op.name && !ref) {
       extra.push(`${op.id.padEnd(11)} ${op.name}  (${op.status})`);
     } else if (op.name && ref && ref.name !== op.name) {
@@ -175,7 +182,10 @@ function main(): void {
   report('In the reference, missing or unnamed here', missing);
   report('Named here, absent from the reference', extra);
   report('Named differently', renamed);
-  report('Differences already accounted for', accepted);
+  report(
+    'Differences already accounted for',
+    [...acceptedBy].map(([reason, n]) => `${String(n).padStart(3)} × ${reason}`),
+  );
 
   console.log(`\nSkipped: ${historical} legacy or withdrawn encodings, kept as history.`);
 

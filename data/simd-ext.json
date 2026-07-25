@@ -1,17 +1,18 @@
 {
   "section": {
-    "id": "relaxed-simd",
-    "anchor": "relaxed-simd",
-    "title": "Relaxed SIMD proposal",
+    "id": "simd-ext",
+    "anchor": "simd-ext",
+    "title": "Vector extensions",
     "prefix": "FD",
     "start": 256,
-    "count": 48,
-    "intro": "Relaxed SIMD prototype opcodes, in the 0xFD 0x1__ range."
+    "count": 80,
+    "intro": "Vector instructions encoded as 0xFD with a sub-opcode of 256 or more — relaxed SIMD, which is standardised, and half precision, which is a phase 1 proposal.",
+    "emoji": "🧮"
   },
   "opcodes": [
     {
       "id": "0xFD.256",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 256,
       "bytes": [
@@ -31,7 +32,7 @@
     },
     {
       "id": "0xFD.257",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 257,
       "bytes": [
@@ -50,7 +51,7 @@
     },
     {
       "id": "0xFD.258",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 258,
       "bytes": [
@@ -69,7 +70,7 @@
     },
     {
       "id": "0xFD.259",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 259,
       "bytes": [
@@ -88,7 +89,7 @@
     },
     {
       "id": "0xFD.260",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 260,
       "bytes": [
@@ -107,7 +108,7 @@
     },
     {
       "id": "0xFD.261",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 261,
       "bytes": [
@@ -126,7 +127,7 @@
     },
     {
       "id": "0xFD.262",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 262,
       "bytes": [
@@ -145,7 +146,7 @@
     },
     {
       "id": "0xFD.263",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 263,
       "bytes": [
@@ -164,7 +165,7 @@
     },
     {
       "id": "0xFD.264",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 264,
       "bytes": [
@@ -183,7 +184,7 @@
     },
     {
       "id": "0xFD.265",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 265,
       "bytes": [
@@ -203,7 +204,7 @@
     },
     {
       "id": "0xFD.266",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 266,
       "bytes": [
@@ -223,7 +224,7 @@
     },
     {
       "id": "0xFD.267",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 267,
       "bytes": [
@@ -243,7 +244,7 @@
     },
     {
       "id": "0xFD.268",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 268,
       "bytes": [
@@ -263,7 +264,7 @@
     },
     {
       "id": "0xFD.269",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 269,
       "bytes": [
@@ -282,7 +283,7 @@
     },
     {
       "id": "0xFD.270",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 270,
       "bytes": [
@@ -301,7 +302,7 @@
     },
     {
       "id": "0xFD.271",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 271,
       "bytes": [
@@ -320,7 +321,7 @@
     },
     {
       "id": "0xFD.272",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 272,
       "bytes": [
@@ -339,7 +340,7 @@
     },
     {
       "id": "0xFD.273",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 273,
       "bytes": [
@@ -358,7 +359,7 @@
     },
     {
       "id": "0xFD.274",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 274,
       "bytes": [
@@ -377,7 +378,7 @@
     },
     {
       "id": "0xFD.275",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 275,
       "bytes": [
@@ -396,7 +397,7 @@
     },
     {
       "id": "0xFD.276",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 276,
       "bytes": [
@@ -409,7 +410,7 @@
     },
     {
       "id": "0xFD.277",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 277,
       "bytes": [
@@ -422,7 +423,7 @@
     },
     {
       "id": "0xFD.278",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 278,
       "bytes": [
@@ -435,7 +436,7 @@
     },
     {
       "id": "0xFD.279",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 279,
       "bytes": [
@@ -448,7 +449,7 @@
     },
     {
       "id": "0xFD.280",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 280,
       "bytes": [
@@ -461,7 +462,7 @@
     },
     {
       "id": "0xFD.281",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 281,
       "bytes": [
@@ -474,7 +475,7 @@
     },
     {
       "id": "0xFD.282",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 282,
       "bytes": [
@@ -487,7 +488,7 @@
     },
     {
       "id": "0xFD.283",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 283,
       "bytes": [
@@ -500,7 +501,7 @@
     },
     {
       "id": "0xFD.284",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 284,
       "bytes": [
@@ -513,7 +514,7 @@
     },
     {
       "id": "0xFD.285",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 285,
       "bytes": [
@@ -526,7 +527,7 @@
     },
     {
       "id": "0xFD.286",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 286,
       "bytes": [
@@ -539,7 +540,7 @@
     },
     {
       "id": "0xFD.287",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 287,
       "bytes": [
@@ -552,7 +553,7 @@
     },
     {
       "id": "0xFD.288",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 288,
       "bytes": [
@@ -560,12 +561,18 @@
         160,
         2
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f16x8.splat",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "splat"
+      }
     },
     {
       "id": "0xFD.289",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 289,
       "bytes": [
@@ -573,12 +580,21 @@
         161,
         2
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f16x8.extract_lane",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "extract",
+        "post": "lane"
+      }
     },
     {
       "id": "0xFD.290",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 290,
       "bytes": [
@@ -586,12 +602,21 @@
         162,
         2
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f16x8.replace_lane",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "immediateArgs": "l",
+      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "replace",
+        "post": "lane"
+      }
     },
     {
       "id": "0xFD.291",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 291,
       "bytes": [
@@ -604,7 +629,7 @@
     },
     {
       "id": "0xFD.292",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 292,
       "bytes": [
@@ -617,7 +642,7 @@
     },
     {
       "id": "0xFD.293",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 293,
       "bytes": [
@@ -630,7 +655,7 @@
     },
     {
       "id": "0xFD.294",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 294,
       "bytes": [
@@ -643,7 +668,7 @@
     },
     {
       "id": "0xFD.295",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 295,
       "bytes": [
@@ -656,7 +681,7 @@
     },
     {
       "id": "0xFD.296",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 296,
       "bytes": [
@@ -669,7 +694,7 @@
     },
     {
       "id": "0xFD.297",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 297,
       "bytes": [
@@ -682,7 +707,7 @@
     },
     {
       "id": "0xFD.298",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 298,
       "bytes": [
@@ -695,7 +720,7 @@
     },
     {
       "id": "0xFD.299",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 299,
       "bytes": [
@@ -708,7 +733,7 @@
     },
     {
       "id": "0xFD.300",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 300,
       "bytes": [
@@ -721,7 +746,7 @@
     },
     {
       "id": "0xFD.301",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 301,
       "bytes": [
@@ -734,7 +759,7 @@
     },
     {
       "id": "0xFD.302",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 302,
       "bytes": [
@@ -747,7 +772,7 @@
     },
     {
       "id": "0xFD.303",
-      "section": "relaxed-simd",
+      "section": "simd-ext",
       "prefix": "FD",
       "code": 303,
       "bytes": [
@@ -757,6 +782,632 @@
       ],
       "name": null,
       "status": "reserved"
+    },
+    {
+      "id": "0xFD.304",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 304,
+      "bytes": [
+        253,
+        176,
+        2
+      ],
+      "name": "f16x8.abs",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "abs"
+      }
+    },
+    {
+      "id": "0xFD.305",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 305,
+      "bytes": [
+        253,
+        177,
+        2
+      ],
+      "name": "f16x8.neg",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "neg"
+      }
+    },
+    {
+      "id": "0xFD.306",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 306,
+      "bytes": [
+        253,
+        178,
+        2
+      ],
+      "name": "f16x8.sqrt",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "sqrt"
+      }
+    },
+    {
+      "id": "0xFD.307",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 307,
+      "bytes": [
+        253,
+        179,
+        2
+      ],
+      "name": "f16x8.ceil",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "ceil"
+      }
+    },
+    {
+      "id": "0xFD.308",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 308,
+      "bytes": [
+        253,
+        180,
+        2
+      ],
+      "name": "f16x8.floor",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "floor"
+      }
+    },
+    {
+      "id": "0xFD.309",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 309,
+      "bytes": [
+        253,
+        181,
+        2
+      ],
+      "name": "f16x8.trunc",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "trunc"
+      }
+    },
+    {
+      "id": "0xFD.310",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 310,
+      "bytes": [
+        253,
+        182,
+        2
+      ],
+      "name": "f16x8.nearest",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "nearest"
+      }
+    },
+    {
+      "id": "0xFD.311",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 311,
+      "bytes": [
+        253,
+        183,
+        2
+      ],
+      "name": "f16x8.eq",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "eq"
+      }
+    },
+    {
+      "id": "0xFD.312",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 312,
+      "bytes": [
+        253,
+        184,
+        2
+      ],
+      "name": "f16x8.ne",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "ne"
+      }
+    },
+    {
+      "id": "0xFD.313",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 313,
+      "bytes": [
+        253,
+        185,
+        2
+      ],
+      "name": "f16x8.lt",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "lt"
+      }
+    },
+    {
+      "id": "0xFD.314",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 314,
+      "bytes": [
+        253,
+        186,
+        2
+      ],
+      "name": "f16x8.gt",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "gt"
+      }
+    },
+    {
+      "id": "0xFD.315",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 315,
+      "bytes": [
+        253,
+        187,
+        2
+      ],
+      "name": "f16x8.le",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "le"
+      }
+    },
+    {
+      "id": "0xFD.316",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 316,
+      "bytes": [
+        253,
+        188,
+        2
+      ],
+      "name": "f16x8.ge",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "ge"
+      }
+    },
+    {
+      "id": "0xFD.317",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 317,
+      "bytes": [
+        253,
+        189,
+        2
+      ],
+      "name": "f16x8.add",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "add"
+      }
+    },
+    {
+      "id": "0xFD.318",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 318,
+      "bytes": [
+        253,
+        190,
+        2
+      ],
+      "name": "f16x8.sub",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "sub"
+      }
+    },
+    {
+      "id": "0xFD.319",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 319,
+      "bytes": [
+        253,
+        191,
+        2
+      ],
+      "name": "f16x8.mul",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "mul"
+      }
+    },
+    {
+      "id": "0xFD.320",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 320,
+      "bytes": [
+        253,
+        192,
+        2
+      ],
+      "name": "f16x8.div",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "div"
+      }
+    },
+    {
+      "id": "0xFD.321",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 321,
+      "bytes": [
+        253,
+        193,
+        2
+      ],
+      "name": "f16x8.min",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "min"
+      }
+    },
+    {
+      "id": "0xFD.322",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 322,
+      "bytes": [
+        253,
+        194,
+        2
+      ],
+      "name": "f16x8.max",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "max"
+      }
+    },
+    {
+      "id": "0xFD.323",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 323,
+      "bytes": [
+        253,
+        195,
+        2
+      ],
+      "name": "f16x8.pmin",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "pmin"
+      }
+    },
+    {
+      "id": "0xFD.324",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 324,
+      "bytes": [
+        253,
+        196,
+        2
+      ],
+      "name": "f16x8.pmax",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "pmax"
+      }
+    },
+    {
+      "id": "0xFD.325",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 325,
+      "bytes": [
+        253,
+        197,
+        2
+      ],
+      "name": "i16x8.trunc_sat_f16x8_s",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "i16x8",
+        "mainop": "trunc",
+        "post": "sat_f16x8",
+        "sign": "s"
+      }
+    },
+    {
+      "id": "0xFD.326",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 326,
+      "bytes": [
+        253,
+        198,
+        2
+      ],
+      "name": "i16x8.trunc_sat_f16x8_u",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "i16x8",
+        "mainop": "trunc",
+        "post": "sat_f16x8",
+        "sign": "u"
+      }
+    },
+    {
+      "id": "0xFD.327",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 327,
+      "bytes": [
+        253,
+        199,
+        2
+      ],
+      "name": "f16x8.convert_i16x8_s",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "convert",
+        "post": "i16x8",
+        "sign": "s"
+      }
+    },
+    {
+      "id": "0xFD.328",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 328,
+      "bytes": [
+        253,
+        200,
+        2
+      ],
+      "name": "f16x8.convert_i16x8_u",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "convert",
+        "post": "i16x8",
+        "sign": "u"
+      }
+    },
+    {
+      "id": "0xFD.329",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 329,
+      "bytes": [
+        253,
+        201,
+        2
+      ],
+      "name": "f16x8.demote_f32x4_zero",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "demote",
+        "post": "f32x4",
+        "rest": "_zero"
+      }
+    },
+    {
+      "id": "0xFD.330",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 330,
+      "bytes": [
+        253,
+        202,
+        2
+      ],
+      "name": "f16x8.demote_f64x2_zero",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "demote",
+        "post": "f64x2",
+        "rest": "_zero"
+      }
+    },
+    {
+      "id": "0xFD.331",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 331,
+      "bytes": [
+        253,
+        203,
+        2
+      ],
+      "name": "f32x4.promote_f16x8_low",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f32x4",
+        "mainop": "promote",
+        "post": "f16x8",
+        "rest": "_low"
+      }
+    },
+    {
+      "id": "0xFD.332",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 332,
+      "bytes": [
+        253,
+        204,
+        2
+      ],
+      "name": "i16x8.trunc_f16x8_s",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "i16x8",
+        "mainop": "trunc",
+        "post": "f16x8",
+        "sign": "s"
+      }
+    },
+    {
+      "id": "0xFD.333",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 333,
+      "bytes": [
+        253,
+        205,
+        2
+      ],
+      "name": "i16x8.trunc_f16x8_u",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "i16x8",
+        "mainop": "trunc",
+        "post": "f16x8",
+        "sign": "u"
+      }
+    },
+    {
+      "id": "0xFD.334",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 334,
+      "bytes": [
+        253,
+        206,
+        2
+      ],
+      "name": "f16x8.madd",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "madd"
+      }
+    },
+    {
+      "id": "0xFD.335",
+      "section": "simd-ext",
+      "prefix": "FD",
+      "code": 335,
+      "bytes": [
+        253,
+        207,
+        2
+      ],
+      "name": "f16x8.nmadd",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "parts": {
+        "pre": "f16x8",
+        "mainop": "nmadd"
+      }
     }
   ]
 }

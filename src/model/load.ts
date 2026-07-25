@@ -9,7 +9,7 @@ export const SECTION_ORDER: SectionId[] = [
   'stringref',
   'fc',
   'simd',
-  'relaxed-simd',
+  'simd-ext',
   'threads',
 ];
 

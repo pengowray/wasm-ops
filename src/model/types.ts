@@ -12,7 +12,7 @@ export type SectionId =
   | 'stringref'
   | 'fc'
   | 'simd'
-  | 'relaxed-simd'
+  | 'simd-ext'
   | 'threads';
 
 export interface Section {

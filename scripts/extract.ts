@@ -52,7 +52,7 @@ const SECTIONS: SectionSpec[] = [
     intro: 'SIMD (single instruction, multiple data) instructions begin with 0xFD.',
   },
   {
-    id: 'relaxed-simd', tableId: 'opcodes_FD1', anchor: 'relaxed-simd', title: 'Relaxed SIMD proposal',
+    id: 'simd-ext', tableId: 'opcodes_FD1', anchor: 'simd-ext', title: 'Vector extensions',
     prefix: 'FD', start: 0x100, count: 0,
     intro: 'Relaxed SIMD prototype opcodes, in the 0xFD 0x1__ range.',
   },

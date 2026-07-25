@@ -55,7 +55,7 @@ export const DEFAULT_VIEW: ViewOptions = {
   // the default the list layout picks up, and matches the toolbar.
   group: 'category',
   order: 'opcode',
-  sections: ['core', 'gc', 'stringref', 'fc', 'simd', 'relaxed-simd', 'threads'],
+  sections: ['core', 'gc', 'stringref', 'fc', 'simd', 'simd-ext', 'threads'],
   showReserved: true,
   showProposals: true,
   showHistorical: false,

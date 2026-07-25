@@ -6,7 +6,7 @@
     "emoji": "⭐",
     "prefix": "FC",
     "start": 0,
-    "count": 32,
+    "count": 64,
     "intro": "Multibyte instructions beginning with 0xFC."
   },
   "opcodes": [
@@ -540,6 +540,408 @@
       "bytes": [
         252,
         31
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.32",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 32,
+      "bytes": [
+        252,
+        32
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.33",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 33,
+      "bytes": [
+        252,
+        33
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.34",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 34,
+      "bytes": [
+        252,
+        34
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.35",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 35,
+      "bytes": [
+        252,
+        35
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.36",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 36,
+      "bytes": [
+        252,
+        36
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.37",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 37,
+      "bytes": [
+        252,
+        37
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.38",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 38,
+      "bytes": [
+        252,
+        38
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.39",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 39,
+      "bytes": [
+        252,
+        39
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.40",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 40,
+      "bytes": [
+        252,
+        40
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.41",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 41,
+      "bytes": [
+        252,
+        41
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.42",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 42,
+      "bytes": [
+        252,
+        42
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.43",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 43,
+      "bytes": [
+        252,
+        43
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.44",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 44,
+      "bytes": [
+        252,
+        44
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.45",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 45,
+      "bytes": [
+        252,
+        45
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.46",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 46,
+      "bytes": [
+        252,
+        46
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.47",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 47,
+      "bytes": [
+        252,
+        47
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.48",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 48,
+      "bytes": [
+        252,
+        48
+      ],
+      "name": "f32.load_f16",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Loads two bytes as an f16 and promotes the result to f32.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span>",
+      "parts": {
+        "pre": "f32",
+        "mainop": "load",
+        "post": "f16"
+      }
+    },
+    {
+      "id": "0xFC.49",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 49,
+      "bytes": [
+        252,
+        49
+      ],
+      "name": "f32.store_f16",
+      "status": "proposal",
+      "proposal": "Half precision (FP16)",
+      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Demotes an f32 to f16 and stores it as two bytes.</p>",
+      "immediateArgs": "m",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span>",
+      "parts": {
+        "pre": "f32",
+        "mainop": "store",
+        "post": "f16"
+      }
+    },
+    {
+      "id": "0xFC.50",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 50,
+      "bytes": [
+        252,
+        50
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.51",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 51,
+      "bytes": [
+        252,
+        51
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.52",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 52,
+      "bytes": [
+        252,
+        52
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.53",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 53,
+      "bytes": [
+        252,
+        53
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.54",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 54,
+      "bytes": [
+        252,
+        54
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.55",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 55,
+      "bytes": [
+        252,
+        55
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.56",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 56,
+      "bytes": [
+        252,
+        56
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.57",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 57,
+      "bytes": [
+        252,
+        57
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.58",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 58,
+      "bytes": [
+        252,
+        58
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.59",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 59,
+      "bytes": [
+        252,
+        59
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.60",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 60,
+      "bytes": [
+        252,
+        60
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.61",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 61,
+      "bytes": [
+        252,
+        61
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.62",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 62,
+      "bytes": [
+        252,
+        62
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFC.63",
+      "section": "fc",
+      "prefix": "FC",
+      "code": 63,
+      "bytes": [
+        252,
+        63
       ],
       "name": null,
       "status": "reserved"
