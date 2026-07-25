@@ -298,14 +298,18 @@ export function renderItem(item: ViewItem): string {
 }
 
 /**
- * How each status is announced. Every one that is not `standard` carries the
- * same warning mark and the same shape — label, then what it means for someone
- * reading a module today — so the difference between them is in the words and
- * not in how hard they are to notice.
+ * How each status is announced. Every one that is not `standard` takes the same
+ * shape — mark, label, then what it means for someone reading a module today —
+ * so they are easy to compare, and the mark says which kind of caution it is
+ * rather than shouting the same warning at all of them.
  */
-const STATUS_NOTES: Partial<
-  Record<Opcode['status'], { mark: string; label: string; detail: string }>
-> = {
+interface StatusNote {
+  mark: string;
+  label: string;
+  detail: string;
+}
+
+const STATUS_NOTES: Partial<Record<Opcode['status'], StatusNote>> = {
   proposal: {
     mark: '\u{1F9EA}',
     label: 'Proposal',
@@ -327,6 +331,25 @@ const STATUS_NOTES: Partial<
     detail: 'this encoding was abandoned. The slot is unassigned today.',
   },
 };
+
+/**
+ * A phase-4 proposal is finished in every sense a reader cares about: the
+ * design is settled, the encoding is fixed and the engines have shipped it.
+ * The atomics are the case in point \u2014 telling someone that `i32.atomic.load`
+ * "may still change" is not caution, it is wrong, and it makes the same warning
+ * on a phase-1 instruction mean less.
+ */
+const AT_PHASE_4: StatusNote = {
+  mark: '\u2705',
+  label: 'Phase 4',
+  detail:
+    'settled and shipped in every current engine, awaiting only the specification text that folds it in.',
+};
+
+function statusNote(op: Opcode): StatusNote | undefined {
+  if (op.status === 'proposal' && proposal(op.proposal)?.phase === 4) return AT_PHASE_4;
+  return STATUS_NOTES[op.status];
+}
 
 /** The opcode's name as a panel heading, with its immediate operands. */
 export function renderHeading(op: Opcode): string {
@@ -390,11 +413,13 @@ export function renderDetail(op: Opcode): string {
   const rows: string[] = [renderHeading(op)];
   const tags = renderTags(op);
 
-  const note = STATUS_NOTES[op.status];
+  const note = statusNote(op);
   if (note) {
     rows.push(
-      `<p class="detail-status" data-status="${op.status}">` +
-        `<span class="status-mark" aria-hidden="true">⚠️</span>` +
+      `<p class="detail-status" data-status="${op.status}"` +
+        (note === AT_PHASE_4 ? ` data-tone="settled"` : '') +
+        `>` +
+        `<span class="status-mark" aria-hidden="true">${note.mark}</span>` +
         `<span class="status-text"><strong>${note.label}</strong> — ${note.detail}` +
         (op.supersededBy
           ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`

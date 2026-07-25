@@ -1058,6 +1058,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .detail-status[data-status='proposal'] { border-left-style: dashed; }
 .detail-status[data-status='dormant'] { border-left-style: dashed; }
 .detail-status[data-status='withdrawn'] { border-left-style: dotted; }
+/* Not a caution at all — a note that this one is done bar the paperwork. */
+.detail-status[data-tone='settled'] { border-left-style: solid; border-left-color: var(--accent); }
 .status-mark { flex: none; line-height: 1.4; }
 .status-text strong { color: var(--fg); }
 .detail-proposal, .detail-superseded {
