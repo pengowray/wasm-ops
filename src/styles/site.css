@@ -1423,6 +1423,10 @@ html:not(.js) .about-body { overflow: visible; }
 	gap: .5rem 2rem;
 	margin-top: .5rem;
 }
+/* Sits above the columns, so it keeps the lede's measure rather than a
+   column's. */
+.footer-lede { max-width: 68ch; margin: 1rem 0 0; }
+
 .footer-columns h3 { margin: .6rem 0 .2rem; font-size: .95rem; }
 .footer-columns section { break-inside: avoid; }
 
