@@ -25,9 +25,10 @@
 	--hatch-bg: #ffffff;
 
 	--hl-self: #24dff0;
-	--hl-op: #cff1fc;
+	--hl-self-fg: #10262a;
+	--hl-op: #b5e9f7;
+	--hl-op-fg: #14343d;
 	--hl-pre: rgba(219, 223, 16, 0.62);
-	--hl-pinned: #ffe9a8;
 
 	--radius: 6px;
 	--move: 320ms;
@@ -50,10 +51,13 @@
 		--hatch: #777777;
 		--hatch-bg: #1c1c1c;
 
-		--hl-self: #1d7c88;
-		--hl-op: #24414a;
+		/* These sit on a #1c1c1c background. The previous values were only a
+		   few points lighter than it, so a lit cell read as unlit. */
+		--hl-self: #46c8dc;
+		--hl-self-fg: #08222a;
+		--hl-op: #2f5f6d;
+		--hl-op-fg: #eaf7fb;
 		--hl-pre: rgba(220, 110, 16, 0.62);
-		--hl-pinned: #5a4718;
 	}
 }
 
@@ -72,10 +76,11 @@
 	--hatch: #777777;
 	--hatch-bg: #1c1c1c;
 
-	--hl-self: #1d7c88;
-	--hl-op: #24414a;
+	--hl-self: #46c8dc;
+	--hl-self-fg: #08222a;
+	--hl-op: #2f5f6d;
+	--hl-op-fg: #eaf7fb;
 	--hl-pre: rgba(220, 110, 16, 0.62);
-	--hl-pinned: #5a4718;
 }
 
 * { box-sizing: border-box; }
@@ -326,7 +331,11 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	line-height: 1.15;
 	text-align: center;
 	color: var(--fg-dim);
-	background: var(--bg);
+	/* The single source of truth for a cell's background. Text sitting over the
+	   crosshatch reuses it to blank out the hatching behind itself, so it stays
+	   correct when a highlight changes the colour. */
+	--cell-bg: var(--bg);
+	background-color: var(--cell-bg);
 	border: 1px solid var(--rule);
 	background-clip: padding-box;
 	overflow-wrap: anywhere;
@@ -343,8 +352,19 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	background-image:
 		repeating-linear-gradient(45deg, transparent 0 5px, var(--hatch) 5px 5.5px),
 		repeating-linear-gradient(-45deg, transparent 0 5px, var(--hatch) 5px 5.5px);
-	background-color: var(--surface-sunk);
-	color: var(--fg-faint);
+	--cell-bg: var(--surface-sunk);
+	color: var(--fg-dim);
+}
+
+/* Diagonal hatching running under lettering makes it hard to read, so the text
+   carries its own flat background. */
+.cell[data-status='reserved'] .cell-name,
+.cell[data-status='proposal'] .cell-name,
+.cell[data-status='reserved'] .cell-hex,
+.cell[data-status='proposal'] .cell-hex {
+	background-color: var(--cell-bg);
+	padding: 0 .25em;
+	border-radius: 2px;
 }
 
 /* A cell hidden by a filter keeps its slot but loses its content. */
@@ -354,15 +374,24 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 .cell-hex {
 	display: none;
+	align-self: center;
 	font-family: 'Source Code Pro', monospace;
-	font-size: .68rem;
-	color: var(--fg-faint);
+	font-size: .74rem;
+	letter-spacing: .02em;
+	color: var(--fg-dim);
 }
 /* In the byte grid a cell's position already states its opcode; in a list it
-   has to be spelled out. */
-.chart[data-layout='list'] .cell-hex { display: block; }
+   has to be spelled out, and has to be legible while it does so. */
+.chart[data-layout='list'] .cell-hex {
+	display: block;
+	margin-bottom: .15rem;
+	font-weight: 700;
+	color: var(--fg);
+}
 
-.cell-name { display: block; }
+/* Hugs the text rather than filling the cell, so the flat background over the
+   crosshatch is only as wide as the lettering needs. */
+.cell-name { display: inline-block; align-self: center; max-width: 100%; }
 
 .pre { color: inherit; }
 .op { font-size: 1.05em; font-weight: 700; }
@@ -380,11 +409,13 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 /* Hovering a cell lights up every cell sharing its operation, and the type
    prefix within them. Driven by data attributes set at build time. */
-.cell.hl-op { background-color: var(--hl-op); color: var(--fg); }
-.cell.hl-self { background-color: var(--hl-self); color: var(--fg); }
+.cell.hl-op { --cell-bg: var(--hl-op); color: var(--hl-op-fg); }
+.cell.hl-self { --cell-bg: var(--hl-self); color: var(--hl-self-fg); }
 .cell.hl-pre .pre { background-color: var(--hl-pre); }
 .cell.pinned { outline: 2px solid var(--accent); outline-offset: -2px; }
-.cell.selected { background-color: var(--hl-self); color: var(--fg); }
+
+/* A lit cell drops its hatching: the point of lighting it is to be seen. */
+.cell.hl-op, .cell.hl-self { background-image: none; }
 
 /* ------------------------------------------------------------------ movement */
 
@@ -457,12 +488,28 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .detail-bytes { font-family: 'Source Code Pro', monospace; font-size: .8rem; margin: 0; }
 .detail-name { margin: .2rem 0 .5rem; }
 
-.hex { font-weight: 800; color: #b8860b; }
-.leb { font-weight: 800; color: rgb(233, 165, 109); }
-.hex-dim { font-size: smaller; color: var(--fg-faint); }
-:root[data-theme='dark'] .hex { color: khaki; }
-@media (prefers-color-scheme: dark) {
-	:root:not([data-theme='light']) .hex { color: khaki; }
+/* How the instruction is encoded, one named part per row. */
+.encoding {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: .85rem;
+}
+.encoding th {
+	width: 10.5rem;
+	padding: .3rem .6rem .3rem 0;
+	text-align: left;
+	font-weight: 400;
+	color: var(--fg-dim);
+	vertical-align: top;
+}
+.encoding th code { background: none; padding: 0; color: var(--fg-dim); }
+.encoding td { padding: .3rem 0; vertical-align: top; }
+.encoding tr + tr th, .encoding tr + tr td { border-top: 1px solid var(--rule-soft); }
+.encoding-note {
+	display: block;
+	margin-top: .1rem;
+	font-size: .78rem;
+	color: var(--fg-faint);
 }
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }

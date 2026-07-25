@@ -20,19 +20,61 @@ export function escapeHtml(value: string): string {
     .replace(/"/g, '&quot;');
 }
 
-/** The `0xFD, LEB(0x0C) = 0x0C` style byte breakdown shown in the detail pane. */
-export function hexDisplay(op: Opcode): string {
+/** `0xFD 0x80 0x02` — the bytes as they appear in the module. */
+export function byteSequence(op: Opcode): string {
+  return op.bytes.map((b) => '0x' + b.toString(16).toUpperCase().padStart(2, '0')).join(' ');
+}
+
+/**
+ * How an instruction is encoded, spelled out.
+ *
+ * The old page compressed this into `0xFB, LEB(0x14) = 0x14`, which asks the
+ * reader to already know that the second number is a sub-opcode, that LEB means
+ * LEB128, and why a function of a value would equal itself. Broken into named
+ * rows, each part says what it is, and the LEB128 step is only shown when it
+ * actually changes the bytes.
+ */
+export function renderEncoding(op: Opcode): string {
+  const rows: string[] = [];
+  const code = (text: string) => `<code>${text}</code>`;
+
   if (!op.prefix) {
-    return `<span class="hex-dim">0x</span><span class="hex">${toHex(op.code)}</span>`;
+    // A single-byte instruction is its own byte sequence; there is no second
+    // row to add that would not just repeat the first.
+    rows.push(row('Opcode byte', code('0x' + toHex(op.code)), `${op.code} in decimal`));
+    return `<h4>Encoding</h4><table class="encoding">${rows.join('')}</table>`;
   }
-  const leb = op.bytes
-    .slice(1)
-    .map((b) => b.toString(16).toUpperCase().padStart(2, '0'))
-    .join(' ');
+  {
+    rows.push(row('Prefix byte', code('0x' + op.prefix), 'says which extension follows'));
+
+    const sub = '0x' + toHex(op.code);
+    rows.push(row('Sub-opcode', code(sub), `${op.code} in decimal`));
+
+    const encoded = op.bytes.slice(1);
+    const encodedHex = encoded
+      .map((b) => '0x' + b.toString(16).toUpperCase().padStart(2, '0'))
+      .join(' ');
+    rows.push(
+      row(
+        `${code(`to_LEB(${sub})`)}`,
+        code(encodedHex),
+        encoded.length > 1
+          ? `the sub-opcode is above 127, so LEB128 spreads it over ${encoded.length} bytes`
+          : 'unchanged: values below 128 encode as a single byte',
+      ),
+    );
+  }
+
+  rows.push(row('Byte sequence', code(byteSequence(op))));
+
+  return `<h4>Encoding</h4><table class="encoding">${rows.join('')}</table>`;
+}
+
+function row(label: string, value: string, note?: string): string {
   return (
-    `<span class="hex-dim">0x</span><span class="hex">${op.prefix}</span>` +
-    `<span class="hex-dim">, LEB(0x</span><span class="leb">${toHex(op.code)}</span>` +
-    `<span class="hex-dim">) = 0x${leb}</span>`
+    `<tr><th scope="row">${label}</th><td>${value}` +
+    (note ? `<span class="encoding-note">${note}</span>` : '') +
+    `</td></tr>`
   );
 }
 
@@ -150,7 +192,7 @@ export function renderItem(item: ViewItem): string {
 export function renderDetail(op: Opcode): string {
   const rows: string[] = [];
 
-  rows.push(`<p class="detail-bytes">${hexDisplay(op)}</p>`);
+  rows.push(`<p class="detail-bytes"><code>${byteSequence(op)}</code></p>`);
 
   const heading = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
   rows.push(
@@ -176,6 +218,8 @@ export function renderDetail(op: Opcode): string {
         (op.stack.note ? `<div class="detail-stack-note">${op.stack.note}</div>` : ''),
     );
   }
+
+  rows.push(renderEncoding(op));
 
   return (
     `<article class="detail" id="detail-${op.id}" data-key="${op.id}">` +

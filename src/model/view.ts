@@ -19,7 +19,13 @@ import { CATEGORY_LABELS, CATEGORY_ORDER, categorize, type CategoryId } from './
  */
 export type Layout = 'matrix' | 'list';
 export type GroupBy = 'section' | 'category' | 'none';
-export type OrderBy = 'opcode' | 'name';
+/**
+ * `name` sorts on the operation, ignoring the type it acts on, so every
+ * `store` sits together regardless of whether it is `f32.store` or `i64.store`.
+ * `type-name` sorts on the full name, which keeps each type's instructions
+ * together instead.
+ */
+export type OrderBy = 'opcode' | 'name' | 'type-name';
 
 export interface ViewOptions {
   layout: Layout;
@@ -39,7 +45,9 @@ export interface ViewOptions {
 
 export const DEFAULT_VIEW: ViewOptions = {
   layout: 'matrix',
-  group: 'section',
+  // Grouping is ignored by the byte grid, which is always by section. This is
+  // the default the list layout picks up, and matches the toolbar.
+  group: 'category',
   order: 'opcode',
   sections: ['core', 'gc', 'stringref', 'fc', 'simd', 'relaxed-simd', 'threads'],
   showReserved: true,
@@ -90,11 +98,32 @@ function rowLabel(code: number): string {
   return toHex(code >> 4).replace(/^0(?=.)/, '') + '_';
 }
 
+/**
+ * The part of a name that is the operation rather than the type it acts on:
+ * `f32.store` and `i64.store` both reduce to `store`, and
+ * `i32.atomic.rmw16.xchg_u` to `xchg_u`.
+ */
+function operationOf(op: Opcode): string {
+  const pre = op.parts?.pre;
+  if (!op.name) return '';
+  return pre && op.name.startsWith(pre + '.') ? op.name.slice(pre.length + 1) : op.name;
+}
+
 function sortOpcodes(ops: Opcode[], order: OrderBy): Opcode[] {
-  if (order === 'name') {
+  if (order === 'name' || order === 'type-name') {
+    const byOperation = order === 'name';
     return [...ops].sort((a, b) => {
       // Unassigned slots have no name to sort by; they sink to the end.
       if (!a.name || !b.name) return (a.name ? 0 : 1) - (b.name ? 0 : 1);
+      if (byOperation) {
+        // Ties fall back to the type, so the variants of one operation stay in
+        // a predictable order rather than whatever the byte order happens to be.
+        return (
+          operationOf(a).localeCompare(operationOf(b)) ||
+          (a.parts?.pre ?? '').localeCompare(b.parts?.pre ?? '') ||
+          a.code - b.code
+        );
+      }
       return a.name.localeCompare(b.name) || a.code - b.code;
     });
   }

@@ -82,14 +82,15 @@ export function renderPage(
 	</fieldset>
 	<fieldset class="control" data-when-layout="list">
 		<legend>Group by</legend>
-		<label><input type="radio" name="group" value="section" checked> Section</label>
-		<label><input type="radio" name="group" value="category"> Category</label>
+		<label><input type="radio" name="group" value="category" checked> Category</label>
+		<label><input type="radio" name="group" value="section"> Section</label>
 		<label><input type="radio" name="group" value="none"> Nothing</label>
 	</fieldset>
 	<fieldset class="control" data-when-layout="list">
 		<legend>Sort by</legend>
 		<label><input type="radio" name="order" value="opcode" checked> Opcode</label>
-		<label><input type="radio" name="order" value="name"> Name</label>
+		<label title="Sort on the operation, so every store sits together"><input type="radio" name="order" value="name"> Name</label>
+		<label title="Sort on the full name, keeping each type together"><input type="radio" name="order" value="type-name"> Type + name</label>
 	</fieldset>
 	<!-- Filtering is occasional, so it folds away rather than sitting across the
 	     toolbar. A <details> keeps it working as a disclosure without script. -->
