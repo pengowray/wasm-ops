@@ -20,7 +20,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadData } from '../src/model/load.ts';
-import { opcodeId } from '../src/model/types.ts';
+import { HISTORICAL, opcodeId } from '../src/model/types.ts';
 import type { Opcode } from '../src/model/types.ts';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -92,6 +92,7 @@ function main(): void {
   const ours = new Map<string, Opcode>();
   for (const op of data.opcodes) ours.set(op.id, op);
 
+  let historical = 0;
   const missing: string[] = [];
   const extra: string[] = [];
   const renamed: string[] = [];
@@ -105,6 +106,14 @@ function main(): void {
     if (!checked(op)) continue;
     // The prefix-byte cells are navigation, not instructions.
     if (op.linkTo) continue;
+
+    // Legacy and withdrawn encodings are recorded precisely because current
+    // references no longer carry them; their absence is the expected result,
+    // not a finding.
+    if (HISTORICAL.includes(op.status)) {
+      historical++;
+      continue;
+    }
 
     const ref = refById.get(op.id);
     if (op.name && !ref) {
@@ -140,6 +149,9 @@ function main(): void {
   report('In the reference, missing or unnamed here', missing);
   report('Named here, absent from the reference', extra);
   report('Named differently', renamed);
+
+  console.log(`
+Skipped: ${historical} legacy or withdrawn encodings, kept as history.`);
 
   const uncovered = data.opcodes.filter((o) => o.name && !checked(o)).length;
   console.log(

@@ -240,8 +240,21 @@ export function renderHeading(op: Opcode): string {
 export function renderDetail(op: Opcode): string {
   const rows: string[] = [renderHeading(op)];
 
-  if (op.status === 'proposal') {
-    rows.push(`<p class="detail-status"><em>Proposal</em></p>`);
+  const STATUS_NOTE: Partial<Record<Opcode['status'], string>> = {
+    proposal: 'Proposal — not yet standardised',
+    legacy: 'Legacy — superseded, but still emitted and accepted',
+    withdrawn: 'Withdrawn — this encoding was abandoned; the slot is unassigned',
+  };
+  const note = STATUS_NOTE[op.status];
+  if (note) {
+    rows.push(
+      `<p class="detail-status" data-status="${op.status}">${note}` +
+        (op.proposal ? ` <span class="detail-proposal">${escapeHtml(op.proposal)}</span>` : '') +
+        (op.supersededBy
+          ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`
+          : '') +
+        `</p>`,
+    );
   }
 
   // Every part of the panel is labelled, so the eye can go straight to the one

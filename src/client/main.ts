@@ -115,6 +115,7 @@ function start(
     options.sections = form.getAll('section') as SectionId[];
     options.showProposals = form.get('showProposals') !== null;
     options.showReserved = form.get('showReserved') !== null;
+    options.showHistorical = form.get('showHistorical') !== null;
   }
 
   const filter = document.getElementById('filter') as HTMLDetailsElement | null;
@@ -166,7 +167,7 @@ function start(
 
   document.getElementById('preset-all')?.addEventListener('click', () => {
     setChecks('section', () => true);
-    for (const name of ['showProposals', 'showReserved']) {
+    for (const name of ['showProposals', 'showReserved', 'showHistorical']) {
       (toolbar.querySelector(`input[name="${name}"]`) as HTMLInputElement).checked = true;
     }
     readToolbar();

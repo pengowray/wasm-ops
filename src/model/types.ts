@@ -37,11 +37,24 @@ export interface Section {
 }
 
 /**
- * How settled an opcode is. `reserved` covers both genuinely-empty slots and
- * slots whose only content is a name (the old page's `*name` convention marked
- * a proposal; a bare `&nbsp;` marked an unused slot).
+ * Where an instruction sits in its lifecycle.
+ *
+ * - `standard`   in the specification
+ * - `proposal`   an active proposal, not yet standardised
+ * - `legacy`     superseded, but still emitted and accepted in practice — the
+ *                pre-`try_table` exception handling instructions
+ * - `withdrawn`  an encoding that was used during a proposal's development and
+ *                then abandoned. The slot is unassigned today; this records
+ *                what a reader may find in an old module or an old tool
+ * - `reserved`   unassigned, nothing was ever here
+ *
+ * `legacy` and `withdrawn` are history rather than reference material, so the
+ * chart hides them unless asked.
  */
-export type OpcodeStatus = 'standard' | 'proposal' | 'reserved';
+export type OpcodeStatus = 'standard' | 'proposal' | 'legacy' | 'withdrawn' | 'reserved';
+
+/** Statuses that describe what an instruction *was*, rather than what it is. */
+export const HISTORICAL: readonly OpcodeStatus[] = ['legacy', 'withdrawn'];
 
 /**
  * A structured decomposition of an opcode name, e.g. `i64.load16_u` becomes
@@ -96,6 +109,8 @@ export interface Opcode {
   status: OpcodeStatus;
   /** Named proposal this instruction belongs to, when known. */
   proposal?: string;
+  /** For `legacy` and `withdrawn`: what replaced it, and where it went. */
+  supersededBy?: string;
   parts?: NameParts;
   /** Immediate operands, shown beside the name: `[t?]`, `x`. HTML. */
   immediateArgs?: string;

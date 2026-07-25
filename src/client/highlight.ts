@@ -31,8 +31,12 @@ export class Highlighter {
     for (const root of roots) {
       root.addEventListener('pointerover', (event) => {
         if (root.classList.contains('settling')) return;
-        const cell = (event.target as Element).closest<HTMLElement>(TARGET);
-        if (cell) this.#apply(cell);
+        const target = event.target as Element;
+        const cell = target.closest<HTMLElement>(TARGET);
+        // The type prefix lights up only while the pointer is over the `i32`
+        // itself, not anywhere in the cell — otherwise every cell of that type
+        // flashes yellow just from crossing the chart.
+        if (cell) this.#apply(cell, Boolean(target.closest('.pre')));
       });
       root.addEventListener('pointerleave', () => this.restore());
     }
@@ -61,7 +65,7 @@ export class Highlighter {
       if (el.matches(TARGET)) el.classList.add('pinned');
     }
     const anchor = document.querySelector<HTMLElement>(`.cell${selector}`);
-    if (anchor) this.#apply(anchor);
+    if (anchor) this.#apply(anchor, false);
   }
 
   #clear(): void {
@@ -69,7 +73,7 @@ export class Highlighter {
     this.#lit = [];
   }
 
-  #apply(cell: HTMLElement): void {
+  #apply(cell: HTMLElement, includeType: boolean): void {
     this.#clear();
 
     const op = cell.dataset['op'];
@@ -84,7 +88,7 @@ export class Highlighter {
     };
 
     if (op) light(`[data-op="${CSS.escape(op)}"]`, 'hl-op');
-    if (pre) light(`[data-pre="${CSS.escape(pre)}"]`, 'hl-pre');
+    if (pre && includeType) light(`[data-pre="${CSS.escape(pre)}"]`, 'hl-pre');
     // The instruction itself, in both the chart and the map.
     if (key) {
       const escaped = CSS.escape(key);

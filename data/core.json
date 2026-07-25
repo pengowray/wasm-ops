@@ -134,11 +134,13 @@
         6
       ],
       "name": "try",
-      "status": "proposal",
+      "status": "legacy",
       "parts": {
         "mainop": "try"
       },
-      "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Legacy exception handling",
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
       "id": "0x07",
@@ -149,11 +151,13 @@
         7
       ],
       "name": "catch",
-      "status": "proposal",
+      "status": "legacy",
       "parts": {
         "mainop": "catch"
       },
-      "description": "<p>begins the catch block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>begins the catch block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Legacy exception handling",
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
       "id": "0x08",
@@ -164,11 +168,12 @@
         8
       ],
       "name": "throw",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "throw"
       },
-      "description": "<p>Creates an exception defined by the tag and then throws it</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>Creates an exception defined by the tag and then throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Exception handling"
     },
     {
       "id": "0x09",
@@ -179,11 +184,13 @@
         9
       ],
       "name": "rethrow",
-      "status": "proposal",
+      "status": "legacy",
       "parts": {
         "mainop": "rethrow"
       },
-      "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Legacy exception handling",
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
       "id": "0x0A",
@@ -194,11 +201,12 @@
         10
       ],
       "name": "throw_ref",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "throw_ref"
       },
-      "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>Pops the exnref on top of the stack and throws it</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Exception handling"
     },
     {
       "id": "0x0B",
@@ -350,7 +358,7 @@
         18
       ],
       "name": "return_call",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "return_call"
       },
@@ -365,7 +373,7 @@
         19
       ],
       "name": "return_call_indirect",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "return_call_indirect"
       },
@@ -380,7 +388,7 @@
         20
       ],
       "name": "call_ref",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "call_ref"
       },
@@ -395,7 +403,7 @@
         21
       ],
       "name": "return_call_ref",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "return_call_ref"
       },
@@ -432,11 +440,13 @@
         24
       ],
       "name": "delegate",
-      "status": "proposal",
+      "status": "legacy",
       "parts": {
         "mainop": "delegate"
       },
-      "description": "<p>begins the delegate block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>begins the delegate block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Legacy exception handling",
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
       "id": "0x19",
@@ -447,11 +457,13 @@
         25
       ],
       "name": "catch_all",
-      "status": "proposal",
+      "status": "legacy",
       "parts": {
         "mainop": "catch_all"
       },
-      "description": "<p>begins the catch_all block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>begins the catch_all block of the try block</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Legacy exception handling",
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
     {
       "id": "0x1A",
@@ -537,11 +549,12 @@
         31
       ],
       "name": "try_table",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "try_table"
       },
-      "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>"
+      "description": "<p>begins a block which can handle thrown exceptions</p>\n<p><em>Exception Handling Proposal</em></p>",
+      "proposal": "Exception handling"
     },
     {
       "id": "0x20",
@@ -3984,7 +3997,7 @@
         211
       ],
       "name": "ref.eq",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "ref",
         "mainop": "eq"
@@ -4000,7 +4013,7 @@
         212
       ],
       "name": "ref.as_non_null",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "pre": "ref",
         "mainop": "as",
@@ -4017,7 +4030,7 @@
         213
       ],
       "name": "br_on_null",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "br_on_null"
       },
@@ -4032,7 +4045,7 @@
         214
       ],
       "name": "br_on_non_null",
-      "status": "proposal",
+      "status": "standard",
       "parts": {
         "mainop": "br_on_non_null"
       },

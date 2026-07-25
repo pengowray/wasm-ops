@@ -1,39 +1,64 @@
 <details class="accordion">
 	<summary>Further reading</summary>
 	<ul>
-		<li><a href="https://webassembly.github.io/spec/">WebAssembly Specifications</a>
-			<ul><li><a href="https://webassembly.github.io/spec/core/binary/instructions.html">Instructions</a> (opcodes)</li></ul>
+		<li><a href="https://webassembly.github.io/spec/core/">WebAssembly Core Specification</a>
+			<ul>
+				<li><a href="https://webassembly.github.io/spec/core/binary/instructions.html">Binary format: instructions</a> — the authority for every opcode on this page</li>
+				<li><a href="https://webassembly.github.io/spec/core/appendix/index-instructions.html">Index of instructions</a> — the full list with signatures</li>
+			</ul>
 		</li>
-		<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly">WebAssembly</a> — MDN (developer.mozilla.org)
-			<ul><li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Reference">Instruction reference</a> (opcodes)</li></ul>
+		<li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly">WebAssembly</a> — MDN
+			<ul><li><a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/Instructions">Instruction reference</a></li></ul>
 		</li>
-		<li><a href="https://rsms.me/wasm-intro">Introduction to WebAssembly</a> — Rasmus Andersson (rsms.me)</li>
-		<li><a href="https://doc.rust-lang.org/stable/core/arch/wasm/index.html">Rust Module core::arch::wasm</a> — SIMD documentation</li>
+		<li><a href="https://webassembly.org/features/">Feature status</a> — what each engine supports today</li>
+		<li><a href="https://github.com/WebAssembly/wabt">wabt</a> — the WebAssembly binary toolkit; its <a href="https://github.com/WebAssembly/wabt/blob/main/include/wabt/opcode.def">opcode.def</a> is a machine-readable opcode list</li>
+		<li><a href="https://doc.rust-lang.org/stable/core/arch/wasm/index.html">core::arch::wasm</a> — Rust's intrinsics, useful for SIMD semantics</li>
+		<li><a href="https://rsms.me/wasm-intro">Introduction to WebAssembly</a> — Rasmus Andersson</li>
 	</ul>
 </details>
 
 <details class="accordion">
-	<summary>Extensions and proposals</summary>
+	<summary>Standardised extensions</summary>
+	<p>Finished proposals, folded into the specification. Those that added or changed instructions:</p>
 	<ul>
-		<li><a href="https://webassembly.org/roadmap/">WebAssembly Roadmap</a> — implemented features in popular browsers and engines</li>
-		<li><a href="https://github.com/WebAssembly/proposals">WebAssembly proposals</a> (github)</li>
-	</ul>
-	<ul>
-		<li><a href="https://github.com/WebAssembly/bulk-memory-operations">Bulk Memory Operations and Conditional Segment Initialization</a></li>
-		<li><a href="https://github.com/WebAssembly/reference-types">Reference Types Proposal</a></li>
-		<li><a href="https://github.com/WebAssembly/exception-handling">Exception Handling Proposal</a></li>
-		<li><a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping float-to-int Conversion Proposal</a></li>
-		<li><a href="https://github.com/WebAssembly/stringref">Reference-Typed Strings Proposal</a></li>
-		<li><a href="https://github.com/WebAssembly/stack-switching">Stack Switching Proposal / Typed continuations</a> — proposes several new instructions: cont.new, cont.bind, resume, resume_throw</li>
-		<li><a href="https://github.com/WebAssembly/call-tags">Call Tags Proposal</a> — proposes new instructions: call_with_tag, call_tag.new, call_tag.canon</li>
-		<li><a href="https://github.com/WebAssembly/memory-control">Memory control proposal</a> — proposes new instructions: memory.map, memory.unmap, memory.protect, memory.discard</li>
-		<li><a href="https://github.com/WebAssembly/constant-time">Constant-Time Extension Proposal</a> – proposes new instructions for secret types: iNN.declassify, sNN.classify, sNN.load, sNN.store, ...</li>
+		<li><a href="https://github.com/WebAssembly/nontrapping-float-to-int-conversions">Non-trapping float-to-int conversions</a> — <code>0xFC 0</code>–<code>7</code></li>
+		<li><a href="https://github.com/WebAssembly/sign-extension-ops">Sign-extension operators</a> — <code>0xC0</code>–<code>0xC4</code></li>
+		<li><a href="https://github.com/WebAssembly/bulk-memory-operations">Bulk memory operations</a> — <code>0xFC 8</code>–<code>11</code></li>
+		<li><a href="https://github.com/WebAssembly/reference-types">Reference types</a> — <code>0xD0</code>–<code>0xD2</code>, <code>0x25</code>, <code>0x26</code>, <code>0xFC 12</code>–<code>17</code></li>
+		<li><a href="https://github.com/WebAssembly/simd">Fixed-width SIMD</a> — the <code>0xFD</code> prefix</li>
+		<li><a href="https://github.com/WebAssembly/relaxed-simd">Relaxed SIMD</a> — <code>0xFD 256</code>–<code>275</code></li>
+		<li><a href="https://github.com/WebAssembly/tail-call">Tail call</a> — <code>0x12</code>, <code>0x13</code></li>
+		<li><a href="https://github.com/WebAssembly/function-references">Typed function references</a> — <code>0x14</code>, <code>0x15</code>, <code>0xD4</code>–<code>0xD6</code></li>
+		<li><a href="https://github.com/WebAssembly/gc">Garbage collection</a> — <code>0xFB 0</code>–<code>30</code>, and <code>ref.eq</code> at <code>0xD3</code></li>
+		<li><a href="https://github.com/WebAssembly/exception-handling">Exception handling</a> — <code>0x08</code>, <code>0x0A</code>, <code>0x1F</code>. The earlier <code>try</code>/<code>catch</code>/<code>delegate</code> encoding is still emitted by older toolchains; turn on “Legacy &amp; withdrawn” to see it</li>
+		<li><a href="https://github.com/WebAssembly/multi-memory">Multiple memories</a> and <a href="https://github.com/WebAssembly/memory64">Memory64</a> — no new opcodes; they widen the immediates that existing memory instructions carry</li>
+		<li><a href="https://github.com/WebAssembly/extended-const">Extended constant expressions</a>, <a href="https://github.com/WebAssembly/multi-value">Multi-value</a>, <a href="https://github.com/WebAssembly/branch-hinting">Branch hinting</a> — no new opcodes</li>
 	</ul>
 </details>
 
 <details class="accordion">
-	<summary>Acknowledgements</summary>
-	<p>WebAssembly Opcodes by Pengo Wray</p>
-	<p>Contributors: nokotan (かめのこにょこにょこ)</p>
+	<summary>Active proposals</summary>
+	<p>Tracked at <a href="https://github.com/WebAssembly/proposals">WebAssembly/proposals</a>. Phases run 1 (idea) to 4 (standardising); those that add instructions:</p>
+	<ul>
+		<li><a href="https://github.com/WebAssembly/threads">Threads</a> — phase 4 — the <code>0xFE</code> prefix, shown above</li>
+		<li><a href="https://github.com/WebAssembly/wide-arithmetic">Wide arithmetic</a> — phase 3 — <code>0xFC 19</code>–<code>22</code></li>
+		<li><a href="https://github.com/WebAssembly/stack-switching">Stack switching</a> — phase 3 — adds <code>cont.new</code>, <code>cont.bind</code>, <code>resume</code>, <code>resume_throw</code>, <code>switch</code></li>
+		<li><a href="https://github.com/WebAssembly/relaxed-atomics">Relaxed atomics</a> — phase 2</li>
+		<li><a href="https://github.com/WebAssembly/multibyte-array-access">Multibyte array access</a> — phase 2 — further <code>0xFB</code> instructions</li>
+		<li><a href="https://github.com/WebAssembly/rounding-mode-control">Rounding variants</a> — phase 2</li>
+		<li><a href="https://github.com/WebAssembly/half-precision">Half precision</a> — phase 1 — <code>f16</code> vector operations</li>
+		<li><a href="https://github.com/WebAssembly/more-array-constructors">More array constructors</a> — phase 1</li>
+		<li><a href="https://github.com/WebAssembly/memory-control">Memory control</a> — phase 1 — <code>memory.discard</code> and related</li>
+		<li><a href="https://github.com/WebAssembly/flexible-vectors">Flexible vectors</a> — phase 1 — vector operations of no fixed width</li>
+		<li><a href="https://github.com/WebAssembly/shared-everything-threads">Shared-everything threads</a> — phase 1</li>
+		<li><a href="https://github.com/WebAssembly/stringref">Reference-typed strings</a> — phase 1 — the <code>0xFB 128</code>+ range shown above. Dormant since 2023; no engine implements it</li>
+	</ul>
+	<p>Proposals reaching phase 5 move to <a href="https://github.com/WebAssembly/proposals/blob/main/finished-proposals.md">finished proposals</a>. Ones that stall are listed as <a href="https://github.com/WebAssembly/proposals/blob/main/inactive-proposals.md">inactive</a> — among them the constant-time extension and call tags, which earlier versions of this page listed as upcoming.</p>
+</details>
+
+<details class="accordion">
+	<summary>About this chart</summary>
+	<p>WebAssembly Opcodes by Pengo Wray. Contributors: nokotan (かめのこにょこにょこ).</p>
+	<p>The opcode data is checked against the specification and against wabt's opcode table on every build. Corrections and additions are welcome.</p>
 	<p><a href="https://github.com/pengowray/wasm-ops">View on GitHub</a></p>
 </details>

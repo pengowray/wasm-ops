@@ -106,6 +106,7 @@ export function renderPage(
 			<div class="filter-group">
 				<label class="toggle"><input type="checkbox" name="showProposals" checked><span>Proposals</span></label>
 				<label class="toggle" data-when-layout="matrix"><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
+				<label class="toggle" title="Superseded and abandoned encodings — what these bytes used to mean"><input type="checkbox" name="showHistorical"><span>Legacy &amp; withdrawn</span></label>
 			</div>
 			<div class="filter-group filter-presets">
 				<button type="button" id="preset-base" class="ghost">Base opcodes only</button>

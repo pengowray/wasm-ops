@@ -21,8 +21,7 @@
 	--accent: #1a7f8e;
 	--accent-contrast: #ffffff;
 
-	--hatch: #aaaaaa;
-	--hatch-bg: #ffffff;
+	--legacy-bg: #fdf4e3;
 
 	--hl-self: #24dff0;
 	--hl-self-fg: #10262a;
@@ -52,8 +51,7 @@
 		--accent: #4fd0e0;
 		--accent-contrast: #10262a;
 
-		--hatch: #777777;
-		--hatch-bg: #1c1c1c;
+		--legacy-bg: #2e2820;
 
 		/* These sit on a #1c1c1c background. The previous values were only a
 		   few points lighter than it, so a lit cell read as unlit. */
@@ -80,8 +78,7 @@
 	--accent: #4fd0e0;
 	--accent-contrast: #10262a;
 
-	--hatch: #777777;
-	--hatch-bg: #1c1c1c;
+	--legacy-bg: #2e2820;
 
 	--hl-self: #46c8dc;
 	--hl-self-fg: #08222a;
@@ -346,6 +343,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .map-cell[data-status='reserved'] { background: var(--rule-soft); cursor: default; }
 .map-cell[data-status='proposal'] { background: var(--rule); }
+.map-cell[data-status='legacy'],
+.map-cell[data-status='withdrawn'] { background: var(--rule-soft); opacity: .7; }
 
 /* Which instructions are on screen right now — the "you are here". */
 .map-cell.in-view { outline: 1px solid var(--fg-faint); outline-offset: 0; }
@@ -474,27 +473,37 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .cell:hover { text-decoration: none; }
 
-/* Unassigned slots and proposals get the crosshatch the old page used, drawn
-   with a gradient rather than a base64 SVG so it follows the theme. */
+/*
+ * Status is shown by tint and border rather than by hatching. The old
+ * crosshatch was one pattern for every non-standard state, it moired at some
+ * zoom levels — thin repeating diagonals always will — and it ran underneath
+ * the lettering. Four states, four treatments, no pattern.
+ */
 .cell[data-status='reserved'],
-.cell[data-status='proposal'],
 .cell[data-filtered] {
-	background-image:
-		repeating-linear-gradient(45deg, transparent 0 5px, var(--hatch) 5px 5.5px),
-		repeating-linear-gradient(-45deg, transparent 0 5px, var(--hatch) 5px 5.5px);
 	--cell-bg: var(--surface-sunk);
+}
+
+/* Not yet standardised: dashed edge, the usual "provisional" signal. */
+.cell[data-status='proposal'] {
+	--cell-bg: var(--surface-sunk);
+	border-style: dashed;
 	color: var(--fg-dim);
 }
 
-/* Diagonal hatching running under lettering makes it hard to read, so the text
-   carries its own flat background. */
-.cell[data-status='reserved'] .cell-name,
-.cell[data-status='proposal'] .cell-name,
-.cell[data-status='reserved'] .cell-hex,
-.cell[data-status='proposal'] .cell-hex {
-	background-color: var(--cell-bg);
-	padding: 0 .25em;
-	border-radius: 2px;
+/* Superseded but still in use: readable, tinted to set it apart. */
+.cell[data-status='legacy'] {
+	--cell-bg: var(--legacy-bg);
+	border-style: dashed;
+	color: var(--fg-dim);
+}
+
+/* Abandoned: the slot is unassigned today, so it is set back furthest. */
+.cell[data-status='withdrawn'] {
+	--cell-bg: var(--surface-sunk);
+	border-style: dotted;
+	color: var(--fg-faint);
+	font-style: italic;
 }
 
 /* A cell hidden by a filter keeps its slot but loses its content. */
@@ -549,8 +558,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .cell.hl-pre .pre { background-color: var(--hl-pre); }
 .cell.pinned { outline: 2px solid var(--accent); outline-offset: -2px; }
 
-/* A lit cell drops its hatching: the point of lighting it is to be seen. */
-.cell.hl-op, .cell.hl-self { background-image: none; }
+/* A lit cell keeps its status border but drops the muting, since the point of
+   lighting it is to be seen. */
+.cell.hl-op, .cell.hl-self { font-style: normal; }
 
 /* ------------------------------------------------------------------ movement */
 
@@ -621,6 +631,20 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 .detail { padding: 1rem 0; border-top: 1px solid var(--rule-soft); scroll-margin-top: 5rem; }
 .detail-name { margin: .2rem 0 .5rem; }
+
+.detail-status {
+	margin: .4rem 0;
+	padding: .4rem .6rem;
+	font-size: .82rem;
+	color: var(--fg-dim);
+	background: var(--surface-sunk);
+	border-left: 3px solid var(--rule);
+	border-radius: 0 var(--radius) var(--radius) 0;
+}
+.detail-status[data-status='legacy'] { background: var(--legacy-bg); border-left-color: var(--enc-prefix); }
+.detail-status[data-status='withdrawn'] { border-left-style: dotted; }
+.detail-proposal { color: var(--fg-faint); }
+.detail-superseded { display: block; margin-top: .2rem; color: var(--fg-faint); }
 
 /*
  * The bytes, shown once and split into their parts. The captions sit under the

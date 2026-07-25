@@ -7,7 +7,7 @@
     "prefix": "FB",
     "start": 128,
     "count": 64,
-    "intro": "This is a phase 1 proposal and may change in future. [As of 2022]"
+    "intro": "Instructions for working with strings as a reference type. This proposal has been at phase 1 and inactive since 2023; no engine implements it, and the encoding may still change."
   },
   "opcodes": [
     {

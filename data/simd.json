@@ -2949,8 +2949,17 @@
         162,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i8x16.relaxed_swizzle",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i8x16",
+        "mainop": "relaxed",
+        "sign": "s",
+        "rest": "wizzle"
+      }
     },
     {
       "id": "0xFD.163",
@@ -2998,8 +3007,16 @@
         165,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i32x4.relaxed_trunc_f32x4_s",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i32x4",
+        "mainop": "relaxed",
+        "rest": "_trunc_f32x4_s"
+      }
     },
     {
       "id": "0xFD.166",
@@ -3011,8 +3028,16 @@
         166,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i32x4.relaxed_trunc_f32x4_u",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i32x4",
+        "mainop": "relaxed",
+        "rest": "_trunc_f32x4_u"
+      }
     },
     {
       "id": "0xFD.167",
@@ -3178,8 +3203,16 @@
         175,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f32x4.relaxed_madd",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f32x4",
+        "mainop": "relaxed",
+        "rest": "_madd"
+      }
     },
     {
       "id": "0xFD.176",
@@ -3191,8 +3224,16 @@
         176,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f32x4.relaxed_nmadd",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f32x4",
+        "mainop": "relaxed",
+        "rest": "_nmadd"
+      }
     },
     {
       "id": "0xFD.177",
@@ -3222,8 +3263,17 @@
         178,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i8x16.relaxed_laneselect",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i8x16",
+        "mainop": "relaxed",
+        "post": "lane",
+        "rest": "select"
+      }
     },
     {
       "id": "0xFD.179",
@@ -3235,8 +3285,17 @@
         179,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i16x8.relaxed_laneselect",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i16x8",
+        "mainop": "relaxed",
+        "post": "lane",
+        "rest": "select"
+      }
     },
     {
       "id": "0xFD.180",
@@ -3248,8 +3307,16 @@
         180,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f32x4.relaxed_min",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f32x4",
+        "mainop": "relaxed",
+        "rest": "_min"
+      }
     },
     {
       "id": "0xFD.181",
@@ -3553,8 +3620,16 @@
         197,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i32x4.relaxed_trunc_f64x2_s_zero",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i32x4",
+        "mainop": "relaxed",
+        "rest": "_trunc_f64x2_s_zero"
+      }
     },
     {
       "id": "0xFD.198",
@@ -3566,8 +3641,16 @@
         198,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i32x4.relaxed_trunc_f64x2_u_zero",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i32x4",
+        "mainop": "relaxed",
+        "rest": "_trunc_f64x2_u_zero"
+      }
     },
     {
       "id": "0xFD.199",
@@ -3733,8 +3816,16 @@
         207,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f64x2.relaxed_madd",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f64x2",
+        "mainop": "relaxed",
+        "rest": "_madd"
+      }
     },
     {
       "id": "0xFD.208",
@@ -3746,8 +3837,16 @@
         208,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f64x2.relaxed_nmadd",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f64x2",
+        "mainop": "relaxed",
+        "rest": "_nmadd"
+      }
     },
     {
       "id": "0xFD.209",
@@ -3777,8 +3876,17 @@
         210,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i32x4.relaxed_laneselect",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i32x4",
+        "mainop": "relaxed",
+        "post": "lane",
+        "rest": "select"
+      }
     },
     {
       "id": "0xFD.211",
@@ -3790,8 +3898,17 @@
         211,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "i64x2.relaxed_laneselect",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "i64x2",
+        "mainop": "relaxed",
+        "post": "lane",
+        "rest": "select"
+      }
     },
     {
       "id": "0xFD.212",
@@ -3803,8 +3920,16 @@
         212,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f64x2.relaxed_min",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f64x2",
+        "mainop": "relaxed",
+        "rest": "_min"
+      }
     },
     {
       "id": "0xFD.213",
@@ -4062,8 +4187,16 @@
         226,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f32x4.relaxed_max",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f32x4",
+        "mainop": "relaxed",
+        "rest": "_max"
+      }
     },
     {
       "id": "0xFD.227",
@@ -4273,8 +4406,16 @@
         238,
         1
       ],
-      "name": null,
-      "status": "reserved"
+      "name": "f64x2.relaxed_max",
+      "status": "withdrawn",
+      "proposal": "Relaxed SIMD (prototype encoding)",
+      "supersededBy": "the standardised relaxed SIMD range at 0xFD 256+",
+      "description": "<p>An encoding used while relaxed SIMD was being prototyped. Relaxed SIMD was standardised in the 0xFD 256 and above range, and this slot is unassigned again.</p>",
+      "parts": {
+        "pre": "f64x2",
+        "mainop": "relaxed",
+        "rest": "_max"
+      }
     },
     {
       "id": "0xFD.239",

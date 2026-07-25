@@ -8,7 +8,7 @@
  */
 
 import type { Opcode, OpcodeData, Section, SectionId } from './types.ts';
-import { toHex } from './types.ts';
+import { HISTORICAL, toHex } from './types.ts';
 import { CATEGORY_LABELS, CATEGORY_ORDER, categorize, type CategoryId } from './categories.ts';
 
 /**
@@ -41,6 +41,12 @@ export interface ViewOptions {
   showReserved: boolean;
   /** Include instructions that are still proposals. */
   showProposals: boolean;
+  /**
+   * Include superseded and abandoned encodings. Off by default: they describe
+   * what a byte used to mean, which is worth recording but is not what someone
+   * reading the chart to understand a module today is looking for.
+   */
+  showHistorical: boolean;
 }
 
 export const DEFAULT_VIEW: ViewOptions = {
@@ -52,6 +58,7 @@ export const DEFAULT_VIEW: ViewOptions = {
   sections: ['core', 'gc', 'stringref', 'fc', 'simd', 'relaxed-simd', 'threads'],
   showReserved: true,
   showProposals: true,
+  showHistorical: false,
 };
 
 export type ViewItem =
@@ -87,6 +94,7 @@ export const MATRIX_COLUMNS = 17;
 function passesStatus(op: Opcode, options: ViewOptions): boolean {
   if (op.status === 'reserved' && !options.showReserved) return false;
   if (op.status === 'proposal' && !options.showProposals) return false;
+  if (HISTORICAL.includes(op.status) && !options.showHistorical) return false;
   return true;
 }
 
