@@ -26,18 +26,24 @@ export interface Tag {
 const VALUE_TYPES = new Set(['i32', 'i64', 'f32', 'f64', 'v128']);
 
 /**
- * Instructions that move values around the operand stack without computing
- * anything with them — which in WebAssembly is a very short list. There is no
- * `dup` or `swap`: `drop` and `select` are the whole of the rearranging, and
- * anything beyond them goes through a local, which is why `local.get`,
- * `local.set` and `local.tee` belong here too.
+ * Instructions that manipulate the operand stack and nothing else: that take
+ * what is on it and rearrange it, computing nothing, touching no memory,
+ * branching nowhere.
  *
- * `const` is left out — it pushes an immediate rather than moving something
- * already on the stack, and is already gathered under "Constants". Globals are
- * left out as storage: they are a place to keep a value, not a way to reorder
- * the stack.
+ * There is exactly one. WebAssembly looks like a stack machine and is not
+ * quite one — there is no `dup`, no `swap`, no `rot`, no way to reach past the
+ * top of the stack at all. `select` chooses between two values but consumes
+ * three and computes with them; `local.get` and `local.tee` do the work `dup`
+ * would, but by going out to a local and back rather than by touching the
+ * stack. Take away everything that only appears to rearrange the stack and
+ * `drop` is what is left: the one instruction whose whole job is to make the
+ * stack shorter.
+ *
+ * A reader who clicks the chip expecting a family and finds a single lit cell
+ * has learned the thing the chart cannot say in a sentence. There is a link in
+ * the reference for anyone who wants it spelled out.
  */
-const STACK_OPS = new Set(['drop', 'select', 'select t', 'local.get', 'local.set', 'local.tee']);
+const STACK_OPS = new Set(['drop']);
 
 /** Vector lane shapes. */
 const LANE_SHAPES = new Set(['i8x16', 'i16x8', 'i32x4', 'i64x2', 'f16x8', 'f32x4', 'f64x2']);
@@ -84,16 +90,8 @@ export function tagsFor(op: Opcode): Tag[] {
     if (lane) add(`lane-${lane[1]}${lane[2]}`, `${lane[1]}${lane[2]} lanes`, 'type');
   }
 
-  /*
-   * Instructions whose whole effect is moving a value on or off the operand
-   * stack: they compute nothing, touch no memory and branch nowhere. They cut
-   * across categories — `drop` is parametric, `local.get` is a variable
-   * instruction — which is exactly why it is a tag and not a category.
-   *
-   * The stack switching instructions are deliberately not here. They are about
-   * the execution stack, which is a different stack: `resume` alongside `drop`
-   * would make the tag mean the word rather than the thing.
-   */
+  // See STACK_OPS. The stack switching instructions are not here either: they
+  // are about the execution stack, which is a different stack.
   if (STACK_OPS.has(op.name)) add('stack', 'stack manipulation', 'trait');
 
   if (op.parts?.sign === 's') add('signed', 'signed', 'trait');
