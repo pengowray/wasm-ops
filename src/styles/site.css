@@ -256,7 +256,8 @@ h1 { font-size: 1.5rem; margin: 0; }
 
 /* ----------------------------------------------------------------- search */
 
-.control-search { gap: .4rem; }
+/* The list hangs off the box, so the box is what it is measured from. */
+.control-search { gap: .4rem; position: relative; }
 .control-search label {
 	color: var(--fg-faint);
 	font-size: .72rem;
@@ -306,6 +307,73 @@ h1 { font-size: 1.5rem; margin: 0; }
 }
 .search-empty strong { color: var(--fg); }
 .search-empty .ghost { margin-left: .4rem; }
+
+/*
+ * The ranked answer.
+ *
+ * Wider than the box it hangs from, because a result is three columns — the
+ * opcode, the name, and why it matched — and the box only has to be wide enough
+ * to type into. Above everything: it is a menu, and a menu that anything can
+ * paint over is worse than no menu.
+ */
+.search-results {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 60;
+	width: max(22rem, 100%);
+	max-height: 22rem;
+	margin: .3rem 0 0;
+	padding: .2rem;
+	overflow-y: auto;
+	list-style: none;
+	background: var(--bg);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	box-shadow: 0 10px 30px rgb(0 0 0 / .22);
+}
+.search-results[hidden] { display: none; }
+
+.result {
+	display: grid;
+	grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+	gap: .5rem;
+	align-items: baseline;
+	padding: .25rem .4rem;
+	font-size: .85rem;
+	border-radius: calc(var(--radius) - 2px);
+	cursor: pointer;
+}
+.result-active { background: var(--hl-op); color: var(--hl-op-fg); }
+
+.result-op { white-space: nowrap; font-size: .78rem; }
+.result-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-weight: 700;
+}
+/* Why a line the reader did not type is in the list. */
+.result-note {
+	white-space: nowrap;
+	font-family: Georgia, serif;
+	font-style: italic;
+	font-size: .78rem;
+	color: var(--fg-faint);
+}
+
+.result mark {
+	padding: 0 .05em;
+	color: inherit;
+	background: var(--hl-pre);
+	border-radius: 2px;
+}
+
+.result-more {
+	padding: .35rem .4rem;
+	font-size: .75rem;
+	color: var(--fg-faint);
+}
 
 .toolbar.toolbar-pinned {
 	position: sticky;

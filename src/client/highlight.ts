@@ -30,7 +30,9 @@ const TAG_CLASSES = ['hl-self', 'hl-tag'] as const;
  * and hides the rest.
  */
 export interface HighlightState {
-  kind: 'none' | 'hover' | 'tag' | 'pin';
+  kind: 'none' | 'hover' | 'tag' | 'pin' | 'found';
+  /** The query, for `found`. */
+  query?: string;
   /** The part of a name under the pointer, for `hover`. */
   token?: string;
   tag?: string;
@@ -45,6 +47,8 @@ export class Highlighter {
   #pinnedKey: string | null = null;
   #pinnedTag: string | null = null;
   #hoverToken: string | null = null;
+  #found: Set<string> | null = null;
+  #query = '';
   #lit: HTMLElement[] = [];
   #hovered: HTMLElement[] = [];
   #onChange: ((state: HighlightState) => void) | null = null;
@@ -105,6 +109,12 @@ export class Highlighter {
     if (this.#pinnedKey) {
       return { kind: 'pin', key: this.#pinnedKey, keys: [this.#pinnedKey] };
     }
+    // Last, because it is the standing state rather than a gesture: a query
+    // sits there while the reader points at things, and each of those is a
+    // question asked over the top of it.
+    if (this.#found) {
+      return { kind: 'found', query: this.#query, keys: [...this.#found] };
+    }
     return NOTHING;
   }
 
@@ -160,6 +170,21 @@ export class Highlighter {
     return this.#pinnedTag;
   }
 
+  /**
+   * What a search found.
+   *
+   * Shown the same way a pinned property is, because it is the same kind of
+   * answer — a set of instructions sharing something — and because the chart
+   * staying whole is the point: a query that removed everything else told you
+   * how many matched and nothing about where they were. Lit, they are visibly
+   * three quarters of one table, or scattered over four.
+   */
+  found(keys: Set<string> | null, query: string): void {
+    this.#found = keys?.size ? keys : null;
+    this.#query = query;
+    this.restore();
+  }
+
   /** Marks the selected instruction. Selection is an outline, not a wash. */
   pin(cell: HTMLElement | null): void {
     this.#pinnedKey = cell?.dataset['key'] ?? null;
@@ -191,6 +216,18 @@ export class Highlighter {
       }
       this.#announce();
       return;
+    }
+
+    // Under the selection rather than instead of it: a reader searches, then
+    // opens one of the results, and both facts stay on the page.
+    if (this.#found) {
+      for (const el of document.querySelectorAll<HTMLElement>(
+        '.cell[data-key]:not([data-filtered]), .map-cell[data-key]:not([data-filtered])',
+      )) {
+        if (!this.#found.has(el.dataset['key']!)) continue;
+        el.classList.add('hl-tag');
+        this.#lit.push(el);
+      }
     }
 
     if (this.#pinnedKey) {

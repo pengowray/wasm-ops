@@ -111,9 +111,13 @@ export function renderPage(
 		<label for="search">Search</label>
 		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
 			autocomplete="off" autocorrect="off" spellcheck="false"
+			role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list"
 			aria-describedby="search-count"
-			title="Searches names, opcodes and descriptions. All words must match. Use tag:signed, tag:loads or tag:vector-simd to match a property exactly.">
+			title="Searches names, opcodes, properties and descriptions. All words must match. Bytes match in hex or decimal: 11, 0x11 and 17 all find call_indirect.">
 		<span class="search-count" id="search-count" role="status"></span>
+		<!-- The ranked answer. The chart lights every match; this says which one
+		     the query most likely meant. -->
+		<ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
 	</div>
 	<fieldset class="control">
 		<legend>Arrange</legend>

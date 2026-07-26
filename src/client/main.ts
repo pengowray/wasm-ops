@@ -23,7 +23,8 @@ import { flip } from './flip.ts';
 import { Highlighter, type HighlightState } from './highlight.ts';
 import { NavMap } from './map.ts';
 import { Panel } from './panel.ts';
-import { Search } from './search.ts';
+import { Results } from './results.ts';
+import { Search, type SearchHit } from './search.ts';
 import { initTheme } from './theme.ts';
 
 const chart = document.getElementById('chart');
@@ -342,28 +343,20 @@ function start(
   // --- what is lit ----------------------------------------------------------
 
   /*
-   * Two filters, one predicate.
+   * "Only these": whatever is lit right now, kept, with everything else taken
+   * away. It is the one thing on the page that hides instructions — the search
+   * lights its matches and leaves the chart whole — and it works on any
+   * highlight, so a query, a property chip and a hovered part of a name are all
+   * narrowed the same way.
    *
-   * The search box is one of them. The other is "only these": whatever is lit
-   * right now, kept, with everything else taken away — the same thing a search
-   * does, asked with the mouse instead of the keyboard. Hovering `load` lights
-   * twenty-six cells scattered over four tables, and the obvious next question
-   * is to see those twenty-six and nothing else.
-   *
-   * It is a snapshot, taken when the key is pressed, rather than a live tie to
-   * the highlight: the pointer has to move to reach anything, and a filter that
+   * A snapshot, taken when the key is pressed, rather than a live tie to the
+   * highlight: the pointer has to move to reach anything, and a filter that
    * followed the pointer would empty the chart on the way.
    */
-  let queryMatch: ((op: Opcode) => boolean) | undefined;
   let onlyKeys: Set<string> | null = null;
 
   function applyMatch(): void {
-    if (!queryMatch && !onlyKeys) {
-      options.match = undefined;
-      return;
-    }
-    options.match = (op) =>
-      (!queryMatch || queryMatch(op)) && (!onlyKeys || onlyKeys.has(op.id));
+    options.match = onlyKeys ? (op: Opcode) => onlyKeys!.has(op.id) : undefined;
   }
 
   const caption = document.getElementById('map-caption');
@@ -409,6 +402,11 @@ function start(
         `<span class="map-caption-lede">Sharing</span> ` +
         `<span class="map-caption-name">${state.token}</span> ` +
         `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
+    } else if (state.kind === 'found') {
+      what =
+        `<span class="map-caption-lede">Found</span> ` +
+        `<span class="map-caption-name">${state.query ?? ''}</span> ` +
+        `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
     }
 
     if (onlyKeys) {
@@ -429,8 +427,14 @@ function start(
     if (onlyKeys) {
       onlyKeys = null;
     } else {
-      const lit = highlighter.state().keys;
-      if (!lit.length) return;
+      const state = highlighter.state();
+      // Narrowing to a single cell is not narrowing, it is hiding the page. A
+      // reader who searched, opened one of the results and then asked for only
+      // these meant the results — the selection is where they are, not what
+      // they asked about.
+      const lit =
+        state.kind === 'pin' && hits.length ? hits.map((hit) => hit.op.id) : state.keys;
+      if (lit.length < 2) return;
       onlyKeys = new Set(lit);
     }
     applyMatch();
@@ -460,6 +464,9 @@ function start(
   const searchCount = document.getElementById('search-count');
   const searchEmpty = document.getElementById('search-empty');
   const emptyTerm = searchEmpty?.querySelector('.search-empty-term');
+  const resultsEl = document.getElementById('search-results');
+  let results: Results | null = null;
+  let hits: SearchHit[] = [];
 
   /**
    * The running count, and the empty state.
@@ -473,7 +480,7 @@ function start(
   function updateSearchCount(): void {
     const query = searchInput?.value.trim() ?? '';
     const total = countShown(data, { ...options, match: undefined });
-    const found = options.match ? countShown(data, options) : total;
+    const found = hits.length;
     if (searchCount) searchCount.textContent = query ? `${found} of ${total}` : '';
     if (searchEmpty) searchEmpty.hidden = !query || found > 0;
     if (emptyTerm) emptyTerm.textContent = query;
@@ -482,14 +489,20 @@ function start(
   /**
    * Applies whatever is in the box.
    *
-   * Unanimated by default: this runs while the reader is still typing, and a
-   * cell sliding to a new home only to be moved again by the next letter reads
-   * as the page struggling rather than as continuity.
+   * A query no longer takes the chart apart. It lights what it found and lists
+   * what it found, and the chart stays where it was — which is the difference
+   * between "39 of 810" and being able to see that those 39 are the whole left
+   * edge of one table. The reader who does want the rest gone presses F, which
+   * is the same gesture for a search as for anything else lit.
+   *
+   * Unanimated by default: this runs while the reader is still typing, and
+   * nothing is moving anyway.
    */
   function applySearch(animate = false): void {
     const query = searchInput?.value.trim() ?? '';
-    queryMatch = search.predicate(query);
-    applyMatch();
+    hits = search.find(query);
+    highlighter.found(new Set(hits.map((hit) => hit.op.id)), query);
+    results?.show(document.activeElement === searchInput ? hits : []);
     updateSearchCount();
 
     // Shareable, and survives a reload: the URL carries the query alongside any
@@ -499,20 +512,57 @@ function start(
     else url.searchParams.delete('q');
     history.replaceState(null, '', url);
 
-    relayout(animate);
+    // Only the "only these" filter can change what is laid out now, and it does
+    // not change while typing — but a rearrangement is still needed the first
+    // time, to attach the highlight to the nodes on screen.
+    if (animate || onlyKeys) relayout(animate);
   }
 
   let searchTimer = 0;
   searchInput?.addEventListener('input', () => {
     window.clearTimeout(searchTimer);
-    // Long enough to gather a burst of typing, short enough that the chart
-    // looks like it is following the query rather than catching up with it.
+    // Long enough to gather a burst of typing, short enough that the list looks
+    // like it is following the query rather than catching up with it.
     searchTimer = window.setTimeout(() => applySearch(), 110);
   });
 
+  /** Opens an instruction from the result list, wherever the chart has put it. */
+  function reveal(key: string): void {
+    const cell = chart.querySelector<HTMLElement>(`.cell[data-key="${CSS.escape(key)}"]`);
+    panel.open(key);
+    if (cell) {
+      highlighter.pin(cell);
+      cell.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+    history.replaceState(null, '', `#${key}`);
+  }
+
+  results = searchInput && resultsEl ? new Results(resultsEl, searchInput, reveal) : null;
+
+  searchInput?.addEventListener('focus', () => results?.show(hits));
+  // A click inside the list is handled on mousedown, before this runs.
+  searchInput?.addEventListener('blur', () => results?.hide());
+
   searchInput?.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      if (!results?.open) return;
+      event.preventDefault();
+      results.move(event.key === 'ArrowDown' ? 1 : -1);
+      return;
+    }
+    if (event.key === 'Enter') {
+      // Never submits: the form would reload the page and lose everything.
+      event.preventDefault();
+      results?.choose();
+      searchInput.blur();
+      return;
+    }
     if (event.key !== 'Escape') return;
-    if (searchInput.value) {
+    // Three things to back out of, innermost first: the list, then the query,
+    // then the box itself.
+    if (results?.open) {
+      results.hide();
+    } else if (searchInput.value) {
       searchInput.value = '';
       applySearch();
     } else {
