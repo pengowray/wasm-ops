@@ -181,7 +181,7 @@ export function renderPage(
 	</details>
 </aside>
 
-<main id="chart" class="chart" data-layout="${options.layout}" data-group="${options.group}" data-colour="proposal">
+<main id="chart" class="chart" data-layout="${options.layout}" data-group="${options.group}" data-cols="${options.columns}" data-colour="proposal">
 ${chart}
 </main>
 

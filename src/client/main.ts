@@ -135,6 +135,28 @@ function start(
    */
   if (mapEl) mapEl.dataset['colour'] = chart.dataset['colour'] ?? '';
 
+  /*
+   * How wide the byte grid is folded.
+   *
+   * Sixteen bytes across is the shape a hex dump has trained everyone to read,
+   * and it is what the page is rendered at. A phone has about half the width
+   * for it, and sixteen columns there leaves a cell too narrow for a name like
+   * `i32.trunc_sat_f64_u`, so the grid folds to eight and runs twice as far
+   * down — the same bytes in the same order, refolded rather than shrunk.
+   *
+   * The breakpoint is the one the stylesheet already calls mobile, declared
+   * once here and read from the media query rather than written down twice.
+   */
+  const narrow = window.matchMedia('(max-width: 900px)');
+  const setColumns = (): boolean => {
+    const wanted = narrow.matches ? 8 : 16;
+    if (options.columns === wanted) return false;
+    options.columns = wanted;
+    chart.dataset['cols'] = String(wanted);
+    return true;
+  };
+  chart.dataset['cols'] = String(options.columns);
+
   // --- arranging ----------------------------------------------------------
 
   const template = document.createElement('div');
@@ -351,6 +373,15 @@ function start(
     event.preventDefault();
     searchInput?.focus();
     searchInput?.select();
+  });
+
+  // The page is rendered sixteen wide; on a phone it has to refold before the
+  // reader sees it, and again if the window is turned or resized past the
+  // breakpoint. Unanimated: nothing has moved from anywhere, it simply arrives
+  // in a different shape.
+  if (setColumns()) relayout(false);
+  narrow.addEventListener('change', () => {
+    if (setColumns()) relayout(false);
   });
 
   const startingQuery = new URLSearchParams(location.search).get('q');

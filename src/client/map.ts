@@ -124,7 +124,10 @@ export class NavMap {
    * map that folded up and unfolded on every keystroke would be unreadable.
    */
   trim(options: ViewOptions): void {
-    const unsearched: ViewOptions = { ...options, match: undefined };
+    // Sixteen wide whatever the chart is doing: the map is a fixed picture of
+    // the byte space to navigate by, and refolding it when the window narrows
+    // would move every square the reader had learnt the position of.
+    const unsearched: ViewOptions = { ...options, match: undefined, columns: 16 };
     for (const section of this.#data.sections) {
       const ops = this.#data.opcodes.filter((op) => op.section === section.id);
       const rows = new Set(gridRows(section, ops, unsearched).map((base) => base >> 4));

@@ -634,8 +634,14 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	align-items: stretch;
 }
 
+/* A column for the row labels, then one per byte. The count is on the element
+   rather than in a media query because the item list has to agree with it —
+   see `ViewOptions.columns`. */
 .chart[data-layout='matrix'] {
 	grid-template-columns: 2.6rem repeat(16, minmax(0, 1fr));
+}
+.chart[data-layout='matrix'][data-cols='8'] {
+	grid-template-columns: 2.4rem repeat(8, minmax(0, 1fr));
 }
 
 .chart[data-layout='cards'] {
@@ -678,6 +684,28 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-size: .75rem;
 	font-weight: 700;
 	color: var(--fg-faint);
+}
+
+/*
+ * The axes are half of an opcode, so they are lettered as one.
+ *
+ * A hex axis is the other nibble of the byte in the cell, so it takes the
+ * colour and the face the hex half of an identifier has everywhere else; a
+ * decimal axis is part of a sub-opcode and takes that half's. Neutral grey
+ * said only "this is a heading", which the position had already said, and left
+ * the reader to work out that `_E` and `0xBE` were the same kind of thing.
+ */
+.colhead[data-notation='hex'],
+.rowhead[data-notation='hex'] {
+	font-family: 'Source Code Pro', monospace;
+	color: var(--enc-prefix);
+}
+.colhead[data-notation='dec'],
+.rowhead[data-notation='dec'] {
+	font-family: Georgia, serif;
+	font-style: italic;
+	font-size: .85rem;
+	color: var(--enc-sub);
 }
 
 /* The corner states the section's prefix, so the axes are readable as an
@@ -726,8 +754,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * zoom levels — thin repeating diagonals always will — and it ran underneath
  * the lettering. Four states, four treatments, no pattern.
  */
-.cell[data-status='reserved'],
-.cell[data-filtered] {
+.cell[data-status='reserved'] {
 	--cell-bg: var(--surface-sunk);
 }
 
@@ -761,10 +788,39 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 
 /*
- * A cell hidden by a filter keeps its slot but loses its content. It stays
- * clickable: an apparently empty square in the middle of a run is exactly the
- * one a reader wants to ask about, and the panel can explain why it is empty.
+ * A cell hidden by a filter keeps its slot but loses its content, and every
+ * blank slot is the same blank.
+ *
+ * It used to keep the treatment of whatever it was hiding — the legacy tint,
+ * the dotted border of a withdrawn encoding — which turned the filters into a
+ * second, quieter chart: hide the legacy encodings and you could still read
+ * where they were, in cream, through the gap. That is not what hiding means,
+ * and it is not a distinction worth a colour, since the cursor already says
+ * there is something under an empty square and the panel says what.
+ *
+ * Written after the status rules and repeated against the proposal tint, both
+ * of which are otherwise at least as specific.
  */
+.cell[data-filtered],
+.chart[data-colour='proposal'] .cell[data-proposal][data-filtered] {
+	--cell-bg: var(--surface-sunk);
+	border-style: solid;
+	border-color: var(--rule);
+}
+
+/*
+ * With "Unassigned slots" turned off, the unassigned bytes are left as gaps
+ * rather than drawn as empty boxes — which is the difference the control was
+ * offering all along and never showed, since a hidden unassigned slot looked
+ * exactly like a shown one. Now the assigned bytes stand as islands and the
+ * shape of what is actually used reads off the page.
+ */
+.cell[data-status='reserved'][data-filtered] {
+	--cell-bg: transparent;
+	border-color: transparent;
+	cursor: default;
+}
+
 .cell[data-filtered] .cell-name,
 .cell[data-filtered] .cell-hex,
 .cell[data-filtered] .cell-summary { visibility: hidden; }
@@ -1343,10 +1399,28 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * rides along quietly but is never dropped: it is what says the decimal is a
  * value and not a byte.
  */
-.op-hex, .op-dec, .op-utype { font-family: 'Source Code Pro', monospace; }
+.op-hex, .op-utype { font-family: 'Source Code Pro', monospace; }
 .op-hex { color: var(--enc-prefix); }
-.op-dec { color: var(--enc-sub); font-weight: 700; }
 .op-utype { color: var(--fg-faint); font-size: .85em; }
+
+/*
+ * A sub-opcode is not a byte, and it is worth being able to see that without
+ * reading the `:u32` beside it. Monospace said the opposite: set in the same
+ * face as the prefix, `0xFD 263` looked like a number written half in one base
+ * and half in another, and the two halves ran together.
+ *
+ * Georgia's italic is the face this page already uses for the things that are
+ * values rather than bytes — immediate operands, stack types — so a sub-opcode
+ * joins them. A size up as well, because Georgia's figures are small on the
+ * body and the sub-opcode is the part of the identifier that varies.
+ */
+.op-dec {
+	font-family: Georgia, serif;
+	font-style: italic;
+	font-size: 1.15em;
+	font-weight: 700;
+	color: var(--enc-sub);
+}
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
 .op-imm-args { font-family: Georgia, serif; font-size: .95rem; }
@@ -1463,8 +1537,12 @@ html:not(.js) .about-body { overflow: visible; }
 @media (max-width: 900px) {
 	body { padding: 1rem .5rem 3rem; }
 
-	.chart[data-layout='matrix'] { grid-template-columns: 1.9rem repeat(16, minmax(0, 1fr)); }
-	.cell { font-size: .62rem; min-height: 2.8rem; padding: .2rem .1rem; }
+	/* Half the columns and twice the rows, so a cell is wide enough to hold a
+	   name at a size worth reading rather than being squeezed to fit. */
+	.chart[data-layout='matrix'][data-cols='8'] {
+		grid-template-columns: 2.1rem repeat(8, minmax(0, 1fr));
+	}
+	.cell { font-size: .68rem; min-height: 2.8rem; padding: .2rem .1rem; }
 	.toolbar { font-size: .78rem; }
 
 	/* On a narrow screen a side panel would leave nothing beside it, so the

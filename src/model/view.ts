@@ -42,6 +42,20 @@ export interface ViewOptions {
   layout: Layout;
   group: GroupBy;
   order: OrderBy;
+  /**
+   * How many bytes a row of the byte grid holds.
+   *
+   * Sixteen is the shape everyone already has in their head from a hex dump,
+   * and it is what the chart uses given the width for it. A phone has room for
+   * about half that before a cell is too narrow to hold a name, so there the
+   * grid folds to eight and runs twice as far down instead — the same bytes,
+   * the same order, a different fold.
+   *
+   * It is a view option rather than a media query because the item list has to
+   * change: eight columns means eight column headings and twice as many row
+   * headings, and CSS cannot add either.
+   */
+  columns: 8 | 16;
   /** Sections to include. */
   sections: SectionId[];
   /**
@@ -72,11 +86,15 @@ export const DEFAULT_VIEW: ViewOptions = {
   // the default the list layout picks up, and matches the toolbar.
   group: 'category',
   order: 'opcode',
+  columns: 16,
   sections: ['core', 'gc', 'stringref', 'fc', 'simd', 'simd-ext', 'threads'],
   showReserved: true,
   showProposals: true,
   showHistorical: false,
 };
+
+/** Which spelling of a number a grid axis is written in. */
+export type Notation = 'hex' | 'dec';
 
 export type ViewItem =
   | {
@@ -99,21 +117,25 @@ export type ViewItem =
    * sub-opcode 0xE8. Without it the axes are unlabelled hex nibbles.
    */
   | { kind: 'corner'; key: string; label: string }
-  | { kind: 'colhead'; key: string; label: string }
+  /**
+   * Which notation a grid's axes are written in, so the stylesheet can give
+   * them the colour that notation has everywhere else on the page. The core
+   * table counts in bytes and its axes are hex nibbles; a prefixed table counts
+   * in sub-opcodes, which are u32 values written in decimal, so its axes are
+   * decimal too rather than a third spelling of the same number.
+   */
+  | { kind: 'colhead'; key: string; label: string; notation: Notation }
   /** Column headings for the table layout, one per group. */
   | { kind: 'tablehead'; key: string }
   /** A divider within a group — "Comparison", "Loads" — in the card layout. */
   | { kind: 'subgroup'; key: string; label: string; tag: string }
-  | { kind: 'rowhead'; key: string; label: string }
+  | { kind: 'rowhead'; key: string; label: string; notation: Notation }
   /**
    * `filtered` cells are shown as empty slots rather than dropped. In the byte
    * grid a cell's position *is* its opcode, so removing one would shift every
    * cell after it and the grid would stop meaning anything.
    */
   | { kind: 'cell'; key: string; op: Opcode; filtered?: boolean };
-
-/** The grid is a row-label column plus 16 value columns. */
-export const MATRIX_COLUMNS = 17;
 
 /** The proposals represented in a run of instructions, in first-seen order. */
 function distinctProposals(ops: Opcode[]): string[] {
@@ -155,12 +177,41 @@ export function countShown(data: OpcodeData, options: ViewOptions): number {
 }
 
 /**
- * Row label for a run of 16 opcodes, e.g. `3_` for 0x30–0x3F, `10_` for
- * 0x100–0x10F. Derived from the code so sections that do not start at zero
- * (stringref at 0x80, relaxed SIMD at 0x100) label correctly.
+ * How a grid's axes are written.
+ *
+ * The core table is a table of bytes: a cell's opcode *is* one byte, and the
+ * two axes are its two hex nibbles, so `B_` down the side and `_E` across the
+ * top read as the halves of `0xBE`. That only works at sixteen wide, where a
+ * row is exactly one high nibble.
+ *
+ * Everything else is a table of sub-opcodes, which are u32 values rather than
+ * bytes and are written in decimal throughout the rest of the page. Splitting
+ * one into nibbles says nothing — `0xFD 263` is not `0xFD 1_` and `_7` — so
+ * those axes are a base value and an offset, and add up rather than
+ * concatenating: row 256 plus column +7.
+ *
+ * Eight columns is the same arrangement: a row is no longer a nibble, so even
+ * the core table gives its base in full and counts across from it.
  */
-function rowLabel(code: number): string {
-  return toHex(code >> 4).replace(/^0(?=.)/, '') + '_';
+function axisNotation(section: Section, columns: 8 | 16): Notation {
+  return !section.prefix && columns === 16 ? 'hex' : 'dec';
+}
+
+/** The label down the side of a row, given the first opcode in it. */
+function rowLabel(section: Section, base: number, columns: 8 | 16): string {
+  if (axisNotation(section, columns) === 'hex') {
+    return toHex(base >> 4).replace(/^0(?=.)/, '') + '_';
+  }
+  // The core table is bytes wherever it is folded, so its base stays hex.
+  return section.prefix ? String(base) : toHex(base);
+}
+
+/** The label across the top of a column, given its offset into a row. */
+function colLabel(section: Section, offset: number, columns: 8 | 16): string {
+  if (axisNotation(section, columns) === 'hex') {
+    return `_${offset.toString(16).toUpperCase()}`;
+  }
+  return `+${offset}`;
 }
 
 /**
@@ -234,40 +285,52 @@ function sortOpcodes(ops: Opcode[], order: OrderBy): Opcode[] {
  * GC that the chart had already stopped drawing.
  */
 export function gridRows(section: Section, ops: Opcode[], options: ViewOptions): number[] {
+  const width = options.columns;
   const lastUsed = ops.reduce(
     (last, op) => (op.name && passesStatus(op, options) ? Math.max(last, op.code) : last),
     section.start,
   );
-  const end = Math.min(section.start + section.count, (lastUsed | 0xf) + 1);
+  const end = Math.min(section.start + section.count, lastUsed - (lastUsed % width) + width);
 
   const rows: number[] = [];
-  for (let base = section.start; base < end; base += 16) {
-    const row = ops.filter((op) => op.code >= base && op.code < base + 16);
+  for (let base = section.start; base < end; base += width) {
+    const row = ops.filter((op) => op.code >= base && op.code < base + width);
     if (!row.length || row.every((op) => !passesStatus(op, options))) continue;
     rows.push(base);
   }
   return rows;
 }
 
-/** Lays one section out as a 16-wide byte grid, with row and column headers. */
+/** Lays one section out as a byte grid, with row and column headers. */
 function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): ViewItem[] {
+  const width = options.columns;
+  const notation = axisNotation(section, width);
   const items: ViewItem[] = [];
   items.push({
     kind: 'corner',
     key: `corner:${section.id}`,
     label: section.prefix ? `0x${section.prefix}` : '0x',
   });
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < width; i++) {
     items.push({
       kind: 'colhead',
-      key: `colhead:${section.id}:${i}`,
-      label: `_${i.toString(16).toUpperCase()}`,
+      // The width is in the key because it is in the label: folded to eight
+      // columns the same position is `+3` rather than `_3`, and a pooled
+      // element is reused by key alone.
+      key: `colhead:${section.id}:${width}:${i}`,
+      label: colLabel(section, i, width),
+      notation,
     });
   }
 
   for (const base of gridRows(section, ops, options)) {
-    items.push({ kind: 'rowhead', key: `rowhead:${section.id}:${base}`, label: rowLabel(base) });
-    for (const op of ops.filter((op) => op.code >= base && op.code < base + 16)) {
+    items.push({
+      kind: 'rowhead',
+      key: `rowhead:${section.id}:${width}:${base}`,
+      label: rowLabel(section, base, width),
+      notation,
+    });
+    for (const op of ops.filter((op) => op.code >= base && op.code < base + width)) {
       const filtered = !passesStatus(op, options);
       items.push({ kind: 'cell', key: op.id, op, ...(filtered ? { filtered } : {}) });
     }

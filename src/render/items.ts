@@ -328,9 +328,15 @@ export function renderItem(item: ViewItem): string {
         `title="Row and column are the sub-opcode in hex">${escapeHtml(item.label)}</div>`
       );
     case 'colhead':
-      return `<div class="colhead" data-key="${escapeHtml(item.key)}">${escapeHtml(item.label)}</div>`;
+      return (
+        `<div class="colhead" data-key="${escapeHtml(item.key)}" ` +
+        `data-notation="${item.notation}">${escapeHtml(item.label)}</div>`
+      );
     case 'rowhead':
-      return `<div class="rowhead" data-key="${escapeHtml(item.key)}">${escapeHtml(item.label)}</div>`;
+      return (
+        `<div class="rowhead" data-key="${escapeHtml(item.key)}" ` +
+        `data-notation="${item.notation}">${escapeHtml(item.label)}</div>`
+      );
     case 'cell':
       return renderCell(item.op, item.filtered ?? false);
   }
