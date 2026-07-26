@@ -1,0 +1,188 @@
+/**
+ * What the four doorway bytes say about themselves.
+ *
+ * `0xFB`, `0xFC`, `0xFD` and `0xFE` are not instructions. Each one announces
+ * that a sub-opcode follows and that the pair should be looked up in another
+ * table. A cell in the core grid therefore has nothing to say about what it
+ * does, only about where it leads, and that is entirely derivable: which
+ * sections sit behind it, how far they run, how many bytes are assigned, and
+ * which proposals put them there.
+ *
+ * So it is derived. The alternative is four hand-written paragraphs listing
+ * proposals, which were wrong the day shared-everything threads landed and
+ * would be wrong again after the next one. Nothing here is a fact about the
+ * prefix byte that is not already a fact about the table behind it.
+ */
+
+import { proposal } from './proposals.ts';
+import { HISTORICAL, type Opcode, type OpcodeData, type Section } from './types.ts';
+
+function esc(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/** A sub-opcode, in the decimal the rest of the page writes them in. */
+function dec(value: number): string {
+  return `<span class="op-dec">${value}</span>`;
+}
+
+/** The span a run of opcodes covers, as `0–260` — or a single value. */
+function range(ops: Opcode[]): string {
+  const codes = ops.map((op) => op.code);
+  const low = Math.min(...codes);
+  const high = Math.max(...codes);
+  return low === high ? dec(low) : `${dec(low)}–${dec(high)}`;
+}
+
+/** The badge used for a count everywhere else on the page. */
+function badge(count: number): string {
+  return (
+    `<span class="group-count">` +
+    `<span class="count-n">${count}</span><span class="count-unit"> opcodes</span></span>`
+  );
+}
+
+/**
+ * What a byte behind this prefix means today: named, and not superseded,
+ * abandoned or dormant.
+ *
+ * The distinction matters more here than anywhere else on the page. Counting
+ * every encoding ever assigned, the GC table runs 0–113 with 49 instructions;
+ * counting what a module can contain today it runs 0–38 with 39, and the ten in
+ * between are the withdrawn 2022 draft. A doorway says where it leads now. The
+ * rest is in the folded list under the description, which is where someone
+ * looking at an old module will go.
+ */
+function live(ops: Opcode[]): Opcode[] {
+  const named = ops.filter((op) => op.name);
+  const current = named.filter((op) => !HISTORICAL.includes(op.status));
+  // Unless the whole table is history. Reference-typed strings is dormant from
+  // end to end, and a doorway that describes it as empty would be describing
+  // the filter rather than the byte — the reader who has turned the dormant
+  // encodings on is looking at a table of 39 instructions.
+  return current.length ? current : named;
+}
+
+/**
+ * The cell's own text: the prefix byte, then a line per table behind it giving
+ * how far it runs and how much of it is in use, with the table's emoji at the
+ * end of its line.
+ *
+ * The lines are marked with their section so the client can drop the ones the
+ * reader is not being shown. Reference-typed strings is dormant and hidden by
+ * default; advertising `➰ 128–159` on a byte whose string table is nowhere on
+ * the page is an invitation to look for something that is not there.
+ */
+function cellText(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
+  const lines = (op.prefixFor ?? []).map((id) => {
+    const section = sections.find((s) => s.id === id);
+    const ops = live(opcodes.filter((o) => o.section === id));
+    if (!section || !ops.length) return '';
+    return (
+      `<span class="prefix-line" data-for-section="${esc(id)}">` +
+      `<span class="prefix-range">${range(ops)}</span>` +
+      // Count and emoji travel together, so that when the line folds inside a
+      // grid cell it folds once — `0–38` above `39 ⭕` — rather than coming
+      // apart into a column of three.
+      `<span class="prefix-tail">${badge(ops.length)}` +
+      (section.emoji ? `<span class="prefix-emoji">${section.emoji}</span>` : '') +
+      `</span></span>`
+    );
+  });
+  return (
+    `<span class="prefix-cell">` +
+    `<span class="prefix-byte op-hex">0x${op.bytes[0]!.toString(16).toUpperCase()}</span>` +
+    lines.join('') +
+    `</span>`
+  );
+}
+
+/** One list entry per proposal represented in a run, with the range it covers. */
+function proposalList(ops: Opcode[]): string {
+  const byProposal = new Map<string, Opcode[]>();
+  for (const op of ops) {
+    if (!op.proposal) continue;
+    let bucket = byProposal.get(op.proposal);
+    if (!bucket) byProposal.set(op.proposal, (bucket = []));
+    bucket.push(op);
+  }
+
+  const entries = [...byProposal]
+    .map(([id, group]) => ({ p: proposal(id), group }))
+    .filter((entry) => entry.p)
+    .sort((a, b) => Math.min(...a.group.map((o) => o.code)) - Math.min(...b.group.map((o) => o.code)))
+    .map(
+      ({ p, group }) =>
+        `<li><a href="${esc(p!.url)}">${esc(p!.name)}</a> — ${range(group)}, ` +
+        `${group.length} instruction${group.length > 1 ? 's' : ''}</li>`,
+    );
+
+  return entries.length ? `<ul>${entries.join('')}</ul>` : '';
+}
+
+/**
+ * The generated half of a doorway byte's description: where it leads, what is
+ * behind it now, and — folded away — what used to be.
+ *
+ * The superseded encodings are in a `<details>` because they answer a different
+ * question. "What is this byte for" is asked far more often than "what did
+ * these bytes once mean", and the second answer is longer than the first.
+ */
+function describe(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
+  const mine = (op.prefixFor ?? []).flatMap((id) =>
+    opcodes.filter((o) => o.section === id && o.name),
+  );
+  const current = live(mine);
+  const past = mine.filter((o) => HISTORICAL.includes(o.status));
+
+  const tables = (op.prefixFor ?? [])
+    .map((id) => {
+      const section = sections.find((s) => s.id === id);
+      const ops = live(opcodes.filter((o) => o.section === id));
+      if (!section || !ops.length) return '';
+      return (
+        `<li><a href="#${esc(section.anchor)}">` +
+        (section.emoji ? `${section.emoji} ` : '') +
+        `${esc(section.title)}</a> — sub-opcodes ${range(ops)}, ${badge(ops.length)}</li>`
+      );
+    })
+    .filter(Boolean);
+
+  const parts: string[] = [];
+  if (tables.length) {
+    parts.push(
+      `<p>${tables.length > 1 ? 'The tables' : 'The table'} this prefix opens:</p>`,
+      `<ul class="prefix-tables">${tables.join('')}</ul>`,
+    );
+  }
+
+  const now = proposalList(current);
+  if (now) parts.push(`<p>Proposals in this range:</p>${now}`);
+
+  const then = proposalList(past);
+  if (then) {
+    parts.push(
+      `<details class="prefix-past"><summary>Superseded, abandoned and dormant encodings ` +
+        `(${past.length})</summary>${then}</details>`,
+    );
+  }
+
+  return parts.join('');
+}
+
+/**
+ * Fills in the derived half of every doorway byte. Run once, over the whole
+ * dataset, because a prefix cell is a statement about tables that live in other
+ * files.
+ */
+export function describePrefixes(data: OpcodeData): void {
+  for (const op of data.opcodes) {
+    if (!op.prefixFor?.length) continue;
+    op.displayName = cellText(op, data.sections, data.opcodes);
+    op.description = (op.description ?? '') + describe(op, data.sections, data.opcodes);
+  }
+}

@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { describePrefixes } from './prefixes.ts';
 import type { Opcode, OpcodeData, Section, SectionId } from './types.ts';
 
 /** Section files, in the order they appear on the page. */
@@ -47,5 +48,9 @@ export function loadData(dir: string = DATA_DIR): OpcodeData {
     opcodes.push(...parsed.opcodes);
   }
 
-  return { sections, opcodes };
+  const data: OpcodeData = { sections, opcodes };
+  // Only possible once every file is in: what 0xFB says is a statement about
+  // the GC and string tables, which live in two other files.
+  describePrefixes(data);
+  return data;
 }

@@ -667,7 +667,11 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	border: 1px solid var(--rule);
 	border-radius: 999px;
 	vertical-align: middle;
+	white-space: nowrap;
 }
+/* Sixteen columns of byte grid have no width to spare for the word; the
+   headings there are few and all count the same thing anyway. */
+.chart[data-layout='matrix'] .count-unit { display: none; }
 
 .group-intro {
 	display: block;
@@ -1140,6 +1144,77 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .chart[data-layout='cards'] .op::before,
 .chart[data-layout='cards'] .post::before { content: none; }
 
+/* ------------------------------------------------------- the doorway bytes */
+
+/*
+ * 0xFB, 0xFC, 0xFD and 0xFE are not instructions, and their cells stopped
+ * pretending to be. They used to hold links to their sub-tables, which was two
+ * click targets inside a cell that was already a click target, and a name —
+ * "🌀 SIMD opcodes" — that said less than the byte itself.
+ *
+ * What a doorway byte has to say is where it leads and how far: the prefix in
+ * hex, then a line per table giving the span of sub-opcodes behind it, how many
+ * are assigned, and the table's emoji to recognise it by. Written in the same
+ * notation as the axes of the table it points at, so the range in the cell and
+ * the row labels in the grid below are visibly the same numbers.
+ */
+.prefix-cell { display: block; line-height: 1.35; }
+
+/* The card and table layouts label every cell with its opcode; this one has
+   already said it, larger, as the first thing in the cell. */
+.cell:has(.prefix-cell) .cell-hex { display: none; }
+
+.prefix-byte {
+	display: block;
+	font-family: 'Source Code Pro', monospace;
+	font-weight: 700;
+	font-size: 1.05em;
+}
+
+/* Wrapping rather than nowrap, because the same line has to sit in a cell of
+   the byte grid — sixty-odd pixels — and in a table row with a column to
+   itself. Given room it is one line; given a grid cell it folds. */
+.prefix-line {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: center;
+	gap: 0 .2rem;
+	font-weight: 400;
+}
+/* Hidden by the client when the reader has turned that table off. */
+.prefix-line[hidden] { display: none; }
+
+.prefix-range {
+	white-space: nowrap;
+	font-family: Georgia, serif;
+	font-style: italic;
+	color: var(--enc-sub);
+}
+.prefix-tail {
+	display: inline-flex;
+	align-items: baseline;
+	gap: .2rem;
+	white-space: nowrap;
+}
+.prefix-emoji { line-height: 1; }
+
+/* Given a column of its own the lines run left to right like the rest of a
+   table row. */
+.chart[data-layout='table'] .prefix-line { justify-content: flex-start; }
+
+/* The same badge as a group heading's, sized for a cell. */
+.prefix-cell .group-count {
+	margin-left: .25rem;
+	padding: 0 .3rem;
+	font-size: .6rem;
+	vertical-align: baseline;
+}
+
+.prefix-tables { margin: .3rem 0; }
+.prefix-past { margin: .5rem 0; }
+.prefix-past > summary { cursor: pointer; color: var(--fg-dim); }
+
 .cell .jump { display: block; font-weight: 700; }
 
 /* ---------------------------------------------------------------- highlights */
@@ -1380,6 +1455,17 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    open-ended slot rather than a solid one. */
 .enc-group[data-part='imm'] .enc-bytes {
 	color: var(--fg-dim);
+	font-family: Georgia, serif;
+	font-style: italic;
+	border-bottom-style: dashed;
+}
+
+/* The empty slot a sub-opcode goes in, on the four bytes whose entire meaning
+   is that one follows. Same open-ended treatment as the immediates, in the
+   sub-opcode's own colour and face, so the picture reads as "this byte, then a
+   value of that kind". */
+.enc-group[data-part='subslot'] .enc-bytes {
+	color: var(--enc-sub);
 	font-family: Georgia, serif;
 	font-style: italic;
 	border-bottom-style: dashed;

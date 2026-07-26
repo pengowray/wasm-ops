@@ -157,7 +157,31 @@ function start(
   };
   chart.dataset['cols'] = String(options.columns);
 
+  // The page arrives with the dormant sections already filtered out, so the
+  // doorway bytes are advertising a table that is not there before the reader
+  // has touched anything.
+  syncPrefixLines();
+
   // --- arranging ----------------------------------------------------------
+
+  /**
+   * The four doorway bytes list the tables behind them; a table the reader has
+   * turned off is not behind anything they can reach.
+   *
+   * Reference-typed strings is the case this exists for: it is dormant and
+   * hidden by default, and `0xFB` advertising a string table at 128–159 while
+   * no such table is on the page sends the reader looking for something that
+   * is not there.
+   */
+  function syncPrefixLines(): void {
+    for (const line of chart.querySelectorAll<HTMLElement>('.prefix-line[data-for-section]')) {
+      const id = line.dataset['forSection'] as SectionId;
+      const shown =
+        options.sections.includes(id) &&
+        countShown(data, { ...options, sections: [id], match: undefined }) > 0;
+      line.hidden = !shown;
+    }
+  }
 
   const template = document.createElement('div');
 
@@ -185,8 +209,10 @@ function start(
         // Headings come from the pool with the count they were rendered with,
         // which is the count before whatever filter or search is now running.
         if (item.kind === 'group') {
-          const count = el.querySelector('.group-count');
+          const badge = el.querySelector<HTMLElement>('.group-count');
+          const count = el.querySelector('.count-n');
           if (count) count.textContent = String(item.count);
+          if (badge) badge.hidden = item.count === 1;
         }
         if (item.kind === 'cell') {
           // A cell filtered out of the byte grid keeps its slot but is blanked.
@@ -202,6 +228,8 @@ function start(
       chart.dataset['group'] = options.group;
       toolbar.dataset['layout'] = options.layout;
     }, animate);
+
+    syncPrefixLines();
 
     // Both of these hold references into the chart's DOM, which has just been
     // rebuilt from the pool.

@@ -129,6 +129,16 @@ export interface Opcode {
   /** Descriptive prose. HTML. */
   description?: string;
   /**
+   * A cell that is not an instruction but a doorway: one of the four bytes in
+   * the core table that introduce a sub-table, listing the sections it opens.
+   *
+   * What such a cell says about itself — the range of sub-opcodes behind it,
+   * how many are assigned, which proposals they came from — is all derivable
+   * from those sections, so it is generated at load time rather than written
+   * out by hand and left to go stale the next time a proposal lands.
+   */
+  prefixFor?: SectionId[];
+  /**
    * A cell whose content is a link rather than an instruction — the four
    * prefix bytes in the core table that jump to their sub-tables.
    */

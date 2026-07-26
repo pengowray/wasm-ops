@@ -4734,23 +4734,15 @@
       ],
       "name": "twobytefb.gc",
       "status": "standard",
-      "linkTo": [
-        {
-          "label": "⭕ GC",
-          "href": "#gc"
-        },
-        {
-          "label": "➰ Str",
-          "href": "#strings"
-        }
-      ],
-      "displayName": "⭕ Garbage Collection<br>➰ Reference-Typed Strings",
       "parts": {
         "pre": "twobytefb",
         "mainop": "gc"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFB.</p><ul><li>Garbage collection — structs, arrays and typed references.</li><li>Reference-typed strings, a dormant proposal.</li></ul><p>See the tables below for the full opcodes.</p>",
-      "proposal": "mvp"
+      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
+      "prefixFor": [
+        "gc",
+        "stringref"
+      ]
     },
     {
       "id": "0xFC",
@@ -4762,19 +4754,14 @@
       ],
       "name": "twobytefc.fc",
       "status": "standard",
-      "linkTo": [
-        {
-          "label": "⭐\nFC",
-          "href": "#fc"
-        }
-      ],
-      "displayName": "⭐ 0xFCxx opcodes",
       "parts": {
         "pre": "twobytefc",
         "mainop": "fc"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFC.</p><ul><li>Non-trapping float-to-int conversions</li><li>Bulk memory operations</li><li>Reference types — table and element instructions</li><li>Wide arithmetic and half precision, both still proposals</li></ul><p>See the table below for the full opcodes.</p>",
-      "proposal": "mvp"
+      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
+      "prefixFor": [
+        "fc"
+      ]
     },
     {
       "id": "0xFD",
@@ -4786,19 +4773,15 @@
       ],
       "name": "twobytefd.simd",
       "status": "standard",
-      "linkTo": [
-        {
-          "label": "🌀\nSIMD",
-          "href": "#simd"
-        }
-      ],
-      "displayName": "🌀 SIMD opcodes",
       "parts": {
         "pre": "twobytefd",
         "mainop": "simd"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFD.</p>\n<p>SIMD opcodes (Vector instructions).</p>\n<p>The opcode which follows the prefix uses variable-length integer encoding (LEB128)</p>\n<p>See table below for full opcodes.</p>",
-      "proposal": "mvp"
+      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
+      "prefixFor": [
+        "simd",
+        "simd-ext"
+      ]
     },
     {
       "id": "0xFE",
@@ -4810,19 +4793,14 @@
       ],
       "name": "twobytefe.threads",
       "status": "standard",
-      "linkTo": [
-        {
-          "label": "🧵\nThreads",
-          "href": "#threads"
-        }
-      ],
-      "displayName": "🧵 Threading opcodes",
       "parts": {
         "pre": "twobytefe",
         "mainop": "threads"
       },
-      "description": "<p>Multibyte instructions beginning with the prefix 0xFE.</p>\n<p>Threads Proposal for WebAssembly.</p>\n<p>See table below for full opcodes.</p>",
-      "proposal": "mvp"
+      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
+      "prefixFor": [
+        "threads"
+      ]
     },
     {
       "id": "0xFF",

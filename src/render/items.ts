@@ -51,7 +51,20 @@ function hexByte(byte: number): string {
 export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
   const groups: string[] = [];
 
-  if (!op.prefix) {
+  if (op.prefixFor?.length) {
+    // A doorway byte. Its encoding is the interesting thing about it — it is
+    // the only cell in the chart whose whole meaning is "a number follows" —
+    // so the slot that number goes in is drawn rather than described, as an
+    // open-ended box in the sub-opcode's own colour and face.
+    groups.push(group(hexByte(op.code), 'prefix byte', 'prefix'));
+    groups.push(
+      group(
+        'n',
+        'sub-opcode<span class="enc-sub">LEB128 u32, 1–5 bytes</span>',
+        'subslot',
+      ),
+    );
+  } else if (!op.prefix) {
     groups.push(group(hexByte(op.code), 'opcode byte'));
   } else {
     groups.push(group(op.prefix, 'prefix byte', 'prefix'));
@@ -164,7 +177,10 @@ function renderFragment(text: string): string {
  * still yields `i64.load16_u` on one line.
  */
 export function renderName(op: Opcode): string {
-  if (op.displayName) return `<span class="op">${op.displayName}</span>`;
+  // Not `.op`: that class carries the generated line break and the weight that
+  // belong to a decomposed instruction name, and a doorway byte's cell is not
+  // one — it is a small block of its own with its own arrangement.
+  if (op.displayName) return `<span class="display-name">${op.displayName}</span>`;
   if (!op.name) return '';
 
   const tokens = tokenise(op.parts, op.name);
@@ -190,6 +206,12 @@ export function partTokens(op: Opcode): string {
 
 /** Attributes that let the highlight logic select related cells with plain CSS. */
 function cellData(op: Opcode): string {
+  // As with its properties: the parts of `twobytefd.simd` are not parts of
+  // anything, and relating this cell to every SIMD instruction because of them
+  // answers a question nobody asked.
+  if (op.prefixFor?.length) {
+    return ` data-key="${op.id}" data-section="${op.section}" data-status="${op.status}"`;
+  }
   const attrs: Record<string, string | undefined> = {
     'data-key': op.id,
     'data-section': op.section,
@@ -233,7 +255,14 @@ export function renderCell(op: Opcode, filtered = false): string {
   const tag = linkable ? 'a' : 'div';
   const href = linkable ? ` href="#${op.id}"` : '';
   const hidden = filtered ? ' data-filtered="1"' : '';
-  const label = op.name ? ` aria-label="${escapeHtml(`${specText(op)} ${op.name}`)}"` : '';
+  // A doorway byte's `name` is a placeholder from the old data — `twobytefb.gc`
+  // — which is not something to read out. What it is, is a prefix.
+  const spoken = op.prefixFor?.length
+    ? `${specText(op)} prefix byte, a sub-opcode follows`
+    : op.name
+      ? `${specText(op)} ${op.name}`
+      : '';
+  const label = spoken ? ` aria-label="${escapeHtml(spoken)}"` : '';
 
   // The extra columns are only shown by the table layout, but they are written
   // here rather than injected later: a cell is rendered once at build time and
@@ -297,6 +326,26 @@ function tagHint(label: string): string {
   return `Highlight everything tagged “${label}” — or search tag:${normaliseTag(label)} to filter`;
 }
 
+/**
+ * How many instructions are under a heading.
+ *
+ * A bare number beside a heading is a riddle — 200 of what? — so it says what
+ * it counts. Except in the byte grid, where the headings run across a
+ * sixteen-column table and the word costs more room than it earns; the unit is
+ * written but hidden there, so that switching layout does not have to rewrite
+ * the badge.
+ *
+ * A count of one is not worth a badge at all. Grouping by name gives a heading
+ * per operation and a good many operations exist exactly once; "1" against each
+ * of them is a column of noise saying nothing the heading did not.
+ */
+function renderCount(count: number): string {
+  return (
+    `<span class="group-count"${count === 1 ? ' hidden' : ''}>` +
+    `<span class="count-n">${count}</span><span class="count-unit"> opcodes</span></span>`
+  );
+}
+
 export function renderItem(item: ViewItem): string {
   switch (item.kind) {
     case 'group':
@@ -304,7 +353,7 @@ export function renderItem(item: ViewItem): string {
         `<h2 class="group" data-key="${escapeHtml(item.key)}" id="${escapeHtml(item.anchor)}">` +
         (item.emoji ? `<span class="group-emoji">${item.emoji}</span> ` : '') +
         headingTag(item.label, item.tag) +
-        ` <span class="group-count">${item.count}</span>` +
+        ` ${renderCount(item.count)}` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
         renderGroupProposals(item.proposals) +
         `</h2>`
@@ -491,6 +540,10 @@ export function renderStatus(op: Opcode): string {
  * anywhere, it lights up everything sharing that property.
  */
 export function renderTags(op: Opcode): string {
+  // A doorway byte has no properties: the ones it was being given — "Other",
+  // "simd" — are read off `twobytefd.simd`, which is a placeholder standing in
+  // for a name it does not have.
+  if (op.prefixFor?.length) return '';
   const tags = tagsFor(op);
   if (!tags.length) return '';
   return (
