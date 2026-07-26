@@ -471,6 +471,46 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .map-fold[open] > summary::after { transform: translateY(1px) rotate(225deg); }
 .map-fold > summary:hover { color: var(--fg); }
 
+/*
+ * The map in words.
+ *
+ * The squares answer where and how many; nothing answered what. A scatter of
+ * lit squares three seconds after the pointer moved on is an answer to a
+ * forgotten question, so the question is now written under it — and where there
+ * is no question there is no line at all.
+ */
+.map-caption {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: .2rem .5rem;
+	margin: .3rem 0 0;
+	font-size: .75rem;
+	color: var(--fg-dim);
+}
+.map-caption[hidden] { display: none; }
+.map-caption-lede { color: var(--fg-faint); }
+.map-caption-name { font-weight: 700; color: var(--fg); }
+.map-caption-count { color: var(--fg-faint); }
+.map-caption-only {
+	display: block;
+	width: 100%;
+	color: var(--accent);
+}
+
+.map-only { padding: 0 .35rem; font-size: .7rem; }
+.map-only[hidden] { display: none; }
+.map-only[aria-pressed='true'] {
+	color: var(--accent-contrast);
+	background: var(--accent);
+	border-color: var(--accent);
+}
+.map-only kbd {
+	font-family: 'Source Code Pro', monospace;
+	font-size: .9em;
+	opacity: .7;
+}
+
 /* Above the chart: the sections run across, to spend width rather than height. */
 .map {
 	display: flex;
@@ -1683,5 +1723,28 @@ html:not(.js) .about-body { overflow: visible; }
 		border-top: 1px solid var(--rule);
 		border-radius: var(--radius) var(--radius) 0 0;
 		box-shadow: 0 -12px 32px rgba(0, 0, 0, .18);
+		/* Vertical panning is the sheet's own gesture to interpret: it either
+		   scrolls the description or pushes the sheet away, and the browser
+		   cannot know which until the sheet says where it is scrolled to. */
+		touch-action: pan-y;
 	}
+
+	/* Springs back when a drag is let go without going far enough. During the
+	   drag there is no transition, so the sheet stays under the finger. */
+	.panel { transition: transform 180ms var(--ease); }
+	.panel.panel-dragging { transition: none; }
+
+	/* A handle, because a sheet you can push down should look like one. */
+	.panel-head::before {
+		content: '';
+		position: absolute;
+		top: .35rem;
+		left: 50%;
+		width: 2.2rem;
+		height: 4px;
+		margin-left: -1.1rem;
+		background: var(--rule);
+		border-radius: 999px;
+	}
+	.panel-head { position: sticky; padding-top: 1rem; }
 }

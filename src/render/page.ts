@@ -184,6 +184,13 @@ export function renderPage(
 		<summary>Map</summary>
 		<div class="map" id="map"></div>
 	</details>
+	<!-- What the map is currently answering, in words. The squares say where
+	     the matches are and how many; only this says what the question was. -->
+	<p class="map-caption" id="map-caption" role="status" hidden>
+		<span class="map-caption-what"></span>
+		<button type="button" class="ghost map-only" id="map-only"
+			title="Show only these and hide the rest (F)">Only these <kbd>F</kbd></button>
+	</p>
 </aside>
 
 <main id="chart" class="chart" data-layout="${options.layout}" data-group="${options.group}" data-cols="${options.columns}" data-colour="proposal">

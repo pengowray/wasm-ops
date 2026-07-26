@@ -8,7 +8,7 @@
  * panel, relationship highlighting, and the theme toggle.
  */
 
-import type { OpcodeData, SectionId } from '../model/types.ts';
+import type { Opcode, OpcodeData, SectionId } from '../model/types.ts';
 import {
   buildView,
   countShown,
@@ -17,10 +17,10 @@ import {
   type ViewOptions,
 } from '../model/view.ts';
 import { prefixLine, prefixTable, type PrefixTable } from '../model/prefixes.ts';
-import { renderItem } from '../render/items.ts';
+import { renderItem, specLabel } from '../render/items.ts';
 import { initAbout } from './about.ts';
 import { flip } from './flip.ts';
-import { Highlighter } from './highlight.ts';
+import { Highlighter, type HighlightState } from './highlight.ts';
 import { NavMap } from './map.ts';
 import { Panel } from './panel.ts';
 import { Search } from './search.ts';
@@ -339,6 +339,120 @@ function start(
     relayout();
   });
 
+  // --- what is lit ----------------------------------------------------------
+
+  /*
+   * Two filters, one predicate.
+   *
+   * The search box is one of them. The other is "only these": whatever is lit
+   * right now, kept, with everything else taken away — the same thing a search
+   * does, asked with the mouse instead of the keyboard. Hovering `load` lights
+   * twenty-six cells scattered over four tables, and the obvious next question
+   * is to see those twenty-six and nothing else.
+   *
+   * It is a snapshot, taken when the key is pressed, rather than a live tie to
+   * the highlight: the pointer has to move to reach anything, and a filter that
+   * followed the pointer would empty the chart on the way.
+   */
+  let queryMatch: ((op: Opcode) => boolean) | undefined;
+  let onlyKeys: Set<string> | null = null;
+
+  function applyMatch(): void {
+    if (!queryMatch && !onlyKeys) {
+      options.match = undefined;
+      return;
+    }
+    options.match = (op) =>
+      (!queryMatch || queryMatch(op)) && (!onlyKeys || onlyKeys.has(op.id));
+  }
+
+  const caption = document.getElementById('map-caption');
+  const captionWhat = caption?.querySelector<HTMLElement>('.map-caption-what');
+  const onlyButton = document.getElementById('map-only');
+
+  /** The label a property chip is drawn with, for a tag id. */
+  function tagLabel(tag: string): string {
+    const chip = document.querySelector<HTMLElement>(`.tag[data-tag="${CSS.escape(tag)}"]`);
+    return chip?.textContent?.trim() ?? tag;
+  }
+
+  function countLabel(n: number): string {
+    return `${n} opcode${n === 1 ? '' : 's'}`;
+  }
+
+  /**
+   * The map in words.
+   *
+   * The squares say where the matches are and roughly how many; nothing said
+   * what the question was, so a scatter of lit squares three seconds after the
+   * pointer moved was unreadable — you could see an answer without knowing what
+   * had been asked.
+   */
+  function updateCaption(state: HighlightState): void {
+    if (!caption || !captionWhat || !onlyButton) return;
+
+    let what = '';
+    if (state.kind === 'pin' && state.key) {
+      const op = byId.get(state.key);
+      if (op) {
+        what =
+          `<span class="map-caption-lede">Selected</span> ${specLabel(op)} ` +
+          `<span class="map-caption-name">${op.name ?? 'unassigned'}</span>`;
+      }
+    } else if (state.kind === 'tag' && state.tag) {
+      what =
+        `<span class="map-caption-lede">Tagged</span> ` +
+        `<span class="map-caption-name">${tagLabel(state.tag)}</span> ` +
+        `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
+    } else if (state.kind === 'hover' && state.token) {
+      what =
+        `<span class="map-caption-lede">Sharing</span> ` +
+        `<span class="map-caption-name">${state.token}</span> ` +
+        `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
+    }
+
+    if (onlyKeys) {
+      what +=
+        `<span class="map-caption-only">showing only ${countLabel(onlyKeys.size)}</span>`;
+    }
+
+    captionWhat.innerHTML = what;
+    onlyButton.hidden = !onlyKeys && !state.keys.length;
+    onlyButton.setAttribute('aria-pressed', String(Boolean(onlyKeys)));
+    caption.hidden = !what && onlyButton.hidden;
+  }
+
+  highlighter.onChange(updateCaption);
+
+  /** Keeps whatever is lit and hides the rest; pressed again, puts it back. */
+  function toggleOnly(): void {
+    if (onlyKeys) {
+      onlyKeys = null;
+    } else {
+      const lit = highlighter.state().keys;
+      if (!lit.length) return;
+      onlyKeys = new Set(lit);
+    }
+    applyMatch();
+    updateSearchCount();
+    relayout();
+    updateCaption(highlighter.state());
+  }
+
+  onlyButton?.addEventListener('click', toggleOnly);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const active = document.activeElement;
+    if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) return;
+    if (event.key === 'f' || event.key === 'F') {
+      event.preventDefault();
+      toggleOnly();
+    } else if (event.key === 'Escape' && onlyKeys) {
+      toggleOnly();
+    }
+  });
+
   // --- search ---------------------------------------------------------------
 
   const search = new Search(data, detailsEl);
@@ -374,7 +488,8 @@ function start(
    */
   function applySearch(animate = false): void {
     const query = searchInput?.value.trim() ?? '';
-    options.match = search.predicate(query);
+    queryMatch = search.predicate(query);
+    applyMatch();
     updateSearchCount();
 
     // Shareable, and survives a reload: the URL carries the query alongside any

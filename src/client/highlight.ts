@@ -21,11 +21,33 @@ const PART_LIT = 'part-lit';
 const MAP_LIT = 'map-part-lit';
 const TAG_CLASSES = ['hl-self', 'hl-tag'] as const;
 
+/**
+ * What is lit, in a form something other than the stylesheet can act on.
+ *
+ * The highlight was previously written only into class names, which is all the
+ * colours need. Two things now want to know what the answer *is*: the line
+ * under the map that says it in words, and the shortcut that keeps only these
+ * and hides the rest.
+ */
+export interface HighlightState {
+  kind: 'none' | 'hover' | 'tag' | 'pin';
+  /** The part of a name under the pointer, for `hover`. */
+  token?: string;
+  tag?: string;
+  key?: string;
+  /** Keys of the chart cells lit, whatever lit them. */
+  keys: string[];
+}
+
+const NOTHING: HighlightState = { kind: 'none', keys: [] };
+
 export class Highlighter {
   #pinnedKey: string | null = null;
   #pinnedTag: string | null = null;
+  #hoverToken: string | null = null;
   #lit: HTMLElement[] = [];
   #hovered: HTMLElement[] = [];
+  #onChange: ((state: HighlightState) => void) | null = null;
 
   constructor(roots: HTMLElement[]) {
     for (const root of roots) {
@@ -40,9 +62,60 @@ export class Highlighter {
     }
   }
 
+  /** Told whenever what is lit changes. */
+  onChange(handler: (state: HighlightState) => void): void {
+    this.#onChange = handler;
+    handler(this.state());
+  }
+
+  /**
+   * What is lit right now. The keys are read back out of the chart rather than
+   * remembered, because a rearrangement replaces every node and the set that
+   * survives a filter is not the set that was lit when it was applied.
+   */
+  state(): HighlightState {
+    const keys = (selector: string): string[] => {
+      const out: string[] = [];
+      for (const el of document.querySelectorAll<HTMLElement>(selector)) {
+        const key = el.closest<HTMLElement>('.cell')?.dataset['key'];
+        if (key && !out.includes(key)) out.push(key);
+      }
+      return out;
+    };
+
+    if (this.#pinnedTag) {
+      return {
+        kind: 'tag',
+        tag: this.#pinnedTag,
+        keys: keys(`.cell[data-tags~="${CSS.escape(this.#pinnedTag)}"]:not([data-filtered])`),
+      };
+    }
+    // Before the selection, because a hover happens on top of one: the pointer
+    // is asking a new question while the panel still shows the answer to the
+    // old, and the words under the map should follow the pointer, as the
+    // colours do. A pinned tag is the exception above — it owns the map, so a
+    // hover does not reach it and the caption must not claim otherwise.
+    if (this.#hoverToken) {
+      return {
+        kind: 'hover',
+        token: this.#hoverToken,
+        keys: keys(`.cell:not([data-filtered]) [data-p="${CSS.escape(this.#hoverToken)}"]`),
+      };
+    }
+    if (this.#pinnedKey) {
+      return { kind: 'pin', key: this.#pinnedKey, keys: [this.#pinnedKey] };
+    }
+    return NOTHING;
+  }
+
+  #announce(): void {
+    this.#onChange?.(this.state());
+  }
+
   /** Lights every occurrence of one part of a name. */
   #hover(token: string): void {
     this.#clearHover();
+    this.#hoverToken = token;
     const escaped = CSS.escape(token);
 
     for (const el of document.querySelectorAll<HTMLElement>(`.cell:not([data-filtered]) [data-p="${escaped}"]`)) {
@@ -51,18 +124,26 @@ export class Highlighter {
     }
 
     // A pinned tag owns the map; two answers at once would be unreadable.
-    if (this.#pinnedTag) return;
+    if (this.#pinnedTag) {
+      this.#announce();
+      return;
+    }
     for (const el of document.querySelectorAll<HTMLElement>(
       `.map-cell[data-parts~="${escaped}"]:not([data-filtered])`,
     )) {
       el.classList.add(MAP_LIT);
       this.#hovered.push(el);
     }
+    this.#announce();
   }
 
   #clearHover(): void {
     for (const el of this.#hovered) el.classList.remove(PART_LIT, MAP_LIT);
     this.#hovered = [];
+    if (this.#hoverToken) {
+      this.#hoverToken = null;
+      this.#announce();
+    }
   }
 
   /**
@@ -108,14 +189,17 @@ export class Highlighter {
         el.classList.add('hl-tag');
         this.#lit.push(el);
       }
+      this.#announce();
       return;
     }
 
-    if (!this.#pinnedKey) return;
-    const selector = `[data-key="${CSS.escape(this.#pinnedKey)}"]:not([data-filtered])`;
-    for (const el of document.querySelectorAll<HTMLElement>(selector)) {
-      if (el.matches('.cell, .map-cell')) el.classList.add('pinned');
+    if (this.#pinnedKey) {
+      const selector = `[data-key="${CSS.escape(this.#pinnedKey)}"]:not([data-filtered])`;
+      for (const el of document.querySelectorAll<HTMLElement>(selector)) {
+        if (el.matches('.cell, .map-cell')) el.classList.add('pinned');
+      }
     }
+    this.#announce();
   }
 
   #clear(): void {
