@@ -951,6 +951,18 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .history-support::after { content: ' ↗'; }
 
+/* Where a proposal reaches into more than one table. Set as a list rather than
+   a sentence: it is two or three facts of the same shape, and a sentence
+   joining them with "and" reads as though the split were incidental. */
+.history-spread-lede { margin: .6rem 0 .2rem; font-size: .85rem; color: var(--fg-dim); }
+.history-spread {
+	margin: .2rem 0;
+	padding-left: 1.1rem;
+	font-size: .85rem;
+	color: var(--fg-dim);
+}
+.history-spread li { margin: .15rem 0; }
+
 /* -------------------------------------------------------------- properties */
 
 .detail-tags { display: flex; flex-wrap: wrap; gap: .3rem; margin: .3rem 0; }

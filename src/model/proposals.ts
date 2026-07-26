@@ -133,7 +133,7 @@ const LIST: Proposal[] = [
     feature: 'Garbage Collection',
     stage: 'standard',
     standardisedIn: 'WebAssembly 3.0 (2025)',
-    note: 'Standardised. Shipping in current browsers; check support if you target older engines. The encoding changed substantially from the 2022 draft.',
+    note: 'Standardised as part of WebAssembly 3.0 and shipping in browsers since late 2023. These encodings replace the 2022 draft, which used *_canon names and a sparser numbering.',
     url: 'https://github.com/WebAssembly/gc',
     hue: 130,
   },

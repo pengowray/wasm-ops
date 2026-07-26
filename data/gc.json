@@ -7,7 +7,7 @@
     "prefix": "FB",
     "start": 0,
     "count": 128,
-    "intro": "Structs, arrays and typed references. Standardised as part of WebAssembly 3.0 and shipping in browsers since late 2023; these encodings replace the 2022 draft, which used <code>*_canon</code> names and a sparser numbering."
+    "intro": "Structs, arrays and typed references."
   },
   "opcodes": [
     {

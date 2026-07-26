@@ -2,6 +2,7 @@ import type { OpcodeData } from '../model/types.ts';
 import { buildView, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { hasDetail, renderDetail, renderItem } from './items.ts';
 import { allProposals } from '../model/proposals.ts';
+import { proposalSpread } from '../model/spread.ts';
 import type { DataMeta } from '../model/load.ts';
 
 /**
@@ -59,7 +60,11 @@ export function renderPage(
 ): string {
   const items = buildView(data, options);
   const chart = items.map(renderItem).join('\n');
-  const details = data.opcodes.filter(hasDetail).map(renderDetail).join('\n');
+  const spread = proposalSpread(data);
+  const details = data.opcodes
+    .filter(hasDetail)
+    .map((op) => renderDetail(op, spread.get(op.proposal ?? '')))
+    .join('\n');
 
   const sectionToggles = data.sections
     .map(

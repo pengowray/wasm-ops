@@ -497,7 +497,7 @@ function supportLink(feature: string): string {
  * still a proposal" and "it is the stack-switching proposal, at phase 3" are
  * one answer, so they are one section, and it is called what it answers.
  */
-export function renderStatus(op: Opcode): string {
+export function renderStatus(op: Opcode, spread?: string): string {
   const note = statusNote(op);
   const p = proposal(op.proposal);
   if (!note && !p) return '';
@@ -531,7 +531,10 @@ export function renderStatus(op: Opcode): string {
     `<span class="history-standing">${escapeHtml(standing(p))}</span>` +
     `<span class="history-note">${escapeHtml(p.note)}</span>` +
     support +
-    `</p>`
+    `</p>` +
+    // Only for the proposals that reach into more than one table; see
+    // `proposalSpread`.
+    (spread ?? '')
   );
 }
 
@@ -566,7 +569,7 @@ export function renderTags(op: Opcode): string {
  * they follow from the prefix and code, and baking 630 copies of the same table
  * into the page would be repeating what the client can work out.
  */
-export function renderDetail(op: Opcode): string {
+export function renderDetail(op: Opcode, spread?: string): string {
   const rows: string[] = [renderHeading(op)];
   const tags = renderTags(op);
 
@@ -581,7 +584,7 @@ export function renderDetail(op: Opcode): string {
     rows.push(`<h4>Followed by</h4><div class="detail-followed">${op.followedBy}</div>`);
   }
 
-  rows.push(renderStatus(op));
+  rows.push(renderStatus(op, spread));
 
   if (op.stack) {
     const cls = op.stack.large ? 'op-type large' : 'op-type';
