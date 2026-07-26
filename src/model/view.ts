@@ -160,7 +160,8 @@ function passesStatus(op: Opcode, options: ViewOptions): boolean {
   return true;
 }
 
-function visible(op: Opcode, options: ViewOptions): boolean {
+/** Whether an opcode survives every filter, the section list included. */
+export function visible(op: Opcode, options: ViewOptions): boolean {
   return options.sections.includes(op.section) && passesStatus(op, options);
 }
 

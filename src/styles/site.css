@@ -1203,13 +1203,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-style: italic;
 	color: var(--enc-sub);
 }
-.prefix-tail {
-	display: inline-flex;
-	align-items: baseline;
-	gap: .2rem;
-	white-space: nowrap;
-}
-.prefix-emoji { line-height: 1; }
+/* A line of its own: the emoji are how a table is recognised at a glance, and
+   trailing a range and a badge they read as punctuation on the end of a number
+   rather than as the tables they stand for. */
+.prefix-emoji { flex: 0 0 100%; line-height: 1.4; letter-spacing: .1em; }
 
 /* Given a column of its own the lines run left to right like the rest of a
    table row. */

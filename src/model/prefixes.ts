@@ -15,7 +15,13 @@
  */
 
 import { proposal } from './proposals.ts';
-import { HISTORICAL, type Opcode, type OpcodeData, type Section } from './types.ts';
+import {
+  HISTORICAL,
+  type Opcode,
+  type OpcodeData,
+  type Section,
+  type SectionId,
+} from './types.ts';
 
 function esc(value: string): string {
   return value
@@ -77,26 +83,101 @@ function live(ops: Opcode[]): Opcode[] {
  * default; advertising `➰ 128–159` on a byte whose string table is nowhere on
  * the page is an invitation to look for something that is not there.
  */
-function cellText(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
-  const lines = (op.prefixFor ?? []).map((id) => {
-    const section = sections.find((s) => s.id === id);
-    const ops = live(opcodes.filter((o) => o.section === id));
-    if (!section || !ops.length) return '';
-    return (
-      `<span class="prefix-line" data-for-section="${esc(id)}">` +
-      `<span class="prefix-range">${range(ops)}</span>` +
-      // Count and emoji travel together, so that when the line folds inside a
-      // grid cell it folds once — `0–38` above `39 ⭕` — rather than coming
-      // apart into a column of three.
-      `<span class="prefix-tail">${badge(ops.length)}` +
-      (section.emoji ? `<span class="prefix-emoji">${section.emoji}</span>` : '') +
-      `</span></span>`
-    );
-  });
+/** A run of opcodes reduced to the three numbers a doorway cell quotes. */
+export interface PrefixTable {
+  id: SectionId;
+  low: number;
+  high: number;
+  n: number;
+  emoji: string;
+}
+
+/**
+ * The figures for one table, over whichever of its opcodes are in play.
+ *
+ * Both callers pass a different set and mean it. At build time it is the
+ * instructions the page arrives showing; in the browser it is whatever the
+ * filters have left, which is why the numbers cannot be baked into the markup:
+ * turning the dormant string table on takes 0xFB from `0–38, 39` to
+ * `0–183, 88`, and both are true statements about that byte.
+ */
+export function prefixTable(id: SectionId, emoji: string, ops: Opcode[]): PrefixTable | null {
+  if (!ops.length) return null;
+  return {
+    id,
+    emoji,
+    low: Math.min(...ops.map((o) => o.code)),
+    high: Math.max(...ops.map((o) => o.code)),
+    n: ops.length,
+  };
+}
+
+/**
+ * The one line a doorway byte's cell says about the tables in front of the
+ * reader: how far they run altogether, how many bytes of that are assigned,
+ * and which tables they are.
+ *
+ * One line rather than one per table. Behind 0xFD are the SIMD table at 0–255
+ * and the vector extensions at 256–335, which is not two things behind that
+ * byte — it is one range of 336, broken in the middle for reasons that belong
+ * to the chart and not to the encoding. Behind 0xFB, with the string table
+ * shown, it is 0–183. The same sentence either way: this byte, then a value in
+ * this range.
+ *
+ * Which tables are in front of the reader is the client's business, so this is
+ * recomputed there as the filters change; see `syncPrefixLines`.
+ */
+export function prefixLine(tables: PrefixTable[]): string {
+  if (!tables.length) return '';
+  const low = Math.min(...tables.map((t) => t.low));
+  const high = Math.max(...tables.map((t) => t.high));
+  const count = tables.reduce((total, t) => total + t.n, 0);
+  const emoji = tables.map((t) => t.emoji).join('');
   return (
-    `<span class="prefix-cell">` +
+    `<span class="prefix-range">${low === high ? dec(low) : `${dec(low)}–${dec(high)}`}</span>` +
+    badge(count) +
+    (emoji ? `<span class="prefix-emoji">${emoji}</span>` : '')
+  );
+}
+
+/**
+ * The cell's own text: the prefix byte, then the range behind it.
+ *
+ * The per-table figures ride along in an attribute so the client can rebuild
+ * that line when the reader turns a table on or off — reference-typed strings
+ * is dormant and hidden by default, and 0xFB should say 0–38 then and 0–183
+ * when it is shown.
+ */
+function cellText(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
+  const ids = op.prefixFor ?? [];
+  // What the page arrives showing: everything except the encodings that are
+  // superseded, abandoned or dormant, which is the default filter.
+  const shown = ids
+    .map((id) => {
+      const section = sections.find((s) => s.id === id);
+      if (!section) return null;
+      const ops = opcodes.filter(
+        (o) => o.section === id && o.name && !HISTORICAL.includes(o.status),
+      );
+      return prefixTable(id, section.emoji ?? '', ops);
+    })
+    .filter((entry): entry is PrefixTable => entry !== null)
+    .sort((a: PrefixTable, b: PrefixTable) => a.low - b.low);
+
+  // Only the identities travel in the markup; the figures are recomputed in the
+  // browser from the filters in force there.
+  const behind = ids
+    .map((id) => ({ id, emoji: sections.find((s) => s.id === id)?.emoji ?? '' }))
+    .sort(
+      (a, b) =>
+        (sections.find((s) => s.id === a.id)?.start ?? 0) -
+        (sections.find((s) => s.id === b.id)?.start ?? 0),
+    );
+
+  return (
+    `<span class="prefix-cell" data-tables="${esc(JSON.stringify(behind))}">` +
     `<span class="prefix-byte op-hex">0x${op.bytes[0]!.toString(16).toUpperCase()}</span>` +
-    lines.join('') +
+    `<span class="prefix-line">${prefixLine(shown)}</span>` +
     `</span>`
   );
 }

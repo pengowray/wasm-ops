@@ -9,7 +9,14 @@
  */
 
 import type { OpcodeData, SectionId } from '../model/types.ts';
-import { buildView, countShown, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
+import {
+  buildView,
+  countShown,
+  DEFAULT_VIEW,
+  visible,
+  type ViewOptions,
+} from '../model/view.ts';
+import { prefixLine, prefixTable, type PrefixTable } from '../model/prefixes.ts';
 import { renderItem } from '../render/items.ts';
 import { initAbout } from './about.ts';
 import { flip } from './flip.ts';
@@ -174,12 +181,25 @@ function start(
    * is not there.
    */
   function syncPrefixLines(): void {
-    for (const line of chart.querySelectorAll<HTMLElement>('.prefix-line[data-for-section]')) {
-      const id = line.dataset['forSection'] as SectionId;
-      const shown =
-        options.sections.includes(id) &&
-        countShown(data, { ...options, sections: [id], match: undefined }) > 0;
-      line.hidden = !shown;
+    // Deliberately blind to the search: a query is typed a letter at a time,
+    // and a doorway whose range shrank on every keystroke would be reporting
+    // the query rather than the byte.
+    const unsearched: ViewOptions = { ...options, match: undefined };
+    for (const cell of chart.querySelectorAll<HTMLElement>('.prefix-cell[data-tables]')) {
+      const behind = JSON.parse(cell.dataset['tables']!) as { id: SectionId; emoji: string }[];
+      const shown = behind
+        .map(({ id, emoji }) =>
+          prefixTable(
+            id,
+            emoji,
+            data.opcodes.filter((op) => op.section === id && op.name && visible(op, unsearched)),
+          ),
+        )
+        .filter((table): table is PrefixTable => table !== null);
+      const line = cell.querySelector<HTMLElement>('.prefix-line');
+      if (!line) continue;
+      line.innerHTML = prefixLine(shown);
+      line.hidden = !shown.length;
     }
   }
 
