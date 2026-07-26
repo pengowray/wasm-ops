@@ -118,11 +118,10 @@ export type ViewItem =
    */
   | { kind: 'corner'; key: string; label: string }
   /**
-   * Which notation a grid's axes are written in, so the stylesheet can give
-   * them the colour that notation has everywhere else on the page. The core
-   * table counts in bytes and its axes are hex nibbles; a prefixed table counts
-   * in sub-opcodes, which are u32 values written in decimal, so its axes are
-   * decimal too rather than a third spelling of the same number.
+   * Which kind of number the table is a table of, so the stylesheet can letter
+   * its axes in the colour and face that kind has everywhere else on the page.
+   * Both axes of a grid get the same one — they are the two halves of a single
+   * opcode, and two colours on one grid would say they were different things.
    */
   | { kind: 'colhead'; key: string; label: string; notation: Notation }
   /** Column headings for the table layout, one per group. */
@@ -195,25 +194,20 @@ export function countShown(data: OpcodeData, options: ViewOptions): number {
  * the core table gives its base in full and counts across from it.
  */
 /**
- * The two axes are lettered separately, because they are not always the same
- * kind of number.
+ * Which kind of number a table is a table of — and so, since both axes are
+ * halves of one of its opcodes, how both axes are lettered.
  *
- * At sixteen wide the core table is the tidy case: both axes are hex nibbles of
- * one byte, `B_` and `_E`, and both take the hex colour.
+ * The core table is a table of bytes and there is not a sub-opcode anywhere in
+ * it, so nothing in it is written in the sub-opcode's colour and face. Every
+ * other table is a table of sub-opcodes and takes theirs. One style per table:
+ * two colours on one grid says the two axes are different kinds of thing, and
+ * they are not — they are the two halves of the same number.
  *
- * Folded to eight, they part company. A row is no longer a nibble, so it gives
- * its base byte in full — `A8`, still hex, still a byte — while the column is
- * no longer a nibble either but an offset added to that base, `+2`, which is a
- * count rather than a byte and is written and coloured as one. Colouring the
- * row as a sub-opcode there was simply wrong: it is the same byte value it was
- * at sixteen wide, and nothing about folding the table changed what it is.
+ * How the halves are *spelled* does change with the fold, which is a separate
+ * question from what they are. See `colLabel`.
  */
-function rowNotation(section: Section): Notation {
+function notation(section: Section): Notation {
   return section.prefix ? 'dec' : 'hex';
-}
-
-function colNotation(section: Section, columns: 8 | 16): Notation {
-  return !section.prefix && columns === 16 ? 'hex' : 'dec';
 }
 
 /** The label down the side of a row, given the first opcode in it. */
@@ -223,9 +217,16 @@ function rowLabel(section: Section, base: number, columns: 8 | 16): string {
   return columns === 16 ? toHex(base >> 4).replace(/^0(?=.)/, '') + '_' : toHex(base);
 }
 
-/** The label across the top of a column, given its offset into a row. */
+/**
+ * The label across the top of a column.
+ *
+ * Sixteen columns of a byte table is the one case where a column is a whole
+ * nibble, so `_E` and the row's `B_` concatenate into `0xBE`. Everywhere else
+ * a column is an offset added to the row's base — `+6` — because a sub-opcode
+ * does not divide into nibbles and neither does a row of eight.
+ */
 function colLabel(section: Section, offset: number, columns: 8 | 16): string {
-  if (colNotation(section, columns) === 'hex') {
+  if (!section.prefix && columns === 16) {
     return `_${offset.toString(16).toUpperCase()}`;
   }
   return `+${offset}`;
@@ -335,7 +336,7 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
       // element is reused by key alone.
       key: `colhead:${section.id}:${width}:${i}`,
       label: colLabel(section, i, width),
-      notation: colNotation(section, width),
+      notation: notation(section),
     });
   }
 
@@ -344,7 +345,7 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
       kind: 'rowhead',
       key: `rowhead:${section.id}:${width}:${base}`,
       label: rowLabel(section, base, width),
-      notation: rowNotation(section),
+      notation: notation(section),
     });
     for (const op of ops.filter((op) => op.code >= base && op.code < base + width)) {
       const filtered = !passesStatus(op, options);
