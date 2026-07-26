@@ -132,6 +132,19 @@ export function specText(op: Opcode): string {
   return op.prefix ? `0x${op.prefix} ${op.code}:u32` : `0x${toHex(op.code)}`;
 }
 
+/**
+ * What to call an opcode in running text — a tooltip, the line under the map,
+ * a spoken label.
+ *
+ * Not `op.name`, quite. The four doorway bytes carry `twobytefd.simd` and the
+ * like, placeholders from the old data that were never meant to be read, and
+ * an unassigned slot carries nothing at all.
+ */
+export function plainName(op: Opcode): string {
+  if (op.prefixFor?.length) return 'prefix byte';
+  return op.name ?? 'unassigned';
+}
+
 function group(bytes: string, caption: string, part = 'opcode'): string {
   return (
     `<span class="enc-group" data-part="${part}">` +
@@ -461,6 +474,25 @@ function statusNote(op: Opcode): StatusNote | undefined {
  * five equal things, the first of which happens to be a name.
  */
 export function renderHeading(op: Opcode): string {
+  /*
+   * A doorway byte is titled as what it is.
+   *
+   * Its `displayName` is the block drawn in its cell — a range, a count badge
+   * and a row of emoji, laid out for sixty pixels of byte grid — and using
+   * that as the panel's title put a small centred table where the heading
+   * should be, above a description that then said the same three facts again
+   * in sentences. And its `name` is `twobytefd.simd`, a placeholder from the
+   * old data that is not a name and should not be read out.
+   */
+  if (op.prefixFor?.length) {
+    return (
+      `<h2 class="detail-name">${specLabel(op)}` +
+      `<span class="detail-role">prefix byte</span></h2>` +
+      `<p class="detail-summary">Not an instruction. A sub-opcode follows, and the ` +
+      `two bytes together name one in a table of its own.</p>`
+    );
+  }
+
   const name = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
   const summary = summarize(op);
   return (

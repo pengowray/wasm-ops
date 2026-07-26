@@ -17,7 +17,7 @@
 
 import type { OpcodeData } from '../model/types.ts';
 import { gridRows, type ViewOptions } from '../model/view.ts';
-import { escapeHtml, partTokens, specText } from '../render/items.ts';
+import { escapeHtml, partTokens, plainName, specText } from '../render/items.ts';
 import { tagTokens } from '../model/tags.ts';
 
 export class NavMap {
@@ -50,7 +50,7 @@ export class NavMap {
             (op.name ? ` data-tags="${escapeHtml(tagTokens(op))}"` : '') +
             (op.name ? ` data-parts="${escapeHtml(partTokens(op))}"` : '') +
             (op.proposal ? ` data-proposal="${escapeHtml(op.proposal)}"` : '');
-          const label = `${specText(op)} ${op.name ?? 'unassigned'}`;
+          const label = `${specText(op)} ${plainName(op)}`;
           return `<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
         })
         .join('');

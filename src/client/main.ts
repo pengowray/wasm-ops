@@ -17,7 +17,7 @@ import {
   type ViewOptions,
 } from '../model/view.ts';
 import { prefixLine, prefixTable, type PrefixTable } from '../model/prefixes.ts';
-import { renderItem, specLabel } from '../render/items.ts';
+import { plainName, renderItem, specLabel } from '../render/items.ts';
 import { initAbout } from './about.ts';
 import { flip } from './flip.ts';
 import { Highlighter, type HighlightState } from './highlight.ts';
@@ -390,7 +390,7 @@ function start(
       if (op) {
         what =
           `<span class="map-caption-lede">Selected</span> ${specLabel(op)} ` +
-          `<span class="map-caption-name">${op.name ?? 'unassigned'}</span>`;
+          `<span class="map-caption-name">${plainName(op)}</span>`;
       }
     } else if (state.kind === 'tag' && state.tag) {
       what =

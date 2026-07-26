@@ -1515,6 +1515,16 @@ button.map-only[aria-pressed='true'] {
 	font-weight: 400;
 }
 
+/* What a cell is, where it is not an instruction and so has no name to be
+   titled by. The byte is the title; this is the subtitle under it. */
+.detail-role {
+	display: block;
+	margin-top: .1rem;
+	font-size: .85rem;
+	font-weight: 400;
+	color: var(--fg-dim);
+}
+
 /*
  * Present in the document, absent from the page. Two readers want the same
  * content in different forms: the property chips are buttons, which anything

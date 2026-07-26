@@ -13,8 +13,7 @@
  * live.
  */
 
-import { specLabel } from '../render/items.ts';
-import { escapeHtml } from '../render/items.ts';
+import { escapeHtml, plainName, specLabel } from '../render/items.ts';
 import type { SearchHit } from '../model/rank.ts';
 
 /** Enough to choose from without becoming a second chart. */
@@ -62,7 +61,7 @@ export class Results {
     }
 
     const rows = hits.slice(0, SHOWN).map((hit) => {
-      const name = hit.op.name ?? '';
+      const name = plainName(hit.op);
       const marked = hit.span
         ? escapeHtml(name.slice(0, hit.span[0])) +
           `<mark>${escapeHtml(name.slice(hit.span[0], hit.span[1]))}</mark>` +

@@ -4738,7 +4738,6 @@
         "pre": "twobytefb",
         "mainop": "gc"
       },
-      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
       "prefixFor": [
         "gc",
         "stringref"
@@ -4758,7 +4757,6 @@
         "pre": "twobytefc",
         "mainop": "fc"
       },
-      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
       "prefixFor": [
         "fc"
       ]
@@ -4777,7 +4775,6 @@
         "pre": "twobytefd",
         "mainop": "simd"
       },
-      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
       "prefixFor": [
         "simd",
         "simd-ext"
@@ -4797,7 +4794,6 @@
         "pre": "twobytefe",
         "mainop": "threads"
       },
-      "description": "<p>Not an instruction. This byte announces that a sub-opcode follows, and the two together are looked up in a table of their own.</p>",
       "prefixFor": [
         "threads"
       ]

@@ -194,22 +194,38 @@ export function countShown(data: OpcodeData, options: ViewOptions): number {
  * Eight columns is the same arrangement: a row is no longer a nibble, so even
  * the core table gives its base in full and counts across from it.
  */
-function axisNotation(section: Section, columns: 8 | 16): Notation {
+/**
+ * The two axes are lettered separately, because they are not always the same
+ * kind of number.
+ *
+ * At sixteen wide the core table is the tidy case: both axes are hex nibbles of
+ * one byte, `B_` and `_E`, and both take the hex colour.
+ *
+ * Folded to eight, they part company. A row is no longer a nibble, so it gives
+ * its base byte in full — `A8`, still hex, still a byte — while the column is
+ * no longer a nibble either but an offset added to that base, `+2`, which is a
+ * count rather than a byte and is written and coloured as one. Colouring the
+ * row as a sub-opcode there was simply wrong: it is the same byte value it was
+ * at sixteen wide, and nothing about folding the table changed what it is.
+ */
+function rowNotation(section: Section): Notation {
+  return section.prefix ? 'dec' : 'hex';
+}
+
+function colNotation(section: Section, columns: 8 | 16): Notation {
   return !section.prefix && columns === 16 ? 'hex' : 'dec';
 }
 
 /** The label down the side of a row, given the first opcode in it. */
 function rowLabel(section: Section, base: number, columns: 8 | 16): string {
-  if (axisNotation(section, columns) === 'hex') {
-    return toHex(base >> 4).replace(/^0(?=.)/, '') + '_';
-  }
-  // The core table is bytes wherever it is folded, so its base stays hex.
-  return section.prefix ? String(base) : toHex(base);
+  if (section.prefix) return String(base);
+  // A byte either way: two nibbles at sixteen wide, the whole thing at eight.
+  return columns === 16 ? toHex(base >> 4).replace(/^0(?=.)/, '') + '_' : toHex(base);
 }
 
 /** The label across the top of a column, given its offset into a row. */
 function colLabel(section: Section, offset: number, columns: 8 | 16): string {
-  if (axisNotation(section, columns) === 'hex') {
+  if (colNotation(section, columns) === 'hex') {
     return `_${offset.toString(16).toUpperCase()}`;
   }
   return `+${offset}`;
@@ -305,7 +321,6 @@ export function gridRows(section: Section, ops: Opcode[], options: ViewOptions):
 /** Lays one section out as a byte grid, with row and column headers. */
 function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): ViewItem[] {
   const width = options.columns;
-  const notation = axisNotation(section, width);
   const items: ViewItem[] = [];
   items.push({
     kind: 'corner',
@@ -320,7 +335,7 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
       // element is reused by key alone.
       key: `colhead:${section.id}:${width}:${i}`,
       label: colLabel(section, i, width),
-      notation,
+      notation: colNotation(section, width),
     });
   }
 
@@ -329,7 +344,7 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
       kind: 'rowhead',
       key: `rowhead:${section.id}:${width}:${base}`,
       label: rowLabel(section, base, width),
-      notation,
+      notation: rowNotation(section),
     });
     for (const op of ops.filter((op) => op.code >= base && op.code < base + width)) {
       const filtered = !passesStatus(op, options);

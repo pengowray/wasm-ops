@@ -73,7 +73,11 @@ export class Search {
       }
 
       haystacks.set(op.id, {
-        name: op.name.toLowerCase(),
+        // A doorway byte has no name to search — `twobytefd.simd` is a
+        // placeholder, and matching `fd` inside it would mark a run of letters
+        // the reader is never shown. It is findable by its byte, which is the
+        // only thing it is.
+        name: op.prefixFor?.length ? '' : op.name.toLowerCase(),
         tags,
         summary,
         prose: prose.get(op.id) ?? '',
