@@ -1340,7 +1340,38 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .panel-empty { display: none; }
 
 .panel-body { font-size: .92rem; }
-.panel-body h3 { margin: .2rem 0 .6rem; font-size: 1.3rem; word-break: break-word; }
+.panel-body h2 { margin: .2rem 0 .6rem; font-size: 1.3rem; word-break: break-word; }
+
+/*
+ * The opcode above the name, small and quiet. It is the other half of the
+ * instruction's identity, and the heading gave only one half — the bytes were
+ * in the picture below, which is the right way to explain an encoding and the
+ * wrong way to label a section.
+ */
+.detail-op {
+	display: block;
+	margin-bottom: .1rem;
+	font-size: .8rem;
+	font-weight: 400;
+}
+
+/*
+ * Present in the document, absent from the page. Two readers want the same
+ * content in different forms: the property chips are buttons, which anything
+ * extracting the page as prose discards, leaving a heading with nothing under
+ * it. This is that list as a sentence — off screen for sighted readers, and
+ * hidden from screen readers, which read the chips themselves.
+ */
+.reading-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
 /*
  * The panel is six or seven short sections in a narrow column, and small faint
  * uppercase was not enough to tell one from the next — the encoding, the

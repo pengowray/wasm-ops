@@ -445,14 +445,31 @@ function statusNote(op: Opcode): StatusNote | undefined {
   return STATUS_NOTES[op.status];
 }
 
-/** The opcode's name as a panel heading, with its immediate operands. */
+/**
+ * The opcode's name as a panel heading, with its opcode and its immediate
+ * operands.
+ *
+ * An instruction is identified by two things and the heading used to give one
+ * of them. The bytes were in the encoding breakdown below, drawn rather than
+ * written, which is the right way to explain an encoding and the wrong way to
+ * label a section — and anything that reads the page as a document rather than
+ * as a page (Chrome's reading mode, a text extractor, a screen reader skimming
+ * headings) got a list of names with no numbers against them.
+ *
+ * `h2` rather than `h3` because the sections under it are `h4`. Two levels
+ * apart reads as a title over its parts; one level apart reads as a list of
+ * five equal things, the first of which happens to be a name.
+ */
 export function renderHeading(op: Opcode): string {
   const name = op.displayName ?? (op.name ? escapeHtml(op.name) : '<em>Unassigned</em>');
   const summary = summarize(op);
   return (
-    `<h3 class="detail-name">${name}` +
+    // A doorway byte's cell already opens with its own byte, larger.
+    `<h2 class="detail-name">` +
+    (op.prefixFor?.length ? '' : `<span class="detail-op">${specLabel(op)}</span>`) +
+    name +
     (op.immediateArgs ? ` <span class="immediate-args">${op.immediateArgs}</span>` : '') +
-    `</h3>` +
+    `</h2>` +
     (summary ? `<p class="detail-summary">${escapeHtml(summary)}</p>` : '')
   );
 }
@@ -559,7 +576,15 @@ export function renderTags(op: Opcode): string {
           `${escapeHtml(tag.label)}</button>`,
       )
       .join('') +
-    `</p>`
+    `</p>` +
+    // The chips are buttons, and anything that reads the page as a document
+    // throws buttons away — which left a Properties heading with nothing under
+    // it, the one section that looked broken rather than absent. The same list
+    // as plain text, off screen, and hidden from screen readers because they
+    // read the chips perfectly well already.
+    `<p class="reading-text" aria-hidden="true">` +
+    escapeHtml(tags.map((tag) => tag.label).join(', ')) +
+    `.</p>`
   );
 }
 
