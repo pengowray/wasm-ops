@@ -415,26 +415,36 @@ function start(
     }
 
     captionWhat.innerHTML = what;
-    onlyButton.hidden = !onlyKeys && !state.keys.length;
+    // Never offered where pressing it would do nothing.
+    onlyButton.hidden = !onlyKeys && !narrowTarget().length;
     onlyButton.setAttribute('aria-pressed', String(Boolean(onlyKeys)));
     caption.hidden = !what && onlyButton.hidden;
   }
 
   highlighter.onChange(updateCaption);
 
+  /**
+   * What "only these" would keep, given what is lit.
+   *
+   * Narrowing to a single cell is not narrowing, it is hiding the page, so a
+   * lone selection is not an offer — unless a search is running, in which case
+   * the reader who opened one of the results and then asked for only these
+   * meant the results. The selection is where they are, not what they asked
+   * about.
+   */
+  function narrowTarget(): string[] {
+    const state = highlighter.state();
+    const lit = state.kind === 'pin' && hits.length ? hits.map((hit) => hit.op.id) : state.keys;
+    return lit.length < 2 ? [] : lit;
+  }
+
   /** Keeps whatever is lit and hides the rest; pressed again, puts it back. */
   function toggleOnly(): void {
     if (onlyKeys) {
       onlyKeys = null;
     } else {
-      const state = highlighter.state();
-      // Narrowing to a single cell is not narrowing, it is hiding the page. A
-      // reader who searched, opened one of the results and then asked for only
-      // these meant the results — the selection is where they are, not what
-      // they asked about.
-      const lit =
-        state.kind === 'pin' && hits.length ? hits.map((hit) => hit.op.id) : state.keys;
-      if (lit.length < 2) return;
+      const lit = narrowTarget();
+      if (!lit.length) return;
       onlyKeys = new Set(lit);
     }
     applyMatch();
@@ -449,7 +459,7 @@ function start(
     if (event.metaKey || event.ctrlKey || event.altKey) return;
     const active = document.activeElement;
     if (active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement) return;
-    if (event.key === 'f' || event.key === 'F') {
+    if (event.key === 'l' || event.key === 'L') {
       event.preventDefault();
       toggleOnly();
     } else if (event.key === 'Escape' && onlyKeys) {
@@ -492,7 +502,7 @@ function start(
    * A query no longer takes the chart apart. It lights what it found and lists
    * what it found, and the chart stays where it was — which is the difference
    * between "39 of 810" and being able to see that those 39 are the whole left
-   * edge of one table. The reader who does want the rest gone presses F, which
+   * edge of one table. The reader who does want the rest gone presses L, which
    * is the same gesture for a search as for anything else lit.
    *
    * Unanimated by default: this runs while the reader is still typing, and

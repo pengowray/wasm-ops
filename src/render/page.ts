@@ -193,7 +193,7 @@ export function renderPage(
 	<p class="map-caption" id="map-caption" role="status" hidden>
 		<span class="map-caption-what"></span>
 		<button type="button" class="ghost map-only" id="map-only"
-			title="Show only these and hide the rest (F)">Only these <kbd>F</kbd></button>
+			title="Show only these and hide the rest (L)">Only these <kbd>L</kbd></button>
 	</p>
 </aside>
 

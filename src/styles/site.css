@@ -566,9 +566,42 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--accent);
 }
 
-.map-only { padding: 0 .35rem; font-size: .7rem; }
+/*
+ * The caption is one line of running text and has to behave like one.
+ *
+ * Instruction names are long and unbreakable — `i32.trunc_sat_f64_u` — and in
+ * the rail there are 130 pixels for them, so it wraps, and breaks inside a word
+ * when a word is wider than the column. And it stops after three lines: this is
+ * a label on the map, and a label that can grow without limit is not a label,
+ * it is a paragraph that happens to be in the wrong place. Whatever is too long
+ * to fit is in the panel beside it, in full.
+ */
+.map-caption-what {
+	min-width: 0;
+	overflow: hidden;
+	overflow-wrap: anywhere;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+}
+
+/*
+ * Quiet until it is doing something. It sits under the map on every highlight,
+ * which is most of the time, and a bordered button there reads as a thing that
+ * needs attending to rather than as an offer. Pressed, it is the loudest thing
+ * on the rail, because then it is the reason three quarters of the chart is
+ * missing.
+ */
+button.map-only {
+	padding: 0 .3rem;
+	font-size: .7rem;
+	color: var(--fg-faint);
+	border-color: transparent;
+}
+button.map-only:hover { color: var(--fg); border-color: var(--rule); }
 .map-only[hidden] { display: none; }
-.map-only[aria-pressed='true'] {
+button.map-only[aria-pressed='true'] {
 	color: var(--accent-contrast);
 	background: var(--accent);
 	border-color: var(--accent);
@@ -577,6 +610,28 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-family: 'Source Code Pro', monospace;
 	font-size: .9em;
 	opacity: .7;
+}
+
+@media (min-width: 1220px) {
+	/*
+	 * The caption must not move the chart by a single pixel.
+	 *
+	 * The rail is a `max-content` column, sized by the widest thing in it, so a
+	 * caption with any width of its own would widen the rail, narrow the chart,
+	 * reflow the cells — and, since the caption reports what is highlighted,
+	 * potentially change what it says next. A layout that feeds back into its
+	 * own input does not settle.
+	 *
+	 * `width: 0` contributes nothing to sizing the column; `min-width: 100%`
+	 * then fills whatever width the column turned out to be. The percentage
+	 * cannot be resolved while the column is being sized — that is the point —
+	 * so it is ignored there and applied afterwards.
+	 */
+	.map-caption {
+		width: 0;
+		min-width: 100%;
+	}
+	.map-only { max-width: 100%; }
 }
 
 /* Above the chart: the sections run across, to spend width rather than height. */
