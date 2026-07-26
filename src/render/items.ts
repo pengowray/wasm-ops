@@ -34,6 +34,21 @@ function hexByte(byte: number): string {
 }
 
 /**
+ * A run of bytes for the encoding breakdown, each written out in full.
+ *
+ * `FD 87 02` is the convention for a byte dump and assumes you already know
+ * you are reading one. This block is where someone finds that out, so each
+ * byte says so: `0xFD 0x87 0x02`. The `0x` is set back in grey — it is
+ * notation rather than value, and three of them at full strength would be as
+ * much ink as the bytes.
+ */
+function byteRun(bytes: number[]): string {
+  return bytes
+    .map((byte) => `<span class="enc-0x">0x</span>${hexByte(byte)}`)
+    .join(' ');
+}
+
+/**
  * How an instruction is encoded.
  *
  * Shows the actual bytes once, split into their parts with a caption under
@@ -56,7 +71,7 @@ export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
     // the only cell in the chart whose whole meaning is "a number follows" —
     // so the slot that number goes in is drawn rather than described, as an
     // open-ended box in the sub-opcode's own colour and face.
-    groups.push(group(hexByte(op.code), 'prefix byte', 'prefix'));
+    groups.push(group(byteRun([op.code]), 'prefix byte', 'prefix'));
     groups.push(
       group(
         'n',
@@ -65,14 +80,14 @@ export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
       ),
     );
   } else if (!op.prefix) {
-    groups.push(group(hexByte(op.code), 'opcode byte'));
+    groups.push(group(byteRun([op.code]), 'opcode byte'));
   } else {
-    groups.push(group(op.prefix, 'prefix byte', 'prefix'));
+    groups.push(group(byteRun([op.bytes[0]!]), 'prefix byte', 'prefix'));
 
     const encoded = op.bytes.slice(1);
     groups.push(
       group(
-        encoded.map(hexByte).join(' '),
+        byteRun(encoded),
         `sub-opcode ${specValue(op.code)}` +
           `<span class="enc-sub">LEB128, ${encoded.length} byte${
             encoded.length > 1 ? 's' : ''
@@ -488,8 +503,9 @@ export function renderHeading(op: Opcode): string {
     return (
       `<h2 class="detail-name">${specLabel(op)}` +
       `<span class="detail-role">prefix byte</span></h2>` +
-      `<p class="detail-summary">Not an instruction. A sub-opcode follows, and the ` +
-      `two bytes together name one in a table of its own.</p>`
+      `<p class="detail-summary">Not an instruction on its own. It marks the start ` +
+      `of a longer opcode: the sub-opcode after it selects an instruction from a ` +
+      `separate table.</p>`
     );
   }
 

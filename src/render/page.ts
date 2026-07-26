@@ -188,13 +188,9 @@ export function renderPage(
 		<summary>Map</summary>
 		<div class="map" id="map"></div>
 	</details>
-	<!-- What the map is currently answering, in words. The squares say where
-	     the matches are and how many; only this says what the question was. -->
-	<p class="map-caption" id="map-caption" role="status" hidden>
-		<span class="map-caption-what"></span>
-		<button type="button" class="ghost map-only" id="map-only"
-			title="Show only these and hide the rest (L)">Only these <kbd>L</kbd></button>
-	</p>
+	<!-- What the map is currently answering goes into the map's own tooltip
+	     rather than onto the page beneath it; see describeHighlight in the
+	     client. Text in this rail sets the rail's width, and so the chart's. -->
 </aside>
 
 <main id="chart" class="chart" data-layout="${options.layout}" data-group="${options.group}" data-cols="${options.columns}" data-colour="proposal">

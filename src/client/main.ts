@@ -17,7 +17,7 @@ import {
   type ViewOptions,
 } from '../model/view.ts';
 import { prefixLine, prefixTable, type PrefixTable } from '../model/prefixes.ts';
-import { plainName, renderItem, specLabel } from '../render/items.ts';
+import { plainName, renderItem, specText } from '../render/items.ts';
 import { initAbout } from './about.ts';
 import { flip } from './flip.ts';
 import { Highlighter, type HighlightState } from './highlight.ts';
@@ -359,10 +359,6 @@ function start(
     options.match = onlyKeys ? (op: Opcode) => onlyKeys!.has(op.id) : undefined;
   }
 
-  const caption = document.getElementById('map-caption');
-  const captionWhat = caption?.querySelector<HTMLElement>('.map-caption-what');
-  const onlyButton = document.getElementById('map-only');
-
   /** The label a property chip is drawn with, for a tag id. */
   function tagLabel(tag: string): string {
     const chip = document.querySelector<HTMLElement>(`.tag[data-tag="${CSS.escape(tag)}"]`);
@@ -374,54 +370,43 @@ function start(
   }
 
   /**
-   * The map in words.
+   * The map in words — as the map's own tooltip, not as a line under it.
    *
-   * The squares say where the matches are and roughly how many; nothing said
-   * what the question was, so a scatter of lit squares three seconds after the
-   * pointer moved was unreadable — you could see an answer without knowing what
-   * had been asked.
+   * It began as a line on the page, and could not stay there. The rail is sized
+   * by its widest child, so any text in it sets the width of the whole column,
+   * which sets the width of the chart. Text that changes as the pointer moves
+   * therefore resizes the chart as the pointer moves, and since this text
+   * reports what is highlighted, the chart it resized fed back into what it
+   * said next. Every fix for that was a fight with intrinsic sizing.
+   *
+   * A tooltip has no width of its own to give away. It is a worse place for a
+   * label and a much better place than one that moves the page — and the thing
+   * it labels, the map, is already the thing the pointer is on when the
+   * question is worth asking.
    */
-  function updateCaption(state: HighlightState): void {
-    if (!caption || !captionWhat || !onlyButton) return;
+  function describeHighlight(state: HighlightState): void {
+    if (!mapEl) return;
 
     let what = '';
     if (state.kind === 'pin' && state.key) {
       const op = byId.get(state.key);
-      if (op) {
-        what =
-          `<span class="map-caption-lede">Selected</span> ${specLabel(op)} ` +
-          `<span class="map-caption-name">${plainName(op)}</span>`;
-      }
+      if (op) what = `Selected ${specText(op)} ${plainName(op)}`;
     } else if (state.kind === 'tag' && state.tag) {
-      what =
-        `<span class="map-caption-lede">Tagged</span> ` +
-        `<span class="map-caption-name">${tagLabel(state.tag)}</span> ` +
-        `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
+      what = `Tagged ${tagLabel(state.tag)} — ${countLabel(state.keys.length)}`;
     } else if (state.kind === 'hover' && state.token) {
-      what =
-        `<span class="map-caption-lede">Sharing</span> ` +
-        `<span class="map-caption-name">${state.token}</span> ` +
-        `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
+      what = `Sharing ${state.token} — ${countLabel(state.keys.length)}`;
     } else if (state.kind === 'found') {
-      what =
-        `<span class="map-caption-lede">Found</span> ` +
-        `<span class="map-caption-name">${state.query ?? ''}</span> ` +
-        `<span class="map-caption-count">${countLabel(state.keys.length)}</span>`;
+      what = `Found ${state.query ?? ''} — ${countLabel(state.keys.length)}`;
     }
 
-    if (onlyKeys) {
-      what +=
-        `<span class="map-caption-only">showing only ${countLabel(onlyKeys.size)}</span>`;
-    }
+    const lines = [what];
+    if (onlyKeys) lines.push(`Showing only these ${onlyKeys.size}. L or Escape to show the rest.`);
+    else if (narrowTarget().length) lines.push('Press L to show only these.');
 
-    captionWhat.innerHTML = what;
-    // Never offered where pressing it would do nothing.
-    onlyButton.hidden = !onlyKeys && !narrowTarget().length;
-    onlyButton.setAttribute('aria-pressed', String(Boolean(onlyKeys)));
-    caption.hidden = !what && onlyButton.hidden;
+    mapEl.title = lines.filter(Boolean).join('\n');
   }
 
-  highlighter.onChange(updateCaption);
+  highlighter.onChange(describeHighlight);
 
   /**
    * What "only these" would keep, given what is lit.
@@ -450,10 +435,8 @@ function start(
     applyMatch();
     updateSearchCount();
     relayout();
-    updateCaption(highlighter.state());
+    describeHighlight(highlighter.state());
   }
-
-  onlyButton?.addEventListener('click', toggleOnly);
 
   document.addEventListener('keydown', (event) => {
     if (event.metaKey || event.ctrlKey || event.altKey) return;

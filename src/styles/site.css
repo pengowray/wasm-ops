@@ -539,100 +539,6 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .map-fold[open] > summary::after { transform: translateY(1px) rotate(225deg); }
 .map-fold > summary:hover { color: var(--fg); }
 
-/*
- * The map in words.
- *
- * The squares answer where and how many; nothing answered what. A scatter of
- * lit squares three seconds after the pointer moved on is an answer to a
- * forgotten question, so the question is now written under it — and where there
- * is no question there is no line at all.
- */
-.map-caption {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: baseline;
-	gap: .2rem .5rem;
-	margin: .3rem 0 0;
-	font-size: .75rem;
-	color: var(--fg-dim);
-}
-.map-caption[hidden] { display: none; }
-.map-caption-lede { color: var(--fg-faint); }
-.map-caption-name { font-weight: 700; color: var(--fg); }
-.map-caption-count { color: var(--fg-faint); }
-.map-caption-only {
-	display: block;
-	width: 100%;
-	color: var(--accent);
-}
-
-/*
- * The caption is one line of running text and has to behave like one.
- *
- * Instruction names are long and unbreakable — `i32.trunc_sat_f64_u` — and in
- * the rail there are 130 pixels for them, so it wraps, and breaks inside a word
- * when a word is wider than the column. And it stops after three lines: this is
- * a label on the map, and a label that can grow without limit is not a label,
- * it is a paragraph that happens to be in the wrong place. Whatever is too long
- * to fit is in the panel beside it, in full.
- */
-.map-caption-what {
-	min-width: 0;
-	overflow: hidden;
-	overflow-wrap: anywhere;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
-	line-clamp: 3;
-}
-
-/*
- * Quiet until it is doing something. It sits under the map on every highlight,
- * which is most of the time, and a bordered button there reads as a thing that
- * needs attending to rather than as an offer. Pressed, it is the loudest thing
- * on the rail, because then it is the reason three quarters of the chart is
- * missing.
- */
-button.map-only {
-	padding: 0 .3rem;
-	font-size: .7rem;
-	color: var(--fg-faint);
-	border-color: transparent;
-}
-button.map-only:hover { color: var(--fg); border-color: var(--rule); }
-.map-only[hidden] { display: none; }
-button.map-only[aria-pressed='true'] {
-	color: var(--accent-contrast);
-	background: var(--accent);
-	border-color: var(--accent);
-}
-.map-only kbd {
-	font-family: 'Source Code Pro', monospace;
-	font-size: .9em;
-	opacity: .7;
-}
-
-@media (min-width: 1220px) {
-	/*
-	 * The caption must not move the chart by a single pixel.
-	 *
-	 * The rail is a `max-content` column, sized by the widest thing in it, so a
-	 * caption with any width of its own would widen the rail, narrow the chart,
-	 * reflow the cells — and, since the caption reports what is highlighted,
-	 * potentially change what it says next. A layout that feeds back into its
-	 * own input does not settle.
-	 *
-	 * `width: 0` contributes nothing to sizing the column; `min-width: 100%`
-	 * then fills whatever width the column turned out to be. The percentage
-	 * cannot be resolved while the column is being sized — that is the point —
-	 * so it is ignored there and applied afterwards.
-	 */
-	.map-caption {
-		width: 0;
-		min-width: 100%;
-	}
-	.map-only { max-width: 100%; }
-}
 
 /* Above the chart: the sections run across, to spend width rather than height. */
 .map {
@@ -1660,9 +1566,16 @@ button.map-only[aria-pressed='true'] {
 	line-height: 1.25;
 	border-bottom: 2px solid currentColor;
 }
-.enc-group[data-part='prefix'] .enc-bytes { color: var(--enc-prefix); }
+/* A byte is a byte. A single-byte instruction's opcode was drawn in the text
+   colour, which made it the one byte on the page not in the byte colour — and
+   the same value one row down in the chart, or as `0x28` in the heading above
+   it, was orange. Two colours for one number. */
+.enc-group[data-part='prefix'] .enc-bytes,
+.enc-group[data-part='opcode'] .enc-bytes { color: var(--enc-prefix); }
 .enc-group[data-part='sub'] .enc-bytes { color: var(--enc-sub); }
-.enc-group[data-part='opcode'] .enc-bytes { color: var(--fg); }
+
+/* Notation, not value. Set back so the bytes are what you read. */
+.enc-0x { color: var(--fg-faint); }
 
 /* Immediate operands are not a fixed run of bytes, so they are drawn as an
    open-ended slot rather than a solid one. */

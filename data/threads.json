@@ -1270,7 +1270,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>32-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
@@ -1290,7 +1290,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>64-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
@@ -1311,7 +1311,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>8-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
@@ -1332,7 +1332,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>16-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
@@ -1353,7 +1353,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>8-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
@@ -1374,7 +1374,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>16-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
@@ -1395,7 +1395,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>32-bit exchange: nothing is computed from the value that was read — the operand is written in its place. The specification writes this operator's modify step as <code>nop</code>, which is where the word comes from; it does not mean the instruction does nothing</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "immediateArgs": "m",
       "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
       "proposal": "threads"
