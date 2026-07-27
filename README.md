@@ -32,7 +32,7 @@ cannot drift apart.
 ```bash
 npm install
 npm run build     # generate dist/
-npm run serve     # preview it at http://localhost:8080
+npm run serve     # preview it at http://localhost:10303
 npm run verify    # check the data
 npm run typecheck
 ```

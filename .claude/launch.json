@@ -5,7 +5,7 @@
       "name": "wasm-ops",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "serve"],
-      "port": 8080,
+      "port": 10303,
       "autoPort": true
     }
   ]

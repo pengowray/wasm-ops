@@ -9,7 +9,10 @@ import { readFile } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 
 const ROOT = join(new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'), 'dist');
-const PORT = Number(process.env['PORT'] ?? 8080);
+// Not 8080. That is the first port everything else on a machine reaches for, so
+// a stale server of someone else's answers on it and you spend a while reading
+// a page this build did not produce.
+const PORT = Number(process.env['PORT'] ?? 10303);
 
 const TYPES: Record<string, string> = {
   '.html': 'text/html; charset=utf-8',
