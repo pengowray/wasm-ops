@@ -282,10 +282,10 @@ function summarise(op: Opcode, sections: Section[]): string {
     `The first byte (prefix) of a multi-byte opcode. While the prefix is always ` +
     `a single byte, the sub-opcode which follows is variable-length: an unsigned ` +
     `32-bit integer stored with <i>Little Endian Base 128</i> (LEB128) encoding. ` +
-    `The prefix and sub-opcode together form one opcode. An opcode is 2-bytes ` +
-    `when the sub-opcode has a value 0 to 127, and 3-bytes when it reaches 128 ` +
-    `(up to a theoretical 16,383), at which point variable encoding begins to ` +
-    `differ from typical integer representations.` +
+    `For multi-byte opcodes, the prefix and sub-opcode together form an opcode. An opcode is 2-bytes ` +
+    `when the sub-opcode has a value 0 to 127, and 3-bytes when it reaches 128, ` +
+    `at which point variable encoding begins to ` +
+    `differ from typical integer representations. The theoretical maximum for a 2-byte sub-opcode (in a 3-byte opcode) is 16,383.` +
     (opens.length
       ? ` The instructions (opcodes) prefixed with ${byte} are listed in ${sectionNames(opens)}.`
       : '')
