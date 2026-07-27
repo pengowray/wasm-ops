@@ -79,19 +79,31 @@ function start(
   if (themeButton) initTheme(themeButton);
 
   /*
-   * The docked panel and the table's column headings stick to the top of the
-   * window, and so does the toolbar once pinned. They need to know how tall it
-   * is to sit below it rather than behind it, and it wraps to a different
-   * number of lines at different widths, so the height is measured rather than
-   * assumed.
+   * How much of the top of the window is spoken for.
+   *
+   * The search band always holds station; the toolbar does so only while pinned
+   * or soft-pinned. The docked panel, the map rail and the table's sticky column
+   * headings all have to start below whichever of them are up — and both wrap to
+   * a different number of lines at different widths, so this is measured rather
+   * than assumed.
    */
-  const trackToolbarHeight = () => {
-    const height = toolbar.classList.contains('toolbar-pinned')
-      ? toolbar.getBoundingClientRect().height
-      : 0;
-    document.documentElement.style.setProperty('--toolbar-h', `${Math.round(height)}px`);
+  const searchbar = document.getElementById('searchbar');
+  const trackStuckHeights = () => {
+    const holding =
+      toolbar.classList.contains('toolbar-pinned') ||
+      toolbar.classList.contains('toolbar-softpinned');
+    const style = document.documentElement.style;
+    style.setProperty(
+      '--toolbar-h',
+      `${holding ? Math.round(toolbar.getBoundingClientRect().height) : 0}px`,
+    );
+    style.setProperty(
+      '--search-h',
+      `${searchbar ? Math.round(searchbar.getBoundingClientRect().height) : 0}px`,
+    );
   };
-  new ResizeObserver(trackToolbarHeight).observe(toolbar);
+  new ResizeObserver(trackStuckHeights).observe(toolbar);
+  if (searchbar) new ResizeObserver(trackStuckHeights).observe(searchbar);
 
   // The toolbar is unpinned by default; the choice is remembered.
   const pin = document.getElementById('pin-toolbar');
@@ -99,7 +111,7 @@ function start(
     const setPinned = (on: boolean) => {
       toolbar.classList.toggle('toolbar-pinned', on);
       pin.setAttribute('aria-pressed', String(on));
-      trackToolbarHeight();
+      trackStuckHeights();
     };
     try {
       setPinned(localStorage.getItem('pinToolbar') === 'true');
@@ -127,9 +139,9 @@ function start(
     if (!panel.openKey) return;
     const target = event.target as Element;
     if (target.closest('#panel') || target.closest('.cell') || target.closest('.map-cell')) return;
-    // The search box moved out of the toolbar and into the masthead; typing
-    // into it is not a click on the page behind the sheet.
-    if (target.closest('#toolbar') || target.closest('.control-search')) return;
+    // The search box has a band of its own now; typing into it is not a click
+    // on the page behind the sheet.
+    if (target.closest('#toolbar') || target.closest('#searchbar')) return;
     panel.close();
   });
 
@@ -457,6 +469,25 @@ function start(
   let hits: SearchHit[] = [];
 
   /**
+   * Soft pin: the toolbar holds station for as long as a search is going on,
+   * whatever the pin button says.
+   *
+   * A search is going on if the cursor is in the box or there is a query
+   * lighting up the chart — either way the reader is working through the
+   * results, and the controls that narrow them (the sections, the proposals,
+   * the arrangement) are the ones they are most likely to want next. It is
+   * deliberately not the pin: the button records a preference, and a preference
+   * should not be quietly rewritten by something the reader did for another
+   * reason. When the search ends, the toolbar goes back to whatever they chose.
+   */
+  function syncSoftPin(): void {
+    const searching =
+      (searchInput?.value.trim() ?? '') !== '' || document.activeElement === searchInput;
+    toolbar.classList.toggle('toolbar-softpinned', searching);
+    trackStuckHeights();
+  }
+
+  /**
    * The running count, and the empty state.
    *
    * Counted against what the other filters leave rather than against the whole
@@ -492,6 +523,7 @@ function start(
     highlighter.found(new Set(hits.map((hit) => hit.op.id)), query);
     results?.show(document.activeElement === searchInput ? hits : []);
     updateSearchCount();
+    syncSoftPin();
 
     // Shareable, and survives a reload: the URL carries the query alongside any
     // selected instruction in the hash.
@@ -527,9 +559,15 @@ function start(
 
   results = searchInput && resultsEl ? new Results(resultsEl, searchInput, reveal) : null;
 
-  searchInput?.addEventListener('focus', () => results?.show(hits));
+  searchInput?.addEventListener('focus', () => {
+    results?.show(hits);
+    syncSoftPin();
+  });
   // A click inside the list is handled on mousedown, before this runs.
-  searchInput?.addEventListener('blur', () => results?.hide());
+  searchInput?.addEventListener('blur', () => {
+    results?.hide();
+    syncSoftPin();
+  });
 
   searchInput?.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {

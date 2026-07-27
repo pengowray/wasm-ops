@@ -35,9 +35,21 @@
 	--enc-prefix: #9a5b00;
 	--enc-sub: #1a6f7d;
 
-	/* Set by the client: the height of the toolbar when it is pinned, zero when
-	   it is not. Everything else that sticks to the top offsets by it. */
+	/*
+	 * Set by the client.
+	 *
+	 * `--toolbar-h` is the height of the toolbar while it is holding station —
+	 * pinned by the button, or soft-pinned by a search in progress — and zero
+	 * when it is not. The search band offsets by it, and so tucks under the
+	 * controls exactly when there are controls to tuck under.
+	 *
+	 * `--search-h` is the search band, which always holds station. `--stuck-h`
+	 * is the two together: how much of the top of the window is spoken for, and
+	 * therefore what anything else that sticks has to start below.
+	 */
 	--toolbar-h: 0px;
+	--search-h: 0px;
+	--stuck-h: calc(var(--toolbar-h) + var(--search-h));
 
 	/* The map's squares are tiny, so its highlights are stronger than the
 	   chart's rather than the same colours scaled down. */
@@ -196,8 +208,6 @@ h1 { font-size: 1.5rem; margin: 0; }
 }
 .meta-sep { color: var(--rule); }
 
-/* The search box takes the far end of the title line, where About was. */
-.site-header .control-search { margin-left: auto; }
 
 .lede { max-width: 68ch; color: var(--fg-dim); font-size: .95rem; }
 .lede p { margin: .4rem 0; }
@@ -272,6 +282,38 @@ h1 { font-size: 1.5rem; margin: 0; }
 .control-actions { margin-left: auto; gap: .4rem; }
 
 /* ----------------------------------------------------------------- search */
+
+/*
+ * A band of its own, always holding station at the top of the window.
+ *
+ * Below the toolbar in the document and offset by its height, so the two stack
+ * in the order they are read whenever both are up. Its own z-index is a step
+ * under the toolbar's, so the "Show" menu — which hangs down out of the toolbar
+ * and over this band — passes in front rather than behind.
+ */
+.searchbar {
+	position: sticky;
+	top: var(--toolbar-h);
+	z-index: 44;
+	align-items: center;
+	gap: .6rem;
+	margin: -.5rem 0 1rem;
+	padding: .4rem .8rem;
+	background: var(--surface);
+	border: 1px solid var(--rule-soft);
+	border-radius: var(--radius);
+	font-size: .85rem;
+}
+
+/* Given a band to itself the box can have the width of one, rather than the
+   eleven rems it was allowed as one control among six. */
+.searchbar .control-search { flex: 1; min-width: 0; }
+.searchbar #search { flex: 1; width: auto; min-width: 6rem; max-width: 32rem; }
+
+/* The list is measured from the control, which now spans the window, and a
+   result is three short columns. Wide enough for the longest of them and no
+   wider: a menu of five items across fourteen hundred pixels is a banner. */
+.searchbar .search-results { width: min(100%, 34rem); }
 
 /* The list hangs off the box, so the box is what it is measured from. */
 .control-search { gap: .4rem; position: relative; }
@@ -392,7 +434,16 @@ h1 { font-size: 1.5rem; margin: 0; }
 	color: var(--fg-faint);
 }
 
-.toolbar.toolbar-pinned {
+/*
+ * Pinned by the button, or soft-pinned for as long as a search is going on —
+ * the cursor is in the box, or there is a query lighting up the chart. The two
+ * are the same treatment on purpose: a reader who is searching is reading the
+ * chart *through* the box, and the box scrolling away mid-answer is the one
+ * time the toolbar has to stay. Soft-pinning leaves the button alone, so
+ * whatever the reader chose is still what they get back when they stop.
+ */
+.toolbar.toolbar-pinned,
+.toolbar.toolbar-softpinned {
 	position: sticky;
 	top: 0;
 	z-index: 45;
@@ -711,9 +762,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 
 	.map-dock {
 		position: sticky;
-		top: calc(var(--toolbar-h) + 1rem);
+		top: calc(var(--stuck-h) + 1rem);
 		margin: 0;
-		max-height: calc(100dvh - var(--toolbar-h) - 2rem);
+		max-height: calc(100dvh - var(--stuck-h) - 2rem);
 		overflow-y: auto;
 		/*
 		 * Setting either axis to something other than `visible` makes the other
@@ -1262,7 +1313,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  */
 .chart[data-layout='table'][data-group='none'] .tablehead {
 	position: sticky;
-	top: var(--toolbar-h);
+	top: var(--stuck-h);
 	z-index: 5;
 }
 
@@ -1474,12 +1525,12 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	position: fixed;
 	/* Starts below a pinned toolbar and is shortened to match. The toolbar
 	   paints above the panel, so without this its top rows sit behind it. */
-	top: var(--toolbar-h);
+	top: var(--stuck-h);
 	right: 0;
 	z-index: 30;
 	flex-direction: column;
 	width: min(28rem, 92vw);
-	height: calc(100dvh - var(--toolbar-h));
+	height: calc(100dvh - var(--stuck-h));
 	padding: 0 1.25rem 1.5rem;
 	background: var(--bg);
 	border-left: 1px solid var(--rule);
@@ -1583,10 +1634,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 		position: sticky;
 		/* Below a pinned toolbar, not behind it — and shortened to match, so
 		   the bottom of the panel stays on screen. */
-		top: calc(var(--toolbar-h) + 1rem);
+		top: calc(var(--stuck-h) + 1rem);
 		width: auto;
 		height: auto;
-		max-height: calc(100dvh - var(--toolbar-h) - 2rem);
+		max-height: calc(100dvh - var(--stuck-h) - 2rem);
 		padding: 0 0 1rem 1.25rem;
 		border-left: 1px solid var(--rule-soft);
 		box-shadow: none;

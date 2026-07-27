@@ -98,23 +98,6 @@ export function renderPage(
 <header class="site-header">
 	<h1>WebAssembly Opcodes</h1>
 	<p class="byline">by Pengo Wray</p>
-	<!-- The fastest way to the one instruction someone came for, so it is the one
-	     control at the top of the page rather than the first item of a band of
-	     settings below it. It takes the slot the About button had; About is a
-	     link on the line underneath, where it costs a word instead of a button. -->
-	<div class="control control-search js-only">
-		<label for="search">Search</label>
-		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
-			autocomplete="off" autocorrect="off" spellcheck="false"
-			role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list"
-			aria-describedby="search-count"
-			title="Searches names, opcodes, properties and descriptions. All words must match. Bytes match in hex or decimal: 11, 0x11 and 17 all find call_indirect.">
-		<span class="search-count" id="search-count" role="status"></span>
-		<!-- The ranked answer. The chart lights every match; this says which one
-		     the query most likely meant. -->
-		<ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
-	</div>
-
 	<!-- An ordinary link, not a button, and not hidden without JavaScript: with
 	     the script running the hash opens the dialog, and without it the same
 	     hash lands on the very same content, which is then an ordinary block at
@@ -183,6 +166,34 @@ export function renderPage(
 		</button>
 	</div>
 </form>
+
+<!--
+	The search box, in a band of its own that pins itself.
+
+	It is the fastest way to the one instruction someone came for, and unlike the
+	rest of the toolbar it is wanted *while* reading rather than before: the chart
+	is several screens tall, and a box that has scrolled off the top is a box you
+	have to leave the chart to reach. So this band always sticks, whatever the pin
+	button says about the band above it.
+
+	Where it sticks to is the toolbar's height while the toolbar is holding
+	station, and zero otherwise — so it tucks under the controls when they are
+	there and takes the top of the window when they are not. One offset, no cases.
+-->
+<div class="searchbar js-only" id="searchbar">
+	<div class="control control-search">
+		<label for="search">Search</label>
+		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
+			autocomplete="off" autocorrect="off" spellcheck="false"
+			role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list"
+			aria-describedby="search-count"
+			title="Searches names, opcodes, properties and descriptions. All words must match. Bytes match in hex or decimal: 11, 0x11 and 17 all find call_indirect.">
+		<span class="search-count" id="search-count" role="status"></span>
+		<!-- The ranked answer. The chart lights every match; this says which one
+		     the query most likely meant. -->
+		<ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
+	</div>
+</div>
 
 <p class="search-empty js-only" id="search-empty" hidden>
 	Nothing matches <strong class="search-empty-term"></strong>.
