@@ -1307,7 +1307,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .tablehead {
 	display: grid;
 	grid-template-columns:
-		minmax(7rem, 8rem) minmax(9rem, 1.6fr) minmax(7rem, .7fr) minmax(6rem, .6fr);
+		minmax(7rem, 8rem) minmax(9rem, 1.6fr) minmax(6rem, .6fr) minmax(8rem, .7fr);
 	gap: .25rem .9rem;
 	align-items: baseline;
 	text-align: left;
@@ -1370,7 +1370,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .chart[data-layout='table'] .op-x { font-size: 1em; }
 
 /* Set in the text face rather than the code face: it is a fact about the
-   instruction, not part of it. */
+   instruction, not part of it. Last of the four columns, after the category:
+   the two are both notes about the row rather than the row itself, and of the
+   two the category is the one a reader scans down. */
 .chart[data-layout='table'] .cell-status {
 	display: block;
 	color: var(--fg-dim);
@@ -1418,6 +1420,24 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	.chart[data-layout='table'] .cell:has(.prefix-cell) > * { grid-column: 1; }
 	.chart[data-layout='table'] .cell-name,
 	.chart[data-layout='table'] .cell-status { grid-column: 2; }
+	/*
+	 * Only where it is a caution. Standardised is what a byte is unless told
+	 * otherwise, and on a phone the column is a third line under every row —
+	 * five hundred of them reading "Wasm 2.0", which is the answer to a question
+	 * a reader of a list is not asking, in the place where the exceptions should
+	 * have been standing out.
+	 *
+	 * The ones that remain are set like the summary above them rather than
+	 * louder than it: italic, faint, an aside about the row. On a narrow screen
+	 * a row is a small stack of lines and whichever is darkest is read first,
+	 * which should be the instruction's name.
+	 */
+	.chart[data-layout='table'] .cell[data-status='standard'] .cell-status { display: none; }
+	.chart[data-layout='table'] .cell-status {
+		color: var(--fg-faint);
+		font-style: italic;
+		font-size: .76rem;
+	}
 	/* The category is the one column worth dropping: on a phone it is a word
 	   per row repeating the group heading a few rows above it. */
 	.chart[data-layout='table'] .cell-cat { display: none; }

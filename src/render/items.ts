@@ -305,8 +305,8 @@ export function renderCell(op: Opcode, filtered = false): string {
   const summary = summarize(op);
   const columns =
     `<span class="cell-summary">${summary ? escapeHtml(summary) : ''}</span>` +
-    `<span class="cell-status">${escapeHtml(statusBrief(op))}</span>` +
-    `<span class="cell-cat">${op.name ? CATEGORY_LABELS[categorize(op)] : ''}</span>`;
+    `<span class="cell-cat">${op.name ? CATEGORY_LABELS[categorize(op)] : ''}</span>` +
+    `<span class="cell-status">${escapeHtml(statusBrief(op))}</span>`;
 
   return (
     `<${tag} class="cell"${href}${cellData(op)}${hidden}${label}>` +
@@ -410,8 +410,8 @@ export function renderItem(item: ViewItem): string {
     case 'tablehead':
       return (
         `<div class="tablehead" data-key="${escapeHtml(item.key)}" aria-hidden="true">` +
-        `<span>Opcode</span><span>Instruction</span><span>Status</span>` +
-        `<span>Category</span>` +
+        `<span>Opcode</span><span>Instruction</span><span>Category</span>` +
+        `<span>Status</span>` +
         `</div>`
       );
     case 'corner':
@@ -505,8 +505,8 @@ function statusNote(op: Opcode): StatusNote | undefined {
 }
 
 /**
- * The same standing, in a column: `Wasm 2.0 (2022)`, `Phase 3 (2026)`,
- * `Withdrawn (2022)`.
+ * The same standing, in a column: `Wasm 2.0`, `Proposal (Phase 3)`,
+ * `Withdrawn`.
  *
  * The list shows one instruction per row and had no room to say the thing that
  * most changes what a row means — whether the byte is settled, still moving, or
@@ -518,21 +518,40 @@ function statusNote(op: Opcode): StatusNote | undefined {
  * caution against a page of prose; six hundred of them down a column is a
  * pictogram per row saying what the words beside it already say.
  *
- * "Wasm" rather than "WebAssembly" because the release number and the year are
- * the fact and the word is the same on every standardised row — which is most
- * of them — and a column of it would set the width for nothing.
+ * No year either, which the panel does give. A year is what tells you whether a
+ * proposal is moving or has stalled, and that is a thing to read once about the
+ * one instruction you opened — not six hundred times down a column, where every
+ * row carries four digits that are the same as the four above them and answer a
+ * question nobody asked of a list.
+ *
+ * "Wasm" rather than "WebAssembly" because the release number is the fact and
+ * the word is the same on every standardised row — which is most of them — and
+ * a column of it would set the width for nothing. The proposals say "Proposal"
+ * in full: a bare "Phase 3" under a heading reading Status is a scale with no
+ * name, and phases belong to proposals rather than to the language.
  */
 export function statusBrief(op: Opcode): string {
   // Not an instruction, so it has no standing; and its "proposal" is the group
   // the four doorway bytes are filed under rather than a history.
   if (op.prefixFor?.length) return '';
-  const note = statusNote(op);
-  // The panel writes "Proposal: Phase 3" because the box has to say what kind
-  // of thing it is cautioning about. Under a column headed Status it does not.
-  if (note) return note.label.replace(/^Proposal:\s*/, '');
   const p = proposal(op.proposal);
-  if (!p) return '';
-  return p.standardisedIn ? p.standardisedIn.replace('WebAssembly', 'Wasm') : standing(p);
+
+  switch (op.status) {
+    case 'legacy':
+      return 'Legacy';
+    case 'withdrawn':
+      return 'Withdrawn';
+    case 'dormant':
+      return 'Dormant proposal';
+    case 'proposal':
+      // A proposal that stopped is described by having stopped. Which phase it
+      // stopped at is in the panel; here it would read as progress.
+      if (p?.stage === 'dormant') return 'Dormant proposal';
+      return p?.phase ? `Proposal (Phase ${p.phase})` : 'Proposal';
+    default:
+      if (!p?.standardisedIn) return '';
+      return p.standardisedIn.replace('WebAssembly', 'Wasm').replace(/\s*\(\d{4}\)/, '');
+  }
 }
 
 /**
