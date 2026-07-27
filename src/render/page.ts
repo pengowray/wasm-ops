@@ -98,17 +98,11 @@ export function renderPage(
 <header class="site-header">
 	<h1>WebAssembly Opcodes</h1>
 	<p class="byline">by Pengo Wray</p>
-	<span class="header-meta">
-		<span class="reviewed">Reviewed ${content.meta.reviewed}</span>
-		<button type="button" class="ghost about-open js-only">About &amp; reference</button>
-	</span>
-</header>
-
-<form class="toolbar js-only" id="toolbar" aria-label="Chart display options">
-	<!-- First, because it is the fastest way to the one instruction someone came
-	     for. It filters rather than ranks: the chart stays the chart, with
-	     everything that does not match taken out of it. -->
-	<div class="control control-search">
+	<!-- The fastest way to the one instruction someone came for, so it is the one
+	     control at the top of the page rather than the first item of a band of
+	     settings below it. It takes the slot the About button had; About is a
+	     link on the line underneath, where it costs a word instead of a button. -->
+	<div class="control control-search js-only">
 		<label for="search">Search</label>
 		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
 			autocomplete="off" autocorrect="off" spellcheck="false"
@@ -120,6 +114,19 @@ export function renderPage(
 		     the query most likely meant. -->
 		<ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
 	</div>
+
+	<!-- An ordinary link, not a button, and not hidden without JavaScript: with
+	     the script running the hash opens the dialog, and without it the same
+	     hash lands on the very same content, which is then an ordinary block at
+	     the foot of the page. One target, reachable either way. -->
+	<p class="header-meta">
+		<span class="reviewed">Reviewed ${content.meta.reviewed}</span>
+		<span class="meta-sep" aria-hidden="true">|</span>
+		<a class="about-open" href="#about">About</a>
+	</p>
+</header>
+
+<form class="toolbar js-only" id="toolbar" aria-label="Chart display options">
 	<fieldset class="control">
 		<legend>Arrange</legend>
 		<label><input type="radio" name="layout" value="matrix" checked> Grid</label>

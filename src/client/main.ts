@@ -127,7 +127,9 @@ function start(
     if (!panel.openKey) return;
     const target = event.target as Element;
     if (target.closest('#panel') || target.closest('.cell') || target.closest('.map-cell')) return;
-    if (target.closest('#toolbar')) return;
+    // The search box moved out of the toolbar and into the masthead; typing
+    // into it is not a click on the page behind the sheet.
+    if (target.closest('#toolbar') || target.closest('.control-search')) return;
     panel.close();
   });
 
@@ -315,10 +317,6 @@ function start(
   };
 
   toolbar.addEventListener('change', (event) => {
-    // The search box lives in the toolbar but is not one of its settings: it
-    // fires `change` on blur, and re-laying the chart out for that would move
-    // everything a second time for no reason.
-    if ((event.target as HTMLElement).id === 'search') return;
     const target = event.target as HTMLInputElement;
 
     const current = arrangements[options.layout];

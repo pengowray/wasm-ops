@@ -175,12 +175,29 @@ a:hover { text-decoration: underline; }
 }
 h1 { font-size: 1.5rem; margin: 0; }
 .byline { margin: 0; color: var(--fg-dim); font-weight: 700; font-size: .9rem; }
+
+/*
+ * When the data was last checked, and the way in to everything else — on a line
+ * of its own under the title rather than opposite it. `flex-basis: 100%` is what
+ * breaks the line: the header is a wrapping flex row, so an item that wants the
+ * whole width takes the next one.
+ *
+ * It reads at the size and weight the review date always had. About joined it as
+ * a word in the same sentence rather than as the bordered button it was, since
+ * the two are the same kind of aside about the page and one of them was shouting.
+ */
 .header-meta {
 	display: flex;
+	flex: 0 0 100%;
 	align-items: baseline;
-	gap: .7rem;
-	margin-left: auto;
+	gap: .4rem;
+	margin: .15rem 0 0;
+	font-size: .82rem;
 }
+.meta-sep { color: var(--rule); }
+
+/* The search box takes the far end of the title line, where About was. */
+.site-header .control-search { margin-left: auto; }
 
 .lede { max-width: 68ch; color: var(--fg-dim); font-size: .95rem; }
 .lede p { margin: .4rem 0; }
@@ -456,10 +473,21 @@ h1 { font-size: 1.5rem; margin: 0; }
 .filter-panel .toggle { display: flex; align-items: center; gap: .35rem; cursor: pointer; }
 .filter-presets { grid-auto-flow: column; gap: .4rem; justify-content: start; }
 
-/* Grouping and sorting have no meaning in the byte grid, where position is
-   fixed by the opcode; unassigned slots have no meaning outside it. Controls
-   are dimmed rather than hidden so the toolbar does not reflow as you use it. */
-.toolbar[data-layout='matrix'] [data-needs-grouping],
+/*
+ * Grouping and sorting have no meaning in the byte grid, where a cell's
+ * position is its opcode and nothing else can be done with it. They were dimmed
+ * rather than hidden, so that the toolbar would not reflow as you used it —
+ * which meant the arrangement everyone arrives in, and most people stay in,
+ * spent half its toolbar on two greyed-out sets of controls that do nothing.
+ * Emptiness costs less than that.
+ */
+.toolbar[data-layout='matrix'] [data-needs-grouping] { display: none; }
+
+/*
+ * Unassigned slots, on the other hand, stay and dim. That control lives inside
+ * the "Show" dropdown, which is opened deliberately and read from top to
+ * bottom, and a menu whose items come and go is a menu you cannot learn.
+ */
 .toolbar:not([data-layout='matrix']) [data-matrix-only] {
 	opacity: .4;
 	pointer-events: none;
