@@ -218,8 +218,11 @@ export class Highlighter {
       return;
     }
 
-    // Under the selection rather than instead of it: a reader searches, then
-    // opens one of the results, and both facts stay on the page.
+    // Under the selection rather than instead of it, for a selection made in
+    // the chart: the reader searched, then pointed at one of the matches, and
+    // both facts are worth keeping on the page. Choosing from the result list
+    // is the other case — that answers the search, so the caller puts the found
+    // set out first and only the selection is left.
     if (this.#found) {
       for (const el of document.querySelectorAll<HTMLElement>(
         '.cell[data-key]:not([data-filtered]), .map-cell[data-key]:not([data-filtered])',

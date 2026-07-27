@@ -79,31 +79,54 @@ function start(
   if (themeButton) initTheme(themeButton);
 
   /*
-   * How much of the top of the window is spoken for.
-   *
-   * The search band always holds station; the toolbar does so only while pinned
-   * or soft-pinned. The docked panel, the map rail and the table's sticky column
-   * headings all have to start below whichever of them are up — and both wrap to
-   * a different number of lines at different widths, so this is measured rather
-   * than assumed.
+   * The docked panel and the table's column headings stick to the top of the
+   * window, and so does the toolbar once pinned. They need to know how tall it
+   * is to sit below it rather than behind it, and it wraps to a different
+   * number of lines at different widths, so the height is measured rather than
+   * assumed.
    */
-  const searchbar = document.getElementById('searchbar');
-  const trackStuckHeights = () => {
-    const holding =
-      toolbar.classList.contains('toolbar-pinned') ||
-      toolbar.classList.contains('toolbar-softpinned');
-    const style = document.documentElement.style;
-    style.setProperty(
-      '--toolbar-h',
-      `${holding ? Math.round(toolbar.getBoundingClientRect().height) : 0}px`,
-    );
-    style.setProperty(
-      '--search-h',
-      `${searchbar ? Math.round(searchbar.getBoundingClientRect().height) : 0}px`,
-    );
+  const trackToolbarHeight = () => {
+    const height = toolbar.classList.contains('toolbar-pinned')
+      ? toolbar.getBoundingClientRect().height
+      : 0;
+    document.documentElement.style.setProperty('--toolbar-h', `${Math.round(height)}px`);
   };
-  new ResizeObserver(trackStuckHeights).observe(toolbar);
-  if (searchbar) new ResizeObserver(trackStuckHeights).observe(searchbar);
+  new ResizeObserver(trackToolbarHeight).observe(toolbar);
+
+  /*
+   * The search box lives in the masthead, and rides with the controls whenever
+   * the controls stay put.
+   *
+   * It belongs at the top of the page because it is the fastest way to the one
+   * instruction someone came for — but it is also the only control wanted
+   * *while* reading rather than before, and the masthead scrolls away. So when
+   * the reader pins the toolbar, the box moves into it and stays on screen with
+   * it; unpinned, it goes home. One box, in whichever of the two is there.
+   *
+   * Moving a node blurs anything focused inside it, so the cursor and selection
+   * are put back by hand. That only matters if the pin is pressed mid-query,
+   * which is rare and would be baffling if it swallowed what you were typing.
+   */
+  const searchBox = document.querySelector<HTMLElement>('.control-search');
+  const searchHome = searchBox?.parentElement ?? null;
+
+  function dockSearch(pinned: boolean): void {
+    if (!searchBox || !searchHome) return;
+    const into = pinned ? toolbar : searchHome;
+    if (searchBox.parentElement === into) return;
+
+    const input = searchBox.querySelector<HTMLInputElement>('#search');
+    const focused = document.activeElement === input;
+    const at = focused ? [input!.selectionStart, input!.selectionEnd] : null;
+
+    if (pinned) toolbar.prepend(searchBox);
+    else searchHome.insertBefore(searchBox, searchHome.querySelector('.header-meta'));
+
+    if (focused && input) {
+      input.focus({ preventScroll: true });
+      if (at?.[0] !== null && at?.[1] !== null) input.setSelectionRange(at![0]!, at![1]!);
+    }
+  }
 
   // The toolbar is unpinned by default; the choice is remembered.
   const pin = document.getElementById('pin-toolbar');
@@ -111,7 +134,9 @@ function start(
     const setPinned = (on: boolean) => {
       toolbar.classList.toggle('toolbar-pinned', on);
       pin.setAttribute('aria-pressed', String(on));
-      trackStuckHeights();
+      dockSearch(on);
+      // After the move, so the height it reports is the height it now has.
+      trackToolbarHeight();
     };
     try {
       setPinned(localStorage.getItem('pinToolbar') === 'true');
@@ -139,9 +164,9 @@ function start(
     if (!panel.openKey) return;
     const target = event.target as Element;
     if (target.closest('#panel') || target.closest('.cell') || target.closest('.map-cell')) return;
-    // The search box has a band of its own now; typing into it is not a click
-    // on the page behind the sheet.
-    if (target.closest('#toolbar') || target.closest('#searchbar')) return;
+    // The search box moved out of the toolbar and into the masthead; typing
+    // into it is not a click on the page behind the sheet.
+    if (target.closest('#toolbar') || target.closest('.control-search')) return;
     panel.close();
   });
 
@@ -469,25 +494,6 @@ function start(
   let hits: SearchHit[] = [];
 
   /**
-   * Soft pin: the toolbar holds station for as long as a search is going on,
-   * whatever the pin button says.
-   *
-   * A search is going on if the cursor is in the box or there is a query
-   * lighting up the chart — either way the reader is working through the
-   * results, and the controls that narrow them (the sections, the proposals,
-   * the arrangement) are the ones they are most likely to want next. It is
-   * deliberately not the pin: the button records a preference, and a preference
-   * should not be quietly rewritten by something the reader did for another
-   * reason. When the search ends, the toolbar goes back to whatever they chose.
-   */
-  function syncSoftPin(): void {
-    const searching =
-      (searchInput?.value.trim() ?? '') !== '' || document.activeElement === searchInput;
-    toolbar.classList.toggle('toolbar-softpinned', searching);
-    trackStuckHeights();
-  }
-
-  /**
    * The running count, and the empty state.
    *
    * Counted against what the other filters leave rather than against the whole
@@ -523,7 +529,6 @@ function start(
     highlighter.found(new Set(hits.map((hit) => hit.op.id)), query);
     results?.show(document.activeElement === searchInput ? hits : []);
     updateSearchCount();
-    syncSoftPin();
 
     // Shareable, and survives a reload: the URL carries the query alongside any
     // selected instruction in the hash.
@@ -546,9 +551,22 @@ function start(
     searchTimer = window.setTimeout(() => applySearch(), 110);
   });
 
-  /** Opens an instruction from the result list, wherever the chart has put it. */
+  /**
+   * Opens an instruction from the result list, wherever the chart has put it.
+   *
+   * Choosing a result ends the search, as far as the chart is concerned: the
+   * reader asked which of the matches they meant and then answered it, so the
+   * other thirty-eight stop being lit and this one is the only thing marked.
+   * Leaving them lit meant scrolling to a cell that arrived indistinguishable
+   * from its neighbours — every one of them in the same found colour, with the
+   * selection outline the single quiet difference.
+   *
+   * The query itself stays in the box, so the list is one keystroke away again
+   * and the count still says what it found.
+   */
   function reveal(key: string): void {
     const cell = chart.querySelector<HTMLElement>(`.cell[data-key="${CSS.escape(key)}"]`);
+    highlighter.found(null, '');
     panel.open(key);
     if (cell) {
       highlighter.pin(cell);
@@ -559,15 +577,9 @@ function start(
 
   results = searchInput && resultsEl ? new Results(resultsEl, searchInput, reveal) : null;
 
-  searchInput?.addEventListener('focus', () => {
-    results?.show(hits);
-    syncSoftPin();
-  });
+  searchInput?.addEventListener('focus', () => results?.show(hits));
   // A click inside the list is handled on mousedown, before this runs.
-  searchInput?.addEventListener('blur', () => {
-    results?.hide();
-    syncSoftPin();
-  });
+  searchInput?.addEventListener('blur', () => results?.hide());
 
   searchInput?.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
