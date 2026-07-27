@@ -272,7 +272,7 @@ function start(
           const badge = el.querySelector<HTMLElement>('.group-count');
           const count = el.querySelector('.count-n');
           if (count) count.textContent = String(item.count);
-          if (badge) badge.hidden = item.count === 1;
+          if (badge) badge.hidden = item.count <= 1;
         }
         if (item.kind === 'cell') {
           // A cell filtered out of the byte grid keeps its slot but is blanked.

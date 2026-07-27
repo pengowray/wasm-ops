@@ -1116,7 +1116,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .cell-name { display: inline-block; align-self: center; max-width: 100%; }
 
 /* Extra columns, shown only by the card and table layouts. */
-.cell-summary, .cell-imm, .cell-stack, .cell-cat { display: none; }
+.cell-summary, .cell-status, .cell-cat { display: none; }
 
 /* --------------------------------------------------------------- subgroups */
 
@@ -1307,8 +1307,7 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .tablehead {
 	display: grid;
 	grid-template-columns:
-		minmax(7rem, 8rem) minmax(9rem, 1.3fr) minmax(4rem, .5fr)
-		minmax(9rem, 1.2fr) minmax(6rem, .6fr);
+		minmax(7rem, 8rem) minmax(9rem, 1.6fr) minmax(7rem, .7fr) minmax(6rem, .6fr);
 	gap: .25rem .9rem;
 	align-items: baseline;
 	text-align: left;
@@ -1370,16 +1369,12 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .chart[data-layout='table'] .op,
 .chart[data-layout='table'] .op-x { font-size: 1em; }
 
-.chart[data-layout='table'] .cell-imm {
+/* Set in the text face rather than the code face: it is a fact about the
+   instruction, not part of it. */
+.chart[data-layout='table'] .cell-status {
 	display: block;
-	font-family: Georgia, serif;
-	font-style: italic;
 	color: var(--fg-dim);
-}
-.chart[data-layout='table'] .cell-stack {
-	display: block;
-	font-family: Georgia, serif;
-	color: var(--fg-dim);
+	font-size: .78rem;
 }
 .chart[data-layout='table'] .cell-cat { display: block; color: var(--fg-faint); font-size: .78rem; }
 .chart[data-layout='table'] .cell-summary {
@@ -1390,10 +1385,41 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--fg-faint);
 }
 
-/* Narrow windows cannot carry five columns; the row becomes a stack. */
+/*
+ * Narrow windows cannot carry four columns, so the row folds to two: the byte
+ * on the left, everything about it in a block on the right.
+ *
+ * It used to be written as a single column, which is not what it did. The
+ * summary is placed in column 2 by hand, and asking for column 2 of a
+ * one-column grid makes a second one — so the rows ended up with a wide empty
+ * first column and a narrow strip on the right holding the name, the summary
+ * and the type, each hard against the right-hand edge. The stack was there; it
+ * was just built out of a column that was never declared and so was as wide as
+ * the leftovers.
+ */
 @media (max-width: 800px) {
-	.chart[data-layout='table'] .cell { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+	.chart[data-layout='table'] .cell {
+		grid-template-columns: 5.5rem minmax(0, 1fr);
+		gap: .05rem .7rem;
+		padding: .4rem .5rem;
+	}
 	.tablehead { display: none; }
+	.chart[data-layout='table'] .cell-hex { grid-column: 1; grid-row: 1; }
+	/* A doorway byte has no hex column of its own — its block opens with the
+	   byte, larger — so it takes the whole row rather than leaving the first
+	   column empty beside it. */
+	.chart[data-layout='table'] .cell:has(.prefix-cell) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	/* Including the empty spans it carries for columns it has nothing to put in:
+	   the summary asks for column 2 by hand, and asking for a second column of a
+	   one-column grid makes one — which is what pushed the block into a strip on
+	   the right. */
+	.chart[data-layout='table'] .cell:has(.prefix-cell) > * { grid-column: 1; }
+	.chart[data-layout='table'] .cell-name,
+	.chart[data-layout='table'] .cell-status { grid-column: 2; }
+	/* The category is the one column worth dropping: on a phone it is a word
+	   per row repeating the group heading a few rows above it. */
 	.chart[data-layout='table'] .cell-cat { display: none; }
 }
 

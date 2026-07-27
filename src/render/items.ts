@@ -305,8 +305,7 @@ export function renderCell(op: Opcode, filtered = false): string {
   const summary = summarize(op);
   const columns =
     `<span class="cell-summary">${summary ? escapeHtml(summary) : ''}</span>` +
-    `<span class="cell-imm">${op.immediateArgs ?? ''}</span>` +
-    `<span class="cell-stack">${op.stack?.html ?? ''}</span>` +
+    `<span class="cell-status">${escapeHtml(statusBrief(op))}</span>` +
     `<span class="cell-cat">${op.name ? CATEGORY_LABELS[categorize(op)] : ''}</span>`;
 
   return (
@@ -373,10 +372,15 @@ function tagHint(label: string): string {
  * A count of one is not worth a badge at all. Grouping by name gives a heading
  * per operation and a good many operations exist exactly once; "1" against each
  * of them is a column of noise saying nothing the heading did not.
+ *
+ * Nor is a count of none. The four doorway bytes are not instructions and are
+ * not counted as any, so grouping by name gives each of them a heading of its
+ * own over a single cell reading "0 opcodes" — which is true of what it counts
+ * and reads as a group that lost its contents.
  */
 function renderCount(count: number): string {
   return (
-    `<span class="group-count"${count === 1 ? ' hidden' : ''}>` +
+    `<span class="group-count"${count <= 1 ? ' hidden' : ''}>` +
     `<span class="count-n">${count}</span>` +
     `<span class="count-unit"> opcode${count === 1 ? '' : 's'}</span></span>`
   );
@@ -406,8 +410,8 @@ export function renderItem(item: ViewItem): string {
     case 'tablehead':
       return (
         `<div class="tablehead" data-key="${escapeHtml(item.key)}" aria-hidden="true">` +
-        `<span>Opcode</span><span>Instruction</span><span>Immediates</span>` +
-        `<span>Stack</span><span>Category</span>` +
+        `<span>Opcode</span><span>Instruction</span><span>Status</span>` +
+        `<span>Category</span>` +
         `</div>`
       );
     case 'corner':
@@ -498,6 +502,37 @@ function statusNote(op: Opcode): StatusNote | undefined {
     default:
       return undefined;
   }
+}
+
+/**
+ * The same standing, in a column: `Wasm 2.0 (2022)`, `Phase 3 (2026)`,
+ * `Withdrawn (2022)`.
+ *
+ * The list shows one instruction per row and had no room to say the thing that
+ * most changes what a row means — whether the byte is settled, still moving, or
+ * gone. The columns it did have were the immediates and the stack type, both of
+ * which are notation the panel draws properly and neither of which reads well
+ * squeezed into a few rems.
+ *
+ * No emoji, unlike the panel's box. A mark is worth having where it is one
+ * caution against a page of prose; six hundred of them down a column is a
+ * pictogram per row saying what the words beside it already say.
+ *
+ * "Wasm" rather than "WebAssembly" because the release number and the year are
+ * the fact and the word is the same on every standardised row — which is most
+ * of them — and a column of it would set the width for nothing.
+ */
+export function statusBrief(op: Opcode): string {
+  // Not an instruction, so it has no standing; and its "proposal" is the group
+  // the four doorway bytes are filed under rather than a history.
+  if (op.prefixFor?.length) return '';
+  const note = statusNote(op);
+  // The panel writes "Proposal: Phase 3" because the box has to say what kind
+  // of thing it is cautioning about. Under a column headed Status it does not.
+  if (note) return note.label.replace(/^Proposal:\s*/, '');
+  const p = proposal(op.proposal);
+  if (!p) return '';
+  return p.standardisedIn ? p.standardisedIn.replace('WebAssembly', 'Wasm') : standing(p);
 }
 
 /**
