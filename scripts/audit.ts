@@ -65,9 +65,9 @@ function parseReference(source: string): RefOpcode[] {
 }
 
 /**
- * Sections a reference covers, keyed by prefix. 0xFB is included because the
- * GC encoding is supplied separately; the stringref proposal shares that
- * prefix from 0x80 up and is checked by neither, so it is excluded below.
+ * Tables a reference covers, keyed by prefix. 0xFB is included because the
+ * GC encoding is supplied separately; the string instructions share that
+ * prefix from 0x80 up and are checked by neither, so they are excluded below.
  */
 const COVERED = new Set(['', 'FB', 'FC', 'FD', 'FE']);
 
@@ -123,9 +123,10 @@ function main(): void {
   const renamed: string[] = [];
 
   // Ours -> reference.
-  // The stringref proposal also lives under 0xFB, from 0x80 up, and no
-  // reference here covers it.
-  const checked = (op: Opcode) => COVERED.has(op.prefix) && op.section !== 'stringref';
+  // The string instructions also live under 0xFB, from 0x80 up, and no
+  // reference here covers them. Excluded by proposal rather than by table,
+  // since they share a table with the GC encodings that are checked.
+  const checked = (op: Opcode) => COVERED.has(op.prefix) && op.proposal !== 'stringref';
 
   for (const op of data.opcodes) {
     if (!checked(op)) continue;
@@ -198,8 +199,8 @@ function main(): void {
 
   const uncovered = data.opcodes.filter((o) => o.name && !checked(o)).length;
   console.log(
-    `\nNot checked: ${uncovered} instructions with no reference — the stringref ` +
-      `proposal, which no toolchain here implements.`,
+    `\nNot checked: ${uncovered} instructions with no reference — the ` +
+      `reference-typed strings proposal, which no toolchain here implements.`,
   );
 }
 

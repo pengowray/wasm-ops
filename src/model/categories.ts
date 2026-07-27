@@ -143,9 +143,10 @@ export function categorize(op: Opcode): CategoryId {
   }
 
   if (op.name.startsWith('br_on')) return 'control';
-  if (op.section === 'simd' || op.section === 'simd-ext') return 'vector';
+  if (op.section === 'simd') return 'vector';
+  // The string instructions share this table, but every one of them is caught
+  // by its namespace above, so what is left here is GC.
   if (op.section === 'gc') return 'gc';
-  if (op.section === 'stringref') return 'string';
   if (op.section === 'threads') return 'atomic';
   return 'other';
 }

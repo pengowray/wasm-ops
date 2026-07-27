@@ -23,8 +23,21 @@ const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '
 const SOURCE = join(ROOT, 'docs', 'index.html');
 const OUT_DIR = join(ROOT, 'data');
 
-/** Which legacy table maps to which section, and where its numbering starts. */
-interface SectionSpec extends Section {
+/**
+ * Which legacy table maps to which section, and where its numbering starts.
+ *
+ * The legacy page split 0xFB and 0xFD across two tables each, and the ids of
+ * the two extra halves are not section ids any more — the chart merged each
+ * pair into the one table its prefix actually addresses. They are still what
+ * this script reads, since it reads the old page, so the id is widened here and
+ * narrowed again on the way into an opcode. Anything extracted under one of
+ * them has to be folded into its sibling by hand, which is what was done once
+ * and is why this script is not for re-running.
+ */
+type LegacyId = SectionId | 'stringref' | 'simd-ext';
+
+interface SectionSpec extends Omit<Section, 'id'> {
+  id: LegacyId;
   tableId: string;
 }
 
@@ -249,7 +262,7 @@ function main(): void {
 
       const op: Opcode = {
         id,
-        section: spec.id,
+        section: spec.id as SectionId,
         prefix: spec.prefix,
         code,
         bytes: opcodeBytes(spec.prefix, code),
@@ -284,7 +297,7 @@ function main(): void {
       opcodes.push(op);
     });
 
-    const section: Section = { ...spec, count: cells.length };
+    const section: Section = { ...spec, id: spec.id as SectionId, count: cells.length };
     delete (section as Partial<SectionSpec>).tableId;
 
     const file = join(OUT_DIR, `${spec.id}.json`);

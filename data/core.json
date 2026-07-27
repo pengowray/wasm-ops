@@ -2,7 +2,7 @@
   "section": {
     "id": "core",
     "anchor": "core",
-    "title": "Core instructions",
+    "title": "Table A (core)",
     "prefix": "",
     "start": 0,
     "count": 256,
@@ -4739,8 +4739,7 @@
         "mainop": "gc"
       },
       "prefixFor": [
-        "gc",
-        "stringref"
+        "gc"
       ]
     },
     {
@@ -4776,8 +4775,7 @@
         "mainop": "simd"
       },
       "prefixFor": [
-        "simd",
-        "simd-ext"
+        "simd"
       ]
     },
     {

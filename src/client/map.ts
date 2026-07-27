@@ -16,7 +16,7 @@
  */
 
 import type { OpcodeData } from '../model/types.ts';
-import { gridRows, type ViewOptions } from '../model/view.ts';
+import { BAND, gridRows, type ViewOptions } from '../model/view.ts';
 import { escapeHtml, partTokens, plainName, specText } from '../render/items.ts';
 import { tagTokens } from '../model/tags.ts';
 
@@ -41,6 +41,13 @@ export class NavMap {
       const cells = data.opcodes
         .filter((op) => op.section === section.id)
         .map((op) => {
+          // The same breaks the chart makes, in the same places. The map is a
+          // miniature of the byte grids, and a landmark it does not share is
+          // not a landmark you can navigate by.
+          const band =
+            op.code !== section.start && op.code % BAND === 0
+              ? `<span class="map-band" data-band="${op.code}"></span>`
+              : '';
           // The map carries the same selectable attributes as a cell, so a
           // highlight reaches it too — which is the whole point of having it.
           const attrs =
@@ -51,14 +58,14 @@ export class NavMap {
             (op.name ? ` data-parts="${escapeHtml(partTokens(op))}"` : '') +
             (op.proposal ? ` data-proposal="${escapeHtml(op.proposal)}"` : '');
           const label = `${specText(op)} ${plainName(op)}`;
-          return `<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
+          return `${band}<span class="map-cell"${attrs} title="${escapeHtml(label)}"></span>`;
         })
         .join('');
 
       return (
         `<div class="map-section" data-section="${section.id}">` +
         `<span class="map-label">${section.emoji ? section.emoji + ' ' : ''}` +
-        `${escapeHtml(shortTitle(section.title))}</span>` +
+        `${escapeHtml(section.title)}</span>` +
         `<div class="map-grid">${cells}</div>` +
         `</div>`
       );
@@ -139,6 +146,15 @@ export class NavMap {
         if (rows.has(row)) delete square.dataset['offgrid'];
         else square.dataset['offgrid'] = '1';
       }
+      // A band divides two runs of rows, so it is only a division while there
+      // are rows on both sides of it. Filtering the string encodings away takes
+      // everything below 0xFB 128 with it, and a break with nothing after it is
+      // a stripe of padding under the last row rather than a landmark.
+      for (const band of el?.querySelectorAll<HTMLElement>('.map-band') ?? []) {
+        const at = Number(band.dataset['band']) >> 4;
+        const divides = [...rows].some((r) => r < at) && [...rows].some((r) => r >= at);
+        band.hidden = !divides;
+      }
     }
   }
 
@@ -187,11 +203,8 @@ export class NavMap {
   }
 }
 
-/** Section titles are written for headings; the map has room for a word or two. */
-function shortTitle(title: string): string {
-  return title
-    .replace(/ proposal$/i, '')
-    .replace(/ instructions$/i, '')
-    .replace(/ opcodes.*$/i, '')
-    .replace(/^Reference-Typed /i, '');
-}
+/*
+ * There was a `shortTitle` here, trimming "… proposal" and "… instructions" off
+ * a heading to fit the rail. The tables are lettered now and their titles are
+ * already two words, so it had nothing left to cut.
+ */

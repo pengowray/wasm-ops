@@ -409,6 +409,11 @@ export function renderItem(item: ViewItem): string {
         `<div class="colhead" data-key="${escapeHtml(item.key)}" ` +
         `data-notation="${item.notation}">${escapeHtml(item.label)}</div>`
       );
+    // Empty on purpose: it is a gap, and a gap says what it has to say by
+    // being there. Hidden from anything reading the page as a document, which
+    // has the numbers themselves and no rows to lose its place among.
+    case 'band':
+      return `<div class="band" data-key="${escapeHtml(item.key)}" aria-hidden="true"></div>`;
     case 'rowhead':
       return (
         `<div class="rowhead" data-key="${escapeHtml(item.key)}" ` +

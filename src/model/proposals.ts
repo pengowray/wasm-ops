@@ -65,7 +65,11 @@ const LIST: Proposal[] = [
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/sign-extension-ops',
-    hue: 200,
+    // 0xC0–0xC4 sits directly under the last of the numeric instructions, and
+    // the blue it had was a few degrees off the blue of those — a boundary
+    // between two proposals that read as a shading artefact. Traded with stack
+    // switching, whose own run has nothing but unassigned bytes around it.
+    hue: 330,
   },
   {
     id: 'nontrapping-float-to-int',
@@ -85,7 +89,10 @@ const LIST: Proposal[] = [
     standardisedIn: 'WebAssembly 2.0 (2022)',
     note: 'Standardised and supported by every current engine.',
     url: 'https://github.com/WebAssembly/bulk-memory-operations',
-    hue: 155,
+    // Sub-opcodes 8–11, wedged between the float-to-int conversions in cyan and
+    // the reference types in violet, and green enough to blend into the first
+    // of them. Warm, so both of its edges are edges.
+    hue: 15,
   },
   {
     id: 'reference-types',
@@ -164,7 +171,11 @@ const LIST: Proposal[] = [
     standardisedIn: 'WebAssembly 3.0 (2025)',
     note: 'Standardised. Results may differ between engines by design — that is the point of the relaxation.',
     url: 'https://github.com/WebAssembly/relaxed-simd',
-    hue: 305,
+    // Now that the vector tables are one table, sub-opcode 256 begins on the
+    // row after 255 and the join is the thing worth seeing. Purple against
+    // purple hid it; this is the one boundary in that table that is a change of
+    // proposal rather than a change of row.
+    hue: 35,
   },
   {
     id: 'threads',
@@ -221,7 +232,8 @@ const LIST: Proposal[] = [
     phase: 3,
     note: 'At phase 3. Adds continuations for coroutines, generators and async. Encoding not final.',
     url: 'https://github.com/WebAssembly/stack-switching',
-    hue: 330,
+    // The blue that was on sign-extension; see there.
+    hue: 200,
   },
   {
     id: 'half-precision',

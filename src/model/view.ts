@@ -87,7 +87,7 @@ export const DEFAULT_VIEW: ViewOptions = {
   group: 'category',
   order: 'opcode',
   columns: 16,
-  sections: ['core', 'gc', 'stringref', 'fc', 'simd', 'simd-ext', 'threads'],
+  sections: ['core', 'gc', 'fc', 'simd', 'threads'],
   showReserved: true,
   showProposals: true,
   showHistorical: false,
@@ -129,6 +129,17 @@ export type ViewItem =
   /** A divider within a group — "Comparison", "Loads" — in the card layout. */
   | { kind: 'subgroup'; key: string; label: string; tag: string }
   | { kind: 'rowhead'; key: string; label: string; notation: Notation }
+  /**
+   * A few pixels of nothing across the full width of a byte grid, every 128
+   * sub-opcodes.
+   *
+   * A table of 336 cells is one undifferentiated field to count your way down,
+   * and the tables are now long enough that counting is what reading them had
+   * become. The break is at a round number of the numbering the table is
+   * written in — 128, 256 — so a band is a landmark you can name rather than
+   * decoration: everything below the first break is 128 or more.
+   */
+  | { kind: 'band'; key: string }
   /**
    * `filtered` cells are shown as empty slots rather than dropped. In the byte
    * grid a cell's position *is* its opcode, so removing one would shift every
@@ -319,6 +330,19 @@ export function gridRows(section: Section, ops: Opcode[], options: ViewOptions):
   return rows;
 }
 
+/**
+ * How many opcodes a byte grid runs before it is broken by a band.
+ *
+ * A multiple of both foldings — eight rows at sixteen columns, sixteen at eight
+ * — so the same numbers get the break whichever shape the grid is in, and the
+ * band always falls between two rows rather than through one.
+ *
+ * Exported because the map draws the same grids and has to break them in the
+ * same places; a map whose bands were somewhere else would be a map of a
+ * different chart.
+ */
+export const BAND = 128;
+
 /** Lays one section out as a byte grid, with row and column headers. */
 function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): ViewItem[] {
   const width = options.columns;
@@ -341,6 +365,9 @@ function matrixItems(section: Section, ops: Opcode[], options: ViewOptions): Vie
   }
 
   for (const base of gridRows(section, ops, options)) {
+    if (base !== section.start && base % BAND === 0) {
+      items.push({ kind: 'band', key: `band:${section.id}:${base}` });
+    }
     items.push({
       kind: 'rowhead',
       key: `rowhead:${section.id}:${width}:${base}`,

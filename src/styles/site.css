@@ -585,6 +585,14 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    stay in line — see `NavMap.trim`. */
 .map-cell[data-offgrid] { display: none; }
 
+/* The chart's 128-opcode break, at map scale: a full-width sliver, so the same
+   landmark is in the same place in both. */
+.map-band {
+	grid-column: 1 / -1;
+	height: 3px;
+}
+.map-band[hidden] { display: none; }
+
 /*
  * Which instructions are on screen right now — the "you are here".
  *
@@ -718,6 +726,21 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	gap: .3rem;
 }
 
+/*
+ * A break across the grid every 128 sub-opcodes.
+ *
+ * Space rather than a rule. A line would be a sixth kind of border in a chart
+ * whose cells already say four things with theirs, and the gap is doing the
+ * work a rule would: it stops the eye, and it says the row under it starts a
+ * round number. Enough to be seen at a glance down the page and not enough to
+ * read as the end of the table.
+ */
+.band {
+	grid-column: 1 / -1;
+	height: 6px;
+}
+.chart:not([data-layout='matrix']) .band { display: none; }
+
 .group {
 	grid-column: 1 / -1;
 	margin: 2rem 0 .5rem;
@@ -838,11 +861,20 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--fg-dim);
 }
 
-/* Superseded but still in use: readable, tinted to set it apart. */
+/*
+ * Superseded but still in use: readable, tinted to set it apart, and set in the
+ * same faint italic as a withdrawn encoding.
+ *
+ * `try` at 0x06 and `ref.test` at 0xFB 64 are the same kind of answer — this
+ * byte used to mean that — and they were drawn as two different kinds. Sitting
+ * among the current instructions in the same face and the same strength, `try`
+ * read as one of them.
+ */
 .cell[data-status='legacy'] {
 	--cell-bg: var(--legacy-bg);
 	border-style: dashed;
-	color: var(--fg-dim);
+	color: var(--fg-faint);
+	font-style: italic;
 }
 
 /* Abandoned: the slot is unassigned today, so it is set back furthest. */
@@ -853,11 +885,13 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-style: italic;
 }
 
-/* A stalled proposal: present, but nothing is built on it. */
+/* A stalled proposal: present, but nothing is built on it. Italic like the
+   other two states that are not what a byte means today. */
 .cell[data-status='dormant'] {
 	--cell-bg: var(--surface-sunk);
 	border-style: dashed;
 	color: var(--fg-faint);
+	font-style: italic;
 }
 
 /*
@@ -1359,7 +1393,8 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * bought, and it was paid as a stall right after the animation finished. A
  * plain transform transition composites perfectly well without it.
  */
-.cell.moving, .rowhead.moving, .colhead.moving, .corner.moving, .group.moving {
+.cell.moving, .rowhead.moving, .colhead.moving, .corner.moving, .group.moving,
+.band.moving {
 	transition: transform var(--move) var(--ease);
 }
 .chart.settling .cell { pointer-events: none; }

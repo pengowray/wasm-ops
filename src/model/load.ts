@@ -4,15 +4,7 @@ import { describePrefixes } from './prefixes.ts';
 import type { Opcode, OpcodeData, Section, SectionId } from './types.ts';
 
 /** Section files, in the order they appear on the page. */
-export const SECTION_ORDER: SectionId[] = [
-  'core',
-  'gc',
-  'stringref',
-  'fc',
-  'simd',
-  'simd-ext',
-  'threads',
-];
+export const SECTION_ORDER: SectionId[] = ['core', 'gc', 'fc', 'simd', 'threads'];
 
 const DATA_DIR = join(
   new URL('../..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'),
@@ -50,7 +42,7 @@ export function loadData(dir: string = DATA_DIR): OpcodeData {
 
   const data: OpcodeData = { sections, opcodes };
   // Only possible once every file is in: what 0xFB says is a statement about
-  // the GC and string tables, which live in two other files.
+  // the table behind it, which lives in another file.
   describePrefixes(data);
   return data;
 }

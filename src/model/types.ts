@@ -6,14 +6,11 @@
  * regex run over the cell text at page load. Both are now explicit and typed.
  */
 
-export type SectionId =
-  | 'core'
-  | 'gc'
-  | 'stringref'
-  | 'fc'
-  | 'simd'
-  | 'simd-ext'
-  | 'threads';
+/**
+ * One id per table. The five are lettered A to E on the page; the ids stay as
+ * they are because they are in live URLs and in the section filter.
+ */
+export type SectionId = 'core' | 'gc' | 'fc' | 'simd' | 'threads';
 
 export interface Section {
   id: SectionId;
@@ -21,9 +18,8 @@ export interface Section {
   title: string;
   emoji?: string;
   /**
-   * The heading's HTML id. Kept as whatever the old page used — `strings` for
-   * stringref, for instance — because those anchors are linked from inside the
-   * chart and from outside the site.
+   * The heading's HTML id. Kept as whatever the page has always used, because
+   * those anchors are linked from inside the chart and from outside the site.
    */
   anchor: string;
   /** Prefix byte as uppercase hex, e.g. "FB". Empty for single-byte opcodes. */

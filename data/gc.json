@@ -2,12 +2,12 @@
   "section": {
     "id": "gc",
     "anchor": "gc",
-    "title": "Garbage collection",
+    "title": "Table B",
     "emoji": "⭕",
     "prefix": "FB",
     "start": 0,
-    "count": 128,
-    "intro": "Structs, arrays and typed references."
+    "count": 192,
+    "intro": "Structs, arrays, typed references and strings: everything written as 0xFB followed by a sub-opcode. The string instructions from 128 up are a phase 1 proposal, inactive since 2023, and appear only with “Legacy, withdrawn &amp; dormant” turned on."
   },
   "opcodes": [
     {
@@ -1931,6 +1931,1060 @@
       "bytes": [
         251,
         127
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.128",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 128,
+      "bytes": [
+        251,
+        128,
+        1
+      ],
+      "name": "string.new_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.129",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 129,
+      "bytes": [
+        251,
+        129,
+        1
+      ],
+      "name": "string.new_wtf16",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "wtf16"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.130",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 130,
+      "bytes": [
+        251,
+        130,
+        1
+      ],
+      "name": "string.const",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "const"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.131",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 131,
+      "bytes": [
+        251,
+        131,
+        1
+      ],
+      "name": "string.measure_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "measure",
+        "rest": "utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.132",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 132,
+      "bytes": [
+        251,
+        132,
+        1
+      ],
+      "name": "string.measure_wtf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "measure",
+        "rest": "wtf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.133",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 133,
+      "bytes": [
+        251,
+        133,
+        1
+      ],
+      "name": "string.measure_wtf16",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "measure",
+        "rest": "wtf16"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.134",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 134,
+      "bytes": [
+        251,
+        134,
+        1
+      ],
+      "name": "string.encode_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.135",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 135,
+      "bytes": [
+        251,
+        135,
+        1
+      ],
+      "name": "string.encode_wtf16",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "wtf16"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.136",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 136,
+      "bytes": [
+        251,
+        136,
+        1
+      ],
+      "name": "string.concat",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "concat"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.137",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 137,
+      "bytes": [
+        251,
+        137,
+        1
+      ],
+      "name": "string.eq",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "eq"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.138",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 138,
+      "bytes": [
+        251,
+        138,
+        1
+      ],
+      "name": "string.is_usv_sequence",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "is",
+        "rest": "usv_sequence"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.139",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 139,
+      "bytes": [
+        251,
+        139,
+        1
+      ],
+      "name": "string.new_lossy_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "lossy_utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.140",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 140,
+      "bytes": [
+        251,
+        140,
+        1
+      ],
+      "name": "string.new_wtf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "wtf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.141",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 141,
+      "bytes": [
+        251,
+        141,
+        1
+      ],
+      "name": "string.encode_lossy_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "lossy_utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.142",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 142,
+      "bytes": [
+        251,
+        142,
+        1
+      ],
+      "name": "string.encode_wtf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "wtf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.143",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 143,
+      "bytes": [
+        251,
+        143,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.144",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 144,
+      "bytes": [
+        251,
+        144,
+        1
+      ],
+      "name": "string.as_wtf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "as",
+        "rest": "wtf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.145",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 145,
+      "bytes": [
+        251,
+        145,
+        1
+      ],
+      "name": "stringview_wtf8.advance",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "advance"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.146",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 146,
+      "bytes": [
+        251,
+        146,
+        1
+      ],
+      "name": "stringview_wtf8.encode_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "encode",
+        "rest": "utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.147",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 147,
+      "bytes": [
+        251,
+        147,
+        1
+      ],
+      "name": "stringview_wtf8.slice",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "slice"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.148",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 148,
+      "bytes": [
+        251,
+        148,
+        1
+      ],
+      "name": "stringview_wtf8.encode_lossy_utf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "encode",
+        "rest": "lossy_utf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.149",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 149,
+      "bytes": [
+        251,
+        149,
+        1
+      ],
+      "name": "stringview_wtf8.encode_wtf8",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf8",
+        "mainop": "encode",
+        "rest": "wtf8"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.150",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 150,
+      "bytes": [
+        251,
+        150,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.151",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 151,
+      "bytes": [
+        251,
+        151,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.152",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 152,
+      "bytes": [
+        251,
+        152,
+        1
+      ],
+      "name": "string.as_wtf16",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "as",
+        "rest": "wtf16"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.153",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 153,
+      "bytes": [
+        251,
+        153,
+        1
+      ],
+      "name": "stringview_wtf16.length",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "length"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.154",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 154,
+      "bytes": [
+        251,
+        154,
+        1
+      ],
+      "name": "stringview_wtf16.get_codeunit",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "get",
+        "rest": "codeunit"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.155",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 155,
+      "bytes": [
+        251,
+        155,
+        1
+      ],
+      "name": "stringview_wtf16.encode",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "encode"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.156",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 156,
+      "bytes": [
+        251,
+        156,
+        1
+      ],
+      "name": "stringview_wtf16.slice",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_wtf16",
+        "mainop": "slice"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.157",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 157,
+      "bytes": [
+        251,
+        157,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.158",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 158,
+      "bytes": [
+        251,
+        158,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.159",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 159,
+      "bytes": [
+        251,
+        159,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.160",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 160,
+      "bytes": [
+        251,
+        160,
+        1
+      ],
+      "name": "string.as_iter",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "as",
+        "rest": "iter"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.161",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 161,
+      "bytes": [
+        251,
+        161,
+        1
+      ],
+      "name": "stringview_iter.next",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "next"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.162",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 162,
+      "bytes": [
+        251,
+        162,
+        1
+      ],
+      "name": "stringview_iter.advance",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "advance"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.163",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 163,
+      "bytes": [
+        251,
+        163,
+        1
+      ],
+      "name": "stringview_iter.rewind",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "rewind"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.164",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 164,
+      "bytes": [
+        251,
+        164,
+        1
+      ],
+      "name": "stringview_iter.slice",
+      "status": "dormant",
+      "parts": {
+        "pre": "stringview_iter",
+        "mainop": "slice"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.165",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 165,
+      "bytes": [
+        251,
+        165,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.166",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 166,
+      "bytes": [
+        251,
+        166,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.167",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 167,
+      "bytes": [
+        251,
+        167,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.168",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 168,
+      "bytes": [
+        251,
+        168,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.169",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 169,
+      "bytes": [
+        251,
+        169,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.170",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 170,
+      "bytes": [
+        251,
+        170,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.171",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 171,
+      "bytes": [
+        251,
+        171,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.172",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 172,
+      "bytes": [
+        251,
+        172,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.173",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 173,
+      "bytes": [
+        251,
+        173,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.174",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 174,
+      "bytes": [
+        251,
+        174,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.175",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 175,
+      "bytes": [
+        251,
+        175,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.176",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 176,
+      "bytes": [
+        251,
+        176,
+        1
+      ],
+      "name": "string.new_utf8_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "utf8_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.177",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 177,
+      "bytes": [
+        251,
+        177,
+        1
+      ],
+      "name": "string.new_wtf16_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "wtf16_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.178",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 178,
+      "bytes": [
+        251,
+        178,
+        1
+      ],
+      "name": "string.encode_utf8_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "utf8_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.179",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 179,
+      "bytes": [
+        251,
+        179,
+        1
+      ],
+      "name": "string.encode_wtf16_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "wtf16_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.180",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 180,
+      "bytes": [
+        251,
+        180,
+        1
+      ],
+      "name": "string.new_lossy_utf8_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "lossy_utf8_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.181",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 181,
+      "bytes": [
+        251,
+        181,
+        1
+      ],
+      "name": "string.new_wtf8_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "new",
+        "rest": "wtf8_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.182",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 182,
+      "bytes": [
+        251,
+        182,
+        1
+      ],
+      "name": "string.encode_lossy_utf8_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "lossy_utf8_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.183",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 183,
+      "bytes": [
+        251,
+        183,
+        1
+      ],
+      "name": "string.encode_wtf8_array",
+      "status": "dormant",
+      "parts": {
+        "pre": "string",
+        "mainop": "encode",
+        "rest": "wtf8_array"
+      },
+      "proposal": "stringref"
+    },
+    {
+      "id": "0xFB.184",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 184,
+      "bytes": [
+        251,
+        184,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.185",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 185,
+      "bytes": [
+        251,
+        185,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.186",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 186,
+      "bytes": [
+        251,
+        186,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.187",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 187,
+      "bytes": [
+        251,
+        187,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.188",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 188,
+      "bytes": [
+        251,
+        188,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.189",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 189,
+      "bytes": [
+        251,
+        189,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.190",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 190,
+      "bytes": [
+        251,
+        190,
+        1
+      ],
+      "name": null,
+      "status": "reserved"
+    },
+    {
+      "id": "0xFB.191",
+      "section": "gc",
+      "prefix": "FB",
+      "code": 191,
+      "bytes": [
+        251,
+        191,
+        1
       ],
       "name": null,
       "status": "reserved"
