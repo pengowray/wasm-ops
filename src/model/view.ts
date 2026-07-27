@@ -478,7 +478,20 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
   // `linkTo` cells are the prefix bytes, which exist to point at the sub-table
   // that decodes them. In the byte grid they occupy a real byte value and have
   // to be there; in a list of instructions they are not instructions.
-  const listable = data.opcodes.filter((op) => op.name && !op.linkTo && visible(op, options));
+  //
+  // Nor are the four doorway bytes, for the same reason, and the list drops them
+  // too. A card is a thing to look at and 0xFD earns its place among them — it
+  // is drawn as its own small block, saying what is behind it. A list row is a
+  // line in a column of instructions, and a row whose name column holds a
+  // miniature table instead of an instruction is a row that has to be read
+  // twice to find out it is not one.
+  const listable = data.opcodes.filter(
+    (op) =>
+      op.name &&
+      !op.linkTo &&
+      !(options.layout === 'table' && op.prefixFor?.length) &&
+      visible(op, options),
+  );
 
   if (options.group === 'none') {
     return [

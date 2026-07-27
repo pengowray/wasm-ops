@@ -584,9 +584,10 @@ export function renderHeading(op: Opcode): string {
     return (
       `<h2 class="detail-name">${specLabel(op)}` +
       `<span class="detail-role">opcode prefix</span></h2>` +
-      `<p class="detail-summary">Not an instruction on its own. It marks the start ` +
-      `of a longer opcode: the sub-opcode after it selects an instruction from a ` +
-      `separate table.</p>`
+      `<p class="detail-summary">The first byte of a multi-byte opcode. What ` +
+      `follows is a sub-opcode, written as a u32 in LEB128, and the prefix and ` +
+      `the sub-opcode together are one instruction. The instructions this prefix ` +
+      `opens are listed below.</p>`
     );
   }
 

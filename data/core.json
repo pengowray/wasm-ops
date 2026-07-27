@@ -515,7 +515,7 @@
         "html": "[t] → []",
         "note": "(value-polymorphic)"
       },
-      "description": "<p>The drop instruction simply throws away a single operand.</p><p>Arguably the only stack manipulation instruction WebAssembly has. There is no <code>dup</code>, <code>swap</code> or <code>rot</code>, and no way to reach past the top of the stack: <code>select</code> consumes three operands and computes with them, and <code>local.tee</code> does the work <code>dup</code> would by going out to a local and back. See <a href=\"https://purplesyringa.moe/blog/wasm-is-not-quite-a-stack-machine/\">WebAssembly is not quite a stack machine</a>, by purplesyringa.</p>",
+      "description": "<p>The drop instruction simply throws away a single operand.</p><p>Arguably the only stack manipulation instruction WebAssembly has. There is no <code>dup</code>, <code>swap</code> or <code>rot</code>, and no way to reach past the top of the stack. See <a href=\"https://purplesyringa.moe/blog/wasm-is-not-quite-a-stack-machine/\">WebAssembly is not quite a stack machine</a>, by purplesyringa.</p>",
       "proposal": "mvp"
     },
     {
