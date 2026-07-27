@@ -38,19 +38,23 @@ function dec(value: number): string {
   return `<span class="op-dec">${value}</span>`;
 }
 
-/** The span a run of opcodes covers, as `0–260` — or a single value. */
+/**
+ * The span a run of opcodes covers — `sub-opcodes 0–260`, or `sub-opcode 4`
+ * where a proposal put exactly one byte in this table.
+ */
 function range(ops: Opcode[]): string {
   const codes = ops.map((op) => op.code);
   const low = Math.min(...codes);
   const high = Math.max(...codes);
-  return low === high ? dec(low) : `${dec(low)}–${dec(high)}`;
+  return low === high ? `sub-opcode ${dec(low)}` : `sub-opcodes ${dec(low)}–${dec(high)}`;
 }
 
 /** The badge used for a count everywhere else on the page. */
 function badge(count: number): string {
   return (
     `<span class="group-count">` +
-    `<span class="count-n">${count}</span><span class="count-unit"> opcodes</span></span>`
+    `<span class="count-n">${count}</span>` +
+    `<span class="count-unit"> opcode${count === 1 ? '' : 's'}</span></span>`
   );
 }
 
@@ -180,8 +184,41 @@ function cellText(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
   );
 }
 
-/** One list entry per proposal represented in a run, with the range it covers. */
-function proposalList(ops: Opcode[]): string {
+/**
+ * An entry in one of the doorway's lists: what it is, how many opcodes it comes
+ * to, and one line per fact about where they are.
+ *
+ * The three used to run together as `Table B — sub-opcodes 0–38, 39 opcodes`,
+ * which reads as one sentence and is three answers to three questions. Broken
+ * apart, the name and the size are the line — the two things being scanned for
+ * — and the whereabouts sit under it where they can be read or skipped.
+ */
+function entry(head: string, count: number, lines: string[]): string {
+  return (
+    `<li>${head} ${badge(count)}` +
+    (lines.length ? `<ul>${lines.map((line) => `<li>${line}</li>`).join('')}</ul>` : '') +
+    `</li>`
+  );
+}
+
+/** `Table 0`, or `Table B and Table C`, for a list of sections. */
+function sectionNames(sections: Section[]): string {
+  const names = sections.map((section) => `<a href="#${esc(section.anchor)}">${markedTitle(section)}</a>`);
+  if (names.length < 2) return names.join('');
+  return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+}
+
+/**
+ * One entry per proposal represented in a run: the proposal, everything it
+ * contributed, and where.
+ *
+ * The count is the proposal's whole size, not the part of it behind this byte,
+ * because the reader is being told what the proposal *is* — and a proposal that
+ * has one instruction somewhere else says so on the next line rather than
+ * quietly counting it. Shared-everything threads is 35 sub-opcodes here and one
+ * in another table; a "35" with no note is a wrong answer to "how big is it".
+ */
+function proposalList(ops: Opcode[], pool: Opcode[], sections: Section[]): string {
   const byProposal = new Map<string, Opcode[]>();
   for (const op of ops) {
     if (!op.proposal) continue;
@@ -191,16 +228,32 @@ function proposalList(ops: Opcode[]): string {
   }
 
   const entries = [...byProposal]
-    .map(([id, group]) => ({ p: proposal(id), group }))
-    .filter((entry) => entry.p)
+    .map(([id, group]) => ({ p: proposal(id), id, group }))
+    .filter((e) => e.p)
     .sort((a, b) => Math.min(...a.group.map((o) => o.code)) - Math.min(...b.group.map((o) => o.code)))
-    .map(
-      ({ p, group }) =>
-        `<li><a href="${esc(p!.url)}">${esc(p!.name)}</a> — ${range(group)}, ` +
-        `${group.length} instruction${group.length > 1 ? 's' : ''}</li>`,
-    );
+    .map(({ p, id, group }) => {
+      const here = new Set(group.map((op) => op.section));
+      // Counted over the same pool the run came from: the list of what is
+      // current and the folded list of what is not are each self-consistent,
+      // and neither borrows the other's instructions to inflate a total.
+      const all = pool.filter((op) => op.proposal === id);
+      const elsewhere = sections.filter(
+        (section) => !here.has(section.id) && all.some((op) => op.section === section.id),
+      );
+      const spare = all.length - group.length;
 
-  return entries.length ? `<ul>${entries.join('')}</ul>` : '';
+      const lines = [range(group)];
+      if (spare > 0 && elsewhere.length) {
+        lines.push(
+          spare === 1
+            ? `additional opcode in ${sectionNames(elsewhere)}`
+            : `${spare} additional opcodes in ${sectionNames(elsewhere)}`,
+        );
+      }
+      return entry(`<a href="${esc(p!.url)}">${esc(p!.name)}</a>`, all.length, lines);
+    });
+
+  return entries.length ? `<ul class="prefix-proposals">${entries.join('')}</ul>` : '';
 }
 
 /**
@@ -223,25 +276,25 @@ function describe(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
       const section = sections.find((s) => s.id === id);
       const ops = live(opcodes.filter((o) => o.section === id));
       if (!section || !ops.length) return '';
-      return (
-        `<li><a href="#${esc(section.anchor)}">` +
-        `${markedTitle(section)}</a> — sub-opcodes ${range(ops)}, ${badge(ops.length)}</li>`
-      );
+      return entry(`<a href="#${esc(section.anchor)}">${markedTitle(section)}</a>`, ops.length, [
+        range(ops),
+      ]);
     })
     .filter(Boolean);
 
   const parts: string[] = [];
   if (tables.length) {
-    parts.push(
-      `<p>${tables.length > 1 ? 'The tables' : 'The table'} this prefix opens:</p>`,
-      `<ul class="prefix-tables">${tables.join('')}</ul>`,
-    );
+    parts.push(`<p>Sub-opcodes listed in:</p>`, `<ul class="prefix-tables">${tables.join('')}</ul>`);
   }
 
-  const now = proposalList(current);
+  const now = proposalList(current, live(opcodes.filter((o) => o.name)), sections);
   if (now) parts.push(`<p>Proposals in this range:</p>${now}`);
 
-  const then = proposalList(past);
+  const then = proposalList(
+    past,
+    opcodes.filter((o) => o.name && HISTORICAL.includes(o.status)),
+    sections,
+  );
   if (then) {
     parts.push(
       `<details class="prefix-past"><summary>Superseded, abandoned and dormant encodings ` +

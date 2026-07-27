@@ -71,7 +71,7 @@ export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
     // the only cell in the chart whose whole meaning is "a number follows" —
     // so the slot that number goes in is drawn rather than described, as an
     // open-ended box in the sub-opcode's own colour and face.
-    groups.push(group(byteRun([op.code]), 'prefix byte', 'prefix'));
+    groups.push(group(byteRun([op.code]), 'prefix', 'prefix'));
     groups.push(
       group(
         'n',
@@ -80,9 +80,9 @@ export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
       ),
     );
   } else if (!op.prefix) {
-    groups.push(group(byteRun([op.code]), 'opcode byte'));
+    groups.push(group(byteRun([op.code]), '1-byte opcode'));
   } else {
-    groups.push(group(byteRun([op.bytes[0]!]), 'prefix byte', 'prefix'));
+    groups.push(group(byteRun([op.bytes[0]!]), 'prefix', 'prefix'));
 
     const encoded = op.bytes.slice(1);
     groups.push(
@@ -156,7 +156,7 @@ export function specText(op: Opcode): string {
  * an unassigned slot carries nothing at all.
  */
 export function plainName(op: Opcode): string {
-  if (op.prefixFor?.length) return 'prefix byte';
+  if (op.prefixFor?.length) return 'opcode prefix';
   return op.name ?? 'unassigned';
 }
 
@@ -238,7 +238,14 @@ function cellData(op: Opcode): string {
   // anything, and relating this cell to every SIMD instruction because of them
   // answers a question nobody asked.
   if (op.prefixFor?.length) {
-    return ` data-key="${op.id}" data-section="${op.section}" data-status="${op.status}"`;
+    // Except which group it is in, which is a fact about the byte rather than
+    // about its placeholder name: "Opcode prefix" is what these four are, and it
+    // carries their colour and the chip that lights all four at once.
+    const from = op.proposal ? ` data-proposal="${escapeHtml(op.proposal)}"` : '';
+    const tag = op.proposal ? ` data-tags="from-${escapeHtml(op.proposal)}"` : '';
+    return (
+      ` data-key="${op.id}" data-section="${op.section}" data-status="${op.status}"${from}${tag}`
+    );
   }
   const attrs: Record<string, string | undefined> = {
     'data-key': op.id,
@@ -286,7 +293,7 @@ export function renderCell(op: Opcode, filtered = false): string {
   // A doorway byte's `name` is a placeholder from the old data — `twobytefb.gc`
   // — which is not something to read out. What it is, is a prefix.
   const spoken = op.prefixFor?.length
-    ? `${specText(op)} prefix byte, a sub-opcode follows`
+    ? `${specText(op)} opcode prefix, a sub-opcode follows`
     : op.name
       ? `${specText(op)} ${op.name}`
       : '';
@@ -358,10 +365,10 @@ function tagHint(label: string): string {
  * How many instructions are under a heading.
  *
  * A bare number beside a heading is a riddle — 200 of what? — so it says what
- * it counts. Except in the byte grid, where the headings run across a
- * sixteen-column table and the word costs more room than it earns; the unit is
- * written but hidden there, so that switching layout does not have to rewrite
- * the badge.
+ * it counts, in every layout. The byte grid used to hide the word to save the
+ * width, which saved four characters on a heading that spans sixteen columns
+ * and left the one place with room to spare as the one place that did not say
+ * what it meant.
  *
  * A count of one is not worth a badge at all. Grouping by name gives a heading
  * per operation and a good many operations exist exactly once; "1" against each
@@ -370,7 +377,8 @@ function tagHint(label: string): string {
 function renderCount(count: number): string {
   return (
     `<span class="group-count"${count === 1 ? ' hidden' : ''}>` +
-    `<span class="count-n">${count}</span><span class="count-unit"> opcodes</span></span>`
+    `<span class="count-n">${count}</span>` +
+    `<span class="count-unit"> opcode${count === 1 ? '' : 's'}</span></span>`
   );
 }
 
@@ -428,57 +436,68 @@ export function renderItem(item: ViewItem): string {
 }
 
 /**
- * How each status is announced. Every one that is not `standard` takes the same
- * shape — mark, label, then what it means for someone reading a module today —
- * so they are easy to compare, and the mark says which kind of caution it is
- * rather than shouting the same warning at all of them.
+ * How each status is announced: a mark, a label and a year.
+ *
+ * There used to be a sentence as well — "not standardised. Engine support
+ * varies and the encoding may still change." — which said in twenty words
+ * roughly what the proposal's own note two lines below said in its own terms,
+ * and said it identically over a phase-1 sketch and a phase-3 design that
+ * engines have already shipped. Whatever those sentences knew that the notes
+ * did not has been folded into the notes; what is left here is the part that
+ * differs from one instruction to the next.
+ *
+ * Which is the phase and the year. "Phase 3" alone does not say whether the
+ * design is moving; "Phase 3 (2026)" and "Phase 1 (2022)" are two different
+ * pieces of advice. What the year *is* depends on the status — reaching a
+ * phase, going quiet, being abandoned — so the tooltip says which, and every
+ * one of them is a date from the proposal's own record rather than a guess.
  */
 interface StatusNote {
   mark: string;
   label: string;
-  detail: string;
+  /** The tooltip: what happened in that year. */
+  title?: string;
+  /** Set on the one status that is reassurance rather than caution. */
+  settled?: boolean;
 }
 
-const STATUS_NOTES: Partial<Record<Opcode['status'], StatusNote>> = {
-  proposal: {
-    mark: '\u{1F9EA}',
-    label: 'Proposal',
-    detail: 'not standardised. Engine support varies and the encoding may still change.',
-  },
-  legacy: {
-    mark: '\u26A0\uFE0F',
-    label: 'Legacy',
-    detail: 'superseded by a newer encoding, though still emitted and accepted.',
-  },
-  dormant: {
-    mark: '\u{1F4A4}',
-    label: 'Dormant',
-    detail: 'an inactive proposal. No engine implements it and the encoding may still change.',
-  },
-  withdrawn: {
-    mark: '\u26D4',
-    label: 'Withdrawn',
-    detail: 'this encoding was abandoned. The slot is unassigned today.',
-  },
-};
-
-/**
- * A phase-4 proposal is finished in every sense a reader cares about: the
- * design is settled, the encoding is fixed and the engines have shipped it.
- * The atomics are the case in point \u2014 telling someone that `i32.atomic.load`
- * "may still change" is not caution, it is wrong, and it makes the same warning
- * on a phase-1 instruction mean less.
- */
-const AT_PHASE_4: StatusNote = {
-  mark: '\u2705',
-  label: 'Phase 4',
-  detail:
-    'settled and shipped in every current engine, awaiting only the specification text that folds it in.',
-};
+const MARK = {
+  proposal: '\u{1F9EA}',
+  legacy: '\u26A0\uFE0F',
+  dormant: '\u{1F4A4}',
+  withdrawn: '\u26D4',
+  settled: '\u2705',
+} as const;
 
 function statusNote(op: Opcode): StatusNote | undefined {
-  if (op.status === 'proposal' && proposal(op.proposal)?.phase === 4) return AT_PHASE_4;
-  return STATUS_NOTES[op.status];
+  const p = proposal(op.proposal);
+  const year = p?.since ? ` (${p.since})` : '';
+  const phase = ` Phase ${p?.phase ?? '?'}`;
+  const title = p?.sinceNote ? { title: p.sinceNote } : {};
+
+  switch (op.status) {
+    case 'proposal':
+      /*
+       * A phase-4 proposal is finished in every sense a reader cares about: the
+       * design is settled, the encoding is fixed and the engines have shipped
+       * it. The atomics are the case in point \u2014 telling someone that
+       * `i32.atomic.load` "may still change" is not caution, it is wrong, and it
+       * makes the same warning on a phase-1 instruction mean less.
+       */
+      return p?.phase === 4
+        ? { mark: MARK.settled, label: `Phase 4${year}`, settled: true, ...title }
+        : { mark: MARK.proposal, label: `Proposal:${phase}${year}`, ...title };
+    case 'legacy':
+      return { mark: MARK.legacy, label: `Legacy${year}`, ...title };
+    // The phase belongs on this one too: dormant is not a phase of its own, it
+    // is a proposal that stopped somewhere, and where it stopped is the fact.
+    case 'dormant':
+      return { mark: MARK.dormant, label: `Dormant:${phase}${year}`, ...title };
+    case 'withdrawn':
+      return { mark: MARK.withdrawn, label: `Withdrawn${year}`, ...title };
+    default:
+      return undefined;
+  }
 }
 
 /**
@@ -510,7 +529,7 @@ export function renderHeading(op: Opcode): string {
   if (op.prefixFor?.length) {
     return (
       `<h2 class="detail-name">${specLabel(op)}` +
-      `<span class="detail-role">prefix byte</span></h2>` +
+      `<span class="detail-role">opcode prefix</span></h2>` +
       `<p class="detail-summary">Not an instruction on its own. It marks the start ` +
       `of a longer opcode: the sub-opcode after it selects an instruction from a ` +
       `separate table.</p>`
@@ -571,16 +590,23 @@ function supportLink(feature: string): string {
  * one answer, so they are one section, and it is called what it answers.
  */
 export function renderStatus(op: Opcode, spread?: string): string {
+  // A doorway byte is not an instruction and has no standing of its own. It is
+  // filed under "Opcode prefix" so that it has a colour and a chip like every
+  // other run of bytes, and that is a grouping rather than a history: a Status
+  // section here would be four lines saying it is a byte.
+  if (op.prefixFor?.length) return '';
+
   const note = statusNote(op);
   const p = proposal(op.proposal);
   if (!note && !p) return '';
 
   const caution = note
     ? `<p class="detail-status" data-status="${op.status}"` +
-      (note === AT_PHASE_4 ? ` data-tone="settled"` : '') +
+      (note.settled ? ` data-tone="settled"` : '') +
+      (note.title ? ` title="${escapeHtml(note.title)}"` : '') +
       `>` +
       `<span class="status-mark" aria-hidden="true">${note.mark}</span>` +
-      `<span class="status-text"><strong>${note.label}</strong> — ${note.detail}` +
+      `<span class="status-text"><strong>${note.label}</strong>` +
       (op.supersededBy
         ? `<span class="detail-superseded">Replaced by ${op.supersededBy}</span>`
         : '') +
@@ -598,13 +624,21 @@ export function renderStatus(op: Opcode, spread?: string): string {
     : '';
   return (
     `<h4>Status</h4>` +
-    caution +
+    // The proposal first, then the caution. Which proposal an instruction came
+    // through is the answer to "what is this"; the box is a qualification of
+    // that answer, and a qualification read before the thing it qualifies is
+    // just an alarm.
     `<p class="detail-history">` +
     `<a class="history-name" href="${escapeHtml(p.url)}">${escapeHtml(p.name)}</a>` +
-    `<span class="history-standing">${escapeHtml(standing(p))}</span>` +
+    // Only where the box is not already saying it. "Proposal, phase 3" directly
+    // above "Proposal: Phase 3 (2026)" is one fact printed twice, and the one
+    // with the year is the better of the two. A standardised proposal has no
+    // box, and this is where it says which release folded it in.
+    (note ? '' : `<span class="history-standing">${escapeHtml(standing(p))}</span>`) +
     `<span class="history-note">${escapeHtml(p.note)}</span>` +
     support +
     `</p>` +
+    caution +
     // Only for the proposals that reach into more than one table; see
     // `proposalSpread`.
     (spread ?? '')

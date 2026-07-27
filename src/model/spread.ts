@@ -68,12 +68,17 @@ export function proposalSpread(data: OpcodeData): Map<string, string> {
       .filter((entry) => entry.ops.length);
     if (sections.length < 2) continue;
 
+    // The same shape as the lists on a doorway byte: what it is and how much of
+    // it, then where. They answer the same question from opposite ends — a byte
+    // asking which proposals are behind it, a proposal asking which tables it
+    // is in — and reading alike is most of what makes that visible.
     const items = sections
       .map(
         ({ section, ops: group }) =>
-          `<li><a href="#${esc(section.anchor)}">` +
-          `${markedTitle(section)}</a> — ${reach(section, group)}, ` +
-          `${group.length} instruction${group.length > 1 ? 's' : ''}</li>`,
+          `<li><a href="#${esc(section.anchor)}">${markedTitle(section)}</a> ` +
+          `<span class="group-count"><span class="count-n">${group.length}</span>` +
+          `<span class="count-unit"> opcode${group.length === 1 ? '' : 's'}</span></span>` +
+          `<ul><li>${reach(section, group)}</li></ul></li>`,
       )
       .join('');
 

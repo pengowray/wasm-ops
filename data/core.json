@@ -4735,6 +4735,7 @@
       ],
       "name": "twobytefb.gc",
       "status": "standard",
+      "proposal": "opcode-prefix",
       "parts": {
         "pre": "twobytefb",
         "mainop": "gc"
@@ -4753,6 +4754,7 @@
       ],
       "name": "twobytefc.fc",
       "status": "standard",
+      "proposal": "opcode-prefix",
       "parts": {
         "pre": "twobytefc",
         "mainop": "fc"
@@ -4771,6 +4773,7 @@
       ],
       "name": "twobytefd.simd",
       "status": "standard",
+      "proposal": "opcode-prefix",
       "parts": {
         "pre": "twobytefd",
         "mainop": "simd"
@@ -4789,6 +4792,7 @@
       ],
       "name": "twobytefe.threads",
       "status": "standard",
+      "proposal": "opcode-prefix",
       "parts": {
         "pre": "twobytefe",
         "mainop": "threads"

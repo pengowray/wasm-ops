@@ -140,6 +140,18 @@ export type ViewItem =
    */
   | { kind: 'cell'; key: string; op: Opcode; filtered?: boolean };
 
+/**
+ * Whether an opcode is one of the things a count of opcodes is counting.
+ *
+ * The four doorway bytes are not. They are named, they are shown, and they are
+ * grouped and coloured like everything else — but "Table 0, 205 opcodes" over a
+ * grid in which four of the 205 are announcements that an opcode is about to
+ * start somewhere else is four too many.
+ */
+function countable(op: Opcode): boolean {
+  return !op.prefixFor?.length;
+}
+
 /** The proposals represented in a run of instructions, in first-seen order. */
 function distinctProposals(ops: Opcode[]): string[] {
   const seen: string[] = [];
@@ -405,7 +417,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         label: section.title,
         ...(section.mark ? { mark: section.mark } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
-        count: showing.length,
+        count: showing.filter(countable).length,
         proposals: distinctProposals(showing),
       });
       items.push(...matrixItems(section, sectionOps, options));
@@ -496,7 +508,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         label: section.title,
         ...(section.mark ? { mark: section.mark } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
-        count: group.length,
+        count: group.filter(countable).length,
         proposals: distinctProposals(group),
       });
       items.push(...head(section.id));
@@ -525,7 +537,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         key: `group:name:${name}`,
         anchor: `op-${anchorSafe(name)}`,
         label: name,
-        count: group.length,
+        count: group.filter(countable).length,
       });
       items.push(...head(`name:${name}`));
       emit(items, `name:${name}`, sortOpcodes(group, options.order));
@@ -550,7 +562,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
       key: `group:category:${category}`,
       anchor: `cat-${category}`,
       label: CATEGORY_LABELS[category],
-      count: sorted.length,
+      count: sorted.filter(countable).length,
       tag: `cat-${category}`,
     });
     items.push(...head(category));

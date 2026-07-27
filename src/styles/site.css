@@ -899,9 +899,12 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	vertical-align: middle;
 	white-space: nowrap;
 }
-/* Sixteen columns of byte grid have no width to spare for the word; the
-   headings there are few and all count the same thing anyway. */
-.chart[data-layout='matrix'] .count-unit { display: none; }
+/* A bare number beside a heading is a riddle in every layout — 205 of what? —
+   so the word stays. The one place it does not fit is inside a doorway cell,
+   which is sixty pixels wide and has a range and a table mark to fit as well;
+   there the number is one of three figures in a block that is plainly about
+   the table behind the byte. */
+.prefix-cell .count-unit { display: none; }
 
 .group-intro {
 	display: block;
@@ -1203,6 +1206,9 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--fg-dim);
 }
 .history-spread li { margin: .15rem 0; }
+/* As on a doorway byte: the whereabouts are a note under the table's name, not
+   a second list. */
+.history-spread ul { margin: 0; padding-left: 0; list-style: none; color: var(--fg-faint); }
 
 /* -------------------------------------------------------------- properties */
 
@@ -1462,6 +1468,19 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 
 .prefix-tables { margin: .3rem 0; }
+
+/* Where a table or a proposal is, under what it is. The inner list is set
+   quieter and unbulleted: it is a note on the line above rather than a list of
+   its own, and two levels of bullet would say the second level was as important
+   as the first. */
+.prefix-tables ul, .prefix-proposals ul {
+	margin: .1rem 0 .35rem;
+	padding-left: 0;
+	list-style: none;
+	font-size: .88em;
+	color: var(--fg-dim);
+}
+.prefix-proposals > li { margin-top: .25rem; }
 .prefix-past { margin: .5rem 0; }
 .prefix-past > summary { cursor: pointer; color: var(--fg-dim); }
 
