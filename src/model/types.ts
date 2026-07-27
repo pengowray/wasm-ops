@@ -161,18 +161,50 @@ export interface OpcodeData {
 /**
  * A table's mark, drawn: the character reversed out of a filled square.
  *
- * Inverted rather than set as a plain letter because it appears beside running
- * text — in a heading, in a filter's label, on the line a doorway byte says
- * where it leads — and a bare `B` there is a word of the sentence. A block of
- * ink with a letter knocked out of it is a symbol, which is what it stands in
- * for and what an emoji was doing in the same places.
+ * Inverted so that it reads as a symbol where it stands on its own — on the
+ * line where a doorway byte says which table it opens, there is nothing else in
+ * the cell for a bare `B` to be a letter of. Sized in `em`, so it takes the
+ * scale of whatever it is set beside rather than needing one rule per place it
+ * appears.
  *
- * Sized in `em`, so it takes the scale of whatever it is set beside rather than
- * needing one rule per place it appears.
+ * Not hidden from screen readers. It was, back when it sat in front of a title
+ * that then said the same letter again; now it *is* that letter, and hiding it
+ * would leave a heading reading "Table".
  */
 export function tableMark(mark: string | undefined): string {
   if (!mark) return '';
-  return `<span class="table-mark" aria-hidden="true">${mark}</span>`;
+  return `<span class="table-mark">${mark}</span>`;
+}
+
+function escapeText(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * A table's title with its own letter drawn as the mark: `Table B`, where the
+ * `B` is the boxed one.
+ *
+ * The mark used to lead the title, which said the letter twice — `B Table B`,
+ * and worse for Table 0, where the repetition was of a digit and read as a
+ * number. A title has exactly one character that names the table, so the mark
+ * goes there rather than beside it: one letter, drawn once, in the place the
+ * sentence already wanted it.
+ */
+export function markedTitle(section: Pick<Section, 'title' | 'mark'>): string {
+  const { title, mark } = section;
+  if (!mark) return escapeText(title);
+  const at = title.indexOf(mark);
+  // A title that does not contain its own mark is not something the data should
+  // hold, but a heading that silently lost its letter would be worse than an
+  // ugly one.
+  if (at < 0) return `${escapeText(title)} ${tableMark(mark)}`;
+  return (
+    escapeText(title.slice(0, at)) + tableMark(mark) + escapeText(title.slice(at + mark.length))
+  );
 }
 
 /** LEB128-encode an unsigned integer. */

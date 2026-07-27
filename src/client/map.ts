@@ -15,7 +15,7 @@
  * should not move around underneath you when the chart is rearranged.
  */
 
-import { tableMark } from '../model/types.ts';
+import { markedTitle } from '../model/types.ts';
 import type { OpcodeData } from '../model/types.ts';
 import { BAND, gridRows, type ViewOptions } from '../model/view.ts';
 import { escapeHtml, partTokens, plainName, specText } from '../render/items.ts';
@@ -65,8 +65,7 @@ export class NavMap {
 
       return (
         `<div class="map-section" data-section="${section.id}">` +
-        `<span class="map-label">${tableMark(section.mark)} ` +
-        `${escapeHtml(section.title)}</span>` +
+        `<span class="map-label">${markedTitle(section)}</span>` +
         `<div class="map-grid">${cells}</div>` +
         `</div>`
       );

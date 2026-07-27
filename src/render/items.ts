@@ -7,7 +7,7 @@
  */
 
 import type { Opcode } from '../model/types.ts';
-import { tableMark, toHex } from '../model/types.ts';
+import { markedTitle, toHex } from '../model/types.ts';
 import { addWordBreaks, tokenise } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
 import { proposal, standing } from '../model/proposals.ts';
@@ -379,8 +379,11 @@ export function renderItem(item: ViewItem): string {
     case 'group':
       return (
         `<h2 class="group" data-key="${escapeHtml(item.key)}" id="${escapeHtml(item.anchor)}">` +
-        (item.mark ? `${tableMark(item.mark)} ` : '') +
-        headingTag(item.label, item.tag) +
+        // A section heading carries its table's letter as the mark inside its
+        // own title; a category heading is a property chip and carries neither.
+        (item.mark
+          ? markedTitle({ title: item.label, mark: item.mark })
+          : headingTag(item.label, item.tag)) +
         ` ${renderCount(item.count)}` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +
         renderGroupProposals(item.proposals) +

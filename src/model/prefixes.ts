@@ -17,6 +17,7 @@
 import { proposal } from './proposals.ts';
 import {
   HISTORICAL,
+  markedTitle,
   tableMark,
   type Opcode,
   type OpcodeData,
@@ -224,8 +225,7 @@ function describe(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
       if (!section || !ops.length) return '';
       return (
         `<li><a href="#${esc(section.anchor)}">` +
-        `${tableMark(section.mark)} ` +
-        `${esc(section.title)}</a> — sub-opcodes ${range(ops)}, ${badge(ops.length)}</li>`
+        `${markedTitle(section)}</a> — sub-opcodes ${range(ops)}, ${badge(ops.length)}</li>`
       );
     })
     .filter(Boolean);

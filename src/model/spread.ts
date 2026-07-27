@@ -15,7 +15,7 @@
  */
 
 import { proposal } from './proposals.ts';
-import { tableMark } from './types.ts';
+import { markedTitle } from './types.ts';
 import type { Opcode, OpcodeData, Section } from './types.ts';
 
 function esc(value: string): string {
@@ -72,8 +72,7 @@ export function proposalSpread(data: OpcodeData): Map<string, string> {
       .map(
         ({ section, ops: group }) =>
           `<li><a href="#${esc(section.anchor)}">` +
-          `${tableMark(section.mark)} ` +
-          `${esc(section.title)}</a> — ${reach(section, group)}, ` +
+          `${markedTitle(section)}</a> — ${reach(section, group)}, ` +
           `${group.length} instruction${group.length > 1 ? 's' : ''}</li>`,
       )
       .join('');
