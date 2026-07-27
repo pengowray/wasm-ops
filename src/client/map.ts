@@ -16,7 +16,7 @@
  */
 
 import { markedTitle } from '../model/types.ts';
-import type { OpcodeData } from '../model/types.ts';
+import type { OpcodeData, Section } from '../model/types.ts';
 import { BAND, gridRows, type ViewOptions } from '../model/view.ts';
 import { escapeHtml, partTokens, plainName, specText } from '../render/items.ts';
 import { tagTokens } from '../model/tags.ts';
@@ -65,7 +65,7 @@ export class NavMap {
 
       return (
         `<div class="map-section" data-section="${section.id}">` +
-        `<span class="map-label">${markedTitle(section)}</span>` +
+        `<span class="map-label">${shortTitle(section)}</span>` +
         `<div class="map-grid">${cells}</div>` +
         `</div>`
       );
@@ -203,8 +203,19 @@ export class NavMap {
   }
 }
 
-/*
- * There was a `shortTitle` here, trimming "… proposal" and "… instructions" off
- * a heading to fit the rail. The tables are lettered now and their titles are
- * already two words, so it had nothing left to cut.
+/**
+ * A table's name as the map writes it: `D (SIMD)` rather than `Table D (SIMD)`.
+ *
+ * The map is five tables side by side, so a caption saying "Table" says it five
+ * times over a rail that is mostly captions — and the mark is a lettered box,
+ * which reads as the name of a table without being told. The chart's own
+ * headings keep the word: there a title sits alone above a grid, with nothing
+ * beside it to say what kind of thing it is naming.
+ *
+ * Trimmed off the front of the rendered title rather than the raw one, because
+ * `markedTitle` puts the mark where the letter was and the word is plain text
+ * ahead of it.
  */
+function shortTitle(section: Section): string {
+  return markedTitle(section).replace(/^Table\s+/, '');
+}

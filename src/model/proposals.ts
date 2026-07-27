@@ -226,7 +226,13 @@ const LIST: Proposal[] = [
     sinceNote: 'Proposed in November 2023 and still at phase 1',
     note: 'Implemented behind a flag in V8, but still an early proposal. Extends atomics from linear memory to globals, tables and GC objects. Encoding not final.',
     url: 'https://github.com/WebAssembly/shared-everything-threads',
-    hue: 165,
+    // Its 35 sub-opcodes begin where the atomics end, and the ten degrees
+    // between this and their teal made the join look like a lighting effect
+    // rather than the boundary between two proposals. Magenta: nothing it
+    // touches in either table it appears in is anywhere near it — the atomics
+    // below, and garbage collection and custom descriptors either side of its
+    // single byte in the other.
+    hue: 315,
   },
   {
     id: 'custom-descriptors',

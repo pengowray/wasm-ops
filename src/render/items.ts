@@ -624,21 +624,24 @@ export function renderStatus(op: Opcode, spread?: string): string {
     : '';
   return (
     `<h4>Status</h4>` +
-    // The proposal first, then the caution. Which proposal an instruction came
-    // through is the answer to "what is this"; the box is a qualification of
-    // that answer, and a qualification read before the thing it qualifies is
-    // just an alarm.
-    `<p class="detail-history">` +
+    // The proposal first, then the caution, and the caution against the name
+    // rather than at the foot of the section. Which proposal an instruction came
+    // through is the answer to "what is this" and where it has got to is the
+    // qualification of that answer, so the two are one line and a box under it;
+    // the note and the support link are elaboration and follow.
+    //
+    // A div rather than a p, since a p cannot hold the box.
+    `<div class="detail-history">` +
     `<a class="history-name" href="${escapeHtml(p.url)}">${escapeHtml(p.name)}</a>` +
     // Only where the box is not already saying it. "Proposal, phase 3" directly
     // above "Proposal: Phase 3 (2026)" is one fact printed twice, and the one
     // with the year is the better of the two. A standardised proposal has no
     // box, and this is where it says which release folded it in.
     (note ? '' : `<span class="history-standing">${escapeHtml(standing(p))}</span>`) +
+    caution +
     `<span class="history-note">${escapeHtml(p.note)}</span>` +
     support +
-    `</p>` +
-    caution +
+    `</div>` +
     // Only for the proposals that reach into more than one table; see
     // `proposalSpread`.
     (spread ?? '')
