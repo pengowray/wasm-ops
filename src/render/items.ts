@@ -242,9 +242,16 @@ function cellData(op: Opcode): string {
     // about its placeholder name: "Opcode prefix" is what these four are, and it
     // carries their colour and the chip that lights all four at once.
     const from = op.proposal ? ` data-proposal="${escapeHtml(op.proposal)}"` : '';
-    const tag = op.proposal ? ` data-tags="from-${escapeHtml(op.proposal)}"` : '';
+    // "Prefix" is a heading in the card layout and a chip in the panel, and a
+    // chip that lights nothing is worse than no chip: the four bytes answer to
+    // it like every other category answers to its own.
+    const cat = categorize(op);
+    const tags = [`cat-${cat}`, op.proposal ? `from-${op.proposal}` : '']
+      .filter(Boolean)
+      .join(' ');
     return (
-      ` data-key="${op.id}" data-section="${op.section}" data-status="${op.status}"${from}${tag}`
+      ` data-key="${op.id}" data-section="${op.section}" data-status="${op.status}"` +
+      ` data-cat="${cat}"${from} data-tags="${escapeHtml(tags)}"`
     );
   }
   const attrs: Record<string, string | undefined> = {
@@ -584,10 +591,9 @@ export function renderHeading(op: Opcode): string {
     return (
       `<h2 class="detail-name">${specLabel(op)}` +
       `<span class="detail-role">opcode prefix</span></h2>` +
-      `<p class="detail-summary">The first byte of a multi-byte opcode. What ` +
-      `follows is a sub-opcode, written as a u32 in LEB128, and the prefix and ` +
-      `the sub-opcode together are one instruction. The instructions this prefix ` +
-      `opens are listed below.</p>`
+      // Generated with the rest of what a doorway says about itself, since the
+      // last sentence names the tables it opens; see `summarise` in prefixes.
+      `<p class="detail-summary">${op.prefixSummary ?? ''}</p>`
     );
   }
 

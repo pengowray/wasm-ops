@@ -257,6 +257,32 @@ function proposalList(ops: Opcode[], pool: Opcode[], sections: Section[]): strin
 }
 
 /**
+ * What the byte is, in two sentences and a third saying where to find the
+ * instructions.
+ *
+ * Written as a definition rather than as a denial. It used to open "Not an
+ * instruction on its own", which answers a question about the byte with a fact
+ * about every other byte, and then described the sub-opcode by what it selects
+ * from — so the table was doing the defining, when the table is only where the
+ * instructions are written down. What defines the byte is the encoding: a
+ * prefix, a sub-opcode, one instruction.
+ */
+function summarise(op: Opcode, sections: Section[]): string {
+  const byte = `<span class="op-hex">0x${op.bytes[0]!.toString(16).toUpperCase()}</span>`;
+  const opens = (op.prefixFor ?? [])
+    .map((id) => sections.find((s) => s.id === id))
+    .filter((section): section is Section => Boolean(section));
+  return (
+    `The first byte of a multi-byte opcode. It is followed by a sub-opcode, ` +
+    `written as a u32 in LEB128. The prefix and the sub-opcode together are one ` +
+    `instruction.` +
+    (opens.length
+      ? ` The instructions prefixed with ${byte} are listed in ${sectionNames(opens)}.`
+      : '')
+  );
+}
+
+/**
  * The generated half of a doorway byte's description: where it leads, what is
  * behind it now, and — folded away — what used to be.
  *
@@ -314,6 +340,7 @@ export function describePrefixes(data: OpcodeData): void {
   for (const op of data.opcodes) {
     if (!op.prefixFor?.length) continue;
     op.displayName = cellText(op, data.sections, data.opcodes);
+    op.prefixSummary = summarise(op, data.sections);
     op.description = (op.description ?? '') + describe(op, data.sections, data.opcodes);
   }
 }

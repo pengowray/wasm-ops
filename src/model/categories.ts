@@ -21,6 +21,7 @@ export type CategoryId =
   | 'atomic'
   | 'string'
   | 'gc'
+  | 'prefix'
   | 'other';
 
 export const CATEGORY_LABELS: Record<CategoryId, string> = {
@@ -35,6 +36,7 @@ export const CATEGORY_LABELS: Record<CategoryId, string> = {
   atomic: 'Atomic',
   string: 'Strings',
   gc: 'Garbage collection',
+  prefix: 'Prefix',
   other: 'Other',
 };
 
@@ -51,7 +53,11 @@ export const CATEGORY_ORDER: CategoryId[] = [
   'atomic',
   'gc',
   'string',
+  // Last, and after "Other", because they are not instructions: four bytes that
+  // say a longer opcode is coming. A reader scanning the categories for what
+  // WebAssembly can do should reach the end of that before meeting them.
   'other',
+  'prefix',
 ];
 
 /** Instructions whose category cannot be read off the name shape. */
@@ -81,6 +87,15 @@ const BY_NAME: Record<string, CategoryId> = {
   throw: 'control',
   throw_ref: 'control',
   rethrow: 'control',
+  // Stack switching. A continuation is suspended and resumed, which is a
+  // transfer of control however unusual the shape of it — and the alternative
+  // was "Other", a bucket whose only members were these seven and which said
+  // nothing about any of them.
+  suspend: 'control',
+  resume: 'control',
+  resume_throw: 'control',
+  resume_throw_ref: 'control',
+  switch: 'control',
   drop: 'parametric',
   select: 'parametric',
   // The typed variant of select is written with its immediate: `select t`.
@@ -89,6 +104,7 @@ const BY_NAME: Record<string, CategoryId> = {
 
 /** Namespace before the dot, e.g. `memory.grow` -> `memory`. */
 const BY_PREFIX: Record<string, CategoryId> = {
+  cont: 'control',
   local: 'variable',
   global: 'variable',
   table: 'table',
@@ -121,6 +137,9 @@ const BY_PREFIX: Record<string, CategoryId> = {
 };
 
 export function categorize(op: Opcode): CategoryId {
+  // Before the name is consulted, because a doorway byte's name is a
+  // placeholder — `twobytefd.simd` — which would file 0xFD with the vectors.
+  if (op.prefixFor?.length) return 'prefix';
   if (!op.name) return 'other';
 
   const direct = BY_NAME[op.name];
@@ -150,6 +169,9 @@ export function categorize(op: Opcode): CategoryId {
   if (op.section === 'threads') return 'atomic';
   return 'other';
 }
+
+/** The stack-switching instructions that are not named `cont.something`. */
+const STACK_SWITCHING = new Set(['suspend', 'resume', 'resume_throw', 'resume_throw_ref', 'switch']);
 
 /**
  * A finer split within a category, used to break the long groups in the card
@@ -190,7 +212,7 @@ export interface Subcategory {
  * that reappears every time the byte order happens to come back to it.
  */
 const SUB_ORDER: Partial<Record<CategoryId, readonly string[]>> = {
-  control: ['block', 'branch', 'call', 'exception'],
+  control: ['block', 'branch', 'call', 'exception', 'stack'],
   variable: ['local', 'global'],
   memory: ['load', 'store', 'manage'],
   numeric: ['const', 'arith', 'round', 'compare', 'bitwise', 'convert'],
@@ -371,6 +393,12 @@ export function subcategorize(op: Opcode): Subcategory | null {
   }
 
   if (category === 'control') {
+    // Ahead of the exceptions, which `resume_throw` would otherwise answer to:
+    // what it throws to is a continuation, so it belongs with the rest of the
+    // stack switching rather than with `try` and `catch`.
+    if (name.startsWith('cont.') || STACK_SWITCHING.has(name)) {
+      return of('stack', 'Stack switching');
+    }
     if (/throw|catch|try|delegate/.test(name)) return of('exception', 'Exceptions');
     if (mainop.startsWith('br')) return of('branch', 'Branches');
     if (mainop.startsWith('call') || mainop.startsWith('return')) return of('call', 'Calls');

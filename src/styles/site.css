@@ -892,12 +892,16 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    otherwise run together into one block of ink. */
 .table-mark + .table-mark { margin-left: .2em; }
 
+/* Set in the dimmer grey rather than the faintest one. It is a small number in
+   a thin outline, often over a tinted cell, and in the dark theme the faint
+   grey is only a step and a half off the background it was being read against.
+   Quieter than the heading it follows, which is all it has to be. */
 .group-count {
 	margin-left: .4rem;
 	padding: .05rem .4rem;
 	font-size: .7rem;
 	font-weight: 400;
-	color: var(--fg-faint);
+	color: var(--fg-dim);
 	border: 1px solid var(--rule);
 	border-radius: 999px;
 	vertical-align: middle;
@@ -1509,11 +1513,19 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
    table row. */
 .chart[data-layout='table'] .prefix-line { justify-content: flex-start; }
 
-/* The same badge as a group heading's, sized for a cell. */
+/*
+ * The same badge as a group heading's, sized for a cell — but read against a
+ * proposal tint rather than the page, and at .6rem it was the smallest and
+ * faintest thing in a cell whose whole content is four numbers. Full text
+ * colour, over the cell's own background so the tint does not sit behind it,
+ * and a little larger.
+ */
 .prefix-cell .group-count {
 	margin-left: .25rem;
 	padding: 0 .3rem;
-	font-size: .6rem;
+	font-size: .68rem;
+	color: var(--fg);
+	background: var(--cell-bg);
 	vertical-align: baseline;
 }
 
@@ -1746,6 +1758,66 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 		font-size: .85rem;
 		color: var(--fg-faint);
 	}
+}
+
+/*
+ * The cards keep the column at any width above the bottom-sheet one.
+ *
+ * A byte grid is a shape, and taking 24rem off it at 1200px would fold sixteen
+ * columns into eight and redraw every row — so the grid earns its rail only
+ * when there is room to spare, and until then the panel lies over the top. A
+ * field of cards has no shape to lose: it reflows to whatever width it is
+ * given, and the panel opening over it hides the cards next to the one just
+ * clicked, which are exactly the cards being compared with it.
+ *
+ * The declarations repeat the block above because there is no way to say "this
+ * selector, or that width" in one rule.
+ */
+@media (min-width: 901px) {
+	.js .layout:has(.chart[data-layout='cards']) {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 24rem;
+		gap: 1.5rem;
+		align-items: start;
+	}
+	/* Above the pair, until the window is wide enough for the rail to sit
+	   beside them; below that width the map is a fold-out across the top. */
+	.js .layout:has(.chart[data-layout='cards']) > .map-dock { grid-column: 1 / -1; }
+
+	.js .layout:has(.chart[data-layout='cards']) .panel,
+	.js .layout:has(.chart[data-layout='cards']) .panel[data-open='false'] {
+		display: flex;
+		position: sticky;
+		/* Below a pinned toolbar, not behind it — and shortened to match, so
+		   the bottom of the panel stays on screen. */
+		top: calc(var(--toolbar-h) + 1rem);
+		width: auto;
+		height: auto;
+		max-height: calc(100dvh - var(--toolbar-h) - 2rem);
+		padding: 0 0 1rem 1.25rem;
+		border-left: 1px solid var(--rule-soft);
+		box-shadow: none;
+	}
+
+	.layout:has(.chart[data-layout='cards']) .panel[data-open='false'] .panel-head {
+		display: none;
+	}
+	.layout:has(.chart[data-layout='cards']) .panel[data-open='false'] .panel-empty {
+		display: block;
+		margin: 0;
+		padding-top: .5rem;
+		font-size: .85rem;
+		color: var(--fg-faint);
+	}
+}
+
+/* Where the map has a rail of its own, the cards' three columns are the map,
+   the cards and the panel. */
+@media (min-width: 1220px) {
+	.js .layout:has(.chart[data-layout='cards']) {
+		grid-template-columns: max-content minmax(0, 1fr) 24rem;
+	}
+	.js .layout:has(.chart[data-layout='cards']) > .map-dock { grid-column: auto; }
 }
 
 /* ------------------------------------------------------------------ details */

@@ -151,6 +151,15 @@ export interface Opcode {
   linkTo?: { label: string; href: string }[];
   /** Display name override, used by the prefix-byte cells. HTML. */
   displayName?: string;
+  /**
+   * A doorway byte's opening sentences: what the byte is, how the sub-opcode
+   * after it is written, and which table its instructions are listed in.
+   *
+   * Derived rather than written, because the last part of it names tables, and
+   * which tables a prefix opens is a fact about the sections rather than about
+   * the byte. HTML.
+   */
+  prefixSummary?: string;
 }
 
 export interface OpcodeData {
