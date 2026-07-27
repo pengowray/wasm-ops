@@ -124,7 +124,12 @@ export function renderPage(
 		<legend>Arrange</legend>
 		<label><input type="radio" name="layout" value="matrix" checked> Grid</label>
 		<label><input type="radio" name="layout" value="cards"> Cards</label>
-		<label><input type="radio" name="layout" value="table"> Table</label>
+		<!-- "List", not "Table": every arrangement on this page is of a table, and
+		     five of them are lettered Table 0 to Table E. A control offering
+		     "Table" among "Grid" and "Cards" reads as a jump to one of those
+		     rather than as a way of setting all of them out. The layout's id is
+		     unchanged, since a table is what the arrangement is. -->
+		<label><input type="radio" name="layout" value="table"> List</label>
 	</fieldset>
 	<fieldset class="control" data-needs-grouping>
 		<legend>Group by</legend>
