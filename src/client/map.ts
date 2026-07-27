@@ -204,7 +204,7 @@ export class NavMap {
 }
 
 /**
- * A table's name as the map writes it: `D (SIMD)` rather than `Table D (SIMD)`.
+ * A table's name as the map writes it: `D SIMD` rather than `Table D SIMD`.
  *
  * The map is five tables side by side, so a caption saying "Table" says it five
  * times over a rail that is mostly captions — and the mark is a lettered box,

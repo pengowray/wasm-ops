@@ -717,6 +717,16 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 
 /*
+ * Except while the map is answering a question about a set of instructions,
+ * when the whole of it steps back and only the answer is at full strength.
+ * Two highlights in the same language — the matches, and the squares that
+ * happen to be on screen — is one too many; see `describeHighlight`.
+ */
+.map[data-lit] .map-cell:not(.hl-op, .hl-self, .hl-tag, .map-part-lit, .pinned) {
+	opacity: .45;
+}
+
+/*
  * Hidden by the chart's filters or a search: the square keeps its place, since
  * the map is a picture of the byte space and closing the gap would move every
  * square after it, but it shows nothing. A dimmed square still reads as an

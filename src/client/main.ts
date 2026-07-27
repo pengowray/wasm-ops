@@ -431,6 +431,25 @@ function start(
       what = `Found ${state.query ?? ''} — ${countLabel(state.keys.length)}`;
     }
 
+    /*
+     * While the map is answering a question about a set of instructions, the
+     * "you are here" brightening comes off the whole map.
+     *
+     * Both are said the same way — full strength against a dimmed background —
+     * so with a hover or a tag or a query live, the map was drawing two
+     * highlights in one language: the matches, and the band of squares that
+     * happen to be on screen. At a glance the band read as part of the answer,
+     * and where the two overlapped there was nothing to tell them apart.
+     *
+     * The set the reader asked for wins, and the viewport marker steps back
+     * until the question is over. A single selection keeps it: one square lit
+     * is not a pattern to be read, and "where am I" is still worth knowing
+     * while you look at one instruction.
+     */
+    const many = state.kind === 'hover' || state.kind === 'tag' || state.kind === 'found';
+    if (many) mapEl.dataset['lit'] = '1';
+    else delete mapEl.dataset['lit'];
+
     const lines = [what];
     if (onlyKeys) lines.push(`Showing only these ${onlyKeys.size}. L or Escape to show the rest.`);
     else if (narrowTarget().length) lines.push('Press L to show only these.');
@@ -583,9 +602,26 @@ function start(
 
   results = searchInput && resultsEl ? new Results(resultsEl, searchInput, reveal) : null;
 
-  searchInput?.addEventListener('focus', () => results?.show(hits));
+  /*
+   * The matches are lit while the reader is in the box, and go out when they
+   * leave it.
+   *
+   * A query is typed a few letters at a time and lights a great deal on the way
+   * — `i` is most of the chart — so what the map shows during typing is a
+   * by-product of an unfinished word. Left behind afterwards it stops being an
+   * answer and becomes a wash over the page, and the next thing pointed at is
+   * read against it. The query stays in the box, the count stays beside it, and
+   * clicking back into the box brings the highlight back with the list.
+   */
+  searchInput?.addEventListener('focus', () => {
+    results?.show(hits);
+    highlighter.found(new Set(hits.map((hit) => hit.op.id)), searchInput.value.trim());
+  });
   // A click inside the list is handled on mousedown, before this runs.
-  searchInput?.addEventListener('blur', () => results?.hide());
+  searchInput?.addEventListener('blur', () => {
+    results?.hide();
+    highlighter.found(null, '');
+  });
 
   searchInput?.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {

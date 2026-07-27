@@ -2,7 +2,7 @@
   "section": {
     "id": "simd",
     "anchor": "simd",
-    "title": "Table D (SIMD)",
+    "title": "Table D SIMD",
     "mark": "D",
     "prefix": "FD",
     "start": 0,

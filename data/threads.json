@@ -2,7 +2,7 @@
   "section": {
     "id": "threads",
     "anchor": "threads",
-    "title": "Table E",
+    "title": "Table E Threads & Atomics",
     "mark": "E",
     "prefix": "FE",
     "start": 0,
