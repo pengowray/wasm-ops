@@ -540,10 +540,20 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .map-fold > summary:hover { color: var(--fg); }
 
 
-/* Above the chart: the sections run across, to spend width rather than height. */
+/*
+ * Above the chart: the sections run across, to spend width rather than height.
+ *
+ * Each hugs its own contents rather than being stretched to the height of the
+ * tallest in its row. Stretched, a section is a grid of two rows in a box
+ * taller than both, so the spare height goes *between* the label and the
+ * squares: on a phone, where three or four sections share a row with Table 0,
+ * the short ones had their squares floating half a centimetre below their own
+ * labels and level with nothing. Now every row of the map starts at the top.
+ */
 .map {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: flex-start;
 	gap: .6rem 1rem;
 	padding: .6rem 0;
 }
