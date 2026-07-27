@@ -266,6 +266,12 @@ function proposalList(ops: Opcode[], pool: Opcode[], sections: Section[]): strin
  * from — so the table was doing the defining, when the table is only where the
  * instructions are written down. What defines the byte is the encoding: a
  * prefix, a sub-opcode, one instruction.
+ *
+ * The lengths are spelled out because "variable-length" on its own tells a
+ * reader that the answer varies without telling them what it varies between.
+ * Two bytes and three is the whole of it in practice — 0xFD reaches 336 and
+ * 0xFB 183, and nothing is assigned anywhere near 16,383 — so the theoretical
+ * fourth byte is named as theoretical rather than left hanging.
  */
 function summarise(op: Opcode, sections: Section[]): string {
   const byte = `<span class="op-hex">0x${op.bytes[0]!.toString(16).toUpperCase()}</span>`;
@@ -273,9 +279,12 @@ function summarise(op: Opcode, sections: Section[]): string {
     .map((id) => sections.find((s) => s.id === id))
     .filter((section): section is Section => Boolean(section));
   return (
-    `The first byte of a multi-byte opcode. It is followed by a sub-opcode, ` +
-    `written as a u32 in LEB128. The prefix and the sub-opcode together are one ` +
-    `instruction.` +
+    `The first byte of a multi-byte opcode. The prefix is always a single byte; ` +
+    `the sub-opcode that follows is variable-length — an unsigned 32-bit integer ` +
+    `written in <i>Little Endian Base 128</i> (LEB128) encoding. The prefix and ` +
+    `sub-opcode together form one opcode: two bytes for a sub-opcode of 0 to 127, ` +
+    `then three bytes from 128 — where LEB128 parts company with the plain byte ` +
+    `value — as far as a theoretical 16,383.` +
     (opens.length
       ? ` The instructions prefixed with ${byte} are listed in ${sectionNames(opens)}.`
       : '')
