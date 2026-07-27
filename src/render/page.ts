@@ -238,11 +238,6 @@ ${chart}
 ${details}
 </section>
 
-<footer class="site-footer">
-	<button type="button" class="ghost about-open js-only">About, reference &amp; credits</button>
-	<span class="reviewed">Instruction data reviewed ${content.meta.reviewed}.</span>
-</footer>
-
 <!-- A dialog, so it covers the chart rather than pushing it down the page, and
      is out of the way until asked for. Without JavaScript there is nothing to
      open it, so the stylesheet leaves it as an ordinary block at the foot of

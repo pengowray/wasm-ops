@@ -150,7 +150,7 @@
 
 body {
 	margin: 0 auto;
-	padding: 1.5rem 1rem 4rem;
+	padding: 1.5rem 1rem;
 	max-width: 1600px;
 	font-family: Roboto, system-ui, sans-serif;
 	background: var(--bg);
@@ -1973,19 +1973,6 @@ code, .code {
 	font-size: 85%;
 	background: var(--surface-sunk);
 	border-radius: var(--radius);
-}
-
-/* ------------------------------------------------------------------- footer */
-
-.site-footer {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: baseline;
-	gap: .5rem 1rem;
-	margin-top: 3rem;
-	padding-top: .8rem;
-	font-size: .9rem;
-	border-top: 1px solid var(--rule-soft);
 }
 
 /* ------------------------------------------------------------------- about */
