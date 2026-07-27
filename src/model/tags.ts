@@ -106,7 +106,20 @@ export function tagsFor(op: Opcode): Tag[] {
   if ((pre.includes('atomic') || op.name.startsWith('atomic.')) && category !== 'atomic') {
     add('atomic', 'atomic', 'trait');
   }
-  if (op.prefix) add('prefixed', 'multi-byte opcode', 'trait');
+  /*
+   * How many bytes the opcode takes, for the ones that take more than one.
+   *
+   * "Multi-byte opcode" lit 457 instructions and told you the least
+   * interesting half of the fact. Everything behind a prefix is multi-byte;
+   * what varies is where the sub-opcode crosses 128 and needs a second LEB128
+   * byte — `i8x16.add` is FD 6E and `f16x8.add` is FD C1 02, one byte longer
+   * for a name that looks the same shape. The chip says which, and clicking it
+   * shows exactly where in each table the boundary falls.
+   *
+   * Read off the encoding rather than the sub-opcode, so it stays right if a
+   * table ever runs past 16384.
+   */
+  if (op.prefix) add(`bytes-${op.bytes.length}`, `${op.bytes.length}-byte opcode`, 'trait');
   if (op.immediateArgs) add('immediates', 'takes immediates', 'trait');
   if (op.stack) add('documented-stack', 'stack signature known', 'trait');
 
