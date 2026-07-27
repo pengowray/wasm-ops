@@ -161,7 +161,6 @@ export function renderPage(
 			</div>
 			<div class="filter-group">
 				<label class="toggle"><input type="checkbox" name="showProposals" checked><span>Proposals</span></label>
-				<label class="toggle" data-matrix-only><input type="checkbox" name="showReserved" checked><span>Unassigned slots</span></label>
 				<label class="toggle" title="Superseded, abandoned and stalled encodings — not what these bytes mean today"><input type="checkbox" name="showHistorical"><span>Legacy, withdrawn &amp; dormant</span></label>
 			</div>
 			<div class="filter-group">

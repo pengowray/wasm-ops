@@ -58,12 +58,6 @@ export interface ViewOptions {
   columns: 8 | 16;
   /** Sections to include. */
   sections: SectionId[];
-  /**
-   * Include unassigned slots. Only applies to the byte grid, where a gap tells
-   * you that a byte value is unused. A row or tile of nothing tells you
-   * nothing, so the other layouts drop them regardless.
-   */
-  showReserved: boolean;
   /** Include instructions that are still proposals. */
   showProposals: boolean;
   /**
@@ -88,7 +82,6 @@ export const DEFAULT_VIEW: ViewOptions = {
   order: 'opcode',
   columns: 16,
   sections: ['core', 'gc', 'fc', 'simd', 'threads'],
-  showReserved: true,
   showProposals: true,
   showHistorical: false,
 };
@@ -163,7 +156,18 @@ function distinctProposals(ops: Opcode[]): string[] {
  * searching should do in each.
  */
 function passesStatus(op: Opcode, options: ViewOptions): boolean {
-  if (op.status === 'reserved' && !options.showReserved) return false;
+  /*
+   * Unassigned slots are never filtered out on their own account. The byte grid
+   * is a picture of a numbering, and a byte nothing has been assigned to is one
+   * of the facts it is drawing — the gaps are where the next proposal will go.
+   * There was a control for hiding them, which turned that picture into a
+   * scatter of islands and answered a question nobody had. (The card and table
+   * layouts drop them regardless: those list instructions, and an unassigned
+   * slot is not one.)
+   *
+   * They can still be filtered by "only these", below, where the reader has
+   * named a set and an unnamed byte is not in it.
+   */
   if (op.status === 'proposal' && !options.showProposals) return false;
   if (HISTORICAL.includes(op.status) && !options.showHistorical) return false;
   if (options.match && !options.match(op)) return false;

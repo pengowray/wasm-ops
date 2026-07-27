@@ -270,7 +270,6 @@ function start(
     options.order = (form.get('order') as ViewOptions['order']) ?? 'opcode';
     options.sections = form.getAll('section') as SectionId[];
     options.showProposals = form.get('showProposals') !== null;
-    options.showReserved = form.get('showReserved') !== null;
     options.showHistorical = form.get('showHistorical') !== null;
     const colour = form.get('colourByProposal') !== null ? 'proposal' : '';
     chart.dataset['colour'] = colour;
@@ -284,9 +283,7 @@ function start(
   function updateBadge(): void {
     if (!badge) return;
     const filtering =
-      options.sections.length < data.sections.length ||
-      !options.showProposals ||
-      (options.layout === 'matrix' && !options.showReserved);
+      options.sections.length < data.sections.length || !options.showProposals;
     badge.hidden = !filtering;
   }
 
@@ -619,7 +616,6 @@ function start(
     setChecks('section', () => true);
     for (const [name, on] of [
       ['showProposals', true],
-      ['showReserved', true],
       ['showHistorical', false],
       ['colourByProposal', false],
     ] as [string, boolean][]) {
@@ -643,7 +639,7 @@ function start(
 
   document.getElementById('preset-all')?.addEventListener('click', () => {
     setChecks('section', () => true);
-    for (const name of ['showProposals', 'showReserved', 'showHistorical']) {
+    for (const name of ['showProposals', 'showHistorical']) {
       (toolbar.querySelector(`input[name="${name}"]`) as HTMLInputElement).checked = true;
     }
     readToolbar();
