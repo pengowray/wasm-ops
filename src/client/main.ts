@@ -187,12 +187,12 @@ function start(
     // the query rather than the byte.
     const unsearched: ViewOptions = { ...options, match: undefined };
     for (const cell of chart.querySelectorAll<HTMLElement>('.prefix-cell[data-tables]')) {
-      const behind = JSON.parse(cell.dataset['tables']!) as { id: SectionId; emoji: string }[];
+      const behind = JSON.parse(cell.dataset['tables']!) as { id: SectionId; mark: string }[];
       const shown = behind
-        .map(({ id, emoji }) =>
+        .map(({ id, mark }) =>
           prefixTable(
             id,
-            emoji,
+            mark,
             data.opcodes.filter((op) => op.section === id && op.name && visible(op, unsearched)),
           ),
         )

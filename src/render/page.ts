@@ -1,3 +1,4 @@
+import { tableMark } from '../model/types.ts';
 import type { OpcodeData } from '../model/types.ts';
 import { buildView, DEFAULT_VIEW, type ViewOptions } from '../model/view.ts';
 import { hasDetail, renderDetail, renderItem } from './items.ts';
@@ -70,7 +71,7 @@ export function renderPage(
     .map(
       (section) =>
         `<label class="toggle"><input type="checkbox" name="section" value="${section.id}" checked>` +
-        `<span>${section.emoji ? section.emoji + ' ' : ''}${section.title}</span></label>`,
+        `<span>${tableMark(section.mark)} ${section.title}</span></label>`,
     )
     .join('\n');
 

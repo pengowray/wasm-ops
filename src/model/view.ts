@@ -103,7 +103,7 @@ export type ViewItem =
       /** HTML id for the heading — the link target for jumps and deep links. */
       anchor: string;
       label: string;
-      emoji?: string;
+      mark?: string;
       intro?: string;
       count: number;
       /** Proposals the instructions in this group came through. */
@@ -399,7 +399,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         key: `group:section:${section.id}`,
         anchor: section.anchor,
         label: section.title,
-        ...(section.emoji ? { emoji: section.emoji } : {}),
+        ...(section.mark ? { mark: section.mark } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
         count: showing.length,
         proposals: distinctProposals(showing),
@@ -490,7 +490,7 @@ export function buildView(data: OpcodeData, options: ViewOptions): ViewItem[] {
         key: `group:section:${section.id}`,
         anchor: section.anchor,
         label: section.title,
-        ...(section.emoji ? { emoji: section.emoji } : {}),
+        ...(section.mark ? { mark: section.mark } : {}),
         ...(section.intro ? { intro: section.intro } : {}),
         count: group.length,
         proposals: distinctProposals(group),

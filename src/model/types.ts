@@ -14,9 +14,19 @@ export type SectionId = 'core' | 'gc' | 'fc' | 'simd' | 'threads';
 
 export interface Section {
   id: SectionId;
-  /** Heading text, without the emoji. */
+  /** Heading text, without the mark. */
   title: string;
-  emoji?: string;
+  /**
+   * The one character a table is recognised by: its letter, or `0` for the
+   * table of single-byte opcodes.
+   *
+   * It was an emoji per table — ⭕, ⭐, 🌀, 🧵 — chosen when the tables were
+   * named after proposals and there was nothing in a name to abbreviate. Now
+   * that they are lettered, the letter is the abbreviation, and it says which
+   * table rather than merely standing for one. It is also the same character in
+   * every font, which no emoji is.
+   */
+  mark?: string;
   /**
    * The heading's HTML id. Kept as whatever the page has always used, because
    * those anchors are linked from inside the chart and from outside the site.
@@ -146,6 +156,23 @@ export interface Opcode {
 export interface OpcodeData {
   sections: Section[];
   opcodes: Opcode[];
+}
+
+/**
+ * A table's mark, drawn: the character reversed out of a filled square.
+ *
+ * Inverted rather than set as a plain letter because it appears beside running
+ * text — in a heading, in a filter's label, on the line a doorway byte says
+ * where it leads — and a bare `B` there is a word of the sentence. A block of
+ * ink with a letter knocked out of it is a symbol, which is what it stands in
+ * for and what an emoji was doing in the same places.
+ *
+ * Sized in `em`, so it takes the scale of whatever it is set beside rather than
+ * needing one rule per place it appears.
+ */
+export function tableMark(mark: string | undefined): string {
+  if (!mark) return '';
+  return `<span class="table-mark" aria-hidden="true">${mark}</span>`;
 }
 
 /** LEB128-encode an unsigned integer. */

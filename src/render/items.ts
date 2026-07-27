@@ -7,7 +7,7 @@
  */
 
 import type { Opcode } from '../model/types.ts';
-import { toHex } from '../model/types.ts';
+import { tableMark, toHex } from '../model/types.ts';
 import { addWordBreaks, tokenise } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
 import { proposal, standing } from '../model/proposals.ts';
@@ -379,7 +379,7 @@ export function renderItem(item: ViewItem): string {
     case 'group':
       return (
         `<h2 class="group" data-key="${escapeHtml(item.key)}" id="${escapeHtml(item.anchor)}">` +
-        (item.emoji ? `<span class="group-emoji">${item.emoji}</span> ` : '') +
+        (item.mark ? `${tableMark(item.mark)} ` : '') +
         headingTag(item.label, item.tag) +
         ` ${renderCount(item.count)}` +
         (item.intro ? `<span class="group-intro">${item.intro}</span>` : '') +

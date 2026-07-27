@@ -750,6 +750,39 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 .chart > .group:first-child { margin-top: .5rem; }
 
+/*
+ * A table's mark: its letter reversed out of a filled square.
+ *
+ * The tables carried an emoji each — ⭕, ⭐, 🌀, 🧵 — back when they were named
+ * after proposals and there was nothing in a name to abbreviate to. Lettered,
+ * the letter is the abbreviation, and it names the table instead of merely
+ * standing for one. Inverted so that it still reads as a symbol beside running
+ * text rather than as a stray capital in the middle of a sentence.
+ *
+ * Everything is in `em`, so one rule serves a 1.25rem heading, a .62rem map
+ * label and the line inside a byte-grid cell.
+ */
+.table-mark {
+	display: inline-block;
+	min-width: 1.35em;
+	padding: 0 .18em;
+	font-family: 'Source Code Pro', monospace;
+	font-size: .82em;
+	font-weight: 700;
+	line-height: 1.35;
+	text-align: center;
+	color: var(--bg);
+	background: var(--fg-dim);
+	border-radius: .18em;
+	/* It sits beside text of another size in several places; centring it on the
+	   x-height rather than the baseline keeps it level with all of them. */
+	vertical-align: .04em;
+}
+
+/* Two marks in a row, on a doorway byte that opened more than one table, would
+   otherwise run together into one block of ink. */
+.table-mark + .table-mark { margin-left: .2em; }
+
 .group-count {
 	margin-left: .4rem;
 	padding: .05rem .4rem;
@@ -1306,10 +1339,10 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	font-style: italic;
 	color: var(--enc-sub);
 }
-/* A line of its own: the emoji are how a table is recognised at a glance, and
-   trailing a range and a badge they read as punctuation on the end of a number
-   rather than as the tables they stand for. */
-.prefix-emoji { flex: 0 0 100%; line-height: 1.4; letter-spacing: .1em; }
+/* A line of its own: the mark is how a table is recognised at a glance, and
+   trailing a range and a badge it reads as punctuation on the end of a number
+   rather than as the table it stands for. */
+.prefix-marks { flex: 0 0 100%; line-height: 1.6; }
 
 /* Given a column of its own the lines run left to right like the rest of a
    table row. */

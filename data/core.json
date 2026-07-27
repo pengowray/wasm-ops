@@ -2,7 +2,8 @@
   "section": {
     "id": "core",
     "anchor": "core",
-    "title": "Table A (core)",
+    "title": "Table 0",
+    "mark": "0",
     "prefix": "",
     "start": 0,
     "count": 256,

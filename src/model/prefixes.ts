@@ -17,6 +17,7 @@
 import { proposal } from './proposals.ts';
 import {
   HISTORICAL,
+  tableMark,
   type Opcode,
   type OpcodeData,
   type Section,
@@ -75,13 +76,12 @@ function live(ops: Opcode[]): Opcode[] {
 
 /**
  * The cell's own text: the prefix byte, then a line per table behind it giving
- * how far it runs and how much of it is in use, with the table's emoji at the
+ * how far it runs and how much of it is in use, with the table's mark at the
  * end of its line.
  *
  * The lines are marked with their section so the client can drop the ones the
- * reader is not being shown. Reference-typed strings is dormant and hidden by
- * default; advertising `➰ 128–159` on a byte whose string table is nowhere on
- * the page is an invitation to look for something that is not there.
+ * reader is not being shown: a doorway that advertises a table nowhere on the
+ * page is an invitation to look for something that is not there.
  */
 /** A run of opcodes reduced to the three numbers a doorway cell quotes. */
 export interface PrefixTable {
@@ -89,7 +89,7 @@ export interface PrefixTable {
   low: number;
   high: number;
   n: number;
-  emoji: string;
+  mark: string;
 }
 
 /**
@@ -101,11 +101,11 @@ export interface PrefixTable {
  * turning the dormant string table on takes 0xFB from `0–38, 39` to
  * `0–183, 88`, and both are true statements about that byte.
  */
-export function prefixTable(id: SectionId, emoji: string, ops: Opcode[]): PrefixTable | null {
+export function prefixTable(id: SectionId, mark: string, ops: Opcode[]): PrefixTable | null {
   if (!ops.length) return null;
   return {
     id,
-    emoji,
+    mark,
     low: Math.min(...ops.map((o) => o.code)),
     high: Math.max(...ops.map((o) => o.code)),
     n: ops.length,
@@ -117,12 +117,9 @@ export function prefixTable(id: SectionId, emoji: string, ops: Opcode[]): Prefix
  * reader: how far they run altogether, how many bytes of that are assigned,
  * and which tables they are.
  *
- * One line rather than one per table. Behind 0xFD are the SIMD table at 0–255
- * and the vector extensions at 256–335, which is not two things behind that
- * byte — it is one range of 336, broken in the middle for reasons that belong
- * to the chart and not to the encoding. Behind 0xFB, with the string table
- * shown, it is 0–183. The same sentence either way: this byte, then a value in
- * this range.
+ * One line rather than one per table, and now one table behind each byte in any
+ * case: 0xFD opens a single range of 336 and 0xFB one of 0–183. The sentence is
+ * the same either way — this byte, then a value in this range.
  *
  * Which tables are in front of the reader is the client's business, so this is
  * recomputed there as the filters change; see `syncPrefixLines`.
@@ -132,11 +129,11 @@ export function prefixLine(tables: PrefixTable[]): string {
   const low = Math.min(...tables.map((t) => t.low));
   const high = Math.max(...tables.map((t) => t.high));
   const count = tables.reduce((total, t) => total + t.n, 0);
-  const emoji = tables.map((t) => t.emoji).join('');
+  const marks = tables.map((t) => tableMark(t.mark)).join('');
   return (
     `<span class="prefix-range">${low === high ? dec(low) : `${dec(low)}–${dec(high)}`}</span>` +
     badge(count) +
-    (emoji ? `<span class="prefix-emoji">${emoji}</span>` : '')
+    (marks ? `<span class="prefix-marks">${marks}</span>` : '')
   );
 }
 
@@ -159,7 +156,7 @@ function cellText(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
       const ops = opcodes.filter(
         (o) => o.section === id && o.name && !HISTORICAL.includes(o.status),
       );
-      return prefixTable(id, section.emoji ?? '', ops);
+      return prefixTable(id, section.mark ?? '', ops);
     })
     .filter((entry): entry is PrefixTable => entry !== null)
     .sort((a: PrefixTable, b: PrefixTable) => a.low - b.low);
@@ -167,7 +164,7 @@ function cellText(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
   // Only the identities travel in the markup; the figures are recomputed in the
   // browser from the filters in force there.
   const behind = ids
-    .map((id) => ({ id, emoji: sections.find((s) => s.id === id)?.emoji ?? '' }))
+    .map((id) => ({ id, mark: sections.find((s) => s.id === id)?.mark ?? '' }))
     .sort(
       (a, b) =>
         (sections.find((s) => s.id === a.id)?.start ?? 0) -
@@ -227,7 +224,7 @@ function describe(op: Opcode, sections: Section[], opcodes: Opcode[]): string {
       if (!section || !ops.length) return '';
       return (
         `<li><a href="#${esc(section.anchor)}">` +
-        (section.emoji ? `${section.emoji} ` : '') +
+        `${tableMark(section.mark)} ` +
         `${esc(section.title)}</a> — sub-opcodes ${range(ops)}, ${badge(ops.length)}</li>`
       );
     })

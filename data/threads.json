@@ -3,7 +3,7 @@
     "id": "threads",
     "anchor": "threads",
     "title": "Table E",
-    "emoji": "🧵",
+    "mark": "E",
     "prefix": "FE",
     "start": 0,
     "count": 128,
