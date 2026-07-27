@@ -7,7 +7,7 @@
     "prefix": "",
     "start": 0,
     "count": 256,
-    "intro": "Single-byte instructions. Gaps are reserved for future extensions."
+    "intro": "Single-byte instructions."
   },
   "opcodes": [
     {

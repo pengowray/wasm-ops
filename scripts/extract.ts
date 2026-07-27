@@ -50,7 +50,7 @@ interface SectionSpec extends Omit<Section, 'id'> {
 const SECTIONS: SectionSpec[] = [
   {
     id: 'core', tableId: 'opcodes', anchor: 'core', title: 'Core instructions', prefix: '', start: 0, count: 0,
-    intro: 'Single-byte instructions. Gaps are reserved for future extensions.',
+    intro: 'Single-byte instructions.',
   },
   {
     id: 'gc', tableId: 'opcodes_FB', anchor: 'gc', title: 'GC Proposal', prefix: 'FB', start: 0, count: 0,
@@ -73,7 +73,7 @@ const SECTIONS: SectionSpec[] = [
   {
     id: 'simd-ext', tableId: 'opcodes_FD1', anchor: 'simd-ext', title: 'Vector extensions',
     prefix: 'FD', start: 0x100, count: 0,
-    intro: 'Relaxed SIMD prototype opcodes, in the 0xFD 0x1__ range.',
+    intro: 'Relaxed SIMD prototype opcodes.',
   },
   {
     id: 'threads', tableId: 'opcodes_FE', anchor: 'threads', title: 'Threads', prefix: 'FE', start: 0, count: 0,

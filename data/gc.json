@@ -7,7 +7,7 @@
     "prefix": "FB",
     "start": 0,
     "count": 192,
-    "intro": "Structs, arrays, typed references and strings: everything written as 0xFB followed by a sub-opcode. The string instructions from 128 up are a phase 1 proposal, inactive since 2023, and appear only with “Legacy, withdrawn &amp; dormant” turned on."
+    "intro": "Multibyte instructions beginning with 0xFB."
   },
   "opcodes": [
     {

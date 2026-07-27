@@ -7,7 +7,7 @@
     "prefix": "FD",
     "start": 0,
     "count": 336,
-    "intro": "Vector instructions — single instruction, multiple data — written as 0xFD followed by a sub-opcode. Fixed-width SIMD runs from 0; relaxed SIMD and half precision carry on from 256."
+    "intro": "Multibyte instructions beginning with 0xFD: Vector instructions."
   },
   "opcodes": [
     {
