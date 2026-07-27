@@ -108,11 +108,18 @@ export function renderPage(
 	     search box among them. See dockSearch. -->
 	<div class="control control-search js-only">
 		<label for="search">Search</label>
-		<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
-			autocomplete="off" autocorrect="off" spellcheck="false"
-			role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list"
-			aria-describedby="search-count"
-			title="Searches names, opcodes, properties and descriptions. All words must match. Bytes match in hex or decimal: 11, 0x11 and 17 all find call_indirect.">
+		<span class="search-field">
+			<input type="search" id="search" name="q" placeholder="name, byte, tag:signed"
+				autocomplete="off" autocorrect="off" spellcheck="false"
+				role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list"
+				aria-describedby="search-count"
+				title="Searches names, opcodes, properties and descriptions. All words must match. Bytes match in hex or decimal: 11, 0x11 and 17 all find call_indirect.">
+			<button type="button" class="search-x" id="search-x" aria-label="Clear search" title="Clear search" hidden>&times;</button>
+		</span>
+		<!-- Under the box, on a line kept clear for it whether or not there is a
+		     count to put there. Beside the box it was five and a half rems of
+		     reserved width that collapsed when empty, so the box itself slid
+		     sideways the moment anyone typed. -->
 		<span class="search-count" id="search-count" role="status"></span>
 		<!-- The ranked answer. The chart lights every match; this says which one
 		     the query most likely meant. -->

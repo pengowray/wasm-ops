@@ -273,17 +273,38 @@ h1 { font-size: 1.5rem; margin: 0; }
 
 /* ----------------------------------------------------------------- search */
 
-/* The list hangs off the box, so the box is what it is measured from. */
-.control-search { gap: .4rem; position: relative; }
+/*
+ * Two rows: the label and the box, then the count under the box.
+ *
+ * A grid rather than a wrapping flex row, so the count lines up with the box
+ * above it rather than with the label beside it. `.js-only` reveals its
+ * elements with `display: flex` from a two-class selector, so this needs the
+ * same weight to change the box at all.
+ *
+ * The list still hangs off this element, which is what `position: relative` is
+ * for — and now it clears the count as well, since the count is inside the box
+ * it measures from.
+ */
+.js .control-search {
+	display: grid;
+	grid-template-columns: auto minmax(0, auto);
+	align-items: center;
+	gap: 0 .4rem;
+}
+.control-search { position: relative; }
 .control-search label {
 	color: var(--fg-faint);
 	font-size: .72rem;
 	text-transform: uppercase;
 	letter-spacing: .06em;
 }
+/* The box and the button that sits inside its right-hand end. */
+.search-field { position: relative; display: flex; align-items: center; }
+
 #search {
 	width: 11rem;
-	padding: .25rem .55rem;
+	/* Room at the end for the clear button, which is drawn over it. */
+	padding: .25rem 1.55rem .25rem .55rem;
 	font: inherit;
 	font-size: .85rem;
 	color: var(--fg);
@@ -293,16 +314,56 @@ h1 { font-size: 1.5rem; margin: 0; }
 }
 #search:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 #search::placeholder { color: var(--fg-faint); }
-/* The count is live text, so it must not shift the controls beside it as the
-   number changes width. */
+/* Chrome puts its own cross in a search input. One is enough, and the other one
+   is the one that can be styled and can be relied on in every browser. */
+#search::-webkit-search-cancel-button { display: none; }
+
+/*
+ * Clearing the box, from inside it.
+ *
+ * There is a "Clear search" button in the nothing-matched message already, but
+ * that only exists when nothing matched — which is the one case where the
+ * reader can see that the query is the problem. The usual case is a query that
+ * found something and has been read, and there was nothing to press.
+ */
+.search-x {
+	position: absolute;
+	right: .3rem;
+	display: grid;
+	place-items: center;
+	width: 1.1rem;
+	height: 1.1rem;
+	padding: 0;
+	font: inherit;
+	font-size: 1rem;
+	line-height: 1;
+	color: var(--fg-faint);
+	background: none;
+	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.search-x:hover { color: var(--fg); background: var(--rule-soft); }
+/* `display: grid` above would otherwise beat the attribute. */
+.search-x[hidden] { display: none; }
+
+/*
+ * The count goes under the box, in the second column so that it lines up with
+ * it, on a line that is there whether or not there is anything to say. Beside
+ * the box it reserved five and a half rems that collapsed when empty, so the
+ * box slid sideways the moment anyone typed — and in the masthead, where the
+ * control is pushed to the right, it slid the moment the number changed width.
+ */
 .search-count {
-	min-width: 5.5rem;
-	font-size: .75rem;
+	grid-column: 2;
+	min-height: 1.1em;
+	margin-top: .1rem;
+	font-size: .72rem;
+	line-height: 1.1;
 	color: var(--fg-faint);
 	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
 }
-
-.search-count:empty { min-width: 0; }
 
 /*
  * `js-only` reveals its elements with `display: flex`, which beats the `hidden`
@@ -337,8 +398,15 @@ h1 { font-size: 1.5rem; margin: 0; }
 	position: absolute;
 	top: 100%;
 	left: 0;
+	right: auto;
 	z-index: 60;
-	width: max(22rem, 100%);
+	/*
+	 * Wider than the box it hangs from, but never wider than the page. On a
+	 * phone the box is a third of the width and the list is twenty-two rems, so
+	 * without the cap it ran off the side and gave the whole document a
+	 * horizontal scrollbar.
+	 */
+	width: min(max(22rem, 100%), calc(100vw - 1rem));
 	max-height: 22rem;
 	margin: .3rem 0 0;
 	padding: .2rem;
@@ -350,6 +418,15 @@ h1 { font-size: 1.5rem; margin: 0; }
 	box-shadow: 0 10px 30px rgb(0 0 0 / .22);
 }
 .search-results[hidden] { display: none; }
+
+/*
+ * Hung from whichever edge of the box has the room.
+ *
+ * The box has two homes and they sit at opposite ends: pushed to the right of
+ * the masthead, first control on the left of the toolbar. A list wider than the
+ * box has to open away from the near edge in each case, or it leaves the page.
+ */
+.site-header .search-results { left: auto; right: 0; }
 
 .result {
 	display: grid;

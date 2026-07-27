@@ -490,6 +490,7 @@ function start(
   const searchEmpty = document.getElementById('search-empty');
   const emptyTerm = searchEmpty?.querySelector('.search-empty-term');
   const resultsEl = document.getElementById('search-results');
+  const clearX = document.getElementById('search-x') as HTMLButtonElement | null;
   let results: Results | null = null;
   let hits: SearchHit[] = [];
 
@@ -507,6 +508,9 @@ function start(
     const total = countShown(data, { ...options, match: undefined });
     const found = hits.length;
     if (searchCount) searchCount.textContent = query ? `${found} of ${total}` : '';
+    // Against the raw value rather than the trimmed query: a box holding a
+    // space has something in it to clear, and looks like it does.
+    if (clearX) clearX.hidden = !searchInput?.value;
     if (searchEmpty) searchEmpty.hidden = !query || found > 0;
     if (emptyTerm) emptyTerm.textContent = query;
   }
@@ -545,6 +549,8 @@ function start(
 
   let searchTimer = 0;
   searchInput?.addEventListener('input', () => {
+    // The cross follows the keystroke, not the debounced search behind it.
+    if (clearX) clearX.hidden = !searchInput.value;
     window.clearTimeout(searchTimer);
     // Long enough to gather a burst of typing, short enough that the list looks
     // like it is following the query rather than catching up with it.
@@ -606,6 +612,19 @@ function start(
     } else {
       searchInput.blur();
     }
+  });
+
+  /*
+   * `mousedown` would blur the box before the click landed, which hides the
+   * result list and, on the masthead, is a visible flicker. Suppressing it
+   * leaves the cursor where it was: cleared and still ready to type.
+   */
+  clearX?.addEventListener('mousedown', (event) => event.preventDefault());
+  clearX?.addEventListener('click', () => {
+    if (!searchInput) return;
+    searchInput.value = '';
+    applySearch();
+    searchInput.focus();
   });
 
   document.getElementById('search-clear')?.addEventListener('click', () => {
