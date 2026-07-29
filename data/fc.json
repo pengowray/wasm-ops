@@ -186,8 +186,8 @@
         "mainop": "init"
       },
       "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>",
+      "immediateArgs": "y x",
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : memidx</span></li></ol>",
       "proposal": "bulk-memory"
     },
     {
@@ -768,7 +768,7 @@
       "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Loads two bytes as an f16 and promotes the result to f32.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "parts": {
         "pre": "f32",
         "mainop": "load",
@@ -789,7 +789,7 @@
       "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Demotes an f32 to f16 and stores it as two bytes.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "parts": {
         "pre": "f32",
         "mainop": "store",

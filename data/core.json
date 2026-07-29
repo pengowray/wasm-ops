@@ -64,11 +64,12 @@
       "parts": {
         "mainop": "block"
       },
-      "immediateArgs": "[t<sup>?</sup>]",
-      "followedBy": "<ol>\n<li>i8 <i>rt</i> : blocktype — 0x40 = [], 0x7F = [i32], 0x7E = [i64], 0x7D = [f32], 0x7C = [f64]</li>\n<li>instructions</li>\n<li>0x0B — end</li>\n</ol>",
+      "immediateArgs": "bt",
+      "followedBy": "<ol>\n<li>s33 <i>bt</i> : blocktype — 0x40 for no result; one valtype byte (0x7F i32, 0x7E i64, 0x7D f32, 0x7C f64, 0x7B v128, or a reference type) for one result; or a typeidx of 0 or more, naming a function type, for a block that takes or returns more than one value</li>\n<li>instructions</li>\n<li>0x0B — end</li>\n</ol>",
       "stack": {
-        "html": "[] → [t<sup>∗</sup>]",
-        "note": "<p>The result type of the instructions must match the blocktype. </p>\n<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. They must be well-nested.</p>"
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "note": "<p>Both the parameter and result types come from the <i>bt</i> immediate.</p>\n<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. They must be well-nested.</p>",
+        "large": true
       },
       "description": "<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>",
       "proposal": "mvp"
@@ -86,10 +87,12 @@
       "parts": {
         "mainop": "loop"
       },
-      "immediateArgs": "[t<sup>?</sup>]",
-      "followedBy": "<ol>\n<li>i8 <i>rt</i> : blocktype — 0x40 = [], 0x7F = [i32], 0x7E = [i64], 0x7D = [f32], 0x7C = [f64]</li>\n<li>instructions</li>\n<li>0x0B — end</li>\n</ol>",
+      "immediateArgs": "bt",
+      "followedBy": "<ol>\n<li>s33 <i>bt</i> : blocktype — 0x40 for no result; one valtype byte (0x7F i32, 0x7E i64, 0x7D f32, 0x7C f64, 0x7B v128, or a reference type) for one result; or a typeidx of 0 or more, naming a function type, for a block that takes or returns more than one value</li>\n<li>instructions</li>\n<li>0x0B — end</li>\n</ol>",
       "stack": {
-        "html": "[] → [t<sup>∗</sup>]"
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "large": true,
+        "note": "<p>Both the parameter and result types come from the <i>bt</i> immediate.</p>"
       },
       "description": "<p>a block with a label at the beginning which may be used to form loops</p>",
       "proposal": "mvp"
@@ -107,11 +110,12 @@
       "parts": {
         "mainop": "if"
       },
-      "immediateArgs": "[t<sup>?</sup>]",
-      "followedBy": "<ol>\n<li>i8 <i>rt</i> : blocktype — 0x40 = [], 0x7F = [i32], 0x7E = [i64], 0x7D = [f32], 0x7C = [f64]</li>\n<li>instructions<sub>1</sub></li>\n<li>0x0B — end</li>\n</ol>\nor\n<ol>\n<li>i8 <i>rt</i> : blocktype</li>\n<li>instructions<sub>1</sub></li>\n<li>0x05 — else</li>\n<li>instructions<sub>2</sub></li>\n<li>0x0B — end</li>\n</ol>",
+      "immediateArgs": "bt",
+      "followedBy": "<ol>\n<li>s33 <i>bt</i> : blocktype — 0x40 for no result; one valtype byte (0x7F i32, 0x7E i64, 0x7D f32, 0x7C f64, 0x7B v128, or a reference type) for one result; or a typeidx of 0 or more, naming a function type, for a block that takes or returns more than one value</li>\n<li>instructions<sub>1</sub> — run when the condition is non-zero</li>\n<li>optionally 0x05 — else, then instructions<sub>2</sub>, run when it is zero</li>\n<li>0x0B — end</li>\n</ol>",
       "stack": {
-        "html": "[i32] → [t<sup>∗</sup>]",
-        "note": "<span class=\"op-type\">i32 <i>c</i> → [t<sup>∗</sup>]</span>\n<span class=\"op-type\">if <i>c</i> is non-zero, enter block instructions<sub>1</sub>, else enter block instructions<sub>2</sub></span>"
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "note": "<p>Both the parameter and result types come from the <i>bt</i> immediate.</p>\n<p>The i32 on top is the condition: non-zero runs the first branch, zero runs the else-branch if there is one.</p>",
+        "large": true
       },
       "description": "<p>the beginning of an if construct with an implicit <i>then</i> block</p>",
       "proposal": "mvp"
@@ -147,7 +151,9 @@
       },
       "description": "<p>begins a block which can handle thrown exceptions</p>",
       "proposal": "legacy-exception-handling",
-      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
+      "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
+      "immediateArgs": "bt",
+      "followedBy": "<ol>\n<li>s33 <i>bt</i> : blocktype — 0x40 for no result; one valtype byte (0x7F i32, 0x7E i64, 0x7D f32, 0x7C f64, 0x7B v128, or a reference type) for one result; or a typeidx of 0 or more, naming a function type, for a block that takes or returns more than one value</li>\n<li>instructions</li>\n<li>zero or more 0x07 — catch clauses, optionally ending with 0x19 — catch_all, or a single 0x18 — delegate</li>\n<li>0x0B — end</li>\n</ol>"
     },
     {
       "id": "0x07",
@@ -253,7 +259,7 @@
       "immediateArgs": "l",
       "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>\n<p>Label 0 refers to the innermost structured control instruction enclosing the referring branch instruction, while increasing indices refer to those farther out.</p>",
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>∗</sup>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
         "large": true,
         "note": "<p>A branch targeting a <i>block</i> or <i>if</i> behaves like a break statement in most C-like languages, while a branch targeting a <i>loop</i> behaves like a continue statement.</p>\n<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
@@ -276,7 +282,7 @@
       "immediateArgs": "l",
       "followedBy": "<span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span>",
       "stack": {
-        "html": "[t<sup>?</sup> i32] → [t<sup>?</sup>]"
+        "html": "[t<sup>∗</sup> i32] → [t<sup>∗</sup>]"
       },
       "description": "<p>Performs a conditional branch, branching if i32 <i>c</i> is non-zero.</p>\n<p>Conditionally branch to a given label in an enclosing construct.</p>",
       "proposal": "mvp"
@@ -295,9 +301,9 @@
         "mainop": "br_table"
       },
       "immediateArgs": "l* l",
-      "followedBy": "<ol>\n<li><span class=\"op-imm-args\">u32 <i>l*</i> : vec( labelidx )</span></li>\n<li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx </span></li>\n</ol>",
+      "followedBy": "<ol>\n<li><span class=\"op-imm-args\"><i>l*</i> : list(labelidx) — the branch table</span></li>\n<li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx — the default target</span></li>\n</ol>",
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>∗</sup> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
         "large": true,
         "note": "<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
@@ -318,7 +324,7 @@
         "mainop": "return"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>?</sup>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>∗</sup>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
         "large": true,
         "note": "<p><b>stack-polymorphic</b>: performs an <i>unconditional control transfer</i>.</p>"
       },
@@ -360,11 +366,12 @@
       "parts": {
         "mainop": "call_indirect"
       },
-      "immediateArgs": "x",
-      "followedBy": "<ol>\n<li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li>\n<li><span class=\"op-imm-args\">0x00</span> — zero byte</li>\n</ol>",
+      "immediateArgs": "y x",
+      "followedBy": "<ol>\n<li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li>\n<li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li>\n</ol>",
       "stack": {
-        "html": "[t<sup>?</sup> i32] → [t<sup>?</sup>]",
-        "note": "<p>In future versions of WebAssembly, the zero byte may be used to index additional tables.</p>"
+        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "note": "<p>The i32 selects an entry of table <i>x</i>; the call traps unless that entry holds a function of type <i>y</i>. Before reference types this second immediate was always 0x00, the only table there was.</p>",
+        "large": true
       },
       "description": "<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>",
       "proposal": "mvp"
@@ -513,7 +520,7 @@
       },
       "stack": {
         "html": "[t] → []",
-        "note": "(value-polymorphic)"
+        "note": "<p>Works on any single value: <i>t</i> is whatever is on top.</p>"
       },
       "description": "<p>The drop instruction simply throws away a single operand.</p><p>Arguably the only stack manipulation instruction WebAssembly has. There is no <code>dup</code>, <code>swap</code> or <code>rot</code>, and no way to reach past the top of the stack. See <a href=\"https://purplesyringa.moe/blog/wasm-is-not-quite-a-stack-machine/\">WebAssembly is not quite a stack machine</a>, by purplesyringa.</p>",
       "proposal": "mvp"
@@ -533,7 +540,7 @@
       },
       "stack": {
         "html": "[t t i32] → [t]",
-        "note": "(value-polymorphic)"
+        "note": "<p>Works on any value type, as long as both candidates have the same one — but only a number or vector type. For a reference, use the annotated form <i>select t</i> (0x1C).</p>"
       },
       "description": "<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>",
       "proposal": "mvp"
@@ -553,7 +560,7 @@
       },
       "description": "<p>Only annotated 'select' can be used with reference types.</p>",
       "immediateArgs": "t*",
-      "followedBy": "<span class=\"op-imm-args\"><i>t*</i> : vec(valtype)</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>t*</i> : list(valtype) — currently exactly one</span>",
       "proposal": "reference-types"
     },
     {
@@ -594,7 +601,7 @@
       "description": "<p>begins a block which can handle thrown exceptions</p>",
       "proposal": "exception-handling",
       "immediateArgs": "bt c*",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>bt</i> : blocktype</span></li><li><span class=\"op-imm-args\"><i>c*</i> : vec(catch)</span></li></ol><p>Then instructions, then <i>end</i> (0x0B).</p>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>bt</i> : blocktype</span></li><li><span class=\"op-imm-args\"><i>c*</i> : list(catch)</span></li></ol><p>Then instructions, then <i>end</i> (0x0B).</p>"
     },
     {
       "id": "0x20",
@@ -774,10 +781,10 @@
         "mainop": "load"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg { u32 offset, u32 align }</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "stack": {
         "html": "[i32] → [i32]",
-        "note": "<span class=\"op-type\">i : address-operand → c : result</span>\n<p>Memory is accessed with load and store instructions for the different value types. They all take a memory immediate <i>memarg</i> that contains an address offset and the expected alignment.</p>\n<p>The immediate value memarg.align is an alignment hint about the effective-address. It is a power-of 2 encoded as log2(memarg.align). In practice, its value may be: 0 (8-bit), 1 (16-bit), 2 (32-bit), or (64-bit; used only with wasm64). </p>\n<p><code>effective-address = address-operand + memarg.offset </code></p>\n<p>If memarg.align is incorrect it is considered \"misaligned\". Misaligned access still has the same behavior as aligned access, only possibly much slower.</p>"
+        "note": "<p>Memory is accessed with load and store instructions, which all take a memory immediate <i>memarg</i> holding an address offset and the expected alignment.</p>\n<p><code>effective address = address operand + memarg.offset</code></p>\n<p><i>align</i> is the base-2 logarithm of the assumed alignment in bytes: 0 for 1 byte, 1 for 2, 2 for 4, 3 for 8, 4 for 16 (v128). It must not exceed the width of the access, or the module is rejected. A smaller value is allowed: it only tells the engine not to assume alignment, and the access behaves identically, just possibly much slower.</p>\n<p>The signatures here show a 32-bit memory. A 64-bit memory (memory64) takes and returns i64 addresses instead, including for memory.size and memory.grow.</p>"
       },
       "description": "<p>load 4 bytes as i32.</p>",
       "proposal": "mvp"
@@ -797,10 +804,10 @@
         "mainop": "load"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg { u32 offset, u32 align }</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "stack": {
         "html": "[i32] → [i64]",
-        "note": "<p>The static address offset is added to the dynamic address operand, yielding a 33 bit effective address that is the zero-based index at which the memory is accessed. All values are read and written in little endian byte order. A trap results if any of the accessed memory bytes lies outside the address range implied by the memory’s current size.</p>"
+        "note": "<p>The static <i>offset</i> is added to the address operand taken from the stack. For a 32-bit memory the sum is computed in 33 bits, so it cannot wrap; a 64-bit memory (memory64) takes an i64 address instead. All values are read and written in little endian byte order. A trap results if any accessed byte lies outside the memory’s current size.</p>"
       },
       "description": "<p>load 8 bytes as i64.</p>",
       "proposal": "mvp"
@@ -825,7 +832,8 @@
         "note": "<p>Note: When a number is stored into memory, it is converted into a sequence of bytes in little endian byte order.</p>"
       },
       "description": "<p>load 4 bytes as f32.</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x2B",
@@ -846,7 +854,8 @@
         "html": "[i32] → [f64]"
       },
       "description": "<p>load 8 bytes as f64.</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x2C",
@@ -870,7 +879,8 @@
         "note": "<p>Integer loads and stores can optionally specify a storage size that is smaller than the bit width of the respective value type. In the case of loads, a sign extension mode sx (s|u) is then required to select appropriate behavior.</p>"
       },
       "description": "<p>load 1 byte and sign-extend i8 to i32.</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x2D",
@@ -893,7 +903,8 @@
         "html": "[i32] → [i32]"
       },
       "description": "<p>load 1 byte and zero-extend i8 to i32</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x2E",
@@ -916,7 +927,8 @@
         "html": "[i32] → [i32]"
       },
       "description": "<p>load 2 bytes and sign-extend i16 to i32</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x2F",
@@ -939,7 +951,8 @@
         "html": "[i32] → [i32]"
       },
       "description": "<p>load 2 bytes and zero-extend i16 to i32</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x30",
@@ -962,7 +975,8 @@
         "html": "[i32] → [i64]"
       },
       "description": "<p>load 1 byte and sign-extend i8 to i64</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x31",
@@ -985,7 +999,8 @@
         "html": "[i32] → [i64]"
       },
       "description": "<p>load 1 byte and zero-extend i8 to i64</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x32",
@@ -1008,7 +1023,8 @@
         "html": "[i32] → [i64]"
       },
       "description": "<p>load 2 bytes and sign-extend i16 to i64</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x33",
@@ -1031,7 +1047,8 @@
         "html": "[i32] → [i64]"
       },
       "description": "<p>load 2 bytes and zero-extend i16 to i64</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x34",
@@ -1054,7 +1071,8 @@
         "html": "[i32] → [i64]"
       },
       "description": "<p>load 4 bytes and sign-extend i32 to i64</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x35",
@@ -1077,7 +1095,8 @@
         "html": "[i32] → [i64]"
       },
       "description": "<p>load 4 bytes and zero-extend i32 to i64</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x36",
@@ -1098,7 +1117,8 @@
         "html": "[i32 i32] → []"
       },
       "description": "<p>store 4 bytes (no conversion)</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x37",
@@ -1119,7 +1139,8 @@
         "html": "[i32 i64] → []"
       },
       "description": "<p>store 8 bytes (no conversion)</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x38",
@@ -1140,7 +1161,8 @@
         "html": "[i32 f32] → []"
       },
       "description": "<p>store 4 bytes (no conversion)</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x39",
@@ -1161,7 +1183,8 @@
         "html": "[i32 f64] → []"
       },
       "description": "<p>store 8 bytes (no conversion)</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x3A",
@@ -1183,7 +1206,8 @@
         "html": "[i32 i32] → []"
       },
       "description": "<p>wrap i32 to i8 and store 1 byte</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x3B",
@@ -1205,7 +1229,8 @@
         "html": "[i32 i32] → []"
       },
       "description": "<p>wrap i32 to i16 and store 2 bytes</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x3C",
@@ -1227,7 +1252,8 @@
         "html": "[i32 i64] → []"
       },
       "description": "<p>wrap i64 to i8 and store 1 byte</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x3D",
@@ -1249,7 +1275,8 @@
         "html": "[i32 i64] → []"
       },
       "description": "<p>wrap i64 to i16 and store 2 bytes</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x3E",
@@ -1271,7 +1298,8 @@
         "html": "[i32 i64] → []"
       },
       "description": "<p>wrap i64 to i32 and store 4 bytes</p>",
-      "proposal": "mvp"
+      "proposal": "mvp",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>"
     },
     {
       "id": "0x3F",
@@ -1332,7 +1360,7 @@
         "mainop": "const"
       },
       "immediateArgs": "n",
-      "followedBy": "<span class=\"op-imm-args\"><i>n</i> : i32</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>n</i> : i32 — signed LEB, 1–5 bytes</span>",
       "stack": {
         "html": "[] → [i32]"
       },
@@ -1354,7 +1382,7 @@
         "mainop": "const"
       },
       "immediateArgs": "n",
-      "followedBy": "<span class=\"op-imm-args\"><i>n</i> : i64</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>n</i> : i64 — signed LEB, 1–10 bytes</span>",
       "stack": {
         "html": "[] → [i64]"
       },
@@ -1376,7 +1404,7 @@
         "mainop": "const"
       },
       "immediateArgs": "z",
-      "followedBy": "<span class=\"op-imm-args\"><i>z</i> : f32</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>z</i> : f32 — 4 bytes, little-endian</span>",
       "stack": {
         "html": "[] → [f32]"
       },
@@ -1398,7 +1426,7 @@
         "mainop": "const"
       },
       "immediateArgs": "z",
-      "followedBy": "<span class=\"op-imm-args\"><i>z</i> : f64</span>",
+      "followedBy": "<span class=\"op-imm-args\"><i>z</i> : f64 — 8 bytes, little-endian</span>",
       "stack": {
         "html": "[] → [f64]"
       },
@@ -4167,8 +4195,8 @@
         "mainop": "null"
       },
       "description": "<p>evaluates to the null reference constant</p>",
-      "immediateArgs": "t",
-      "followedBy": "<span class=\"op-imm-args\"><i>t</i> : reftype</span>",
+      "immediateArgs": "ht",
+      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype — a signed LEB read as s33. A negative one-byte value is an abstract type (0x70 func, 0x6F extern, 0x6E any, 0x6D eq, 0x6C i31, 0x6B struct, 0x6A array, 0x69 exn, and the bottom types); a value of 0 or more is a typeidx.</span>",
       "proposal": "reference-types"
     },
     {
@@ -4449,7 +4477,7 @@
         "mainop": "resume"
       },
       "immediateArgs": "x h*",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : vec(handler)</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : list(handler)</span></li></ol>"
     },
     {
       "id": "0xE4",
@@ -4467,7 +4495,7 @@
         "mainop": "resume_throw"
       },
       "immediateArgs": "x e h*",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>e</i> : tagidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : vec(handler)</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>e</i> : tagidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : list(handler)</span></li></ol>"
     },
     {
       "id": "0xE5",
@@ -4485,7 +4513,7 @@
         "mainop": "resume_throw_ref"
       },
       "immediateArgs": "x h*",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : vec(handler)</span></li></ol>"
+      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\"><i>h*</i> : list(handler)</span></li></ol>"
     },
     {
       "id": "0xE6",

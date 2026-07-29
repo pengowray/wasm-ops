@@ -27,7 +27,7 @@
       },
       "description": "<p>Loads a v128 vector from the given heap address.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -48,7 +48,7 @@
         "sign": "s"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -69,7 +69,7 @@
         "sign": "u"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -90,7 +90,7 @@
         "sign": "s"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -111,7 +111,7 @@
         "sign": "u"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -132,7 +132,7 @@
         "sign": "s"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -153,7 +153,7 @@
         "sign": "u"
       },
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -175,7 +175,7 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -197,7 +197,7 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -219,7 +219,7 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -241,7 +241,7 @@
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -261,7 +261,7 @@
       },
       "description": "<p>Stores a v128 vector to the given heap address.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -1652,7 +1652,7 @@
       },
       "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1674,7 +1674,7 @@
       },
       "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1696,7 +1696,7 @@
       },
       "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1718,7 +1718,7 @@
       },
       "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1740,7 +1740,7 @@
       },
       "description": "<p>Stores the 8-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1762,7 +1762,7 @@
       },
       "description": "<p>Stores the 16-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1784,7 +1784,7 @@
       },
       "description": "<p>Stores the 32-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1806,7 +1806,7 @@
       },
       "description": "<p>Stores the 64-bit value from lane L of v into m</p>",
       "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
+      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
       "proposal": "simd"
     },
     {
@@ -1828,7 +1828,7 @@
       },
       "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
@@ -1850,7 +1850,7 @@
       },
       "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>",
       "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, u32 offset</span><p>With multiple memories, a flag bit in <i>align</i> marks a u32 memory index following it.</p>",
+      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "proposal": "simd"
     },
     {
