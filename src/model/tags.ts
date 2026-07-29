@@ -120,8 +120,16 @@ export function tagsFor(op: Opcode): Tag[] {
    * table ever runs past 16384.
    */
   if (op.prefix) add(`bytes-${op.bytes.length}`, `${op.bytes.length}-byte opcode`, 'trait');
-  if (op.immediateArgs) add('immediates', 'takes immediates', 'trait');
-  if (op.stack) add('documented-stack', 'stack signature known', 'trait');
+  if (op.immediates?.length) add('immediates', 'takes immediates', 'trait');
+  /*
+   * There was a "stack signature known" chip here. It was a fact about this
+   * dataset wearing the clothes of a fact about the instruction: v128.load's
+   * signature is in the specification either way, and its absence here meant
+   * only that nobody had typed it in. It was also broken in two of the three
+   * places it appeared — the client strips `stack` from its copy of the data,
+   * so the chip rendered on the page while the search and the map found
+   * nothing.
+   */
 
   if (op.status !== 'standard') {
     add(op.status, op.status, 'status');

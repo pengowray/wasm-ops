@@ -32,13 +32,15 @@ export interface PageContent {
  * breakdown: everything except the prose, which is already in the page as the
  * detail block and would otherwise be shipped twice.
  *
- * `immediateArgs` stays — it is a few words on forty instructions, and the
- * encoding block names the operands that follow the opcode.
+ * `immediates` stays — the encoding block names the operands that follow the
+ * opcode, and it is a name and a kind on 261 instructions. What each kind
+ * means is in the script already, in the kinds table, rather than repeated per
+ * instruction as the old HTML was.
  */
 function clientData(data: OpcodeData): string {
   const slim = {
     sections: data.sections,
-    opcodes: data.opcodes.map(({ description, followedBy, stack, ...rest }) => rest),
+    opcodes: data.opcodes.map(({ description, followedByNote, stack, ...rest }) => rest),
   };
   // `<` is escaped so the JSON can never terminate its own script element.
   return JSON.stringify(slim).replace(/</g, '\\u003c');

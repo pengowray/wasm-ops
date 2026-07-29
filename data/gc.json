@@ -26,9 +26,13 @@
         "mainop": "new"
       },
       "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.1",
@@ -47,9 +51,13 @@
         "rest": "default"
       },
       "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.2",
@@ -67,9 +75,17 @@
         "mainop": "get"
       },
       "description": "<p>reads field <code>i</code> from a structure</p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "fieldidx"
+        }
+      ]
     },
     {
       "id": "0xFB.3",
@@ -87,9 +103,17 @@
         "mainop": "get",
         "sign": "s"
       },
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "fieldidx"
+        }
+      ]
     },
     {
       "id": "0xFB.4",
@@ -107,9 +131,17 @@
         "mainop": "get",
         "sign": "u"
       },
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "fieldidx"
+        }
+      ]
     },
     {
       "id": "0xFB.5",
@@ -127,9 +159,17 @@
         "mainop": "set"
       },
       "description": "<p>writes field <code>i</code> of a structure</p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : fieldidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "fieldidx"
+        }
+      ]
     },
     {
       "id": "0xFB.6",
@@ -147,9 +187,13 @@
         "mainop": "new"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type)</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.7",
@@ -168,9 +212,13 @@
         "rest": "default"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.8",
@@ -189,9 +237,18 @@
         "rest": "fixed"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>",
-      "immediateArgs": "x n",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>n</i> : number of elements</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "n",
+          "encoding": "u32",
+          "note": "the number of elements"
+        }
+      ]
     },
     {
       "id": "0xFB.9",
@@ -210,9 +267,17 @@
         "rest": "data"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "dataidx"
+        }
+      ]
     },
     {
       "id": "0xFB.10",
@@ -231,9 +296,17 @@
         "rest": "elem"
       },
       "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "elemidx"
+        }
+      ]
     },
     {
       "id": "0xFB.11",
@@ -251,9 +324,13 @@
         "mainop": "get"
       },
       "description": "<p>reads an element from an array</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.12",
@@ -271,9 +348,13 @@
         "mainop": "get",
         "sign": "s"
       },
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.13",
@@ -291,9 +372,13 @@
         "mainop": "get",
         "sign": "u"
       },
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.14",
@@ -311,9 +396,13 @@
         "mainop": "set"
       },
       "description": "<p>writes an element to an array</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.15",
@@ -348,9 +437,13 @@
         "pre": "array",
         "mainop": "fill"
       },
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.17",
@@ -367,9 +460,17 @@
         "pre": "array",
         "mainop": "copy"
       },
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : typeidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.18",
@@ -387,9 +488,17 @@
         "mainop": "init",
         "rest": "data"
       },
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "dataidx"
+        }
+      ]
     },
     {
       "id": "0xFB.19",
@@ -407,9 +516,17 @@
         "mainop": "init",
         "rest": "elem"
       },
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        },
+        {
+          "name": "y",
+          "kind": "elemidx"
+        }
+      ]
     },
     {
       "id": "0xFB.20",
@@ -427,9 +544,13 @@
         "mainop": "test"
       },
       "description": "<p>checks whether a reference has a given heap type</p>",
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.21",
@@ -447,9 +568,13 @@
         "mainop": "test"
       },
       "description": "<p>checks whether a reference has a given heap type</p>",
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.22",
@@ -467,9 +592,13 @@
         "mainop": "cast"
       },
       "description": "<p>tries to convert to a given heap type</p>",
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.23",
@@ -487,9 +616,13 @@
         "mainop": "cast"
       },
       "description": "<p>tries to convert to a given heap type</p>",
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.24",
@@ -506,9 +639,29 @@
         "mainop": "br_on_cast"
       },
       "description": "<p>branches if a reference has a given heap type</p>",
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.25",
@@ -525,9 +678,29 @@
         "mainop": "br_on_cast_fail"
       },
       "description": "<p>branches if a reference does not have a given heap type</p>",
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.26",
@@ -659,9 +832,13 @@
         "rest": "desc"
       },
       "description": "<p>allocates a struct with an explicit descriptor, taking the descriptor and the field values</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.new</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.33",
@@ -680,9 +857,13 @@
         "rest": "default_desc"
       },
       "description": "<p>allocates a struct with an explicit descriptor, its fields set to their defaults</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_s</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.34",
@@ -701,9 +882,13 @@
         "rest": "desc"
       },
       "description": "<p>reads the descriptor a reference was allocated with</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_u</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : typeidx</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "typeidx"
+        }
+      ]
     },
     {
       "id": "0xFB.35",
@@ -722,9 +907,13 @@
         "rest": "desc_eq"
       },
       "description": "<p>casts a reference, checking that its descriptor is the one given rather than checking its type</p>",
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.36",
@@ -743,9 +932,13 @@
         "rest": "desc_eq"
       },
       "description": "<p>casts a reference, checking that its descriptor is the one given rather than checking its type. The nullable form</p>",
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.37",
@@ -762,9 +955,29 @@
         "mainop": "br_on_cast_desc_eq"
       },
       "description": "<p>branches if a reference’s descriptor is the one given</p>",
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable<br>u32 <i>l</i> : labelidx<br><i>ht</i>1 : heaptype — the source type<br><i>ht</i>2 : heaptype — the type being tested for</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.38",
@@ -781,9 +994,29 @@
         "mainop": "br_on_cast_desc_eq_fail"
       },
       "description": "<p>branches if a reference’s descriptor is not the one given</p>",
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable<br>u32 <i>l</i> : labelidx<br><i>ht</i>1 : heaptype — the source type<br><i>ht</i>2 : heaptype — the type being tested for</span>",
-      "proposal": "custom-descriptors"
+      "proposal": "custom-descriptors",
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.39",
@@ -1103,8 +1336,12 @@
         "pre": "ref",
         "mainop": "test"
       },
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.65",
@@ -1124,8 +1361,12 @@
         "pre": "ref",
         "mainop": "cast"
       },
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.66",
@@ -1144,8 +1385,28 @@
       "parts": {
         "mainop": "br_on_cast"
       },
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.67",
@@ -1164,8 +1425,28 @@
       "parts": {
         "mainop": "br_on_cast_fail"
       },
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.68",
@@ -1233,8 +1514,12 @@
         "pre": "ref",
         "mainop": "test"
       },
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.73",
@@ -1254,8 +1539,12 @@
         "pre": "ref",
         "mainop": "cast"
       },
-      "immediateArgs": "ht",
-      "followedBy": "<span class=\"op-imm-args\"><i>ht</i> : heaptype</span>"
+      "immediates": [
+        {
+          "name": "ht",
+          "kind": "heaptype"
+        }
+      ]
     },
     {
       "id": "0xFB.74",
@@ -1274,8 +1563,28 @@
       "parts": {
         "mainop": "br_on_cast"
       },
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.75",
@@ -1294,8 +1603,28 @@
       "parts": {
         "mainop": "br_on_cast_fail"
       },
-      "immediateArgs": "f l ht ht",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>f</i> : castflags — one byte, which of the two types is nullable</span></li><li><span class=\"op-imm-args\">u32 <i>l</i> : labelidx</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>1</sub> : heaptype — the source type</span></li><li><span class=\"op-imm-args\"><i>ht</i><sub>2</sub> : heaptype — the type being tested for</span></li></ol>"
+      "immediates": [
+        {
+          "name": "f",
+          "kind": "castflags"
+        },
+        {
+          "name": "l",
+          "kind": "labelidx"
+        },
+        {
+          "name": "ht",
+          "index": 1,
+          "kind": "heaptype",
+          "note": "the source type"
+        },
+        {
+          "name": "ht",
+          "index": 2,
+          "kind": "heaptype",
+          "note": "the type being tested for"
+        }
+      ]
     },
     {
       "id": "0xFB.76",

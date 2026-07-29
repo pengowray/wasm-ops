@@ -186,9 +186,17 @@
         "mainop": "init"
       },
       "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "y x",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : dataidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : memidx</span></li></ol>",
-      "proposal": "bulk-memory"
+      "proposal": "bulk-memory",
+      "immediates": [
+        {
+          "name": "y",
+          "kind": "dataidx"
+        },
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ]
     },
     {
       "id": "0xFC.9",
@@ -206,9 +214,13 @@
         "mainop": "drop"
       },
       "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : dataidx</span>",
-      "proposal": "bulk-memory"
+      "proposal": "bulk-memory",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "dataidx"
+        }
+      ]
     },
     {
       "id": "0xFC.10",
@@ -226,9 +238,17 @@
         "mainop": "copy"
       },
       "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : memidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : memidx</span></li></ol>",
-      "proposal": "bulk-memory"
+      "proposal": "bulk-memory",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        },
+        {
+          "name": "y",
+          "kind": "memidx"
+        }
+      ]
     },
     {
       "id": "0xFC.11",
@@ -246,9 +266,13 @@
         "mainop": "fill"
       },
       "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : memidx</span>",
-      "proposal": "bulk-memory"
+      "proposal": "bulk-memory",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ]
     },
     {
       "id": "0xFC.12",
@@ -266,9 +290,17 @@
         "mainop": "init"
       },
       "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "y x",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>y</i> : elemidx</span></li><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li></ol>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "immediates": [
+        {
+          "name": "y",
+          "kind": "elemidx"
+        },
+        {
+          "name": "x",
+          "kind": "tableidx"
+        }
+      ]
     },
     {
       "id": "0xFC.13",
@@ -286,9 +318,13 @@
         "mainop": "drop"
       },
       "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : elemidx</span>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "elemidx"
+        }
+      ]
     },
     {
       "id": "0xFC.14",
@@ -306,9 +342,17 @@
         "mainop": "copy"
       },
       "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
-      "immediateArgs": "x y",
-      "followedBy": "<ol><li><span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span></li><li><span class=\"op-imm-args\">u32 <i>y</i> : tableidx</span></li></ol>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "tableidx"
+        },
+        {
+          "name": "y",
+          "kind": "tableidx"
+        }
+      ]
     },
     {
       "id": "0xFC.15",
@@ -326,9 +370,13 @@
         "mainop": "grow"
       },
       "description": "<p>manipulate the size of a table</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "tableidx"
+        }
+      ]
     },
     {
       "id": "0xFC.16",
@@ -346,9 +394,13 @@
         "mainop": "size"
       },
       "description": "<p>manipulate the size of a table</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "tableidx"
+        }
+      ]
     },
     {
       "id": "0xFC.17",
@@ -366,9 +418,13 @@
         "mainop": "fill"
       },
       "description": "<p>fills a range in a table with a value</p>",
-      "immediateArgs": "x",
-      "followedBy": "<span class=\"op-imm-args\">u32 <i>x</i> : tableidx</span>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "tableidx"
+        }
+      ]
     },
     {
       "id": "0xFC.18",
@@ -767,13 +823,17 @@
       "status": "proposal",
       "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Loads two bytes as an f16 and promotes the result to f32.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "parts": {
         "pre": "f32",
         "mainop": "load",
         "post": "f16"
-      }
+      },
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFC.49",
@@ -788,13 +848,17 @@
       "status": "proposal",
       "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p><p>Demotes an f32 to f16 and stores it as two bytes.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
       "parts": {
         "pre": "f32",
         "mainop": "store",
         "post": "f16"
-      }
+      },
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFC.50",

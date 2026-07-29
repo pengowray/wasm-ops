@@ -124,7 +124,21 @@ function tidy(html: string): string {
     .trim();
 }
 
-type HelpParts = Pick<Opcode, 'immediateArgs' | 'followedBy' | 'stack' | 'description'>;
+/**
+ * The four fields a legacy help fragment splits into.
+ *
+ * Two of them no longer exist on `Opcode`: the operand list is a typed
+ * `immediates` array now, and the short form beside the name is derived from
+ * it rather than stored. So this is its own shape rather than a `Pick` of the
+ * model, and what it produces is the pre-2026 data file — see the guard in
+ * `main`.
+ */
+interface HelpParts {
+  immediateArgs?: string;
+  followedBy?: string;
+  stack?: Opcode['stack'];
+  description?: string;
+}
 
 /**
  * Splits a legacy help fragment into structured fields.
@@ -232,6 +246,25 @@ function repairCodeBlocks(source: string): string {
 }
 
 function main(): void {
+  /*
+   * What this writes is the shape data/ had before the operand restructure:
+   * `followedBy` as free HTML and `immediateArgs` as a second copy of the
+   * operand names. The loader does not read either any more, so a run would
+   * not merely discard the hand edits the README warns about — it would leave
+   * five files the site cannot load.
+   *
+   * The parsing below is still the record of how the conversion was done, so
+   * it stays; only the overwrite is gated.
+   */
+  if (!process.argv.includes('--force')) {
+    console.error(
+      'extract writes the pre-2026 data shape, which the site no longer loads.\n' +
+        'It was the one-time conversion from docs/index.html; data/ is edited directly now.\n' +
+        'Pass --force if you really mean to overwrite data/.',
+    );
+    process.exit(1);
+  }
+
   const source = repairCodeBlocks(readFileSync(SOURCE, 'utf8'));
   const doc = parse(source, { comment: false });
 
@@ -310,7 +343,9 @@ function main(): void {
     writeFileSync(file, JSON.stringify({ section, opcodes }, null, 2) + '\n', 'utf8');
 
     const named = opcodes.filter((o) => o.name).length;
-    const documented = opcodes.filter((o) => o.description || o.stack || o.followedBy).length;
+    const documented = opcodes.filter(
+      (o) => o.description || o.stack || (o as HelpParts).followedBy,
+    ).length;
     console.log(
       `${spec.id.padEnd(13)} ${String(cells.length).padStart(3)} cells, ` +
         `${String(named).padStart(3)} named, ${String(documented).padStart(3)} documented`,

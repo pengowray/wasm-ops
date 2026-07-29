@@ -17,6 +17,8 @@ import { parse } from 'node-html-parser';
 import { legacyHexId, opcodeBytes, opcodeId } from '../src/model/types.ts';
 import type { Opcode } from '../src/model/types.ts';
 import { loadData } from '../src/model/load.ts';
+import { immediateNames, renderImmediates } from '../src/model/immediates.ts';
+import { polymorphicNote } from '../src/render/items.ts';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
 const LEGACY = join(ROOT, 'data', '.legacy-help.json');
@@ -61,9 +63,12 @@ function missing(a: string[], b: string[]): string[] {
 function renderedText(op: Opcode): string[] {
   return words(
     [
-      op.immediateArgs ?? '',
-      op.followedBy ?? '',
+      immediateNames(op),
+      // Through the same function the page uses, so the operand text this
+      // compares is the operand text a reader gets, kinds table and all.
+      renderImmediates(op),
       op.stack?.html ?? '',
+      polymorphicNote(op.stack?.polymorphic),
       op.stack?.note ?? '',
       op.description ?? '',
     ].join(' '),

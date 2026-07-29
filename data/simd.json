@@ -26,9 +26,13 @@
         "mainop": "load"
       },
       "description": "<p>Loads a v128 vector from the given heap address.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.1",
@@ -47,9 +51,13 @@
         "opbits": "8x8",
         "sign": "s"
       },
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.2",
@@ -68,9 +76,13 @@
         "opbits": "8x8",
         "sign": "u"
       },
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.3",
@@ -89,9 +101,13 @@
         "opbits": "16x4",
         "sign": "s"
       },
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.4",
@@ -110,9 +126,13 @@
         "opbits": "16x4",
         "sign": "u"
       },
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.5",
@@ -131,9 +151,13 @@
         "opbits": "32x2",
         "sign": "s"
       },
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.6",
@@ -152,9 +176,13 @@
         "opbits": "32x2",
         "sign": "u"
       },
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.7",
@@ -174,9 +202,13 @@
         "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.8",
@@ -196,9 +228,13 @@
         "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.9",
@@ -218,9 +254,13 @@
         "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.10",
@@ -240,9 +280,13 @@
         "rest": "splat"
       },
       "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.11",
@@ -260,9 +304,13 @@
         "mainop": "store"
       },
       "description": "<p>Stores a v128 vector to the given heap address.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.12",
@@ -279,9 +327,14 @@
         "pre": "v128",
         "mainop": "const"
       },
-      "immediateArgs": "b*",
-      "followedBy": "<span class=\"op-imm-args\"><i>b*</i> : 16 bytes, little-endian</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "b*",
+          "encoding": "u8[16]",
+          "note": "the 128-bit value, little-endian"
+        }
+      ]
     },
     {
       "id": "0xFD.13",
@@ -299,9 +352,15 @@
         "mainop": "shuffle"
       },
       "description": "<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>",
-      "immediateArgs": "l*",
-      "followedBy": "<span class=\"op-imm-args\"><i>l*</i> : 16 laneidx, one byte each</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l*",
+          "encoding": "u8[16]",
+          "kind": "laneidx",
+          "note": "one per result lane, each 0–31 selecting a byte of the two inputs"
+        }
+      ]
     },
     {
       "id": "0xFD.14",
@@ -447,9 +506,13 @@
         "sign": "s"
       },
       "description": "<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>\n<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.22",
@@ -469,9 +532,13 @@
         "sign": "u"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 16 packed u8 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.23",
@@ -490,9 +557,13 @@
         "post": "lane"
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.24",
@@ -512,9 +583,13 @@
         "sign": "s"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.25",
@@ -534,9 +609,13 @@
         "sign": "u"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 8 packed u16 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.26",
@@ -555,9 +634,13 @@
         "post": "lane"
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 8 packed i16 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.27",
@@ -576,9 +659,13 @@
         "post": "lane"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.28",
@@ -597,9 +684,13 @@
         "post": "lane"
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed i32 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.29",
@@ -618,9 +709,13 @@
         "post": "lane"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.30",
@@ -639,9 +734,13 @@
         "post": "lane"
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed i64 numbers.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.31",
@@ -660,9 +759,13 @@
         "post": "lane"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.32",
@@ -681,9 +784,13 @@
         "post": "lane"
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Rust: <code>fn f32x4_replace_lane&lt;const N: usize&gt;(a: v128, val: f32) -&gt; v128</code></p>\n<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.33",
@@ -702,9 +809,13 @@
         "post": "lane"
       },
       "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.34",
@@ -723,9 +834,13 @@
         "post": "lane"
       },
       "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.35",
@@ -1651,9 +1766,17 @@
         "post": "lane"
       },
       "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.85",
@@ -1673,9 +1796,17 @@
         "post": "lane"
       },
       "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.86",
@@ -1695,9 +1826,17 @@
         "post": "lane"
       },
       "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.87",
@@ -1717,9 +1856,17 @@
         "post": "lane"
       },
       "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.88",
@@ -1739,9 +1886,17 @@
         "post": "lane"
       },
       "description": "<p>Stores the 8-bit value from lane L of v into m</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.89",
@@ -1761,9 +1916,17 @@
         "post": "lane"
       },
       "description": "<p>Stores the 16-bit value from lane L of v into m</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.90",
@@ -1783,9 +1946,17 @@
         "post": "lane"
       },
       "description": "<p>Stores the 32-bit value from lane L of v into m</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.91",
@@ -1805,9 +1976,17 @@
         "post": "lane"
       },
       "description": "<p>Stores the 64-bit value from lane L of v into m</p>",
-      "immediateArgs": "m l",
-      "followedBy": "<ol><li><span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span></li><li><span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span></li></ol>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        },
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.92",
@@ -1827,9 +2006,13 @@
         "rest": "zero"
       },
       "description": "<p>Load a 32-bit element into the low bits of the vector and sets all other bits to zero.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.93",
@@ -1849,9 +2032,13 @@
         "rest": "zero"
       },
       "description": "<p>Load a 64-bit element into the low bits of the vector and sets all other bits to zero.</p>",
-      "immediateArgs": "m",
-      "followedBy": "<span class=\"op-imm-args\"><i>m</i> : memarg — u32 align, then u64 offset</span><p>Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the two; subtract 64 for the alignment. Without that bit the instruction uses memory 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "immediates": [
+        {
+          "name": "m",
+          "kind": "memarg"
+        }
+      ]
     },
     {
       "id": "0xFD.94",
@@ -5633,13 +5820,17 @@
       "status": "proposal",
       "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
       "parts": {
         "pre": "f16x8",
         "mainop": "extract",
         "post": "lane"
-      }
+      },
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.290",
@@ -5655,13 +5846,17 @@
       "status": "proposal",
       "proposal": "half-precision",
       "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
-      "immediateArgs": "l",
-      "followedBy": "<span class=\"op-imm-args\"><i>l</i> : laneidx — one byte</span>",
       "parts": {
         "pre": "f16x8",
         "mainop": "replace",
         "post": "lane"
-      }
+      },
+      "immediates": [
+        {
+          "name": "l",
+          "kind": "laneidx"
+        }
+      ]
     },
     {
       "id": "0xFD.291",

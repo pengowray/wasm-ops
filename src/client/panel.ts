@@ -129,10 +129,7 @@ export class Panel {
 
     const encoding = document.createElement('div');
     encoding.className = 'detail-encoding';
-    // Whether there is a "Followed by" section to point the operands at is a
-    // property of the prose, so it is read off the article rather than shipped
-    // as another field.
-    encoding.innerHTML = renderEncoding(op, Boolean(content.querySelector('.detail-followed')));
+    encoding.innerHTML = renderEncoding(op);
 
     // The summary belongs to the name — it says what the instruction does, and
     // reads as one unit with it. The bytes come after that pair, not between

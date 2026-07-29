@@ -1959,9 +1959,37 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
-.op-imm-args { font-family: Georgia, serif; font-size: .95rem; }
 .op-type { font-family: Georgia, serif; }
 .op-type.large { font-size: 1.1rem; }
+
+/*
+ * The operand list. The face used to be set by a `<span class="op-imm-args">`
+ * written into the data 285 times — and left out of block, loop and if, so one
+ * list rendered in two typefaces. It belongs to the section, not to each line.
+ *
+ * `em` rather than `rem`, so an operand takes the scale of whatever it is set
+ * beside: the panel body is .92rem and the static article is 1rem, and an
+ * absolute size was larger than its surroundings in one and smaller in the
+ * other.
+ *
+ * A single operand drops the numbering. Every list here is an `<ol>` so that
+ * the renderer emits one shape rather than choosing between two, and "1." on
+ * its own numbers nothing.
+ */
+.detail-followed ol { margin: .4rem 0; padding-left: 1.4rem; }
+.detail-followed li { margin: .2rem 0; font-family: Georgia, serif; font-size: .95em; }
+.detail-followed ol:has(> li:only-child) { padding-left: 0; list-style: none; }
+
+/*
+ * Scoped to `.detail`, which both the static article and the panel carry —
+ * the panel clones the article, class attribute and all. These were scoped to
+ * `.panel-body`, so the articles at the foot of the page, which is where every
+ * cell link lands without JavaScript, fell back to the user agent's spacing.
+ */
+.detail p { margin: .5rem 0; }
+.detail ol, .detail ul { margin: .4rem 0; padding-left: 1.4rem; }
+.detail li { margin: .2rem 0; }
+.detail-stack-note { margin-top: .6rem; font-size: .92em; color: var(--fg-dim); }
 
 .supsub { display: inline-block; }
 .supsub sup, .supsub sub { position: relative; display: block; font-size: .5em; line-height: 1.2; }

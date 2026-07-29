@@ -6,8 +6,9 @@
  * headings when the layout changes. One implementation, one output.
  */
 
-import type { Opcode } from '../model/types.ts';
+import type { Opcode, StackSignature } from '../model/types.ts';
 import { markedTitle, toHex } from '../model/types.ts';
+import { immediateNames, renderImmediates } from '../model/immediates.ts';
 import { addWordBreaks, tokenise } from '../model/names.ts';
 import { CATEGORY_LABELS, categorize } from '../model/categories.ts';
 import { proposal, standing } from '../model/proposals.ts';
@@ -63,7 +64,7 @@ function byteRun(bytes: number[]): string {
  * `:u32` tag says what it is. That line is how the binary format section of the
  * specification writes the instruction, so it is also the form to search for.
  */
-export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
+export function renderEncoding(op: Opcode): string {
   const groups: string[] = [];
 
   if (op.prefixFor?.length) {
@@ -100,16 +101,13 @@ export function renderEncoding(op: Opcode, hasFollowedBy = false): string {
   // Immediate operands are part of how the instruction is encoded, so they
   // belong in this picture — but they are variable length and are described
   // rather than enumerated, hence the different treatment.
-  if (op.immediateArgs) {
-    groups.push(
-      group(
-        op.immediateArgs,
-        'immediate operands' +
-          (hasFollowedBy ? '<span class="enc-sub">see “Followed by”</span>' : ''),
-        'imm',
-      ),
-    );
-  }
+  //
+  // No cross-reference under the caption any more. It used to read "see
+  // “Followed by”", which sent a reader from an unexplained letter to a
+  // heading that did not say what it held; the section below is now called
+  // the same two words as this caption, so the two identify each other.
+  const names = immediateNames(op);
+  if (names) groups.push(group(escapeHtml(names), 'immediate operands', 'imm'));
 
   return `<h4>Encoding</h4><div class="encoding"><div class="enc-row">${groups.join('')}</div></div>`;
 }
@@ -281,7 +279,7 @@ function cellData(op: Opcode): string {
  */
 export function hasDetail(op: Opcode): boolean {
   return Boolean(
-    op.name || op.description || op.stack || op.followedBy || op.immediateArgs || op.linkTo,
+    op.name || op.description || op.stack || op.immediates?.length || op.linkTo,
   );
 }
 
@@ -604,7 +602,9 @@ export function renderHeading(op: Opcode): string {
     `<h2 class="detail-name">` +
     (op.prefixFor?.length ? '' : `<span class="detail-op">${specLabel(op)}</span>`) +
     name +
-    (op.immediateArgs ? ` <span class="immediate-args">${op.immediateArgs}</span>` : '') +
+    (immediateNames(op)
+      ? ` <span class="immediate-args">${escapeHtml(immediateNames(op))}</span>`
+      : '') +
     `</h2>` +
     (summary ? `<p class="detail-summary">${escapeHtml(summary)}</p>` : '')
   );
@@ -743,6 +743,32 @@ export function renderTags(op: Opcode): string {
 }
 
 /**
+ * What a polymorphic signature means, said once here rather than copied onto
+ * each instruction.
+ *
+ * The old page wrote the first of these as "**stack-polymorphic**: performs an
+ * *unconditional control transfer*", which announces a term of art and then
+ * restates it in more jargon, and the second as the bare fragment
+ * "(value-polymorphic)", a term defined nowhere on the page.
+ */
+export function polymorphicNote(kind: StackSignature['polymorphic']): string {
+  switch (kind) {
+    case 'stack':
+      return (
+        '<p><b>Stack-polymorphic</b>: execution jumps away and never continues past this ' +
+        'instruction, so the validator accepts whatever is left on the stack.</p>'
+      );
+    case 'value':
+      return (
+        '<p><b>Value-polymorphic</b>: works on any value type — <i>t</i> is whatever the ' +
+        'operands are.</p>'
+      );
+    default:
+      return '';
+  }
+}
+
+/**
  * The written description of one opcode — the part that cannot be derived and
  * so has to be shipped. The byte sequence and encoding breakdown are not here:
  * they follow from the prefix and code, and baking 630 copies of the same table
@@ -756,22 +782,36 @@ export function renderDetail(op: Opcode, spread?: string): string {
     rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
   }
 
-  // Before the status: it finishes the encoding the panel opened with, so it
-  // belongs with the reading of the bytes rather than after an aside about
-  // where the instruction stands.
-  if (op.followedBy) {
-    rows.push(`<h4>Followed by</h4><div class="detail-followed">${op.followedBy}</div>`);
+  // Above the status. What an instruction does to the stack is the fact most
+  // readers came for; where its proposal got to is the qualification of that
+  // answer, and on the settled majority it says the same thing every time.
+  if (op.stack) {
+    // Stacked sup-and-sub notation sets at half size, so a signature using it
+    // needs more room than one written in plain types. That follows from the
+    // markup rather than from the instruction, so it is read off the markup —
+    // it used to be a `large` flag set by hand on exactly the five entries
+    // that happened to use `supsub`, and on none of the sixth.
+    const cls = op.stack.html.includes('supsub') ? 'op-type large' : 'op-type';
+    rows.push(
+      `<h4>Stack</h4><p><span class="${cls}">${op.stack.html}</span></p>` +
+        (op.stack.polymorphic || op.stack.note
+          ? `<div class="detail-stack-note">${polymorphicNote(op.stack.polymorphic)}${
+              op.stack.note ?? ''
+            }</div>`
+          : ''),
+    );
+  }
+
+  // Named for what it holds, and named the same two words the encoding
+  // breakdown captions the operand slot with, so the two identify each other.
+  // "Followed by" named a relation with the other end missing, directly under
+  // a description written in prose.
+  const immediates = renderImmediates(op);
+  if (immediates) {
+    rows.push(`<h4>Immediate operands</h4><div class="detail-followed">${immediates}</div>`);
   }
 
   rows.push(renderStatus(op, spread));
-
-  if (op.stack) {
-    const cls = op.stack.large ? 'op-type large' : 'op-type';
-    rows.push(
-      `<h4>Stack</h4><p><span class="${cls}">${op.stack.html}</span></p>` +
-        (op.stack.note ? `<div class="detail-stack-note">${op.stack.note}</div>` : ''),
-    );
-  }
 
   if (tags) rows.push(tags);
 

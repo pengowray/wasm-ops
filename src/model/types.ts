@@ -96,9 +96,87 @@ export interface NameParts {
 export interface StackSignature {
   /** The `[t1*] → [t2*]` markup, kept as HTML for its sups and subs. */
   html: string;
-  /** The old page rendered some signatures at a larger size. */
-  large?: boolean;
-  /** Commentary that sat alongside the signature, e.g. "(value-polymorphic)". */
+  /**
+   * Why the signature does not name concrete types.
+   *
+   * - `stack`  control never reaches the next instruction, so the validator
+   *            accepts whatever is on the stack and whatever follows expects
+   * - `value`  the types are whatever the operands happen to be
+   *
+   * The old page wrote both as prose, four times identically for `stack` and
+   * as the bare fragment `(value-polymorphic)` for `value`. It is a property of
+   * the instruction, so it is a field, and the sentence explaining it is
+   * written once in the renderer rather than copied per opcode.
+   */
+  polymorphic?: 'stack' | 'value';
+  /**
+   * Commentary on the signature: what the letters stand for, when the
+   * instruction traps, what the types cannot say. Prose only — a second
+   * signature in a second notation belongs nowhere.
+   */
+  note?: string;
+}
+
+/**
+ * What an immediate operand indexes or means.
+ *
+ * The kind carries the operand's encoding width and any standing gloss, so
+ * those are written once here rather than on each of the hundreds of
+ * instructions that take that kind. `memarg` alone appears 113 times.
+ */
+export type ImmediateKind =
+  | 'typeidx'
+  | 'funcidx'
+  | 'tableidx'
+  | 'globalidx'
+  | 'localidx'
+  | 'labelidx'
+  | 'memidx'
+  | 'dataidx'
+  | 'elemidx'
+  | 'tagidx'
+  | 'fieldidx'
+  | 'laneidx'
+  | 'stringidx'
+  | 'valtype'
+  | 'heaptype'
+  | 'blocktype'
+  | 'memarg'
+  | 'castflags'
+  | 'ordering'
+  | 'rmw-ordering'
+  | 'catch'
+  | 'handler'
+  | 'i32'
+  | 'i64'
+  | 'f32'
+  | 'f64';
+
+/**
+ * One operand carried in the bytes after the opcode.
+ *
+ * Was free HTML per instruction, which is how the same operand came to be
+ * written four ways across 105 memory instructions, with the two memarg fields
+ * in the wrong order on two of them and nothing able to notice. The letters,
+ * the widths and the glosses all repeat; only which kinds an instruction takes,
+ * and in what order, does not.
+ */
+export interface Immediate {
+  /**
+   * The metavariable, as the specification's binary production writes it:
+   * `m`, `x`, `l`, `ht`. Carries its own `*` where the specification does
+   * (`l*`), since that is part of how the operand is named.
+   */
+  name: string;
+  /** Subscript, where one instruction takes two operands of the same kind. */
+  index?: number;
+  /** What it indexes or means. Omitted where the width is the whole answer. */
+  kind?: ImmediateKind;
+  /** A u32 count, then that many of `kind`: the specification's `list(…)`. */
+  list?: true;
+  /** Overrides the kind's width, for the few operands with a fixed one. */
+  encoding?: string;
+  /** What this operand is for, where the kind alone does not say. */
   note?: string;
 }
 
@@ -127,10 +205,22 @@ export interface Opcode {
   /** For `legacy` and `withdrawn`: what replaced it, and where it went. */
   supersededBy?: string;
   parts?: NameParts;
-  /** Immediate operands, shown beside the name: `[t?]`, `x`. HTML. */
-  immediateArgs?: string;
-  /** What follows the opcode in the byte stream. HTML. */
-  followedBy?: string;
+  /**
+   * The operands carried in the bytes after the opcode, in encoding order.
+   *
+   * The short form shown beside the name — `m`, `y x` — is derived from this
+   * rather than stored beside it. It was a second field, on 258 instructions,
+   * and it already disagreed with the long form on eleven of them.
+   */
+  immediates?: Immediate[];
+  /**
+   * What follows the immediates but is not one: a block's body and its `end`
+   * byte, a `try`'s catch clauses, how label indices are numbered. HTML.
+   *
+   * Four instructions need it. Keeping it separate is what lets `immediates`
+   * stay a list of operands rather than a list of whatever comes next.
+   */
+  followedByNote?: string;
   stack?: StackSignature;
   /** Descriptive prose. HTML. */
   description?: string;

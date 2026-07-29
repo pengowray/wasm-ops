@@ -23,6 +23,7 @@ import { proposal } from '../model/proposals.ts';
 import { rank, type Haystacks, type SearchHit } from '../model/rank.ts';
 import { normaliseTag } from '../model/search.ts';
 import { tagsFor } from '../model/tags.ts';
+import { immediateNames } from '../model/immediates.ts';
 import { summarize } from '../model/summary.ts';
 
 const EMPTY: Haystacks = { name: '', tags: [], summary: '', prose: '' };
@@ -53,7 +54,7 @@ export class Search {
       // summary, its operands, the shelves it sits on and where it came from.
       const summary = [
         summarize(op),
-        op.immediateArgs?.replace(/<[^>]+>/g, ' '),
+        immediateNames(op),
         CATEGORY_LABELS[categorize(op)],
         subcategorize(op)?.label,
         proposal(op.proposal)?.name,
