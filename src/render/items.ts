@@ -786,14 +786,8 @@ export function renderDetail(op: Opcode, spread?: string): string {
   // readers came for; where its proposal got to is the qualification of that
   // answer, and on the settled majority it says the same thing every time.
   if (op.stack) {
-    // Stacked sup-and-sub notation sets at half size, so a signature using it
-    // needs more room than one written in plain types. That follows from the
-    // markup rather than from the instruction, so it is read off the markup —
-    // it used to be a `large` flag set by hand on exactly the five entries
-    // that happened to use `supsub`, and on none of the sixth.
-    const cls = op.stack.html.includes('supsub') ? 'op-type large' : 'op-type';
     rows.push(
-      `<h4>Stack</h4><p><span class="${cls}">${op.stack.html}</span></p>` +
+      `<h4>Stack</h4><p><span class="op-type">${op.stack.html}</span></p>` +
         (op.stack.polymorphic || op.stack.note
           ? `<div class="detail-stack-note">${polymorphicNote(op.stack.polymorphic)}${
               op.stack.note ?? ''

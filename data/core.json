@@ -24,7 +24,7 @@
         "mainop": "unreachable"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack"
       },
       "description": "<p>The unreachable instruction causes an unconditional trap.</p>\n<p>A trap immediately aborts execution. Traps cannot be handled by WebAssembly code, but are reported to the outside environment, where they typically can be caught.</p>\n<p>The instructions after it are still validated, but against an unconstrained operand stack, so sequences that would not otherwise type-check are accepted there.</p>",
@@ -63,7 +63,7 @@
         "mainop": "block"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]"
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]"
       },
       "description": "<p>the beginning of a block construct, a sequence of instructions with a label at the end.</p>\n<p>Both the parameter and result types come from the <i>bt</i> immediate.</p>\n<p>The <i>block</i>, <i>loop</i> and <i>if</i> instructions are structured instructions. They bracket nested sequences of instructions, called blocks, terminated with, or separated by, <i>end</i> or <i>else</i> pseudo-instructions. They must be well-nested.</p>",
       "proposal": "mvp",
@@ -89,7 +89,7 @@
         "mainop": "loop"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "note": "<p>Both the parameter and result types come from the <i>bt</i> immediate.</p>"
       },
       "description": "<p>a block with a label at the beginning which may be used to form loops</p>",
@@ -116,7 +116,7 @@
         "mainop": "if"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "note": "<p>Both the parameter and result types come from the <i>bt</i> immediate.</p>\n<p>The i32 on top is the condition: non-zero runs the first branch, zero runs the else-branch if there is one.</p>"
       },
       "description": "<p>the beginning of an if construct with an implicit <i>then</i> block</p>",
@@ -283,7 +283,7 @@
         "mainop": "br"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>∗</sup>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack"
       },
       "description": "<p>Branch to a given label in an enclosing construct.</p>\n<p>Performs an unconditional branch.</p>\n<p>A branch targeting a <i>block</i> or <i>if</i> behaves like a break statement in most C-like languages, while a branch targeting a <i>loop</i> behaves like a continue statement.</p>\n",
@@ -310,7 +310,7 @@
         "mainop": "br_if"
       },
       "stack": {
-        "html": "[t<sup>∗</sup> i32] → [t<sup>∗</sup>]"
+        "html": "[<i>t</i><sup>*</sup> i32] → [<i>t</i><sup>*</sup>]"
       },
       "description": "<p>Performs a conditional branch, branching if i32 <i>c</i> is non-zero.</p>\n<p>Conditionally branch to a given label in an enclosing construct.</p>",
       "proposal": "mvp",
@@ -335,7 +335,7 @@
         "mainop": "br_table"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>∗</sup> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack"
       },
       "description": "<p>A jump table which jumps to a label in an enclosing construct.</p>\n<p>Performs an indirect branch through an operand indexing into the label vector that is an immediate to the instruction, or to a default target if the operand is out of bounds.</p>",
@@ -368,7 +368,7 @@
         "mainop": "return"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> t<sup>∗</sup>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack"
       },
       "description": "<p>return zero or more values from this function.</p>\n<p>The return instruction is a shortcut for an unconditional branch to the outermost block, which implicitly is the body of the current function.</p>",
@@ -388,7 +388,7 @@
         "mainop": "call"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span>] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]"
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]"
       },
       "description": "<p>The call instruction invokes another function, consuming the necessary arguments from the stack and returning the result values of the call. </p>",
       "proposal": "mvp",
@@ -413,7 +413,7 @@
         "mainop": "call_indirect"
       },
       "stack": {
-        "html": "[t<span class=\"supsub\"><sup>∗</sup><sub>1</sub></span> i32] → [t<span class=\"supsub\"><sup>∗</sup><sub>2</sub></span>]",
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "note": "<p>The i32 selects an entry of table <i>x</i>; the call traps unless that entry holds a function of type <i>y</i>. Before reference types this second immediate was always 0x00, the only table there was.</p>"
       },
       "description": "<p>The call_indirect instruction calls a function indirectly through an operand indexing into a table.</p>",
@@ -596,7 +596,7 @@
         "mainop": "drop"
       },
       "stack": {
-        "html": "[t] → []",
+        "html": "[<i>t</i>] → []",
         "note": "<p>Works on any single value: <i>t</i> is whatever is on top.</p>"
       },
       "description": "<p>The drop instruction simply throws away a single operand.</p><p>Arguably the only stack manipulation instruction WebAssembly has. There is no <code>dup</code>, <code>swap</code> or <code>rot</code>, and no way to reach past the top of the stack. See <a href=\"https://purplesyringa.moe/blog/wasm-is-not-quite-a-stack-machine/\">WebAssembly is not quite a stack machine</a>, by purplesyringa.</p>",
@@ -616,7 +616,7 @@
         "mainop": "select"
       },
       "stack": {
-        "html": "[t t i32] → [t]",
+        "html": "[<i>t</i> <i>t</i> i32] → [<i>t</i>]",
         "note": "<p>Works on any value type, as long as both candidates have the same one — but only a number or vector type. For a reference, use the annotated form <i>select t</i> (0x1C).</p>"
       },
       "description": "<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>",
@@ -711,7 +711,7 @@
         "mainop": "get"
       },
       "stack": {
-        "html": "[] → [t]"
+        "html": "[] → [<i>t</i>]"
       },
       "description": "<p>This instruction gets the value of a variable.</p>\n<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>\n<p>The <i>locals</i> context refers to the list of locals declared in the current function (including parameters), represented by their value type.</p>",
       "proposal": "mvp",
@@ -737,7 +737,7 @@
         "mainop": "set"
       },
       "stack": {
-        "html": "[t] → []"
+        "html": "[<i>t</i>] → []"
       },
       "description": "<p>This instruction sets the value of a variable.</p>\n<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>",
       "proposal": "mvp",
@@ -763,7 +763,7 @@
         "mainop": "tee"
       },
       "stack": {
-        "html": "[t] → [t]"
+        "html": "[<i>t</i>] → [<i>t</i>]"
       },
       "description": "<p>The local.tee instruction is like local.set but also returns its argument.</p>\n<p>The index space for locals is only accessible inside a function and includes the parameters of that function, which precede the local variables.</p>",
       "proposal": "mvp",
@@ -789,7 +789,7 @@
         "mainop": "get"
       },
       "stack": {
-        "html": "[] → [t]"
+        "html": "[] → [<i>t</i>]"
       },
       "description": "<p>This instruction gets the value of a variable.</p>\n<p>The <i>globals</i> context is the list of globals declared in the current module, represented by their global type.</p>",
       "proposal": "mvp",
@@ -815,7 +815,7 @@
         "mainop": "set"
       },
       "stack": {
-        "html": "[t] → []"
+        "html": "[<i>t</i>] → []"
       },
       "description": "<p>This instruction sets the value of a variable </p>",
       "proposal": "mvp",

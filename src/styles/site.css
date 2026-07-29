@@ -1959,8 +1959,19 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 }
 
 .immediate-args { color: var(--fg-faint); font-family: Georgia, serif; font-style: italic; }
+/*
+ * A stack signature. Metavariables are italic and concrete types upright, so
+ * `[t t i32] → [t]` says which of its three operands is a variable without
+ * anything having to explain it.
+ *
+ * The `.supsub` rules that used to sit here stacked a superscript over a
+ * subscript in an inline-block at half size, which was small enough that the
+ * five signatures using it carried a hand-set `large` flag to compensate. The
+ * subscript and the star sit side by side now, at the size of everything
+ * around them, and neither the flag nor the rules are needed.
+ */
 .op-type { font-family: Georgia, serif; }
-.op-type.large { font-size: 1.1rem; }
+.op-type sub, .op-type sup { font-size: .7em; }
 
 /*
  * The operand list. The face used to be set by a `<span class="op-imm-args">`
@@ -1990,10 +2001,6 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .detail ol, .detail ul { margin: .4rem 0; padding-left: 1.4rem; }
 .detail li { margin: .2rem 0; }
 .detail-stack-note { margin-top: .6rem; font-size: .92em; color: var(--fg-dim); }
-
-.supsub { display: inline-block; }
-.supsub sup, .supsub sub { position: relative; display: block; font-size: .5em; line-height: 1.2; }
-.supsub sub { top: .3em; }
 
 code, .code {
 	font-family: 'Source Code Pro', monospace;

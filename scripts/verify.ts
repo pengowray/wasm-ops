@@ -24,6 +24,9 @@ const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '
 const LEGACY = join(ROOT, 'data', '.legacy-help.json');
 const REVISIONS = join(ROOT, 'data', 'revisions.json');
 
+/** Tags that mark up a word rather than separate two. */
+const INLINE = /^<\/?(i|b|em|strong|sup|sub|code|span)(\s[^>]*)?>$/i;
+
 /**
  * Visible text as a word list.
  *
@@ -31,9 +34,14 @@ const REVISIONS = join(ROOT, 'data', 'revisions.json');
  * tokenises as two words instead of the single glued `Stack:[i32]`. The two
  * section headings are then dropped from both sides: in the new model they are
  * field names, not content.
+ *
+ * Inline formatting is the exception, and elides to nothing. A reader of
+ * `[<i>t</i>]` sees `[t]`, one word; splitting it into three would report a
+ * loss every time a metavariable is italicised, which is a change to how a
+ * word is set and not to whether it is there.
  */
 function words(html: string): string[] {
-  const spaced = html.replace(/<[^>]+>/g, ' ');
+  const spaced = html.replace(/<[^>]+>/g, (tag) => (INLINE.test(tag) ? '' : ' '));
   const text = parse(spaced).textContent // decodes entities
     .replace(/ /g, ' ')
     .replace(/Followed by:|Stack:/g, ' ')
