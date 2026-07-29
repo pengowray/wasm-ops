@@ -2548,7 +2548,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [i32]",
-        "note": "How many code units the string would take in this encoding, or −1 if it cannot be encoded in it."
+        "note": "How many bytes the string would take as UTF-8, or −1 if it contains an isolated surrogate, which UTF-8 cannot represent."
       }
     },
     {
@@ -2571,7 +2571,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [i32]",
-        "note": "How many code units the string would take in this encoding, or −1 if it cannot be encoded in it."
+        "note": "How many bytes the string takes in this encoding."
       }
     },
     {
@@ -2594,7 +2594,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [i32]",
-        "note": "How many code units the string would take in this encoding, or −1 if it cannot be encoded in it."
+        "note": "How many 16-bit code units the string takes in this encoding."
       }
     },
     {

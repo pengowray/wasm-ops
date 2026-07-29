@@ -109,7 +109,8 @@
       "immediates": [
         {
           "name": "ord",
-          "kind": "ordering"
+          "encoding": "u8",
+          "note": "a reserved byte, always 0x00"
         }
       ],
       "stack": {
@@ -2505,7 +2506,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>)] → [i32]",
-        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>struct.atomic.get_s</code>, zero-extended by <code>struct.atomic.get_u</code>."
       }
     },
     {
@@ -2542,7 +2543,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>)] → [i32]",
-        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>struct.atomic.get_s</code>, zero-extended by <code>struct.atomic.get_u</code>."
       }
     },
     {
@@ -2895,7 +2896,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>) i32] → [i32]",
-        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>array.atomic.get_s</code>, zero-extended by <code>array.atomic.get_u</code>."
       }
     },
     {
@@ -2928,7 +2929,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>) i32] → [i32]",
-        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>array.atomic.get_s</code>, zero-extended by <code>array.atomic.get_u</code>."
       }
     },
     {
