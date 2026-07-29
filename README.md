@@ -13,8 +13,9 @@ of truth; everything on the page is generated from it.
 ```
 data/*.json      one file per section — the opcodes themselves
 content/*.html   the page's prose (intro, further reading)
-src/model/       the typed opcode model, name decomposition, categories, and
-                 the view logic that turns options into an ordered layout
+src/model/       the typed opcode model, name decomposition, categories, the
+                 immediate-operand kinds, and the view logic that turns options
+                 into an ordered layout
 src/render/      HTML generation, used by both the build and the client
 src/client/      browser behaviour: rearranging, highlighting, detail panel,
                  navigation map
@@ -45,9 +46,17 @@ encoding breakdown, the navigation map — is generated in the browser rather th
 baked into the HTML, so the page does not carry hundreds of copies of the same
 derived markup.
 
-`npm run extract` regenerates `data/` from the legacy `docs/index.html`. That was
-the one-time conversion; now that `data/` is edited directly, running it again
-would discard those edits.
+An instruction's immediate operands are recorded as which *kinds* it takes and
+in what order. What a `memarg` is, that a `typeidx` is a `u32`, which bytes the
+ordering immediate of an atomic read-modify-write may hold — those are facts
+about the kind, written once in `src/model/immediates.ts`. The short form shown
+beside the instruction name is derived from the same list, so the two spellings
+of an operand cannot disagree.
+
+`npm run extract` was the one-time conversion of the legacy `docs/index.html`
+into `data/`. It emits the pre-2026 shape, which the loader no longer reads, so
+it now refuses without `--force`; the parsing is kept as the record of how the
+conversion was done.
 
 ## Verification
 
@@ -55,6 +64,10 @@ would discard those edits.
 
 - every opcode's id and byte encoding agree with its prefix and code
 - each section's opcodes are contiguous from its declared start
+- every named instruction has a stack signature, bar the five delimiters
+  (`else`, `catch`, `end`, `delegate`, `catch_all`) that have no stack effect of
+  their own
+- every immediate names a kind the renderer knows
 - no visible text has been lost relative to the original page
 
 The last check compares against `data/.legacy-help.json`, a snapshot of the old
