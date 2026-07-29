@@ -31,7 +31,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.1",
@@ -55,7 +58,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i64] → [i32]"
+      }
     },
     {
       "id": "0xFE.2",
@@ -79,7 +85,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64 i64] → [i32]"
+      }
     },
     {
       "id": "0xFE.3",
@@ -102,7 +111,10 @@
           "name": "ord",
           "kind": "ordering"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → []"
+      }
     },
     {
       "id": "0xFE.4",
@@ -119,7 +131,10 @@
         "mainop": "pause"
       },
       "description": "<p>hints that the thread is spinning and the core may back off. Semantically a no-op</p>",
-      "proposal": "relaxed-atomics"
+      "proposal": "relaxed-atomics",
+      "stack": {
+        "html": "[] → []"
+      }
     },
     {
       "id": "0xFE.5",
@@ -275,7 +290,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.17",
@@ -299,7 +317,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i64]"
+      }
     },
     {
       "id": "0xFE.18",
@@ -325,7 +346,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.19",
@@ -351,7 +375,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.20",
@@ -377,7 +404,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i64]"
+      }
     },
     {
       "id": "0xFE.21",
@@ -403,7 +433,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i64]"
+      }
     },
     {
       "id": "0xFE.22",
@@ -429,7 +462,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [i64]"
+      }
     },
     {
       "id": "0xFE.23",
@@ -453,7 +489,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → []"
+      }
     },
     {
       "id": "0xFE.24",
@@ -477,7 +516,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → []"
+      }
     },
     {
       "id": "0xFE.25",
@@ -502,7 +544,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → []"
+      }
     },
     {
       "id": "0xFE.26",
@@ -527,7 +572,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → []"
+      }
     },
     {
       "id": "0xFE.27",
@@ -552,7 +600,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → []"
+      }
     },
     {
       "id": "0xFE.28",
@@ -577,7 +628,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → []"
+      }
     },
     {
       "id": "0xFE.29",
@@ -602,7 +656,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → []"
+      }
     },
     {
       "id": "0xFE.30",
@@ -626,7 +683,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.31",
@@ -650,7 +710,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.32",
@@ -675,7 +738,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.33",
@@ -700,7 +766,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.34",
@@ -725,7 +794,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.35",
@@ -750,7 +822,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.36",
@@ -775,7 +850,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.37",
@@ -799,7 +877,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.38",
@@ -823,7 +904,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.39",
@@ -848,7 +932,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.40",
@@ -873,7 +960,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.41",
@@ -898,7 +988,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.42",
@@ -923,7 +1016,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.43",
@@ -948,7 +1044,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.44",
@@ -972,7 +1071,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.45",
@@ -996,7 +1098,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.46",
@@ -1021,7 +1126,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.47",
@@ -1046,7 +1154,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.48",
@@ -1071,7 +1182,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.49",
@@ -1096,7 +1210,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.50",
@@ -1121,7 +1238,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.51",
@@ -1145,7 +1265,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.52",
@@ -1169,7 +1292,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.53",
@@ -1194,7 +1320,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.54",
@@ -1219,7 +1348,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.55",
@@ -1244,7 +1376,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.56",
@@ -1269,7 +1404,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.57",
@@ -1294,7 +1432,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.58",
@@ -1318,7 +1459,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.59",
@@ -1342,7 +1486,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.60",
@@ -1367,7 +1514,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.61",
@@ -1392,7 +1542,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.62",
@@ -1417,7 +1570,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.63",
@@ -1442,7 +1598,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.64",
@@ -1467,7 +1626,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.65",
@@ -1491,7 +1653,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.66",
@@ -1515,7 +1680,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.67",
@@ -1540,7 +1708,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.68",
@@ -1565,7 +1736,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.69",
@@ -1590,7 +1764,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.70",
@@ -1615,7 +1792,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.71",
@@ -1640,7 +1820,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.72",
@@ -1664,7 +1847,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.73",
@@ -1688,7 +1874,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.74",
@@ -1713,7 +1902,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.75",
@@ -1738,7 +1930,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → [i32]"
+      }
     },
     {
       "id": "0xFE.76",
@@ -1763,7 +1958,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.77",
@@ -1788,7 +1986,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.78",
@@ -1813,7 +2014,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i64 i64] → [i64]"
+      }
     },
     {
       "id": "0xFE.79",
@@ -1841,7 +2045,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>."
+      }
     },
     {
       "id": "0xFE.80",
@@ -1869,7 +2077,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → []",
+        "note": "<i>t</i> is the type of global <i>x</i>."
+      }
     },
     {
       "id": "0xFE.81",
@@ -1897,7 +2109,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. Pushes the value the global held before the write."
+      }
     },
     {
       "id": "0xFE.82",
@@ -1925,7 +2141,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. Pushes the value the global held before the write."
+      }
     },
     {
       "id": "0xFE.83",
@@ -1953,7 +2173,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. Pushes the value the global held before the write."
+      }
     },
     {
       "id": "0xFE.84",
@@ -1981,7 +2205,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. Pushes the value the global held before the write."
+      }
     },
     {
       "id": "0xFE.85",
@@ -2009,7 +2237,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. Pushes the value the global held before the write."
+      }
     },
     {
       "id": "0xFE.86",
@@ -2037,7 +2269,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. Pushes the value the global held before the write."
+      }
     },
     {
       "id": "0xFE.87",
@@ -2065,7 +2301,11 @@
           "name": "x",
           "kind": "globalidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i> <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of global <i>x</i>. The expected value, then the replacement; pushes the value the global held before."
+      }
     },
     {
       "id": "0xFE.88",
@@ -2093,7 +2333,11 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of table <i>x</i>."
+      }
     },
     {
       "id": "0xFE.89",
@@ -2121,7 +2365,11 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 <i>t</i>] → []",
+        "note": "<i>t</i> is the element type of table <i>x</i>."
+      }
     },
     {
       "id": "0xFE.90",
@@ -2149,7 +2397,11 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of table <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.91",
@@ -2177,7 +2429,11 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 <i>t</i> <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of table <i>x</i>. Index, expected value, then the replacement; pushes the element held before."
+      }
     },
     {
       "id": "0xFE.92",
@@ -2209,7 +2465,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>)] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>."
+      }
     },
     {
       "id": "0xFE.93",
@@ -2242,7 +2502,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>)] → [i32]",
+        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+      }
     },
     {
       "id": "0xFE.94",
@@ -2275,7 +2539,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>)] → [i32]",
+        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+      }
     },
     {
       "id": "0xFE.95",
@@ -2307,7 +2575,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → []",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>."
+      }
     },
     {
       "id": "0xFE.96",
@@ -2339,7 +2611,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. Pushes the value the field held before the write."
+      }
     },
     {
       "id": "0xFE.97",
@@ -2371,7 +2647,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. Pushes the value the field held before the write."
+      }
     },
     {
       "id": "0xFE.98",
@@ -2403,7 +2683,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. Pushes the value the field held before the write."
+      }
     },
     {
       "id": "0xFE.99",
@@ -2435,7 +2719,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. Pushes the value the field held before the write."
+      }
     },
     {
       "id": "0xFE.100",
@@ -2467,7 +2755,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. Pushes the value the field held before the write."
+      }
     },
     {
       "id": "0xFE.101",
@@ -2499,7 +2791,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. Pushes the value the field held before the write."
+      }
     },
     {
       "id": "0xFE.102",
@@ -2531,7 +2827,11 @@
           "name": "y",
           "kind": "fieldidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) <i>t</i> <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the type of field <i>y</i> of struct type <i>x</i>. The expected value, then the replacement; pushes the value the field held before."
+      }
     },
     {
       "id": "0xFE.103",
@@ -2559,7 +2859,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>."
+      }
     },
     {
       "id": "0xFE.104",
@@ -2588,7 +2892,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32] → [i32]",
+        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+      }
     },
     {
       "id": "0xFE.105",
@@ -2617,7 +2925,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32] → [i32]",
+        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>get_s</code>, zero-extended by <code>get_u</code>."
+      }
     },
     {
       "id": "0xFE.106",
@@ -2645,7 +2957,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → []",
+        "note": "<i>t</i> is the element type of array type <i>x</i>."
+      }
     },
     {
       "id": "0xFE.107",
@@ -2673,7 +2989,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.108",
@@ -2701,7 +3021,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.109",
@@ -2729,7 +3053,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.110",
@@ -2757,7 +3085,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.111",
@@ -2785,7 +3117,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.112",
@@ -2813,7 +3149,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Pushes the element held before the write."
+      }
     },
     {
       "id": "0xFE.113",
@@ -2841,7 +3181,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>x</i>) i32 <i>t</i> <i>t</i>] → [<i>t</i>]",
+        "note": "<i>t</i> is the element type of array type <i>x</i>. Index, expected value, then the replacement; pushes the element held before."
+      }
     },
     {
       "id": "0xFE.114",

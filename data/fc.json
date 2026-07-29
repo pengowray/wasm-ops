@@ -28,7 +28,10 @@
         "sign": "s"
       },
       "description": "<p>saturating form of i32.trunc_f32_s</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f32] → [i32]"
+      }
     },
     {
       "id": "0xFC.1",
@@ -48,7 +51,10 @@
         "sign": "u"
       },
       "description": "<p>saturating form of i32.trunc_f32_u</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f32] → [i32]"
+      }
     },
     {
       "id": "0xFC.2",
@@ -68,7 +74,10 @@
         "sign": "s"
       },
       "description": "<p>saturating form of i32.trunc_f64_s</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f64] → [i32]"
+      }
     },
     {
       "id": "0xFC.3",
@@ -88,7 +97,10 @@
         "sign": "u"
       },
       "description": "<p>saturating form of i32.trunc_f64_u</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f64] → [i32]"
+      }
     },
     {
       "id": "0xFC.4",
@@ -108,7 +120,10 @@
         "sign": "s"
       },
       "description": "<p>saturating form of i64.trunc_f32_s</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f32] → [i64]"
+      }
     },
     {
       "id": "0xFC.5",
@@ -128,7 +143,10 @@
         "sign": "u"
       },
       "description": "<p>saturating form of i64.trunc_f32_u</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f32] → [i64]"
+      }
     },
     {
       "id": "0xFC.6",
@@ -148,7 +166,10 @@
         "sign": "s"
       },
       "description": "<p>saturating form of i64.trunc_f64_s</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f64] → [i64]"
+      }
     },
     {
       "id": "0xFC.7",
@@ -168,7 +189,10 @@
         "sign": "u"
       },
       "description": "<p>saturating form of i64.trunc_f64_u</p>",
-      "proposal": "nontrapping-float-to-int"
+      "proposal": "nontrapping-float-to-int",
+      "stack": {
+        "html": "[f64] → [i64]"
+      }
     },
     {
       "id": "0xFC.8",
@@ -196,7 +220,10 @@
           "name": "x",
           "kind": "memidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → []"
+      }
     },
     {
       "id": "0xFC.9",
@@ -220,7 +247,11 @@
           "name": "x",
           "kind": "dataidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → []",
+        "note": "Drops the segment’s contents; nothing is taken from or left on the stack."
+      }
     },
     {
       "id": "0xFC.10",
@@ -248,7 +279,10 @@
           "name": "y",
           "kind": "memidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → []"
+      }
     },
     {
       "id": "0xFC.11",
@@ -272,7 +306,10 @@
           "name": "x",
           "kind": "memidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → []"
+      }
     },
     {
       "id": "0xFC.12",
@@ -300,7 +337,10 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → []"
+      }
     },
     {
       "id": "0xFC.13",
@@ -324,7 +364,11 @@
           "name": "x",
           "kind": "elemidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → []",
+        "note": "Drops the segment’s contents; nothing is taken from or left on the stack."
+      }
     },
     {
       "id": "0xFC.14",
@@ -352,7 +396,10 @@
           "name": "y",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32 i32] → []"
+      }
     },
     {
       "id": "0xFC.15",
@@ -376,7 +423,10 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → []"
+      }
     },
     {
       "id": "0xFC.16",
@@ -400,7 +450,10 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → [i32]"
+      }
     },
     {
       "id": "0xFC.17",
@@ -424,7 +477,10 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 i32] → []"
+      }
     },
     {
       "id": "0xFC.18",
@@ -454,6 +510,9 @@
         "pre": "i64",
         "mainop": "add",
         "opbits": "128"
+      },
+      "stack": {
+        "html": "[i64 i64 i64] → [i64 i64]"
       }
     },
     {
@@ -472,6 +531,9 @@
         "pre": "i64",
         "mainop": "sub",
         "opbits": "128"
+      },
+      "stack": {
+        "html": "[i64 i64 i64] → [i64 i64]"
       }
     },
     {
@@ -490,6 +552,9 @@
         "pre": "i64",
         "mainop": "mul",
         "rest": "wide_s"
+      },
+      "stack": {
+        "html": "[i64 i64] → [i64 i64]"
       }
     },
     {
@@ -508,6 +573,9 @@
         "pre": "i64",
         "mainop": "mul",
         "rest": "wide_u"
+      },
+      "stack": {
+        "html": "[i64 i64] → [i64 i64]"
       }
     },
     {
@@ -833,7 +901,11 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [f32]",
+        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+      }
     },
     {
       "id": "0xFC.49",
@@ -858,7 +930,11 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 f32] → []",
+        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+      }
     },
     {
       "id": "0xFC.50",

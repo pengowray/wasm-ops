@@ -142,7 +142,7 @@
       "parts": {
         "mainop": "else"
       },
-      "description": "<p>Marks the else block of an <i>if</i>.</p>",
+      "description": "<p>Marks the else block of an <i>if</i>.</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>if</i>.</p>",
       "proposal": "mvp"
     },
     {
@@ -167,7 +167,11 @@
           "kind": "blocktype"
         }
       ],
-      "followedByNote": "<p>Then the instructions, then zero or more 0x07 — catch clauses, optionally ending with 0x19 — catch_all, or a single 0x18 — delegate; then 0x0B — end.</p>"
+      "followedByNote": "<p>Then the instructions, then zero or more 0x07 — catch clauses, optionally ending with 0x19 — catch_all, or a single 0x18 — delegate; then 0x0B — end.</p>",
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "Both the parameter and result types come from the <i>bt</i> immediate."
+      }
     },
     {
       "id": "0x07",
@@ -182,7 +186,7 @@
       "parts": {
         "mainop": "catch"
       },
-      "description": "<p>begins the catch block of the try block</p>",
+      "description": "<p>begins the catch block of the try block</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>try</i>.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediates": [
@@ -212,7 +216,12 @@
           "name": "x",
           "kind": "tagidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack",
+        "note": "<i>t</i><sup>*</sup> are the parameters of tag <i>x</i>."
+      }
     },
     {
       "id": "0x09",
@@ -235,7 +244,11 @@
           "name": "l",
           "kind": "labelidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack"
+      }
     },
     {
       "id": "0x0A",
@@ -251,7 +264,12 @@
         "mainop": "throw_ref"
       },
       "description": "<p>Pops the exnref on top of the stack and throws it</p>",
-      "proposal": "exception-handling"
+      "proposal": "exception-handling",
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> exnref] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack",
+        "note": "Traps on a null exception reference."
+      }
     },
     {
       "id": "0x0B",
@@ -266,7 +284,7 @@
       "parts": {
         "mainop": "end"
       },
-      "description": "<p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p>",
+      "description": "<p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p>\n<p>Not typed on its own: what it does to the stack belongs to the construct it closes.</p>",
       "proposal": "mvp"
     },
     {
@@ -449,7 +467,12 @@
           "name": "x",
           "kind": "funcidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack",
+        "note": "<i>t</i><sup>*</sup> are the parameters of function <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
+      }
     },
     {
       "id": "0x13",
@@ -475,7 +498,12 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack",
+        "note": "<i>t</i><sup>*</sup> are the parameters of type <i>y</i>, and the i32 indexes table <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
+      }
     },
     {
       "id": "0x14",
@@ -497,7 +525,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "<i>t</i><sub>1</sub><sup>*</sup> and <i>t</i><sub>2</sub><sup>*</sup> are the parameters and results of function type <i>x</i>. Traps on a null reference."
+      }
     },
     {
       "id": "0x15",
@@ -518,7 +550,12 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack",
+        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
+      }
     },
     {
       "id": "0x16",
@@ -555,7 +592,7 @@
       "parts": {
         "mainop": "delegate"
       },
-      "description": "<p>begins the delegate block of the try block</p>",
+      "description": "<p>begins the delegate block of the try block</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>try</i>.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediates": [
@@ -578,7 +615,7 @@
       "parts": {
         "mainop": "catch_all"
       },
-      "description": "<p>begins the catch_all block of the try block</p>",
+      "description": "<p>begins the catch_all block of the try block</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>try</i>.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
@@ -644,7 +681,12 @@
           "list": true,
           "note": "currently exactly one"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i> <i>t</i> i32] → [<i>t</i>]",
+        "polymorphic": "value",
+        "note": "<i>t</i> is given by the immediate rather than inferred, which is what lets this form take a reference."
+      }
     },
     {
       "id": "0x1D",
@@ -694,7 +736,11 @@
           "list": true
         }
       ],
-      "followedByNote": "<p>Then the instructions, then 0x0B — end.</p>"
+      "followedByNote": "<p>Then the instructions, then 0x0B — end.</p>",
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "Both the parameter and result types come from the <i>bt</i> immediate."
+      }
     },
     {
       "id": "0x20",
@@ -847,7 +893,10 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → []"
+      }
     },
     {
       "id": "0x26",
@@ -870,7 +919,10 @@
           "name": "x",
           "kind": "tableidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → []"
+      }
     },
     {
       "id": "0x27",
@@ -4211,7 +4263,10 @@
         "sign": "s"
       },
       "description": "<p>extend a signed 8-bit integer to a 32-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
-      "proposal": "sign-extension"
+      "proposal": "sign-extension",
+      "stack": {
+        "html": "[i32] → [i32]"
+      }
     },
     {
       "id": "0xC1",
@@ -4230,7 +4285,10 @@
         "sign": "s"
       },
       "description": "<p>extend a signed 16-bit integer to a 32-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
-      "proposal": "sign-extension"
+      "proposal": "sign-extension",
+      "stack": {
+        "html": "[i32] → [i32]"
+      }
     },
     {
       "id": "0xC2",
@@ -4249,7 +4307,10 @@
         "sign": "s"
       },
       "description": "<p>extend a signed 8-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
-      "proposal": "sign-extension"
+      "proposal": "sign-extension",
+      "stack": {
+        "html": "[i64] → [i64]"
+      }
     },
     {
       "id": "0xC3",
@@ -4268,7 +4329,10 @@
         "sign": "s"
       },
       "description": "<p>extend a signed 16-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
-      "proposal": "sign-extension"
+      "proposal": "sign-extension",
+      "stack": {
+        "html": "[i64] → [i64]"
+      }
     },
     {
       "id": "0xC4",
@@ -4287,7 +4351,10 @@
         "sign": "s"
       },
       "description": "<p>extend a signed 32-bit integer to a 64-bit integer</p>\n<p><em>Sign-extension operators extension</em></p>",
-      "proposal": "sign-extension"
+      "proposal": "sign-extension",
+      "stack": {
+        "html": "[i64] → [i64]"
+      }
     },
     {
       "id": "0xC5",
@@ -4431,7 +4498,11 @@
           "name": "ht",
           "kind": "heaptype"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → [(ref null <i>ht</i>)]",
+        "note": "The result type is named by the immediate."
+      }
     },
     {
       "id": "0xD1",
@@ -4448,7 +4519,11 @@
         "mainop": "is_null"
       },
       "description": "<p>checks for null</p>",
-      "proposal": "reference-types"
+      "proposal": "reference-types",
+      "stack": {
+        "html": "[(ref null <i>ht</i>)] → [i32]",
+        "note": "1 if the reference is null, 0 if not."
+      }
     },
     {
       "id": "0xD2",
@@ -4471,7 +4546,11 @@
           "name": "x",
           "kind": "funcidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → [(ref <i>x</i>)]",
+        "note": "A non-null reference to function <i>x</i>."
+      }
     },
     {
       "id": "0xD3",
@@ -4488,7 +4567,11 @@
         "mainop": "eq"
       },
       "description": "<p>[eqref eqref] -&gt; [i32]</p>",
-      "proposal": "gc"
+      "proposal": "gc",
+      "stack": {
+        "html": "[eqref eqref] → [i32]",
+        "note": "1 if the two are the same reference or both null, 0 otherwise."
+      }
     },
     {
       "id": "0xD4",
@@ -4506,7 +4589,11 @@
         "rest": "non_null"
       },
       "description": "<p>converts a nullable reference to a non-nullable one or traps if null</p>",
-      "proposal": "function-references"
+      "proposal": "function-references",
+      "stack": {
+        "html": "[(ref null <i>ht</i>)] → [(ref <i>ht</i>)]",
+        "note": "Traps on null."
+      }
     },
     {
       "id": "0xD5",
@@ -4528,7 +4615,11 @@
           "name": "l",
           "kind": "labelidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sup>*</sup> (ref null <i>ht</i>)] → [<i>t</i><sup>*</sup> (ref <i>ht</i>)]",
+        "note": "Branches to <i>l</i> if the reference is null; otherwise leaves it on the stack, now known to be non-null."
+      }
     },
     {
       "id": "0xD6",
@@ -4550,7 +4641,11 @@
           "name": "l",
           "kind": "labelidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sup>*</sup> (ref null <i>ht</i>)] → [<i>t</i><sup>*</sup>]",
+        "note": "Branches to <i>l</i> if the reference is not null, carrying it to the label; otherwise leaves nothing."
+      }
     },
     {
       "id": "0xD7",
@@ -4672,7 +4767,11 @@
           "name": "x",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[(ref null <i>ft</i>)] → [(ref <i>x</i>)]",
+        "note": "<i>ft</i> is the function type that continuation type <i>x</i> wraps. Turns a function into a continuation that has not started running."
+      }
     },
     {
       "id": "0xE1",
@@ -4699,7 +4798,11 @@
           "name": "y",
           "kind": "typeidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sup>*</sup> (ref null <i>x</i>)] → [(ref <i>y</i>)]",
+        "note": "<i>t</i><sup>*</sup> are arguments bound into the continuation ahead of time, which is why <i>y</i> takes fewer parameters than <i>x</i>."
+      }
     },
     {
       "id": "0xE2",
@@ -4721,7 +4824,11 @@
           "name": "x",
           "kind": "tagidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "<i>t</i><sub>1</sub><sup>*</sup> and <i>t</i><sub>2</sub><sup>*</sup> are the parameters and results of tag <i>x</i>. Suspends to the nearest handler for that tag."
+      }
     },
     {
       "id": "0xE3",
@@ -4748,7 +4855,11 @@
           "kind": "handler",
           "list": true
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "<i>t</i><sub>1</sub><sup>*</sup> and <i>t</i><sub>2</sub><sup>*</sup> are the parameters and results of continuation type <i>x</i>. The handler clauses say where control goes if the continuation suspends."
+      }
     },
     {
       "id": "0xE4",
@@ -4779,7 +4890,11 @@
           "kind": "handler",
           "list": true
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "<i>t</i><sub>1</sub><sup>*</sup> are the parameters of tag <i>e</i>, raised at the point where the continuation suspended; <i>t</i><sub>2</sub><sup>*</sup> are the results of continuation type <i>x</i>."
+      }
     },
     {
       "id": "0xE5",
@@ -4806,7 +4921,11 @@
           "kind": "handler",
           "list": true
         }
-      ]
+      ],
+      "stack": {
+        "html": "[exnref (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "Takes an existing exception reference rather than a tag’s parameters, as <code>throw_ref</code> does beside <code>throw</code>. <i>t</i><sub>2</sub><sup>*</sup> are the results of continuation type <i>x</i>."
+      }
     },
     {
       "id": "0xE6",
@@ -4832,7 +4951,11 @@
           "name": "y",
           "kind": "tagidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "<i>t</i><sub>1</sub><sup>*</sup> and <i>t</i><sub>2</sub><sup>*</sup> are the parameters and results of continuation type <i>x</i>. Switches straight to another continuation rather than suspending to a handler."
+      }
     },
     {
       "id": "0xE7",

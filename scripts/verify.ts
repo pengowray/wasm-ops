@@ -17,7 +17,7 @@ import { parse } from 'node-html-parser';
 import { legacyHexId, opcodeBytes, opcodeId } from '../src/model/types.ts';
 import type { Opcode } from '../src/model/types.ts';
 import { loadData } from '../src/model/load.ts';
-import { immediateNames, renderImmediates } from '../src/model/immediates.ts';
+import { IMMEDIATE_KINDS, immediateNames, renderImmediates } from '../src/model/immediates.ts';
 import { polymorphicNote } from '../src/render/items.ts';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1');
@@ -110,6 +110,34 @@ function main(): void {
     if (op.status !== 'reserved' && !op.name) {
       failures.push(`${op.id}: ${op.status} but has no name`);
     }
+
+    for (const imm of op.immediates ?? []) {
+      if (imm.kind && !IMMEDIATE_KINDS.has(imm.kind)) {
+        failures.push(`${op.id}: unknown immediate kind "${imm.kind}"`);
+      }
+      if (!imm.kind && !imm.note) {
+        failures.push(`${op.id}: immediate "${imm.name}" has neither a kind nor a note`);
+      }
+    }
+  }
+
+  /*
+   * Every instruction says what it does to the stack.
+   *
+   * 559 of 729 did not, because the page this data came from only ever had
+   * signatures for the single-byte table, and nothing here could report that:
+   * the legacy comparison below asks whether anything was lost since 2022, and
+   * something that was never there cannot be lost. This asks the other
+   * question.
+   *
+   * The five exceptions are delimiters rather than instructions — `end` does
+   * not have a stack effect of its own, it closes a construct that does — and
+   * each says so in its description.
+   */
+  const UNTYPED = new Set(['0x05', '0x07', '0x0B', '0x18', '0x19']);
+  for (const op of data.opcodes) {
+    if (!op.name || op.linkTo || op.prefixFor || UNTYPED.has(op.id)) continue;
+    if (!op.stack) failures.push(`${op.id} (${op.name}): no stack signature`);
   }
 
   // Every section's cells must be contiguous from its declared start.

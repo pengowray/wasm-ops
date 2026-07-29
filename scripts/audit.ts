@@ -30,7 +30,18 @@ interface RefOpcode {
   prefix: string;
   code: number;
   name: string;
+  /** `[params] → [results]`, where the reference gives concrete types for both. */
+  stack?: string;
 }
+
+/** wabt's type column names, in ours. */
+const TYPES: Record<string, string> = {
+  I32: 'i32',
+  I64: 'i64',
+  F32: 'f32',
+  F64: 'f64',
+  V128: 'v128',
+};
 
 /**
  * Parses wabt's opcode.def. Each entry is a C macro call whose last useful
@@ -41,24 +52,38 @@ interface RefOpcode {
  */
 function parseReference(source: string): RefOpcode[] {
   const out: RefOpcode[] = [];
+  // The five leading columns are the result types and the parameter types, in
+  // that order — `___` where there is none. They used to be skipped over; they
+  // are the only machine-readable stack signature in the repository.
   const line =
-    /WABT_OPCODE\s*\([^)]*?,\s*(0x[0-9a-f]+|0)\s*,\s*(0x[0-9a-f]+)\s*,\s*(\w+)\s*,\s*"([^"]*)"/gi;
+    /WABT_OPCODE\s*\(\s*(\w+)\s*,\s*(\w+)\s*,\s*(\w+)\s*,\s*(\w+)\s*,\s*(\w+)\s*,\s*\w+\s*,\s*(0x[0-9a-f]+|0)\s*,\s*(0x[0-9a-f]+)\s*,\s*(\w+)\s*,\s*"([^"]*)"/gi;
 
   let match: RegExpExecArray | null;
   while ((match = line.exec(source)) !== null) {
-    const prefixValue = parseInt(match[1]!, 16);
-    const enumName = match[3]!;
-    const name = match[4]!;
+    const [tr, tr2, t1, t2, t3] = [match[1]!, match[2]!, match[3]!, match[4]!, match[5]!];
+    const prefixValue = parseInt(match[6]!, 16);
+    const enumName = match[8]!;
+    const name = match[9]!;
     // wabt lists a handful of internal pseudo-opcodes with no text name.
     if (!name) continue;
     // wabt's interpreter has its own opcodes — alloca, br_unless, drop_keep —
     // occupying 0xE0 upwards. They are an implementation detail of that
     // interpreter and are not WebAssembly instructions.
     if (enumName.startsWith('Interp')) continue;
+
+    // `t1 t2 t3` are bottom of stack to top, which is the order a signature is
+    // written in. Checked against the 153 concrete signatures the chart already
+    // had: all 153 agree.
+    const params = [t1, t2, t3].filter((t) => t !== '___').map((t) => TYPES[t] ?? t);
+    const results = [tr, tr2].filter((t) => t !== '___').map((t) => TYPES[t] ?? t);
+
     out.push({
       prefix: prefixValue === 0 ? '' : prefixValue.toString(16).toUpperCase(),
-      code: parseInt(match[2]!, 16),
+      code: parseInt(match[7]!, 16),
       name,
+      ...(params.length || results.length
+        ? { stack: `[${params.join(' ')}] → [${results.join(' ')}]` }
+        : {}),
     });
   }
   return out;
@@ -121,6 +146,7 @@ function main(): void {
   const missing: string[] = [];
   const extra: string[] = [];
   const renamed: string[] = [];
+  const mistyped: string[] = [];
 
   // Ours -> reference.
   // The string instructions also live under 0xFB, from 0x80 up, and no
@@ -155,6 +181,18 @@ function main(): void {
     } else if (op.name && ref && ref.name !== op.name) {
       renamed.push(`${op.id.padEnd(11)} ours: ${op.name.padEnd(32)} ref: ${ref.name}`);
     }
+
+    // Stack signatures, where both sides have one and ours names no type
+    // variable. A signature containing `<i>` is polymorphic or depends on an
+    // immediate's type index, which the reference has no column for and writes
+    // as blank — comparing those would report a difference on every one.
+    if (op.name && ref?.stack && op.stack && !op.stack.html.includes('<')) {
+      if (op.stack.html !== ref.stack) {
+        mistyped.push(
+          `${op.id.padEnd(11)} ${op.name.padEnd(30)} ours: ${op.stack.html.padEnd(26)} ref: ${ref.stack}`,
+        );
+      }
+    }
   }
 
   // Reference -> ours.
@@ -183,6 +221,7 @@ function main(): void {
   report('In the reference, missing or unnamed here', missing);
   report('Named here, absent from the reference', extra);
   report('Named differently', renamed);
+  report('Stack signature differs from the reference', mistyped);
   report(
     'Differences already accounted for',
     [...acceptedBy].map(([reason, n]) => `${String(n).padStart(3)} × ${reason}`),
@@ -190,7 +229,7 @@ function main(): void {
 
   console.log(`\nSkipped: ${historical} legacy or withdrawn encodings, kept as history.`);
 
-  const unexplained = missing.length + extra.length + renamed.length;
+  const unexplained = missing.length + extra.length + renamed.length + mistyped.length;
   console.log(
     unexplained
       ? `\n${unexplained} difference(s) need a decision.`

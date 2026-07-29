@@ -32,7 +32,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.1",
@@ -57,7 +60,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.2",
@@ -82,7 +88,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.3",
@@ -107,7 +116,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.4",
@@ -132,7 +144,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.5",
@@ -157,7 +172,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.6",
@@ -182,7 +200,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.7",
@@ -208,7 +229,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.8",
@@ -234,7 +258,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.9",
@@ -260,7 +287,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.10",
@@ -286,7 +316,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.11",
@@ -310,7 +343,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → []"
+      }
     },
     {
       "id": "0xFD.12",
@@ -334,7 +370,10 @@
           "encoding": "u8[16]",
           "note": "the 128-bit value, little-endian"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[] → [v128]"
+      }
     },
     {
       "id": "0xFD.13",
@@ -360,7 +399,10 @@
           "kind": "laneidx",
           "note": "one per result lane, each 0–31 selecting a byte of the two inputs"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.14",
@@ -378,7 +420,10 @@
         "mainop": "swizzle"
       },
       "description": "<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>\n<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.15",
@@ -396,7 +441,10 @@
         "mainop": "splat"
       },
       "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 16 lanes.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.16",
@@ -414,7 +462,10 @@
         "mainop": "splat"
       },
       "description": "<p>Creates a vector with identical lanes.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.17",
@@ -432,7 +483,10 @@
         "mainop": "splat"
       },
       "description": "<p>Creates a vector with identical lanes.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.18",
@@ -450,7 +504,10 @@
         "mainop": "splat"
       },
       "description": "<p>Creates a vector with identical lanes.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[i64] → [v128]"
+      }
     },
     {
       "id": "0xFD.19",
@@ -468,7 +525,10 @@
         "mainop": "splat"
       },
       "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 4 lanes.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[f32] → [v128]"
+      }
     },
     {
       "id": "0xFD.20",
@@ -486,7 +546,10 @@
         "mainop": "splat"
       },
       "description": "<p>Creates a vector with identical lanes.</p>\n<p>Constructs a vector with x replicated to all 2 lanes.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[f64] → [v128]"
+      }
     },
     {
       "id": "0xFD.21",
@@ -512,7 +575,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.22",
@@ -538,7 +604,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.23",
@@ -563,7 +632,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.24",
@@ -589,7 +661,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.25",
@@ -615,7 +690,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.26",
@@ -640,7 +718,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.27",
@@ -665,7 +746,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.28",
@@ -690,7 +774,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.29",
@@ -715,7 +802,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [i64]"
+      }
     },
     {
       "id": "0xFD.30",
@@ -740,7 +830,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 i64] → [v128]"
+      }
     },
     {
       "id": "0xFD.31",
@@ -765,7 +858,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [f32]"
+      }
     },
     {
       "id": "0xFD.32",
@@ -790,7 +886,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 f32] → [v128]"
+      }
     },
     {
       "id": "0xFD.33",
@@ -815,7 +914,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [f64]"
+      }
     },
     {
       "id": "0xFD.34",
@@ -840,7 +942,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 f64] → [v128]"
+      }
     },
     {
       "id": "0xFD.35",
@@ -858,7 +963,10 @@
         "mainop": "eq"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.36",
@@ -876,7 +984,10 @@
         "mainop": "ne"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.37",
@@ -895,7 +1006,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.38",
@@ -914,7 +1028,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.39",
@@ -933,7 +1050,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.40",
@@ -952,7 +1072,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.41",
@@ -971,7 +1094,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.42",
@@ -990,7 +1116,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.43",
@@ -1009,7 +1138,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.44",
@@ -1028,7 +1160,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.45",
@@ -1046,7 +1181,10 @@
         "mainop": "eq"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.46",
@@ -1064,7 +1202,10 @@
         "mainop": "ne"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.47",
@@ -1083,7 +1224,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.48",
@@ -1102,7 +1246,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.49",
@@ -1121,7 +1268,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.50",
@@ -1140,7 +1290,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.51",
@@ -1159,7 +1312,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.52",
@@ -1178,7 +1334,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.53",
@@ -1197,7 +1356,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.54",
@@ -1216,7 +1378,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.55",
@@ -1234,7 +1399,10 @@
         "mainop": "eq"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.56",
@@ -1252,7 +1420,10 @@
         "mainop": "ne"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.57",
@@ -1271,7 +1442,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.58",
@@ -1290,7 +1464,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.59",
@@ -1309,7 +1486,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.60",
@@ -1328,7 +1508,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.61",
@@ -1347,7 +1530,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.62",
@@ -1366,7 +1552,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.63",
@@ -1385,7 +1574,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.64",
@@ -1404,7 +1596,10 @@
         "sign": "u"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.65",
@@ -1422,7 +1617,10 @@
         "mainop": "eq"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.66",
@@ -1440,7 +1638,10 @@
         "mainop": "ne"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.67",
@@ -1458,7 +1659,10 @@
         "mainop": "lt"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.68",
@@ -1476,7 +1680,10 @@
         "mainop": "gt"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.69",
@@ -1494,7 +1701,10 @@
         "mainop": "le"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than [or equal] the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.70",
@@ -1512,7 +1722,10 @@
         "mainop": "ge"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than [or equal] the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.71",
@@ -1530,7 +1743,10 @@
         "mainop": "eq"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.72",
@@ -1548,7 +1764,10 @@
         "mainop": "ne"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.73",
@@ -1566,7 +1785,10 @@
         "mainop": "lt"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.74",
@@ -1584,7 +1806,10 @@
         "mainop": "gt"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.75",
@@ -1602,7 +1827,10 @@
         "mainop": "le"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.76",
@@ -1620,7 +1848,10 @@
         "mainop": "ge"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.77",
@@ -1638,7 +1869,10 @@
         "mainop": "not"
       },
       "description": "<p>Flips each bit of the 128-bit input vector.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.78",
@@ -1656,7 +1890,10 @@
         "mainop": "and"
       },
       "description": "<p>Performs a bitwise and of the two input 128-bit vectors, returning the resulting vector.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.79",
@@ -1674,7 +1911,10 @@
         "mainop": "andnot"
       },
       "description": "<p>Bitwise AND of bits of a and the logical inverse of bits of b.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.80",
@@ -1692,7 +1932,10 @@
         "mainop": "or"
       },
       "description": "<p>Performs a bitwise or of the two input 128-bit vectors, returning the resulting vector.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.81",
@@ -1710,7 +1953,10 @@
         "mainop": "xor"
       },
       "description": "<p>Performs a bitwise xor of the two input 128-bit vectors, returning the resulting vector.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.82",
@@ -1728,7 +1974,10 @@
         "mainop": "bitselect"
       },
       "description": "<p>Rust: <code>fn v128_bitselect(v1: v128, v2: v128, c: v128) -&gt; v128</code></p>\n<p>Use the bitmask in <code>c</code> to select bits from <code>v1</code> when 1 and <code>v2</code> when 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.83",
@@ -1746,7 +1995,10 @@
         "mainop": "any_true"
       },
       "description": "<p>Returns true if any bit in a is set, or false otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.84",
@@ -1776,7 +2028,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.85",
@@ -1806,7 +2061,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.86",
@@ -1836,7 +2094,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.87",
@@ -1866,7 +2127,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.88",
@@ -1896,7 +2160,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → []"
+      }
     },
     {
       "id": "0xFD.89",
@@ -1926,7 +2193,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → []"
+      }
     },
     {
       "id": "0xFD.90",
@@ -1956,7 +2226,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → []"
+      }
     },
     {
       "id": "0xFD.91",
@@ -1986,7 +2259,10 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32 v128] → []"
+      }
     },
     {
       "id": "0xFD.92",
@@ -2012,7 +2288,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.93",
@@ -2038,7 +2317,10 @@
           "name": "m",
           "kind": "memarg"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.94",
@@ -2058,7 +2340,10 @@
         "rest": "zero"
       },
       "description": "<p>Conversion of the two double-precision floating point lanes to two lower single-precision lanes of the result. The two higher lanes of the result are initialized to zero. If the conversion result is not representable as a single-precision floating point number, it is rounded to the nearest-even representable number.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.95",
@@ -2077,7 +2362,10 @@
         "post": "low_f32x4"
       },
       "description": "<p>Conversion of the two lower single-precision floating point lanes to the two double-precision lanes of the result.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.96",
@@ -2095,7 +2383,10 @@
         "mainop": "abs"
       },
       "description": "<p>Lane-wise wrapping absolute value.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.97",
@@ -2113,7 +2404,10 @@
         "mainop": "neg"
       },
       "description": "<p>Negates a 128-bit vectors interpreted as sixteen 8-bit signed integers</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.98",
@@ -2131,7 +2425,10 @@
         "mainop": "popcnt"
       },
       "description": "<p>Count the number of bits set to one within each lane.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.99",
@@ -2149,7 +2446,10 @@
         "mainop": "all_true"
       },
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.100",
@@ -2167,7 +2467,10 @@
         "mainop": "bitmask"
       },
       "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.101",
@@ -2187,7 +2490,10 @@
         "sign": "s"
       },
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>\n<p>Signed saturation to 0x7f or 0x80 is used and the input lanes are always interpreted as signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.102",
@@ -2207,7 +2513,10 @@
         "sign": "u"
       },
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.103",
@@ -2225,7 +2534,10 @@
         "mainop": "ceil"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.104",
@@ -2243,7 +2555,10 @@
         "mainop": "floor"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.105",
@@ -2261,7 +2576,10 @@
         "mainop": "trunc"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.106",
@@ -2279,7 +2597,10 @@
         "mainop": "nearest"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.107",
@@ -2297,7 +2618,10 @@
         "mainop": "shl"
       },
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.108",
@@ -2316,7 +2640,10 @@
         "sign": "s"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.109",
@@ -2335,7 +2662,10 @@
         "sign": "u"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.110",
@@ -2353,7 +2683,10 @@
         "mainop": "add"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.111",
@@ -2373,7 +2706,10 @@
         "sign": "s"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MAX.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.112",
@@ -2393,7 +2729,10 @@
         "sign": "u"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to u8::MAX.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.113",
@@ -2411,7 +2750,10 @@
         "mainop": "sub"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.114",
@@ -2431,7 +2773,10 @@
         "sign": "s"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit signed integers, saturating on overflow to i8::MIN.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.115",
@@ -2451,7 +2796,10 @@
         "sign": "u"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed sixteen 8-bit unsigned integers, saturating on overflow to 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.116",
@@ -2469,7 +2817,10 @@
         "mainop": "ceil"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value not smaller than the input.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.117",
@@ -2487,7 +2838,10 @@
         "mainop": "floor"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value not greater than the input.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.118",
@@ -2506,7 +2860,10 @@
         "sign": "s"
       },
       "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.119",
@@ -2525,7 +2882,10 @@
         "sign": "u"
       },
       "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.120",
@@ -2544,7 +2904,10 @@
         "sign": "s"
       },
       "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.121",
@@ -2563,7 +2926,10 @@
         "sign": "u"
       },
       "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.122",
@@ -2581,7 +2947,10 @@
         "mainop": "trunc"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value with the magnitude not larger than the input.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.123",
@@ -2600,7 +2969,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise rounding average.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.124",
@@ -2620,7 +2992,10 @@
         "rest": "i8x16_s"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.125",
@@ -2640,7 +3015,10 @@
         "rest": "i8x16_u"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.126",
@@ -2660,7 +3038,10 @@
         "rest": "i16x8_s"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.127",
@@ -2680,7 +3061,10 @@
         "rest": "i16x8_u"
       },
       "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.128",
@@ -2699,7 +3083,10 @@
         "mainop": "abs"
       },
       "description": "<p>Lane-wise wrapping absolute value.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.129",
@@ -2718,7 +3105,10 @@
         "mainop": "neg"
       },
       "description": "<p>Negates a 128-bit vectors interpreted as eight 16-bit signed integers</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.130",
@@ -2739,7 +3129,10 @@
         "sign": "s"
       },
       "description": "<p>Rust: <code>fn i16x8_q15mulr_sat(a: v128, b: v128) -&gt; v128</code></p>\n<p>Lane-wise saturating rounding multiplication in Q15 format.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.131",
@@ -2758,7 +3151,10 @@
         "mainop": "all_true"
       },
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.132",
@@ -2777,7 +3173,10 @@
         "mainop": "bitmask"
       },
       "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.133",
@@ -2798,7 +3197,10 @@
         "sign": "s"
       },
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.134",
@@ -2819,7 +3221,10 @@
         "sign": "u"
       },
       "description": "<p>Converts two input vectors into a smaller lane vector by narrowing each lane.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.135",
@@ -2840,7 +3245,10 @@
         "sign": "s"
       },
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.136",
@@ -2861,7 +3269,10 @@
         "sign": "s"
       },
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.137",
@@ -2882,7 +3293,10 @@
         "sign": "u"
       },
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.138",
@@ -2903,7 +3317,10 @@
         "sign": "u"
       },
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.139",
@@ -2922,7 +3339,10 @@
         "mainop": "shl"
       },
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.140",
@@ -2942,7 +3362,10 @@
         "sign": "s"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.141",
@@ -2962,7 +3385,10 @@
         "sign": "u"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.142",
@@ -2981,7 +3407,10 @@
         "mainop": "add"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.143",
@@ -3002,7 +3431,10 @@
         "sign": "s"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MAX.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.144",
@@ -3023,7 +3455,10 @@
         "sign": "u"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to u16::MAX.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.145",
@@ -3042,7 +3477,10 @@
         "mainop": "sub"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.146",
@@ -3063,7 +3501,10 @@
         "sign": "s"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit signed integers, saturating on overflow to i16::MIN.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.147",
@@ -3084,7 +3525,10 @@
         "sign": "u"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed eight 16-bit unsigned integers, saturating on overflow to 0.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.148",
@@ -3103,7 +3547,10 @@
         "mainop": "nearest"
       },
       "description": "<p>Lane-wise rounding to the nearest integral value; if two values are equally near, rounds to the even one.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.149",
@@ -3122,7 +3569,10 @@
         "mainop": "mul"
       },
       "description": "<p>Multiplies two 128-bit vectors as if they were two packed eight 16-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.150",
@@ -3142,7 +3592,10 @@
         "sign": "s"
       },
       "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.151",
@@ -3162,7 +3615,10 @@
         "sign": "u"
       },
       "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.152",
@@ -3182,7 +3638,10 @@
         "sign": "s"
       },
       "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.153",
@@ -3202,7 +3661,10 @@
         "sign": "u"
       },
       "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.154",
@@ -3235,7 +3697,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise rounding average.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.156",
@@ -3256,7 +3721,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.157",
@@ -3277,7 +3745,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.158",
@@ -3298,7 +3769,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.159",
@@ -3319,7 +3793,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.160",
@@ -3338,7 +3815,10 @@
         "mainop": "abs"
       },
       "description": "<p>Lane-wise wrapping absolute value.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.161",
@@ -3357,7 +3837,10 @@
         "mainop": "neg"
       },
       "description": "<p>Negates a 128-bit vectors interpreted as four 32-bit signed integers</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.162",
@@ -3378,6 +3861,10 @@
         "pre": "i8x16",
         "mainop": "relaxed",
         "rest": "swizzle"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3397,7 +3884,10 @@
         "mainop": "all_true"
       },
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.164",
@@ -3416,7 +3906,10 @@
         "mainop": "bitmask"
       },
       "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.165",
@@ -3437,6 +3930,10 @@
         "pre": "i32x4",
         "mainop": "relaxed",
         "rest": "trunc_f32x4_s"
+      },
+      "stack": {
+        "html": "[v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3458,6 +3955,10 @@
         "pre": "i32x4",
         "mainop": "relaxed",
         "rest": "trunc_f32x4_u"
+      },
+      "stack": {
+        "html": "[v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3479,7 +3980,10 @@
         "sign": "s"
       },
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.168",
@@ -3500,7 +4004,10 @@
         "sign": "s"
       },
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.169",
@@ -3521,7 +4028,10 @@
         "sign": "u"
       },
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.170",
@@ -3542,7 +4052,10 @@
         "sign": "u"
       },
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.171",
@@ -3561,7 +4074,10 @@
         "mainop": "shl"
       },
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.172",
@@ -3581,7 +4097,10 @@
         "sign": "s"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.173",
@@ -3601,7 +4120,10 @@
         "sign": "u"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.174",
@@ -3620,7 +4142,10 @@
         "mainop": "add"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed four 32-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.175",
@@ -3641,6 +4166,10 @@
         "pre": "f32x4",
         "mainop": "relaxed",
         "rest": "madd"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3662,6 +4191,10 @@
         "pre": "f32x4",
         "mainop": "relaxed",
         "rest": "nmadd"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3681,7 +4214,10 @@
         "mainop": "sub"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed four 32-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.178",
@@ -3702,6 +4238,10 @@
         "pre": "i8x16",
         "mainop": "relaxed",
         "rest": "laneselect"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3723,6 +4263,10 @@
         "pre": "i16x8",
         "mainop": "relaxed",
         "rest": "laneselect"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3744,6 +4288,10 @@
         "pre": "f32x4",
         "mainop": "relaxed",
         "rest": "min"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -3763,7 +4311,10 @@
         "mainop": "mul"
       },
       "description": "<p>Multiplies two 128-bit vectors as if they were two packed four 32-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.182",
@@ -3783,7 +4334,10 @@
         "sign": "s"
       },
       "description": "<p>Compares lane-wise signed integers, and returns the minimum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.183",
@@ -3803,7 +4357,10 @@
         "sign": "u"
       },
       "description": "<p>Compares lane-wise unsigned integers, and returns the minimum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.184",
@@ -3823,7 +4380,10 @@
         "sign": "s"
       },
       "description": "<p>Compares lane-wise signed integers, and returns the maximum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.185",
@@ -3843,7 +4403,10 @@
         "sign": "u"
       },
       "description": "<p>Compares lane-wise unsigned integers, and returns the maximum of each pair.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.186",
@@ -3864,7 +4427,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise multiply signed 16-bit integers in the two input vectors and add adjacent pairs of the full 32-bit results.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.187",
@@ -3898,7 +4464,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.189",
@@ -3919,7 +4488,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.190",
@@ -3940,7 +4512,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.191",
@@ -3961,7 +4536,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.192",
@@ -3980,7 +4558,10 @@
         "mainop": "abs"
       },
       "description": "<p>Lane-wise wrapping absolute value.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.193",
@@ -3999,7 +4580,10 @@
         "mainop": "neg"
       },
       "description": "<p>Negates a 128-bit vectors interpreted as two 64-bit signed integers</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.194",
@@ -4031,7 +4615,10 @@
         "mainop": "all_true"
       },
       "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.196",
@@ -4050,7 +4637,10 @@
         "mainop": "bitmask"
       },
       "description": "<p>Extracts the high bit for each lane in 'a' and produce a scalar mask with all bits concatenated.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [i32]"
+      }
     },
     {
       "id": "0xFD.197",
@@ -4071,6 +4661,10 @@
         "pre": "i32x4",
         "mainop": "relaxed",
         "rest": "trunc_f64x2_s_zero"
+      },
+      "stack": {
+        "html": "[v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4092,6 +4686,10 @@
         "pre": "i32x4",
         "mainop": "relaxed",
         "rest": "trunc_f64x2_u_zero"
+      },
+      "stack": {
+        "html": "[v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4113,7 +4711,10 @@
         "sign": "s"
       },
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, sign extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.200",
@@ -4134,7 +4735,10 @@
         "sign": "s"
       },
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, sign extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.201",
@@ -4155,7 +4759,10 @@
         "sign": "u"
       },
       "description": "<p>Converts low half of the smaller lane vector to a larger lane vector, zero extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.202",
@@ -4176,7 +4783,10 @@
         "sign": "u"
       },
       "description": "<p>Converts high half of the smaller lane vector to a larger lane vector, zero extended.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.203",
@@ -4195,7 +4805,10 @@
         "mainop": "shl"
       },
       "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.204",
@@ -4215,7 +4828,10 @@
         "sign": "s"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, sign extending.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.205",
@@ -4235,7 +4851,10 @@
         "sign": "u"
       },
       "description": "<p>Shifts each lane to the right by the specified number of bits, shifting in zeros.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 i32] → [v128]"
+      }
     },
     {
       "id": "0xFD.206",
@@ -4254,7 +4873,10 @@
         "mainop": "add"
       },
       "description": "<p>Adds two 128-bit vectors as if they were two packed two 64-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.207",
@@ -4275,6 +4897,10 @@
         "pre": "f64x2",
         "mainop": "relaxed",
         "rest": "madd"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4296,6 +4922,10 @@
         "pre": "f64x2",
         "mainop": "relaxed",
         "rest": "nmadd"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4315,7 +4945,10 @@
         "mainop": "sub"
       },
       "description": "<p>Subtracts two 128-bit vectors as if they were two packed two 64-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.210",
@@ -4336,6 +4969,10 @@
         "pre": "i32x4",
         "mainop": "relaxed",
         "rest": "laneselect"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4357,6 +4994,10 @@
         "pre": "i64x2",
         "mainop": "relaxed",
         "rest": "laneselect"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4378,6 +5019,10 @@
         "pre": "f64x2",
         "mainop": "relaxed",
         "rest": "min"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4397,7 +5042,10 @@
         "mainop": "mul"
       },
       "description": "<p>Multiplies two 128-bit vectors as if they were two packed two 64-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.214",
@@ -4416,7 +5064,10 @@
         "mainop": "eq"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.215",
@@ -4435,7 +5086,10 @@
         "mainop": "ne"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.216",
@@ -4455,7 +5109,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.217",
@@ -4475,7 +5132,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.218",
@@ -4495,7 +5155,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.219",
@@ -4515,7 +5178,10 @@
         "sign": "s"
       },
       "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.220",
@@ -4536,7 +5202,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.221",
@@ -4557,7 +5226,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.222",
@@ -4578,7 +5250,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.223",
@@ -4599,7 +5274,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.224",
@@ -4618,7 +5296,10 @@
         "mainop": "abs"
       },
       "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.225",
@@ -4637,7 +5318,10 @@
         "mainop": "neg"
       },
       "description": "<p>Negates each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.226",
@@ -4658,6 +5342,10 @@
         "pre": "f32x4",
         "mainop": "relaxed",
         "rest": "max"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4677,7 +5365,10 @@
         "mainop": "sqrt"
       },
       "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.228",
@@ -4696,7 +5387,10 @@
         "mainop": "add"
       },
       "description": "<p>Lane-wise addition of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.229",
@@ -4715,7 +5409,10 @@
         "mainop": "sub"
       },
       "description": "<p>Lane-wise subtraction of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.230",
@@ -4734,7 +5431,10 @@
         "mainop": "mul"
       },
       "description": "<p>Lane-wise multiplication of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.231",
@@ -4753,7 +5453,10 @@
         "mainop": "div"
       },
       "description": "<p>Lane-wise division of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.232",
@@ -4772,7 +5475,10 @@
         "mainop": "min"
       },
       "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.233",
@@ -4791,7 +5497,10 @@
         "mainop": "max"
       },
       "description": "<p>Calculates the lane-wise [maximum] of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.234",
@@ -4810,7 +5519,10 @@
         "mainop": "pmin"
       },
       "description": "<p>Lane-wise minimum value, defined as b &lt; a ? b : a</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.235",
@@ -4829,7 +5541,10 @@
         "mainop": "pmax"
       },
       "description": "<p>Lane-wise maximum value, defined as a &lt; b ? b : a</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.236",
@@ -4848,7 +5563,10 @@
         "mainop": "abs"
       },
       "description": "<p>Calculates the absolute value of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.237",
@@ -4867,7 +5585,10 @@
         "mainop": "neg"
       },
       "description": "<p>Negates each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.238",
@@ -4888,6 +5609,10 @@
         "pre": "f64x2",
         "mainop": "relaxed",
         "rest": "max"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
       }
     },
     {
@@ -4907,7 +5632,10 @@
         "mainop": "sqrt"
       },
       "description": "<p>Calculates the square root of each lane of a 128-bit vector interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.240",
@@ -4926,7 +5654,10 @@
         "mainop": "add"
       },
       "description": "<p>Lane-wise add of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.241",
@@ -4945,7 +5676,10 @@
         "mainop": "sub"
       },
       "description": "<p>Lane-wise subtract of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.242",
@@ -4964,7 +5698,10 @@
         "mainop": "mul"
       },
       "description": "<p>Lane-wise multiply of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.243",
@@ -4983,7 +5720,10 @@
         "mainop": "div"
       },
       "description": "<p>Lane-wise divide of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.244",
@@ -5002,7 +5742,10 @@
         "mainop": "min"
       },
       "description": "<p>Calculates the lane-wise minimum of two 128-bit vectors interpreted as two 64-bit floating point numbers.\n</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.245",
@@ -5021,7 +5764,10 @@
         "mainop": "max"
       },
       "description": "<p>Calculates the lane-wise maximum of two 128-bit vectors interpreted as two 64-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.246",
@@ -5040,7 +5786,10 @@
         "mainop": "pmin"
       },
       "description": "<p>Lane-wise minimum value</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.247",
@@ -5059,7 +5808,10 @@
         "mainop": "pmax"
       },
       "description": "<p>Lane-wise maximum value</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.248",
@@ -5080,7 +5832,10 @@
         "sign": "s"
       },
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit signed integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.249",
@@ -5101,7 +5856,10 @@
         "sign": "u"
       },
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit floating point numbers into a 128-bit vector of four 32-bit unsigned integers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.250",
@@ -5122,7 +5880,10 @@
         "sign": "s"
       },
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit signed integers into a 128-bit vector of four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.251",
@@ -5143,7 +5904,10 @@
         "sign": "u"
       },
       "description": "<p>Converts a 128-bit vector interpreted as four 32-bit unsigned integers into a 128-bit vector of four 32-bit floating point numbers.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.252",
@@ -5165,7 +5929,10 @@
         "rest": "zero"
       },
       "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.253",
@@ -5187,7 +5954,10 @@
         "rest": "zero"
       },
       "description": "<p>Saturating conversion of the two double-precision floating point lanes to two lower integer lanes using the IEEE convertToIntegerTowardZero function.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.254",
@@ -5208,7 +5978,10 @@
         "sign": "s"
       },
       "description": "<p>Lane-wise conversion from signed integer to floating point.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.255",
@@ -5229,7 +6002,10 @@
         "sign": "u"
       },
       "description": "<p>Lane-wise conversion from unsigned integer to floating point.</p>",
-      "proposal": "simd"
+      "proposal": "simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.256",
@@ -5249,7 +6025,10 @@
         "rest": "swizzle"
       },
       "description": "<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,\nindices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result\nfor any out of range indices is implementation-defined (i.e. if the index is <code>[16-255]</code>.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.257",
@@ -5269,7 +6048,10 @@
         "rest": "trunc_f32x4_s"
       },
       "description": "<p><code>relaxed i32x4.trunc_f32x4_s</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_s</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.258",
@@ -5289,7 +6071,10 @@
         "rest": "trunc_f32x4_u"
       },
       "description": "<p><code>relaxed i32x4.trunc_f32x4_u</code> (relaxed version of <code>i32x4.trunc_sat_f32x4_u</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.259",
@@ -5309,7 +6094,10 @@
         "rest": "trunc_f64x2_s_zero"
       },
       "description": "<p><code>relaxed i32x4.trunc_f64x2_s_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_s_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.260",
@@ -5329,7 +6117,10 @@
         "rest": "trunc_f64x2_u_zero"
       },
       "description": "<p><code>relaxed i32x4.trunc_f64x2_u_zero</code> (relaxed version of <code>i32x4.trunc_sat_f64x2_u_zero</code>)</p>\n<p>This instruction has the same behavior as the non-relaxed instruction for lanes that are in the range of an <code>i32</code> (signed or unsigned depending on the instruction). The result of lanes which contain NaN is implementation defined, either 0 or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned. The result of lanes which are out of bounds of <code>INT32</code> or <code>UINT32</code> is implementation defined, it can be either the saturated result or <code>INT32_MAX</code> for signed and <code>UINT32_MAX</code> for unsigned.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.261",
@@ -5349,7 +6140,10 @@
         "rest": "madd"
       },
       "description": "<p><span class=\"name\">Relaxed fused multiply-add</span></p>\n<p><code>relaxed f32x4.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.262",
@@ -5369,7 +6163,10 @@
         "rest": "nmadd"
       },
       "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f32x4.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.263",
@@ -5389,7 +6186,10 @@
         "rest": "madd"
       },
       "description": "<p>Relaxed fused multiply-add</p>\n<p><code>relaxed f64x2.madd(a, b, c) = a * b + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.264",
@@ -5409,7 +6209,10 @@
         "rest": "nmadd"
       },
       "description": "<p>Relaxed fused negative multiply-add</p>\n<p><code>relaxed f64x2.nmadd(a, b, c) = -(a * b) + c</code></p>\n<p>where:\n<ul>\n<li>the intermediate a * b is be rounded first, and the final result rounded again (for a total of 2 roundings), or</li>\n<li>the entire expression evaluated with higher precision and then only rounded once (if supported by hardware).</li>\n</ul>\n</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.265",
@@ -5429,7 +6232,10 @@
         "rest": "laneselect"
       },
       "description": "<p><code>i8x16.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.266",
@@ -5449,7 +6255,10 @@
         "rest": "laneselect"
       },
       "description": "<p><code>i16x8.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.267",
@@ -5469,7 +6278,10 @@
         "rest": "laneselect"
       },
       "description": "<p><code>i32x4.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.268",
@@ -5489,7 +6301,10 @@
         "rest": "laneselect"
       },
       "description": "<p><code>i64x2.laneselect(a: v128, b: v128, m: v128) -&gt; v128</code></p>\n<p>Select lanes from <code>a</code> or <code>b</code> based on masks in <code>m</code>. If each lane-sized mask in <code>m</code> has all bits set or all bits unset, these instructions behave the same as <code>v128.bitselect</code>. Otherwise, the result is implementation defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.269",
@@ -5509,7 +6324,10 @@
         "rest": "min"
       },
       "description": "<p>Relaxed min</p>\n<p><code>f32x4.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.270",
@@ -5529,7 +6347,10 @@
         "rest": "max"
       },
       "description": "<p>Relaxed max</p>\n<p><code>f32x4.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.271",
@@ -5549,7 +6370,10 @@
         "rest": "min"
       },
       "description": "<p>Relaxed min</p>\n<p><code>f64x2.min(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise minimum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.272",
@@ -5569,7 +6393,10 @@
         "rest": "max"
       },
       "description": "<p>Relaxed max</p>\n<p><code>f64x2.max(a: v128, b: v128) -&gt; v128</code></p>\n<p>Return the lane-wise maximum of two values. If either values is NaN, or the values are -0.0 and +0.0, the return value is implementation-defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.273",
@@ -5589,7 +6416,10 @@
         "rest": "q15mulr_s"
       },
       "description": "<p>Relaxed Rounding Q-format Multiplication</p>\n<p><code>i16x8.q15mulr_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 2 fixed-point numbers in Q15 format. If both inputs are <code>INT16_MIN</code>, the result overflows, and the return value is implementation defined (either <code>INT16_MIN</code> or <code>INT16_MAX</code>).</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.274",
@@ -5609,7 +6439,10 @@
         "rest": "dot_i8x16_i7x16_s"
       },
       "description": "<p>Relaxed integer dot product</p>\n<p><code>i16x8.dot_i8x16_i7x16_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.275",
@@ -5629,7 +6462,10 @@
         "rest": "dot_i8x16_i7x16_add_s"
       },
       "description": "<p>Relaxed integer dot product</p>\n<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
-      "proposal": "relaxed-simd"
+      "proposal": "relaxed-simd",
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
+      }
     },
     {
       "id": "0xFD.276",
@@ -5804,6 +6640,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "splat"
+      },
+      "stack": {
+        "html": "[f32] → [v128]",
+        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
       }
     },
     {
@@ -5830,7 +6670,11 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128] → [f32]",
+        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+      }
     },
     {
       "id": "0xFD.290",
@@ -5856,7 +6700,11 @@
           "name": "l",
           "kind": "laneidx"
         }
-      ]
+      ],
+      "stack": {
+        "html": "[v128 f32] → [v128]",
+        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+      }
     },
     {
       "id": "0xFD.291",
@@ -6044,6 +6892,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "abs"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6063,6 +6914,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "neg"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6082,6 +6936,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "sqrt"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6101,6 +6958,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "ceil"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6120,6 +6980,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "floor"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6139,6 +7002,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "trunc"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6158,6 +7024,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "nearest"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6177,6 +7046,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "eq"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Each result lane is all ones where the comparison holds and all zeros where it does not, not 1 and 0."
       }
     },
     {
@@ -6196,6 +7069,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "ne"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Each result lane is all ones where the comparison holds and all zeros where it does not, not 1 and 0."
       }
     },
     {
@@ -6215,6 +7092,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "lt"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Each result lane is all ones where the comparison holds and all zeros where it does not, not 1 and 0."
       }
     },
     {
@@ -6234,6 +7115,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "gt"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Each result lane is all ones where the comparison holds and all zeros where it does not, not 1 and 0."
       }
     },
     {
@@ -6253,6 +7138,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "le"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Each result lane is all ones where the comparison holds and all zeros where it does not, not 1 and 0."
       }
     },
     {
@@ -6272,6 +7161,10 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "ge"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]",
+        "note": "Each result lane is all ones where the comparison holds and all zeros where it does not, not 1 and 0."
       }
     },
     {
@@ -6291,6 +7184,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "add"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6310,6 +7206,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "sub"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6329,6 +7228,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "mul"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6348,6 +7250,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "div"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6367,6 +7272,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "min"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6386,6 +7294,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "max"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6405,6 +7316,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "pmin"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6424,6 +7338,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "pmax"
+      },
+      "stack": {
+        "html": "[v128 v128] → [v128]"
       }
     },
     {
@@ -6445,6 +7362,9 @@
         "mainop": "trunc",
         "post": "sat_f16x8",
         "sign": "s"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6466,6 +7386,9 @@
         "mainop": "trunc",
         "post": "sat_f16x8",
         "sign": "u"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6487,6 +7410,9 @@
         "mainop": "convert",
         "post": "i16x8",
         "sign": "s"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6508,6 +7434,9 @@
         "mainop": "convert",
         "post": "i16x8",
         "sign": "u"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6529,6 +7458,9 @@
         "mainop": "demote",
         "post": "f32x4",
         "rest": "zero"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6550,6 +7482,9 @@
         "mainop": "demote",
         "post": "f64x2",
         "rest": "zero"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6571,6 +7506,9 @@
         "mainop": "promote",
         "post": "f16x8",
         "rest": "low"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6592,6 +7530,9 @@
         "mainop": "trunc",
         "post": "f16x8",
         "sign": "s"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6613,6 +7554,9 @@
         "mainop": "trunc",
         "post": "f16x8",
         "sign": "u"
+      },
+      "stack": {
+        "html": "[v128] → [v128]"
       }
     },
     {
@@ -6632,6 +7576,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "madd"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
       }
     },
     {
@@ -6651,6 +7598,9 @@
       "parts": {
         "pre": "f16x8",
         "mainop": "nmadd"
+      },
+      "stack": {
+        "html": "[v128 v128 v128] → [v128]"
       }
     }
   ]

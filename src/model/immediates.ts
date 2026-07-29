@@ -112,6 +112,14 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
   f64: { gloss: '8 bytes, little-endian' },
 };
 
+/**
+ * Every kind the renderer knows. The data is JSON, so nothing type-checks what
+ * it puts in `kind` — a typo would render as a bare word with no width and no
+ * gloss, which looks enough like an operand to survive review. `npm run verify`
+ * checks the data against this.
+ */
+export const IMMEDIATE_KINDS = new Set(Object.keys(KINDS));
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
