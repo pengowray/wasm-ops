@@ -250,7 +250,7 @@
       ],
       "stack": {
         "html": "[] → []",
-        "note": "Drops the segment’s contents; nothing is taken from or left on the stack."
+        "note": "Frees the segment’s contents. The segment cannot be used again."
       }
     },
     {
@@ -367,7 +367,7 @@
       ],
       "stack": {
         "html": "[] → []",
-        "note": "Drops the segment’s contents; nothing is taken from or left on the stack."
+        "note": "Frees the segment’s contents. The segment cannot be used again."
       }
     },
     {
@@ -904,7 +904,7 @@
       ],
       "stack": {
         "html": "[i32] → [f32]",
-        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+        "note": "<p><b>Half precision</b>: <code>f16</code> is not a WebAssembly value type. The scalar operand and result are f32, rounded to half precision.</p>"
       }
     },
     {
@@ -933,7 +933,7 @@
       ],
       "stack": {
         "html": "[i32 f32] → []",
-        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+        "note": "<p><b>Half precision</b>: <code>f16</code> is not a WebAssembly value type. The scalar operand and result are f32, rounded to half precision.</p>"
       }
     },
     {

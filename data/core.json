@@ -73,7 +73,7 @@
           "kind": "blocktype"
         }
       ],
-      "followedByNote": "<p>Then the block’s instructions, then 0x0B — end.</p>"
+      "followedByNote": "<p>Then the block’s instructions, then 0x0B (end).</p>"
     },
     {
       "id": "0x03",
@@ -100,7 +100,7 @@
           "kind": "blocktype"
         }
       ],
-      "followedByNote": "<p>Then the block’s instructions, then 0x0B — end.</p>"
+      "followedByNote": "<p>Then the block’s instructions, then 0x0B (end).</p>"
     },
     {
       "id": "0x04",
@@ -127,7 +127,7 @@
           "kind": "blocktype"
         }
       ],
-      "followedByNote": "<p>Then the instructions run when the condition is non-zero; optionally 0x05 — else and the instructions run when it is zero; then 0x0B — end.</p>"
+      "followedByNote": "<p>Then the instructions run when the condition is non-zero. Optionally 0x05 (else) and the instructions run when it is zero. Then 0x0B (end).</p>"
     },
     {
       "id": "0x05",
@@ -167,7 +167,7 @@
           "kind": "blocktype"
         }
       ],
-      "followedByNote": "<p>Then the instructions, then zero or more 0x07 — catch clauses, optionally ending with 0x19 — catch_all, or a single 0x18 — delegate; then 0x0B — end.</p>",
+      "followedByNote": "<p>Then the instructions. Then zero or more 0x07 (catch) clauses, optionally ending with 0x19 (catch_all), or a single 0x18 (delegate). Then 0x0B (end).</p>",
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "note": "Both the parameter and result types come from the <i>bt</i> immediate."
@@ -502,7 +502,7 @@
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack",
-        "note": "<i>t</i><sup>*</sup> are the parameters of type <i>y</i>, and the i32 indexes table <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
+        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>y</i>, and the i32 indexes table <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
       }
     },
     {
@@ -654,7 +654,7 @@
       },
       "stack": {
         "html": "[<i>t</i> <i>t</i> i32] → [<i>t</i>]",
-        "note": "<p>Works on any value type, as long as both candidates have the same one — but only a number or vector type. For a reference, use the annotated form <i>select t</i> (0x1C).</p>"
+        "note": "<p>Works on any value type, as long as both candidates have the same one, but only a number or vector type. For a reference, use the annotated form <i>select t</i> (0x1C).</p>"
       },
       "description": "<p>The select instruction selects one of its first two operands based on whether its third operand is zero or not.</p>",
       "proposal": "mvp"
@@ -736,7 +736,7 @@
           "list": true
         }
       ],
-      "followedByNote": "<p>Then the instructions, then 0x0B — end.</p>",
+      "followedByNote": "<p>Then the instructions, then 0x0B (end).</p>",
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "note": "Both the parameter and result types come from the <i>bt</i> immediate."
@@ -4801,7 +4801,7 @@
       ],
       "stack": {
         "html": "[<i>t</i><sup>*</sup> (ref null <i>x</i>)] → [(ref <i>y</i>)]",
-        "note": "<i>t</i><sup>*</sup> are arguments bound into the continuation ahead of time, which is why <i>y</i> takes fewer parameters than <i>x</i>."
+        "note": "<p><b>Types</b>: <i>t</i><sup>*</sup> are arguments bound into the continuation ahead of time, which is why <i>y</i> takes fewer parameters than <i>x</i>. The specification writes them <i>t</i><sub>3</sub><sup>*</sup>.</p>"
       }
     },
     {
@@ -4892,8 +4892,8 @@
         }
       ],
       "stack": {
-        "html": "[<i>t</i><sub>1</sub><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
-        "note": "<i>t</i><sub>1</sub><sup>*</sup> are the parameters of tag <i>e</i>, raised at the point where the continuation suspended; <i>t</i><sub>2</sub><sup>*</sup> are the results of continuation type <i>x</i>."
+        "html": "[<i>t</i><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "note": "<p><b>Types</b>: <i>t</i><sup>*</sup> are the parameters of tag <i>e</i>, raised at the point where the continuation suspended. <i>t</i><sub>2</sub><sup>*</sup> are the results of continuation type <i>x</i>.</p>"
       }
     },
     {

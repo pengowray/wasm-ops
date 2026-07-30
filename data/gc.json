@@ -128,7 +128,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>)] → [i32]",
-        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>struct.get_s</code>, zero-extended by <code>struct.get_u</code>. Traps on a null reference."
+        "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>struct.get_s</code>, zero-extended by <code>struct.get_u</code>.</p>"
       }
     },
     {
@@ -160,7 +160,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>)] → [i32]",
-        "note": "Field <i>y</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>struct.get_s</code>, zero-extended by <code>struct.get_u</code>. Traps on a null reference."
+        "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>struct.get_s</code>, zero-extended by <code>struct.get_u</code>.</p>"
       }
     },
     {
@@ -283,7 +283,7 @@
       ],
       "stack": {
         "html": "[<i>t</i><sup>*</sup>] → [(ref <i>x</i>)]",
-        "note": "One value per element — <i>n</i> of them, given as an immediate rather than taken from the stack."
+        "note": "One value per element. How many there are is the immediate <i>n</i>, not an operand."
       }
     },
     {
@@ -405,7 +405,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>) i32] → [i32]",
-        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>array.get_s</code>, zero-extended by <code>array.get_u</code>. Traps on a null reference."
+        "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>array.get_s</code>, zero-extended by <code>array.get_u</code>.</p>"
       }
     },
     {
@@ -433,7 +433,7 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>) i32] → [i32]",
-        "note": "The element type of <i>x</i> is packed (i8 or i16), so it is read into an i32 — sign-extended by <code>array.get_s</code>, zero-extended by <code>array.get_u</code>. Traps on a null reference."
+        "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>array.get_s</code>, zero-extended by <code>array.get_u</code>.</p>"
       }
     },
     {
@@ -632,8 +632,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [i32]",
-        "note": "<i>ht</i><sub>top</sub> is the top of the hierarchy the immediate heap type belongs to — <code>any</code>, <code>func</code> or <code>extern</code> — so the operand may be any reference in that hierarchy. 1 if the reference matches the immediate type, 0 if not. <code>ref.test null</code> counts null as a match."
+        "html": "[(ref null <i>ht</i>′)] → [i32]",
+        "note": "<p><b>Types</b>: <i>ht</i>′ is any supertype of <i>ht</i>, so the operand may be any reference in the same type hierarchy. Pushes 1 if the reference matches, 0 if not, and 0 for null.</p>"
       }
     },
     {
@@ -660,8 +660,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [i32]",
-        "note": "<i>ht</i><sub>top</sub> is the top of the hierarchy the immediate heap type belongs to — <code>any</code>, <code>func</code> or <code>extern</code> — so the operand may be any reference in that hierarchy. 1 if the reference matches the immediate type, 0 if not. <code>ref.test null</code> counts null as a match."
+        "html": "[(ref null <i>ht</i>′)] → [i32]",
+        "note": "<p><b>Types</b>: <i>ht</i>′ is any supertype of <i>ht</i>, so the operand may be any reference in the same type hierarchy. Pushes 1 if the reference matches, 0 if not. Null counts as a match.</p>"
       }
     },
     {
@@ -688,8 +688,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [(ref <i>ht</i>)]",
-        "note": "<i>ht</i><sub>top</sub> is the top of the hierarchy the immediate heap type belongs to — <code>any</code>, <code>func</code> or <code>extern</code> — so the operand may be any reference in that hierarchy. Traps if the reference does not match, and on null."
+        "html": "[(ref null <i>ht</i>′)] → [(ref <i>ht</i>)]",
+        "note": "<p><b>Types</b>: <i>ht</i>′ is any supertype of <i>ht</i>, so the operand may be any reference in the same type hierarchy. Traps if the reference does not match, and on null.</p>"
       }
     },
     {
@@ -716,8 +716,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [(ref null <i>ht</i>)]",
-        "note": "<i>ht</i><sub>top</sub> is the top of the hierarchy the immediate heap type belongs to — <code>any</code>, <code>func</code> or <code>extern</code> — so the operand may be any reference in that hierarchy. Traps if the reference does not match. Null passes."
+        "html": "[(ref null <i>ht</i>′)] → [(ref null <i>ht</i>)]",
+        "note": "<p><b>Types</b>: <i>ht</i>′ is any supertype of <i>ht</i>, so the operand may be any reference in the same type hierarchy. Traps if the reference does not match. Null passes.</p>"
       }
     },
     {
@@ -1055,8 +1055,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>) (ref null (exact <i>x</i>))] → [(ref (exact <i>x</i>))]",
-        "note": "The reference to cast, then the descriptor to compare against. Succeeds where the reference’s own descriptor is that same object. <code>ref.cast_desc_eq null</code> lets null pass; the other traps on it."
+        "html": "[(ref null <i>ht</i>) (ref null (exact <i>y</i>))] → [(ref (exact <i>x</i>))]",
+        "note": "<p><b>Types</b>: <i>x</i> is the type named by the immediate and <i>y</i> its declared descriptor type. The reference to cast comes first, then the descriptor to compare it against; the cast succeeds where the reference’s own descriptor is that same object. Traps on a mismatch, and on null.</p>"
       }
     },
     {
@@ -1084,8 +1084,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>) (ref null (exact <i>x</i>))] → [(ref (exact <i>x</i>))]",
-        "note": "The reference to cast, then the descriptor to compare against. Succeeds where the reference’s own descriptor is that same object. <code>ref.cast_desc_eq null</code> lets null pass; the other traps on it."
+        "html": "[(ref null <i>ht</i>) (ref null (exact <i>y</i>))] → [(ref null (exact <i>x</i>))]",
+        "note": "<p><b>Types</b>: <i>x</i> is the type named by the immediate and <i>y</i> its declared descriptor type. The reference to cast comes first, then the descriptor to compare it against; the cast succeeds where the reference’s own descriptor is that same object. Traps on a mismatch. Null passes.</p>"
       }
     },
     {
@@ -1127,8 +1127,8 @@
         }
       ],
       "stack": {
-        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null (exact <i>x</i>))] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
-        "note": "<i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. As <code>br_on_cast</code>, but matching on descriptor identity rather than on the type alone; <code>br_on_cast_desc_eq_fail</code> branches when it does not match."
+        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null (exact <i>y</i>))] → [<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>\\<i>rt</i><sub>2</sub>]",
+        "note": "<p><b>Types</b>: <i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. Matches on descriptor identity rather than on the type alone. Branches to <i>l</i> with the reference typed <i>rt</i><sub>2</sub> if it matches; otherwise leaves it with <i>rt</i><sub>2</sub> subtracted from its type, which is what the backslash means.</p>"
       }
     },
     {
@@ -1170,8 +1170,8 @@
         }
       ],
       "stack": {
-        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null (exact <i>x</i>))] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
-        "note": "<i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. As <code>br_on_cast</code>, but matching on descriptor identity rather than on the type alone; <code>br_on_cast_desc_eq_fail</code> branches when it does not match."
+        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null (exact <i>y</i>))] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
+        "note": "<p><b>Types</b>: <i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. The mirror of <code>br_on_cast_desc_eq</code>: branches when the reference does <em>not</em> match.</p>"
       }
     },
     {
@@ -1499,8 +1499,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [i32]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way."
+        "html": "[(ref null <i>ht</i>′)] → [i32]",
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. The instruction it became is typed the same way.</p>"
       }
     },
     {
@@ -1528,8 +1528,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [(ref <i>ht</i>)]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way."
+        "html": "[(ref null <i>ht</i>′)] → [(ref <i>ht</i>)]",
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. The instruction it became is typed the same way.</p>"
       }
     },
     {
@@ -1573,7 +1573,7 @@
       ],
       "stack": {
         "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>] → [<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way. The draft took only a labelidx and a single heaptype, with no castflags byte."
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. It took only a labelidx and a single heaptype, with no castflags byte.</p>"
       }
     },
     {
@@ -1617,7 +1617,7 @@
       ],
       "stack": {
         "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way. The draft took only a labelidx and a single heaptype, with no castflags byte."
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. It took only a labelidx and a single heaptype, with no castflags byte.</p>"
       }
     },
     {
@@ -1693,8 +1693,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [i32]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way."
+        "html": "[(ref null <i>ht</i>′)] → [i32]",
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. The instruction it became is typed the same way.</p>"
       }
     },
     {
@@ -1722,8 +1722,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i><sub>top</sub>)] → [(ref null <i>ht</i>)]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way."
+        "html": "[(ref null <i>ht</i>′)] → [(ref null <i>ht</i>)]",
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. The instruction it became is typed the same way.</p>"
       }
     },
     {
@@ -1767,7 +1767,7 @@
       ],
       "stack": {
         "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>] → [<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way. The draft took only a labelidx and a single heaptype, with no castflags byte."
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. It took only a labelidx and a single heaptype, with no castflags byte.</p>"
       }
     },
     {
@@ -1811,7 +1811,7 @@
       ],
       "stack": {
         "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way. The draft took only a labelidx and a single heaptype, with no castflags byte."
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. It took only a labelidx and a single heaptype, with no castflags byte.</p>"
       }
     },
     {
@@ -2266,7 +2266,7 @@
       },
       "stack": {
         "html": "[externref] → [anyref]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way."
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. The instruction it became is typed the same way.</p>"
       }
     },
     {
@@ -2289,7 +2289,7 @@
       },
       "stack": {
         "html": "[anyref] → [externref]",
-        "note": "A 2022 draft encoding. The instruction it became is typed the same way."
+        "note": "<p><b>2022 draft</b>: a draft encoding, abandoned before the proposal was finished. The instruction it became is typed the same way.</p>"
       }
     },
     {
@@ -2706,7 +2706,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [i32]",
-        "note": "1 if the string is a sequence of Unicode scalar values — no isolated surrogates — and 0 if not."
+        "note": "<p>1 if the string is a sequence of Unicode scalar values, with no isolated surrogates, and 0 if not.</p>"
       }
     },
     {
@@ -2834,7 +2834,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [stringview_wtf8]",
-        "note": "A view is a way of reading one string, not a copy of it."
+        "note": "<p><b>View</b>: shares the string’s contents rather than copying them.</p>"
       }
     },
     {
@@ -2855,8 +2855,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32] → [i32]",
-        "note": "View, a byte position, then how many bytes to move on. Pushes the new position."
+        "html": "[stringview_wtf8 i32 i32] → [i32]"
       }
     },
     {
@@ -2878,8 +2877,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]",
-        "note": "View, the destination address in memory <i>x</i>, then the start and end byte positions. Pushes how many bytes were read and how many written."
+        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]"
       }
     },
     {
@@ -2900,8 +2898,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32] → [stringref]",
-        "note": "View, then the start and end byte positions."
+        "html": "[stringview_wtf8 i32 i32] → [stringref]"
       }
     },
     {
@@ -2923,8 +2920,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]",
-        "note": "View, the destination address in memory <i>x</i>, then the start and end byte positions. Pushes how many bytes were read and how many written."
+        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]"
       }
     },
     {
@@ -2946,8 +2942,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]",
-        "note": "View, the destination address in memory <i>x</i>, then the start and end byte positions. Pushes how many bytes were read and how many written."
+        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]"
       }
     },
     {
@@ -2996,7 +2991,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [stringview_wtf16]",
-        "note": "A view is a way of reading one string, not a copy of it."
+        "note": "<p><b>View</b>: shares the string’s contents rather than copying them.</p>"
       }
     },
     {
@@ -3040,8 +3035,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16 i32] → [i32]",
-        "note": "View, then a code-unit index. Traps if the index is past the end."
+        "html": "[stringview_wtf16 i32] → [i32]"
       }
     },
     {
@@ -3062,8 +3056,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16 i32 i32 i32] → [i32]",
-        "note": "View, the destination address in memory <i>x</i>, then the start code-unit position and how many to write. Pushes how many were written."
+        "html": "[stringview_wtf16 i32 i32 i32] → [i32]"
       }
     },
     {
@@ -3084,8 +3077,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16 i32 i32] → [stringref]",
-        "note": "View, then the start and end code-unit positions."
+        "html": "[stringview_wtf16 i32 i32] → [stringref]"
       }
     },
     {
@@ -3147,7 +3139,7 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref] → [stringview_iter]",
-        "note": "A view is a way of reading one string, not a copy of it."
+        "note": "<p><b>View</b>: shares the string’s contents rather than copying them.</p>"
       }
     },
     {
@@ -3168,8 +3160,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter] → [i32]",
-        "note": "Pushes the next code point and moves the iterator on, or −1 at the end of the string."
+        "html": "[stringview_iter] → [i32]"
       }
     },
     {
@@ -3190,8 +3181,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter i32] → [i32]",
-        "note": "View, then how many code points to move. Pushes how many it actually moved, which is fewer at either end of the string."
+        "html": "[stringview_iter i32] → [i32]"
       }
     },
     {
@@ -3212,8 +3202,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter i32] → [i32]",
-        "note": "View, then how many code points to move. Pushes how many it actually moved, which is fewer at either end of the string."
+        "html": "[stringview_iter i32] → [i32]"
       }
     },
     {
@@ -3234,8 +3223,7 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter i32] → [stringref]",
-        "note": "View, then how many code points to take from the current position."
+        "html": "[stringview_iter i32] → [stringref]"
       }
     },
     {

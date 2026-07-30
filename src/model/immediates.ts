@@ -14,6 +14,30 @@
 
 import type { Immediate, ImmediateKind, Opcode } from './types.ts';
 
+/**
+ * A labelled block of explanation, for text that repeats across many
+ * instructions.
+ *
+ * The label matters more than it looks. `memarg`'s explanation appears on 113
+ * instructions and the relaxed-SIMD one on 17, so a reader meets the same block
+ * again and again; without something at the front saying "this is the alignment
+ * rules, the ones you have already read", each sighting reads as though it might
+ * be a different rule for this instruction. The label is the thing that says it
+ * is not.
+ *
+ * One shape everywhere: a bold label, a colon, then the text. Where the text is
+ * a set of separate rules rather than one statement, the label stands on its own
+ * line and the rules are bulleted.
+ */
+export function labelled(label: string, text: string): string {
+  return `<p><b>${label}</b>: ${text}</p>`;
+}
+
+/** As `labelled`, for a label over a list of separate rules. */
+function labelledList(label: string, items: string[]): string {
+  return `<p><b>${label}</b></p><ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>`;
+}
+
 interface KindInfo {
   /**
    * How the bytes are encoded, set before the name. Omitted where the kind is
@@ -38,6 +62,18 @@ interface KindInfo {
  */
 const INDEX: KindInfo = { encoding: 'u32' };
 
+/**
+ * Which type a memory address is.
+ *
+ * True of every instruction that takes or returns one, which is the 113 with a
+ * memarg plus the six that name a memory by index and none by address. It sat
+ * on `i32.load` alone, phrased as a remark about "the memory instructions" —
+ * plural, on one of them, where a reader of `i32.store` never saw it.
+ */
+const ADDRESSES =
+  'an i32 for a 32-bit memory, an i64 for a 64-bit memory (memory64). The signatures here ' +
+  'show the 32-bit case, which is what almost every module uses.';
+
 const KINDS: Record<ImmediateKind, KindInfo> = {
   typeidx: INDEX,
   funcidx: INDEX,
@@ -45,7 +81,10 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
   globalidx: INDEX,
   localidx: INDEX,
   labelidx: INDEX,
-  memidx: INDEX,
+  // The six memory instructions that name a memory but take no memarg —
+  // memory.size, grow, fill, copy and init — are the rest of the audience for
+  // the address-type note.
+  memidx: { encoding: 'u32', note: labelled('Addresses', ADDRESSES) },
   dataidx: INDEX,
   elemidx: INDEX,
   tagidx: INDEX,
@@ -59,8 +98,8 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
     encoding: 's33',
     gloss:
       'a negative one-byte value is an abstract type (0x70 func, 0x6F extern, 0x6E any, ' +
-      '0x6D eq, 0x6C i31, 0x6B struct, 0x6A array, 0x69 exn, and the bottom types); a ' +
-      'value of 0 or more is a typeidx',
+      '0x6D eq, 0x6C i31, 0x6B struct, 0x6A array, 0x69 exn, 0x74 noexn, 0x73 nofunc, ' +
+      '0x72 noextern, 0x71 none); a value of 0 or more is a typeidx',
   },
   blocktype: {
     encoding: 's33',
@@ -72,18 +111,22 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
 
   // Align is encoded first. The page said otherwise on i32.load and i64.load
   // until 2026, which is the clearest argument there is for writing this once.
+  // What a memarg is was written out in full on i32.load and nowhere else,
+  // under a heading reading "Stack", so the other 112 instructions that take
+  // one could not reach it. Written once here, it reaches all 113.
   memarg: {
     gloss: 'u32 align, then u64 offset',
-    // What a memarg is was written out in full on i32.load and nowhere else,
-    // under a heading reading "Stack", so the other 112 instructions that take
-    // one could not reach it.
     note:
-      '<i>align</i> is the base-2 logarithm of the assumed alignment in bytes — 0 for 1 ' +
-      'byte, 1 for 2, 2 for 4, 3 for 8, 4 for 16 — and must not exceed the width of the ' +
-      'access, or the module is rejected. A smaller value only tells the engine not to ' +
-      'assume alignment. Bit 6 of <i>align</i> (0x40) marks a u32 memory index between the ' +
-      'two fields; subtract 64 for the alignment. Without that bit the instruction uses ' +
-      'memory 0.',
+      labelledList('Alignment', [
+        '<i>align</i> is the base-2 logarithm of the assumed alignment in bytes: 0 for 1 byte, ' +
+          '1 for 2, 2 for 4, 3 for 8, 4 for 16.',
+        'A value larger than the width of the access is rejected when the module is ' +
+          'validated. A smaller one is allowed, and only tells the engine not to assume ' +
+          'alignment.',
+        'Bit 6 (0x40) is not part of the number. When it is set, a u32 memory index follows ' +
+          '<i>align</i>, before the offset, and the alignment is what is left after ' +
+          'subtracting 64. When it is clear, the instruction uses memory 0.',
+      ]) + labelled('Addresses', ADDRESSES),
   },
 
   castflags: { encoding: 'u8', gloss: 'which of the two heap types is nullable' },
@@ -93,9 +136,11 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
     encoding: 'u8',
     label: 'ordering',
     gloss: '0x00 seqcst, 0x11 acqrel',
-    note:
-      'A read-modify-write packs the read ordering into the low four bits and the write ' +
-      'ordering into the high four, and the two must match, so no other byte is valid.',
+    note: labelled(
+      'Ordering byte',
+      'a read-modify-write packs the read ordering into the low four bits and the write ' +
+        'ordering into the high four, and the two must match, so no other byte is valid.',
+    ),
   },
 
   catch: {
@@ -194,9 +239,7 @@ export function renderImmediates(op: Opcode): string {
     if (note && !notes.includes(note)) notes.push(note);
   }
 
-  return (
-    list +
-    notes.map((note) => `<p>${note}</p>`).join('') +
-    (op.followedByNote ?? '')
-  );
+  // The notes carry their own block markup, since a labelled one is a heading
+  // over a list rather than a paragraph.
+  return list + notes.join('') + (op.followedByNote ?? '');
 }

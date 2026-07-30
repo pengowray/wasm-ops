@@ -1987,9 +1987,15 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * the renderer emits one shape rather than choosing between two, and "1." on
  * its own numbers nothing.
  */
-.detail-followed ol { margin: .4rem 0; padding-left: 1.4rem; }
-.detail-followed li { margin: .2rem 0; font-family: Georgia, serif; font-size: .95em; }
-.detail-followed ol:has(> li:only-child) { padding-left: 0; list-style: none; }
+/*
+ * Direct children only: the operand list is the section's own first child, and
+ * a kind's explanation below it may bullet its rules too. Those are prose and
+ * belong in the body face — unscoped, they came out in the operand serif, which
+ * made a paragraph about alignment look like more operands.
+ */
+.detail-followed > ol { margin: .4rem 0; padding-left: 1.4rem; }
+.detail-followed > ol > li { margin: .2rem 0; font-family: Georgia, serif; font-size: .95em; }
+.detail-followed > ol:has(> li:only-child) { padding-left: 0; list-style: none; }
 
 /*
  * Scoped to `.detail`, which both the static article and the panel carry —

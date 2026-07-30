@@ -3864,7 +3864,7 @@
       },
       "stack": {
         "html": "[v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -3933,7 +3933,7 @@
       },
       "stack": {
         "html": "[v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -3958,7 +3958,7 @@
       },
       "stack": {
         "html": "[v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4169,7 +4169,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4194,7 +4194,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4241,7 +4241,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4266,7 +4266,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4291,7 +4291,7 @@
       },
       "stack": {
         "html": "[v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4664,7 +4664,7 @@
       },
       "stack": {
         "html": "[v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4689,7 +4689,7 @@
       },
       "stack": {
         "html": "[v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4900,7 +4900,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4925,7 +4925,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4972,7 +4972,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -4997,7 +4997,7 @@
       },
       "stack": {
         "html": "[v128 v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -5022,7 +5022,7 @@
       },
       "stack": {
         "html": "[v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -5345,7 +5345,7 @@
       },
       "stack": {
         "html": "[v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -5612,7 +5612,7 @@
       },
       "stack": {
         "html": "[v128 v128] → [v128]",
-        "note": "Relaxed: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice."
+        "note": "<p><b>Relaxed</b>: an engine may pick among several permitted results for the same input. The deterministic profile fixes one choice.</p>"
       }
     },
     {
@@ -6643,7 +6643,7 @@
       },
       "stack": {
         "html": "[f32] → [v128]",
-        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+        "note": "<p><b>Half precision</b>: <code>f16</code> is not a WebAssembly value type. The scalar operand and result are f32, rounded to half precision.</p>"
       }
     },
     {
@@ -6673,7 +6673,7 @@
       ],
       "stack": {
         "html": "[v128] → [f32]",
-        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+        "note": "<p><b>Half precision</b>: <code>f16</code> is not a WebAssembly value type. The scalar operand and result are f32, rounded to half precision.</p>"
       }
     },
     {
@@ -6703,7 +6703,7 @@
       ],
       "stack": {
         "html": "[v128 f32] → [v128]",
-        "note": "<code>f16</code> is not a WebAssembly value type. The scalar is an f32, rounded to half precision."
+        "note": "<p><b>Half precision</b>: <code>f16</code> is not a WebAssembly value type. The scalar operand and result are f32, rounded to half precision.</p>"
       }
     },
     {
