@@ -1994,7 +1994,7 @@
         "pre": "v128",
         "mainop": "any_true"
       },
-      "description": "<p>Returns true if any bit in a is set, or false otherwise.</p>",
+      "description": "<p>Pushes 1 if any lane is non-zero, and 0 if every lane is zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -2445,7 +2445,7 @@
         "pre": "i8x16",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "description": "<p>Pushes 1 if every lane is non-zero, and 0 if any lane is zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -3150,7 +3150,7 @@
         "pre": "i16x8",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "description": "<p>Pushes 1 if every lane is non-zero, and 0 if any lane is zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -3883,7 +3883,7 @@
         "pre": "i32x4",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "description": "<p>Pushes 1 if every lane is non-zero, and 0 if any lane is zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -4614,7 +4614,7 @@
         "pre": "i64x2",
         "mainop": "all_true"
       },
-      "description": "<p>Returns true if all lanes are non-zero, false otherwise.</p>",
+      "description": "<p>Pushes 1 if every lane is non-zero, and 0 if any lane is zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -5518,7 +5518,7 @@
         "pre": "f32x4",
         "mainop": "pmin"
       },
-      "description": "<p>Lane-wise minimum value, defined as b &lt; a ? b : a.</p>",
+      "description": "<p>Lane-wise pseudo-minimum: takes the second lane where it is less than the first, and the first lane otherwise.</p>\n<p>Not the same as <code>min</code>. A comparison against NaN is false, so a NaN in either lane gives the first lane, and +0 and −0 are not distinguished.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5540,7 +5540,7 @@
         "pre": "f32x4",
         "mainop": "pmax"
       },
-      "description": "<p>Lane-wise maximum value, defined as a &lt; b ? b : a.</p>",
+      "description": "<p>Lane-wise pseudo-maximum: takes the second lane where it is greater than the first, and the first lane otherwise.</p>\n<p>Not the same as <code>max</code>. A comparison against NaN is false, so a NaN in either lane gives the first lane, and +0 and −0 are not distinguished.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5785,7 +5785,7 @@
         "pre": "f64x2",
         "mainop": "pmin"
       },
-      "description": "<p>Lane-wise minimum value.</p>",
+      "description": "<p>Lane-wise pseudo-minimum: takes the second lane where it is less than the first, and the first lane otherwise.</p>\n<p>Not the same as <code>min</code>. A comparison against NaN is false, so a NaN in either lane gives the first lane, and +0 and −0 are not distinguished.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5807,7 +5807,7 @@
         "pre": "f64x2",
         "mainop": "pmax"
       },
-      "description": "<p>Lane-wise maximum value.</p>",
+      "description": "<p>Lane-wise pseudo-maximum: takes the second lane where it is greater than the first, and the first lane otherwise.</p>\n<p>Not the same as <code>max</code>. A comparison against NaN is false, so a NaN in either lane gives the first lane, and +0 and −0 are not distinguished.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"

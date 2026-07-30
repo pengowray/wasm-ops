@@ -886,7 +886,7 @@
         "pre": "table",
         "mainop": "get"
       },
-      "description": "<p>Access tables.</p>",
+      "description": "<p>Reads the element at a given index of table <i>x</i>.</p>\n<p>Traps if the index is past the end of the table.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -912,7 +912,7 @@
         "pre": "table",
         "mainop": "set"
       },
-      "description": "<p>Access tables.</p>",
+      "description": "<p>Writes an element to a given index of table <i>x</i>.</p>\n<p>Traps if the index is past the end of the table.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -2368,7 +2368,7 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p class=\"bigsign\">&gt;</p>\n<p> greater than.</p>",
+      "description": "<p>&gt;</p>\n<p>Greater than.</p>",
       "proposal": "mvp"
     },
     {
