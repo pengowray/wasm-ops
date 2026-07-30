@@ -35,38 +35,45 @@ The stringview notes that were left blank as reconstructed are in the proposal
 verbatim, so they are back, with one reading corrected. See README.md in this
 directory.
 
-## 2. 59 descriptions describe the proposal, not the instruction
+## 2. 53 descriptions describe the proposal, not the instruction
 
 | Shared text | Count |
 |---|---:|
-| "Part of the half-precision proposal, which adds the 16-bit float type f16…" | 35 |
+| "Part of the half-precision proposal, which adds the 16-bit float type f16…" | 29 |
 | "An encoding used while relaxed SIMD was being prototyped…" | 17 |
 | "Part of the stack switching proposal, which adds continuations…" | 7 |
 
 The Status box directly below already says this, in the proposal's own entry. So
-these 59 spend their one prose field repeating the box and never say what the
-instruction does.
+these 53 spend their one prose field repeating the box and never say what the
+instruction does. The half-precision group was 35 until its six comparisons were
+written.
 
 ## 3. Shared text that omits the distinguishing feature
 
-99 groups share a description, covering 294 instructions. Most are harmless — the
+85 groups share a description, covering 249 instructions. Most are harmless — the
 four `all_true` differ only in lane shape, and the name carries that. These are
 the ones where the shared text leaves out the very thing that separates the
 members:
 
 | Group | Count | What the text never says |
 |---|---:|---|
-| integer and float comparisons, 13 groups | 37 | which comparison — `i8x16.lt_u` and `i8x16.ge_u` read identically |
 | `extmul` | 12 | low or high half, signed or unsigned |
 | `extadd_pairwise` | 4 | signed or unsigned |
 | `load*_splat` | 4 | the element width |
-| `shr_s` / `shr_u` and the lane shifts | 4 | which end the bits come in from |
+| the lane shifts | 4 | which end the bits come in from |
 
-## 4. Five ways to write a lane shape
+The 54 comparisons were the largest of these and are done: they open with the
+operator as a symbol, the way the 32 scalar comparisons always have.
 
-"16 eight-bit", "eight 16-bit", "8 sixteen-bit", "4 thirty-two-bit", "two
-64-bit" — all in the comparison descriptions, all meaning the same kind of
-thing. Pick one and apply it wherever a description names a shape.
+## 4. One way to write a lane shape, not yet applied everywhere
+
+The comparisons had five between them: "16 eight-bit", "eight 16-bit", "8
+sixteen-bit", "4 thirty-two-bit", "two 64-bit". Those 54 now use one form:
+
+> the count as a word, the width in digits — "sixteen 8-bit signed integers",
+> "four single-precision floats"
+
+The rest of `simd.json` has not been swept for it.
 
 ## 5. Smaller, each one edit
 
@@ -104,7 +111,7 @@ Preference if it changes: brackets. One edit, in `renderImmediate`.
 | `ref.test`, `ref.cast` and two withdrawn drafts | operand written `(ref null ht′)`, glossed as "any supertype of *ht*" |
 | `br_on_cast` and three related | `[t* rt₁\rt₂]` — the specification's own type-difference operator, explained in the note |
 | `cont.bind` | bound arguments written `t*`; the proposal writes `t₃*`, but nothing on the page is numbered 1 or 2 for a 3 to follow |
-| the stringview operand glosses | blank on purpose. See README.md in this directory |
+| a comparison's description | opens with the operator as a symbol in `p.bigsign`, then the prose. The convention came from the 2022 page; the CSS rule for it did not, until now |
 | addresses | `i32` rather than the specification's `at`, with the address-type note qualifying it |
 | `*` | ASCII, not `∗` (U+2217); `list(…)`, not `vec(…)` |
 | metavariables | italic; concrete types upright |

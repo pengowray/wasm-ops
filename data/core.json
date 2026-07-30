@@ -2369,7 +2369,7 @@
       "stack": {
         "html": "[f64 f64] → [i32]"
       },
-      "description": "<p>&gt;</p>\n<p>Greater than.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Greater than.</p>",
       "proposal": "mvp"
     },
     {

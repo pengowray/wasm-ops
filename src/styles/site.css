@@ -2016,6 +2016,23 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .detail li { margin: .2rem 0; }
 .detail-stack-note { margin-top: .6rem; font-size: .92em; color: var(--fg-dim); }
 
+/*
+ * A comparison opens with its operator as a symbol. The 2022 page marked these
+ * up for it and never wrote the rule, so `==` and `≥` were set as body text and
+ * read as a stray first line. There are 86 of them, and the symbol is the
+ * quickest way to tell lt from ge without reading a sentence.
+ *
+ * Georgia, because a mathematical operator is a value rather than a byte, which
+ * is the same reason the sub-opcode and the stack types are set in it.
+ */
+.detail p.bigsign {
+	margin: 0 0 .1rem;
+	font-family: Georgia, serif;
+	font-size: 1.9rem;
+	line-height: 1.1;
+	color: var(--fg-dim);
+}
+
 code, .code {
 	font-family: 'Source Code Pro', monospace;
 	padding: .1em .35em;

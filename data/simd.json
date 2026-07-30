@@ -969,7 +969,7 @@
         "pre": "i8x16",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of sixteen 8-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -990,7 +990,7 @@
         "pre": "i8x16",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit integers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of sixteen 8-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1012,7 +1012,7 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of sixteen 8-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1034,7 +1034,7 @@
         "mainop": "lt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of sixteen 8-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1056,7 +1056,7 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of sixteen 8-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1078,7 +1078,7 @@
         "mainop": "gt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of sixteen 8-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1100,7 +1100,7 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of sixteen 8-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1122,7 +1122,7 @@
         "mainop": "le",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of sixteen 8-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1144,7 +1144,7 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit signed integers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of sixteen 8-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1166,7 +1166,7 @@
         "mainop": "ge",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 16 eight-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of sixteen 8-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1187,7 +1187,7 @@
         "pre": "i16x8",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of eight 16-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1208,7 +1208,7 @@
         "pre": "i16x8",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit integers.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of eight 16-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1230,7 +1230,7 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of eight 16-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1252,7 +1252,7 @@
         "mainop": "lt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of eight 16-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1274,7 +1274,7 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of eight 16-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1296,7 +1296,7 @@
         "mainop": "gt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of eight 16-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1318,7 +1318,7 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of eight 16-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1340,7 +1340,7 @@
         "mainop": "le",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of eight 16-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1362,7 +1362,7 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of eight 16-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of eight 16-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1384,7 +1384,7 @@
         "mainop": "ge",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 8 sixteen-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of eight 16-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1405,7 +1405,7 @@
         "pre": "i32x4",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of four 32-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1426,7 +1426,7 @@
         "pre": "i32x4",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit integers.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of four 32-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1448,7 +1448,7 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of four 32-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1470,7 +1470,7 @@
         "mainop": "lt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of four 32-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1492,7 +1492,7 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of four 32-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1514,7 +1514,7 @@
         "mainop": "gt",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of four 32-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1536,7 +1536,7 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of four 32-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1558,7 +1558,7 @@
         "mainop": "le",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of four 32-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1580,7 +1580,7 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of four 32-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of four 32-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1602,7 +1602,7 @@
         "mainop": "ge",
         "sign": "u"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit unsigned integers.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of four 32-bit unsigned integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1623,7 +1623,7 @@
         "pre": "f32x4",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of four single-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1644,7 +1644,7 @@
         "pre": "f32x4",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of four single-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false and this is its negation, so a NaN in either lane gives all ones. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1665,7 +1665,7 @@
         "pre": "f32x4",
         "mainop": "lt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of four single-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1686,7 +1686,7 @@
         "pre": "f32x4",
         "mainop": "gt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of four single-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1707,7 +1707,7 @@
         "pre": "f32x4",
         "mainop": "le"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than [or equal] the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of four single-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1728,7 +1728,7 @@
         "pre": "f32x4",
         "mainop": "ge"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 4 thirty-two-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than [or equal] the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of four single-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1749,7 +1749,7 @@
         "pre": "f64x2",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were equal, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of two double-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1770,7 +1770,7 @@
         "pre": "f64x2",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the corresponding input elements were not equal, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of two double-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false and this is its negation, so a NaN in either lane gives all ones. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1791,7 +1791,7 @@
         "pre": "f64x2",
         "mainop": "lt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of two double-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1812,7 +1812,7 @@
         "pre": "f64x2",
         "mainop": "gt"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of two double-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1833,7 +1833,7 @@
         "pre": "f64x2",
         "mainop": "le"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is less than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of two double-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1854,7 +1854,7 @@
         "pre": "f64x2",
         "mainop": "ge"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of 2 sixty-four-bit floating point numbers.</p>\n<p>Returns a new vector where each lane is all ones if the lane-wise left element is greater than the right element, or all zeros otherwise.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of two double-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5070,7 +5070,7 @@
         "pre": "i64x2",
         "mainop": "eq"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of two 64-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5092,7 +5092,7 @@
         "pre": "i64x2",
         "mainop": "ne"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit integers.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of two 64-bit integers.</p>\n<p>Signedness does not affect equality, so there is one form rather than a signed and an unsigned one.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5115,7 +5115,7 @@
         "mainop": "lt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of two 64-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5138,7 +5138,7 @@
         "mainop": "gt",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of two 64-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5161,7 +5161,7 @@
         "mainop": "le",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of two 64-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5184,7 +5184,7 @@
         "mainop": "ge",
         "sign": "s"
       },
-      "description": "<p>Compares two 128-bit vectors as if they were two vectors of two 64-bit signed integers.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of two 64-bit signed integers.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -7049,7 +7049,7 @@
       "name": "f16x8.eq",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p class=\"bigsign\">==</p>\n<p>Lane-wise comparison of eight half-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "eq"
@@ -7072,7 +7072,7 @@
       "name": "f16x8.ne",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p class=\"bigsign\">≠</p>\n<p>Lane-wise comparison of eight half-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false and this is its negation, so a NaN in either lane gives all ones. +0 and −0 compare equal.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "ne"
@@ -7095,7 +7095,7 @@
       "name": "f16x8.lt",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p class=\"bigsign\">&lt;</p>\n<p>Lane-wise comparison of eight half-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "lt"
@@ -7118,7 +7118,7 @@
       "name": "f16x8.gt",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p class=\"bigsign\">&gt;</p>\n<p>Lane-wise comparison of eight half-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "gt"
@@ -7141,7 +7141,7 @@
       "name": "f16x8.le",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p class=\"bigsign\">≤</p>\n<p>Lane-wise comparison of eight half-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "le"
@@ -7164,7 +7164,7 @@
       "name": "f16x8.ge",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p class=\"bigsign\">≥</p>\n<p>Lane-wise comparison of eight half-precision floats.</p>\n<p><b>Result</b>: a lane is all ones where the comparison is true and all zeros where it is false, not 1 and 0.</p>\n<p>A comparison with NaN is false, so a NaN in either lane gives all zeros. +0 and −0 compare equal.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "ge"
