@@ -82,7 +82,7 @@
         "pre": "struct",
         "mainop": "get"
       },
-      "description": "<p>Reads field <code>i</code> from a structure.</p>",
+      "description": "<p>Reads field <i>y</i> of struct type <i>x</i>.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -129,7 +129,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>)] → [i32]",
         "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>struct.get_s</code>, zero-extended by <code>struct.get_u</code>.</p>"
-      }
+      },
+      "description": "<p>Reads packed field <i>y</i> of struct type <i>x</i>, sign-extending it into an i32.</p>"
     },
     {
       "id": "0xFB.4",
@@ -161,7 +162,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>)] → [i32]",
         "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>struct.get_s</code>, zero-extended by <code>struct.get_u</code>.</p>"
-      }
+      },
+      "description": "<p>Reads packed field <i>y</i> of struct type <i>x</i>, zero-extending it into an i32.</p>"
     },
     {
       "id": "0xFB.5",
@@ -178,7 +180,7 @@
         "pre": "struct",
         "mainop": "set"
       },
-      "description": "<p>Writes field <code>i</code> of a structure.</p>",
+      "description": "<p>Writes field <i>y</i> of struct type <i>x</i>.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -406,7 +408,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>) i32] → [i32]",
         "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>array.get_s</code>, zero-extended by <code>array.get_u</code>.</p>"
-      }
+      },
+      "description": "<p>Reads a packed element of array type <i>x</i>, sign-extending it into an i32.</p>"
     },
     {
       "id": "0xFB.13",
@@ -434,7 +437,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>) i32] → [i32]",
         "note": "<p><b>Packed field</b>: it is an i8 or an i16, so it is read into an i32: sign-extended by <code>array.get_s</code>, zero-extended by <code>array.get_u</code>.</p>"
-      }
+      },
+      "description": "<p>Reads a packed element of array type <i>x</i>, zero-extending it into an i32.</p>"
     },
     {
       "id": "0xFB.14",
@@ -510,8 +514,9 @@
       ],
       "stack": {
         "html": "[(ref null <i>x</i>) i32 <i>t</i> i32] → []",
-        "note": "Array, the offset to start at, the value to write, then how many elements. Traps on a null reference."
-      }
+        "note": "Array, the offset to start at, the value to write, then how many elements. Traps on a null reference, or on the range running past the end."
+      },
+      "description": "<p>Sets a range of an array’s elements to one value.</p>"
     },
     {
       "id": "0xFB.17",
@@ -542,7 +547,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>) i32 (ref null <i>y</i>) i32 i32] → []",
         "note": "Destination array and offset, source array and offset, then how many elements. Traps on either being null, or on either range running past the end."
-      }
+      },
+      "description": "<p>Copies a range of elements from one array to another. Both may be the same array.</p>"
     },
     {
       "id": "0xFB.18",
@@ -574,7 +580,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>) i32 i32 i32] → []",
         "note": "Array, the offset to start at, the offset into data segment <i>y</i>, then how many elements."
-      }
+      },
+      "description": "<p>Copies bytes from data segment <i>y</i> into a range of an array.</p>\n<p>The array’s elements have to be numeric or packed, since a data segment is raw bytes.</p>"
     },
     {
       "id": "0xFB.19",
@@ -606,7 +613,8 @@
       "stack": {
         "html": "[(ref null <i>x</i>) i32 i32 i32] → []",
         "note": "Array, the offset to start at, the offset into element segment <i>y</i>, then how many elements."
-      }
+      },
+      "description": "<p>Copies references from element segment <i>y</i> into a range of an array.</p>"
     },
     {
       "id": "0xFB.20",
@@ -2481,7 +2489,14 @@
       "stack": {
         "html": "[i32 i32] → [stringref]",
         "note": "Address in memory <i>x</i>, then how many code units to read."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Reads UTF-8 bytes from memory and returns a new string. Traps if they are not valid UTF-8.</p>"
     },
     {
       "id": "0xFB.129",
@@ -2504,7 +2519,14 @@
       "stack": {
         "html": "[i32 i32] → [stringref]",
         "note": "Address in memory <i>x</i>, then how many 16-bit code units to read."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Reads 16-bit code units from memory and returns a new string.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.130",
@@ -2524,9 +2546,15 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[] → [stringref]",
-        "note": "The string is named by the immediate, not built at run time."
-      }
+        "html": "[] → [stringref]"
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "stringidx"
+        }
+      ],
+      "description": "<p>Pushes a string named by the immediate, from the module’s strings section.</p>\n<p>Nothing is built at run time, so this is a constant instruction and can be used in a global’s initialiser.</p>"
     },
     {
       "id": "0xFB.131",
@@ -2549,7 +2577,8 @@
       "stack": {
         "html": "[stringref] → [i32]",
         "note": "How many bytes the string would take as UTF-8, or −1 if it contains an isolated surrogate, which UTF-8 cannot represent."
-      }
+      },
+      "description": "<p>Measures the string without encoding it, so a caller can allocate before calling <code>string.encode_utf8</code>.</p>"
     },
     {
       "id": "0xFB.132",
@@ -2572,7 +2601,8 @@
       "stack": {
         "html": "[stringref] → [i32]",
         "note": "How many bytes the string takes in this encoding."
-      }
+      },
+      "description": "<p>Measures the string in WTF-8, which is also what a lossy UTF-8 encoding would need: an isolated surrogate takes three bytes in WTF-8, and so does the U+FFFD that replaces it.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.133",
@@ -2595,7 +2625,8 @@
       "stack": {
         "html": "[stringref] → [i32]",
         "note": "How many 16-bit code units the string takes in this encoding."
-      }
+      },
+      "description": "<p>Measures the string in WTF-16, so a caller can allocate before calling <code>string.encode_wtf16</code>.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.134",
@@ -2618,7 +2649,14 @@
       "stack": {
         "html": "[stringref i32] → [i32]",
         "note": "The string, then the destination address in memory <i>x</i>. Pushes how many code units were written."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes the string to memory as UTF-8. Traps on an isolated surrogate, which UTF-8 cannot encode.</p>\n<p>Nothing bounds the write but the memory itself, so measure first.</p>"
     },
     {
       "id": "0xFB.135",
@@ -2641,7 +2679,14 @@
       "stack": {
         "html": "[stringref i32] → [i32]",
         "note": "The string, then the destination address in memory <i>x</i>. Pushes how many code units were written."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes the string to memory as 16-bit code units, little-endian.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.136",
@@ -2662,7 +2707,8 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref stringref] → [stringref]"
-      }
+      },
+      "description": "<p>Returns a new string: the first followed by the second.</p>"
     },
     {
       "id": "0xFB.137",
@@ -2683,8 +2729,9 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringref stringref] → [i32]",
-        "note": "1 if the two strings have the same contents, 0 if not."
-      }
+        "note": "1 if the two strings have the same contents, 0 if not. Two nulls are equal and one null is not: this is the only string instruction that accepts a null reference, and the rest trap on one."
+      },
+      "description": "<p>Compares two strings by contents, not by identity.</p>"
     },
     {
       "id": "0xFB.138",
@@ -2707,7 +2754,8 @@
       "stack": {
         "html": "[stringref] → [i32]",
         "note": "<p>1 if the string is a sequence of Unicode scalar values, with no isolated surrogates, and 0 if not.</p>"
-      }
+      },
+      "description": "<p>Tests whether the string can be encoded as UTF-8 at all. A 0 means it holds an isolated surrogate, so <code>string.encode_utf8</code> would trap on it.</p>"
     },
     {
       "id": "0xFB.139",
@@ -2730,7 +2778,14 @@
       "stack": {
         "html": "[i32 i32] → [stringref]",
         "note": "Address in memory <i>x</i>, then how many code units to read."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Reads UTF-8 bytes from memory and returns a new string, putting U+FFFD in place of anything invalid. Never traps on the contents.</p>"
     },
     {
       "id": "0xFB.140",
@@ -2753,7 +2808,14 @@
       "stack": {
         "html": "[i32 i32] → [stringref]",
         "note": "Address in memory <i>x</i>, then how many code units to read."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Reads WTF-8 bytes from memory and returns a new string. Traps if they are not valid WTF-8.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.141",
@@ -2776,7 +2838,14 @@
       "stack": {
         "html": "[stringref i32] → [i32]",
         "note": "The string, then the destination address in memory <i>x</i>. Pushes how many code units were written."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes the string to memory as UTF-8, putting U+FFFD in place of any isolated surrogate. Never traps on the contents.</p>\n<p>Nothing bounds the write but the memory itself, so measure first.</p>"
     },
     {
       "id": "0xFB.142",
@@ -2799,7 +2868,14 @@
       "stack": {
         "html": "[stringref i32] → [i32]",
         "note": "The string, then the destination address in memory <i>x</i>. Pushes how many code units were written."
-      }
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes the string to memory as WTF-8, which holds anything a string can contain, so it never traps on the contents.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.143",
@@ -2835,7 +2911,8 @@
       "stack": {
         "html": "[stringref] → [stringview_wtf8]",
         "note": "<p><b>View</b>: shares the string’s contents rather than copying them.</p>"
-      }
+      },
+      "description": "<p>Returns a view that reads the string as WTF-8 bytes, for code that works in byte offsets.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.145",
@@ -2855,8 +2932,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32] → [i32]"
-      }
+        "html": "[stringview_wtf8 i32 i32] → [i32]",
+        "note": "The view, the byte offset to start at, then how many bytes to move on. Pushes the offset it reached."
+      },
+      "description": "<p>Moves a byte offset forward through the view by at most the given number of bytes, and returns where it reached.</p>\n<p>The result is the highest offset that is not past the sum of the two, so it lands between code points and never inside one.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.146",
@@ -2877,8 +2956,16 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]"
-      }
+        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]",
+        "note": "The view, the destination address in memory <i>x</i>, the byte offset to start at, then how many bytes to write at most. Pushes the offset it reached, then how many bytes it wrote."
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes part of the view to memory as UTF-8, up to a byte count. Traps on an isolated surrogate.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.147",
@@ -2898,8 +2985,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32] → [stringref]"
-      }
+        "html": "[stringview_wtf8 i32 i32] → [stringref]",
+        "note": "The view, then the start and end byte offsets."
+      },
+      "description": "<p>Returns a new string: the part of the view between two byte offsets, not including the second.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.148",
@@ -2920,8 +3009,16 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]"
-      }
+        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]",
+        "note": "The view, the destination address in memory <i>x</i>, the byte offset to start at, then how many bytes to write at most. Pushes the offset it reached, then how many bytes it wrote."
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes part of the view to memory as UTF-8, up to a byte count, putting U+FFFD in place of any isolated surrogate.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.149",
@@ -2942,8 +3039,16 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]"
-      }
+        "html": "[stringview_wtf8 i32 i32 i32] → [i32 i32]",
+        "note": "The view, the destination address in memory <i>x</i>, the byte offset to start at, then how many bytes to write at most. Pushes the offset it reached, then how many bytes it wrote."
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes part of the view to memory as WTF-8, up to a byte count.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.150",
@@ -2992,7 +3097,8 @@
       "stack": {
         "html": "[stringref] → [stringview_wtf16]",
         "note": "<p><b>View</b>: shares the string’s contents rather than copying them.</p>"
-      }
+      },
+      "description": "<p>Returns a view that reads the string as 16-bit code units, which is how a JavaScript string is indexed.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.153",
@@ -3012,9 +3118,9 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16] → [i32]",
-        "note": "How many 16-bit code units the string has."
-      }
+        "html": "[stringview_wtf16] → [i32]"
+      },
+      "description": "<p>Returns how many 16-bit code units the string has, which is what a JavaScript string reports as its length.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.154",
@@ -3035,8 +3141,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16 i32] → [i32]"
-      }
+        "html": "[stringview_wtf16 i32] → [i32]",
+        "note": "The view, then the index of the code unit to read."
+      },
+      "description": "<p>Reads one 16-bit code unit from the view, by index. Traps at or past the end.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.155",
@@ -3056,8 +3164,16 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16 i32 i32 i32] → [i32]"
-      }
+        "html": "[stringview_wtf16 i32 i32 i32] → [i32]",
+        "note": "The view, the destination address in memory <i>x</i>, the code-unit offset to start at, then how many code units to write at most. Pushes how many it wrote."
+      },
+      "immediates": [
+        {
+          "name": "x",
+          "kind": "memidx"
+        }
+      ],
+      "description": "<p>Writes part of the view to memory as 16-bit code units, up to a given count.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.156",
@@ -3077,8 +3193,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_wtf16 i32 i32] → [stringref]"
-      }
+        "html": "[stringview_wtf16 i32 i32] → [stringref]",
+        "note": "The view, then the start and end code-unit offsets."
+      },
+      "description": "<p>Returns a new string: the part of the view between two code-unit offsets, not including the second.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.157",
@@ -3140,7 +3258,8 @@
       "stack": {
         "html": "[stringref] → [stringview_iter]",
         "note": "<p><b>View</b>: shares the string’s contents rather than copying them.</p>"
-      }
+      },
+      "description": "<p>Returns a view that walks the string one code point at a time, starting at the beginning.</p>\n<p>Unlike the other two views this one carries a position. <code>stringview_iter.next</code>, <code>advance</code> and <code>rewind</code> move it; nothing else does.</p>"
     },
     {
       "id": "0xFB.161",
@@ -3161,7 +3280,8 @@
       "proposal": "stringref",
       "stack": {
         "html": "[stringview_iter] → [i32]"
-      }
+      },
+      "description": "<p>Returns the code point at the view’s position and moves past it, or −1 if the position is already at the end.</p>"
     },
     {
       "id": "0xFB.162",
@@ -3181,8 +3301,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter i32] → [i32]"
-      }
+        "html": "[stringview_iter i32] → [i32]",
+        "note": "The view, then how many code points to move. Pushes how many it moved, which is fewer at the end of the string."
+      },
+      "description": "<p>Moves the view forward by up to the given number of code points, and returns how many it passed.</p>"
     },
     {
       "id": "0xFB.163",
@@ -3202,8 +3324,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter i32] → [i32]"
-      }
+        "html": "[stringview_iter i32] → [i32]",
+        "note": "The view, then how many code points to move. Pushes how many it moved, which is fewer at the start of the string."
+      },
+      "description": "<p>Moves the view back by up to the given number of code points, and returns how many it passed.</p>"
     },
     {
       "id": "0xFB.164",
@@ -3223,8 +3347,10 @@
       },
       "proposal": "stringref",
       "stack": {
-        "html": "[stringview_iter i32] → [stringref]"
-      }
+        "html": "[stringview_iter i32] → [stringref]",
+        "note": "The view, then how many code points to take."
+      },
+      "description": "<p>Returns a new string: up to the given number of code points from the view’s position.</p>"
     },
     {
       "id": "0xFB.165",
@@ -3390,7 +3516,8 @@
       "stack": {
         "html": "[(ref null array) i32 i32] → [stringref]",
         "note": "An array of i8, then the start and end index into it."
-      }
+      },
+      "description": "<p>Reads UTF-8 bytes from an array of i8 and returns a new string. Traps if they are not valid UTF-8.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>"
     },
     {
       "id": "0xFB.177",
@@ -3413,7 +3540,8 @@
       "stack": {
         "html": "[(ref null array) i32 i32] → [stringref]",
         "note": "An array of i16, then the start and end index into it."
-      }
+      },
+      "description": "<p>Reads 16-bit code units from an array of i16 and returns a new string.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.178",
@@ -3436,7 +3564,8 @@
       "stack": {
         "html": "[stringref (ref null array) i32] → [i32]",
         "note": "The string, a mutable array of i8, then the index to start writing at. Pushes how many code units were written."
-      }
+      },
+      "description": "<p>Writes the string into an array of i8 as UTF-8. Traps on an isolated surrogate.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>"
     },
     {
       "id": "0xFB.179",
@@ -3459,7 +3588,8 @@
       "stack": {
         "html": "[stringref (ref null array) i32] → [i32]",
         "note": "The string, a mutable array of i16, then the index to start writing at. Pushes how many code units were written."
-      }
+      },
+      "description": "<p>Writes the string into an array of i16.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>\n<p><b>WTF-16</b>: UTF-16 extended to allow isolated surrogates, which is exactly what a JavaScript string is.</p>"
     },
     {
       "id": "0xFB.180",
@@ -3482,7 +3612,8 @@
       "stack": {
         "html": "[(ref null array) i32 i32] → [stringref]",
         "note": "An array of i8, then the start and end index into it."
-      }
+      },
+      "description": "<p>Reads UTF-8 bytes from an array of i8 and returns a new string, putting U+FFFD in place of anything invalid.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>"
     },
     {
       "id": "0xFB.181",
@@ -3505,7 +3636,8 @@
       "stack": {
         "html": "[(ref null array) i32 i32] → [stringref]",
         "note": "An array of i8, then the start and end index into it."
-      }
+      },
+      "description": "<p>Reads WTF-8 bytes from an array of i8 and returns a new string. Traps if they are not valid WTF-8.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.182",
@@ -3528,7 +3660,8 @@
       "stack": {
         "html": "[stringref (ref null array) i32] → [i32]",
         "note": "The string, a mutable array of i8, then the index to start writing at. Pushes how many code units were written."
-      }
+      },
+      "description": "<p>Writes the string into an array of i8 as UTF-8, putting U+FFFD in place of any isolated surrogate.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>"
     },
     {
       "id": "0xFB.183",
@@ -3551,7 +3684,8 @@
       "stack": {
         "html": "[stringref (ref null array) i32] → [i32]",
         "note": "The string, a mutable array of i8, then the index to start writing at. Pushes how many code units were written."
-      }
+      },
+      "description": "<p>Writes the string into an array of i8 as WTF-8.</p>\n<p>This form uses a GC array in place of linear memory, for modules that have none.</p>\n<p><b>WTF-8</b>: UTF-8 extended to allow isolated surrogates, the lone halves of surrogate pairs that a JavaScript string can hold and UTF-8 cannot encode.</p>"
     },
     {
       "id": "0xFB.184",

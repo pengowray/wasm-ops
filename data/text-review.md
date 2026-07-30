@@ -16,20 +16,24 @@ reference: Rust function signatures, that reference's operand names (`a`, `b`,
 error. 37 were rewritten. The rest of this file is what the same reading turned
 up and did not fix.
 
-## 1. 47 GC instructions have no description
+## 1. Every named instruction now has a description
 
-All of `gc.json` that is not a stringview. They are the bulk of the work and the
-least covered elsewhere: a reader who does not already know the proposal gets a
-name, a signature, and nothing.
+729 of 733. The four without are the `twobyte*` prefix cells, which do not need
+one: their text is generated from what lies behind them.
 
-The 20 outside `gc.json` are written. Two things turned up while writing them:
-`i64.add128` and `i64.sub128` were shown with three operands, because wabt's
-table has only three parameter columns and cannot express the fourth (recorded in
-`ACCEPTED_STACK` in `scripts/audit.ts`); and all three tail calls said "the
-tail-call version of call", including the two that are not.
+Four things turned up while writing the last 67, each of which had been sitting
+in the data unnoticed:
 
-The four `twobyte*` rows also have no description and do not need one: they are
-the prefix cells, and their text is generated from what lies behind them.
+| | |
+|---|---|
+| `i64.add128`, `i64.sub128` | shown with three operands. They take two 128-bit values, so four. wabt's table has three parameter columns and cannot hold the fourth; recorded in `ACCEPTED_STACK` in `scripts/audit.ts` |
+| the three tail calls | all said "the tail-call version of call", including the two that are not |
+| every stringref instruction | no immediate recorded, though twelve take a `memidx` and `string.const` a `stringidx`. Fourteen notes said "memory *x*" with no *x* on the page |
+| `struct.get`, `struct.set` | called the field immediate `i`; the page calls it *y* |
+
+The stringview notes that were left blank as reconstructed are in the proposal
+verbatim, so they are back, with one reading corrected. See README.md in this
+directory.
 
 ## 2. 59 descriptions describe the proposal, not the instruction
 
