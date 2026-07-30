@@ -25,7 +25,7 @@
         "pre": "struct",
         "mainop": "new"
       },
-      "description": "<p>allocates a structure with canonical RTT (runtime type) and initialises its fields with given values</p>",
+      "description": "<p>allocates a struct of type <i>x</i>, taking one value per field from the stack</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -54,7 +54,7 @@
         "mainop": "new",
         "rest": "default"
       },
-      "description": "<p>allocates a structure of type $t with canonical RTT (runtime type) and initialises its fields with default values</p>",
+      "description": "<p>allocates a struct of type <i>x</i> with every field at its default value</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -210,7 +210,7 @@
         "pre": "array",
         "mainop": "new"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type)</p>",
+      "description": "<p>allocates an array of type <i>x</i>, every element set to the same value</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -239,7 +239,7 @@
         "mainop": "new",
         "rest": "default"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises its fields with the default value</p>",
+      "description": "<p>allocates an array of type <i>x</i> with every element at its default value</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -268,7 +268,7 @@
         "mainop": "new",
         "rest": "fixed"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) of fixed size and initialises it from operands</p>",
+      "description": "<p>allocates an array of type <i>x</i> with a fixed number of elements, taken from the stack</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -302,7 +302,7 @@
         "mainop": "new",
         "rest": "data"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from a data segment</p>",
+      "description": "<p>allocates an array of type <i>x</i>, initialised from data segment <i>y</i></p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -335,7 +335,7 @@
         "mainop": "new",
         "rest": "elem"
       },
-      "description": "<p>allocates an array with canonical RTT (runtime type) and initialises it from an element segment</p>",
+      "description": "<p>allocates an array of type <i>x</i>, initialised from element segment <i>y</i></p>",
       "proposal": "gc",
       "immediates": [
         {

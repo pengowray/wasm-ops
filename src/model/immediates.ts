@@ -91,7 +91,18 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
   fieldidx: INDEX,
   stringidx: { encoding: 'u32', gloss: 'index into the module’s strings custom section' },
 
-  laneidx: { encoding: 'u8' },
+  // Six of the sixteen lane instructions carried this rule in their own prose,
+  // pasted from a Rust intrinsics reference, where it read "if N is out of
+  // bounds then it is a compile time error" — the wrong name for the operand and
+  // the wrong kind of error. It belongs to the operand, so all 25 get it.
+  laneidx: {
+    encoding: 'u8',
+    note: labelled(
+      'Lane index',
+      'counts from 0. A value at or past the number of lanes is rejected when the module is ' +
+        'validated, so it can never be out of range at run time.',
+    ),
+  },
 
   valtype: {},
   heaptype: {

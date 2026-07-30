@@ -390,7 +390,7 @@
         "pre": "i8x16",
         "mainop": "shuffle"
       },
-      "description": "<p>Returns a new vector with lanes selected from the lanes of the two input vectors $a and $b specified in the 16 immediate operands.</p>",
+      "description": "<p>Builds a new vector one byte at a time, each byte picked from the two operands by an immediate index.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -419,7 +419,7 @@
         "pre": "i8x16",
         "mainop": "swizzle"
       },
-      "description": "<p>Returns a new vector with lanes selected from the lanes of the first input vector a specified in the second input vector s.</p>\n<p>The indices i in range [0, 15] select the i-th element of 'a'. For indices outside of the range the resulting lane is 0.</p>",
+      "description": "<p>Builds a new vector one byte at a time, each byte picked from the first operand by an index taken from the second.</p>\n<p>An index of 0 to 15 selects that byte of the first operand. Anything larger gives 0.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -568,7 +568,7 @@
         "post": "lane",
         "sign": "s"
       },
-      "description": "<p>Rust: <code>fn i8x16_extract_lane&lt;const N:&nbsp;usize&gt;(a: v128) -&gt; i8</code></p>\n<p>Extracts a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Extracts the scalar value of lane specified in the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
+      "description": "<p>Extracts one lane from a 128-bit vector read as 16 packed i8 numbers.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -625,7 +625,7 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 16 packed i8 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
+      "description": "<p>Replaces one lane of a 128-bit vector read as 16 packed i8 numbers, leaving the others unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -851,7 +851,7 @@
         "mainop": "extract",
         "post": "lane"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from a. If N is out of bounds then it is a compile time error.</p>",
+      "description": "<p>Extracts one lane from a 128-bit vector read as 4 packed f32 numbers.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -879,7 +879,7 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 4 packed f32 numbers.</p>\n<p>Rust: <code>fn f32x4_replace_lane&lt;const N: usize&gt;(a: v128, val: f32) -&gt; v128</code></p>\n<p>Replaces the scalar value of lane specified fn the immediate mode operand <code>N</code> from <code>a</code>. If <code>N</code> is out of bounds then it is a compile time error.</p>",
+      "description": "<p>Replaces one lane of a 128-bit vector read as 4 packed f32 numbers, leaving the others unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -907,7 +907,7 @@
         "mainop": "extract",
         "post": "lane"
       },
-      "description": "<p>Extracts a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Extracts the scalar value of lane specified fn the immediate mode operand N from 'a'. If 'N' [is] out of bounds then it is a compile time error.</p>",
+      "description": "<p>Extracts one lane from a 128-bit vector read as 2 packed f64 numbers.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -935,7 +935,7 @@
         "mainop": "replace",
         "post": "lane"
       },
-      "description": "<p>Replaces a lane from a 128-bit vector interpreted as 2 packed f64 numbers.</p>\n<p>Replaces the scalar value of lane specified in the immediate mode operand N from 'a'. If N is out of bounds then it is a compile time error.</p>",
+      "description": "<p>Replaces one lane of a 128-bit vector read as 2 packed f64 numbers, leaving the others unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -1910,7 +1910,7 @@
         "pre": "v128",
         "mainop": "andnot"
       },
-      "description": "<p>Bitwise AND of bits of a and the logical inverse of bits of b.</p>",
+      "description": "<p>Bitwise AND of the first operand with the bitwise inverse of the second.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -1973,7 +1973,7 @@
         "pre": "v128",
         "mainop": "bitselect"
       },
-      "description": "<p>Rust: <code>fn v128_bitselect(v1: v128, v2: v128, c: v128) -&gt; v128</code></p>\n<p>Use the bitmask in <code>c</code> to select bits from <code>v1</code> when 1 and <code>v2</code> when 0.</p>",
+      "description": "<p>Uses the third operand as a bitmask: where a bit is 1 the result takes that bit from the first operand, where it is 0 from the second.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128 v128] → [v128]"
@@ -2017,7 +2017,7 @@
         "opbits": "8",
         "post": "lane"
       },
-      "description": "<p>Loads an 8-bit value from m and sets lane L of v to that value.</p>",
+      "description": "<p>Loads 8 bits from memory into lane <i>l</i> of the vector operand. Every other lane is copied through unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2050,7 +2050,7 @@
         "opbits": "16",
         "post": "lane"
       },
-      "description": "<p>Loads a 16-bit value from m and sets lane L of v to that value.</p>",
+      "description": "<p>Loads 16 bits from memory into lane <i>l</i> of the vector operand. Every other lane is copied through unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2083,7 +2083,7 @@
         "opbits": "32",
         "post": "lane"
       },
-      "description": "<p>Loads a 32-bit value from m and sets lane L of v to that value.</p>",
+      "description": "<p>Loads 32 bits from memory into lane <i>l</i> of the vector operand. Every other lane is copied through unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2116,7 +2116,7 @@
         "opbits": "64",
         "post": "lane"
       },
-      "description": "<p>Loads a 64-bit value from m and sets lane L of v to that value.</p>",
+      "description": "<p>Loads 64 bits from memory into lane <i>l</i> of the vector operand. Every other lane is copied through unchanged.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2149,7 +2149,7 @@
         "opbits": "8",
         "post": "lane"
       },
-      "description": "<p>Stores the 8-bit value from lane L of v into m</p>",
+      "description": "<p>Stores the 8 bits in lane <i>l</i> of the vector operand to memory.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2182,7 +2182,7 @@
         "opbits": "16",
         "post": "lane"
       },
-      "description": "<p>Stores the 16-bit value from lane L of v into m</p>",
+      "description": "<p>Stores the 16 bits in lane <i>l</i> of the vector operand to memory.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2215,7 +2215,7 @@
         "opbits": "32",
         "post": "lane"
       },
-      "description": "<p>Stores the 32-bit value from lane L of v into m</p>",
+      "description": "<p>Stores the 32 bits in lane <i>l</i> of the vector operand to memory.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2248,7 +2248,7 @@
         "opbits": "64",
         "post": "lane"
       },
-      "description": "<p>Stores the 64-bit value from lane L of v into m</p>",
+      "description": "<p>Stores the 64 bits in lane <i>l</i> of the vector operand to memory.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2466,7 +2466,7 @@
         "pre": "i8x16",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
+      "description": "<p>Takes the high bit of each of the 16 lanes and packs them into the low 16 bits of an i32, lane 0 in bit 0. The bits above them are zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -3128,7 +3128,7 @@
         "post": "sat",
         "sign": "s"
       },
-      "description": "<p>Rust: <code>fn i16x8_q15mulr_sat(a: v128, b: v128) -&gt; v128</code></p>\n<p>Lane-wise saturating rounding multiplication in Q15 format.</p>",
+      "description": "<p>Lane-wise saturating rounding multiplication in Q15 fixed-point format.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -3172,7 +3172,7 @@
         "pre": "i16x8",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
+      "description": "<p>Takes the high bit of each of the 8 lanes and packs them into the low 8 bits of an i32, lane 0 in bit 0. The bits above them are zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -3905,7 +3905,7 @@
         "pre": "i32x4",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in a and produce a scalar mask with all bits concatenated.</p>",
+      "description": "<p>Takes the high bit of each of the 4 lanes and packs them into the low 4 bits of an i32, lane 0 in bit 0. The bits above them are zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -4636,7 +4636,7 @@
         "pre": "i64x2",
         "mainop": "bitmask"
       },
-      "description": "<p>Extracts the high bit for each lane in 'a' and produce a scalar mask with all bits concatenated.</p>",
+      "description": "<p>Takes the high bit of each of the 2 lanes and packs them into the low 2 bits of an i32, lane 0 in bit 0. The bits above them are zero.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [i32]"
@@ -6024,7 +6024,7 @@
         "mainop": "relaxed",
         "rest": "swizzle"
       },
-      "description": "<p><code>relaxed i8x16.swizzle(a, s)</code> selects lanes from <code>a</code> using indices in <code>s</code>,\nindices in the range <code>[0,15]</code> will select the <code>i</code>-th element of <code>a</code>, the result\nfor any out of range indices is implementation-defined (i.e. if the index is <code>[16-255]</code>.</p>",
+      "description": "<p>As <code>i8x16.swizzle</code>, except that an index outside 0 to 15 gives an implementation-defined result rather than 0.</p>",
       "proposal": "relaxed-simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -6438,7 +6438,7 @@
         "mainop": "relaxed",
         "rest": "dot_i8x16_i7x16_s"
       },
-      "description": "<p>Relaxed integer dot product</p>\n<p><code>i16x8.dot_i8x16_i7x16_s(a: v128, b: v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
+      "description": "<p>Reads the first operand as 16 signed 8-bit integers and the second as 16 unsigned 7-bit integers, multiplies them lane by lane, then adds each adjacent pair of products to give 8 i16 lanes.</p>\n<p>If a lane of the second operand has its high bit set, that lane’s result is implementation-defined.</p>",
       "proposal": "relaxed-simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -6461,7 +6461,7 @@
         "mainop": "relaxed",
         "rest": "dot_i8x16_i7x16_add_s"
       },
-      "description": "<p>Relaxed integer dot product</p>\n<p><code>i32x4.dot_i8x16_i7x16_add_s(a: v128, b:v128, c:v128) -&gt; v128</code></p>\n<p>Returns the multiplication of 8-bit elements (signed or unsigned) by 7-bit elements (unsigned) with accumulation of adjacent products. The <code>i32x4</code> versions allows for accumulation into another vector.</p>\n<p>When the second operand of the product has the high bit set in a lane, that lane's result is implementation defined.</p>",
+      "description": "<p>Reads the first operand as 16 signed 8-bit integers and the second as 16 unsigned 7-bit integers and multiplies them lane by lane, as <code>i16x8.relaxed_dot_i8x16_i7x16_s</code> does. Adds each group of four adjacent products to give 4 i32 lanes, then adds those to the third operand.</p>\n<p>If a lane of the second operand has its high bit set, that lane’s result is implementation-defined.</p>",
       "proposal": "relaxed-simd",
       "stack": {
         "html": "[v128 v128 v128] → [v128]"

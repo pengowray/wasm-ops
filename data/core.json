@@ -518,7 +518,7 @@
       "parts": {
         "mainop": "call_ref"
       },
-      "description": "<p>call a function through a ref $t</p>",
+      "description": "<p>calls a function through a reference of type <i>x</i></p>",
       "proposal": "function-references",
       "immediates": [
         {
@@ -672,7 +672,7 @@
       "parts": {
         "mainop": "select t"
       },
-      "description": "<p>Only annotated 'select' can be used with reference types.</p>",
+      "description": "<p>Only the annotated form can be used with reference types.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -3721,7 +3721,7 @@
       "stack": {
         "html": "[i64] → [i32]"
       },
-      "description": "<p>wrap a 64-bit integer to a 32-bit integer.</p>\n<p>Return i modulo 2<sup>32</sup>.</p>",
+      "description": "<p>Wraps a 64-bit integer to a 32-bit integer.</p>\n<p>Keeps the low 32 bits, which is the operand modulo 2<sup>32</sup>.</p>",
       "proposal": "mvp"
     },
     {
