@@ -125,6 +125,26 @@ function hexPart(text: string): string {
   return `<span class="op-hex">${text}</span>`;
 }
 
+/**
+ * Hex literals inside prose, set the way the chart sets an opcode's own bytes:
+ * the same monospace face and the same colour, so `0x0B` in a sentence and
+ * `0x0B` in a cell are recognisably one kind of thing.
+ *
+ * Derived rather than written into the data. There are 41 of them across the
+ * descriptions and the notes, and a span per literal is 41 chances to forget
+ * one, or to spell the digits in lower case as one entry did.
+ *
+ * The alternation matches a whole tag first, so a literal is never rewritten
+ * inside an attribute value and a tag is never taken apart.
+ */
+export function markHex(html: string): string {
+  return html.replace(/<[^>]+>|0x([0-9A-Fa-f]+)\b/g, (match, digits: string | undefined) =>
+    digits === undefined
+      ? match
+      : `<span class="op-hex">0x${digits.toUpperCase()}</span>`,
+  );
+}
+
 /** The sub-opcode, in decimal, with the type tag that says it is not a byte. */
 function decPart(code: number): string {
   return `<span class="op-dec">${code}</span><span class="op-utype">:u32</span>`;
@@ -779,7 +799,7 @@ export function renderDetail(op: Opcode, spread?: string): string {
   const tags = renderTags(op);
 
   if (op.description) {
-    rows.push(`<h4>Description</h4><div class="detail-prose">${op.description}</div>`);
+    rows.push(`<h4>Description</h4><div class="detail-prose">${markHex(op.description)}</div>`);
   }
 
   // Above the status. What an instruction does to the stack is the fact most
@@ -790,7 +810,7 @@ export function renderDetail(op: Opcode, spread?: string): string {
       `<h4>Stack</h4><p><span class="op-type">${op.stack.html}</span></p>` +
         (op.stack.polymorphic || op.stack.note
           ? `<div class="detail-stack-note">${polymorphicNote(op.stack.polymorphic)}${
-              op.stack.note ?? ''
+              markHex(op.stack.note ?? '')
             }</div>`
           : ''),
     );
@@ -802,7 +822,9 @@ export function renderDetail(op: Opcode, spread?: string): string {
   // a description written in prose.
   const immediates = renderImmediates(op);
   if (immediates) {
-    rows.push(`<h4>Immediate operands</h4><div class="detail-followed">${immediates}</div>`);
+    rows.push(
+      `<h4>Immediate operands</h4><div class="detail-followed">${markHex(immediates)}</div>`,
+    );
   }
 
   rows.push(renderStatus(op, spread));

@@ -131,7 +131,7 @@
       "parts": {
         "mainop": "pause"
       },
-      "description": "<p>hints that the thread is spinning and the core may back off. Semantically a no-op</p>",
+      "description": "<p>Hints that the thread is spinning and the core may back off. Semantically a no-op.</p>",
       "proposal": "relaxed-atomics",
       "stack": {
         "html": "[] → []"
@@ -284,7 +284,7 @@
         "pre": "i32.atomic",
         "mainop": "load"
       },
-      "description": "<p>atomically load 4 bytes as i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 4 bytes as i32.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -311,7 +311,7 @@
         "pre": "i64.atomic",
         "mainop": "load"
       },
-      "description": "<p>atomically load 8 bytes as i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 8 bytes as i64.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -340,7 +340,7 @@
         "opbits": "8",
         "sign": "u"
       },
-      "description": "<p>atomically load 1 byte and zero-extend i8 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 1 byte and zero-extend i8 to i32.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -369,7 +369,7 @@
         "opbits": "16",
         "sign": "u"
       },
-      "description": "<p>atomically load 2 bytes and zero-extend i16 to i32</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 2 bytes and zero-extend i16 to i32.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -398,7 +398,7 @@
         "opbits": "8",
         "sign": "u"
       },
-      "description": "<p>atomically load 1 byte and zero-extend i8 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 1 byte and zero-extend i8 to i64.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -427,7 +427,7 @@
         "opbits": "16",
         "sign": "u"
       },
-      "description": "<p>atomically load 2 bytes and zero-extend i16 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 2 bytes and zero-extend i16 to i64.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -456,7 +456,7 @@
         "opbits": "32",
         "sign": "u"
       },
-      "description": "<p>atomically load 4 bytes and zero-extend i32 to i64</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Atomically load 4 bytes and zero-extend i32 to i64.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -483,7 +483,7 @@
         "pre": "i32.atomic",
         "mainop": "store"
       },
-      "description": "<p>(no conversion) atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>(no conversion) atomically store 4 bytes.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -510,7 +510,7 @@
         "pre": "i64.atomic",
         "mainop": "store"
       },
-      "description": "<p>(no conversion) atomically store 8 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>(no conversion) atomically store 8 bytes.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -538,7 +538,7 @@
         "mainop": "store",
         "opbits": "8"
       },
-      "description": "<p>wrap i32 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Wrap i32 to i8 and atomically store 1 byte.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -566,7 +566,7 @@
         "mainop": "store",
         "opbits": "16"
       },
-      "description": "<p>wrap i32 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Wrap i32 to i16 and atomically store 2 bytes.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -594,7 +594,7 @@
         "mainop": "store",
         "opbits": "8"
       },
-      "description": "<p>wrap i64 to i8 and atomically store 1 byte</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Wrap i64 to i8 and atomically store 1 byte.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -622,7 +622,7 @@
         "mainop": "store",
         "opbits": "16"
       },
-      "description": "<p>wrap i64 to i16 and atomically store 2 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Wrap i64 to i16 and atomically store 2 bytes.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -650,7 +650,7 @@
         "mainop": "store",
         "opbits": "32"
       },
-      "description": "<p>wrap i64 to i32 and atomically store 4 bytes</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
+      "description": "<p>Wrap i64 to i32 and atomically store 4 bytes.</p><p>Atomic load/store memory accesses behave like their non-atomic counterparts, with the exception that the ordering of accesses is sequentially consistent.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -677,7 +677,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "add"
       },
-      "description": "<p>32-bit sign-agnostic addition</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic addition.</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -704,7 +704,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "add"
       },
-      "description": "<p>64-bit sign-agnostic addition</p>\n<p>Read: 8 bytes, Write: 8 bytes</p>\n<p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit sign-agnostic addition.</p>\n<p>Read: 8 bytes, Write: 8 bytes</p>\n<p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -732,7 +732,7 @@
         "mainop": "add",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic addition</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic addition.</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -760,7 +760,7 @@
         "mainop": "add",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic addition</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic addition.</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -788,7 +788,7 @@
         "mainop": "add",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic addition</p>\n<p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic addition.</p>\n<p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -816,7 +816,7 @@
         "mainop": "add",
         "sign": "u"
       },
-      "description": "<p>64-bit sign-agnostic addition</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit sign-agnostic addition.</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -844,7 +844,7 @@
         "mainop": "add",
         "sign": "u"
       },
-      "description": "<p>32-bit sign-agnostic addition</p>\n<p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic addition.</p>\n<p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -871,7 +871,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "sub"
       },
-      "description": "<p>32-bit sign-agnostic subtraction</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic subtraction.</p>\n<p>Read: 4 bytes, Write: 4 bytes</p>\n<p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -898,7 +898,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "sub"
       },
-      "description": "<p>64-bit sign-agnostic subtraction</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit sign-agnostic subtraction.</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -926,7 +926,7 @@
         "mainop": "sub",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic subtraction</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic subtraction.</p>\n<p>Read: 1 byte, Write: 1 byte</p>\n<p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -954,7 +954,7 @@
         "mainop": "sub",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic subtraction</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic subtraction.</p>\n<p>Read: 2 bytes, Write: 2 bytes</p>\n<p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -982,7 +982,7 @@
         "mainop": "sub",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic subtraction</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic subtraction.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1010,7 +1010,7 @@
         "mainop": "sub",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic subtraction</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic subtraction.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1038,7 +1038,7 @@
         "mainop": "sub",
         "sign": "u"
       },
-      "description": "<p>32-bit sign-agnostic subtraction</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic subtraction.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1065,7 +1065,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "and"
       },
-      "description": "<p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic bitwise AND.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1092,7 +1092,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "and"
       },
-      "description": "<p>64-bit sign-agnostic bitwise and</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit sign-agnostic bitwise AND.</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1120,7 +1120,7 @@
         "mainop": "and",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic bitwise AND.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1148,7 +1148,7 @@
         "mainop": "and",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic bitwise AND.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1176,7 +1176,7 @@
         "mainop": "and",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic bitwise and</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic bitwise AND.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1204,7 +1204,7 @@
         "mainop": "and",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic bitwise and</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic bitwise AND.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1232,7 +1232,7 @@
         "mainop": "and",
         "sign": "u"
       },
-      "description": "<p>32-bit sign-agnostic bitwise and</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic bitwise AND.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1259,7 +1259,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "or"
       },
-      "description": "<p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1286,7 +1286,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "or"
       },
-      "description": "<p>64-bit sign-agnostic bitwise inclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1314,7 +1314,7 @@
         "mainop": "or",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1342,7 +1342,7 @@
         "mainop": "or",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1370,7 +1370,7 @@
         "mainop": "or",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic bitwise inclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1398,7 +1398,7 @@
         "mainop": "or",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic bitwise inclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1426,7 +1426,7 @@
         "mainop": "or",
         "sign": "u"
       },
-      "description": "<p>32-bit sign-agnostic bitwise inclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic bitwise inclusive OR.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1453,7 +1453,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "xor"
       },
-      "description": "<p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1480,7 +1480,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "xor"
       },
-      "description": "<p>64-bit sign-agnostic bitwise exclusive or</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1508,7 +1508,7 @@
         "mainop": "xor",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1536,7 +1536,7 @@
         "mainop": "xor",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1564,7 +1564,7 @@
         "mainop": "xor",
         "sign": "u"
       },
-      "description": "<p>8-bit sign-agnostic bitwise exclusive or</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1592,7 +1592,7 @@
         "mainop": "xor",
         "sign": "u"
       },
-      "description": "<p>16-bit sign-agnostic bitwise exclusive or</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1620,7 +1620,7 @@
         "mainop": "xor",
         "sign": "u"
       },
-      "description": "<p>32-bit sign-agnostic bitwise exclusive or</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit sign-agnostic bitwise exclusive OR (XOR).</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1647,7 +1647,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>32-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: as i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1674,7 +1674,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>64-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>64-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 8 bytes, Write: 8 bytes</p><p>Returns: as i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1702,7 +1702,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>8-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1730,7 +1730,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>16-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i32</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1758,7 +1758,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>8-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>8-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 1 byte, Write: 1 byte</p><p>Returns: zero-extended i8 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1786,7 +1786,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>16-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>16-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 2 bytes, Write: 2 bytes</p><p>Returns: zero-extended i16 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1814,7 +1814,7 @@
         "mainop": "xchg",
         "sign": "u"
       },
-      "description": "<p>32-bit exchange: writes the operand to the address and returns the value that was there</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
+      "description": "<p>32-bit exchange: writes the operand to the address and returns the value that was there.</p><p>Read: 4 bytes, Write: 4 bytes</p><p>Returns: zero-extended i32 to i64</p>\n<p>Atomic read-modify-write (RMW) operators atomically read a value from an address, modify the value, and store the resulting value to the same address. All RMW operators return the value read from memory before the modify operation was performed.</p>\n<p>The RMW operators have two operands, an address and a value used in the modify operation.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1841,7 +1841,7 @@
         "pre": "i32.atomic.rmw",
         "mainop": "cmpxchg"
       },
-      "description": "<p>Load as loaded: 4 bytes</p><p>Compare expected with loaded: 32-bit compare equal</p><p>Conditionally Store replacement: store 4 bytes</p><p>Return loaded: as i32</p>",
+      "description": "<p>Load as loaded: 4 bytes.</p><p>Compare expected with loaded: 32-bit compare equal.</p><p>Conditionally Store replacement: store 4 bytes.</p><p>Return loaded: as i32.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1868,7 +1868,7 @@
         "pre": "i64.atomic.rmw",
         "mainop": "cmpxchg"
       },
-      "description": "<p>Load as loaded: 8 bytes</p><p>Compare expected with loaded: 64-bit compare equal</p><p>Conditionally Store replacement: 8 bytes</p><p>Return loaded: as i64</p>",
+      "description": "<p>Load as loaded: 8 bytes.</p><p>Compare expected with loaded: 64-bit compare equal.</p><p>Conditionally Store replacement: 8 bytes.</p><p>Return loaded: as i64.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1896,7 +1896,7 @@
         "mainop": "cmpxchg",
         "sign": "u"
       },
-      "description": "<p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i32</p>",
+      "description": "<p>Load as loaded: 1 byte.</p><p>Compare expected with loaded: `expected` wrapped from i32 to i8, 8-bit compare equal.</p><p>Conditionally Store replacement: wrapped from i32 to i8, store 1 byte.</p><p>Return loaded: zero-extended from i8 to i32.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1924,7 +1924,7 @@
         "mainop": "cmpxchg",
         "sign": "u"
       },
-      "description": "<p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i8 to i32</p>",
+      "description": "<p>Load as loaded: 2 bytes.</p><p>Compare expected with loaded: `expected` wrapped from i32 to i16, 16-bit compare equal.</p><p>Conditionally Store replacement: wrapped from i32 to i16, store 2 bytes.</p><p>Return loaded: zero-extended from i8 to i32.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1952,7 +1952,7 @@
         "mainop": "cmpxchg",
         "sign": "u"
       },
-      "description": "<p>Load as loaded: 1 byte</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte</p><p>Return loaded: zero-extended from i8 to i64</p>",
+      "description": "<p>Load as loaded: 1 byte.</p><p>Compare expected with loaded: `expected` wrapped from i64 to i8, 8-bit compare equal.</p><p>Conditionally Store replacement: wrapped from i64 to i8, store 1 byte.</p><p>Return loaded: zero-extended from i8 to i64.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -1980,7 +1980,7 @@
         "mainop": "cmpxchg",
         "sign": "u"
       },
-      "description": "<p>Load as loaded: 2 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes</p><p>Return loaded: zero-extended from i16 to i64</p>",
+      "description": "<p>Load as loaded: 2 bytes.</p><p>Compare expected with loaded: `expected` wrapped from i64 to i16, 16-bit compare equal.</p><p>Conditionally Store replacement: wrapped from i64 to i16, store 2 bytes.</p><p>Return loaded: zero-extended from i16 to i64.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -2008,7 +2008,7 @@
         "mainop": "cmpxchg",
         "sign": "u"
       },
-      "description": "<p>Load as loaded:4 bytes</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes</p><p>Return loaded: zero-extended from i32 to i64</p>",
+      "description": "<p>Load as loaded:4 bytes.</p><p>Compare expected with loaded: `expected` wrapped from i64 to i32, 32-bit compare equal.</p><p>Conditionally Store replacement: wrapped from i64 to i32, store 4 bytes.</p><p>Return loaded: zero-extended from i32 to i64.</p>",
       "proposal": "threads",
       "immediates": [
         {
@@ -2035,7 +2035,7 @@
         "pre": "global.atomic",
         "mainop": "get"
       },
-      "description": "<p>atomically reads a shared global</p>",
+      "description": "<p>Atomically reads a shared global.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2067,7 +2067,7 @@
         "pre": "global.atomic",
         "mainop": "set"
       },
-      "description": "<p>atomically writes a shared global</p>",
+      "description": "<p>Atomically writes a shared global.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2099,7 +2099,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "add"
       },
-      "description": "<p>atomically adds to a shared global, returning the value it held before</p>",
+      "description": "<p>Atomically adds to a shared global, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2131,7 +2131,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "sub"
       },
-      "description": "<p>atomically subtracts from a shared global, returning the value it held before</p>",
+      "description": "<p>Atomically subtracts from a shared global, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2163,7 +2163,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "and"
       },
-      "description": "<p>atomically bitwise-ands a shared global, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-ands a shared global, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2195,7 +2195,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "or"
       },
-      "description": "<p>atomically bitwise-ors a shared global, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-ors a shared global, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2227,7 +2227,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "xor"
       },
-      "description": "<p>atomically bitwise-xors a shared global, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-xors a shared global, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2259,7 +2259,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>atomically replaces a shared global, returning the value it held before</p>",
+      "description": "<p>Atomically replaces a shared global, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2291,7 +2291,7 @@
         "pre": "global.atomic.rmw",
         "mainop": "cmpxchg"
       },
-      "description": "<p>atomically replaces a shared global, if it holds an expected value, returning the value it held before</p>",
+      "description": "<p>Atomically replaces a shared global, if it holds an expected value, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2323,7 +2323,7 @@
         "pre": "table.atomic",
         "mainop": "get"
       },
-      "description": "<p>atomically reads a table element</p>",
+      "description": "<p>Atomically reads a table element.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2355,7 +2355,7 @@
         "pre": "table.atomic",
         "mainop": "set"
       },
-      "description": "<p>atomically writes a table element</p>",
+      "description": "<p>Atomically writes a table element.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2387,7 +2387,7 @@
         "pre": "table.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>atomically replaces a table element, returning the reference it held before</p>",
+      "description": "<p>Atomically replaces a table element, returning the reference it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2419,7 +2419,7 @@
         "pre": "table.atomic.rmw",
         "mainop": "cmpxchg"
       },
-      "description": "<p>atomically replaces a table element, if it matches an expected reference, returning the reference it held before</p>",
+      "description": "<p>Atomically replaces a table element, if it matches an expected reference, returning the reference it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2451,7 +2451,7 @@
         "pre": "struct.atomic",
         "mainop": "get"
       },
-      "description": "<p>atomically reads a struct field</p>",
+      "description": "<p>Atomically reads a struct field.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2488,7 +2488,7 @@
         "mainop": "get",
         "sign": "s"
       },
-      "description": "<p>atomically reads a packed struct field, sign-extending</p>",
+      "description": "<p>Atomically reads a packed struct field, sign-extending.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2525,7 +2525,7 @@
         "mainop": "get",
         "sign": "u"
       },
-      "description": "<p>atomically reads a packed struct field, zero-extending</p>",
+      "description": "<p>Atomically reads a packed struct field, zero-extending.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2561,7 +2561,7 @@
         "pre": "struct.atomic",
         "mainop": "set"
       },
-      "description": "<p>atomically writes a struct field</p>",
+      "description": "<p>Atomically writes a struct field.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2597,7 +2597,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "add"
       },
-      "description": "<p>atomically adds to a struct field, returning the value it held before</p>",
+      "description": "<p>Atomically adds to a struct field, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2633,7 +2633,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "sub"
       },
-      "description": "<p>atomically subtracts from a struct field, returning the value it held before</p>",
+      "description": "<p>Atomically subtracts from a struct field, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2669,7 +2669,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "and"
       },
-      "description": "<p>atomically bitwise-ands a struct field, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-ands a struct field, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2705,7 +2705,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "or"
       },
-      "description": "<p>atomically bitwise-ors a struct field, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-ors a struct field, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2741,7 +2741,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "xor"
       },
-      "description": "<p>atomically bitwise-xors a struct field, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-xors a struct field, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2777,7 +2777,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>atomically replaces a struct field, returning the value it held before</p>",
+      "description": "<p>Atomically replaces a struct field, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2813,7 +2813,7 @@
         "pre": "struct.atomic.rmw",
         "mainop": "cmpxchg"
       },
-      "description": "<p>atomically replaces a struct field, if it holds an expected value, returning the value it held before</p>",
+      "description": "<p>Atomically replaces a struct field, if it holds an expected value, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2849,7 +2849,7 @@
         "pre": "array.atomic",
         "mainop": "get"
       },
-      "description": "<p>atomically reads an array element</p>",
+      "description": "<p>Atomically reads an array element.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2882,7 +2882,7 @@
         "mainop": "get",
         "sign": "s"
       },
-      "description": "<p>atomically reads a packed array element, sign-extending</p>",
+      "description": "<p>Atomically reads a packed array element, sign-extending.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2915,7 +2915,7 @@
         "mainop": "get",
         "sign": "u"
       },
-      "description": "<p>atomically reads a packed array element, zero-extending</p>",
+      "description": "<p>Atomically reads a packed array element, zero-extending.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2947,7 +2947,7 @@
         "pre": "array.atomic",
         "mainop": "set"
       },
-      "description": "<p>atomically writes an array element</p>",
+      "description": "<p>Atomically writes an array element.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -2979,7 +2979,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "add"
       },
-      "description": "<p>atomically adds to an array element, returning the value it held before</p>",
+      "description": "<p>Atomically adds to an array element, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -3011,7 +3011,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "sub"
       },
-      "description": "<p>atomically subtracts from an array element, returning the value it held before</p>",
+      "description": "<p>Atomically subtracts from an array element, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -3043,7 +3043,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "and"
       },
-      "description": "<p>atomically bitwise-ands an array element, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-ands an array element, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -3075,7 +3075,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "or"
       },
-      "description": "<p>atomically bitwise-ors an array element, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-ors an array element, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -3107,7 +3107,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "xor"
       },
-      "description": "<p>atomically bitwise-xors an array element, returning the value it held before</p>",
+      "description": "<p>Atomically bitwise-xors an array element, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -3139,7 +3139,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "xchg"
       },
-      "description": "<p>atomically replaces an array element, returning the value it held before</p>",
+      "description": "<p>Atomically replaces an array element, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {
@@ -3171,7 +3171,7 @@
         "pre": "array.atomic.rmw",
         "mainop": "cmpxchg"
       },
-      "description": "<p>atomically replaces an array element, if it holds an expected value, returning the value it held before</p>",
+      "description": "<p>Atomically replaces an array element, if it holds an expected value, returning the value it held before.</p>",
       "proposal": "shared-everything-threads",
       "immediates": [
         {

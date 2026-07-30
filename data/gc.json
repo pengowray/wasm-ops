@@ -25,7 +25,7 @@
         "pre": "struct",
         "mainop": "new"
       },
-      "description": "<p>allocates a struct of type <i>x</i>, taking one value per field from the stack</p>",
+      "description": "<p>Allocates a struct of type <i>x</i>, taking one value per field from the stack.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -54,7 +54,7 @@
         "mainop": "new",
         "rest": "default"
       },
-      "description": "<p>allocates a struct of type <i>x</i> with every field at its default value</p>",
+      "description": "<p>Allocates a struct of type <i>x</i> with every field at its default value.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -82,7 +82,7 @@
         "pre": "struct",
         "mainop": "get"
       },
-      "description": "<p>reads field <code>i</code> from a structure</p>",
+      "description": "<p>Reads field <code>i</code> from a structure.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -178,7 +178,7 @@
         "pre": "struct",
         "mainop": "set"
       },
-      "description": "<p>writes field <code>i</code> of a structure</p>",
+      "description": "<p>Writes field <code>i</code> of a structure.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -210,7 +210,7 @@
         "pre": "array",
         "mainop": "new"
       },
-      "description": "<p>allocates an array of type <i>x</i>, every element set to the same value</p>",
+      "description": "<p>Allocates an array of type <i>x</i>, every element set to the same value.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -239,7 +239,7 @@
         "mainop": "new",
         "rest": "default"
       },
-      "description": "<p>allocates an array of type <i>x</i> with every element at its default value</p>",
+      "description": "<p>Allocates an array of type <i>x</i> with every element at its default value.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -268,7 +268,7 @@
         "mainop": "new",
         "rest": "fixed"
       },
-      "description": "<p>allocates an array of type <i>x</i> with a fixed number of elements, taken from the stack</p>",
+      "description": "<p>Allocates an array of type <i>x</i> with a fixed number of elements, taken from the stack.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -302,7 +302,7 @@
         "mainop": "new",
         "rest": "data"
       },
-      "description": "<p>allocates an array of type <i>x</i>, initialised from data segment <i>y</i></p>",
+      "description": "<p>Allocates an array of type <i>x</i>, initialised from data segment <i>y</i>.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -335,7 +335,7 @@
         "mainop": "new",
         "rest": "elem"
       },
-      "description": "<p>allocates an array of type <i>x</i>, initialised from element segment <i>y</i></p>",
+      "description": "<p>Allocates an array of type <i>x</i>, initialised from element segment <i>y</i>.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -367,7 +367,7 @@
         "pre": "array",
         "mainop": "get"
       },
-      "description": "<p>reads an element from an array</p>",
+      "description": "<p>Reads an element from an array.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -451,7 +451,7 @@
         "pre": "array",
         "mainop": "set"
       },
-      "description": "<p>writes an element to an array</p>",
+      "description": "<p>Writes an element to an array.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -479,7 +479,7 @@
         "pre": "array",
         "mainop": "len"
       },
-      "description": "<p>inquires the length of an array</p>",
+      "description": "<p>Inquires the length of an array.</p>",
       "proposal": "gc",
       "stack": {
         "html": "[(ref null array)] → [i32]",
@@ -623,7 +623,7 @@
         "pre": "ref",
         "mainop": "test"
       },
-      "description": "<p>checks whether a reference has a given heap type</p>",
+      "description": "<p>Checks whether a reference has a given heap type.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -651,7 +651,7 @@
         "pre": "ref",
         "mainop": "test"
       },
-      "description": "<p>checks whether a reference has a given heap type</p>",
+      "description": "<p>Checks whether a reference has a given heap type.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -679,7 +679,7 @@
         "pre": "ref",
         "mainop": "cast"
       },
-      "description": "<p>tries to convert to a given heap type</p>",
+      "description": "<p>Tries to convert to a given heap type.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -707,7 +707,7 @@
         "pre": "ref",
         "mainop": "cast"
       },
-      "description": "<p>tries to convert to a given heap type</p>",
+      "description": "<p>Tries to convert to a given heap type.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -734,7 +734,7 @@
       "parts": {
         "mainop": "br_on_cast"
       },
-      "description": "<p>branches if a reference has a given heap type</p>",
+      "description": "<p>Branches if a reference has a given heap type.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -777,7 +777,7 @@
       "parts": {
         "mainop": "br_on_cast_fail"
       },
-      "description": "<p>branches if a reference does not have a given heap type</p>",
+      "description": "<p>Branches if a reference does not have a given heap type.</p>",
       "proposal": "gc",
       "immediates": [
         {
@@ -822,7 +822,7 @@
         "mainop": "convert",
         "rest": "extern"
       },
-      "description": "<p>converts an external value into the internal representation</p>",
+      "description": "<p>Converts an external value into the internal representation.</p>",
       "proposal": "gc",
       "stack": {
         "html": "[externref] → [anyref]",
@@ -845,7 +845,7 @@
         "mainop": "convert",
         "rest": "any"
       },
-      "description": "<p>converts an internal value into the external representation</p>",
+      "description": "<p>Converts an internal value into the external representation.</p>",
       "proposal": "gc",
       "stack": {
         "html": "[anyref] → [externref]",
@@ -867,7 +867,7 @@
         "pre": "ref",
         "mainop": "i31"
       },
-      "description": "<p>creates an i31ref from a 32 bit value, truncating high bit</p>",
+      "description": "<p>Creates an i31ref from a 32 bit value, truncating high bit.</p>",
       "proposal": "gc",
       "stack": {
         "html": "[i32] → [(ref i31)]",
@@ -890,7 +890,7 @@
         "mainop": "get",
         "sign": "s"
       },
-      "description": "<p>extracts the value, sign-extending</p>",
+      "description": "<p>Extracts the value, sign-extending.</p>",
       "proposal": "gc",
       "stack": {
         "html": "[(ref null i31)] → [i32]",
@@ -913,7 +913,7 @@
         "mainop": "get",
         "sign": "u"
       },
-      "description": "<p>extracts the value, zero-extending</p>",
+      "description": "<p>Extracts the value, zero-extending.</p>",
       "proposal": "gc",
       "stack": {
         "html": "[(ref null i31)] → [i32]",
@@ -936,7 +936,7 @@
         "mainop": "i31",
         "rest": "shared"
       },
-      "description": "<p>creates a shared i31ref from a 32-bit value, truncating the high bit</p>",
+      "description": "<p>Creates a shared i31ref from a 32-bit value, truncating the high bit.</p>",
       "proposal": "shared-everything-threads",
       "stack": {
         "html": "[i32] → [(ref (shared i31))]",
@@ -959,7 +959,7 @@
         "mainop": "new",
         "rest": "desc"
       },
-      "description": "<p>allocates a struct with an explicit descriptor, taking the descriptor and the field values</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.new</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
+      "description": "<p>Allocates a struct with an explicit descriptor, taking the descriptor and the field values.</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.new</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {
@@ -988,7 +988,7 @@
         "mainop": "new",
         "rest": "default_desc"
       },
-      "description": "<p>allocates a struct with an explicit descriptor, its fields set to their defaults</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_s</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
+      "description": "<p>Allocates a struct with an explicit descriptor, its fields set to their defaults.</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_s</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {
@@ -1017,7 +1017,7 @@
         "mainop": "get",
         "rest": "desc"
       },
-      "description": "<p>reads the descriptor a reference was allocated with</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_u</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
+      "description": "<p>Reads the descriptor a reference was allocated with.</p><p>The 2022 draft of the GC proposal used this byte for <code>i31.get_u</code>; that draft was replaced before it was standardised, and the byte is being assigned again.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {
@@ -1046,7 +1046,7 @@
         "mainop": "cast",
         "rest": "desc_eq"
       },
-      "description": "<p>casts a reference, checking that its descriptor is the one given rather than checking its type</p>",
+      "description": "<p>Casts a reference, checking that its descriptor is the one given rather than checking its type.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {
@@ -1075,7 +1075,7 @@
         "mainop": "cast",
         "rest": "desc_eq"
       },
-      "description": "<p>casts a reference, checking that its descriptor is the one given rather than checking its type. The nullable form</p>",
+      "description": "<p>Casts a reference, checking that its descriptor is the one given rather than checking its type. The nullable form.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {
@@ -1102,7 +1102,7 @@
       "parts": {
         "mainop": "br_on_cast_desc_eq"
       },
-      "description": "<p>branches if a reference’s descriptor is the one given</p>",
+      "description": "<p>Branches if a reference’s descriptor is the one given.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {
@@ -1145,7 +1145,7 @@
       "parts": {
         "mainop": "br_on_cast_desc_eq_fail"
       },
-      "description": "<p>branches if a reference’s descriptor is not the one given</p>",
+      "description": "<p>Branches if a reference’s descriptor is not the one given.</p>",
       "proposal": "custom-descriptors",
       "immediates": [
         {

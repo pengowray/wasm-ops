@@ -39,6 +39,13 @@ const INLINE = /^<\/?(i|b|em|strong|sup|sub|code|span)(\s[^>]*)?>$/i;
  * `[<i>t</i>]` sees `[t]`, one word; splitting it into three would report a
  * loss every time a metavariable is italicised, which is a change to how a
  * word is set and not to whether it is there.
+ *
+ * Words are then compared without their case or their surrounding punctuation,
+ * for the same reason. This check exists to catch text that has gone missing,
+ * and `operands.` is not a different word from `operands`, nor `AND` from `and`.
+ * Leaving those in meant that giving a description a closing full stop, or
+ * capitalising a bitwise operator so it stops reading as a conjunction, reported
+ * a loss: the check crying wolf about house style rather than about content.
  */
 function words(html: string): string[] {
   const spaced = html.replace(/<[^>]+>/g, (tag) => (INLINE.test(tag) ? '' : ' '));
@@ -47,7 +54,14 @@ function words(html: string): string[] {
     .replace(/Followed by:|Stack:/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-  return text.length ? text.split(' ') : [];
+  if (!text.length) return [];
+  return text
+    .toLowerCase()
+    .split(' ')
+    // Brackets, stars and the sigils that belong to a metavariable are kept;
+    // sentence punctuation is not.
+    .map((word) => word.replace(/^[^\w([{*$]+|[^\w)\]}*]+$/g, ''))
+    .filter(Boolean);
 }
 
 function multiset(list: string[]): Map<string, number> {

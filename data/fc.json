@@ -27,7 +27,7 @@
         "post": "sat_f32",
         "sign": "s"
       },
-      "description": "<p>saturating form of i32.trunc_f32_s</p>",
+      "description": "<p>Saturating form of i32.trunc_f32_s.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f32] → [i32]"
@@ -50,7 +50,7 @@
         "post": "sat_f32",
         "sign": "u"
       },
-      "description": "<p>saturating form of i32.trunc_f32_u</p>",
+      "description": "<p>Saturating form of i32.trunc_f32_u.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f32] → [i32]"
@@ -73,7 +73,7 @@
         "post": "sat_f64",
         "sign": "s"
       },
-      "description": "<p>saturating form of i32.trunc_f64_s</p>",
+      "description": "<p>Saturating form of i32.trunc_f64_s.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f64] → [i32]"
@@ -96,7 +96,7 @@
         "post": "sat_f64",
         "sign": "u"
       },
-      "description": "<p>saturating form of i32.trunc_f64_u</p>",
+      "description": "<p>Saturating form of i32.trunc_f64_u.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f64] → [i32]"
@@ -119,7 +119,7 @@
         "post": "sat_f32",
         "sign": "s"
       },
-      "description": "<p>saturating form of i64.trunc_f32_s</p>",
+      "description": "<p>Saturating form of i64.trunc_f32_s.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f32] → [i64]"
@@ -142,7 +142,7 @@
         "post": "sat_f32",
         "sign": "u"
       },
-      "description": "<p>saturating form of i64.trunc_f32_u</p>",
+      "description": "<p>Saturating form of i64.trunc_f32_u.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f32] → [i64]"
@@ -165,7 +165,7 @@
         "post": "sat_f64",
         "sign": "s"
       },
-      "description": "<p>saturating form of i64.trunc_f64_s</p>",
+      "description": "<p>Saturating form of i64.trunc_f64_s.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f64] → [i64]"
@@ -188,7 +188,7 @@
         "post": "sat_f64",
         "sign": "u"
       },
-      "description": "<p>saturating form of i64.trunc_f64_u</p>",
+      "description": "<p>Saturating form of i64.trunc_f64_u.</p>",
       "proposal": "nontrapping-float-to-int",
       "stack": {
         "html": "[f64] → [i64]"
@@ -209,7 +209,7 @@
         "pre": "memory",
         "mainop": "init"
       },
-      "description": "<p>copy from a passive data segment to linear memory</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Copy from a passive data segment to linear memory.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "bulk-memory",
       "immediates": [
         {
@@ -240,7 +240,7 @@
         "pre": "data",
         "mainop": "drop"
       },
-      "description": "<p>prevent further use of passive data segment</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Prevent further use of passive data segment.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "bulk-memory",
       "immediates": [
         {
@@ -268,7 +268,7 @@
         "pre": "memory",
         "mainop": "copy"
       },
-      "description": "<p>copy from one region of linear memory to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Copy from one region of linear memory to another region.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "bulk-memory",
       "immediates": [
         {
@@ -299,7 +299,7 @@
         "pre": "memory",
         "mainop": "fill"
       },
-      "description": "<p>fill a region of linear memory with a given byte value</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Fill a region of linear memory with a given byte value.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "bulk-memory",
       "immediates": [
         {
@@ -326,7 +326,7 @@
         "pre": "table",
         "mainop": "init"
       },
-      "description": "<p>copy from a passive element segment to a table</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Copy from a passive element segment to a table.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -357,7 +357,7 @@
         "pre": "elem",
         "mainop": "drop"
       },
-      "description": "<p>prevent further use of a passive element segment</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Prevent further use of a passive element segment.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -385,7 +385,7 @@
         "pre": "table",
         "mainop": "copy"
       },
-      "description": "<p>copy from one region of a table to another region</p>\n<p><em>Bulk Memory Operations</em></p>",
+      "description": "<p>Copy from one region of a table to another region.</p>\n<p><em>Bulk Memory Operations</em>.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -416,7 +416,7 @@
         "pre": "table",
         "mainop": "grow"
       },
-      "description": "<p>manipulate the size of a table</p>",
+      "description": "<p>Manipulate the size of a table.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -443,7 +443,7 @@
         "pre": "table",
         "mainop": "size"
       },
-      "description": "<p>manipulate the size of a table</p>",
+      "description": "<p>Manipulate the size of a table.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
@@ -470,7 +470,7 @@
         "pre": "table",
         "mainop": "fill"
       },
-      "description": "<p>fills a range in a table with a value</p>",
+      "description": "<p>Fills a range in a table with a value.</p>",
       "proposal": "reference-types",
       "immediates": [
         {
