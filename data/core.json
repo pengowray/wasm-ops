@@ -460,7 +460,7 @@
       "parts": {
         "mainop": "return_call"
       },
-      "description": "<p>The tail-call version of call.</p>",
+      "description": "<p>The tail-call version of <code>call</code>.</p>\n<p>The current frame is replaced instead of a new one being pushed, so a chain of tail calls runs in constant stack space.</p>",
       "proposal": "tail-call",
       "immediates": [
         {
@@ -487,7 +487,7 @@
       "parts": {
         "mainop": "return_call_indirect"
       },
-      "description": "<p>The tail-call version of call.</p>",
+      "description": "<p>The tail-call version of <code>call_indirect</code>.</p>\n<p>The current frame is replaced instead of a new one being pushed, so a chain of tail calls runs in constant stack space.</p>",
       "proposal": "tail-call",
       "immediates": [
         {
@@ -554,8 +554,9 @@
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack",
-        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
-      }
+        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction. Traps on a null reference."
+      },
+      "description": "<p>The tail-call version of <code>call_ref</code>.</p>\n<p>The current frame is replaced instead of a new one being pushed, so a chain of tail calls runs in constant stack space.</p>"
     },
     {
       "id": "0x16",

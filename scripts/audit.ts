@@ -111,6 +111,22 @@ const ACCEPTED: Record<string, string> = {
 };
 
 /**
+ * Signature differences that have been looked at, kept separate from the name
+ * ones above so a reason can never be borrowed by the wrong check.
+ *
+ * wabt's table has three parameter columns, so a four-operand instruction
+ * cannot be written in it at all. The chart had inherited the truncated form.
+ */
+const ACCEPTED_STACK: Record<string, string> = {
+  '0xFC.19':
+    'i64.add128 takes two 128-bit values, so four i64 operands. wabt has three ' +
+    'parameter columns and shows three; the wide-arithmetic proposal defines four.',
+  '0xFC.20':
+    'i64.sub128 takes two 128-bit values, so four i64 operands. wabt has three ' +
+    'parameter columns and shows three; the wide-arithmetic proposal defines four.',
+};
+
+/**
  * Proposals the reference does not carry, so their instructions are expected to
  * be absent from it. Accepting by proposal rather than by opcode means adding
  * an instruction to one of these does not also mean adding a line here.
@@ -188,9 +204,14 @@ function main(): void {
     // as blank — comparing those would report a difference on every one.
     if (op.name && ref?.stack && op.stack && !op.stack.html.includes('<')) {
       if (op.stack.html !== ref.stack) {
-        mistyped.push(
-          `${op.id.padEnd(11)} ${op.name.padEnd(30)} ours: ${op.stack.html.padEnd(26)} ref: ${ref.stack}`,
-        );
+        const accepted = ACCEPTED_STACK[op.id];
+        if (accepted) {
+          acceptedBy.set(accepted, (acceptedBy.get(accepted) ?? 0) + 1);
+        } else {
+          mistyped.push(
+            `${op.id.padEnd(11)} ${op.name.padEnd(30)} ours: ${op.stack.html.padEnd(26)} ref: ${ref.stack}`,
+          );
+        }
       }
     }
   }

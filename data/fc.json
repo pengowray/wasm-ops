@@ -512,8 +512,10 @@
         "opbits": "128"
       },
       "stack": {
-        "html": "[i64 i64 i64] → [i64 i64]"
-      }
+        "html": "[i64 i64 i64 i64] → [i64 i64]",
+        "note": "Each 128-bit value is two operands, low half first, so the four operands are the low and high halves of the first value then those of the second. The results are in the same order: low half, then high half."
+      },
+      "description": "<p>Adds two 128-bit integers, each held in a pair of i64 values. Overflow wraps.</p>\n<p>WebAssembly has no 128-bit integer type, so without this an addition has to be built from an add and a separate carry calculation.</p>"
     },
     {
       "id": "0xFC.20",
@@ -533,8 +535,10 @@
         "opbits": "128"
       },
       "stack": {
-        "html": "[i64 i64 i64] → [i64 i64]"
-      }
+        "html": "[i64 i64 i64 i64] → [i64 i64]",
+        "note": "Each 128-bit value is two operands, low half first, so the four operands are the low and high halves of the first value then those of the second. The results are in the same order: low half, then high half."
+      },
+      "description": "<p>Subtracts the second 128-bit integer from the first, each held in a pair of i64 values. Underflow wraps.</p>\n<p>WebAssembly has no 128-bit integer type, so without this a subtraction has to be built from a subtract and a separate borrow calculation.</p>"
     },
     {
       "id": "0xFC.21",
@@ -554,8 +558,10 @@
         "rest": "wide_s"
       },
       "stack": {
-        "html": "[i64 i64] → [i64 i64]"
-      }
+        "html": "[i64 i64] → [i64 i64]",
+        "note": "The results are the low 64 bits of the product, then the high 64 bits."
+      },
+      "description": "<p>Multiplies two signed 64-bit integers and keeps the whole 128-bit product, where <code>i64.mul</code> keeps only the low half.</p>\n<p><code>i64.mul</code> needs no signed and unsigned form because the low half of the product is the same either way. The high half is not, which is why these two exist.</p>"
     },
     {
       "id": "0xFC.22",
@@ -575,8 +581,10 @@
         "rest": "wide_u"
       },
       "stack": {
-        "html": "[i64 i64] → [i64 i64]"
-      }
+        "html": "[i64 i64] → [i64 i64]",
+        "note": "The results are the low 64 bits of the product, then the high 64 bits."
+      },
+      "description": "<p>Multiplies two unsigned 64-bit integers and keeps the whole 128-bit product, where <code>i64.mul</code> keeps only the low half.</p>\n<p><code>i64.mul</code> needs no signed and unsigned form because the low half of the product is the same either way. The high half is not, which is why these two exist.</p>"
     },
     {
       "id": "0xFC.23",

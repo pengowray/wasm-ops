@@ -33,8 +33,10 @@
         }
       ],
       "stack": {
-        "html": "[i32 i32] → [i32]"
-      }
+        "html": "[i32 i32] → [i32]",
+        "note": "The operands are the address and the maximum number of agents to wake. Fewer may be woken, and none if none were waiting. Notifying an unshared memory is allowed and wakes nothing, since a wait on one traps."
+      },
+      "description": "<p>Wakes agents waiting at an address and returns how many were woken.</p>"
     },
     {
       "id": "0xFE.1",
@@ -60,8 +62,10 @@
         }
       ],
       "stack": {
-        "html": "[i32 i32 i64] → [i32]"
-      }
+        "html": "[i32 i32 i64] → [i32]",
+        "note": "The operands are the address, the expected value, then a timeout in nanoseconds; a negative timeout never expires. Traps on an unshared memory. A host can forbid an agent from blocking: in a browser only a worker can wait, not the main thread."
+      },
+      "description": "<p>Waits for a notification at an address, if the 32-bit value there is still the expected one. Pushes why the wait ended:</p><ul><li><b>0</b>: woken by <code>memory.atomic.notify</code>.</li><li><b>1</b>: the value at the address was not the expected one, so it did not wait.</li><li><b>2</b>: the timeout expired.</li></ul>"
     },
     {
       "id": "0xFE.2",
@@ -87,8 +91,10 @@
         }
       ],
       "stack": {
-        "html": "[i32 i64 i64] → [i32]"
-      }
+        "html": "[i32 i64 i64] → [i32]",
+        "note": "The operands are the address, the expected value, then a timeout in nanoseconds; a negative timeout never expires. Traps on an unshared memory. A host can forbid an agent from blocking: in a browser only a worker can wait, not the main thread."
+      },
+      "description": "<p>Waits for a notification at an address, if the 64-bit value there is still the expected one. Pushes why the wait ended:</p><ul><li><b>0</b>: woken by <code>memory.atomic.notify</code>.</li><li><b>1</b>: the value at the address was not the expected one, so it did not wait.</li><li><b>2</b>: the timeout expired.</li></ul>"
     },
     {
       "id": "0xFE.3",
@@ -115,7 +121,8 @@
       ],
       "stack": {
         "html": "[] → []"
-      }
+      },
+      "description": "<p>Prevents the atomic accesses before it and the ones after it from being reordered across it. It reads and writes nothing itself.</p>\n<p>Alone among the atomic instructions it takes no address and names no memory, so it orders accesses to every memory at once.</p>"
     },
     {
       "id": "0xFE.4",

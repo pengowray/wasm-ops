@@ -63,7 +63,8 @@
       ],
       "stack": {
         "html": "[i32] → [v128]"
-      }
+      },
+      "description": "<p>Reads eight bytes and sign-extends each to 16 bits, giving an i16x8 vector.</p>"
     },
     {
       "id": "0xFD.2",
@@ -91,7 +92,8 @@
       ],
       "stack": {
         "html": "[i32] → [v128]"
-      }
+      },
+      "description": "<p>Reads eight bytes and zero-extends each to 16 bits, giving an i16x8 vector.</p>"
     },
     {
       "id": "0xFD.3",
@@ -119,7 +121,8 @@
       ],
       "stack": {
         "html": "[i32] → [v128]"
-      }
+      },
+      "description": "<p>Reads eight bytes as four 16-bit values and sign-extends each to 32 bits, giving an i32x4 vector.</p>"
     },
     {
       "id": "0xFD.4",
@@ -147,7 +150,8 @@
       ],
       "stack": {
         "html": "[i32] → [v128]"
-      }
+      },
+      "description": "<p>Reads eight bytes as four 16-bit values and zero-extends each to 32 bits, giving an i32x4 vector.</p>"
     },
     {
       "id": "0xFD.5",
@@ -175,7 +179,8 @@
       ],
       "stack": {
         "html": "[i32] → [v128]"
-      }
+      },
+      "description": "<p>Reads eight bytes as two 32-bit values and sign-extends each to 64 bits, giving an i64x2 vector.</p>"
     },
     {
       "id": "0xFD.6",
@@ -203,7 +208,8 @@
       ],
       "stack": {
         "html": "[i32] → [v128]"
-      }
+      },
+      "description": "<p>Reads eight bytes as two 32-bit values and zero-extends each to 64 bits, giving an i64x2 vector.</p>"
     },
     {
       "id": "0xFD.7",
@@ -373,7 +379,8 @@
       ],
       "stack": {
         "html": "[] → [v128]"
-      }
+      },
+      "description": "<p>Pushes a 128-bit constant, given by the sixteen bytes that follow.</p>\n<p>A v128 has no lane shape of its own: the bytes are the vector’s bits in memory order, and the shape comes from whichever instruction reads it.</p>"
     },
     {
       "id": "0xFD.13",
