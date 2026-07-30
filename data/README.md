@@ -5,7 +5,8 @@ changed since the 2022 page, so `npm run verify` does not fight an intentional
 fix; `.legacy-help.json` is the frozen snapshot it compares against.
 
 JSON cannot hold comments, so anything a future editor needs to know about a
-particular entry goes here.
+particular entry goes here. `text-review.md` is the standing list of text the
+2026 audit left open, and the wording decisions it settled.
 
 ## What is deliberately left unsaid
 

@@ -1935,9 +1935,17 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
  * rides along quietly but is never dropped: it is what says the decimal is a
  * value and not a byte.
  */
-.op-hex, .op-utype { font-family: 'Source Code Pro', monospace; }
+.op-hex, .op-utype, .prose-hex { font-family: 'Source Code Pro', monospace; }
 .op-hex { color: var(--enc-prefix); }
 .op-utype { color: var(--fg-faint); font-size: .85em; }
+
+/*
+ * A hex literal in a sentence is a byte, so it takes the same face as one in a
+ * cell — but it is almost never this instruction's own byte, so it does not take
+ * the opcode colour. The face carries the family resemblance; the body colour
+ * keeps the two apart.
+ */
+.prose-hex { color: inherit; }
 
 /*
  * A sub-opcode is not a byte, and it is worth being able to see that without

@@ -126,9 +126,13 @@ function hexPart(text: string): string {
 }
 
 /**
- * Hex literals inside prose, set the way the chart sets an opcode's own bytes:
- * the same monospace face and the same colour, so `0x0B` in a sentence and
- * `0x0B` in a cell are recognisably one kind of thing.
+ * Hex literals inside prose: the same monospace face the chart sets an opcode's
+ * own bytes in, in the body colour rather than the opcode colour.
+ *
+ * The face is what makes `0x40` read as a byte value in the middle of a
+ * sentence. The colour is what says it is not this instruction's opcode — the
+ * hex in a description is usually some other byte entirely, a blocktype tag or
+ * an alignment bit, and tinting it like a cell would claim otherwise.
  *
  * Derived rather than written into the data. There are 41 of them across the
  * descriptions and the notes, and a span per literal is 41 chances to forget
@@ -141,7 +145,7 @@ export function markHex(html: string): string {
   return html.replace(/<[^>]+>|0x([0-9A-Fa-f]+)\b/g, (match, digits: string | undefined) =>
     digits === undefined
       ? match
-      : `<span class="op-hex">0x${digits.toUpperCase()}</span>`,
+      : `<span class="prose-hex">0x${digits.toUpperCase()}</span>`,
   );
 }
 
