@@ -22,6 +22,8 @@
 	--accent-contrast: #ffffff;
 
 	--legacy-bg: #fdf4e3;
+	--diff-add-bg: #d9f2df;
+	--diff-add-fg: #145b2c;
 
 	/* The selected cell was a saturated cyan, which shouted down everything
 	   around it. Both are now tints of the same hue, a step apart. */
@@ -86,6 +88,8 @@
 		--accent-contrast: #10262a;
 
 		--legacy-bg: #2e2820;
+		--diff-add-bg: #183c26;
+		--diff-add-fg: #9be9ad;
 
 		/* These sit on a #1c1c1c background. The previous values were only a
 		   few points lighter than it, so a lit cell read as unlit. */
@@ -124,6 +128,8 @@
 	--accent-contrast: #10262a;
 
 	--legacy-bg: #2e2820;
+	--diff-add-bg: #183c26;
+	--diff-add-fg: #9be9ad;
 
 	--hl-self: #35707e;
 	--hl-self-fg: #eaf7fb;
@@ -1908,6 +1914,15 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	padding: .35rem .45rem;
 	overflow-x: auto;
 	white-space: pre;
+}
+
+.memory-byte-changed {
+	padding: .08rem .12rem;
+	border-radius: 2px;
+	font-weight: 700;
+	color: var(--diff-add-fg);
+	background: var(--diff-add-bg);
+	box-shadow: inset 0 -1px currentColor;
 }
 
 .state-arrow {
