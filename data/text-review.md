@@ -1,7 +1,8 @@
 # Text still to review
 
 What the 2026 audit of `stack`, `immediates` and `description` left open. Counts
-are instructions affected, from the data as it stands.
+are instructions affected, from the data as it stands after the September
+follow-up.
 
 ## Nothing checks `description`
 
@@ -35,25 +36,28 @@ The stringview notes that were left blank as reconstructed are in the proposal
 verbatim, so they are back, with one reading corrected. See README.md in this
 directory.
 
-## 2. 53 descriptions describe the proposal, not the instruction
+The September follow-up also rewrote all 49 atomic read-modify-write
+descriptions. The inherited text repeated the same two-paragraph explanation in
+every entry, several widths and byte counts were missing or wrong, the
+compare-and-exchange pseudo-algorithm was hard to scan, and it contained raw
+Markdown backticks inside HTML. Each entry now says directly what is read,
+changed, written and returned.
+
+## 2. 17 historical descriptions describe an encoding, not an instruction
 
 | Shared text | Count |
 |---|---:|
-| "Part of the half-precision proposal, which adds the 16-bit float type f16…" | 29 |
 | "An encoding used while relaxed SIMD was being prototyped…" | 17 |
-| "Part of the stack switching proposal, which adds continuations…" | 7 |
 
-The Status box directly below already says this, in the proposal's own entry. So
-these 53 spend their one prose field repeating the box and never say what the
-instruction does. The half-precision group was 35 until its six comparisons were
-written.
+These are withdrawn prototype encodings whose slots are unassigned today, so
+there is no current instruction behaviour to describe. Their shared text stays
+for now because it explains what the historical entries are doing in the chart.
+The 29 half-precision and seven stack-switching instructions now describe their
+actual operations instead of repeating their proposal status.
 
-## 3. Shared text that omits the distinguishing feature
+## 3. Shared text that omitted the distinguishing feature — done
 
-85 groups share a description, covering 249 instructions. Most are harmless — the
-four `all_true` differ only in lane shape, and the name carries that. These are
-the ones where the shared text leaves out the very thing that separates the
-members:
+The September follow-up rewrote all four groups that were still open:
 
 | Group | Count | What the text never says |
 |---|---:|---|
@@ -62,8 +66,10 @@ members:
 | `load*_splat` | 4 | the element width |
 | the lane shifts | 4 | which end the bits come in from |
 
-The 54 comparisons were the largest of these and are done: they open with the
-operator as a symbol, the way the 32 scalar comparisons always have.
+The descriptions now state low or high half, sign or zero extension, the loaded
+width, and which side of a left shift receives zeros. The 54 comparisons were
+already done: they open with the operator as a symbol, the way the 32 scalar
+comparisons always have.
 
 ## 4. One way to write a lane shape, not yet applied everywhere
 
@@ -79,12 +85,10 @@ The rest of `simd.json` has not been swept for it.
 
 | | |
 |---|---|
-| `0xFD.331` | named `f32x4.promote_f16x8_low`; the half-precision proposal calls it `f32x4.promote_low_f16x8` |
-| `tableidx` | has no address-type note, where `memidx` and `memarg` now do. Same fact under table64, for `table.get`, `set`, `size`, `grow`, `fill`, `copy` and the index operand of both indirect calls |
-| the five delimiters | `else`, `catch`, `end`, `delegate`, `catch_all` say "Not typed on its own", which is the validator's vocabulary rather than a reader's |
-| the `catch` kind | its gloss lists all four clause forms inline, on one long line. A bulleted labelled block would suit it, now that the style exists |
-| the tail calls | `t₁*` is the callee's parameters in `call`, and the polymorphic prefix in `return_call`. The specification does the same and the page shows them side by side, so one extra clause in the tail-call notes would settle it |
 | `memarg`'s block | three alignment bullets plus an Addresses line, on 113 instructions. Worst case is the eight lane loads and stores (`0xFD.84`–`91`), which add a third labelled block. Look at those before deciding it is too long |
+
+The opcode name, table64 note, delimiter wording, catch-clause layout and
+tail-call stack prefix were all resolved in the September follow-up.
 
 ## 6. The last em dash
 

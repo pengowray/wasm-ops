@@ -142,7 +142,7 @@
       "parts": {
         "mainop": "else"
       },
-      "description": "<p>Marks the else block of an <i>if</i>.</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>if</i>.</p>",
+      "description": "<p>Marks the else block of an <i>if</i>.</p>\n<p>It has no stack effect by itself; the enclosing <i>if</i> determines the stack signature.</p>",
       "proposal": "mvp"
     },
     {
@@ -186,7 +186,7 @@
       "parts": {
         "mainop": "catch"
       },
-      "description": "<p>Begins the catch block of the try block.</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>try</i>.</p>",
+      "description": "<p>Begins a catch block within a <i>try</i>.</p>\n<p>It has no stack effect by itself; the enclosing <i>try</i> determines the stack signature.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediates": [
@@ -284,7 +284,7 @@
       "parts": {
         "mainop": "end"
       },
-      "description": "<p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p>\n<p>Not typed on its own: what it does to the stack belongs to the construct it closes.</p>",
+      "description": "<p>Marks the end of a <i>block</i>, <i>loop</i>, <i>if</i>, or function.</p>\n<p>It has no stack effect by itself; the construct it closes determines the stack signature.</p>",
       "proposal": "mvp"
     },
     {
@@ -471,7 +471,7 @@
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack",
-        "note": "<i>t</i><sup>*</sup> are the parameters of function <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
+        "note": "<i>t</i><sup>*</sup> are the parameters of function <i>x</i>. <i>t</i><sub>1</sub><sup>*</sup> is any earlier stack content and is discarded with the current frame. The callee’s results become the current function’s, so execution does not continue past this instruction."
       }
     },
     {
@@ -502,7 +502,7 @@
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack",
-        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>y</i>, and the i32 indexes table <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction."
+        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>y</i>, and the i32 indexes table <i>x</i>. <i>t</i><sub>1</sub><sup>*</sup> is any earlier stack content and is discarded with the current frame. The callee’s results become the current function’s, so execution does not continue past this instruction."
       }
     },
     {
@@ -554,7 +554,7 @@
       "stack": {
         "html": "[<i>t</i><sub>1</sub><sup>*</sup> <i>t</i><sup>*</sup> (ref null <i>x</i>)] → [<i>t</i><sub>2</sub><sup>*</sup>]",
         "polymorphic": "stack",
-        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>x</i>. The callee’s results become the current function’s, so execution does not continue past this instruction. Traps on a null reference."
+        "note": "<i>t</i><sup>*</sup> are the parameters of function type <i>x</i>. <i>t</i><sub>1</sub><sup>*</sup> is any earlier stack content and is discarded with the current frame. The callee’s results become the current function’s, so execution does not continue past this instruction. Traps on a null reference."
       },
       "description": "<p>The tail-call version of <code>call_ref</code>.</p>\n<p>The current frame is replaced instead of a new one being pushed, so a chain of tail calls runs in constant stack space.</p>"
     },
@@ -593,7 +593,7 @@
       "parts": {
         "mainop": "delegate"
       },
-      "description": "<p>Begins the delegate block of the try block.</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>try</i>.</p>",
+      "description": "<p>Delegates exceptions from a <i>try</i> to an outer handler.</p>\n<p>It has no stack effect by itself; the enclosing <i>try</i> determines the stack signature.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediates": [
@@ -616,7 +616,7 @@
       "parts": {
         "mainop": "catch_all"
       },
-      "description": "<p>Begins the catch_all block of the try block.</p>\n<p>Not typed on its own: what it does to the stack belongs to the enclosing <i>try</i>.</p>",
+      "description": "<p>Begins the catch-all block of a <i>try</i>.</p>\n<p>It has no stack effect by itself; the enclosing <i>try</i> determines the stack signature.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)"
     },
@@ -4758,7 +4758,7 @@
       "name": "cont.new",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Creates a fresh suspended continuation from a function reference.</p>",
       "parts": {
         "pre": "cont",
         "mainop": "new"
@@ -4785,7 +4785,7 @@
       "name": "cont.bind",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Binds a prefix of arguments to a suspended continuation and returns the partially applied continuation.</p>",
       "parts": {
         "pre": "cont",
         "mainop": "bind"
@@ -4816,7 +4816,7 @@
       "name": "suspend",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Suspends the current continuation and transfers control to the nearest handler for tag <i>x</i>.</p>",
       "parts": {
         "mainop": "suspend"
       },
@@ -4842,7 +4842,7 @@
       "name": "resume",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Runs a suspended continuation until it returns or transfers control to one of the supplied handlers.</p>",
       "parts": {
         "mainop": "resume"
       },
@@ -4873,7 +4873,7 @@
       "name": "resume_throw",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Aborts a suspended continuation by raising exception <i>e</i> where that continuation was suspended.</p>",
       "parts": {
         "mainop": "resume_throw"
       },
@@ -4908,7 +4908,7 @@
       "name": "resume_throw_ref",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Aborts a suspended continuation by raising the supplied exception reference where that continuation was suspended.</p>",
       "parts": {
         "mainop": "resume_throw_ref"
       },
@@ -4939,7 +4939,7 @@
       "name": "switch",
       "status": "proposal",
       "proposal": "stack-switching",
-      "description": "<p>Part of the stack switching proposal, which adds continuations so a module can run several execution stacks — coroutines, generators, async/await and lightweight threads.</p>",
+      "description": "<p>Suspends the current continuation and switches directly to the supplied continuation.</p>",
       "parts": {
         "mainop": "switch"
       },

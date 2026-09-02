@@ -74,10 +74,14 @@ const ADDRESSES =
   'an i32 for a 32-bit memory, an i64 for a 64-bit memory (memory64). The signatures here ' +
   'show the 32-bit case, which is what almost every module uses.';
 
+const TABLE_INDICES =
+  'an i32 for a 32-bit table, an i64 for a 64-bit table (table64). The signatures here ' +
+  'show the 32-bit case.';
+
 const KINDS: Record<ImmediateKind, KindInfo> = {
   typeidx: INDEX,
   funcidx: INDEX,
-  tableidx: INDEX,
+  tableidx: { encoding: 'u32', note: labelled('Element indices', TABLE_INDICES) },
   globalidx: INDEX,
   localidx: INDEX,
   labelidx: INDEX,
@@ -155,10 +159,13 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
   },
 
   catch: {
-    gloss:
-      '0x00 <i>x</i> <i>l</i> (catch), 0x01 <i>x</i> <i>l</i> (catch_ref), 0x02 <i>l</i> ' +
-      '(catch_all) or 0x03 <i>l</i> (catch_all_ref), where <i>x</i> is a tagidx and ' +
-      '<i>l</i> a labelidx',
+    gloss: 'one clause tag byte, followed by its operands',
+    note: labelledList('Catch clause', [
+      '0x00 <i>x</i> <i>l</i>: catch tag <i>x</i> and branch to label <i>l</i>.',
+      '0x01 <i>x</i> <i>l</i>: catch tag <i>x</i> with its exception reference and branch to label <i>l</i>.',
+      '0x02 <i>l</i>: catch any exception and branch to label <i>l</i>.',
+      '0x03 <i>l</i>: catch any exception with its exception reference and branch to label <i>l</i>.',
+    ]),
   },
   handler: {},
 

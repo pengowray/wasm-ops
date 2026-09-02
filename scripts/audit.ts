@@ -133,7 +133,11 @@ const ACCEPTED_STACK: Record<string, string> = {
  */
 const ACCEPTED_PROPOSALS: Record<string, string> = {
   'stack-switching': 'phase 3; wabt uses 0xE0+ for its own interpreter opcodes',
-  'half-precision': 'phase 1; not implemented by wabt',
+  'half-precision': 'phase 2; not implemented by wabt',
+  'relaxed-atomics': 'phase 2; not implemented by wabt',
+  'shared-everything-threads': 'phase 1; not implemented by wabt',
+  'custom-descriptors': 'phase 3; not implemented by wabt',
+  'opcode-prefix': 'table markers shown by the chart; not instructions',
 };
 
 /** The GC list is authored from the proposal, since wabt carries no 0xFB. */

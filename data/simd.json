@@ -228,7 +228,7 @@
         "opbits": "8",
         "rest": "splat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "description": "<p>Loads one byte and copies it to all sixteen 8-bit lanes.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -257,7 +257,7 @@
         "opbits": "16",
         "rest": "splat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "description": "<p>Loads two bytes and copies them to all eight 16-bit lanes.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -286,7 +286,7 @@
         "opbits": "32",
         "rest": "splat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "description": "<p>Loads four bytes and copies them to all four 32-bit lanes.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -315,7 +315,7 @@
         "opbits": "64",
         "rest": "splat"
       },
-      "description": "<p>Load a single element and splat to all lanes of a v128 vector.</p>",
+      "description": "<p>Loads eight bytes and copies them to both 64-bit lanes.</p>",
       "proposal": "simd",
       "immediates": [
         {
@@ -2624,7 +2624,7 @@
         "pre": "i8x16",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>\n<p>Only the low bits of the shift amount are used if the shift amount is greater than the lane width.</p>",
+      "description": "<p>Shifts each lane left, discarding bits on the left and shifting zeros in from the right.</p>\n<p>Only the low 3 bits of the shift amount are used.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 i32] → [v128]"
@@ -2998,7 +2998,7 @@
         "post": "pairwise",
         "rest": "i8x16_s"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "description": "<p>Sign-extends adjacent pairs of 8-bit lanes, adds each pair, and returns eight 16-bit sums.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [v128]"
@@ -3021,7 +3021,7 @@
         "post": "pairwise",
         "rest": "i8x16_u"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "description": "<p>Zero-extends adjacent pairs of 8-bit lanes, adds each pair, and returns eight 16-bit sums.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [v128]"
@@ -3044,7 +3044,7 @@
         "post": "pairwise",
         "rest": "i16x8_s"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "description": "<p>Sign-extends adjacent pairs of 16-bit lanes, adds each pair, and returns four 32-bit sums.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [v128]"
@@ -3067,7 +3067,7 @@
         "post": "pairwise",
         "rest": "i16x8_u"
       },
-      "description": "<p>Integer extended pairwise addition producing extended results (twice wider results than the inputs).</p>",
+      "description": "<p>Zero-extends adjacent pairs of 16-bit lanes, adds each pair, and returns four 32-bit sums.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128] → [v128]"
@@ -3345,7 +3345,7 @@
         "pre": "i16x8",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
+      "description": "<p>Shifts each lane left, discarding bits on the left and shifting zeros in from the right.</p>\n<p>Only the low 4 bits of the shift amount are used.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 i32] → [v128]"
@@ -3727,7 +3727,7 @@
         "post": "low_i8x16",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Sign-extends the low eight 8-bit lanes of each input, multiplies corresponding lanes, and returns eight 16-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -3751,7 +3751,7 @@
         "post": "high_i8x16",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Sign-extends the high eight 8-bit lanes of each input, multiplies corresponding lanes, and returns eight 16-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -3775,7 +3775,7 @@
         "post": "low_i8x16",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Zero-extends the low eight 8-bit lanes of each input, multiplies corresponding lanes, and returns eight 16-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -3799,7 +3799,7 @@
         "post": "high_i8x16",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Zero-extends the high eight 8-bit lanes of each input, multiplies corresponding lanes, and returns eight 16-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -4080,7 +4080,7 @@
         "pre": "i32x4",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
+      "description": "<p>Shifts each lane left, discarding bits on the left and shifting zeros in from the right.</p>\n<p>Only the low 5 bits of the shift amount are used.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 i32] → [v128]"
@@ -4470,7 +4470,7 @@
         "post": "low_i16x8",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Sign-extends the low four 16-bit lanes of each input, multiplies corresponding lanes, and returns four 32-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -4494,7 +4494,7 @@
         "post": "high_i16x8",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Sign-extends the high four 16-bit lanes of each input, multiplies corresponding lanes, and returns four 32-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -4518,7 +4518,7 @@
         "post": "low_i16x8",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Zero-extends the low four 16-bit lanes of each input, multiplies corresponding lanes, and returns four 32-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -4542,7 +4542,7 @@
         "post": "high_i16x8",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Zero-extends the high four 16-bit lanes of each input, multiplies corresponding lanes, and returns four 32-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -4811,7 +4811,7 @@
         "pre": "i64x2",
         "mainop": "shl"
       },
-      "description": "<p>Shifts each lane to the left by the specified number of bits.</p>",
+      "description": "<p>Shifts each lane left, discarding bits on the left and shifting zeros in from the right.</p>\n<p>Only the low 6 bits of the shift amount are used.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 i32] → [v128]"
@@ -5208,7 +5208,7 @@
         "post": "low_i32x4",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Sign-extends the low two 32-bit lanes of each input, multiplies corresponding lanes, and returns two 64-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5232,7 +5232,7 @@
         "post": "high_i32x4",
         "sign": "s"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Sign-extends the high two 32-bit lanes of each input, multiplies corresponding lanes, and returns two 64-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5256,7 +5256,7 @@
         "post": "low_i32x4",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Zero-extends the low two 32-bit lanes of each input, multiplies corresponding lanes, and returns two 64-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5280,7 +5280,7 @@
         "post": "high_i32x4",
         "sign": "u"
       },
-      "description": "<p>Lane-wise integer extended multiplication producing twice wider result than the inputs.</p>",
+      "description": "<p>Zero-extends the high two 32-bit lanes of each input, multiplies corresponding lanes, and returns two 64-bit products.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -5503,7 +5503,7 @@
         "pre": "f32x4",
         "mainop": "max"
       },
-      "description": "<p>Calculates the lane-wise [maximum] of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
+      "description": "<p>Calculates the lane-wise maximum of two 128-bit vectors interpreted as four 32-bit floating point numbers.</p>",
       "proposal": "simd",
       "stack": {
         "html": "[v128 v128] → [v128]"
@@ -6643,7 +6643,7 @@
       "name": "f16x8.splat",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds an f32 value to f16 and copies it to all eight lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "splat"
@@ -6666,7 +6666,7 @@
       "name": "f16x8.extract_lane",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Reads one f16 lane and promotes it to f32.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "extract",
@@ -6696,7 +6696,7 @@
       "name": "f16x8.replace_lane",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds an f32 value to f16 and writes it to one lane, leaving the other lanes unchanged.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "replace",
@@ -6895,7 +6895,7 @@
       "name": "f16x8.abs",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Calculates the absolute value of each of the eight f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "abs"
@@ -6917,7 +6917,7 @@
       "name": "f16x8.neg",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Negates each of the eight f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "neg"
@@ -6939,7 +6939,7 @@
       "name": "f16x8.sqrt",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Calculates the square root of each of the eight f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "sqrt"
@@ -6961,7 +6961,7 @@
       "name": "f16x8.ceil",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds each f16 lane up to the nearest integral value.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "ceil"
@@ -6983,7 +6983,7 @@
       "name": "f16x8.floor",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds each f16 lane down to the nearest integral value.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "floor"
@@ -7005,7 +7005,7 @@
       "name": "f16x8.trunc",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds each f16 lane toward zero to an integral value.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "trunc"
@@ -7027,7 +7027,7 @@
       "name": "f16x8.nearest",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds each f16 lane to the nearest integral value, choosing the even value on a tie.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "nearest"
@@ -7187,7 +7187,7 @@
       "name": "f16x8.add",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Adds corresponding f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "add"
@@ -7209,7 +7209,7 @@
       "name": "f16x8.sub",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Subtracts each f16 lane of the second input from the corresponding lane of the first.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "sub"
@@ -7231,7 +7231,7 @@
       "name": "f16x8.mul",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Multiplies corresponding f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "mul"
@@ -7253,7 +7253,7 @@
       "name": "f16x8.div",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Divides each f16 lane of the first input by the corresponding lane of the second.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "div"
@@ -7275,7 +7275,7 @@
       "name": "f16x8.min",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Returns the smaller value from each pair of corresponding f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "min"
@@ -7297,7 +7297,7 @@
       "name": "f16x8.max",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Returns the larger value from each pair of corresponding f16 lanes.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "max"
@@ -7319,7 +7319,7 @@
       "name": "f16x8.pmin",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Lane-wise pseudo-minimum: selects the second f16 lane when it is smaller than the first, and the first otherwise.</p>\n<p>Unlike <code>min</code>, it does not give special treatment to NaN or distinguish +0 from −0.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "pmin"
@@ -7341,7 +7341,7 @@
       "name": "f16x8.pmax",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Lane-wise pseudo-maximum: selects the second f16 lane when it is larger than the first, and the first otherwise.</p>\n<p>Unlike <code>max</code>, it does not give special treatment to NaN or distinguish +0 from −0.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "pmax"
@@ -7363,7 +7363,7 @@
       "name": "i16x8.trunc_sat_f16x8_s",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Converts each f16 lane to a signed 16-bit integer by truncating toward zero and saturating out-of-range values.</p>",
       "parts": {
         "pre": "i16x8",
         "mainop": "trunc",
@@ -7387,7 +7387,7 @@
       "name": "i16x8.trunc_sat_f16x8_u",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Converts each f16 lane to an unsigned 16-bit integer by truncating toward zero and saturating out-of-range values.</p>",
       "parts": {
         "pre": "i16x8",
         "mainop": "trunc",
@@ -7411,7 +7411,7 @@
       "name": "f16x8.convert_i16x8_s",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Converts each signed 16-bit integer lane to f16.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "convert",
@@ -7435,7 +7435,7 @@
       "name": "f16x8.convert_i16x8_u",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Converts each unsigned 16-bit integer lane to f16.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "convert",
@@ -7459,7 +7459,7 @@
       "name": "f16x8.demote_f32x4_zero",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds four f32 lanes to the low four f16 lanes of the result and sets the high four lanes to zero.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "demote",
@@ -7483,7 +7483,7 @@
       "name": "f16x8.demote_f64x2_zero",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Rounds two f64 lanes to the low two f16 lanes of the result and sets the other six lanes to zero.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "demote",
@@ -7504,15 +7504,14 @@
         203,
         2
       ],
-      "name": "f32x4.promote_f16x8_low",
+      "name": "f32x4.promote_low_f16x8",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Promotes the low four f16 lanes to four f32 lanes.</p>",
       "parts": {
         "pre": "f32x4",
         "mainop": "promote",
-        "post": "f16x8",
-        "rest": "low"
+        "post": "low_f16x8"
       },
       "stack": {
         "html": "[v128] → [v128]"
@@ -7531,7 +7530,7 @@
       "name": "i16x8.trunc_f16x8_s",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Converts each f16 lane to a signed 16-bit integer by truncating toward zero.</p>",
       "parts": {
         "pre": "i16x8",
         "mainop": "trunc",
@@ -7555,7 +7554,7 @@
       "name": "i16x8.trunc_f16x8_u",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Converts each f16 lane to an unsigned 16-bit integer by truncating toward zero.</p>",
       "parts": {
         "pre": "i16x8",
         "mainop": "trunc",
@@ -7579,7 +7578,7 @@
       "name": "f16x8.madd",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Combines lane-wise multiplication and addition in one f16 operation.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "madd"
@@ -7601,7 +7600,7 @@
       "name": "f16x8.nmadd",
       "status": "proposal",
       "proposal": "half-precision",
-      "description": "<p>Part of the half-precision proposal, which adds the 16-bit float type <code>f16</code> and a <code>f16x8</code> vector shape.</p>",
+      "description": "<p>Combines negated lane-wise multiplication and addition in one f16 operation.</p>",
       "parts": {
         "pre": "f16x8",
         "mainop": "nmadd"
