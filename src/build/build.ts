@@ -46,6 +46,24 @@ async function main(): Promise<void> {
     logLevel: 'warning',
   });
 
+  // The WAT compiler is intentionally a separate worker: it is only downloaded
+  // when someone presses Run, and parsing never blocks the chart's UI.
+  await esbuild({
+    entryPoints: [join(ROOT, 'src', 'client', 'wat-worker.ts')],
+    outfile: join(ASSETS, 'wat-worker.js'),
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    platform: 'browser',
+    // WABT's universal wrapper contains a Node-only `require("fs")` branch.
+    // It is unreachable in a worker, but still has to remain external while
+    // bundling for the browser.
+    external: ['fs'],
+    target: ['es2022'],
+    sourcemap: true,
+    logLevel: 'warning',
+  });
+
   // The custom domain has to be republished with every deploy or Pages drops it.
   const cname = join(ROOT, 'docs', 'CNAME');
   if (existsSync(cname)) copyFileSync(cname, join(DIST, 'CNAME'));
@@ -62,6 +80,7 @@ async function main(): Promise<void> {
   console.log(`index.html      ${size(join(DIST, 'index.html'))}`);
   console.log(`assets/site.css ${size(join(ASSETS, 'site.css'))}`);
   console.log(`assets/main.js  ${size(join(ASSETS, 'main.js'))}`);
+  console.log(`assets/wat-worker.js ${size(join(ASSETS, 'wat-worker.js'))}`);
   console.log(`${data.opcodes.length} opcodes, ${data.sections.length} sections`);
 }
 

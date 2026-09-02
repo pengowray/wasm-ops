@@ -1737,6 +1737,153 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 .panel-body ol, .panel-body ul { margin: .4rem 0; padding-left: 1.4rem; }
 .panel-body li { margin: .2rem 0; }
 
+/* ------------------------------------------------------------- WAT example */
+
+/*
+ * A small executable example belongs to the instruction reference rather than
+ * in a separate playground. It stays deliberately plain in the rail: code,
+ * one action, and the value that came back. The expand control turns the same
+ * editor into a workspace instead of maintaining a second copy of its state.
+ */
+.example-shell {
+	margin-top: 1.5rem;
+	padding-top: .2rem;
+	border-top: 1px solid var(--rule-soft);
+}
+
+.example-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: .75rem;
+}
+
+.panel-body .example-heading h4 {
+	margin: 0;
+	padding: .75rem 0 .35rem;
+	border: 0;
+	font-size: .9rem;
+	text-transform: none;
+	letter-spacing: 0;
+	color: var(--fg);
+}
+
+.example-note {
+	margin: 0 0 .65rem;
+	font-size: .85rem;
+	line-height: 1.4;
+	color: var(--fg-dim);
+}
+
+.example-workspace { min-width: 0; }
+.example-editor-pane,
+.example-output-pane { min-width: 0; }
+
+.example-label {
+	display: block;
+	margin-bottom: .3rem;
+	font-size: .875rem;
+	font-weight: 700;
+	color: var(--fg-dim);
+}
+
+.wat-editor {
+	display: block;
+	width: 100%;
+	min-height: 12rem;
+	padding: .65rem .7rem;
+	resize: vertical;
+	font: .82rem/1.5 'Source Code Pro', ui-monospace, monospace;
+	tab-size: 2;
+	color: var(--fg);
+	background: var(--surface-sunk);
+	border: 1px solid var(--rule);
+	border-radius: var(--radius);
+	white-space: pre;
+	overflow: auto;
+}
+
+.wat-editor:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+
+.example-actions {
+	display: flex;
+	align-items: center;
+	gap: .45rem;
+	margin-top: .55rem;
+}
+
+.example-run {
+	padding: .35rem .85rem;
+	font: inherit;
+	font-weight: 700;
+	color: var(--accent-contrast);
+	background: var(--accent);
+	border: 1px solid var(--accent);
+	border-radius: var(--radius);
+	cursor: pointer;
+}
+
+.example-run:hover { filter: brightness(1.08); }
+.example-run:disabled { cursor: wait; opacity: .65; }
+
+.example-output-pane { margin-top: 1rem; }
+.example-output {
+	min-height: 5.5rem;
+	padding: .7rem;
+	font-size: .85rem;
+	line-height: 1.45;
+	color: var(--fg-dim);
+	background: var(--surface-sunk);
+	border-left: 3px solid var(--rule);
+	border-radius: 0 var(--radius) var(--radius) 0;
+	overflow-wrap: anywhere;
+}
+
+.example-value {
+	display: block;
+	font: 700 1.45rem/1.25 'Source Code Pro', ui-monospace, monospace;
+	color: var(--fg);
+}
+
+.example-progress { color: var(--fg-faint); }
+.example-meta { margin: .55rem 0 0; font-size: .75rem; color: var(--fg-faint); }
+
+.example-state {
+	display: grid;
+	gap: .6rem;
+	margin-top: .8rem;
+}
+
+.example-state-row {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: .2rem;
+}
+
+.example-state-row > span:first-child {
+	font-size: .75rem;
+	color: var(--fg-faint);
+}
+
+.example-state-row code {
+	display: block;
+	padding: .35rem .45rem;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.state-arrow { color: var(--fg-faint); }
+.example-error-title { color: #b3261e; }
+.example-error {
+	margin: .45rem 0 0;
+	font: .78rem/1.45 'Source Code Pro', ui-monospace, monospace;
+	white-space: pre-wrap;
+	color: var(--fg);
+}
+
 /*
  * Wide enough to give the panel a column instead of laying it over the chart.
  * It stays in place when nothing is selected, so choosing an instruction does
@@ -2170,4 +2317,85 @@ html:not(.js) .about-body { overflow: visible; }
 		border-radius: 999px;
 	}
 	.panel-head { position: sticky; padding-top: 1rem; }
+}
+
+/*
+ * Expanded example workspace. These rules follow every panel breakpoint so
+ * the workspace owns the viewport consistently, whether the reference was a
+ * desktop rail or a mobile sheet before it expanded.
+ */
+body.example-expanded { overflow: hidden; }
+
+body.example-expanded .panel,
+body.example-expanded .layout:has(.chart[data-layout='cards']) .panel {
+	display: flex;
+	position: fixed;
+	inset: 0;
+	z-index: 80;
+	width: 100vw;
+	height: 100dvh;
+	max-height: none;
+	padding: 0;
+	transform: none;
+	background: var(--bg);
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	overflow: hidden;
+}
+
+body.example-expanded .panel-head {
+	position: absolute;
+	top: .7rem;
+	right: .8rem;
+	z-index: 2;
+	padding: 0;
+	background: transparent;
+}
+
+body.example-expanded .panel-head::before { display: none; }
+body.example-expanded .panel-body { width: 100%; height: 100%; font-size: 1rem; }
+body.example-expanded .panel-body > .detail { display: none; }
+
+body.example-expanded .example-shell {
+	display: grid;
+	grid-template-rows: auto auto minmax(0, 1fr);
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 1rem;
+	border: 0;
+}
+
+body.example-expanded .example-heading { padding-right: 3rem; }
+body.example-expanded .example-note { max-width: 70ch; }
+body.example-expanded .example-workspace {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 1rem;
+	min-height: 0;
+}
+
+body.example-expanded .example-editor-pane,
+body.example-expanded .example-output-pane {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+	margin: 0;
+}
+
+body.example-expanded .wat-editor { flex: 1; min-height: 0; resize: none; font-size: .9rem; }
+body.example-expanded .example-output { flex: 1; min-height: 0; overflow: auto; }
+body.example-expanded .example-state-row {
+	grid-template-columns: minmax(7rem, auto) minmax(0, 1fr) auto minmax(0, 1fr);
+	align-items: center;
+}
+body.example-expanded .example-state-row > span:first-child { font-size: .82rem; }
+
+@media (max-width: 700px) {
+	body.example-expanded .example-workspace {
+		grid-template-columns: 1fr;
+		grid-template-rows: minmax(0, 3fr) minmax(0, 2fr);
+	}
+	body.example-expanded .example-state-row { grid-template-columns: 1fr; }
 }

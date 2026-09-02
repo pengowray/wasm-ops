@@ -18,7 +18,7 @@ src/model/       the typed opcode model, name decomposition, categories, the
                  into an ordered layout
 src/render/      HTML generation, used by both the build and the client
 src/client/      browser behaviour: rearranging, highlighting, detail panel,
-                 navigation map
+                 navigation map, editable WAT examples
 src/build/       the static site generator
 scripts/         extraction from the old page, verification, dev server
 ```
@@ -35,6 +35,7 @@ npm install
 npm run build     # generate dist/
 npm run serve     # preview it at http://localhost:10303
 npm run verify    # check the data
+npm run verify:examples # compile every runnable WAT starter
 npm run typecheck
 ```
 

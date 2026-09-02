@@ -14,6 +14,8 @@
 
 import type { Opcode } from '../model/types.ts';
 import { renderEncoding, renderHeading } from '../render/items.ts';
+import { exampleFor } from './examples.ts';
+import { Playground } from './playground.ts';
 
 export class Panel {
   readonly #panel: HTMLElement;
@@ -22,6 +24,7 @@ export class Panel {
   readonly #opcodes: Map<string, Opcode>;
   #currentKey: string | null = null;
   #onClose: (() => void) | null = null;
+  #playground: Playground | null = null;
 
   constructor(panel: HTMLElement, details: HTMLElement, opcodes: Map<string, Opcode>) {
     this.#panel = panel;
@@ -32,7 +35,9 @@ export class Panel {
     panel.querySelector('.panel-close')?.addEventListener('click', () => this.close());
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && this.#panel.dataset['open'] === 'true') this.close();
+      if (event.key !== 'Escape' || this.#panel.dataset['open'] !== 'true') return;
+      if (this.#playground?.expanded) this.#playground.toggleExpanded(false);
+      else this.close();
     });
 
     this.#wireFlick();
@@ -139,13 +144,17 @@ export class Panel {
     if (anchor) anchor.after(encoding);
     else content.prepend(encoding);
 
-    this.#body.replaceChildren(content);
+    this.#playground?.destroy();
+    this.#playground = exampleFor(op) ? new Playground(op) : null;
+    this.#body.replaceChildren(content, ...(this.#playground ? [this.#playground.element] : []));
     this.#panel.dataset['open'] = 'true';
     this.#currentKey = key;
     this.#panel.scrollTop = 0;
   }
 
   close(): void {
+    this.#playground?.destroy();
+    this.#playground = null;
     this.#panel.style.transform = '';
     this.#panel.dataset['open'] = 'false';
     this.#body.replaceChildren();

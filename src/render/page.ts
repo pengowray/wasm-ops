@@ -40,7 +40,7 @@ export interface PageContent {
 function clientData(data: OpcodeData): string {
   const slim = {
     sections: data.sections,
-    opcodes: data.opcodes.map(({ description, followedByNote, stack, ...rest }) => rest),
+    opcodes: data.opcodes.map(({ description, followedByNote, ...rest }) => rest),
   };
   // `<` is escaped so the JSON can never terminate its own script element.
   return JSON.stringify(slim).replace(/</g, '\\u003c');
