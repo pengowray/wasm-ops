@@ -43,13 +43,15 @@ async function main(): Promise<void> {
       failures.push(`${op.id} (${op.name}): source does not name its instruction`);
       continue;
     }
-    if (op.name.includes('atomic') && !example.source.includes('worker or thread')) {
+    if (op.name?.includes('atomic') && !example.source.includes('worker or thread')) {
       failures.push(`${op.id} (${op.name}): atomic example does not explain its concurrency context`);
       continue;
     }
 
     if (!example.starterComplete) {
-      if (!example.source.includes('INTENTIONALLY INVALID:')) {
+      const expectedMarker =
+        example.unsupportedKind === 'future' ? 'FUTURE SYNTAX:' : 'KNOWN INVALID:';
+      if (!example.source.includes(expectedMarker)) {
         failures.push(`${op.id} (${op.name}): unsupported source is not clearly marked`);
         continue;
       }
@@ -117,6 +119,9 @@ async function main(): Promise<void> {
         }
         if (op.name === 'f64x2.min' && result !== 3) {
           throw new Error(`expected lane 0 to demonstrate min with 3, received ${String(result)}`);
+        }
+        if (example.source.includes('(memory ') && (result === 42 || result === 42n)) {
+          throw new Error('memory example returns the generic fixture value 42');
         }
       } finally {
         module.destroy();

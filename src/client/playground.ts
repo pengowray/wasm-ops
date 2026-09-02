@@ -155,7 +155,9 @@ export class Playground {
         <h4>Example${
           this.#example.starterComplete
             ? ''
-            : ' <span class="example-status">Unsupported here</span>'
+            : ` <span class="example-status">${
+                this.#example.unsupportedKind === 'future' ? 'Future syntax' : 'Needs context'
+              }</span>`
         }</h4>
         <button type="button" class="icon-button example-expand" aria-pressed="false"
           aria-label="Expand example" title="Expand example">
@@ -180,7 +182,9 @@ export class Playground {
           <div class="example-output" role="status" aria-live="polite">
             ${this.#example.starterComplete
               ? 'Run the example to compile and execute it.'
-              : 'Intentionally broken — Run shows the expected compiler error.'}
+              : `${
+                  this.#example.unsupportedKind === 'future' ? 'Future syntax' : 'Known invalid here'
+                } — Run shows the expected compiler error.`}
           </div>
         </div>
       </div>`;
@@ -196,7 +200,7 @@ export class Playground {
       this.#editor.value = this.#example.source;
       this.#output.textContent = this.#example.starterComplete
         ? 'Run the example to compile and execute it.'
-        : 'Intentionally broken — Run shows the expected compiler error.';
+        : `${this.#example.unsupportedKind === 'future' ? 'Future syntax' : 'Known invalid here'} — Run shows the expected compiler error.`;
     });
     this.#expand.addEventListener('click', () => this.toggleExpanded());
     this.#editor.addEventListener('keydown', (event) => {

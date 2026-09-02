@@ -4,6 +4,7 @@ export interface WatExample {
   source: string;
   note: string;
   starterComplete: boolean;
+  unsupportedKind?: 'future' | 'context';
 }
 
 const VALUE_TYPES = new Set(['i32', 'i64', 'f32', 'f64', 'v128']);
@@ -128,16 +129,26 @@ function moduleFor(body: string[], results: string[] = ['i32'], declarations = '
     .join('\n')}\n  )\n)`;
 }
 
-function unsupportedExample(op: Opcode, reason: string, attemptedSource?: string): WatExample {
+function unsupportedExample(
+  op: Opcode,
+  reason: string,
+  attemptedSource?: string,
+  unsupportedKind: 'future' | 'context' = 'context',
+): WatExample {
   const source = attemptedSource ?? moduleFor([`${op.name}${immediates(op)}`], []);
+  const status =
+    unsupportedKind === 'future'
+      ? 'FUTURE SYNTAX: not supported by this playground’s compiler yet.'
+      : 'KNOWN INVALID: this minimal example omits required context.';
   const warning =
-    `  ;; INTENTIONALLY INVALID: this playground cannot run this instruction yet.\n` +
+    `  ;; ${status}\n` +
     `  ;; ${reason}\n` +
     `  ;; Press Run to see the expected compiler error.\n`;
   return {
     source: source.replace(/^\(module\n?/, `(module\n${warning}`),
     note: `Not runnable here: ${reason} The compiler error is expected.`,
     starterComplete: false,
+    unsupportedKind,
   };
 }
 
@@ -275,8 +286,8 @@ function specialExample(op: Opcode): WatExample | null {
         'i32.const 0',
         'i32.load',
       ],
-      declarations: '  (memory (export "memory") 1)\n  (data $bytes "\\2a\\00\\00\\00")',
-      note: 'Four bytes from a passive data segment are copied into memory.',
+      declarations: '  (memory (export "memory") 1)\n  (data $bytes "\\78\\56\\34\\12")',
+      note: 'Four bytes encoding 0x12345678 are copied from a passive data segment into memory.',
     },
     'data.drop': {
       body: ['data.drop $bytes', 'i32.const 1'],
@@ -292,8 +303,8 @@ function specialExample(op: Opcode): WatExample | null {
         'i32.const 4',
         'i32.load',
       ],
-      declarations: '  (memory (export "memory") 1)\n  (data (i32.const 0) "\\2a\\00\\00\\00")',
-      note: 'Four bytes are copied from address 0 to address 4.',
+      declarations: '  (memory (export "memory") 1)\n  (data (i32.const 0) "\\78\\56\\34\\12")',
+      note: 'The 0x12345678 byte pattern is copied from address 0 to address 4.',
     },
     'memory.fill': {
       body: ['i32.const 0', 'i32.const 65', 'i32.const 4', 'memory.fill', 'i32.const 0', 'i32.load'],
@@ -432,13 +443,32 @@ function memoryExample(op: Opcode, stack: SimpleStack): WatExample {
   const memory = atomic
     ? '  (memory (export "memory") 1 1 shared)'
     : '  (memory (export "memory") 1)';
-  const declarations = `${memory}\n  (data (i32.const 0) "\\2a\\00\\00\\00\\08\\07\\06\\05\\04\\03\\02\\01")`;
+  const atomicSeed = name.includes('cmpxchg')
+    ? 3
+    : name.includes('.add')
+      ? 10
+      : name.includes('.sub')
+        ? 20
+        : name.includes('.and')
+          ? 15
+          : name.includes('.or')
+            ? 8
+            : name.includes('.xor')
+              ? 10
+              : name.includes('.xchg')
+                ? 9
+                : 17;
+  const data = atomic
+    ? `\\${atomicSeed.toString(16).padStart(2, '0')}\\00\\00\\00\\00\\00\\00\\00`
+    : '\\05\\11\\22\\33\\44\\55\\66\\07';
+  const declarations = `${memory}\n  (data (i32.const 0) "${data}")`;
   const compilerPending = op.proposal === 'half-precision';
   if (compilerPending) {
     return unsupportedExample(
       op,
       'This proposal is newer than the bundled WAT compiler.',
       moduleFor(body, resultTypes, declarations),
+      'future',
     );
   }
   return {
@@ -446,9 +476,11 @@ function memoryExample(op: Opcode, stack: SimpleStack): WatExample {
     note: name.includes('store')
       ? 'The result includes a before/after view of the first 16 memory bytes.'
       : atomic
-        ? 'This runs against shared memory; the comments show the worker/thread context that makes atomicity useful.'
+        ? name.includes('rmw')
+          ? 'The instruction returns the previous value; the memory bytes show its update. The comments explain the worker/thread context.'
+          : 'This runs against shared memory; the comments show the worker/thread context that makes atomicity useful.'
         : observable
-          ? 'The memory begins with 42 at address 0; its first 16 bytes are shown with the result.'
+          ? 'Memory starts with a recognizable byte pattern; its first 16 bytes are shown with the result.'
           : 'The vector load is made visible by extracting lane 0; the first 16 memory bytes are also shown.',
     starterComplete: true,
   };
@@ -476,6 +508,7 @@ function genericExample(op: Opcode, stack: SimpleStack): WatExample {
       op,
       'This proposal is newer than the bundled WAT compiler.',
       moduleFor(body, resultTypes),
+      'future',
     );
   }
 
@@ -500,8 +533,20 @@ export function exampleFor(op: Opcode): WatExample | null {
     return genericExample(op, stack);
   }
 
+  const futureProposals = new Set([
+    'stack-switching',
+    'custom-descriptors',
+    'stringref',
+    'shared-everything-threads',
+    'gc-draft-2022',
+  ]);
   const reason = op.name.includes('atomic')
     ? 'The bundled compiler cannot yet express this shared object. Real code would share it with another worker or thread whose accesses may race.'
     : 'This instruction needs supporting types, references, or control state that do not fit a generic toy module.';
-  return unsupportedExample(op, reason);
+  return unsupportedExample(
+    op,
+    reason,
+    undefined,
+    futureProposals.has(op.proposal ?? '') ? 'future' : 'context',
+  );
 }
