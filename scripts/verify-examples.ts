@@ -1,8 +1,7 @@
 /**
- * Compiles every displayed example and executes every runnable one. The
- * documentation-only modules are checked too: a reader should never arrive at
- * broken source, even where the instruction itself needs more surrounding
- * machinery than a generic toy example can provide.
+ * Compiles and executes every supported example. Unsupported examples are
+ * deliberately active (not commented-out spellings), visibly marked, and
+ * checked to ensure that the bundled compiler or runtime really rejects them.
  */
 
 import wabtFactory from 'wabt';
@@ -32,20 +31,55 @@ async function main(): Promise<void> {
   const failures: string[] = [];
   let checked = 0;
   let runnable = 0;
+  let unsupported = 0;
 
   for (const op of loadData().opcodes) {
     const example = exampleFor(op);
     if (!example) continue;
     checked++;
 
+    const watName = op.name === 'select t' ? 'select' : op.name!;
+    if (!example.source.includes(watName)) {
+      failures.push(`${op.id} (${op.name}): source does not name its instruction`);
+      continue;
+    }
+    if (op.name.includes('atomic') && !example.source.includes('worker or thread')) {
+      failures.push(`${op.id} (${op.name}): atomic example does not explain its concurrency context`);
+      continue;
+    }
+
+    if (!example.starterComplete) {
+      if (!example.source.includes('INTENTIONALLY INVALID:')) {
+        failures.push(`${op.id} (${op.name}): unsupported source is not clearly marked`);
+        continue;
+      }
+
+      let rejected = false;
+      let module: ReturnType<typeof wabt.parseWat> | undefined;
+      try {
+        module = wabt.parseWat(`${op.id}.wat`, example.source, features);
+        const binary = module.toBinary({ canonicalize_lebs: true }).buffer;
+        const buffer = binary.buffer as ArrayBuffer;
+        if (!WebAssembly.validate(buffer)) {
+          rejected = true;
+        } else {
+          await WebAssembly.instantiate(buffer, {});
+        }
+      } catch {
+        rejected = true;
+      } finally {
+        module?.destroy();
+      }
+
+      if (!rejected) {
+        failures.push(`${op.id} (${op.name}): marked unsupported but compiles and instantiates`);
+      } else {
+        unsupported++;
+      }
+      continue;
+    }
+
     try {
-      const watName = op.name === 'select t' ? 'select' : op.name!;
-      if (!example.source.includes(watName)) {
-        throw new Error('source does not name its instruction');
-      }
-      if (!example.starterComplete && !example.source.includes('Documentation-only:')) {
-        throw new Error('non-runnable source does not explain why');
-      }
       const module = wabt.parseWat(`${op.id}.wat`, example.source, features);
       try {
         const binary = module.toBinary({ canonicalize_lebs: true }).buffer;
@@ -55,11 +89,6 @@ async function main(): Promise<void> {
         }
         const instance = await WebAssembly.instantiate(buffer, {});
         const run = instance.instance.exports['run'];
-        if (!example.starterComplete) {
-          if (run !== undefined) throw new Error('documentation-only example exports run');
-          continue;
-        }
-
         if (typeof run !== 'function') throw new Error('runnable example has no run export');
         runnable++;
         let result: unknown;
@@ -77,6 +106,18 @@ async function main(): Promise<void> {
         if (shouldReturnNonZero) {
           if (result === 0 || result === 0n) throw new Error('example returns a trivial zero');
         }
+
+        if (op.stack?.html.match(/→\s*\[[^\]]*v128/)) {
+          if (!example.source.includes('extract_lane')) {
+            throw new Error('vector result is not projected to a visible lane');
+          }
+          if (result === undefined || (typeof result === 'number' && Number.isNaN(result))) {
+            throw new Error('vector projection does not produce a readable value');
+          }
+        }
+        if (op.name === 'f64x2.min' && result !== 3) {
+          throw new Error(`expected lane 0 to demonstrate min with 3, received ${String(result)}`);
+        }
       } finally {
         module.destroy();
       }
@@ -90,7 +131,10 @@ async function main(): Promise<void> {
     failures.forEach((failure) => console.error(`  ${failure}`));
     process.exit(1);
   }
-  console.log(`${checked} WAT examples compile; ${runnable} runnable examples execute`);
+  console.log(
+    `${runnable} runnable WAT examples compile and execute; ` +
+      `${unsupported} unsupported examples fail as documented (${checked} total)`,
+  );
 }
 
 await main();

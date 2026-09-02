@@ -149,9 +149,14 @@ export class Playground {
     this.#example = exampleFor(op)!;
     const root = document.createElement('section');
     root.className = 'example-shell';
+    root.dataset['runnable'] = String(this.#example.starterComplete);
     root.innerHTML = `
       <div class="example-heading">
-        <h4>Example</h4>
+        <h4>Example${
+          this.#example.starterComplete
+            ? ''
+            : ' <span class="example-status">Unsupported here</span>'
+        }</h4>
         <button type="button" class="icon-button example-expand" aria-pressed="false"
           aria-label="Expand example" title="Expand example">
           <svg viewBox="0 0 24 24" aria-hidden="true" width="17" height="17">
@@ -175,7 +180,7 @@ export class Playground {
           <div class="example-output" role="status" aria-live="polite">
             ${this.#example.starterComplete
               ? 'Run the example to compile and execute it.'
-              : 'This documentation-only module compiles, but has no run export.'}
+              : 'Intentionally broken — Run shows the expected compiler error.'}
           </div>
         </div>
       </div>`;
@@ -191,7 +196,7 @@ export class Playground {
       this.#editor.value = this.#example.source;
       this.#output.textContent = this.#example.starterComplete
         ? 'Run the example to compile and execute it.'
-        : 'This documentation-only module compiles, but has no run export.';
+        : 'Intentionally broken — Run shows the expected compiler error.';
     });
     this.#expand.addEventListener('click', () => this.toggleExpanded());
     this.#editor.addEventListener('keydown', (event) => {
@@ -261,7 +266,9 @@ export class Playground {
         `</p>`;
     } catch (error) {
       this.#output.innerHTML =
-        `<strong class="example-error-title">Could not run</strong>` +
+        `<strong class="example-error-title">${
+          this.#example.starterComplete ? 'Could not run' : 'Expected compiler error'
+        }</strong>` +
         `<pre class="example-error">${escapeHtml(cleanError(error))}</pre>`;
     } finally {
       this.#running = false;

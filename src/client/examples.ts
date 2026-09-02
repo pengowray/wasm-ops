@@ -32,8 +32,28 @@ function plainStack(html: string): SimpleStack | null {
   return inputs && outputs ? { inputs, outputs } : null;
 }
 
+function vectorShape(op: Opcode): string {
+  const name = op.name ?? '';
+  const resultShape = /^(i8x16|i16x8|i32x4|i64x2|f16x8|f32x4|f64x2)\./.exec(name)?.[1];
+  const operandShape = name
+    .slice(name.indexOf('.') + 1)
+    .match(/(?:i8x16|i16x8|i32x4|i64x2|f16x8|f32x4|f64x2)/)?.[0];
+  return operandShape ?? resultShape ?? 'i32x4';
+}
+
+function vectorConstant(op: Opcode, index: number): string {
+  const shape = vectorShape(op);
+  const lanes = Number(shape.match(/x(\d+)$/)?.[1] ?? 4);
+  const operation = op.parts?.mainop ?? op.name?.split('.').at(-1) ?? '';
+  let seed = index === 0 ? [8, 20, 6, 12] : [3, 30, 7, 4];
+  if (operation === 'abs') seed = [-8, -20, -6, -12];
+  else if (operation === 'neg') seed = [8, 20, 6, 12];
+  else if (operation === 'sqrt') seed = [81, 16, 25, 36];
+  const values = Array.from({ length: lanes }, (_, lane) => seed[lane % seed.length]);
+  return `v128.const ${shape} ${values.join(' ')}`;
+}
+
 function scalar(valueType: string, value: number): string {
-  if (valueType === 'v128') return 'v128.const i32x4 1 2 3 4';
   if (valueType === 'i64') return `i64.const ${Math.trunc(value)}`;
   if (valueType === 'f32') return `f32.const ${value}`;
   if (valueType === 'f64') return `f64.const ${value}`;
@@ -67,7 +87,21 @@ function sampleValues(op: Opcode, inputs: string[]): string[] {
   else if (operation === 'nearest') values = [1.6, 1, 1, 1];
   else if (operation === 'sqrt') values = [81, 1, 1, 1];
 
-  return inputs.map((type, index) => scalar(type, values[index] ?? 1));
+  return inputs.map((type, index) =>
+    type === 'v128' ? vectorConstant(op, index) : scalar(type, values[index] ?? 1),
+  );
+}
+
+function vectorProjection(op: Opcode): { instruction: string; result: string } {
+  const name = op.name ?? '';
+  let shape = /^(i8x16|i16x8|i32x4|i64x2|f16x8|f32x4|f64x2)\./.exec(name)?.[1] ?? 'i32x4';
+  if (/^f32x4\.(?:eq|ne|lt|gt|le|ge)$/.test(name)) shape = 'i32x4';
+  if (/^f64x2\.(?:eq|ne|lt|gt|le|ge)$/.test(name)) shape = 'i64x2';
+  if (shape === 'i8x16' || shape === 'i16x8') {
+    return { instruction: `${shape}.extract_lane_s 0`, result: 'i32' };
+  }
+  const result = shape.startsWith('f') ? shape.split('x')[0]! : shape === 'i64x2' ? 'i64' : 'i32';
+  return { instruction: `${shape}.extract_lane 0`, result };
 }
 
 function immediates(op: Opcode): string {
@@ -94,16 +128,15 @@ function moduleFor(body: string[], results: string[] = ['i32'], declarations = '
     .join('\n')}\n  )\n)`;
 }
 
-function documentationExample(op: Opcode, reason: string): WatExample {
-  const spelling = `${op.name}${immediates(op)}`;
+function unsupportedExample(op: Opcode, reason: string, attemptedSource?: string): WatExample {
+  const source = attemptedSource ?? moduleFor([`${op.name}${immediates(op)}`], []);
+  const warning =
+    `  ;; INTENTIONALLY INVALID: this playground cannot run this instruction yet.\n` +
+    `  ;; ${reason}\n` +
+    `  ;; Press Run to see the expected compiler error.\n`;
   return {
-    source:
-      `(module\n` +
-      `  ;; Documentation-only: ${reason}\n` +
-      `  ;; The instruction’s text-format spelling is:\n` +
-      `  ;;   ${spelling}\n` +
-      `)`,
-    note: `${reason} The module is documentation-only, so it compiles without exporting a run function.`,
+    source: source.replace(/^\(module\n?/, `(module\n${warning}`),
+    note: `Not runnable here: ${reason} The compiler error is expected.`,
     starterComplete: false,
   };
 }
@@ -174,6 +207,29 @@ function specialExample(op: Opcode): WatExample | null {
       body: ['call $answer'],
       declarations: '  (func $answer (result i32) i32.const 42)',
       note: 'The exported function calls a helper that returns 42.',
+    },
+    call_indirect: {
+      body: ['i32.const 0', 'call_indirect (type $answer-type)'],
+      declarations:
+        '  (type $answer-type (func (result i32)))\n' +
+        '  (table 1 funcref)\n' +
+        '  (func $answer (type $answer-type) i32.const 42)\n' +
+        '  (elem (i32.const 0) func $answer)',
+      note: 'Table slot 0 selects a function of the declared type, which returns 42.',
+    },
+    return_call: {
+      body: ['return_call $answer'],
+      declarations: '  (func $answer (result i32) i32.const 42)',
+      note: 'A tail call returns the helper’s value, 42, directly to the caller.',
+    },
+    return_call_indirect: {
+      body: ['i32.const 0', 'return_call_indirect (type $answer-type)'],
+      declarations:
+        '  (type $answer-type (func (result i32)))\n' +
+        '  (table 1 funcref)\n' +
+        '  (func $answer (type $answer-type) i32.const 42)\n' +
+        '  (elem (i32.const 0) func $answer)',
+      note: 'A table lookup selects the helper, and the tail call returns its 42 directly.',
     },
     'local.get': {
       body: ['local.get $value'],
@@ -297,8 +353,13 @@ function specialExample(op: Opcode): WatExample | null {
       note: 'One table entry is copied from slot 0 to slot 1.',
     },
     'atomic.fence': {
-      body: ['atomic.fence', 'i32.const 1'],
-      note: 'The fence completes before the function returns 1.',
+      body: [
+        ';; Real code would coordinate with another worker or thread.',
+        ';; The fence orders this thread’s memory accesses around this point.',
+        'atomic.fence',
+        'i32.const 1',
+      ],
+      note: 'The fence completes before the function returns 1; the comments describe the concurrency it needs.',
     },
     'ref.null': {
       body: ['ref.null extern', 'ref.is_null'],
@@ -314,8 +375,8 @@ function specialExample(op: Opcode): WatExample | null {
       note: 'A reference to the helper function is non-null, so the test returns 0.',
     },
     'v128.const': {
-      body: ['v128.const i32x4 1 2 3 4', 'drop', 'i32.const 1'],
-      note: 'JavaScript cannot receive v128 values directly, so 1 means the vector was created.',
+      body: ['v128.const i32x4 1 2 3 4', 'i32x4.extract_lane 0'],
+      note: 'The vector is created, then lane 0 is extracted so JavaScript can display its value, 1.',
     },
   };
 
@@ -350,29 +411,45 @@ function specialExample(op: Opcode): WatExample | null {
 function memoryExample(op: Opcode, stack: SimpleStack): WatExample {
   const name = op.name!;
   const body = sampleValues(op, stack.inputs);
+  const atomic = name.includes('atomic');
   if (stack.inputs.length) body[0] = scalar(stack.inputs[0]!, 0);
+  if (atomic) {
+    body.unshift(
+      ';; Real code would share this memory with another worker or thread.',
+      ';; Atomic access matters when those agents can race on this address.',
+    );
+  }
   body.push(`${name}${immediates(op)}`);
 
   const observable = stack.outputs.every((type) => type !== 'v128');
+  let resultTypes = stack.outputs;
   if (!observable) {
-    for (const _ of stack.outputs) body.push('drop');
-    body.push('i32.const 1');
+    const projection = vectorProjection(op);
+    body.push(projection.instruction);
+    resultTypes = [projection.result];
   }
 
-  const atomic = name.includes('atomic');
   const memory = atomic
     ? '  (memory (export "memory") 1 1 shared)'
     : '  (memory (export "memory") 1)';
   const declarations = `${memory}\n  (data (i32.const 0) "\\2a\\00\\00\\00\\08\\07\\06\\05\\04\\03\\02\\01")`;
   const compilerPending = op.proposal === 'half-precision';
   if (compilerPending) {
-    return documentationExample(op, 'This proposal is newer than the bundled WAT compiler.');
+    return unsupportedExample(
+      op,
+      'This proposal is newer than the bundled WAT compiler.',
+      moduleFor(body, resultTypes, declarations),
+    );
   }
   return {
-    source: moduleFor(body, observable ? stack.outputs : ['i32'], declarations),
+    source: moduleFor(body, resultTypes, declarations),
     note: name.includes('store')
       ? 'The result includes a before/after view of the first 16 memory bytes.'
-      : 'The memory begins with 42 at address 0; its first 16 bytes are shown with the result.',
+      : atomic
+        ? 'This runs against shared memory; the comments show the worker/thread context that makes atomicity useful.'
+        : observable
+          ? 'The memory begins with 42 at address 0; its first 16 bytes are shown with the result.'
+          : 'The vector load is made visible by extracting lane 0; the first 16 memory bytes are also shown.',
     starterComplete: true,
   };
 }
@@ -382,9 +459,11 @@ function genericExample(op: Opcode, stack: SimpleStack): WatExample {
   body.push(`${op.name}${immediates(op)}`);
 
   const observable = stack.outputs.every((type) => type !== 'v128');
+  let resultTypes = stack.outputs;
   if (!observable) {
-    for (const _ of stack.outputs) body.push('drop');
-    body.push('i32.const 1');
+    const projection = vectorProjection(op);
+    body.push(projection.instruction);
+    resultTypes = [projection.result];
   }
 
   const compilerPending =
@@ -393,14 +472,18 @@ function genericExample(op: Opcode, stack: SimpleStack): WatExample {
     op.name === 'pause';
 
   if (compilerPending) {
-    return documentationExample(op, 'This proposal is newer than the bundled WAT compiler.');
+    return unsupportedExample(
+      op,
+      'This proposal is newer than the bundled WAT compiler.',
+      moduleFor(body, resultTypes),
+    );
   }
 
   return {
-    source: moduleFor(body, observable ? stack.outputs : ['i32']),
+    source: moduleFor(body, resultTypes),
     note: observable
       ? 'The constants are the operand stack; the returned value is the result.'
-      : 'JavaScript cannot receive v128 values directly, so 1 means the instruction completed.',
+      : 'The operation returns a vector; lane 0 is extracted so JavaScript can display a useful scalar result.',
     starterComplete: true,
   };
 }
@@ -417,8 +500,8 @@ export function exampleFor(op: Opcode): WatExample | null {
     return genericExample(op, stack);
   }
 
-  return documentationExample(
-    op,
-    'This instruction needs supporting types, references, or control state that do not fit a generic toy module.',
-  );
+  const reason = op.name.includes('atomic')
+    ? 'The bundled compiler cannot yet express this shared object. Real code would share it with another worker or thread whose accesses may race.'
+    : 'This instruction needs supporting types, references, or control state that do not fit a generic toy module.';
+  return unsupportedExample(op, reason);
 }

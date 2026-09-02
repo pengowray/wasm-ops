@@ -1768,11 +1768,33 @@ button.ghost:hover { color: var(--fg); border-color: var(--accent); }
 	color: var(--fg);
 }
 
+.example-status {
+	display: inline-block;
+	margin-left: .35rem;
+	padding: .12rem .38rem;
+	border: 1px solid var(--enc-prefix);
+	border-radius: 999px;
+	font-size: .68rem;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: .015em;
+	vertical-align: .08rem;
+	color: var(--fg);
+	background: var(--legacy-bg);
+}
+
 .example-note {
 	margin: 0 0 .65rem;
 	font-size: .85rem;
 	line-height: 1.4;
 	color: var(--fg-dim);
+}
+
+.example-shell[data-runnable="false"] .example-note {
+	padding: .55rem .65rem;
+	border-left: 3px solid var(--enc-prefix);
+	background: var(--legacy-bg);
+	color: var(--fg);
 }
 
 .example-workspace { min-width: 0; }
