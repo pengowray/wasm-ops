@@ -35,7 +35,7 @@ npm install
 npm run build     # generate dist/
 npm run serve     # preview it at http://localhost:10303
 npm run verify    # check the data
-npm run verify:examples # compile every runnable WAT starter
+npm run verify:examples # compile every WAT example and execute the runnable ones
 npm run typecheck
 ```
 

@@ -82,31 +82,46 @@ function snapshot(exports: WebAssembly.Exports): Snapshot {
 }
 
 function hex(bytes: Uint8Array): string {
-  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join(' ');
+  const rows: string[] = [];
+  for (let offset = 0; offset < bytes.length; offset += 8) {
+    const values = Array.from(bytes.slice(offset, offset + 8), (byte) =>
+      byte.toString(16).padStart(2, '0'),
+    ).join(' ');
+    rows.push(`${offset.toString(16).padStart(2, '0')}:  ${values}`);
+  }
+  return rows.join('\n');
+}
+
+function stateRow(label: string, before: string, after: string): string {
+  return (
+    `<div class="example-state-row"><span class="state-name">${label}</span>` +
+    `<div class="state-snapshot"><span>Before</span><code>${before}</code></div>` +
+    `<span class="state-arrow" aria-hidden="true"></span>` +
+    `<div class="state-snapshot"><span>After</span><code>${after}</code></div></div>`
+  );
 }
 
 function stateRows(before: Snapshot, after: Snapshot): string {
   const rows: string[] = [];
   if (before.memory && after.memory) {
-    rows.push(
-      `<div class="example-state-row"><span>Memory 0–15</span>` +
-        `<code>${hex(before.memory)}</code><span class="state-arrow" aria-hidden="true">→</span>` +
-        `<code>${hex(after.memory)}</code></div>`,
-    );
+    rows.push(stateRow('Memory 0–15', hex(before.memory), hex(after.memory)));
   }
   for (const name of new Set([...Object.keys(before.globals), ...Object.keys(after.globals)])) {
     rows.push(
-      `<div class="example-state-row"><span>Global ${escapeHtml(name)}</span>` +
-        `<code>${escapeHtml(printable(before.globals[name]))}</code>` +
-        `<span class="state-arrow" aria-hidden="true">→</span>` +
-        `<code>${escapeHtml(printable(after.globals[name]))}</code></div>`,
+      stateRow(
+        `Global ${escapeHtml(name)}`,
+        escapeHtml(printable(before.globals[name])),
+        escapeHtml(printable(after.globals[name])),
+      ),
     );
   }
   for (const name of new Set([...Object.keys(before.tables), ...Object.keys(after.tables)])) {
     rows.push(
-      `<div class="example-state-row"><span>Table ${escapeHtml(name)} length</span>` +
-        `<code>${before.tables[name]}</code><span class="state-arrow" aria-hidden="true">→</span>` +
-        `<code>${after.tables[name]}</code></div>`,
+      stateRow(
+        `Table ${escapeHtml(name)} length`,
+        String(before.tables[name]),
+        String(after.tables[name]),
+      ),
     );
   }
   return rows.join('');
@@ -160,7 +175,7 @@ export class Playground {
           <div class="example-output" role="status" aria-live="polite">
             ${this.#example.starterComplete
               ? 'Run the example to compile and execute it.'
-              : 'Complete the surrounding module, then run it.'}
+              : 'This documentation-only module compiles, but has no run export.'}
           </div>
         </div>
       </div>`;
@@ -176,7 +191,7 @@ export class Playground {
       this.#editor.value = this.#example.source;
       this.#output.textContent = this.#example.starterComplete
         ? 'Run the example to compile and execute it.'
-        : 'Complete the surrounding module, then run it.';
+        : 'This documentation-only module compiles, but has no run export.';
     });
     this.#expand.addEventListener('click', () => this.toggleExpanded());
     this.#editor.addEventListener('keydown', (event) => {

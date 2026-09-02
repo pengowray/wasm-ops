@@ -1,8 +1,8 @@
 /**
- * Compiles every example advertised as ready to run.
- *
- * Drafts for instructions whose surrounding state cannot yet be generated are
- * deliberately excluded; the UI labels those as incomplete too.
+ * Compiles every displayed example and executes every runnable one. The
+ * documentation-only modules are checked too: a reader should never arrive at
+ * broken source, even where the instruction itself needs more surrounding
+ * machinery than a generic toy example can provide.
  */
 
 import wabtFactory from 'wabt';
@@ -31,18 +31,51 @@ async function main(): Promise<void> {
   const wabt = await wabtFactory();
   const failures: string[] = [];
   let checked = 0;
+  let runnable = 0;
 
   for (const op of loadData().opcodes) {
     const example = exampleFor(op);
-    if (!example?.starterComplete) continue;
+    if (!example) continue;
     checked++;
 
     try {
+      const watName = op.name === 'select t' ? 'select' : op.name!;
+      if (!example.source.includes(watName)) {
+        throw new Error('source does not name its instruction');
+      }
+      if (!example.starterComplete && !example.source.includes('Documentation-only:')) {
+        throw new Error('non-runnable source does not explain why');
+      }
       const module = wabt.parseWat(`${op.id}.wat`, example.source, features);
       try {
         const binary = module.toBinary({ canonicalize_lebs: true }).buffer;
-        if (!WebAssembly.validate(binary.buffer as ArrayBuffer)) {
+        const buffer = binary.buffer as ArrayBuffer;
+        if (!WebAssembly.validate(buffer)) {
           throw new Error('browser validation failed');
+        }
+        const instance = await WebAssembly.instantiate(buffer, {});
+        const run = instance.instance.exports['run'];
+        if (!example.starterComplete) {
+          if (run !== undefined) throw new Error('documentation-only example exports run');
+          continue;
+        }
+
+        if (typeof run !== 'function') throw new Error('runnable example has no run export');
+        runnable++;
+        let result: unknown;
+        try {
+          result = run(...Array.from({ length: run.length }, () => 42));
+          if (op.name === 'unreachable') throw new Error('unreachable did not trap');
+        } catch (error) {
+          if (op.name !== 'unreachable') throw error;
+        }
+
+        const shouldReturnNonZero =
+          /^i(?:32|64)\.(?:add|sub|mul|div_[su]|rem_[su]|and|or|xor|shl|shr_[su]|rotl|rotr|clz|ctz|popcnt|eqz|eq|ne|lt_[su]|gt_[su]|le_[su]|ge_[su])$/.test(
+            op.name ?? '',
+          );
+        if (shouldReturnNonZero) {
+          if (result === 0 || result === 0n) throw new Error('example returns a trivial zero');
         }
       } finally {
         module.destroy();
@@ -57,7 +90,7 @@ async function main(): Promise<void> {
     failures.forEach((failure) => console.error(`  ${failure}`));
     process.exit(1);
   }
-  console.log(`${checked} runnable WAT examples compile and validate`);
+  console.log(`${checked} WAT examples compile; ${runnable} runnable examples execute`);
 }
 
 await main();

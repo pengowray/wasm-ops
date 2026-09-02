@@ -48,7 +48,23 @@ function sampleValues(op: Opcode, inputs: string[]): string[] {
   else if (operation === 'mul') values = [6, 7, 1, 1];
   else if (operation.startsWith('div')) values = [84, 2, 1, 1];
   else if (operation.startsWith('rem')) values = [43, 5, 1, 1];
-  else if (['shl', 'shr', 'rotl', 'rotr'].includes(operation)) values = [1, 3, 1, 1];
+  else if (operation === 'shl') values = [5, 3, 1, 1];
+  else if (operation === 'shr') values = [42, 3, 1, 1];
+  else if (operation === 'rotl' || operation === 'rotr') values = [0x12345678, 8, 1, 1];
+  else if (operation === 'and' || operation === 'or' || operation === 'xor') {
+    values = [10, 12, 1, 1];
+  } else if (operation === 'eqz') values = [0, 1, 1, 1];
+  else if (operation === 'eq') values = [7, 7, 1, 1];
+  else if (operation === 'ne') values = [7, 6, 1, 1];
+  else if (operation === 'lt' || operation === 'le') values = [3, 7, 1, 1];
+  else if (operation === 'gt' || operation === 'ge') values = [7, 3, 1, 1];
+  else if (operation === 'clz' || operation === 'ctz') values = [16, 1, 1, 1];
+  else if (operation === 'popcnt') values = [42, 1, 1, 1];
+  else if (operation === 'abs') values = [-5, 1, 1, 1];
+  else if (operation === 'neg') values = [5, 1, 1, 1];
+  else if (operation === 'ceil') values = [1.25, 1, 1, 1];
+  else if (operation === 'floor' || operation === 'trunc') values = [1.75, 1, 1, 1];
+  else if (operation === 'nearest') values = [1.6, 1, 1, 1];
   else if (operation === 'sqrt') values = [81, 1, 1, 1];
 
   return inputs.map((type, index) => scalar(type, values[index] ?? 1));
@@ -76,6 +92,20 @@ function moduleFor(body: string[], results: string[] = ['i32'], declarations = '
   return `(module${extras}\n  (func (export "run")${result}\n${body
     .map((line) => `    ${line}`)
     .join('\n')}\n  )\n)`;
+}
+
+function documentationExample(op: Opcode, reason: string): WatExample {
+  const spelling = `${op.name}${immediates(op)}`;
+  return {
+    source:
+      `(module\n` +
+      `  ;; Documentation-only: ${reason}\n` +
+      `  ;; The instruction’s text-format spelling is:\n` +
+      `  ;;   ${spelling}\n` +
+      `)`,
+    note: `${reason} The module is documentation-only, so it compiles without exporting a run function.`,
+    starterComplete: false,
+  };
 }
 
 function specialExample(op: Opcode): WatExample | null {
@@ -335,14 +365,15 @@ function memoryExample(op: Opcode, stack: SimpleStack): WatExample {
     : '  (memory (export "memory") 1)';
   const declarations = `${memory}\n  (data (i32.const 0) "\\2a\\00\\00\\00\\08\\07\\06\\05\\04\\03\\02\\01")`;
   const compilerPending = op.proposal === 'half-precision';
+  if (compilerPending) {
+    return documentationExample(op, 'This proposal is newer than the bundled WAT compiler.');
+  }
   return {
     source: moduleFor(body, observable ? stack.outputs : ['i32'], declarations),
-    note: compilerPending
-      ? 'This proposal is newer than the bundled WAT compiler; the draft is ready for tool support to catch up.'
-      : name.includes('store')
-        ? 'The result includes a before/after view of the first 16 memory bytes.'
-        : 'The memory begins with 42 at address 0; its first 16 bytes are shown with the result.',
-    starterComplete: !compilerPending,
+    note: name.includes('store')
+      ? 'The result includes a before/after view of the first 16 memory bytes.'
+      : 'The memory begins with 42 at address 0; its first 16 bytes are shown with the result.',
+    starterComplete: true,
   };
 }
 
@@ -361,14 +392,16 @@ function genericExample(op: Opcode, stack: SimpleStack): WatExample {
     op.proposal === 'half-precision' ||
     op.name === 'pause';
 
+  if (compilerPending) {
+    return documentationExample(op, 'This proposal is newer than the bundled WAT compiler.');
+  }
+
   return {
     source: moduleFor(body, observable ? stack.outputs : ['i32']),
-    note: compilerPending
-      ? 'This proposal is newer than the bundled WAT compiler; the draft is ready for tool support to catch up.'
-      : observable
-        ? 'The constants are the operand stack; the returned value is the result.'
-        : 'JavaScript cannot receive v128 values directly, so 1 means the instruction completed.',
-    starterComplete: !compilerPending,
+    note: observable
+      ? 'The constants are the operand stack; the returned value is the result.'
+      : 'JavaScript cannot receive v128 values directly, so 1 means the instruction completed.',
+    starterComplete: true,
   };
 }
 
@@ -384,10 +417,8 @@ export function exampleFor(op: Opcode): WatExample | null {
     return genericExample(op, stack);
   }
 
-  const placeholderImmediates = immediates(op);
-  return {
-    source: `(module\n  (func (export "run")\n    ;; This instruction needs surrounding types or state.\n    ;; Add its operands above this line.\n    ${op.name}${placeholderImmediates}\n  )\n)`,
-    note: 'This draft shows the instruction’s minimal spelling, but needs its surrounding types or state before it will validate.',
-    starterComplete: false,
-  };
+  return documentationExample(
+    op,
+    'This instruction needs supporting types, references, or control state that do not fit a generic toy module.',
+  );
 }
