@@ -114,9 +114,9 @@
       "proposal": "threads",
       "immediates": [
         {
-          "name": "ord",
+          "name": "0x00",
           "encoding": "u8",
-          "note": "a reserved byte, always 0x00"
+          "note": "reserved; no other value is valid"
         }
       ],
       "stack": {

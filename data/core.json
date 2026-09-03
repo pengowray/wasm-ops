@@ -236,7 +236,7 @@
       "parts": {
         "mainop": "rethrow"
       },
-      "description": "<p>Pops the exnref on top of the stack and throws it.</p>",
+      "description": "<p>Rethrows the exception caught by the enclosing legacy <code>catch</code> selected by label <i>l</i>.</p>",
       "proposal": "legacy-exception-handling",
       "supersededBy": "try_table (0x1F) and throw_ref (0x0A)",
       "immediates": [
@@ -246,8 +246,9 @@
         }
       ],
       "stack": {
-        "html": "[<i>t</i><sub>1</sub><sup>*</sup> i32] → [<i>t</i><sub>2</sub><sup>*</sup>]",
-        "polymorphic": "stack"
+        "html": "[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]",
+        "polymorphic": "stack",
+        "note": "The exception is identified by the enclosing catch label, not taken from the operand stack."
       }
     },
     {
@@ -896,7 +897,8 @@
         }
       ],
       "stack": {
-        "html": "[i32] → []"
+        "html": "[i32] → [<i>rt</i>]",
+        "note": "<i>rt</i> is the element type of table <i>x</i>."
       }
     },
     {
@@ -922,7 +924,8 @@
         }
       ],
       "stack": {
-        "html": "[i32] → []"
+        "html": "[i32 <i>rt</i>] → []",
+        "note": "<i>rt</i> is the element type of table <i>x</i>."
       }
     },
     {

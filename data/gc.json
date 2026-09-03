@@ -1559,24 +1559,12 @@
       },
       "immediates": [
         {
-          "name": "f",
-          "kind": "castflags"
-        },
-        {
           "name": "l",
           "kind": "labelidx"
         },
         {
           "name": "ht",
-          "index": 1,
-          "kind": "heaptype",
-          "note": "the source type"
-        },
-        {
-          "name": "ht",
-          "index": 2,
-          "kind": "heaptype",
-          "note": "the type being tested for"
+          "kind": "heaptype"
         }
       ],
       "stack": {
@@ -1603,24 +1591,12 @@
       },
       "immediates": [
         {
-          "name": "f",
-          "kind": "castflags"
-        },
-        {
           "name": "l",
           "kind": "labelidx"
         },
         {
           "name": "ht",
-          "index": 1,
-          "kind": "heaptype",
-          "note": "the source type"
-        },
-        {
-          "name": "ht",
-          "index": 2,
-          "kind": "heaptype",
-          "note": "the type being tested for"
+          "kind": "heaptype"
         }
       ],
       "stack": {
@@ -1753,24 +1729,12 @@
       },
       "immediates": [
         {
-          "name": "f",
-          "kind": "castflags"
-        },
-        {
           "name": "l",
           "kind": "labelidx"
         },
         {
           "name": "ht",
-          "index": 1,
-          "kind": "heaptype",
-          "note": "the source type"
-        },
-        {
-          "name": "ht",
-          "index": 2,
-          "kind": "heaptype",
-          "note": "the type being tested for"
+          "kind": "heaptype"
         }
       ],
       "stack": {
@@ -1797,24 +1761,12 @@
       },
       "immediates": [
         {
-          "name": "f",
-          "kind": "castflags"
-        },
-        {
           "name": "l",
           "kind": "labelidx"
         },
         {
           "name": "ht",
-          "index": 1,
-          "kind": "heaptype",
-          "note": "the source type"
-        },
-        {
-          "name": "ht",
-          "index": 2,
-          "kind": "heaptype",
-          "note": "the type being tested for"
+          "kind": "heaptype"
         }
       ],
       "stack": {

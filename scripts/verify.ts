@@ -24,6 +24,63 @@ const ROOT = new URL('..', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '
 const LEGACY = join(ROOT, 'data', '.legacy-help.json');
 const REVISIONS = join(ROOT, 'data', 'revisions.json');
 
+/**
+ * Signatures whose types depend on surrounding module context and therefore
+ * cannot be represented by wabt's concrete opcode table. The table forms are
+ * also exercised by hand-written runnable examples: those examples establish
+ * the operand order, while these exact assertions keep the displayed type
+ * variables and results from drifting away from them.
+ */
+const CONTEXTUAL_STACKS: Record<string, string> = {
+  '0x09': '[<i>t</i><sub>1</sub><sup>*</sup>] → [<i>t</i><sub>2</sub><sup>*</sup>]',
+  '0x25': '[i32] → [<i>rt</i>]',
+  '0x26': '[i32 <i>rt</i>] → []',
+  '0xFC.12': '[i32 i32 i32] → []',
+  '0xFC.14': '[i32 i32 i32] → []',
+  '0xFC.15': '[<i>rt</i> i32] → [i32]',
+  '0xFC.16': '[] → [i32]',
+  '0xFC.17': '[i32 <i>rt</i> i32] → []',
+};
+
+/**
+ * Binary operand sequences that are easy to misread from WAT. In particular,
+ * text-format defaults can hide table/memory index operands, table.init writes
+ * its table before its element segment but encodes elemidx before tableidx,
+ * and atomic.fence's trailing zero is a fixed reserved byte rather than an
+ * ordering choice.
+ */
+const REFERENCE_IMMEDIATES: Record<string, string> = {
+  '0x09': 'l:labelidx',
+  '0x25': 'x:tableidx',
+  '0x26': 'x:tableidx',
+  '0xFC.8': 'y:dataidx x:memidx',
+  '0xFC.9': 'x:dataidx',
+  '0xFC.10': 'x:memidx y:memidx',
+  '0xFC.11': 'x:memidx',
+  '0xFC.12': 'y:elemidx x:tableidx',
+  '0xFC.13': 'x:elemidx',
+  '0xFC.14': 'x:tableidx y:tableidx',
+  '0xFC.15': 'x:tableidx',
+  '0xFC.16': 'x:tableidx',
+  '0xFC.17': 'x:tableidx',
+  '0xFB.24': 'f:castflags l:labelidx ht1:heaptype ht2:heaptype',
+  '0xFB.25': 'f:castflags l:labelidx ht1:heaptype ht2:heaptype',
+  '0xFB.66': 'l:labelidx ht:heaptype',
+  '0xFB.67': 'l:labelidx ht:heaptype',
+  '0xFB.74': 'l:labelidx ht:heaptype',
+  '0xFB.75': 'l:labelidx ht:heaptype',
+  '0xFE.3': '0x00:u8',
+};
+
+function immediateSignature(op: Opcode): string {
+  return (op.immediates ?? [])
+    .map((imm) => {
+      const name = imm.name + (imm.index === undefined ? '' : imm.index);
+      return `${name}:${imm.kind ?? imm.encoding ?? '?'}`;
+    })
+    .join(' ');
+}
+
 /** Tags that mark up a word rather than separate two. */
 const INLINE = /^<\/?(i|b|em|strong|sup|sub|code|span)(\s[^>]*)?>$/i;
 
@@ -132,6 +189,29 @@ function main(): void {
       if (!imm.kind && !imm.note) {
         failures.push(`${op.id}: immediate "${imm.name}" has neither a kind nor a note`);
       }
+    }
+  }
+
+  for (const [id, expected] of Object.entries(CONTEXTUAL_STACKS)) {
+    const op = data.opcodes.find((candidate) => candidate.id === id);
+    if (!op) {
+      failures.push(`${id}: missing context-dependent stack reference`);
+    } else if (op.stack?.html !== expected) {
+      failures.push(
+        `${id} (${op.name}): stack is ${op.stack?.html ?? '(missing)'}, expected ${expected}`,
+      );
+    }
+  }
+
+  for (const [id, expected] of Object.entries(REFERENCE_IMMEDIATES)) {
+    const op = data.opcodes.find((candidate) => candidate.id === id);
+    if (!op) {
+      failures.push(`${id}: missing immediate-operand reference`);
+      continue;
+    }
+    const actual = immediateSignature(op);
+    if (actual !== expected) {
+      failures.push(`${id} (${op.name}): immediates are ${actual || '(none)'}, expected ${expected}`);
     }
   }
 

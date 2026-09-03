@@ -425,7 +425,8 @@
         }
       ],
       "stack": {
-        "html": "[i32] → []"
+        "html": "[<i>rt</i> i32] → [i32]",
+        "note": "<i>rt</i> is the element type of table <i>x</i>. The result is the previous size, or −1 if the table could not grow."
       }
     },
     {
@@ -479,7 +480,8 @@
         }
       ],
       "stack": {
-        "html": "[i32 i32] → []"
+        "html": "[i32 <i>rt</i> i32] → []",
+        "note": "<i>rt</i> is the element type of table <i>x</i>. The operands are the start index, the value, then the number of elements to fill."
       }
     },
     {
