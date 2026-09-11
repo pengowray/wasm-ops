@@ -87,11 +87,11 @@ function hex(bytes: Uint8Array, before?: Uint8Array): string {
     const values = Array.from(bytes.slice(offset, offset + 8), (byte, index) => {
       const value = byte.toString(16).padStart(2, '0');
       const previous = before?.[offset + index];
-      if (previous === undefined || previous === byte) return value;
+      if (previous === undefined || previous === byte) return `<span class="memory-byte">${value}</span>`;
       const oldValue = previous.toString(16).padStart(2, '0');
-      return `<span class="memory-byte-changed" title="Changed from ${oldValue} to ${value}">${value}</span>`;
+      return `<span class="memory-byte memory-byte-changed" title="Changed from ${oldValue} to ${value}">${value}</span>`;
     }).join(' ');
-    rows.push(`${offset.toString(16).padStart(2, '0')}:  ${values}`);
+    rows.push(`<span class="memory-offset">${offset.toString(16).padStart(2, '0')}:</span>${values}`);
   }
   return rows.join('\n');
 }
