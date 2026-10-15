@@ -662,7 +662,9 @@ export function renderHeading(op: Opcode): string {
 const SUPPORT_URL = 'https://webassembly.org/features/';
 
 function supportLink(feature: string): string {
-  return `${SUPPORT_URL}#:~:text=${encodeURIComponent(feature)}`;
+  // A text fragment uses `-` to mark a prefix or suffix, so a hyphen in the
+  // name itself has to be escaped. encodeURIComponent leaves it alone.
+  return `${SUPPORT_URL}#:~:text=${encodeURIComponent(feature).replace(/-/g, '%2D')}`;
 }
 
 /**

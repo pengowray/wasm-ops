@@ -209,6 +209,7 @@ const LIST: Proposal[] = [
   {
     id: 'relaxed-atomics',
     name: 'Acquire-release atomics',
+    feature: 'Acquire-Release Atomics',
     stage: 'active',
     phase: 2,
     since: 2026,
@@ -220,6 +221,7 @@ const LIST: Proposal[] = [
   {
     id: 'shared-everything-threads',
     name: 'Shared-everything threads',
+    feature: 'Shared-Everything Threads',
     stage: 'active',
     phase: 1,
     since: 2023,
@@ -237,6 +239,7 @@ const LIST: Proposal[] = [
   {
     id: 'custom-descriptors',
     name: 'Custom descriptors',
+    feature: 'Custom Descriptors and JS Interop',
     stage: 'active',
     phase: 3,
     since: 2026,
