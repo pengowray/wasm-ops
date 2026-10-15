@@ -1034,8 +1034,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null (exact <i>x</i>))] → [(ref (exact <i>y</i>))]",
-        "note": "<i>y</i> is the descriptor type declared for <i>x</i>. Traps on a null reference."
+        "html": "[(ref null <i>x</i>)] → [(ref <i>y</i>)]",
+        "note": "<i>y</i> is the descriptor type declared for <i>x</i>. If the operand is exact, (ref null (exact <i>x</i>)), the result is exact too: (ref (exact <i>y</i>)). Traps on a null reference."
       }
     },
     {
@@ -1063,8 +1063,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i>) (ref null (exact <i>y</i>))] → [(ref (exact <i>x</i>))]",
-        "note": "<p><b>Types</b>: <i>x</i> is the type named by the immediate and <i>y</i> its declared descriptor type. The reference to cast comes first, then the descriptor to compare it against; the cast succeeds where the reference’s own descriptor is that same object. Traps on a mismatch, and on null.</p>"
+        "html": "[(ref null <i>ht</i>′) (ref null <i>y</i>)] → [(ref <i>ht</i>)]",
+        "note": "<p><b>Types</b>: <i>ht</i> is the immediate heap type, either a type <i>x</i> or its exact form (exact <i>x</i>), and <i>ht</i>′ is any supertype of it. <i>y</i> is the descriptor type declared for <i>x</i>. If <i>ht</i> is exact, the descriptor operand must be exact too: (ref null (exact <i>y</i>)). The reference to cast comes first, then the descriptor to compare it against; the cast succeeds where the reference’s own descriptor is that same object. Traps on a mismatch, on a null reference, and on a null descriptor.</p>"
       }
     },
     {
@@ -1092,8 +1092,8 @@
         }
       ],
       "stack": {
-        "html": "[(ref null <i>ht</i>) (ref null (exact <i>y</i>))] → [(ref null (exact <i>x</i>))]",
-        "note": "<p><b>Types</b>: <i>x</i> is the type named by the immediate and <i>y</i> its declared descriptor type. The reference to cast comes first, then the descriptor to compare it against; the cast succeeds where the reference’s own descriptor is that same object. Traps on a mismatch. Null passes.</p>"
+        "html": "[(ref null <i>ht</i>′) (ref null <i>y</i>)] → [(ref null <i>ht</i>)]",
+        "note": "<p><b>Types</b>: <i>ht</i> is the immediate heap type, either a type <i>x</i> or its exact form (exact <i>x</i>), and <i>ht</i>′ is any supertype of it. <i>y</i> is the descriptor type declared for <i>x</i>. If <i>ht</i> is exact, the descriptor operand must be exact too: (ref null (exact <i>y</i>)). The reference to cast comes first, then the descriptor to compare it against; the cast succeeds where the reference’s own descriptor is that same object. Traps on a mismatch and on a null descriptor. A null reference with a non-null descriptor gives a null result.</p>"
       }
     },
     {
@@ -1135,8 +1135,8 @@
         }
       ],
       "stack": {
-        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null (exact <i>y</i>))] → [<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>\\<i>rt</i><sub>2</sub>]",
-        "note": "<p><b>Types</b>: <i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. Matches on descriptor identity rather than on the type alone. Branches to <i>l</i> with the reference typed <i>rt</i><sub>2</sub> if it matches; otherwise leaves it with <i>rt</i><sub>2</sub> subtracted from its type, which is what the backslash means.</p>"
+        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null <i>y</i>)] → [<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub>\\<i>rt</i><sub>2</sub>]",
+        "note": "<p><b>Types</b>: <i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. <i>y</i> is the descriptor type declared for the heap type of <i>rt</i><sub>2</sub>. If <i>rt</i><sub>2</sub> is exact, the descriptor operand must be exact too: (ref null (exact <i>y</i>)). Matches on descriptor identity rather than on the type alone. Branches to <i>l</i> with the reference typed <i>rt</i><sub>2</sub> if it matches; otherwise leaves it with <i>rt</i><sub>2</sub> subtracted from its type, which is what the backslash means. Traps on a null descriptor.</p>"
       }
     },
     {
@@ -1178,8 +1178,8 @@
         }
       ],
       "stack": {
-        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null (exact <i>y</i>))] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
-        "note": "<p><b>Types</b>: <i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. The mirror of <code>br_on_cast_desc_eq</code>: branches when the reference does <em>not</em> match.</p>"
+        "html": "[<i>t</i><sup>*</sup> <i>rt</i><sub>1</sub> (ref null <i>y</i>)] → [<i>t</i><sup>*</sup> <i>rt</i><sub>2</sub>]",
+        "note": "<p><b>Types</b>: <i>rt</i><sub>1</sub> and <i>rt</i><sub>2</sub> are the two immediate heap types, each made nullable or not by a bit of the castflags byte. <i>y</i> is the descriptor type declared for the heap type of <i>rt</i><sub>2</sub>. If <i>rt</i><sub>2</sub> is exact, the descriptor operand must be exact too: (ref null (exact <i>y</i>)). The mirror of <code>br_on_cast_desc_eq</code>: branches when the reference does <em>not</em> match. Traps on a null descriptor.</p>"
       }
     },
     {

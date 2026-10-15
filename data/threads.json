@@ -116,7 +116,7 @@
         {
           "name": "0x00",
           "encoding": "u8",
-          "note": "reserved; no other value is valid"
+          "note": "reserved; no other value is valid. Under the acquire-release atomics proposal (phase 2), this byte would specify the memory ordering: 0x00 for seqcst, 0x01 for acqrel"
         }
       ],
       "stack": {
