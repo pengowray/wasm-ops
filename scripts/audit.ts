@@ -76,12 +76,16 @@ function parseReference(source: string): RefOpcode[] {
     // had: all 153 agree.
     const params = [t1, t2, t3].filter((t) => t !== '___').map((t) => TYPES[t] ?? t);
     const results = [tr, tr2].filter((t) => t !== '___').map((t) => TYPES[t] ?? t);
+    // `Any` marks an operand whose type comes from an immediate, such as the
+    // value table.set stores. That is not a concrete signature, so it is not
+    // recorded, the same as a signature of ours that names a type variable.
+    const concrete = ![...params, ...results].includes('Any');
 
     out.push({
       prefix: prefixValue === 0 ? '' : prefixValue.toString(16).toUpperCase(),
       code: parseInt(match[7]!, 16),
       name,
-      ...(params.length || results.length
+      ...(concrete && (params.length || results.length)
         ? { stack: `[${params.join(' ')}] → [${results.join(' ')}]` }
         : {}),
     });
