@@ -366,7 +366,7 @@ export function standing(p: Proposal): string {
     case 'active':
       return `Proposal, phase ${p.phase ?? '?'}`;
     case 'dormant':
-      return `Proposal, phase ${p.phase ?? '?'} — inactive`;
+      return `Proposal, phase ${p.phase ?? '?'} — dormant`;
     case 'superseded':
       return 'Superseded';
   }

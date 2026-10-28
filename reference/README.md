@@ -3,8 +3,8 @@ Reference opcode lists used by `npm run audit`.
 - `wabt-opcode.def` — from WebAssembly/wabt, include/wabt/opcode.def, fetched
   2026-07-25, rechecked 2026-09-02 (unchanged) and refreshed 2026-10-15
   (wabt commit ef1fa6e3: `table.set` gained an `Any` type for its value
-  operand; no opcodes changed). Covers core, 0xFC, 0xFD (including relaxed
-  SIMD) and 0xFE.
+  operand; no opcodes changed), rechecked 2026-10-29 (unchanged). Covers
+  core, 0xFC, 0xFD (including relaxed SIMD) and 0xFE.
   It contains no 0xFB opcodes, so the GC and stringref sections are not
   checked against it.
 

@@ -32,6 +32,26 @@ The other thing reading it turned up: not one stringref instruction recorded an
 immediate, though twelve take a `memidx` and `string.const` takes a `stringidx`.
 Fourteen notes already said "memory *x*", naming a letter the page never showed.
 
+## Binaryen's stringref encoding differs from the proposal's
+
+The stringref entries follow the proposal's Overview, whose binary encoding has
+not changed since September 2022. Binaryen still reads and writes a subset of
+stringref, and three of its opcodes are not in that document:
+
+| Slot | The proposal | Binaryen |
+|---|---|---|
+| `0xFB.139` | `string.new_lossy_utf8` | `string.test` |
+| `0xFB.168` | unassigned | `string.compare` |
+| `0xFB.169` | unassigned | `string.from_code_point` |
+
+The other twelve opcodes Binaryen decodes match the proposal. Binaryen's
+`wasm-binary.h` also defines constants for `string.is_usv_sequence`
+(`0xFB.138`, matching the proposal) and a `StringHash` at `0xFB.170`, but its
+binary reader decodes neither. Checked against Binaryen `main` on 2026-10-29.
+
+The chart keeps the proposal's encoding. If Binaryen's version is ever written
+up as the proposal's, these three slots are the ones to revisit.
+
 ## Style for repeated explanations
 
 Where the same block of text appears on many instructions — the alignment rules

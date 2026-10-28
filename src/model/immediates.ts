@@ -51,8 +51,9 @@ interface KindInfo {
   /**
    * A fact about the kind rather than about any one instruction, set under the
    * list. Shown once however many operands of that kind an instruction takes.
+   * A function where the instructions sharing the kind need different facts.
    */
-  note?: string;
+  note?: string | ((op: Opcode) => string);
 }
 
 /**
@@ -77,6 +78,55 @@ const ADDRESSES =
 const TABLE_INDICES =
   'an i32 for a 32-bit table, an i64 for a 64-bit table (table64). The signatures here ' +
   'show the 32-bit case.';
+
+/**
+ * Bits 4 and 5 of a memarg's align field, which two phase-2 proposals use for
+ * different instructions. Multibyte array access covers every non-atomic load
+ * and store in the core and 0xFD tables. Acquire-release atomics covers the
+ * atomic loads, stores and read-modify-writes, but not notify and the two waits
+ * at 0xFE 0 to 2. Half precision's two memory instructions are in neither.
+ */
+const PROPOSED = 'Proposed changes';
+
+const ARRAY_ACCESS = labelledList(PROPOSED, [
+  'Under the multibyte array access proposal (phase 2), setting bit 5 (0x20) of <i>align</i> ' +
+    'would make this instruction access the bytes of a GC array.',
+  'With bit 5 set, a u32 array type index would follow <i>align</i>, before <i>offset</i>, in ' +
+    'the same position as a memory index. Bit 6 would have to be clear, and the alignment ' +
+    'would be bits 0 to 3 of <i>align</i>.',
+  'With bit 5 set, an array reference would come before the address on the stack, and the ' +
+    'address would count bytes from the start of the array.',
+]);
+
+const ORDERING_BYTE =
+  'Under the acquire-release atomics proposal (phase 2), setting bit 4 (0x10) of <i>align</i> ' +
+  'would add a u8 memory ordering byte immediately before <i>offset</i> (after the memory ' +
+  'index, if bit 6 is also set).';
+const NO_ORDERING_BYTE = 'With bit 4 clear, there is no ordering byte, and the ordering is seqcst.';
+
+const ATOMIC_ORDERING = labelledList(PROPOSED, [
+  ORDERING_BYTE,
+  'The ordering byte would be 0x00 for seqcst or 0x01 for acqrel.',
+  NO_ORDERING_BYTE,
+]);
+
+const RMW_ORDERING = labelledList(PROPOSED, [
+  ORDERING_BYTE,
+  'The low four bits of the ordering byte would be the read ordering and the high four bits ' +
+    'the write ordering. The two orderings would have to be the same, so the ordering byte ' +
+    'would be 0x00 for seqcst or 0x11 for acqrel.',
+  NO_ORDERING_BYTE,
+]);
+
+function memargProposal(op: Opcode): string {
+  if (op.prefix === 'FE') {
+    if (op.code < 16) return '';
+    return op.name?.includes('.rmw') ? RMW_ORDERING : ATOMIC_ORDERING;
+  }
+  // Matched by table: the proposal lists every memarg instruction in the core
+  // and 0xFD tables, 45 in all. A new one in either table needs checking.
+  return op.prefix === '' || op.prefix === 'FD' ? ARRAY_ACCESS : '';
+}
 
 const KINDS: Record<ImmediateKind, KindInfo> = {
   typeidx: INDEX,
@@ -131,7 +181,7 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
   // one could not reach it. Written once here, it reaches all 113.
   memarg: {
     gloss: 'u32 align, then u64 offset',
-    note:
+    note: (op) =>
       labelledList('Alignment', [
         '<i>align</i> is the base-2 logarithm of the assumed alignment in bytes: 0 for 1 byte, ' +
           '1 for 2, 2 for 4, 3 for 8, 4 for 16.',
@@ -141,7 +191,9 @@ const KINDS: Record<ImmediateKind, KindInfo> = {
         'Bit 6 (0x40) is not part of the number. When it is set, a u32 memory index follows ' +
           '<i>align</i>, before the offset, and the alignment is what is left after ' +
           'subtracting 64. When it is clear, the instruction uses memory 0.',
-      ]) + labelled('Addresses', ADDRESSES),
+      ]) +
+      labelled('Addresses', ADDRESSES) +
+      memargProposal(op),
   },
 
   castflags: { encoding: 'u8', gloss: 'which of the two heap types is nullable' },
@@ -253,7 +305,8 @@ export function renderImmediates(op: Opcode): string {
   // takes two typeidx and should not be told twice what a typeidx is.
   const notes: string[] = [];
   for (const imm of immediates) {
-    const note = imm.kind ? KINDS[imm.kind].note : undefined;
+    const kindNote = imm.kind ? KINDS[imm.kind].note : undefined;
+    const note = typeof kindNote === 'function' ? kindNote(op) : kindNote;
     if (note && !notes.includes(note)) notes.push(note);
   }
 
